@@ -7,49 +7,22 @@ from scipy.stats import *
 
 
 
-def iif(a,b,c):
-    if a:
-        return b 
-    else:
-        return c
-
-def update_top_models_page(models):
-    f = open("media/Navbar.html")
-    navbar_lines = f.readlines()
-    f.close()
-
-    f = open("media/TopModels.html","w")
-    for l in navbar_lines:
-        f.write(l)
-
-    f.write("""
-     <div class="container theme-showcase" role="main">
-          <div class="starter-template">
-            <div class="panel panel-default">
-              <div class="panel-heading">Top User Submited Models</div>
-              <table class="table">
-                <thead>
-                  <tr>
-                      <th>#</th>
-                    <th>Model</th>
-                    <th>R Correlation</th>
-                  </tr>
-                </thead>
-                <tbody>""")
-
-    count = 1
-    for m in models:
-        f.write("<tr><td>" + str(count) + "</td><td>" + m[0] + "</td><td>" + str(m[1]) + "</td></tr>\n")
-        count += 1 
-
-        if count > 20:
-            break
-
-    f.close()
- 
 MEDIA_DIR = os.path.join(os.path.abspath("."))
 
+def get_first_part_of_page():
+    f = open(os.path.join(MEDIA_DIR, u'media/Test_Your_Model_Result.html')) 
+    lines = f.readlines()
+    f.close()
 
+    string = "".join(lines)
+    return string
+
+def is_valid_sequence(sequence):
+	res = "A,G,C,U,T".split(",")
+	for e in sequence.upper():
+		if e not in res:
+			return 0
+	return 1
 
 
 class rest:
@@ -104,6 +77,36 @@ class rest:
 
         #TODO use matlab wrapper instead
         #TODO check for length
+
+        if len(sequence) < 60:
+        	string = get_first_part_of_page()
+        	string += """
+        	<br/>
+        	<hr>
+        	<p class=\"lead\">
+        	You need a sequence of atleast 60 residues, try again. 
+        	</p>
+        	</div>
+        	</div>
+        	</body>
+        	</html>"""
+
+        	return string
+
+        if not is_valid_sequence(sequence):
+        	string = get_first_part_of_page()
+        	string += """
+        	<br/>
+        	<hr>
+        	<p class=\"lead\">
+        	sequence must consist of A,G,C,U or T!
+        	</p>
+        	</div>
+        	</div>
+        	</body>
+        	</html>"""
+
+        	return string
 
         out = os.popen('matlab -nojvm -nodisplay -nosplash -r "design_primers(\'%s\'); exit()"' % sequence).read()
         out = out.replace('\n', '<br/>')
