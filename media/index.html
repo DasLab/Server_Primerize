@@ -58,27 +58,18 @@
     <div class="starter-template">
     <div class="container theme-showcase" role="main">
 
-      <div class="jumbotron">
-          <h1>Welcome</h1>
-          <p>A front end interface for predicting the SHAPE score for a RNA secondary structure and sequence, as well with providing a robust framework for users to test their own custom models with and without machine learning.
-          <p><a href="/media/About.html" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a> <a href="https://github.com/jyesselm/Eterna_Data_Fit" class="btn btn-lg btn-success" role="button">Clone me on Github &raquo;</a></p>
-      </div>
+        <h1> Sequence to primerize </h1>
+	<form method='get' action='/design_primers'>
+        <p class="lead"><input type="text" value="" name="sequence" size='50'/></p>
+        <br/>
+        <input type='submit' class="btn btn-lg btn-default" value='Submit'/>
+        </form>
+        <br/>
 
-      <div class="container">
-
-        <div class="starter-template">    
-          <p class="lead">Use existing model trained on 5000 constructs to get the predicted Eterna Score for your Sequence/Structure</p>
-          <p><a href="/media/Score_Seq_SS.html" class="btn btn-lg btn-default" role="button">Submit Sequence/Structure &raquo;</a></p>
-
-          <br / >
-
-          <p class="lead">Create your own model based a large set of sequence, secondary structure and other features to predict Eterna scores for the full 7000 constructs scored by Eterna</p>
-          <p><a href="/media/Test_Your_Model.html" class="btn btn-lg btn-default" role="button">Submit A Model&raquo;</a></p>
+    </div>
+    </div>
 
 
-
-
-        </div>
 
       </div><!-- /.container -->
 

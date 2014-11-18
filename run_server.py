@@ -100,46 +100,13 @@ class rest:
         return string
 
     @cherrypy.expose
-    def posted_2(self, model):
-        compiled_model = compile_model_from_str(model,features)
+    def design_primers(self, sequence):
 
-        real_scores = []
-        predicted_scores = []
+        #TODO use matlab wrapper instead
+        #TODO check for length
 
-        for c in all_constructs:
-            #set the correct local variable name for the compiled code object
-            construct = c
-            exec compiled_model
-            real_scores.append(float(c.eterna_score))
-            #local variable score gets set by exec model, see parse_model_file
-            predicted_scores.append(score)
-
-        R = pearsonr(real_scores,predicted_scores)
-        #R = [0,0]
-
-        found = 0
-        for m in self.models:
-            if m[0] == model:
-                found = 1
-                break
-
-        if not found:
-            flag = 0
-            pos = 20 
-            if len(self.models) < pos:
-                flag = 1
-            else:
-                if self.models[pos][1] < float(R[0]):
-                    flag = 1
-
-
-            self.models.append([model,float(R[0])])
-            self.model_file.write(model + "\n" + str(R[0]) + "\n")
-            self.model_file.flush()
-
-            if flag:
-                self.models = sorted(self.models, key=lambda x: x[1], reverse=True)
-                update_top_models_page(self.models)
+        out = os.popen('matlab -nojvm -nodisplay -nosplash -r "design_primers(\'%s\'); exit()"' % sequence).read()
+        out = out.replace('\n', '<br/>')
 
         f = open(os.path.join(MEDIA_DIR, u'media/Test_Your_Model_Result.html')) 
         lines = f.readlines()
@@ -150,13 +117,12 @@ class rest:
         <br/>
         <hr>
         <p class=\"lead\">
-        Model:          %s<br />
-        R Correlation:  %s
+        Output:          %s<br />
         </p>
         </div>
         </div>
         </body>
-        </html>""" % (model,R[0])
+        </html>""" % out
         return string
 
 if __name__ == "__main__":
