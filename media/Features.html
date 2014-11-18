@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Eterna Drone</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">EternaDrone</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/media/index.html">Home</a></li>
+            <li><a href="/media/Score_Seq_SS.html">Score a Sequence/Structure</a></li>
+            <li class="active">
+              <a href="/media/Test_Your_Model.html">Test Your Model</a></li>
+            <li><a href="/media/About.html">About</a></li>
+            <li><a href="/media/Contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+
+      <div class="starter-template">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>percent_a</td>
+            <td>number of As / total length of sequence</td>
+          </tr>
+          <tr>
+            <td>percent_u</td>
+            <td>number of Us / total length of sequence</td>
+          </tr>
+          <tr>
+            <td>percent_g</td>
+            <td>number of Gs / total length of sequence</td>
+          </tr>
+          <tr>
+            <td>percent_c</td>
+            <td>number of Cs / total length of sequence</td>
+          </tr>
+          <tr>
+            <td>max_a_repeat</td>
+            <td>max stretch of As, ex. AAAUAC => 3</td>
+          </tr>
+          <tr>
+            <td>max_u_repeat</td>
+            <td>max stretch of Us</td>
+          </tr>
+          <tr>
+            <td>max_g_repeat</td>
+            <td>max stretch of Gs</td>
+          </tr>
+          <tr>
+            <td>max_c_repeat</td>
+            <td>max stretch of Cs</td>
+          </tr>
+          <tr>
+            <td>percent_au</td>
+            <td>number of AU basepairs / number of basepairs (given by target secondary structure)</td>
+          </tr>
+          <tr>
+            <td>percent_gc</td>
+            <td>number of GC basepairs / number of basepairs</td>
+          </tr>
+          <tr>
+            <td>percent_wc</td>
+            <td>number of Waston-Crick (AU and GC) basepairs / number of basepairs</td>
+          </tr>
+          <tr>
+            <td>percent_nc</td>
+            <td>number of Nonconical (Not AU and GC)  basepairs / number of basepairs</td>
+          </tr>
+          <tr>
+            <td>n_basepairs</td>
+            <td>number of basepairs (given by target secondary structure)</td>
+          </tr>
+          <tr>
+            <td>not_capped_loops</td>
+            <td>inspired by Eli Fisker (Eterna Proplayer), number of bulges/hairpins/junctions that do NOT have a GC pair at their edge</td>
+          </tr>
+          <tr>
+            <td>not_stem_capped</td>
+            <td>number of stems (basepair stretches) that do not start with a GC pair at the edge</td>
+          </tr>
+          <tr>
+            <td>avg_structure_diff</td>
+            <td>number of structures that differ between target structure and vienna predicted structure</td>
+          </tr>
+          <tr>
+            <td>free_energy</td>
+            <td>the vienna calculated free energy</td>
+          </tr>
+          <tr>
+            <td>melting_temp</td>
+            <td>the temperature at which vienna predicts 0 free energy</td>
+          </tr>
+          <tr>
+            <td>mfe_prob</td>
+            <td>frequency of mfe structure in ensemble</td>
+          </tr>
+          <tr>
+            <td>ensemble_diversity</td>
+            <td>vienna's ensemble diversity parameter</td>
+          </tr>
+
+        <tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

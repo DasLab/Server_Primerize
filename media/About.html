@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/theme.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">EternaDrone</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/media/index.html">Home</a></li>
+            <li><a href="/media/Score_Seq_SS.html">Score a Sequence/Structure</a></li>
+            <li><a href="/media/Test_Your_Model.html">Test Your Model</a></li>
+            <li class="active"><a href="/media/About.html">About</a></li>
+            <li><a href="/media/Contact.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+
+      <div class="starter-template">
+        <h1>What is Eterna?</h1>
+        <p class="lead"> <a href=http://eterna.stanford.edu/web/>Eterna</a> is a massively mutiplier game and the first experimental "cloud" lab where players can test their own scientific hypotheses. By playing EteRNA, you will participate in creating the first large-scale library of synthetic RNA designs. Your efforts will help reveal new principles for designing RNA-based switches and nanomachines.</p>
+        <hr>
+
+        <h1>What is an Eterna Score?</h1>
+        <p class="lead">Synthetic RNA designs submitted by players are given a score of how well their <a href=http://en.wikipedia.org/wiki/Nucleic_acid_structure>primary sequence</a> folds into the <a href="http://en.wikipedia.org/wiki/Nucleic_acid_secondary_structure">secondary structure</a>. A score of 100 the maximum score a design can obtain, which means that the primary sequence folded into a structure that is experimentally the indistinguishable from the target structure.</p>
+        <hr>
+
+        <h1>What is EternaDrone?</h1>
+        <p class="lead">EternaDrone takes the wealth of data already present Eterna and attempts to harnass or building models for predicting Eterna Scores base using information about the primary and target secondary structure of RNAs. For each construct run through Eterna (~7000) collected so far, features are extracted for both the primary sequence and secondary structure and are fit to the eterna score using a Random Forest regression model. You can use this model to predict the Eterna Score for your own Sequence/Secondary structure <a href="/media/Score_Seq_SS.html">here</a>. It is also possible to submit your own model using these features <a href="/media/Test_Your_Model.html">here</a>. It might be possible to come up with very simple rules that have great predictive power that have not been found with machine learning.
+
+        <hr>
+        <h1>What is a Feature?</h1>
+        <p class="lead">A feature is loosely defined as any value that can be calculated based on sequence/secondary structure of a construct that can be correlated with its final SHAPE score.</p>
+
+        <p class="lead">No one parameter is likely to highly correlate directly with the SHAPE score but by using a combination of many it is possible to build an empirical model to help predict the success of a sequence to form into its target secondary structure.</p>
+
+         <p class="lead">An few example features: the number of Guanine bases in the sequence, the number of basepairs in the secondary structure, etc. See the full list of implemented <a href="/media/Features.html"> features.</a></p>
+
+      </div>
+    </div>
+
+  </body>
+</html>
