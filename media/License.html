@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-
-    <title>Starter Template for Bootstrap</title>
+    <link rel="shortcut icon" href="/images/EteRNA_shortcut.png">
+    <title>Primerize</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -16,8 +15,7 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/css/template.css" rel="stylesheet">
-    <link href="/css/starter-template.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,32 +38,43 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">EternaDrone</a>
+          <a class="navbar-brand" href="/media/Design.html">Primerize</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/media/index.html">Home</a></li>
-            <li class="active"><a href="#about">Score a Sequence/Structure</a></li>
-            <li><a href="#about">Test Your Model</a></li>
+            <li><a href="/media/Design.html">Home</a></li>
+            <li class="active"><a href="/show_license">Download</a></li>
             <li><a href="/media/About.html">About</a></li>
-            <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
-
     <div class="container theme-showcase" role="main">
 
       <div class="starter-template">
+        <div class="row" class="form_control">
+         <h3>Please read the following LICENSE carefully. <br>
+          To continue downloading source code, you must accept the agreement.</h3><br>
+         <div class="alert alert-info">__LICENSE_CONTENT__</div>
+        </div><br>
+        <a href="/media/Download.html" class="btn btn-success">&nbsp;&nbsp;&nbsp;Accept&nbsp;&nbsp;&nbsp;</a>
+        <a href="/media/Design.html" class="btn btn-danger pull-right">&nbsp;&nbsp;&nbsp;Decline&nbsp;&nbsp;&nbsp;</a>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <footer class="bs-docs-footer" role="contentinfo">
+      <div class="container" class="row">
+        <div class="col-md-9">
+         <p class="muted credit">Maintained by the <a href="http://daslab.stanford.edu">Das Lab</a>, <a href="http://www.stanford.edu">Stanford University</a>.<br>
+          <a href="/media/Download.html">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. </p>
+        </div>
+        <div class="col-md-3">
+         <p> powered by <a href="http://www.cherrypy.org/">CherryPy</a> and <a href="http://getbootstrap.com/">Bootstrap</a></p>
+        </div> 
+      </div>
+  </footer>
 
-        <p class="lead">Use existing model trained on 5000 constructs to get the predicted Eterna Score for your Sequence/Structure.</p>
-
-        <form method='get' action='/posted'>
-        <p class="lead">Sequence:</p> <input value="" name="sequence" size='50'/> <br/> <br/>
-        <p class="lead">Structure:</p> <input value="" name="structure" size='50'/>
-        <br />
-        <br />
-        <input type='submit' class="btn btn-lg btn-default" value='Submit' />
-        </form>
-
+  </body>
+</html>

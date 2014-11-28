@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/EteRNA_shortcut.png">
+    <title>Primerize</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/media/Design.html">Primerize</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/media/Design.html">Home</a></li>
+            <li><a href="/show_license">Download</a></li>
+            <li><a href="/media/About.html">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+     <div class="starter-template">
+      <div class="container theme-showcase" role="main">
+        <form method='get' action='/design_primers'>
+          <div class="row">
+            <div class="col-md-9">
+             <h2>Sequence Input:</h2>
+             <p>
+              Please enter your sequence below: nucleotides only, no headers or comments.<br>
+              Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.
+             </p>
+             <textarea class="form-control" name="sequence" rows="6" cols="100" placeholder="Enter a sequence"/></textarea><br>
+             <input type="submit" class="btn btn-primary" value="&nbsp;Submit&nbsp;"/>&nbsp;
+             <a href="/media/Design.html" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+             <input name="is_agree" type="checkbox" value="1" checked="yes"/> <input type="hidden" name="is_agree" value="0" />
+             By clicking submit, you are agreeing to the <a href="/show_license">Terms and Conditions</a>.
+             <a href="/example_P4P6" class="btn btn-warning pull-right" title="Example primer design using P4P6-2HP RNA">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
+           </div>
+            <div class="col-md-3">
+              <div class="panel panel-default" title="More options for guided design. Parameters for primer length, primer number and annealing temperature can be specified.">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Advanced Options</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="input-group">
+                    minimum <b>Tm</b>: 
+                    <input name = "min_Tm" type="text" value="60" style="width:25%" title="Minimum annealing temperature for overlapping regions. Default = 60 &deg;C"/>
+                    &deg;C
+                    <br><br>
+                    <b>#</b> number of primers:
+                    <input name = "num_primers" type="text" value="-1" style="width:25%" title="Limit of number of primers in design. Default = -1; no restriction."/>
+                    <br><br>
+                    maximum <b>length</b> of primers:
+                    <input name = "max_length" type="text" value="60" style="width:25%" title="Maximum length for each primer. Default = 60 nt."/>
+                     nt <br><br>
+                    minimum <b>length</b> of primers:
+                    <input name = "min_length" type="text" value="15" style="width:25%" title="Minimum length for each primer. Default = 15 nt."/>
+                     nt <br><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <footer class="bs-docs-footer" role="contentinfo">
+    <div class="container" class="row">
+      <div class="col-md-9">
+       <p class="muted credit">Maintained by the <a href="http://daslab.stanford.edu">Das Lab</a>, <a href="http://www.stanford.edu">Stanford University</a>.<br>
+        <a href="/media/Download.html">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. </p>
+      </div>
+      <div class="col-md-3">
+       <p> powered by <a href="http://www.cherrypy.org/">CherryPy</a> and <a href="http://getbootstrap.com/">Bootstrap</a></p>
+      </div> 
+    </div>
+  </footer>
+  </body>
+</html>

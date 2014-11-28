@@ -43,65 +43,63 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/media/Design.html">Home</a></li>
-            <li><a href="/show_license">Download</a></li>
-            <li class="active"><a href="/media/About.html">About</a></li>
+            <li class="active"><a href="/show_license">Download</a></li>
+            <li><a href="/media/About.html">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="container theme-showcase" role="main">
+
       <div class="starter-template">
-        <div class="col-md-8" class="row" class="panel panel-primary">
-          <div class="panel panel-primary" >
-            <div class="panel-heading"><h2 class="panel-title">Primerize</h2></div>
-            <div class="panel-body">
-             Primerize (previously known as NA_thermo), is an in-house set of MATLAB scripts developed by the Das Lab.
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8" class="row" class="panel panel-primary">
-          <div class="panel panel-success">
-            <div class="panel-heading"><h2 class="panel-title">Primerize Server</h2></div>
-            <div class="panel-body">
-              Primerize Server is an online version of Primerize. It provides the basic functionallity of primer design for bridging PCR.
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8" class="row" class="panel panel-primary">
-          <div class="panel panel-info" >
-            <div class="panel-heading"><h2 class="panel-title">Citation</h2></div>
-            <div class="panel-body">
-              Please cite use of Primerize Server with:<br><br>
-              Kladwang W, VanLang CC, Cordero P, Das R. (<b>2011</b>). <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html">A two-dimensional mutate-and-map strategy for non-coding RNA structure.</a> <i>Nature chemistry</i> <b>3</b>: 954-962.
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8" class="row" class="panel panel-primary" >
-          <div class="panel panel-warning" >
-            <div class="panel-heading"><h2 class="panel-title">Contact</h2></div>
-            <div class="panel-body">
-              <div class="col-md-4">
-                <b>
-                Principal Investigator:<br>
-                Server Team:<br>
-                </b>
-              </div>
-              <div class="col-md-4">
-                Rhiju Das<br>
-                Siqi Tian<br>
-                Joseph Yesselman<br>
-                Pablo Cordero<br>
-              </div>
-              <div class="col-md-4">
-                <a href="mailto:rhiju@stanford.edu">email</a><br>
-                <a href="mailto:t47@stanford.edu">email</a>
+          <form method="get" action="/submit_download" class="col-md-8">
+            <h3>Please provide your contact information</h3><br>
+            <div class="row">
+              <div class="panel panel-info" >
+                <div class="panel-heading"><h2 class="panel-title">Contact Information</h2></div>
+                <div class="panel-body">
+                  <div class="col-md-2">
+                    First Name: <br><br>
+                    Insititution: <br><br>
+                  </div>
+                  <div class="col-md-4">
+                    <input name = "first_name" type="text" value=""/><br><br>
+                    <input name = "inst" type="text" value=""/><br><br>
+                  </div>
+                  <div class="col-md-2">
+                    Last Name: <br><br>
+                    Department: <br><br>
+                  </div>
+                  <div class="col-md-4">
+                    <input name = "last_name" type="text" value=""/><br><br>
+                    <input name = "dept" type="text" value=""/><br><br>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">&nbsp;&nbsp;&nbsp;&nbsp;E-mail Address:</div>
+                    <div class="col-md-9">
+                     <input name = "email" type="text" value="" style="width:75%"/>
+                   </div>
+                  </div>
+                  <div class="col-md-12">
+                    <br>
+                    <input name="is_subscribe" type="checkbox" value="1" checked="yes"/> 
+                    <input type="hidden" name="is_subscribe" value="0" />
+                    Subscribe to newsletter for future version updates.
+                    <br><br>
+                    <input type="submit" class="btn btn-primary" value="&nbsp;Submit&nbsp;"/>
+                    &nbsp;
+                    <input type="reset" class="btn btn-default" value="&nbsp;&nbsp;Clear&nbsp;&nbsp;"/>
+                    <br><br>
+                   </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </form>
+        <br>
     </div>
+  </div>
   <hr>
   <footer class="bs-docs-footer" role="contentinfo">
     <div class="container" class="row">
