@@ -5,6 +5,13 @@ body {
   padding-right: 15px;
 }
 
+.bgimg {
+  background-image: url("/images/bg_rna.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 30%;
+}
+
 html { 
   overflow-y: scroll; 
 }
@@ -29,6 +36,10 @@ html {
 .navbar .navbar-brand {
   color: #fbad24;
   font-weight: bold;
+  background-image: url("/images/bg_rna.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
   color: #31815a;

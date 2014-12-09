@@ -24,6 +24,7 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
     else:
         is_num_primers = ""
         is_num_primers_disabled = "disabled=\"disabled\""
+    if num_primers == "99": num_primers = "auto"
     script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled)
     return script
 
@@ -98,7 +99,7 @@ class rest:
         try:
             min_Tm = float(min_Tm)
 
-            if ("1" not in is_num_primers) or not num_primers or num_primers == "99":
+            if ("1" not in is_num_primers) or not num_primers or num_primers == "99" or num_primers == "auto":
                 num_primers = -1
             else:
                 num_primers = int(num_primers[0])
@@ -209,9 +210,10 @@ class rest:
         f = open(file_name, "w")
         f.write("Primerize Result\n\nINPUT\n=====\n%s\n" % sequence)
         f.write("#\nMIN_TM: %d\n" % min_Tm)
-        f.write("NUM_PRIMERS: %d" % num_primers)
         if num_primers == 99:
-            f.write(" (unspecified)")
+            f.write("NUM_PRIMERS: auto (unspecified)")
+        else:
+            f.write("NUM_PRIMERS: %d" % num_primers)
         f.write("\nMAX_LENGTH: %d\nMIN_LENGTH: %d\n" % (max_length, min_length))
         f.write("\n\nOUTPUT\n======\n")
         for line in self.lines_warning:

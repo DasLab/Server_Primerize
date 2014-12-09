@@ -69,8 +69,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <img src="/images/bg_rna.png" height="42"/>
-          <a class="navbar-brand" href="/media/Design.html">Primerize</a>
+          <a class="navbar-brand" href="/media/Design.html">&nbsp;&nbsp;Primerize&nbsp;&nbsp;</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -94,35 +93,38 @@
           <div class="row">
             <h2>Input Data:</h2>
             <div class="col-md-9">
-             <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
-              <b>Name Tag</b>:&nbsp;&nbsp;
-              <input name="tag" type="text" value="__TAG__" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
-             </p>
-             <p><b>Sequence</b>:</p>
-             <div class="row">
-              <div class="col-md-10">
-               <ul>
-                <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
-                <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
-                <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
-               </ul>
-              </div>
-              <div class="col-md-2">
-               <p class="text-right">
-                <br><br>
-                <i>Length: <b><span id="count">__LEN__</span></b> nt</i>
+             <div class="bgimg">
+
+               <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
+                <b>Name Tag</b>:&nbsp;&nbsp;
+                <input name="tag" type="text" value="__TAG__" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
                </p>
+               <p><b>Sequence</b>:</p>
+               <div class="row">
+                <div class="col-md-10">
+                 <ul>
+                  <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
+                  <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
+                  <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
+                 </ul>
+                </div>
+                <div class="col-md-2">
+                 <p class="text-right">
+                  <br><br>
+                  <i>Length: <b><span id="count">__LEN__</span></b> nt</i>
+                 </p>
+                </div>
+               </div>
+               <textarea class="form-control" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence">__SEQ__</textarea><br>
+               <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
+               <a href="/media/Design.html" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+               <span>
+                <input id="is_agree" type="checkbox" checked="yes" required>
+               By clicking submit, you are agreeing to the <a href="/show_license">Terms and Conditions</a>.</input>
+               </span>
+               <a href="/example_P4P6" id="btn_demo" class="btn btn-warning pull-right" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
               </div>
-             </div>
-             <textarea class="form-control" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence">__SEQ__</textarea><br>
-             <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
-             <a href="/media/Design.html" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
-             <span>
-              <input id="is_agree" type="checkbox" checked="yes" required>
-             By clicking submit, you are agreeing to the <a href="/show_license">Terms and Conditions</a>.</input>
-             </span>
-             <a href="/example_P4P6" id="btn_demo" class="btn btn-warning pull-right" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
-           </div>
+            </div>
             <div class="col-md-3">
               <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="More options for guided design. Parameters for primer length, primer number and annealing temperature can be specified.">
@@ -135,12 +137,6 @@
                       <input name="min_Tm" type="text" value="__MIN_TM__" style="width:25%"/>
                       &deg;C
                     </p>
-                    <p data-toggle="tooltip" data-placement="left" title="Exact limit of number of primers in design. Default = 99, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
-                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers" __IS_NUM_PRMS__>&nbsp;<b>#</b> number of primers</input>:<br>
-                      <input name="is_num_primers" type="hidden" value="0" checked>
-                      <input name="num_primers" type="text" value="__NUM_PRIMERS__" style="width:25%" id="text_num_primers" __IS_NUM_PRMS_DIS__/>
-                      <input name="num_primers" type="hidden" value=""/>
-                    </p>
                     <p data-toggle="tooltip" data-placement="left" title="Maximum length for each primer. Default = 60 nt.">
                       maximum <b>length</b> of primers:
                       <input name="max_length" type="text" value="__MAX_LEN__" style="width:25%"/>
@@ -150,6 +146,12 @@
                       minimum <b>length</b> of primers:
                       <input name="min_length" type="text" value="__MIN_LEN__" style="width:25%"/>
                        nt <br>
+                    </p>
+                    <p data-toggle="tooltip" data-placement="left" title="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
+                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers" __IS_NUM_PRMS__>&nbsp;<b>#</b> number of primers</input>:<br>
+                      <input name="is_num_primers" type="hidden" value="0" checked>
+                      <input name="num_primers" type="text" value="__NUM_PRIMERS__" style="width:25%" id="text_num_primers" __IS_NUM_PRMS_DIS__/>
+                      <input name="num_primers" type="hidden" value=""/>
                     </p>
                   </div>
                 </div>
