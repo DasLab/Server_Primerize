@@ -34,6 +34,11 @@
         });
         $("#sequence").keyup(function(){
           $("#count").text($(this).val().length);
+          if ($(this).val().length < 60) {
+              $("#count").parent().parent().css("color","red");
+          } else {
+              $("#count").parent().parent().css("color","black");
+          }
         });
         $("#check_num_primers").click(function() {
           if ($(this).is(":checked")) {
@@ -98,6 +103,7 @@
                <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
                 <b>Name Tag</b>:&nbsp;&nbsp;
                 <input name="tag" type="text" value="__TAG__" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
+               &nbsp;&nbsp;(optional)
                </p>
                <p><b>Sequence</b>:</p>
                <div class="row">

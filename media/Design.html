@@ -34,6 +34,11 @@
         });
         $("#sequence").keyup(function(){
           $("#count").text($(this).val().length);
+          if ($(this).val().length < 60) {
+              $("#count").parent().parent().css("color","red");
+          } else {
+              $("#count").parent().parent().css("color","black");
+          }
         });
         $("#check_num_primers").click(function() {
           if ($(this).is(":checked")) {
@@ -97,6 +102,7 @@
                <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
                 <b>Name Tag</b>:&nbsp;&nbsp;
                 <input name="tag" type="text" value="" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
+               &nbsp;&nbsp;(optional)
                </p>
                <p><b>Sequence</b>:</p>
                <div class="row">
@@ -133,7 +139,7 @@
                   <div class="input-group">
                     <p data-toggle="tooltip" data-placement="left" title="Minimum annealing temperature for overlapping regions. Default = 60 &deg;C">
                       minimum <b>Tm</b>: 
-                      <input name="min_Tm" type="text" value="60" style="width:25%"/>
+                      <input name="min_Tm" type="text" value="60.0" style="width:25%"/>
                       &deg;C
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Maximum length for each primer. Default = 60 nt.">
@@ -172,7 +178,7 @@
         <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University">
           <img src="/images/logo_stanford.png" height="42"/>
         </a><br><br>
-        <a href="/media/Download.html">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. </p>
+        <a href="/media/Download.html">Copyright</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. </p>
       </div>
       <div class="col-md-3">
        <p> powered by <a href="http://www.cherrypy.org/" target="_blank">CherryPy</a> and <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>

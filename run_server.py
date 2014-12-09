@@ -2,6 +2,7 @@ import cherrypy
 import os
 import random
 import string
+import sys
 # import re
 # import subprocess
 # from scipy.stats import *
@@ -260,11 +261,21 @@ class rest:
 
 
 if __name__ == "__main__":
+    server_state = "development"
+    if len(sys.argv) > 1:
+        server_state = sys.argv[1]
+    if server_state not in ("development","release"):
+        raise SystemError("ERROR: Only can do development or release")
+    if server_state == "development":
+        socket_host = "127.0.0.1"
+        socket_port = 8080
+    else:
+        socket_host = "171.64.65.150"
+        socket_port = 8080
 
     cherrypy.config.update( {
-        #"server.socket_host":"171.64.65.150", 
-        "server.socket_host":"127.0.0.1", 
-        "server.socket_port":8080,
+        "server.socket_host":socket_host, 
+        "server.socket_port":socket_port,
         "tools.staticdir.root": os.path.abspath(os.path.join(os.path.dirname(__file__), ""))
         #"tools.statiddir.root": "/Users/skullnite/Downloads"
     } )
