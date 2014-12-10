@@ -23,7 +23,33 @@
     $(document).ready(function () {
       $(function () {
         $("[data-toggle='popover']").popover({trigger:"hover"}); 
+        $("[data-toggle='tooltip']").tooltip(); 
       })
+
+      $('#up').on('click', function(e){
+        e.preventDefault();
+        $('html, body').stop().animate({scrollTop: $('#down').offset().top}, 500);
+      });
+      $('#tab_1').on('click', function(e){
+        e.preventDefault();
+        $('html, body').stop().animate({scrollTop: $('#web_input').offset().top}, 500);
+      });
+      $('#tab_2').on('click', function(e){
+        e.preventDefault();
+        $('html, body').stop().animate({scrollTop: $('#web_output_primers').offset().top}, 500);
+      });
+      $('#tab_3').on('click', function(e){
+        e.preventDefault();
+        $('html, body').stop().animate({scrollTop: $('#web_output_assembly').offset().top}, 500);
+      });
+      $('#tab_4').on('click', function(e){
+        e.preventDefault();
+        $('html, body').stop().animate({scrollTop: $('#txt_output').offset().top}, 500);
+      });
+      $('#tab_5').on('click', function(e){
+        e.preventDefault();
+        $('html, body').stop().animate({scrollTop: $('#idt_bulk').offset().top}, 500);
+      });
     })
     </script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -65,7 +91,7 @@
       </div>
     </div>
 
-     <div class="starter-template">
+     <div class="starter-template" id="down">
       <div class="container theme-showcase" role="main">
         <div class="jumbotron">
           <div class="container">
@@ -88,11 +114,11 @@
 
       <div class="container theme-showcase" role="main">
         <ul class="list-group">
-          <a href="#web_input" class="list-group-item list-group-item-info"><h4>Section #1: Website Input</h4></a>
-          <a href="#web_output_primers"  class="list-group-item list-group-item-primary"><h4>Section #2: Website Output Primers</h4></a>
-          <a href="#web_output_assembly"  class="list-group-item list-group-item-success"><h4>Section #3: Website Output Assmebly</h4></a>
-          <a href="#txt_output"  class="list-group-item list-group-item-warning"><h4>Section #4: Downloadable Output</h4></a>
-          <a href="#idt_bulk"  class="list-group-item list-group-item-danger"><h4>Section #5: IDT Bulk Ordering</h4></a>
+          <a id="tab_1" href="#web_input" class="list-group-item list-group-item-info"><h4>Section #1: Website Input</h4></a>
+          <a id="tab_2" href="#web_output_primers" class="list-group-item list-group-item-primary"><h4>Section #2: Website Output Primers</h4></a>
+          <a id="tab_3" href="#web_output_assembly" class="list-group-item list-group-item-success"><h4>Section #3: Website Output Assmebly</h4></a>
+          <a id="tab_4" href="#txt_output" class="list-group-item list-group-item-warning"><h4>Section #4: Downloadable Output</h4></a>
+          <a id="tab_5" href="#idt_bulk" class="list-group-item list-group-item-danger"><h4>Section #5: IDT Bulk Ordering</h4></a>
         </ul>
       </div>
       <hr id="web_input" style="height:2px;color:#000000;background-color:#000000">
@@ -522,14 +548,14 @@ Etc...</textarea>
     </div>
   <hr>
 
-  <a href="#"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" src="/images/fg_top.png" height="60"/></a>
+  <a href="#" id="up"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" src="/images/fg_top.png" height="60"/></a>
 
    <footer class="bs-docs-footer" role="contentinfo">
     <div class="container" class="row">
       <div class="col-md-9">
        <p class="muted credit">Maintained by the &nbsp;&nbsp;
-        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="popover" data-placement="top" title="Das Lab"><img src="/images/logo_das.jpg" height="42"/></a>
-        <a href="http://www.stanford.edu" target="_blank" data-toggle="popover" data-placement="top" title="Stanford University"><img src="/images/logo_stanford.png" height="42"/></a>
+        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab"><img src="/images/logo_das.jpg" height="42"/></a>
+        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University"><img src="/images/logo_stanford.png" height="42"/></a>
         <br><br>
         <a href="/media/Download.html">Copyright</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. </p>
       </div>
