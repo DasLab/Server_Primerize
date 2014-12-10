@@ -45,12 +45,9 @@ def display_complete_html(msg):
             <div class="container" class="row">
                 <div class="col-md-9">
                     <p class="muted credit">Maintained by the &nbsp;&nbsp;
-                        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">
-                            <img src="/images/logo_das.jpg" height="42"/>
-                        </a>
-                        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University">
-                            <img src="/images/logo_stanford.png" height="42"/>
-                        </a><br><br>
+                        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab"><img src="/images/logo_das.jpg" height="42"/></a>
+                        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University"><img src="/images/logo_stanford.png" height="42"/></a>
+                        <br><br>
                         <a href="/media/Download.html">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. 
                     </p>
                 </div>
@@ -161,7 +158,7 @@ class rest:
 
         script +=  "</p></div><br>"
 
-        script += "<div class=\"row\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table\"><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
+        script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table\"><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
         for line in self.lines_primers:
             line = line.split("\t")
             num = "<b>" + line[0][7:]
@@ -171,7 +168,7 @@ class rest:
                 num += " <span class=\"label label-info\">F</span></b>"
             script += "<tr><td>" + num + "</td><td><em>" + line[1] + "</em></td><td>" + line[2] + "</td></tr>"
 
-        script += "</tbody></table></div></div></div><div class=\"row\"><div class=\"panel panel-success\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Assembly Scheme</h2></div><div class=\"panel-body\"><pre>"
+        script += "</tbody></table></div></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-success\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Assembly Scheme</h2></div><div class=\"panel-body\"><pre>"
         for line in self.lines_assembly:
             if line:
                 if line[0] == "~":
@@ -204,7 +201,7 @@ class rest:
             else:
                 script += "<br>"
 
-        script += "</pre></div></div></div>"
+        script += "</pre></div></div></div></div>"
 
         job_id = get_cache_id()
         file_name = "cache/result_" + job_id + ".txt"

@@ -79,6 +79,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/media/Design.html">Home</a></li>
+            <li><a href="/media/Tutorial.html">Tutorial</a></li>
             <li><a href="/show_license">Download Package</a></li>
             <li><a href="/media/About.html">About</a></li>
           </ul>
@@ -96,7 +97,9 @@
       <div class="container theme-showcase" role="main">
         <form method='get' action='/design_primers'>
           <div class="row">
-            <h2>Input Data:</h2>
+            <div class="col-md-12">
+              <h2>Input Data:</h2>
+            </div>
             <div class="col-md-9">
               <div class="bgimg">
                <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
@@ -137,7 +140,7 @@
                 </div>
                 <div class="panel-body">
                   <div class="input-group">
-                    <p data-toggle="tooltip" data-placement="left" title="Minimum annealing temperature for overlapping regions. Default = 60 &deg;C">
+                    <p data-toggle="tooltip" data-placement="left" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
                       minimum <b>Tm</b>: 
                       <input name="min_Tm" type="text" value="60.0" style="width:25%"/>
                       &deg;C
@@ -172,12 +175,9 @@
     <div class="container" class="row">
       <div class="col-md-9">
        <p class="muted credit">Maintained by the &nbsp;&nbsp;
-        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">
-          <img src="/images/logo_das.jpg" height="42"/>
-        </a>
-        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University">
-          <img src="/images/logo_stanford.png" height="42"/>
-        </a><br><br>
+        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab"><img src="/images/logo_das.jpg" height="42"/></a>
+        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University"><img src="/images/logo_stanford.png" height="42"/></a>
+        <br><br>
         <a href="/media/Download.html">Copyright</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. </p>
       </div>
       <div class="col-md-3">

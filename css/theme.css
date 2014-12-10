@@ -94,3 +94,22 @@ html {
     background-color: #112d52;
   }
 }
+
+.tutorial{
+  opacity:0.5;
+}
+
+
+.popover-title{
+    background-color: #000000;
+    border-color: #fbad24;
+    color: #ffffff;
+    opacity:0.9;
+}
+
+.popover-content {
+    background-color: #000000;
+    border-color: #fbad24;
+    color: #7cafd3;
+    opacity:0.8;
+}
