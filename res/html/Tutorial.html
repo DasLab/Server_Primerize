@@ -50,6 +50,10 @@
         e.preventDefault();
         $('html, body').stop().animate({scrollTop: $('#idt_bulk').offset().top}, 500);
       });
+      $('#tab_6').on('click', function(e){
+        e.preventDefault();
+        $('html, body').stop().animate({scrollTop: $('#PCR').offset().top}, 500);
+      });
     })
     </script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -96,7 +100,7 @@
         <div class="jumbotron">
           <div class="container">
             <h1>Welcome to Primerize!</h1>
-            <p>This tutorial walks you through the basics of website interface, explains parameters and results, and shows how to channel the output to IDT Bulk Ordering. Hover mouse to the <img style="opacity:0.85;" src="/res/images/fg_question.png" height="40"> for detailed descriptions. 
+            <p>This tutorial walks you through the basics of website interface, explains parameters and results, shows how to channel the output to IDT Bulk Ordering, and more importantly, in-house protocol for how to PCR assemble the template <i>in vitro</i>. Hover mouse to the <img style="opacity:0.85;" src="/res/images/fg_question.png" height="40"> for detailed descriptions. 
             </p>
             <br>
             <p>
@@ -115,10 +119,11 @@
       <div class="container theme-showcase" role="main">
         <ul class="list-group">
           <a id="tab_1" href="#web_input" class="list-group-item list-group-item-info"><h4>Section #1: Website Input</h4></a>
-          <a id="tab_2" href="#web_output_primers" class="list-group-item list-group-item-primary"><h4>Section #2: Website Output Primers</h4></a>
+          <a id="tab_2" href="#web_output_primers" class="list-group-item list-group-item-primary active"><h4>Section #2: Website Output Primers</h4></a>
           <a id="tab_3" href="#web_output_assembly" class="list-group-item list-group-item-success"><h4>Section #3: Website Output Assmebly</h4></a>
           <a id="tab_4" href="#txt_output" class="list-group-item list-group-item-warning"><h4>Section #4: Downloadable Output</h4></a>
           <a id="tab_5" href="#idt_bulk" class="list-group-item list-group-item-danger"><h4>Section #5: IDT Bulk Ordering</h4></a>
+          <a id="tab_6" href="#PCR" class="list-group-item list-group-item-primary"><h4>Section #6: PCR Assembly</h4></a>
         </ul>
       </div>
       <hr id="web_input" style="height:2px;color:#000000;background-color:#000000">
@@ -410,7 +415,7 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
         <div class="col-md-12">
           <div class="panel panel-danger">
             <div class="panel-heading tutorial">
-              <h2 class="panel-title">Bulk format ordering at IDT DNA oligos</h2>
+              <h2 class="panel-title">Bulk Format Ordering at IDT DNA Oligos</h2>
             </div>
             <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="IDT Bulk Format" data-content="How to input Primerize results to IDT Bulk ordering interface." />
             <div class="panel-body">
@@ -546,6 +551,25 @@ Etc...</textarea>
         </div>
       </div>
     </div>
+  <hr id="PCR" style="height:2px;color:#000000;background-color:#000000">
+
+  <div class="container theme-showcase" role="main">
+    <div class="page-header">
+      <h1>Section <kbd>#6</kbd>: PCR Assembly Protocol</h1>
+    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Experimental Setup for PCR Assembly of Template</h2>
+            </div>
+            <div class="panel-body">
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </div>
   <hr>
 
   <a href="#" id="up"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" src="/res/images/fg_top.png" height="60"/></a>
