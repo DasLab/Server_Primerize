@@ -9,6 +9,27 @@ import sys
 
 MEDIA_DIR = os.path.join(os.path.abspath("."))
 
+def is_valid_name(input, char_allow, length):
+
+    if len(input) <= length: return 0
+    src = ''.join([string.digits, string.ascii_letters, char_allow])
+    for char in input:
+        if char not in src: return 0
+    return 1
+
+
+def is_valid_email(input):
+
+    input_split = input.split("@")
+    if len(input_split) != 2: return 0
+    if not is_valid_name(input_split[0], ".-_", 2): return 0
+    input_split = input_split[1].split(".")
+    if len(input_split) == 1: return 0
+    for char in input_split:
+        if not is_valid_name(char, "", 1): return 0
+    return 1
+
+
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
     f = open(os.path.join(MEDIA_DIR, u"media/Design_result.html")) 
     lines = f.readlines()
@@ -256,6 +277,33 @@ class rest:
         return script.replace("__LICENSE_CONTENT__", md)
 
 
+    @cherrypy.expose
+    def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
+
+        is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 2) and is_valid_name(inst, "()-, ", 8) and is_valid_name(dept, "()-, ", 8) and is_valid_email(email)
+
+        if is_valid:
+            f = open(u"src/usr_tab.csv", "a")
+            if "1" in is_subscribe:
+                f.write("1")
+            else:
+                f.write("0")
+            f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
+            f.close()
+
+            return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=/media/Download_link.html\"></head></html>"
+        else:
+            f = open(os.path.join(MEDIA_DIR, u"media/Download_result.html")) 
+            lines = f.readlines()
+            f.close()
+            script = "".join(lines)
+            script = script.replace("__F_NAME__", first_name).replace("__L_NAME__", last_name).replace("__EMAIL__", email).replace("__INST__", inst).replace("__DEPT__", dept)
+            if "1" in is_subscribe: 
+                script = script.replace("__IS_SUBSCRIBE__", "checked=\"yes\"") 
+            else:
+                script = script.replace("__IS_SUBSCRIBE__", "") 
+            return script
+
 
 if __name__ == "__main__":
     server_state = "development"
@@ -267,7 +315,7 @@ if __name__ == "__main__":
         socket_host = "127.0.0.1"
         socket_port = 8080
     else:
-        socket_host = "171.64.65.150"
+        socket_host = "171.65.23.206"
         socket_port = 8080
 
     cherrypy.config.update( {
@@ -299,6 +347,10 @@ if __name__ == "__main__":
         "/cache": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "cache"
+            },
+        "/src": {
+            "tools.staticdir.on": True,
+            "tools.staticdir.dir": "src"
             }
         }
     )
