@@ -31,7 +31,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
-    f = open(os.path.join(MEDIA_DIR, u"media/Design_result.html")) 
+    f = open(os.path.join(MEDIA_DIR, u"res/html/Design_result.html")) 
     lines = f.readlines()
     f.close()
 
@@ -66,10 +66,10 @@ def display_complete_html(msg):
             <div class="container" class="row">
                 <div class="col-md-9">
                     <p class="muted credit">Maintained by the &nbsp;&nbsp;
-                        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab"><img src="/images/logo_das.jpg" height="42"/></a>
-                        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University"><img src="/images/logo_stanford.png" height="42"/></a>
+                        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab"><img src="/res/images/logo_das.jpg" height="42"/></a>
+                        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University"><img src="/res/images/logo_stanford.png" height="42"/></a>
                         <br><br>
-                        <a href="/media/Download.html">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. 
+                        <a href="/show_license">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. 
                     </p>
                 </div>
                 <div class="col-md-3">
@@ -93,7 +93,7 @@ class rest:
 
     @cherrypy.expose
     def index(self):
-        return open(os.path.join(MEDIA_DIR, u"media/Design.html"))
+        return open(os.path.join(MEDIA_DIR, u"res/html/Design.html"))
 
 
     @cherrypy.expose
@@ -106,7 +106,7 @@ class rest:
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
-                f = open(os.path.join(MEDIA_DIR, u"media/Design.html")) 
+                f = open(os.path.join(MEDIA_DIR, u"res/html/Design.html")) 
                 lines = f.readlines()
                 f.close()
                 script = "".join(lines)
@@ -269,7 +269,7 @@ class rest:
         f.close()
         md = "".join([line.replace("\n","<br>") for line in lines]) + "</strong>"
 
-        f = open(os.path.join(MEDIA_DIR, u"media/License.html")) 
+        f = open(os.path.join(MEDIA_DIR, u"res/html/License.html")) 
         lines = f.readlines()
         f.close()
         script = "".join(lines)
@@ -293,7 +293,7 @@ class rest:
 
             return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=/media/Download_link.html\"></head></html>"
         else:
-            f = open(os.path.join(MEDIA_DIR, u"media/Download_error.html")) 
+            f = open(os.path.join(MEDIA_DIR, u"res/html/Download_error.html")) 
             lines = f.readlines()
             f.close()
             script = "".join(lines)
@@ -328,21 +328,21 @@ if __name__ == "__main__":
     #cherrypy.quickstart( rest(), "/", "development.conf" )
     
     cherrypy.quickstart(rest(), "", config={
-        "/css": {
+        "/res/css": {
             "tools.staticdir.on": True,
-            "tools.staticdir.dir": "css"
+            "tools.staticdir.dir": "res/css"
             },
-        "/js": {
+        "/res/js": {
             "tools.staticdir.on": True,
-            "tools.staticdir.dir": "js"
+            "tools.staticdir.dir": "res/js"
             },
-        "/images": {
+        "/res/images": {
             "tools.staticdir.on": True,
-            "tools.staticdir.dir": "images"
+            "tools.staticdir.dir": "res/images"
             },
-        "/media": {
+        "/res/html": {
             "tools.staticdir.on": True,
-            "tools.staticdir.dir": "media"
+            "tools.staticdir.dir": "res/html"
             },
         "/cache": {
             "tools.staticdir.on": True,
