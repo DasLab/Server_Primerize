@@ -61,26 +61,38 @@
 
     <div class="container theme-showcase" role="main">
       <div class="starter-template">
-        <div class="col-md-8" class="row" class="panel panel-primary">
-          <div class="panel panel-primary" >
+        <div class="col-md-6" class="row" class="panel panel-primary">
+          <div class="panel panel-primary">
+            <div class="panel-heading"><h2 class="panel-title">Primerize Server</h2></div>
+            <div class="panel-body">
+              Custom RNA synthesis is of high demand in biological and biotechnology research. While full synthesis is timely and costly, primer assembly of DNA templates and <i>in vitro</i> transcription provide an easy and fast alternative for noncoding RNAs with lengths up to 500 nucleotides. However, available primer design tools for such tasks are not currently effective: they do not optimize primer boundaries against mispriming; are mainly optimized to adjust codons for protein synthesis rather than the fixed sequences of RNA problems; and have not been widely tested for non-coding RNA synthesis.  <br><br>
+              Since 2010, we have used an efficient algorithm for primer design that has been stringently tested in synthesis of nearly 1000 RNA sequences from our lab and from citizen scientists in the <a href="http://eterna.cmu.edu/" target="_blank">EteRNA</a> videogame/synthetic biology project, already fueling 15 publications including the first <i>in vivo</i> validated structure of a cellular internal ribosomal entry site. <br><br>
+              Previously, our command-line MATLAB scripts required nontrivial efforts for setup for other labs. Here we present an online version of <u><b>Primerize</b></u> that is integrative and user-friendly, and should be broadly used by the RNA community. The server itself has been prepared for 2015 NAR Web Server issue, and was launched in December 2014.
+            </div>
+          </div>
+          <div class="panel panel-danger" >
+            <div class="panel-heading"><h2 class="panel-title">Disclaimer</h2></div>
+            <div class="panel-body">
+              <p>
+                <b>Privacy</b><br>
+               Users of the server are anonymized. Please note that input data and result on the servers are not encrypted by sessions, thus anyone with the job ID may download a particular result within expiration (30 days). However, the chance of guessing the randomly generated job ID of any particular result is relatively small. 
+             </p>
+             <p>
+                <b>Disclosure</b><br>
+                No relevant financial relationship or commercial interest with <a href="http://www.idtdna.com">Integrated DNA Technologies (IDT)</a> exists.
+             </p>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" class="row" class="panel panel-primary">
+          <div class="panel panel-success" >
             <div class="panel-heading"><h2 class="panel-title">Primerize</h2></div>
             <div class="panel-body">
              Primerize (previously named NA_thermo), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
 
             </div>
           </div>
-        </div>
-        <div class="col-md-8" class="row" class="panel panel-primary">
-          <div class="panel panel-success">
-            <div class="panel-heading"><h2 class="panel-title">Primerize Server</h2></div>
-            <div class="panel-body">
-              Custom RNA synthesis is of high demand in biological and biotechnology research. While full synthesis is timely and costly, primer assembly of DNA templates and <i>in vitro</i> transcription provide an easy and fast alternative for noncoding RNAs with lengths up to 500 nucleotides. However, available primer design tools for such tasks are not currently effective: they do not optimize primer boundaries against mispriming; are mainly optimized to adjust codons for protein synthesis rather than the fixed sequences of RNA problems; and have not been widely tested for non-coding RNA synthesis.  <br><br>
-              Since 2010, we have used an efficient algorithm for primer design that has been stringently tested in synthesis of nearly 1000 RNA sequences from our lab and from citizen scientists in the <a href="http://eterna.cmu.edu/" target="_blank">EteRNA</a> videogame/synthetic biology project, already fueling 15 publications including the first <i>in vivo</i> validated structure of a cellular internal ribosomal entry site. <br><br>
-              Previously, our command-line MATLAB scripts required nontrivial efforts for setup for other labs. Here we present an online version of <u><b>Primerize</b></u> that is integrative and user-friendly, and should be broadly used by the RNA community. The server itself has been prepared for 2015 NAR Web Server issue, and was launched in December 2014
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8" class="row" class="panel panel-primary">
           <div class="panel panel-info" >
             <div class="panel-heading"><h2 class="panel-title">Citation</h2></div>
             <div class="panel-body">
@@ -94,33 +106,33 @@
                 <p>Kladwang W., <i>et al.</i> (<b>2011</b>). <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html" target="_blank">A two-dimensional mutate-and-map strategy for non-coding RNA structure.</a> <i>Nature chemistry</i> <b>3</b>: 954-962.</p>
               </blockquote>
             </div>
-          </div>
         </div>
-        <div class="col-md-8" class="row" class="panel panel-primary" id="contact">
-          <div class="panel panel-warning" >
-            <div class="panel-heading"><h2 class="panel-title">Contact</h2></div>
-            <div class="panel-body">
-              <div class="col-md-4">
-                <b>
-                Principal Investigator:<br>
-                Server Team:<br>
-                </b>
-              </div>
-              <div class="col-md-4">
-                Rhiju Das<br>
-                Siqi Tian<br>
-                Joseph Yesselman<br>
-                Pablo Cordero<br>
-              </div>
-              <div class="col-md-4">
-                <a href="mailto:rhiju@stanford.edu" target="_blank">email</a><br>
-                <a href="mailto:t47@stanford.edu" target="_blank">email</a>
-              </div>
+        <div class="panel panel-warning" id="contact">
+          <div class="panel-heading"><h2 class="panel-title">Contact</h2></div>
+          <div class="panel-body">
+            <b>Principal Investigator:<br></b>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              Rhiju Das<br>
+            </div>
+            <div class="col-md-2">
+              <a href="mailto:rhiju@stanford.edu" target="_blank">email</a><br>
+            </div>
+            <br><br><b>Server Team:<br></b>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              Siqi Tian<br>
+              Joseph Yesselman<br>
+              Pablo Cordero<br>
+            </div>
+            <div class="col-md-2">
+              <a href="mailto:t47@stanford.edu" target="_blank">email</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   <hr>
   
    <footer class="bs-docs-footer" role="contentinfo">

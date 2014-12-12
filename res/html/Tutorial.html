@@ -510,12 +510,12 @@ Etc...</textarea>
                                       <tr><td>25nm</td><td>25 nmole</td></tr>
                                       <tr><td>100nm</td><td>100 nmole</td></tr>
                                       <tr><td>250nm</td><td>250 nmole</td></tr>
-                                      <tr><td>1um</td><td>1 µmole</td></tr>
-                                      <tr><td>5um</td><td>5 µmole</td></tr>
-                                      <tr><td>10um</td><td>10 µmole</td></tr>
-                                      <tr><td>4nmU</td><td>4 nmole Ultramer™</td></tr>
-                                      <tr><td>20nmU</td><td>20 nmole Ultramer™</td></tr>
-                                      <tr><td>PU</td><td>PAGE Ultramer™</td></tr>
+                                      <tr><td>1um</td><td>1 &mu;mole</td></tr>
+                                      <tr><td>5um</td><td>5 &mu;mole</td></tr>
+                                      <tr><td>10um</td><td>10 &mu;mole</td></tr>
+                                      <tr><td>4nmU</td><td>4 nmole Ultramer&trade;</td></tr>
+                                      <tr><td>20nmU</td><td>20 nmole Ultramer&trade;</td></tr>
+                                      <tr><td>PU</td><td>PAGE Ultramer&trade;</td></tr>
                                       <tr><td>25nmS</td><td>25 nmole Sameday</td></tr>
                                     </tbody>
                                 </table>
@@ -557,16 +557,101 @@ Etc...</textarea>
     <div class="page-header">
       <h1>Section <kbd>#6</kbd>: PCR Assembly Protocol</h1>
     </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h2 class="panel-title">Experimental Setup for PCR Assembly of Template</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">Experimental Setup for PCR Assembly of Template</h2>
+          </div>
+          <div class="panel-body">
+            <div class="col-md-12">
+              <h4>PCR Recipe</h4>
+              Usign P4P6_2HP as an example, mix the following components in a PCR tube:
+              <br><br>
             </div>
-            <div class="panel-body">
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-6">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="col-md-3">Concentration</th>
+                      <th class="col-md-6">Components</th>
+                      <th class="col-md-3">Volume (&mu;l)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
+                    <tr><td><em>10 mM</em></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
+                    <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                    <tr>
+                      <td><em><b><span style="color:blue">1</span> &mu;M</b></em></td>
+                      <td>Primer <b>2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span></b></td>
+                      <td>2.0 <i>(each)</i></td>
+                    </tr>
+                    <tr>
+                      <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
+                      <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                      <td>2.0 <i>(each)</i></td>
+                    </tr>
+                    <tr><td></td><td>ddH<sub>2</sub>O</td><td>26.0</td></tr>
+                    <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>          
-        </div>
+
+            <div class="col-md-12">
+              <h4>PCR Conditions</h4>
+              <br>
+            </div>
+             <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-6">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="col-md-6">Steps</th>
+                      <th class="col-md-3">Time</th>
+                      <th class="col-md-3">Temperature</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><em>Denaturation</em></td><td>30 s</td><td>98 &deg;C</td></tr>
+                    <tr><td><em>Denaturation</em></td><td>10 s</td><td>98 &deg;C</td></tr>
+                    <tr><td><em>Annealing</em></td><td>30 s</td><td>60 &deg;C*</td></tr>
+                    <tr><td><em>Extension</em></td><td>30 s</td><td>72 &deg;C</td></tr>
+                    <tr><td><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat 30 cycles</em></td></tr>
+                    <tr><td><em>Final Extension</em></td><td>10 min</td><td>72 &deg;C</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-1">
+                 <i>Note</i>: 
+                </div>
+                <div class="col-md-11">
+                 <p>
+                  1. For termianl primers (1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span>), use <b>100 &mu;M</b>. For internal primers (2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span>), dilute to <b>1 &mu;M</b>. Add 2.0 &mu;l of each primer to mixture.<br>
+                </p>
+                <p>
+                  2. Use stock of 10 mM dNTPs, which has 10 mM of each dATP, dTTP, dCTP, dGTP mixed together. 
+                </p>
+                <p>
+                  3. Choose annealing temperature wisely. We recommend to use the same as <code>min_TM</code> by Primerize design, which is usually between 60-64 &deg;C.
+                </p>
+                <p>
+                  4. Check PCR product on 4% agarose gel. If assembly is unsuccessful with shorter mis-priming products, we suggest try raising the annealing temperature to reduce mis-priming. Alternatively, splitting the assembly into separate sub-pools (i.e. primer 1-4 and primer 5-6) and do an additional round of full assembly.
+                </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>          
       </div>
     </div>
   </div>
