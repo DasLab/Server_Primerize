@@ -293,7 +293,7 @@ class rest:
 
             return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=/media/Download_link.html\"></head></html>"
         else:
-            f = open(os.path.join(MEDIA_DIR, u"media/Download_result.html")) 
+            f = open(os.path.join(MEDIA_DIR, u"media/Download_error.html")) 
             lines = f.readlines()
             f.close()
             script = "".join(lines)
