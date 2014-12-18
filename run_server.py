@@ -3,6 +3,7 @@ import os
 import random
 import string
 import sys
+import time
 # import re
 # import subprocess
 # from scipy.stats import *
@@ -46,7 +47,8 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
     else:
         is_num_primers = ""
         is_num_primers_disabled = "disabled=\"disabled\""
-    if num_primers == "99": num_primers = "auto"
+
+    if num_primers in ("99", "-1", " "): num_primers = "auto"
     script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled)
     return script
 
@@ -102,7 +104,7 @@ class rest:
         seq = sequence.upper().replace("U", "T")
         sequence = ""
         for char in seq:
-            if ord(char) not in (10, 13):
+            if ord(char) not in (10, 13, 32):
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
@@ -111,6 +113,7 @@ class rest:
                 f.close()
                 script = "".join(lines)
                 return script
+
             msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input."
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
 
@@ -118,7 +121,7 @@ class rest:
         try:
             min_Tm = float(min_Tm)
 
-            if ("1" not in is_num_primers) or not num_primers or num_primers == "99" or num_primers == "auto":
+            if ("1" not in is_num_primers) or not num_primers or num_primers in ("99", "auto"):
                 num_primers = -1
             else:
                 num_primers = int(num_primers[0])
@@ -132,9 +135,11 @@ class rest:
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
         if not tag: tag = "primer"
 
+        t0 = time.time()
         f_out = os.popen('matlab -nojvm -nodisplay -nosplash -r "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()"' % (sequence, min_Tm, num_primers, max_length, min_length))
         lines = f_out.readlines()
         f_out.close()
+        t_total = time.time() - t0
         if num_primers == -1: num_primers = 99
 
         lines = [line.replace("\n","") for line in lines]
@@ -177,7 +182,7 @@ class rest:
             script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br><div class=\"alert alert-success\" title=\"No alerts\"><p>"
             script += "<b>SUCCESS</b>: No potential mis-priming found. See results below."
 
-        script +=  "</p></div><br>"
+        script +=  "</p></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"alert alert-info\"> <b>Time elapsed</b>: %.1f" % t_total + " s.</div></div></div>"
 
         script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table\"><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
         for line in self.lines_primers:
@@ -280,7 +285,7 @@ class rest:
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
 
-        is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 2) and is_valid_name(inst, "()-, ", 8) and is_valid_name(dept, "()-, ", 8) and is_valid_email(email)
+        is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 2) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
 
         if is_valid:
             f = open(u"src/usr_tab.csv", "a")

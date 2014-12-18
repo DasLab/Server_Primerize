@@ -6,7 +6,7 @@ body {
 }
 
 .bgimg {
-  background-image: url("/images/bg_rna.png");
+  background-image: url("/res/images/bg_rna.png");
   background-repeat: no-repeat;
   background-position: right top;
   background-size: 30%;
@@ -36,7 +36,7 @@ html {
 .navbar .navbar-brand {
   color: #fbad24;
   font-weight: bold;
-  background-image: url("/images/bg_rna.png");
+  background-image: url("/res/images/bg_rna.png");
   background-size: cover;
   background-repeat: no-repeat;
 
