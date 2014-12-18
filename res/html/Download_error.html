@@ -50,9 +50,11 @@
             <li><a href="/res/html/About.html">About</a></li>
           </ul>
           <ul class="pull-right">
-              <li><a href="http://eterna.cmu.edu/" target="_blank">
-              <img src="/res/images/logo_eterna.png" height="42"/>
-            </a></li>
+            <li>
+              <a href="http://eterna.cmu.edu/" target="_blank">
+                <img src="/res/images/logo_eterna.png" height="42"/>
+              </a>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -62,27 +64,46 @@
 
       <div class="starter-template">
           <form method="get" action="/submit_download" class="col-md-8">
-            <h3>Please provide your contact information</h3><br>
+            <h3>Please provide your contact information</h3>
+            <br/>
             <div class="row">
               <div class="panel panel-info" >
-                <div class="panel-heading"><h2 class="panel-title">Contact Information</h2></div>
+                <div class="panel-heading">
+                  <h2 class="panel-title">Contact Information</h2>
+                </div>
                 <div class="panel-body">
-                  <div class="col-md-2">
-                    First Name: <br><br>
-                    Insititution: <br><br>
+                  <div class="row col-md-12">
+                    <div class="col-md-2">
+                      First Name: 
+                    </div>
+                    <div class="col-md-4">
+                      <input name="first_name" type="text" value="__F_NAME__"/>
+                    </div>
+                    <div class="col-md-2">
+                      Last Name: 
+                    </div>
+                    <div class="col-md-4">
+                      <input name="last_name" type="text" value="__L_NAME__"/>
+                    </div>
                   </div>
-                  <div class="col-md-4">
-                    <input name="first_name" type="text" value="__F_NAME__"/><br><br>
-                    <input name="inst" type="text" value="__INST__"/><br><br>
+                  <br/>
+                  <br/>
+                  <div class="row col-md-12">
+                    <div class="col-md-2">
+                    Insititution: 
+                    </div>
+                    <div class="col-md-4">
+                    <input name="inst" type="text" value="__INST__"/>
+                    </div>
+                    <div class="col-md-2">
+                    Department: 
+                    </div>
+                    <div class="col-md-4">
+                    <input name="dept" type="text" value="__DEPT__"/>
+                    </div>
                   </div>
-                  <div class="col-md-2">
-                    Last Name: <br><br>
-                    Department: <br><br>
-                  </div>
-                  <div class="col-md-4">
-                    <input name="last_name" type="text" value="__L_NAME__"/><br><br>
-                    <input name="dept" type="text" value="__DEPT__"/><br><br>
-                  </div>
+                  <br/>
+                  <br/>
                   <div class="row">
                     <div class="col-md-3">&nbsp;&nbsp;&nbsp;&nbsp;E-mail Address:</div>
                     <div class="col-md-9">
@@ -90,15 +111,17 @@
                    </div>
                   </div>
                   <div class="col-md-12">
-                    <br>
+                    <br/>
                     <input name="is_subscribe" type="checkbox" value="1" __IS_SUBSCRIBE__/> 
                     <input type="hidden" name="is_subscribe" value="0" />
                     Subscribe to newsletter for future version updates.
-                    <br><br>
+                    <br/>
+                    <br/>
                     <input type="submit" class="btn btn-primary" value="&nbsp;Submit&nbsp;"/>
                     &nbsp;
                     <a href="/res/html/Download.html" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>
-                    <br><br>
+                    <br/>
+                    <br/>
                     <div class="alert alert-danger">
                       <b>ERROR</b>: Invalid contact information. Please try again.
                     </div>
@@ -108,22 +131,33 @@
               </div>
             </div>
           </form>
-        <br>
+        <br/>
     </div>
   </div>
-  <hr>
+  <hr/>
   
    <footer class="bs-docs-footer" role="contentinfo">
     <div class="container" class="row">
       <div class="col-md-9">
-       <p class="muted credit">Maintained by the &nbsp;&nbsp;
-        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab"><img src="/res/images/logo_das.jpg" height="42"/></a>
-        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University"><img src="/res/images/logo_stanford.png" height="42"/></a>
-        <br><br>
-        <a href="/show_license">Copyright</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. </p>
+       <p class="muted credit">
+        Maintained by the &nbsp;&nbsp;
+        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">
+          <img src="/res/images/logo_das.jpg" height="42"/>
+        </a>
+        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University">
+          <img src="/res/images/logo_stanford.png" height="42"/>
+        </a>
+        <br/>
+        <br/>
+        <a href="/show_license">Copyright</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. 
+       </p>
       </div>
       <div class="col-md-3">
-       <p> powered by <a href="http://www.cherrypy.org/" target="_blank">CherryPy</a> and <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
+       <p> 
+        powered by 
+        <a href="http://www.cherrypy.org/" target="_blank">CherryPy</a> and 
+        <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
+       </p>
       </div> 
     </div>
    </footer>

@@ -62,20 +62,29 @@ def is_valid_sequence(sequence):
 
 
 def display_complete_html(msg):
-    msg += "</p></div></div><hr>"
+    msg += "</p></div></div><hr/>"
     msg += """
         <footer class="bs-docs-footer" role="contentinfo">
             <div class="container" class="row">
                 <div class="col-md-9">
-                    <p class="muted credit">Maintained by the &nbsp;&nbsp;
-                        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab"><img src="/res/images/logo_das.jpg" height="42"/></a>
-                        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University"><img src="/res/images/logo_stanford.png" height="42"/></a>
-                        <br><br>
+                    <p class="muted credit">
+                        Maintained by the &nbsp;&nbsp;
+                        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">
+                            <img src="/res/images/logo_das.jpg" height="42"/>
+                        </a>
+                        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University">
+                            <img src="/res/images/logo_stanford.png" height="42"/>
+                        </a>
+                        <br/>
+                        <br/>
                         <a href="/show_license">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. 
                     </p>
                 </div>
                 <div class="col-md-3">
-                    <p> powered by <a href="http://www.cherrypy.org/" target="_blank">CherryPy</a> and <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
+                    <p> 
+                        powered by 
+                        <a href="http://www.cherrypy.org/" target="_blank">CherryPy</a> and 
+                        <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
                     </p>
                 </div> 
             </div>
@@ -154,7 +163,7 @@ class rest:
 
         script = ""
         if self.lines_warning != ['#']:
-            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
+            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
             for line in self.lines_warning:
                 if line[0] == "@":
                     script += "<b>WARNING</b>"
@@ -177,9 +186,9 @@ class rest:
                             script += "</span>"
                         else:
                             script += char 
-                    script += "<br>"
+                    script += "<br/>"
         else:
-            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br><div class=\"alert alert-success\" title=\"No alerts\"><p>"
+            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br/><div class=\"alert alert-success\" title=\"No alerts\"><p>"
             script += "<b>SUCCESS</b>: No potential mis-priming found. See results below."
 
         script +=  "</p></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"alert alert-info\"> <b>Time elapsed</b>: %.1f" % t_total + " s.</div></div></div>"
@@ -198,23 +207,23 @@ class rest:
         for line in self.lines_assembly:
             if line:
                 if line[0] == "~":
-                    script += "<span class=\"bg-primary\">" + line[1:] + "</span><br>"
+                    script += "<span class=\"bg-primary\">" + line[1:] + "</span><br/>"
                 elif line[0] == "=":
-                    script += "<span class=\"bg-warning\">" + line[1:] + "</span><br>"
+                    script += "<span class=\"bg-warning\">" + line[1:] + "</span><br/>"
                 elif line[0] == "^":
                     for char in line[1:]:
                         if char in ("A","T","C","G"):
                             script += "<span class=\"bg-info\">" + char + "</span>"
                         else:
                             script += char
-                    script += "<br>"
+                    script += "<br/>"
                 elif line[0] == "!":
                     for char in line[1:]:
                         if char in ("A","T","C","G"):
                             script += "<span class=\"bg-danger\">" + char + "</span>"
                         else:
                             script += char
-                    script += "<br>"
+                    script += "<br/>"
                 else:
                     for char in line[1:]:
                         if char == "{":
@@ -223,9 +232,9 @@ class rest:
                             script += "</kbd>" 
                         else:
                             script += char 
-                    script += "<br>"
+                    script += "<br/>"
             else:
-                script += "<br>"
+                script += "<br/>"
 
         script += "</pre></div></div></div></div>"
 
@@ -272,7 +281,7 @@ class rest:
         f = open(os.path.join(MEDIA_DIR, u"LICENSE.MD")) 
         lines = f.readlines()
         f.close()
-        md = "".join([line.replace("\n","<br>") for line in lines]) + "</strong>"
+        md = "".join([line.replace("\n","<br/>") for line in lines]) + "</strong>"
 
         f = open(os.path.join(MEDIA_DIR, u"res/html/License.html")) 
         lines = f.readlines()

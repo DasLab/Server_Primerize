@@ -84,9 +84,11 @@
             <li><a href="/res/html/About.html">About</a></li>
           </ul>
           <ul class="pull-right">
-              <li><a href="http://eterna.cmu.edu/" target="_blank">
-              <img src="/res/images/logo_eterna.png" height="42"/>
-            </a></li>
+            <li>
+              <a href="http://eterna.cmu.edu/" target="_blank">
+                <img src="/res/images/logo_eterna.png" height="42"/>
+              </a>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -108,7 +110,9 @@
                 <input name="tag" type="text" value="__TAG__" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
                &nbsp;&nbsp;(optional)
                </p>
-               <p><b>Sequence</b>:</p>
+               <p>
+                <b>Sequence</b>:
+               </p>
                <div class="row">
                 <div class="col-md-10">
                  <ul>
@@ -119,17 +123,19 @@
                 </div>
                 <div class="col-md-2">
                  <p class="text-right">
-                  <br><br>
+                  <br/>
+                  <br/>
                   <i>Length: <b><span id="count">__LEN__</span></b> nt</i>
                  </p>
                 </div>
                </div>
-               <textarea class="form-control" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence">__SEQ__</textarea><br>
+               <textarea class="form-control" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence">__SEQ__</textarea>
+               <br/>
                <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
                <a href="/res/html/Design.html" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
                <span>
                 <input id="is_agree" type="checkbox" checked="yes" required>
-               By clicking submit, you are agreeing to the <a href="/show_license">Terms and Conditions</a>.</input>
+                By clicking submit, you are agreeing to the <a href="/show_license">Terms and Conditions</a>.</input>
                </span>
                <a href="/example_P4P6" id="btn_demo" class="btn btn-warning pull-right" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
               </div>
@@ -149,15 +155,16 @@
                     <p data-toggle="tooltip" data-placement="left" title="Maximum length for each primer. Default = 60 nt.">
                       maximum <b>length</b> of primers:
                       <input name="max_length" type="text" value="__MAX_LEN__" style="width:25%"/>
-                       nt <br>
+                       nt <br/>
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Minimum length for each primer. Default = 15 nt.">
                       minimum <b>length</b> of primers:
                       <input name="min_length" type="text" value="__MIN_LEN__" style="width:25%"/>
-                       nt <br>
+                       nt <br/>
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
-                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers" __IS_NUM_PRMS__>&nbsp;<b>#</b> number of primers</input>:<br>
+                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers" __IS_NUM_PRMS__>&nbsp;<b>#</b> number of primers</input>:
+                      <br/>
                       <input name="is_num_primers" type="hidden" value="0" checked>
                       <input name="num_primers" type="text" value="__NUM_PRIMERS__" style="width:25%" id="text_num_primers" __IS_NUM_PRMS_DIS__/>
                       <input name="num_primers" type="hidden" value=""/>
@@ -169,6 +176,6 @@
           </div>
         </form>
       </div>
-      <hr>
+      <hr/>
 
 
