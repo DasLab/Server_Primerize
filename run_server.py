@@ -1,6 +1,6 @@
 import cherrypy
+import glob
 import os
-import random
 import string
 import subprocess
 import sys
@@ -37,7 +37,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
-    f = open(os.path.join(MEDIA_DIR, u"res/html/Design_result.html")) 
+    f = open("res/html/Design_result.html") 
     lines = f.readlines()
     f.close()
 
@@ -107,7 +107,7 @@ class rest:
 
     @cherrypy.expose
     def index(self):
-        return open(os.path.join(MEDIA_DIR, u"res/html/Design.html"))
+        return open("res/html/Design.html")
 
 
     @cherrypy.expose
@@ -120,7 +120,7 @@ class rest:
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
-                f = open(os.path.join(MEDIA_DIR, u"res/html/Design.html")) 
+                f = open("res/html/Design.html")
                 lines = f.readlines()
                 f.close()
                 script = "".join(lines)
@@ -272,7 +272,17 @@ class rest:
 
 
     @cherrypy.expose
+    def cleanup_old(self):
+        older_7days = time.time() - 7 * 86400
+
+        for f in glob.glob("cache/*.txt"):
+            if (os.stat(f).st_mtime < older_7days):
+                os.remove(f)
+
+
+    @cherrypy.expose
     def example_P4P6(self):
+        self.cleanup_old()
         seq_P4P6 = "TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC"
         return self.design_primers(seq_P4P6, "P4P4_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0")    
 
@@ -298,7 +308,7 @@ class rest:
         is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 2) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
 
         if is_valid:
-            f = open(os.path.join(MEDIA_DIR, u"src/usr_tab.csv"), "a")
+            f = open("src/usr_tab.csv", "a")
             if "1" in is_subscribe:
                 f.write("1")
             else:
@@ -308,7 +318,7 @@ class rest:
 
             return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=/res/html/Download_link.html\"></head></html>"
         else:
-            f = open(os.path.join(MEDIA_DIR, u"res/html/Download_error.html")) 
+            f = open("res/html/Download_error.html") 
             lines = f.readlines()
             f.close()
             script = "".join(lines)

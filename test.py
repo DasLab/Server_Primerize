@@ -1,5 +1,7 @@
-import tempfile
+import os, time, glob
 
-for i in range(10):
-	temp = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", dir="cache/", delete=False)
-	print temp.name
+t0 = time.time()
+
+for f in glob.glob("cache/*.txt"):
+	print os.stat(f).st_mtime - t0
+	print os.stat(f)
