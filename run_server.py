@@ -2,10 +2,10 @@ import cherrypy
 import os
 import random
 import string
+import subprocess
 import sys
 import time
 # import re
-# import subprocess
 # from scipy.stats import *
 
 MEDIA_DIR = os.path.join(os.path.abspath("."))
@@ -151,9 +151,8 @@ class rest:
         if not tag: tag = "primer"
 
         t0 = time.time()
-        f_out = os.popen('matlab -nojvm -nodisplay -nosplash -r "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()"' % (sequence, min_Tm, num_primers, max_length, min_length))
-        lines = f_out.readlines()
-        f_out.close()
+        f_run = subprocess.check_output(["matlab", "-nojvm", "-nodisplay", "-nosplash", "-r", "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()" % (sequence, min_Tm, num_primers, max_length, min_length)], shell=False)
+        lines = f_run.split("\n")
         t_total = time.time() - t0
 
         lines = [line.replace("\n","") for line in lines]
@@ -168,7 +167,7 @@ class rest:
 
         script = ""
         if self.lines_warning != ['#']:
-            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
+            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
             for line in self.lines_warning:
                 if line[0] == "@":
                     script += "<b>WARNING</b>"

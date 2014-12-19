@@ -43,10 +43,10 @@ label {
   background-image: url("/res/images/bg_rna.png");
   background-size: cover;
   background-repeat: no-repeat;
-
 }
 .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
   color: #ffff00;
+  text-decoration: blink;
 }
 .navbar .navbar-text {
   color: #7cafd3;
@@ -57,11 +57,13 @@ label {
 .navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
   color: #ffffff;
   background-color: #011e46;
+  text-shadow: 2px 2px 5px #7cafd3;
 }
 .navbar .navbar-nav > .active > a, .navbar .navbar-nav > .active > a:hover, .navbar .navbar-nav > .active > a:focus {
   color: #ffffff;
   background-color: #112d52;
   text-decoration: underline;
+  text-shadow: 2px 2px 5px #ffff00;
 }
 .navbar .navbar-nav > .open > a, .navbar .navbar-nav > .open > a:hover, .navbar .navbar-nav > .open > a:focus {
   color: #ffffff;
@@ -103,6 +105,19 @@ label {
   opacity:0.5;
 }
 
+p.cap:first-letter {
+  font-size: 200%;
+}
+
+a:link, a:visited {
+  color: #011e46;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #7cafd3;
+  text-decoration: underline;
+}
 
 .popover-title{
     background-color: #000000;
