@@ -4,6 +4,7 @@ import random
 import string
 import subprocess
 import sys
+import tempfile
 import time
 # import re
 # from scipy.stats import *
@@ -97,10 +98,6 @@ def display_complete_html(msg):
     </html>
     """
     return msg 
-
-
-def get_cache_id():
-    return "".join(random.sample("".join([string.digits, string.ascii_uppercase]), 6))
 
 
 class rest:
@@ -242,9 +239,9 @@ class rest:
 
         script += "</pre></div></div></div></div>"
 
-        job_id = get_cache_id()
-        file_name = "cache/result_" + job_id + ".txt"
-        f = open(os.path.join(MEDIA_DIR, file_name), "w")
+        f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
+        file_name = f.name[-17:]
+
         f.write("Primerize Result\n\nINPUT\n=====\n%s\n" % sequence)
         f.write("#\nMIN_TM: %.1f\n" % min_Tm)
         if num_primers == DEF_NUM_PRM:
@@ -268,9 +265,9 @@ class rest:
             line = line.split("\t")
             f.write("%s\t%s\t25nm\tSTD\n" % (line[0].replace("primer", tag), line[2]))
         f.write("------/* END */------\n------/* NOTE: use \"Lab Ready\" for \"Normalization\" */------\n")
-        f.close()
 
-        script = script.replace("__FILE_NAME__", file_name).replace("__JOB_ID___", job_id)
+        script = script.replace("__FILE_NAME__", u"cache/" + file_name).replace("__JOB_ID___", file_name[-10:-4])
+        f.close()
         return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(script)
 
 
@@ -282,12 +279,12 @@ class rest:
 
     @cherrypy.expose
     def show_license(self):
-        f = open(os.path.join(MEDIA_DIR, u"LICENSE.MD")) 
+        f = open("LICENSE.MD") 
         lines = f.readlines()
         f.close()
         md = "".join([line.replace("\n","<br/>") for line in lines]) + "</strong>"
 
-        f = open(os.path.join(MEDIA_DIR, u"res/html/License.html")) 
+        f = open("res/html/License.html")
         lines = f.readlines()
         f.close()
         script = "".join(lines)

@@ -1,8 +1,5 @@
-import subprocess
+import tempfile
 
-a = subprocess.check_output(["matlab", "-nojvm", "-nodisplay", "-nosplash", "-r", "design_primers(\'TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC\',60,-1,[],60,15,[],1); exit()"], shell=False)
-print a 
-print len(a)
-print type(a)
-
-print a.split('\n')
+for i in range(10):
+	temp = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", dir="cache/", delete=False)
+	print temp.name
