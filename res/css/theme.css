@@ -106,7 +106,12 @@ label {
 }
 
 p.cap:first-letter {
-  font-size: 200%;
+  font-size: 36px;
+  font-family: Georgia, serif;
+  line-height: 100%;
+  float: left;
+  padding: 2px 5px 2px 2px;
+  color: #903;
 }
 
 a:link, a:visited {
@@ -117,6 +122,26 @@ a:link, a:visited {
 a:hover {
   color: #7cafd3;
   text-decoration: underline;
+}
+
+h1.section {
+  background-color: #000000;
+  color: #7cafd3;
+  padding: 15px;
+  box-shadow: 0 0 15px #000000;
+  -moz-box-shadow: 0 0 15px #000000;
+  -webkit-box-shadow: 0 0 15px #000000;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+h1.section>span.sec {
+  color: #ffffff;
+}
+
+h1.section>span.num {
+  color: #ffff00;
 }
 
 .popover-title{

@@ -197,15 +197,15 @@ class rest:
 
         script +=  "</p></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"alert alert-info\"> <b>Time elapsed</b>: %.1f" % t_total + " s.</div></div></div>"
 
-        script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table\"><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
+        script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table table-hover\" ><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
         for line in self.lines_primers:
             line = line.split("\t")
             num = "<b>" + line[0][7:]
             if int(line[0][7:]) % 2 == 0:
-                num += " <span class=\"label label-danger\">R</span></b>"
+                num = "<tr><td>" + num + "<span class=\"label label-danger\">R</span></b>"
             else:
-                num += " <span class=\"label label-info\">F</span></b>"
-            script += "<tr><td>" + num + "</td><td><em>" + line[1] + "</em></td><td>" + line[2] + "</td></tr>"
+                num = "<tr class=\"warning\"><td>" + num + "<span class=\"label label-info\">F</span></b>"
+            script += num + "</td><td><em>" + line[1] + "</em></td><td style=\"word-break: break-all;\">" + line[2] + "</td></tr>"
 
         script += "</tbody></table></div></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-success\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Assembly Scheme</h2></div><div class=\"panel-body\"><pre>"
         for line in self.lines_assembly:
