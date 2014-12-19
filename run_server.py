@@ -14,6 +14,8 @@ DEF_MIN_TM = 60.0
 DEF_MAX_LEN = 60
 DEF_MIN_LEN = 15
 DEF_NUM_PRM = -1
+JOB_KEEP_EXPIRE = 7
+
 
 def is_valid_name(input, char_allow, length):
 
@@ -107,7 +109,7 @@ class rest:
 
     @cherrypy.expose
     def index(self):
-        return open("res/html/Design.html")
+        return open("res/html/index.html")
 
 
     @cherrypy.expose
@@ -273,7 +275,7 @@ class rest:
 
     @cherrypy.expose
     def cleanup_old(self):
-        older_7days = time.time() - 7 * 86400
+        older_7days = time.time() - JOB_KEEP_EXPIRE * 86400
 
         for f in glob.glob("cache/*.txt"):
             if (os.stat(f).st_mtime < older_7days):
