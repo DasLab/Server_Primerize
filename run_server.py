@@ -9,6 +9,10 @@ import time
 # from scipy.stats import *
 
 MEDIA_DIR = os.path.join(os.path.abspath("."))
+DEF_MIN_TM = 60.0
+DEF_MAX_LEN = 60
+DEF_MIN_LEN = 15
+DEF_NUM_PRM = -1
 
 def is_valid_name(input, char_allow, length):
 
@@ -48,7 +52,7 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
         is_num_primers = ""
         is_num_primers_disabled = "disabled=\"disabled\""
 
-    if num_primers in ("99", "-1", " "): num_primers = "auto"
+    if num_primers in (str(DEF_NUM_PRM), " "): num_primers = "auto"
     script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled)
     return script
 
@@ -89,6 +93,8 @@ def display_complete_html(msg):
                 </div> 
             </div>
         </footer>
+    </body>
+    </html>
     """
     return msg 
 
@@ -130,8 +136,8 @@ class rest:
         try:
             min_Tm = float(min_Tm)
 
-            if ("1" not in is_num_primers) or not num_primers or num_primers in ("99", "auto"):
-                num_primers = -1
+            if ("1" not in is_num_primers) or not num_primers or num_primers in (str(DEF_NUM_PRM), "auto"):
+                num_primers = DEF_NUM_PRM
             else:
                 num_primers = int(num_primers[0])
             max_length = int(max_length)
@@ -139,7 +145,7 @@ class rest:
         except ValueError:
             msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input."
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
-        if num_primers != -1 and num_primers % 2 != 0:
+        if num_primers != DEF_NUM_PRM and num_primers % 2 != 0:
             msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>."
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
         if not tag: tag = "primer"
@@ -149,7 +155,6 @@ class rest:
         lines = f_out.readlines()
         f_out.close()
         t_total = time.time() - t0
-        if num_primers == -1: num_primers = 99
 
         lines = [line.replace("\n","") for line in lines]
         if lines[-2] and lines[-2][0] == "?":
@@ -240,10 +245,10 @@ class rest:
 
         job_id = get_cache_id()
         file_name = "cache/result_" + job_id + ".txt"
-        f = open(file_name, "w")
+        f = open(os.path.join(MEDIA_DIR, file_name), "w")
         f.write("Primerize Result\n\nINPUT\n=====\n%s\n" % sequence)
-        f.write("#\nMIN_TM: %d\n" % min_Tm)
-        if num_primers == 99:
+        f.write("#\nMIN_TM: %.1f\n" % min_Tm)
+        if num_primers == DEF_NUM_PRM:
             f.write("NUM_PRIMERS: auto (unspecified)")
         else:
             f.write("NUM_PRIMERS: %d" % num_primers)
@@ -273,7 +278,7 @@ class rest:
     @cherrypy.expose
     def example_P4P6(self):
         seq_P4P6 = "TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC"
-        return self.design_primers(seq_P4P6, "P4P4_2HP", "60", "99", "60", "15", "0")    
+        return self.design_primers(seq_P4P6, "P4P4_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0")    
 
 
     @cherrypy.expose
@@ -297,7 +302,7 @@ class rest:
         is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 2) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
 
         if is_valid:
-            f = open(u"src/usr_tab.csv", "a")
+            f = open(os.path.join(MEDIA_DIR, u"src/usr_tab.csv"), "a")
             if "1" in is_subscribe:
                 f.write("1")
             else:
@@ -320,16 +325,17 @@ class rest:
 
 
 if __name__ == "__main__":
-    server_state = "development"
+    server_state = "dev"
     if len(sys.argv) > 1:
         server_state = sys.argv[1]
-    if server_state not in ("development","release"):
+    if server_state not in ("dev","release"):
+        print "Usage:\n\tpython run_server.py [flag]\n\n\tflag\t[required]\tuse \"release\" for hosting server\n\t\t\t\tuse \"dev\" for development test\n"
         raise SystemError("ERROR: Only can do development or release")
-    if server_state == "development":
-        socket_host = "127.0.0.1"
+    if server_state == "release":
+        socket_host = "171.65.23.206"
         socket_port = 8080
     else:
-        socket_host = "171.65.23.206"
+        socket_host = "127.0.0.1"
         socket_port = 8080
 
     cherrypy.config.update( {

@@ -22,6 +22,14 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/res/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(function () {
+          $("[data-toggle='tooltip']").tooltip(); 
+        });
+      })
+
+    </script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -77,47 +85,50 @@
                 <div class="panel-body">
                   <div class="row col-md-12">
                     <div class="col-md-2">
-                      First Name: 
+                      <label for="first_name">First Name:</label>
                     </div>
                     <div class="col-md-4">
-                      <input name="first_name" type="text" value=""/>
+                      <input name="first_name" type="text" value="" required="required"/>
                     </div>
                     <div class="col-md-2">
-                      Last Name: 
+                      <label for="last_name">Last Name:</label>
                     </div>
                     <div class="col-md-4">
-                      <input name="last_name" type="text" value=""/>
+                      <input name="last_name" type="text" value="" required="required"/>
                     </div>
                   </div>
                   <br/>
                   <br/>
                   <div class="row col-md-12">
                     <div class="col-md-2">
-                    Insititution: 
+                    <label for="inst">Insititution:</label>
                     </div>
                     <div class="col-md-4">
-                    <input name="inst" type="text" value=""/>
+                    <input name="inst" type="text" value="" required="required"/>
                     </div>
                     <div class="col-md-2">
-                    Department: 
+                    <label for="dept">Department:</label> 
                     </div>
                     <div class="col-md-4">
-                    <input name="dept" type="text" value=""/>
+                    <input name="dept" type="text" value="" required="required"/>
                     </div>
                   </div>
                   <br/>
                   <br/>
                   <div class="row">
-                    <div class="col-md-3">&nbsp;&nbsp;&nbsp;&nbsp;E-mail Address:</div>
+                    <div class="col-md-3">
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <label for="email">E-mail Address:</label>
+                    </div>
                     <div class="col-md-9">
-                     <input name="email" type="text" value="" style="width:75%"/>
+                     <input name="email" type="email" value="" style="width:75%" required="required"/>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <br/>
                     <input name="is_subscribe" type="checkbox" value="1" checked="yes"/> 
                     <input type="hidden" name="is_subscribe" value="0" />
-                    Subscribe to newsletter for future version updates.
+                    <label for="is_subscribe">Subscribe to newsletter for future version updates.</label>
                     <br/>
                     <br/>
                     <input type="submit" class="btn btn-primary" value="&nbsp;Submit&nbsp;"/>

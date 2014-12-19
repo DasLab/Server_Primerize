@@ -16,6 +16,10 @@ html {
   overflow-y: scroll; 
 }
 
+label {
+  font-weight: normal;
+}
+
 .starter-template {
   padding: 40px 15px;
 }

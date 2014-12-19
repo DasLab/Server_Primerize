@@ -21,7 +21,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/res/js/bootstrap.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
       $(document).ready(function () {
         $("#is_agree").click(function() {
           if ($(this).is(":checked")) {
@@ -49,7 +49,7 @@
               $("#text_num_primers").attr("disabled", "disabled");
           }
         });
-       });
+      });
       $(function () {
         $("[data-toggle='tooltip']").tooltip(); 
       })
@@ -107,12 +107,12 @@
             <div class="col-md-9">
               <div class="bgimg">
                <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
-                <b>Name Tag</b>:&nbsp;&nbsp;
+                <label for="tag"><b>Name Tag</b>:&nbsp;&nbsp;</label>
                 <input name="tag" type="text" value="" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
                &nbsp;&nbsp;(optional)
                </p>
                <p>
-                <b>Sequence</b>:
+                <label for="sequence"><b>Sequence</b>:</label>
                </p>
                <div class="row">
                 <div class="col-md-10">
@@ -135,8 +135,12 @@
                <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
                <a href="/res/html/Design.html" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
                <span>
-                <input id="is_agree" type="checkbox" checked="yes" required>
-                By clicking submit, you are agreeing to the <a href="/show_license">Terms and Conditions</a>.</input>
+                <input id="is_agree" type="checkbox" checked="yes" required="required">
+                  <label for="is_agree">
+                    By clicking submit, you are agreeing to the 
+                    <a href="/show_license">Terms and Conditions</a>.
+                  </label>
+                </input>
                </span>
                <a href="/example_P4P6" id="btn_demo" class="btn btn-warning pull-right" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
               </div>
@@ -149,22 +153,24 @@
                 <div class="panel-body">
                   <div class="input-group">
                     <p data-toggle="tooltip" data-placement="left" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
-                      minimum <b>Tm</b>: 
+                      <label for="min_Tm">minimum <b>Tm</b>:</label>
                       <input name="min_Tm" type="text" value="60.0" style="width:25%"/>
                       &deg;C
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Maximum length for each primer. Default = 60 nt.">
-                      maximum <b>length</b> of primers:
+                      <label for="max_length">maximum <b>length</b> of primers:</label>
                       <input name="max_length" type="text" value="60" style="width:25%"/>
                        nt <br/>
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Minimum length for each primer. Default = 15 nt.">
-                      minimum <b>length</b> of primers:
+                      <label for="min_length">minimum <b>length</b> of primers:</label>
                       <input name="min_length" type="text" value="15" style="width:25%"/>
                        nt <br/>
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
-                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers">&nbsp;<b>#</b> number of primers</input>:
+                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers">
+                        <label for="is_num_primers">&nbsp;<b>#</b> number of primers:</label>
+                      </input>
                       <br/>
                       <input name="is_num_primers" type="hidden" value="0" checked>
                       <input name="num_primers" type="text" value="auto" style="width:25%" id="text_num_primers" disabled="disabled"/>
