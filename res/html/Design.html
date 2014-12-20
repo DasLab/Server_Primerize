@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="primerize, design, demo">
     <meta name="author" content="T47">
-    <link rel="shortcut icon" href="/images/EteRNA_shortcut.png">
+    <link rel="shortcut icon" href="/res/images/ico_primerize.png">
     <title>Primerize</title>
 
     <!-- Bootstrap core CSS -->
@@ -49,13 +49,18 @@
               $("#text_num_primers").attr("disabled", "disabled");
           }
         });
+        $("#btn_submit").click(function() {
+          $("#wait").show();   
+        });
+        $("#btn_demo").click(function() {
+          $("#wait").show();   
+        });
       });
       $(function () {
         $("[data-toggle='tooltip']").tooltip(); 
       })
-
     </script>
-        <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -66,6 +71,7 @@
   </head>
 
   <body>
+    <div id="wait" class="modal"></div>
 
     <div class="navbar navbar-fixed-top" role="navigation">
       <div class="container">
@@ -190,6 +196,7 @@
    <footer class="bs-docs-footer" role="contentinfo">
     <div class="container" class="row">
       <div class="col-md-9">
+       <img src="/res/images/ico_primerize.png" height="84" style="vertical-align: text-bottom; clear: both; float: left; padding-right: 15px;"/>
        <p class="muted credit">
         Maintained by the &nbsp;&nbsp;
         <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">

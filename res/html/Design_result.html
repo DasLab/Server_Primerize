@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="primerize, design">
     <meta name="author" content="T47">
-    <link rel="shortcut icon" href="/res/images/EteRNA_shortcut.png">
+    <link rel="shortcut icon" href="/res/images/ico_primerize.png">
     <title>Primerize</title>
 
     <!-- Bootstrap core CSS -->
@@ -49,11 +49,16 @@
               $("#text_num_primers").attr("disabled", "disabled");
           }
         });
-       });
+        $("#btn_demo").click(function() {
+          $("#wait").show();   
+        });
+        $("#btn_submit").click(function() {
+          $("#wait").show();   
+        });
+      });
       $(function () {
         $("[data-toggle='tooltip']").tooltip(); 
       })
-
     </script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -66,6 +71,7 @@
   </head>
 
   <body>
+    <div id="wait" class="modal"></div>
 
     <div class="navbar navbar-fixed-top" role="navigation">
       <div class="container">
@@ -105,8 +111,7 @@
               <h2>Input Data:</h2>
             </div>
             <div class="col-md-9">
-             <div class="bgimg">
-
+              <div class="bgimg">
                <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
                 <label for="tag"><b>Name Tag</b>:&nbsp;&nbsp;</label>
                 <input name="tag" type="text" value="__TAG__" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
