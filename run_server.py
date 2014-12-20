@@ -74,6 +74,7 @@ def display_complete_html(msg):
         <footer class="bs-docs-footer" role="contentinfo">
             <div class="container" class="row">
                 <div class="col-md-9">
+                    <img src="/res/images/ico_primerize.png" height="84" style="vertical-align: text-bottom; clear: both; float: left; padding-right: 15px;"/>
                     <p class="muted credit">
                         Maintained by the &nbsp;&nbsp;
                         <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">
