@@ -157,3 +157,19 @@ h1.section>span.num {
     color: #7cafd3;
     opacity:0.8;
 }
+
+.modal {
+  display:    none;
+  position:   fixed;
+  z-index:    1000;
+  top:        0;
+  left:       0;
+  height:     100%;
+  width:      100%;
+  opacity: 0.5;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-image: url("/res/images/fg_load.gif"); 
+  background-position: center center;
+  background-size: 48px;
+}

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="primerize, home">
     <meta name="author" content="T47">
-    <link rel="shortcut icon" href="/images/EteRNA_shortcut.png">
+    <link rel="shortcut icon" href="/res/images/ico_primerize.png">
     <title>Primerize</title>
 
     <!-- Bootstrap core CSS -->
@@ -22,6 +22,11 @@
     <script src="/res/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+      $(document).ready(function () {
+        $("#btn_demo").click(function() {
+          $("#wait").show();   
+        });
+      });
       $(function () {
         $("[data-toggle='tooltip']").tooltip(); 
       })
@@ -74,6 +79,7 @@
         <div class="jumbotron">
           <div class="container">
             <h1>Welcome to Primerize!</h1>
+            <img src="/res/images/ico_primerize.png" style="clear:both;float:left;"/>
             <p>
               Primerize is a Web Server for primer designs of DNA sequence PCR assembly. Primerize is optimized to reduce primer boundaries mispriming, is designed for fixed sequences of RNA problems, and passed wide and stringent tests. This efficient algorithm is suitable for extended use such as Gibson assembly designs and massively parallel mutagenesis library.
             </p>
@@ -81,7 +87,7 @@
             <p>
               For new users, please read the 
               <a class="btn btn-success" href="/res/html/Tutorial.html" role="button" style="color: #ffffff;">&nbsp;&nbsp;Tutorial&nbsp;&nbsp;</a> and try out the
-              <a class="btn btn-warning" href="/example_P4P6" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
+              <a class="btn btn-warning" href="/example_P4P6" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
             </p>
             <p> 
               For further questions, please feel free to 
@@ -98,9 +104,12 @@
     </div>
     <hr/>
 
+   <div id="wait" class="modal"></div>
+
    <footer class="bs-docs-footer" role="contentinfo">
     <div class="container" class="row">
       <div class="col-md-9">
+       <img src="/res/images/ico_primerize.png" height="84" style="vertical-align: text-bottom; clear: both; float: left; padding-right: 15px;"/>
        <p class="muted credit">
         Maintained by the &nbsp;&nbsp;
         <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">

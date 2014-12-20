@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="primerize, tutorial, help, PCR">
     <meta name="author" content="T47">
-    <link rel="shortcut icon" href="/images/EteRNA_shortcut.png">
+    <link rel="shortcut icon" href="/res/images/ico_primerize.png">
     <title>Primerize</title>
 
     <!-- Bootstrap core CSS -->
@@ -55,6 +55,10 @@
       $('#tab_6').on('click', function(e){
         e.preventDefault();
         $('html, body').stop().animate({scrollTop: $('#PCR').offset().top}, 500);
+      });
+
+      $("#btn_demo").click(function() {
+        $("#wait").show();   
       });
     })
     </script>
@@ -104,6 +108,7 @@
         <div class="jumbotron">
           <div class="container">
             <h1>Welcome to Primerize!</h1>
+            <img src="/res/images/ico_primerize.png" style="clear:both;float:left;"/>
             <p>
               This tutorial walks you through the basics of website interface, explains parameters and results, shows how to channel the output to IDT Bulk Ordering, and more importantly, in-house protocol for how to PCR assemble the template <i>in vitro</i>. Hover mouse to the 
               <img style="opacity:0.85;" src="/res/images/fg_question.png" height="40"/> 
@@ -112,7 +117,7 @@
             <br/>
             <p>
               We have examples for new users, see 
-              <a class="btn btn-warning" href="/example_P4P6" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>. 
+              <a class="btn btn-warning" href="/example_P4P6" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>. 
               For further questions, please feel free to 
               <a class="btn btn-info" href="/res/html/About.html#contact" style="color: #ffffff;">Contact Us</a>. 
               Additionally, source code package is available for 
@@ -709,11 +714,13 @@ Etc...</textarea>
   </div>
   <hr/>
 
+  <div id="wait" class="modal"></div>
   <a href="#" id="up"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" src="/res/images/fg_top.png" height="60"/></a>
 
    <footer class="bs-docs-footer" role="contentinfo">
     <div class="container" class="row">
       <div class="col-md-9">
+       <img src="/res/images/ico_primerize.png" height="84" style="vertical-align: text-bottom; clear: both; float: left; padding-right: 15px;"/>
        <p class="muted credit">
         Maintained by the &nbsp;&nbsp;
         <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">
