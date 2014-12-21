@@ -6,7 +6,7 @@ body {
 }
 
 .bgimg {
-  background-image: url("/res/images/bg_rna.png");
+  background-image: url("path_background_rna");
   background-repeat: no-repeat;
   background-position: right top;
   background-size: 30%;
@@ -40,7 +40,7 @@ label {
 .navbar .navbar-brand {
   color: #fbad24;
   font-weight: bold;
-  background-image: url("/res/images/bg_rna.png");
+  background-image: url("path_background_rna");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -169,7 +169,7 @@ h1.section>span.num {
   opacity: 0.5;
   background-color: #ffffff;
   background-repeat: no-repeat;
-  background-image: url("/res/images/fg_load.gif"); 
+  background-image: url("path_button_loading"); 
   background-position: center center;
   background-size: 48px;
 }

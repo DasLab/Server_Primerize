@@ -69,37 +69,7 @@ def is_valid_sequence(sequence):
 
 
 def display_complete_html(msg):
-    msg += "</p></div></div><hr/>"
-    msg += """
-        <footer class="bs-docs-footer" role="contentinfo">
-            <div class="container" class="row">
-                <div class="col-md-9">
-                    <img src="/res/images/ico_primerize.png" height="84" style="vertical-align: text-bottom; clear: both; float: left; padding-right: 15px;"/>
-                    <p class="muted credit">
-                        Maintained by the &nbsp;&nbsp;
-                        <a href="http://daslab.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Das Lab">
-                            <img src="/res/images/logo_das.jpg" height="42"/>
-                        </a>
-                        <a href="http://www.stanford.edu" target="_blank" data-toggle="tooltip" data-placement="top" title="Stanford University">
-                            <img src="/res/images/logo_stanford.png" height="42"/>
-                        </a>
-                        <br/>
-                        <br/>
-                        <a href="/show_license">CopyRight</a> &copy 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. 
-                    </p>
-                </div>
-                <div class="col-md-3">
-                    <p> 
-                        powered by 
-                        <a href="http://www.cherrypy.org/" target="_blank">CherryPy</a> and 
-                        <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
-                    </p>
-                </div> 
-            </div>
-        </footer>
-    </body>
-    </html>
-    """
+    msg += "</p></div></div><hr/><div class=\"bs-docs-footer\" role=\"contentinfo\" id=\"footer\"></div></body></html>"
     return msg 
 
 
@@ -319,7 +289,7 @@ class rest:
             f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
             f.close()
 
-            return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=/res/html/Download_link.html\"></head></html>"
+            return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=path_downlink\"></head></html>"
         else:
             f = open("res/html/Download_error.html") 
             lines = f.readlines()

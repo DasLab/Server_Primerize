@@ -10,6 +10,7 @@ $(document).ready(function () {
         $(this).parent().css("color","red");
     }
   });
+
   $("#sequence").keyup(function(){
     $("#count").text($(this).val().length);
     if ($(this).val().length < 60) {
@@ -18,6 +19,7 @@ $(document).ready(function () {
         $("#count").parent().parent().css("color","black");
     }
   });
+
   $("#check_num_primers").click(function() {
     if ($(this).is(":checked")) {
         $("#text_num_primers").removeAttr("disabled");
@@ -25,6 +27,7 @@ $(document).ready(function () {
         $("#text_num_primers").attr("disabled", "disabled");
     }
   });
+
   $("#btn_submit").click(function() {
     $("#wait").show();   
   });

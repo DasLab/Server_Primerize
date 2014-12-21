@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="primerize, tutorial, help, PCR">
     <meta name="author" content="T47">
-    <link rel="shortcut icon" href="/res/images/ico_primerize.png">
+    <link rel="shortcut icon" href="path_logo_primerize">
     <title>Primerize</title>
 
     <!-- Bootstrap core CSS -->
@@ -23,44 +23,41 @@
 
     <script src="/res/js/util.js"></script>
     <script type="text/javascript">
-    $(document).ready(function () {
-      $('#up').on('click', function(e){
-        e.preventDefault();
-        $('html, body').stop().animate({scrollTop: $('#down').offset().top}, 500);
-      });
-      $('#tab_1').on('click', function(e){
-        e.preventDefault();
-        $('html, body').stop().animate({scrollTop: $('#web_input').offset().top}, 500);
-      });
-      $('#tab_2').on('click', function(e){
-        e.preventDefault();
-        $('html, body').stop().animate({scrollTop: $('#web_output_primers').offset().top}, 500);
-      });
-      $('#tab_3').on('click', function(e){
-        e.preventDefault();
-        $('html, body').stop().animate({scrollTop: $('#web_output_assembly').offset().top}, 500);
-      });
-      $('#tab_4').on('click', function(e){
-        e.preventDefault();
-        $('html, body').stop().animate({scrollTop: $('#txt_output').offset().top}, 500);
-      });
-      $('#tab_5').on('click', function(e){
-        e.preventDefault();
-        $('html, body').stop().animate({scrollTop: $('#idt_bulk').offset().top}, 500);
-      });
-      $('#tab_6').on('click', function(e){
-        e.preventDefault();
-        $('html, body').stop().animate({scrollTop: $('#PCR').offset().top}, 500);
-      });
+      $(document).ready(function () {
+        $('#up').on('click', function(e){
+          e.preventDefault();
+          $('html, body').stop().animate({scrollTop: $('#down').offset().top}, 500);
+        });
+        $('#tab_1').on('click', function(e){
+          e.preventDefault();
+          $('html, body').stop().animate({scrollTop: $('#web_input').offset().top}, 500);
+        });
+        $('#tab_2').on('click', function(e){
+          e.preventDefault();
+          $('html, body').stop().animate({scrollTop: $('#web_output_primers').offset().top}, 500);
+        });
+        $('#tab_3').on('click', function(e){
+          e.preventDefault();
+          $('html, body').stop().animate({scrollTop: $('#web_output_assembly').offset().top}, 500);
+        });
+        $('#tab_4').on('click', function(e){
+          e.preventDefault();
+          $('html, body').stop().animate({scrollTop: $('#txt_output').offset().top}, 500);
+        });
+        $('#tab_5').on('click', function(e){
+          e.preventDefault();
+          $('html, body').stop().animate({scrollTop: $('#idt_bulk').offset().top}, 500);
+        });
+        $('#tab_6').on('click', function(e){
+          e.preventDefault();
+          $('html, body').stop().animate({scrollTop: $('#PCR').offset().top}, 500);
+        });
 
-      $("#btn_demo").click(function() {
-        $("#wait").show();   
-      });
+        $("#btn_demo").click(function() {
+          $("#wait").show();   
+        });
 
-      $("#navbar").load("/res/html/navbar.html", function() {
-        $("#nav_tutorial").addClass("active");
-      });
-    })
+      })
     </script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -81,10 +78,10 @@
         <div class="jumbotron">
           <div class="container">
             <h1>Welcome to Primerize!</h1>
-            <img src="/res/images/ico_primerize.png" style="clear:both;float:left;"/>
+            <img class="path_logo_primerize" src="" style="clear:both;float:left;"/>
             <p>
               This tutorial walks you through the basics of website interface, explains parameters and results, shows how to channel the output to IDT Bulk Ordering, and more importantly, in-house protocol for how to PCR assemble the template <i>in vitro</i>. Hover mouse to the 
-              <img style="opacity:0.85;" src="/res/images/fg_question.png" height="40"/> 
+              <img style="opacity:0.85;" class="path_button_question" src="" height="40"/> 
               for detailed descriptions. 
             </p>
             <br/>
@@ -92,7 +89,7 @@
               We have examples for new users, see 
               <a class="btn btn-warning" href="/example_P4P6" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>. 
               For further questions, please feel free to 
-              <a class="btn btn-info" href="/res/html/About.html#contact" style="color: #ffffff;">Contact Us</a>. 
+              <a class="btn btn-info path_about" href="" style="color: #ffffff;">Contact Us</a>. 
               Additionally, source code package is available for 
               <a class="btn btn-success" href="/show_license" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a>. 
               Please read the Terms and Conditions.
@@ -100,7 +97,7 @@
             <br/>
             <p>
               Ready to use? Go
-              <a class="btn btn-primary btn-lg" href="/res/html/Design.html" role="button" style="color: #ffffff;">&nbsp;Primerize!&nbsp;</a>
+              <a class="btn btn-primary btn-lg path_design" href="" role="button" style="color: #ffffff;">&nbsp;Primerize!&nbsp;</a>
               <br/>
             </p>
           </div>
@@ -164,15 +161,15 @@
                   <br/>
                   <i>Length: <b><span id="count">259</span></b> nt</i>
                  </p>
-                 <img style="position:absolute;display:block;right:25%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
+                 <img style="position:absolute;display:block;right:25%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
                 </div>
                </div>
-               <img style="position:absolute;display:block;right:50%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
+               <img style="position:absolute;display:block;right:50%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
                <textarea class="form-control tutorial" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
-               <img style="position:absolute;display:block;right:50%;top:60%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
+               <img style="position:absolute;display:block;right:50%;top:60%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
                <br/>
                <input type="submit" id="btn_submit" class="btn btn-primary tutorial" value="&nbsp;Primerize!&nbsp;" disabled="disabled"/>&nbsp;
-               <a href="/res/html/Design.html" class="btn btn-default tutorial" disabled="disabled">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href="" class="btn btn-default tutorial path_design" disabled="disabled">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
                <span class="tutorial">
                 <input id="is_agree" type="checkbox" checked="yes" required="required">
                   <label for="is_agree">
@@ -181,16 +178,16 @@
                   </label>
                 </input>
                </span>
-               <img style="position:absolute;display:block;right:50%;top:90%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Terms and Conditions" data-content="You must agree to use."/>
+               <img style="position:absolute;display:block;right:50%;top:90%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Terms and Conditions" data-content="You must agree to use."/>
                <a href="/example_P4P6" id="btn_demo" class="btn btn-warning pull-right tutorial" style="color: #ffffff;" data-toggle="popover" data-placement="bottom" disabled="disabled">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
-               <img style="position:absolute;display:block;right:12%;top:90%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
+               <img style="position:absolute;display:block;right:12%;top:90%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
               </div>
             </div>
             <div class="col-md-3">
               <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="popover" data-placement="left">
                   <h3 class="panel-title tutorial">Advanced Options</h3>
-                  <img style="position:absolute;display:block;right:10%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-content="This part is optional. It enables more options for guided design. Parameters for primer length, primer number and annealing temperature can be specified." data-toggle="popover" data-placement="left" title="Advanced Options"/>
+                  <img style="position:absolute;display:block;right:10%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-content="This part is optional. It enables more options for guided design. Parameters for primer length, primer number and annealing temperature can be specified." data-toggle="popover" data-placement="left" title="Advanced Options"/>
                 </div>
                 <div class="panel-body">
                   <div class="input-group">
@@ -199,19 +196,19 @@
                       <input name="min_Tm" type="text" value="60.0" style="width:25%" disabled="disabled"/>
                       &deg;C
                     </p>
-                    <img style="position:absolute;display:block;right:0%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MIN_TM" data-content="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C"/>
+                    <img style="position:absolute;display:block;right:0%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="MIN_TM" data-content="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C"/>
                     <p class="tutorial">
                       <label for="max_length">maximum <b>length</b> of primers:</label>
                       <input name="max_length" type="text" value="60" style="width:25%" disabled="disabled"/> nt 
                       <br/>
                     </p>
-                    <img style="position:absolute;display:block;right:0%;top:25%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MAX_LENGTH" data-content="Maximum length for each primer. Default = 60 nt."/>
+                    <img style="position:absolute;display:block;right:0%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="MAX_LENGTH" data-content="Maximum length for each primer. Default = 60 nt."/>
                     <p class="tutorial">
                       <label for="min_length">minimum <b>length</b> of primers:</label>
                       <input name="min_length" type="text" value="15" style="width:25%" disabled="disabled"/> nt 
                       <br/>
                     </p>
-                    <img style="position:absolute;display:block;right:0%;top:50%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MIN_LENGTH" data-content="Minimum length for each primer. Default = 15 nt."/>
+                    <img style="position:absolute;display:block;right:0%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="MIN_LENGTH" data-content="Minimum length for each primer. Default = 15 nt."/>
                     <p class="tutorial">
                       <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers">
                         <label for="is_num_primers">&nbsp;<b>#</b> number of primers:</label>
@@ -221,7 +218,7 @@
                       <input name="num_primers" type="text" value="auto" style="width:25%" id="text_num_primers" disabled="disabled"/>
                       <input name="num_primers" type="hidden" value="" disabled="disabled"/>
                     </p>
-                    <img style="position:absolute;display:block;right:0%;top:75%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="NUM_PRIMERS" data-content="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only. Check the checkbox to enable use."/>
+                    <img style="position:absolute;display:block;right:0%;top:75%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="NUM_PRIMERS" data-content="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only. Check the checkbox to enable use."/>
                   </div>
                 </div>
               </div>
@@ -240,14 +237,14 @@
       <div class="row">
         <div class="col-md-10">
           <h2 class="tutorial">Output Result:</h2>
-          <img style="position:absolute;display:block;right:-5%;top:135%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported."/>
+          <img style="position:absolute;display:block;right:-5%;top:135%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported."/>
         </div>
         <div class="col-md-2">
           <p class="text-right tutorial">
             <b>Job ID</b>: ABCDEF
           </p>
           <a href="" class="btn btn-info pull-right tutorial" style="color: #ffffff;" title="Output in plain text" download disabled="disabled">&nbsp;Save Result&nbsp;</a>
-          <img style="position:absolute;display:block;right:75%;top:50%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Save Results" data-content="Save the webpage output results in plain text file. Each run has its unique job key." />
+          <img style="position:absolute;display:block;right:75%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="Save Results" data-content="Save the webpage output results in plain text file. Each run has its unique job key." />
         </div>
       </div>
       <br/>
@@ -265,7 +262,7 @@
           <div class="tutorial alert alert-info">
            <b>Time elapsed</b>: 2.3 s.
          </div>
-         <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Timer" data-content="Total runtime for this job (including program initiation)."/>
+         <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Timer" data-content="Total runtime for this job (including program initiation)."/>
        </div>
       </div>
       <div class="row">
@@ -274,7 +271,7 @@
             <div class="panel-heading tutorial">
               <h2 class="panel-title">Designed Primers</h2>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Table of Primers" data-content="Complete set of primers listed." />
+            <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Table of Primers" data-content="Complete set of primers listed." />
             <div class="panel-body">
               <table class="table tutorial">
                 <thead>
@@ -317,9 +314,9 @@
                   </tr>
                 </tbody>
               </table>
-              <img style="position:absolute;display:block;right:91%;top:12%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Number" data-content="Numbering of all primers. Foward (F) and reverse (R) primers (in assembly) are labelled." />
-              <img style="position:absolute;display:block;right:81%;top:12%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Length" data-content="Length of all primers." />
-              <img style="position:absolute;display:block;right:50%;top:12%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Sequence" data-content="Sequnces of all primers, written from 5' to 3'." />
+              <img style="position:absolute;display:block;right:91%;top:12%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Number" data-content="Numbering of all primers. Foward (F) and reverse (R) primers (in assembly) are labelled." />
+              <img style="position:absolute;display:block;right:81%;top:12%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Length" data-content="Length of all primers." />
+              <img style="position:absolute;display:block;right:50%;top:12%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Sequence" data-content="Sequnces of all primers, written from 5' to 3'." />
             </div>
           </div>
         </div>
@@ -330,7 +327,7 @@
           <div class="panel-heading tutorial">
             <h2 class="panel-title">Assembly Scheme</h2>
           </div>
-          <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Assembly Scheme" data-content="Graphical illustration of the assembly scheme." />
+          <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Assembly Scheme" data-content="Graphical illustration of the assembly scheme." />
           <div class="panel-body">
             <pre class="tutorial"><span class="bg-primary">TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC</span><br/><br/><span class="bg-info">TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG</span>->1<br/>                                          |||||||||||||||||| <kbd>63.0</kbd><br/>                                       2<-<span class="bg-danger">GGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTT</span><br/>                                                                                    |||||||||||||||||| <kbd>60.2</kbd><br/>                                                                                    <span class="bg-info">ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC</span><br/>                                                                                                                          ||||||||||||||||<br/>                                                                                                                       4<-<span class="bg-danger">CCCATACCATTATTCG</span><br/>                                                                                                                                            <br/><span class="bg-warning">AAGATTATGCTGAGTGATATCCGGTTTCCGCAGCTCATCTGCGGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTTGAAACTCTACCGGAACGTTTCCCATACCATTATTCG</span><br/><br/><br/><span class="bg-primary">TGACGGACATGGTCCTAACCACGCAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGAGTAGCTGACAAAAAGAAACAACAACAACAAC</span><br/>                                                                                                                       
 <span class="bg-info">TGACG</span>->3<br/>||||| <kbd>60.4</kbd><br/><span class="bg-danger">ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTG</span><br/>                       |||||||||||||||||||| <kbd>60.5</kbd><br/>                       <span class="bg-info">CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG</span>->5                                   
@@ -338,10 +335,10 @@
                                                            6<-<span class="bg-danger">TACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG</span>
   <br/><span class="bg-warning">ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTGTCTAGAAGACAACTATACCTACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG</span>
             </pre>
-            <img style="position:absolute;display:block;right:5%;top:10%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence." />
-            <img style="position:absolute;display:block;right:5%;top:42%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence in reverse complement." />
-            <img style="position:absolute;display:block;right:45%;top:22%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Primers" data-content="Primers listed above in the assembly scheme, written in their directions (forward/reverse)." />
-            <img style="position:absolute;display:block;right:22%;top:22%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Annealing Temperature" data-content="Annealing temperature of the &ldquo;bridging&rdquo; region between each neighboring primer pairs." />
+            <img style="position:absolute;display:block;right:5%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence." />
+            <img style="position:absolute;display:block;right:5%;top:42%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence in reverse complement." />
+            <img style="position:absolute;display:block;right:45%;top:22%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="Primers" data-content="Primers listed above in the assembly scheme, written in their directions (forward/reverse)." />
+            <img style="position:absolute;display:block;right:22%;top:22%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Annealing Temperature" data-content="Annealing temperature of the &ldquo;bridging&rdquo; region between each neighboring primer pairs." />
           </div>
         </div>
     </div>
@@ -360,7 +357,7 @@
             <div class="panel-heading tutorial">
               <h2 class="panel-title">Plain Text File</h2>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Text Output" data-content="An example of P4P6-2HP Demo text output file. Results are same as seen in webpage." />
+            <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Text Output" data-content="An example of P4P6-2HP Demo text output file. Results are same as seen in webpage." />
             <div class="panel-body">
 
 <pre class="tutorial">
@@ -424,7 +421,7 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
 ------/* END */------
 ------/* NOTE: use "Lab Ready" for "Normalization" */------
 </pre>
-<img style="position:absolute;display:block;right:35%;bottom:10%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="IDT Bulk Ordering" data-content="Directly copy and paste this section into IDT Bulk Ordering Input. (See below)" />
+<img style="position:absolute;display:block;right:35%;bottom:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="IDT Bulk Ordering" data-content="Directly copy and paste this section into IDT Bulk Ordering Input. (See below)" />
         </div>
       </div>
     </div>
@@ -442,7 +439,7 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
             <div class="panel-heading tutorial">
               <h2 class="panel-title">Bulk Format Ordering at IDT DNA Oligos</h2>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="IDT Bulk Format" data-content="How to input Primerize results to IDT Bulk ordering interface." />
+            <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="IDT Bulk Format" data-content="How to input Primerize results to IDT Bulk ordering interface." />
             <div class="panel-body">
 
               <h4 class="tutorial"> First, go to &ldquo;<mark>Custom DNA Oligos</mark>&rdquo;</h4><hr/>
@@ -470,7 +467,7 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
                     </div>
                     <div class="col-md-3 select-mobile hidden-xs">
                         <button class="btn btn-info btn-sm btn-block" disabled="disabled"> Bulk Input</button>
-                        <img style="position:absolute;display:block;right:-25%;top:10%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Bulk Input" data-content="Then click this button to open the Bulk Input feeder window." />
+                        <img style="position:absolute;display:block;right:-25%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Bulk Input" data-content="Then click this button to open the Bulk Input feeder window." />
                     </div>
 
                   </div>
@@ -490,7 +487,7 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
                                 <select required="true" class="tutorial" disabled="disabled">
                                     <option value="1">Tab/Excel</option>
                                 </select>
-                              <img style="position:absolute;display:block;left:20%;top:10%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Delimiter Choice" data-content="You do not need to modify this, the default is &ldquo;Tab&rdquo;." />
+                              <img style="position:absolute;display:block;left:20%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Delimiter Choice" data-content="You do not need to modify this, the default is &ldquo;Tab&rdquo;." />
                             
                             </div>
                         </div>
@@ -516,7 +513,7 @@ Etc...</textarea>
                                     
 
                                 </div>
-                                <img style="position:absolute;display:block;right:50%;top:50%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Input" data-content="Directly copy and paste the IDT section from the text output file to here. Parameters are set to 25nm scale and standard desalting." />
+                                <img style="position:absolute;display:block;right:50%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Input" data-content="Directly copy and paste the IDT section from the text output file to here. Parameters are set to 25nm scale and standard desalting." />
                                 <div class="pull-right tutorial">
                                     <span style="padding-left: 10px;"># Entries:</span>
                                     <span id="NumEntries" type="text" data-bind="text: OligoCollection().length"></span>
@@ -570,7 +567,7 @@ Etc...</textarea>
                     <option value="1">Lab Ready</option>
                   </select>
                 </div>
-                <img style="position:absolute;display:block;right:50%;bottom:2%;opacity:0.85;" src="/res/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Normalization" data-content="Make sure to choose &ldquo;Lab Ready&rdquo; for all primers." />
+                <img style="position:absolute;display:block;right:50%;bottom:2%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Normalization" data-content="Make sure to choose &ldquo;Lab Ready&rdquo; for all primers." />
               </div>
               <br/>
               </div>
@@ -688,7 +685,7 @@ Etc...</textarea>
   <hr/>
 
     <div id="wait" class="modal"></div>
-    <a href="#" id="up"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" src="/res/images/fg_top.png" height="60"/></a>
+    <a href="#" id="up"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" class="path_button_top" src="" height="60"/></a>
 
     <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
   </body>
