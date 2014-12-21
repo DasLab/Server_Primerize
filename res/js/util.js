@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var path_ico = "/res/images/ico_primerize.png";
+  var path_icon = "/res/images/ico_primerize.png";
   var path_logo_primerize = "/res/images/logo_primerize.png";
   var path_logo_das = "/res/images/logo_das.jpg";
   var path_logo_stanford = "/res/images/logo_stanford.png";
@@ -21,7 +21,7 @@ $(document).ready(function () {
   
 	var url = window.location.href;
 
-  $("#navbar").load(path_navbar, function() {
+  $("#navbar").load(path_navbar, function () {
     if (url.indexOf("Design") > -1 || url.indexOf("example") > -1) {
       $("#nav_design").addClass("active");
     } else if (url.indexOf("Tutorial") > -1) {
@@ -35,14 +35,15 @@ $(document).ready(function () {
     }
 
     $("#footer").load(path_footer, function () {
-      $(".path_logo_primerize").attr("src", path_logo_primerize);
-      $(".path_logo_das").attr("src", path_logo_das);
-      $(".path_logo_stanford").attr("src", path_logo_stanford);
-      $(".path_logo_eterna").attr("src", path_logo_eterna);
-      $(".path_background_rna").attr("src", path_background_rna);
-      $(".path_button_loading").attr("src", path_button_loading);
-      $(".path_button_top").attr("src", path_button_top);
-      $(".path_button_question").attr("src", path_button_question);
+      $("#favicon").attr("href", path_icon + "?");
+      $(".path_logo_primerize").attr("src", path_logo_primerize + "?");
+      $(".path_logo_das").attr("src", path_logo_das + "?");
+      $(".path_logo_stanford").attr("src", path_logo_stanford + "?");
+      $(".path_logo_eterna").attr("src", path_logo_eterna + "?");
+      $(".path_background_rna").attr("src", path_background_rna + "?");
+      $(".path_button_loading").attr("src", path_button_loading + "?");
+      $(".path_button_top").attr("src", path_button_top + "?");
+      $(".path_button_question").attr("src", path_button_question + "?");
 
       $(".path_home").attr("href", path_home);
       $(".path_design").attr("href", path_design);
@@ -58,8 +59,7 @@ $(document).ready(function () {
     });
   });
     
-	$("[data-toggle='popover']").popover({trigger:"hover"}); 
+	$("[data-toggle='popover']").popover({trigger: "hover"}); 
 	$("[data-toggle='tooltip']").tooltip(); 
 
 });
-
