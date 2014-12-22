@@ -23,6 +23,14 @@
 
     <script src="/res/js/design.js"></script>
     <script src="/res/js/util.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var col_h = Math.max($("#col-1").height(), $("#col-2").height(), $("#col-3").height());
+        $("#col-1").css("height", col_h);
+        $("#col-2").css("height", col_h);
+        $("#col-3").css("height", col_h);
+      });
+    </script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,34 +48,73 @@
 
     <div class="starter-template">
       <div class="container theme-showcase" role="main">
+
         <div class="jumbotron">
           <div class="container">
-            <h1>Welcome to Primerize!</h1>
-            <img class="path_logo_primerize" src="" style="clear:both;float:left;"/>
+            <h1 style="padding-bottom:20px;">PCR Assembly Primer Design</h1>
+            <img class="path_logo_primerize" src="" style="clear:both;float:right;padding-right:20px;"/>
             <p>
               Primerize is a Web Server for primer designs of DNA sequence PCR assembly. Primerize is optimized to reduce primer boundaries mispriming, is designed for fixed sequences of RNA problems, and passed wide and stringent tests. This efficient algorithm is suitable for extended use such as Gibson assembly designs and massively parallel mutagenesis library.
             </p>
-            <br/>
-            <p>
-              For new users, please read the 
-              <a class="btn btn-success path_tutorial" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Tutorial&nbsp;&nbsp;</a> and try out the
-              <a class="btn btn-warning" href="/example_P4P6" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
-            </p>
-            <p> 
-              For further questions, please feel free to 
-              <a class="btn btn-info path_about" href="" style="color: #ffffff;">Contact Us</a>.
-            </p>
-            <br/>
             <p>
               Ready to use? Go
               <a class="btn btn-primary btn-lg path_design" href="" role="button" style="color: #ffffff;">&nbsp;Primerize!&nbsp;</a>
             </p>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div id="col-1" class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">How to use</h3>
+              </div>
+              <div class="panel-body">
+                <p>
+                  New users can read the 
+                  <a class="btn btn-success btn-sm path_tutorial" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Tutorial&nbsp;&nbsp;</a> for detailed explanations.
+                </p>
+                <p> 
+                  Please also try out the
+                  <a class="btn btn-warning btn-sm" href="/example_P4P6" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div id="col-2" class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Package download</h3>
+              </div>
+              <div class="panel-body">
+                <p>
+                   Advanced academic users may opt to download the source code package. 
+                </p>
+                <p>
+                  Please read the Terms and Conditions before <a class="btn btn-danger btn-sm" href="/show_license" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div id="col-3" class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Contact us</h3>
+              </div>
+              <div class="panel-body">
+                <p> 
+                  Please feel free to 
+                  <a class="btn btn-info btn-sm path_about" href="" style="color: #ffffff;">Contact</a> the Das Lab for further questions/issues regarding the web server, suggestions for improvements, citations, or commercial use authorization.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-    <hr/>
 
+    <hr/>
    <div id="wait" class="modal"></div>
 
    <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
