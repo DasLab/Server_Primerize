@@ -55,7 +55,7 @@ $(document).ready(function () {
       $(".path_design").attr("href", path_design);
       $(".path_tutorial").attr("href", path_tutorial);
       $(".path_download").attr("href", path_download);
-      $(".path_downlink").attr("href", path_downlink);
+      $(".path_downlink").attr("content", path_downlink);
       $(".path_about").attr("href", path_about);
 
       $(".bgimg").css("background-image", 'url("' + path_background_rna + '")');

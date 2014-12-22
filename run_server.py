@@ -289,7 +289,11 @@ class rest:
             f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
             f.close()
 
-            return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=path_downlink\"></head></html>"
+            f = open("res/html/download_link.html") 
+            lines = f.readlines()
+            f.close()
+            script = "".join(lines)
+            return script
         else:
             f = open("res/html/download_error.html") 
             lines = f.readlines()
