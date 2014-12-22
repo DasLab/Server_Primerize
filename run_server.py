@@ -39,7 +39,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
-    f = open("res/html/Design_result.html") 
+    f = open("res/html/design_result.html") 
     lines = f.readlines()
     f.close()
 
@@ -93,7 +93,7 @@ class rest:
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
-                f = open("res/html/Design.html")
+                f = open("res/html/design.html")
                 lines = f.readlines()
                 f.close()
                 script = "".join(lines)
@@ -267,7 +267,7 @@ class rest:
         f.close()
         md = "".join([line.replace("\n","<br/>") for line in lines]) + "</strong>"
 
-        f = open("res/html/License.html")
+        f = open("res/html/license.html")
         lines = f.readlines()
         f.close()
         script = "".join(lines)
@@ -291,7 +291,7 @@ class rest:
 
             return "<html><head><meta http-equiv=\"refresh\" content=\"1;url=path_downlink\"></head></html>"
         else:
-            f = open("res/html/Download_error.html") 
+            f = open("res/html/download_error.html") 
             lines = f.readlines()
             f.close()
             script = "".join(lines)

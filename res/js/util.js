@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
+  var str_title = "Primerize: Primer Design for PCR Assembly";
   var path_icon = "/res/images/ico_primerize.png";
+
   var path_logo_primerize = "/res/images/logo_primerize.png";
   var path_logo_das = "/res/images/logo_das.jpg";
   var path_logo_stanford = "/res/images/logo_stanford.png";
@@ -11,13 +13,13 @@ $(document).ready(function () {
   var path_button_question = "/res/images/fg_question.png";
 
   var path_home = "/res/html/index.html";
-  var path_design = "/res/html/Design.html";
-  var path_tutorial = "/res/html/Tutorial.html";
-  var path_download = "/res/html/Download.html";
-  var path_downlink = "/res/html/Download_link.html";
-  var path_about = "/res/html/About.html";
-  var path_navbar = "/res/html/navbar.html";
-  var path_footer = "/res/html/footer.html";
+  var path_design = "/res/html/design.html";
+  var path_tutorial = "/res/html/tutorial.html";
+  var path_download = "/res/html/download.html";
+  var path_downlink = "/res/html/download_link.html";
+  var path_about = "/res/html/about.html";
+  var path_navbar = "/res/html/_navbar.html";
+  var path_footer = "/res/html/_footer.html";
   
 	var url = window.location.href;
 
@@ -35,7 +37,9 @@ $(document).ready(function () {
     }
 
     $("#footer").load(path_footer, function () {
+      document.title = str_title;
       $("#favicon").attr("href", path_icon + "?");
+      
       $(".path_logo_primerize").attr("src", path_logo_primerize + "?");
       $(".path_logo_das").attr("src", path_logo_das + "?");
       $(".path_logo_stanford").attr("src", path_logo_stanford + "?");
