@@ -282,6 +282,7 @@ class rest:
 
         if is_valid:
             f = open("src/usr_tab.csv", "a")
+            f.write("%s," % time.strftime("%c"))
             if "1" in is_subscribe:
                 f.write("1")
             else:
