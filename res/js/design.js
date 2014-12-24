@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#is_agree").click(function() {
+  $("#is_agree").on("click", function () {
     if ($(this).is(":checked")) {
         $("#btn_submit").removeAttr("disabled");
         $("#btn_demo").removeAttr("disabled");
@@ -11,7 +11,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#sequence").keyup(function(){
+  $("#sequence").on("keyup", function () {
     $("#count").text($(this).val().length);
     if ($(this).val().length < 60) {
         $("#count").parent().parent().css("color","red");
@@ -20,7 +20,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#check_num_primers").click(function() {
+  $("#check_num_primers").on("click", function () {
     if ($(this).is(":checked")) {
         $("#text_num_primers").removeAttr("disabled");
     } else {
@@ -28,10 +28,10 @@ $(document).ready(function () {
     }
   });
 
-  $("#btn_submit").click(function() {
-    $("#wait").show();   
+  $("#btn_submit").on("click", function () {
+    $("#wait").show();
   });
-  $("#btn_demo").click(function() {
-    $("#wait").show();   
+  $("#btn_demo").on("click", function () {
+    $("#wait").show();
   });
 });

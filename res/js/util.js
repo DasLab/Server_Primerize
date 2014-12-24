@@ -65,7 +65,7 @@ $(document).ready(function () {
     });
   });
     
-	$("[data-toggle='popover']").popover({trigger: "hover"}); 
-	$("[data-toggle='tooltip']").tooltip(); 
+	$("[data-toggle='popover']").popover({trigger: "hover"});
+	$("[data-toggle='tooltip']").tooltip();
 
 });

@@ -16,48 +16,7 @@
     <link href="/res/css/bootstrap-theme.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="/res/css/theme.css" rel="stylesheet">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/res/js/bootstrap.min.js"></script>
 
-    <script src="/res/js/util.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#up').on('click', function(e){
-          e.preventDefault();
-          $('html, body').stop().animate({scrollTop: $('#down').offset().top}, 500);
-        });
-        $('#tab_1').on('click', function(e){
-          e.preventDefault();
-          $('html, body').stop().animate({scrollTop: $('#web_input').offset().top}, 500);
-        });
-        $('#tab_2').on('click', function(e){
-          e.preventDefault();
-          $('html, body').stop().animate({scrollTop: $('#web_output_primers').offset().top}, 500);
-        });
-        $('#tab_3').on('click', function(e){
-          e.preventDefault();
-          $('html, body').stop().animate({scrollTop: $('#web_output_assembly').offset().top}, 500);
-        });
-        $('#tab_4').on('click', function(e){
-          e.preventDefault();
-          $('html, body').stop().animate({scrollTop: $('#txt_output').offset().top}, 500);
-        });
-        $('#tab_5').on('click', function(e){
-          e.preventDefault();
-          $('html, body').stop().animate({scrollTop: $('#idt_bulk').offset().top}, 500);
-        });
-        $('#tab_6').on('click', function(e){
-          e.preventDefault();
-          $('html, body').stop().animate({scrollTop: $('#PCR').offset().top}, 500);
-        });
-
-        $("#btn_demo").click(function() {
-          $("#wait").show();   
-        });
-
-      })
-    </script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -687,5 +646,13 @@ Etc...</textarea>
     <a href="#" id="up"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" class="path_button_top" src="" height="60"/></a>
 
     <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/res/js/jquery-1.11.2.min.js"></script>
+    <script src="/res/js/bootstrap.min.js"></script>
+
+    <script src="/res/js/tutorial.js"></script>
+    <script src="/res/js/util.js"></script>
+
   </body>
 </html>
