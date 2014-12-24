@@ -39,7 +39,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
-    f = open("res/html/design_result.html") 
+    f = open("res/html/design_result.html", "r") 
     lines = f.readlines()
     f.close()
 
@@ -80,7 +80,11 @@ class rest:
 
     @cherrypy.expose
     def index(self):
-        return open("res/html/index.html")
+        f = open("res/html/index.html", "r")
+        lines = f.readlines()
+        f.close()
+        script = "".join(lines)
+        return script
 
 
     @cherrypy.expose
@@ -93,7 +97,7 @@ class rest:
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
-                f = open("res/html/design.html")
+                f = open("res/html/design.html", "r")
                 lines = f.readlines()
                 f.close()
                 script = "".join(lines)
@@ -262,12 +266,12 @@ class rest:
 
     @cherrypy.expose
     def show_license(self):
-        f = open("LICENSE.MD") 
+        f = open("LICENSE.MD", "r") 
         lines = f.readlines()
         f.close()
         md = "".join([line.replace("\n","<br/>") for line in lines]) + "</strong>"
 
-        f = open("res/html/license.html")
+        f = open("res/html/license.html", "r")
         lines = f.readlines()
         f.close()
         script = "".join(lines)
@@ -290,13 +294,13 @@ class rest:
             f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
             f.close()
 
-            f = open("res/html/download_link.html") 
+            f = open("res/html/download_link.html", "r") 
             lines = f.readlines()
             f.close()
             script = "".join(lines)
             return script
         else:
-            f = open("res/html/download_error.html") 
+            f = open("res/html/download_error.html", "r") 
             lines = f.readlines()
             f.close()
             script = "".join(lines)
