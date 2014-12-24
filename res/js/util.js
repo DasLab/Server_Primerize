@@ -24,16 +24,16 @@ $(document).ready(function () {
 	var url = window.location.href;
 
   $("#navbar").load(path_navbar, function () {
-    if (url.indexOf("Design") > -1 || url.indexOf("example") > -1) {
+    if (url.indexOf("design") > -1 || url.indexOf("example") > -1) {
       $("#nav_design").addClass("active");
-    } else if (url.indexOf("Tutorial") > -1) {
+    } else if (url.indexOf("tutorial") > -1) {
       $("#nav_tutorial").addClass("active");
-    } else if (url.indexOf("About") > -1) {
+    } else if (url.indexOf("about") > -1) {
       $("#nav_about").addClass("active");
-    } else if (url.indexOf("Download") > -1 || (url.indexOf("icense") > -1)) {
+    } else if (url.indexOf("download") > -1 || (url.indexOf("icense") > -1)) {
       $("#nav_download").addClass("active");
     } else {
-    $("#nav_logo").css("text-decoration","underline");
+      $("#nav_logo").css("text-decoration","underline");
     }
 
     $("#footer").load(path_footer, function () {
