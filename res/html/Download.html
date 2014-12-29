@@ -46,50 +46,47 @@
                 <div class="panel-body">
                   <div class="row col-md-12">
                     <div class="col-md-2">
-                      <label for="first_name">First Name:</label>
+                      First Name: 
                     </div>
                     <div class="col-md-4">
-                      <input name="first_name" type="text" value="" required="required"/>
+                      <input name="first_name" id="first_name" type="text" value="__F_NAME__" required/>
                     </div>
                     <div class="col-md-2">
-                      <label for="last_name">Last Name:</label>
+                      Last Name: 
                     </div>
                     <div class="col-md-4">
-                      <input name="last_name" type="text" value="" required="required"/>
+                      <input name="last_name" id="last_name" type="text" value="__L_NAME__" required/>
                     </div>
                   </div>
                   <br/>
                   <br/>
                   <div class="row col-md-12">
                     <div class="col-md-2">
-                    <label for="inst">Insititution:</label>
+                    Insititution: 
                     </div>
                     <div class="col-md-4">
-                    <input name="inst" type="text" value="" required="required"/>
+                    <input name="inst" id="inst" type="text" value="__INST__" required/>
                     </div>
                     <div class="col-md-2">
-                    <label for="dept">Department:</label> 
+                    Department: 
                     </div>
                     <div class="col-md-4">
-                    <input name="dept" type="text" value="" required="required"/>
+                    <input name="dept" id="dept" type="text" value="__DEPT__" required/>
                     </div>
                   </div>
                   <br/>
                   <br/>
                   <div class="row">
-                    <div class="col-md-3">
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <label for="email">E-mail Address:</label>
-                    </div>
+                    <div class="col-md-3">&nbsp;&nbsp;&nbsp;&nbsp;E-mail Address:</div>
                     <div class="col-md-9">
-                     <input name="email" type="email" value="" style="width:75%" required="required"/>
-                    </div>
+                     <input name="email" id="email" type="email" value="__EMAIL__" style="width:75%" required/>
+                   </div>
                   </div>
                   <div class="col-md-12">
                     <br/>
-                    <input name="is_subscribe" type="checkbox" value="1" checked="yes"/> 
+                    <input name="is_subscribe" id="is_subscribe" type="checkbox" value="1" __IS_SUBSCRIBE__/> 
                     <input type="hidden" name="is_subscribe" value="0" />
-                    <label for="is_subscribe">Subscribe to newsletter for future version updates.</label>
+                    Subscribe to newsletter for future version updates.
                     <br/>
                     <br/>
                     <input type="submit" class="btn btn-primary" value="&nbsp;Submit&nbsp;"/>
@@ -100,6 +97,8 @@
                    </div>
                   </div>
                 </div>
+
+                <div id="message"></div>
               </div>
             </div>
           </form>
@@ -114,6 +113,7 @@
     <script src="/res/js/jquery-1.11.2.min.js"></script>
     <script src="/res/js/bootstrap.min.js"></script>
 
+    __SCRIPT__
     <script src="/res/js/util.js"></script>
 
   </body>

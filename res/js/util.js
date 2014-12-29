@@ -18,7 +18,6 @@ $(document).ready(function () {
   var path_tutorial = "/tutorial";
   var path_license = "/license";
   var path_download = "/download";
-  var path_downlink = "/res/html/download_link.html";
   var path_about = "/about";
   var path_navbar = "/res/html/_navbar.html";
   var path_footer = "/res/html/_footer.html";
@@ -59,7 +58,6 @@ $(document).ready(function () {
       $(".path_tutorial").attr("href", path_tutorial);
       $(".path_license").attr("href", path_license);
       $(".path_download").attr("href", path_download);
-      $(".path_downlink").attr("content", path_downlink);
       $(".path_about").attr("href", path_about);
 
       $(".bgimg").css("background-image", 'url("' + path_background_rna + '")');
