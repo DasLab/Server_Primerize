@@ -16,9 +16,24 @@ DEF_MIN_LEN = 15
 DEF_NUM_PRM = -1
 JOB_KEEP_EXPIRE = 7
 
+PATH_HOME = "res/html/index.html"
+PATH_DESIGN = "res/html/design.html"
+PATH_TUTORIAL = "res/html/tutorial.html"
+PATH_LICENSE = "res/html/license.html"
+PATH_DOWNLOAD = "res/html/download.html"
+  # var path_downlink = "/res/html/download_link.html";
+PATH_ABOUT = "res/html/about.html"
+
+
+def load_html(file_name):
+    f = open(file_name, "r")
+    lines = f.readlines()
+    f.close()
+    script = "".join(lines)
+    return script
+
 
 def is_valid_name(input, char_allow, length):
-
     if len(input) <= length: return 0
     src = ''.join([string.digits, string.ascii_letters, char_allow])
     for char in input:
@@ -27,7 +42,6 @@ def is_valid_name(input, char_allow, length):
 
 
 def is_valid_email(input):
-
     input_split = input.split("@")
     if len(input_split) != 2: return 0
     if not is_valid_name(input_split[0], ".-_", 2): return 0
@@ -39,11 +53,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
-    f = open("res/html/design_result.html", "r") 
-    lines = f.readlines()
-    f.close()
-
-    script = "".join(lines)
+    script = load_html("res/html/design_result.html")
     if type(min_Tm) is float: min_Tm = str(min_Tm)
     if type(num_primers) is int: num_primers = str(num_primers)
     if type(max_length) is int: max_length = str(max_length)
@@ -80,11 +90,7 @@ class rest:
 
     @cherrypy.expose
     def index(self):
-        f = open("res/html/index.html", "r")
-        lines = f.readlines()
-        f.close()
-        script = "".join(lines)
-        return script
+        return load_html(PATH_HOME)
 
 
     @cherrypy.expose
@@ -97,11 +103,7 @@ class rest:
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
-                f = open("res/html/design.html", "r")
-                lines = f.readlines()
-                f.close()
-                script = "".join(lines)
-                return script
+                return load_html("PATH_DESIGN")
 
             msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input."
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
@@ -258,25 +260,12 @@ class rest:
 
 
     @cherrypy.expose
-    def example_P4P6(self):
+    def demo_P4P6(self):
         self.cleanup_old()
         seq_P4P6 = "TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC"
         return self.design_primers(seq_P4P6, "P4P4_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0")    
 
 
-    @cherrypy.expose
-    def show_license(self):
-        f = open("LICENSE.MD", "r") 
-        lines = f.readlines()
-        f.close()
-        md = "".join([line.replace("\n","<br/>") for line in lines]) + "</strong>"
-
-        f = open("res/html/license.html", "r")
-        lines = f.readlines()
-        f.close()
-        script = "".join(lines)
-
-        return script.replace("__LICENSE_CONTENT__", md)
 
 
     @cherrypy.expose
@@ -294,22 +283,34 @@ class rest:
             f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
             f.close()
 
-            f = open("res/html/download_link.html", "r") 
-            lines = f.readlines()
-            f.close()
-            script = "".join(lines)
-            return script
+            return load_html("res/html/download_link.html")
         else:
-            f = open("res/html/download_error.html", "r") 
-            lines = f.readlines()
-            f.close()
-            script = "".join(lines)
+            script = load_html("res/html/download_error.html")
             script = script.replace("__F_NAME__", first_name).replace("__L_NAME__", last_name).replace("__EMAIL__", email).replace("__INST__", inst).replace("__DEPT__", dept)
             if "1" in is_subscribe: 
                 script = script.replace("__IS_SUBSCRIBE__", "checked=\"yes\"") 
             else:
                 script = script.replace("__IS_SUBSCRIBE__", "") 
             return script
+
+    @cherrypy.expose
+    def design(self):
+        return load_html(PATH_DESIGN)
+    @cherrypy.expose
+    def home(self):
+        return load_html(PATH_HOME)
+    @cherrypy.expose
+    def tutorial(self):
+        return load_html(PATH_TUTORIAL)
+    @cherrypy.expose
+    def license(self):
+        return load_html(PATH_LICENSE)
+    @cherrypy.expose
+    def download(self):
+        return load_html(PATH_DOWNLOAD)
+    @cherrypy.expose
+    def about(self):
+        return load_html(PATH_ABOUT)
 
 
 if __name__ == "__main__":
@@ -359,6 +360,10 @@ if __name__ == "__main__":
         "/src": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "src"
+            },
+        "/": {
+            "tools.staticdir.on": True,
+            "tools.staticdir.dir": ""
             }
         }
     )

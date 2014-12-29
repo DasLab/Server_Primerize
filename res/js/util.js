@@ -12,14 +12,16 @@ $(document).ready(function () {
   var path_button_top = "/res/images/fg_top.png?";
   var path_button_question = "/res/images/fg_question.png?";
 
-  var path_home = "/res/html/index.html?";
-  var path_design = "/res/html/design.html?";
-  var path_tutorial = "/res/html/tutorial.html?";
-  var path_download = "/res/html/download.html?";
-  var path_downlink = "/res/html/download_link.htm?l";
-  var path_about = "/res/html/about.html?";
-  var path_navbar = "/res/html/_navbar.html?";
-  var path_footer = "/res/html/_footer.html?";
+  var path_home = "/home";
+  var path_design = "/design";
+  var path_demo = "/demo_P4P6";
+  var path_tutorial = "/tutorial";
+  var path_license = "/license";
+  var path_download = "/download";
+  var path_downlink = "/res/html/download_link.html";
+  var path_about = "/about";
+  var path_navbar = "/res/html/_navbar.html";
+  var path_footer = "/res/html/_footer.html";
   
 	var url = window.location.href;
 
@@ -53,7 +55,9 @@ $(document).ready(function () {
 
       $(".path_home").attr("href", path_home);
       $(".path_design").attr("href", path_design);
+      $(".path_demo").attr("href", path_demo);
       $(".path_tutorial").attr("href", path_tutorial);
+      $(".path_license").attr("href", path_license);
       $(".path_download").attr("href", path_download);
       $(".path_downlink").attr("content", path_downlink);
       $(".path_about").attr("href", path_about);
