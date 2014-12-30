@@ -43,7 +43,7 @@
               <div class="bgimg">
                <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
                 <label for="tag"><b>Name Tag</b>:&nbsp;&nbsp;</label>
-                <input name="tag" type="text" value="" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
+                <input name="tag" type="text" value="__TAG__" style="width:50%" maxlength="32" placeholder="Enter a tag"/>
                &nbsp;&nbsp;(optional)
                </p>
                <p>
@@ -61,11 +61,11 @@
                  <p class="text-right">
                   <br/>
                   <br/>
-                  <i>Length: <b><span id="count">0</span></b> nt</i>
+                  <i>Length: <b><span id="count">__LEN__</span></b> nt</i>
                  </p>
                 </div>
                </div>
-               <textarea class="form-control" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence"></textarea>
+               <textarea class="form-control" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence">__SEQ__</textarea>
                <br/>
                <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
                <a href="" class="btn btn-default path_design">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -89,26 +89,26 @@
                   <div class="input-group">
                     <p data-toggle="tooltip" data-placement="left" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
                       <label for="min_Tm">minimum <b>Tm</b>:</label>
-                      <input name="min_Tm" type="text" value="60.0" style="width:25%"/>
+                      <input name="min_Tm" type="text" value="__MIN_TM__" style="width:25%"/>
                       &deg;C
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Maximum length for each primer. Default = 60 nt.">
                       <label for="max_length">maximum <b>length</b> of primers:</label>
-                      <input name="max_length" type="text" value="60" style="width:25%"/>
+                      <input name="max_length" type="text" value="__MAX_LEN__" style="width:25%"/>
                        nt <br/>
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Minimum length for each primer. Default = 15 nt.">
                       <label for="min_length">minimum <b>length</b> of primers:</label>
-                      <input name="min_length" type="text" value="15" style="width:25%"/>
+                      <input name="min_length" type="text" value="__MIN_LEN__" style="width:25%"/>
                        nt <br/>
                     </p>
                     <p data-toggle="tooltip" data-placement="left" title="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
-                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers">
+                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers" __IS_NUM_PRMS__>
                         <label for="is_num_primers">&nbsp;<b>#</b> number of primers:</label>
                       </input>
                       <br/>
                       <input name="is_num_primers" type="hidden" value="0" checked>
-                      <input name="num_primers" type="text" value="auto" style="width:25%" id="text_num_primers" disabled="disabled"/>
+                      <input name="num_primers" type="text" value="__NUM_PRIMERS__" style="width:25%" id="text_num_primers" __IS_NUM_PRMS_DIS__/>
                       <input name="num_primers" type="hidden" value=""/>
                     </p>
                   </div>
@@ -118,6 +118,7 @@
           </div>
         </form>
       </div>
+      <div id="result">__RESULT__</div>
     </div>
    </div>
    <hr/>

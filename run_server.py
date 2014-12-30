@@ -8,21 +8,9 @@ import tempfile
 import time
 # import re
 # from scipy.stats import *
+from const import *
 
 MEDIA_DIR = os.path.join(os.path.abspath("."))
-DEF_MIN_TM = 60.0
-DEF_MAX_LEN = 60
-DEF_MIN_LEN = 15
-DEF_NUM_PRM = -1
-JOB_KEEP_EXPIRE = 7
-
-PATH_HOME = "res/html/index.html"
-PATH_DESIGN = "res/html/design.html"
-PATH_TUTORIAL = "res/html/tutorial.html"
-PATH_LICENSE = "res/html/license.html"
-PATH_DOWNLOAD = "res/html/download.html"
-  # var path_downlink = "/res/html/download_link.html";
-PATH_ABOUT = "res/html/about.html"
 
 
 def load_html(file_name):
@@ -53,7 +41,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
-    script = load_html("res/html/design_result.html")
+    script = load_html(PATH_DESIGN)
     if type(min_Tm) is float: min_Tm = str(min_Tm)
     if type(num_primers) is int: num_primers = str(num_primers)
     if type(max_length) is int: max_length = str(max_length)
@@ -65,7 +53,7 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
         is_num_primers = ""
         is_num_primers_disabled = "disabled=\"disabled\""
 
-    if num_primers in (str(DEF_NUM_PRM), " "): num_primers = "auto"
+    if num_primers in (str(DEF_NUM_PRM), " ","auto"): num_primers = "auto"
     script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled)
     return script
 
@@ -78,11 +66,6 @@ def is_valid_sequence(sequence):
 	return 1
 
 
-def display_complete_html(msg):
-    msg += "</p></div></div><hr/><div class=\"bs-docs-footer\" role=\"contentinfo\" id=\"footer\"></div></body></html>"
-    return msg 
-
-
 class rest:
     def __init__(self):
         pass
@@ -91,7 +74,24 @@ class rest:
     @cherrypy.expose
     def index(self):
         return load_html(PATH_HOME)
-
+    @cherrypy.expose
+    def design(self):
+        return load_html(PATH_DESIGN).replace("__SEQ__", "").replace("__MIN_TM__", str(DEF_MIN_TM)).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(DEF_MAX_LEN)).replace("__MIN_LEN__", str(DEF_MIN_LEN)).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__RESULT__", "")
+    @cherrypy.expose
+    def home(self):
+        return load_html(PATH_HOME)
+    @cherrypy.expose
+    def tutorial(self):
+        return load_html(PATH_TUTORIAL)
+    @cherrypy.expose
+    def license(self):
+        return load_html(PATH_LICENSE)
+    @cherrypy.expose
+    def download(self):
+        return load_html(PATH_DOWNLOAD).replace("__SCRIPT__", "<script src=\"/res/js/download.js\"></script>")
+    @cherrypy.expose
+    def about(self):
+        return load_html(PATH_ABOUT)
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
@@ -103,15 +103,14 @@ class rest:
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
-                return load_html("PATH_DESIGN")
+                return rest.design(self)
 
-            msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input."
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
+            msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input.</p></div>"
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
 
 
         try:
             min_Tm = float(min_Tm)
-
             if ("1" not in is_num_primers) or not num_primers or num_primers in (str(DEF_NUM_PRM), "auto"):
                 num_primers = DEF_NUM_PRM
             else:
@@ -119,11 +118,12 @@ class rest:
             max_length = int(max_length)
             min_length = int(min_length)
         except ValueError:
-            msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input."
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
+            if not (type(num_primers) is int): num_primers = num_primers[0]
+            msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input.</p></div>"
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
         if num_primers != DEF_NUM_PRM and num_primers % 2 != 0:
-            msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>."
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
+            msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.</p></div>"
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
         if not tag: tag = "primer"
 
         t0 = time.time()
@@ -133,8 +133,8 @@ class rest:
 
         lines = [line.replace("\n","") for line in lines]
         if lines[-2] and lines[-2][0] == "?":
-            msg = "<div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: No solution found, please adjust advanced options."
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(msg)
+            msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: No solution found, please adjust advanced options.</p></div>"
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
 
         sec_break = [i for i in range(len(lines)) if lines[i] == "#"]
         self.lines_warning = lines[sec_break[0] : sec_break[1]]
@@ -143,7 +143,7 @@ class rest:
 
         script = ""
         if self.lines_warning != ['#']:
-            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
+            script += "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
             for line in self.lines_warning:
                 if line[0] == "@":
                     script += "<b>WARNING</b>"
@@ -216,7 +216,7 @@ class rest:
             else:
                 script += "<br/>"
 
-        script += "</pre></div></div></div></div>"
+        script += "</pre></div></div></div></div></p></div>"
 
         f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
         file_name = f.name[-17:]
@@ -247,7 +247,7 @@ class rest:
 
         script = script.replace("__FILE_NAME__", u"cache/" + file_name).replace("__JOB_ID___", file_name[-10:-4])
         f.close()
-        return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers) + display_complete_html(script)
+        return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", script)
 
 
     @cherrypy.expose
@@ -266,8 +266,6 @@ class rest:
         return self.design_primers(seq_P4P6, "P4P4_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0")    
 
 
-
-
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
 
@@ -282,35 +280,16 @@ class rest:
                 f.write("0")
             f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
             f.close()
+            return load_html(PATH_DOWNLOAD).replace("__SCRIPT__", "<script src=\"/res/js/download_link.js\"></script>")
 
-            return load_html("res/html/download_link.html")
         else:
-            script = load_html("res/html/download_error.html")
+            script = load_html(PATH_DOWNLOAD)
             script = script.replace("__F_NAME__", first_name).replace("__L_NAME__", last_name).replace("__EMAIL__", email).replace("__INST__", inst).replace("__DEPT__", dept)
             if "1" in is_subscribe: 
                 script = script.replace("__IS_SUBSCRIBE__", "checked=\"yes\"") 
             else:
                 script = script.replace("__IS_SUBSCRIBE__", "") 
-            return script
-
-    @cherrypy.expose
-    def design(self):
-        return load_html(PATH_DESIGN)
-    @cherrypy.expose
-    def home(self):
-        return load_html(PATH_HOME)
-    @cherrypy.expose
-    def tutorial(self):
-        return load_html(PATH_TUTORIAL)
-    @cherrypy.expose
-    def license(self):
-        return load_html(PATH_LICENSE)
-    @cherrypy.expose
-    def download(self):
-        return load_html(PATH_DOWNLOAD)
-    @cherrypy.expose
-    def about(self):
-        return load_html(PATH_ABOUT)
+            return script.replace("__SCRIPT__", "<script src=\"/res/js/download_error.js\"></script>")
 
 
 if __name__ == "__main__":
