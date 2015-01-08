@@ -55,14 +55,24 @@ $(document).ready(function () {
       $(".path_home").attr("href", path_home);
       $(".path_design").attr("href", path_design);
       $(".path_demo").attr("href", path_demo);
-      $(".path_tutorial").attr("href", path_tutorial);
+      $(".path_tutorial").each(function () {
+        $(this).attr("href", path_tutorial + $(this).attr("href"));
+      });
       $(".path_license").attr("href", path_license);
       $(".path_download").attr("href", path_download);
-      $(".path_about").attr("href", path_about);
+      $(".path_about").each(function () {
+        $(this).attr("href", path_about + $(this).attr("href"));
+      });
 
       $(".bgimg").css("background-image", 'url("' + path_background_rna + '")');
       $(".navbar .navbar-brand").css("background-image", 'url("' + path_background_rna + '")');
       $(".modal").css("background-image", 'url("' + path_button_loading + '")');
+
+      $(".dropdown-toggle").dropdown();
+      $(".dropdown").hover(
+        function () { $(this).addClass('open') },
+        function () { $(this).removeClass('open') }
+      );
 
     });
   });

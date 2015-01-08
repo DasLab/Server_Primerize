@@ -12,9 +12,34 @@
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav" id="nav">
       <li id="nav_design"><a class="path_design" href="">Design</a></li>
-      <li id="nav_tutorial"><a class="path_tutorial" href="">Tutorial</a></li>
+      <li class="dropdown" id="nav_tutorial">
+        <a href="" class="path_tutorial dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+          Tutorial
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a class="path_tutorial" href="#web_input">Section #1: Website Input</a></li>
+          <li><a class="path_tutorial" href="#web_output_primers">Section #2: Website Output Primers</a></li>
+          <li><a class="path_tutorial" href="#web_output_assembly">Section #3: Website Output Assembly</a></li>
+          <li><a class="path_tutorial" href="#txt_output">Section #4: Downloadable Output</a></li>
+          <li><a class="path_tutorial" href="#idt_bulk">Section #5: IDT Bulk Ordering</a></li>
+          <li class="divider"></li>
+          <li><a class="path_tutorial" href="#PCR">Section #6: PCR Assembly Protocol</a></li>
+        </ul>
+      </li>
       <li id="nav_download"><a class="path_license" href="">Download Package</a></li>
-      <li id="nav_about"><a class="path_about" href="">About</a></li>
+      <li class="dropdown" id="nav_about">
+        <a href="" class="path_about dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+          About
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a class="path_about" href="#citation">Citations</a></li>
+          <li><a class="path_about" href="#privacy">Privacy Disclosure</a></li>
+          <li class="divider"></li>
+          <li><a class="path_about" href="#contact">Contact Us</a></li>
+        </ul>
+      </li>
     </ul>
     <ul class="pull-right">
       <li>
