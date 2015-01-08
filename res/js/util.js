@@ -19,8 +19,8 @@ $(document).ready(function () {
   var path_license = "/license";
   var path_download = "/download";
   var path_about = "/about";
-  var path_navbar = "/res/html/_navbar.html";
-  var path_footer = "/res/html/_footer.html";
+  var path_navbar = "/res/html/_navbar.html?";
+  var path_footer = "/res/html/_footer.html?";
   
 	var url = window.location.href;
 
