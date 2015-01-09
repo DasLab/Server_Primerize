@@ -1,7 +1,6 @@
 import cherrypy
 import glob
 import os
-import string
 import subprocess
 import sys
 import tempfile
@@ -9,67 +8,12 @@ import time
 # import re
 # from scipy.stats import *
 from const import *
-
-MEDIA_DIR = os.path.join(os.path.abspath("."))
-
-
-def load_html(file_name):
-    f = open(file_name, "r")
-    lines = f.readlines()
-    f.close()
-    script = "".join(lines)
-    return script
-
-
-def is_valid_name(input, char_allow, length):
-    if len(input) <= length: return 0
-    src = ''.join([string.digits, string.ascii_letters, char_allow])
-    for char in input:
-        if char not in src: return 0
-    return 1
-
-
-def is_valid_email(input):
-    input_split = input.split("@")
-    if len(input_split) != 2: return 0
-    if not is_valid_name(input_split[0], ".-_", 2): return 0
-    input_split = input_split[1].split(".")
-    if len(input_split) == 1: return 0
-    for char in input_split:
-        if not is_valid_name(char, "", 1): return 0
-    return 1
-
-
-def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
-    script = load_html(PATH_DESIGN)
-    if type(min_Tm) is float: min_Tm = str(min_Tm)
-    if type(num_primers) is int: num_primers = str(num_primers)
-    if type(max_length) is int: max_length = str(max_length)
-    if type(min_length) is int: min_length = str(min_length)
-    if "1" in is_num_primers:
-        is_num_primers = "checked"
-        is_num_primers_disabled = ""
-    else:
-        is_num_primers = ""
-        is_num_primers_disabled = "disabled=\"disabled\""
-
-    if num_primers in (str(DEF_NUM_PRM), " ","auto"): num_primers = "auto"
-    script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled)
-    return script
-
-
-def is_valid_sequence(sequence):
-	res = "A,G,C,U,T".split(",")
-	for e in sequence.upper():
-		if e not in res:
-			return 0
-	return 1
+from helper import *
 
 
 class rest:
     def __init__(self):
         pass
-
 
     @cherrypy.expose
     def index(self):
@@ -262,7 +206,6 @@ class rest:
     @cherrypy.expose
     def demo_P4P6(self):
         self.cleanup_old()
-        seq_P4P6 = "TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC"
         return self.design_primers(seq_P4P6, "P4P4_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0")    
 
 
@@ -301,49 +244,17 @@ if __name__ == "__main__":
         raise SystemError("ERROR: Only can do development or release")
     if server_state == "release":
         socket_host = "171.65.23.206"
-        socket_port = 8080
     else:
         socket_host = "127.0.0.1"
-        socket_port = 8080
 
     cherrypy.config.update( {
         "server.socket_host":socket_host, 
-        "server.socket_port":socket_port,
+        "server.socket_port":8080,
         "tools.staticdir.root": os.path.abspath(os.path.join(os.path.dirname(__file__), ""))
         #"tools.statiddir.root": "/Users/skullnite/Downloads"
     } )
     #print os.path.abspath(os.path.join(__file__, "static"))
     #cherrypy.quickstart( rest(), "/", "development.conf" )
     
-    cherrypy.quickstart(rest(), "", config={
-        "/res/css": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/css"
-            },
-        "/res/js": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/js"
-            },
-        "/res/images": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/images"
-            },
-        "/res/html": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/html"
-            },
-        "/cache": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "cache"
-            },
-        "/src": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "src"
-            },
-        "/": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": ""
-            }
-        }
-    )
+    cherrypy.quickstart(rest(), "", config=QUICKSTART_CONFIG)
 
