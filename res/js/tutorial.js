@@ -29,6 +29,6 @@ $(document).ready(function () {
   });
 
   $("#btn_demo").on('click', function () {
-    $("#wait").show();
+    $("#wait").fadeIn(1000);
   });
 });
