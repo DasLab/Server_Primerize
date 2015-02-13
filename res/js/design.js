@@ -1,15 +1,15 @@
 $(document).ready(function () {
-  $("#is_agree").on("click", function () {
-    if ($(this).is(":checked")) {
-        $("#btn_submit").removeAttr("disabled");
-        $("#btn_demo").removeAttr("disabled");
-        $(this).parent().css("color","black");
-    } else {
-        $("#btn_submit").attr("disabled", "disabled");
-        $("#btn_demo").attr("disabled", "disabled");
-        $(this).parent().css("color","red");
-    }
-  });
+  // $("#is_agree").on("click", function () {
+  //   if ($(this).is(":checked")) {
+  //       $("#btn_submit").removeAttr("disabled");
+  //       $("#btn_demo").removeAttr("disabled");
+  //       $(this).parent().css("color","black");
+  //   } else {
+  //       $("#btn_submit").attr("disabled", "disabled");
+  //       $("#btn_demo").attr("disabled", "disabled");
+  //       $(this).parent().css("color","red");
+  //   }
+  // });
 
   $("#sequence").on("keyup", function () {
     $("#count").text($(this).val().length);

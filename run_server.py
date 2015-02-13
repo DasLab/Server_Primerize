@@ -212,7 +212,7 @@ class rest:
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
 
-        is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 2) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
+        is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
 
         if is_valid:
             f = open("src/usr_tab.csv", "a")
