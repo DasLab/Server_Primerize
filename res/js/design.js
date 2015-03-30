@@ -34,4 +34,5 @@ $(document).ready(function () {
   $("#btn_demo").on("click", function () {
     $("#wait").fadeIn(1000);
   });
+  
 });
