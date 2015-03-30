@@ -1,0 +1,1 @@
+sudo pfctl -ef /Users/daslab/pf.config 
