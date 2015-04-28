@@ -1,9 +1,9 @@
+import binascii
 import cherrypy
 import glob
 import os
 import subprocess
 import sys
-import tempfile
 import time
 # import re
 # from scipy.stats import *
@@ -36,6 +36,10 @@ class rest:
     @cherrypy.expose
     def about(self):
         return load_html(PATH_ABOUT)
+
+    @cherrypy.expose
+    def result(self, job_id):
+        return load_html("cache/result_%s.html" % job_id)
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
@@ -165,8 +169,11 @@ class rest:
 
         script += "</pre></div></div></div></div></p></div>"
 
-        f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
-        file_name = f.name[-17:]
+
+        # f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
+        job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]
+        file_name = "cache/result_%s.txt" % job_id
+        f = open(file_name, "w")
 
         f.write("Primerize Result\n\nINPUT\n=====\n%s\n" % sequence)
         f.write("#\nMIN_TM: %.1f\n" % min_Tm)
@@ -200,16 +207,21 @@ class rest:
             f.write("%s\t%s\t25nm\tSTD\n" % (line[0].replace("primer", tag), line[2]))
         f.write("------/* END */------\n------/* NOTE: use \"Lab Ready\" for \"Normalization\" */------\n")
 
-        script = script.replace("__FILE_NAME__", u"cache/" + file_name).replace("__JOB_ID___", file_name[-10:-4])
+        script = script.replace("__FILE_NAME__", file_name).replace("__JOB_ID___", job_id)
         f.close()
-        return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
+
+        f = open("cache/result_%s.html" % job_id, "w")
+        html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
+        f.write(html_content)
+        f.close()
+        return html_content
 
 
     @cherrypy.expose
     def cleanup_old(self):
         older_7days = time.time() - JOB_KEEP_EXPIRE * 86400
 
-        for f in glob.glob("cache/*.txt"):
+        for f in glob.glob("cache/*"):
             if (os.stat(f).st_mtime < older_7days):
                 os.remove(f)
 
