@@ -17,7 +17,7 @@ class rest:
 
     @cherrypy.expose
     def index(self):
-        return load_html(PATH_HOME)
+        raise cherrypy.HTTPRedirect("home")
     @cherrypy.expose
     def design(self):
         return load_html(PATH_DESIGN).replace("__SEQ__", "").replace("__MIN_TM__", str(DEF_MIN_TM)).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(DEF_MAX_LEN)).replace("__MIN_LEN__", str(DEF_MIN_LEN)).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
@@ -39,6 +39,7 @@ class rest:
 
     @cherrypy.expose
     def result(self, job_id):
+        if not job_id: raise cherrypy.HTTPRedirect("home")
         file_name = "cache/result_%s.html" % job_id
         if os.path.exists(file_name):
             return load_html(file_name)
@@ -98,7 +99,7 @@ class rest:
 
         script = ""
         if self.lines_warning != ['#']:
-            script += "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
+            script += "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
             for line in self.lines_warning:
                 if line[0] == "@":
                     script += "<b>WARNING</b>"
@@ -221,7 +222,8 @@ class rest:
         html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
         f.write(html_content)
         f.close()
-        return html_content
+        raise cherrypy.HTTPRedirect("result/%s" % job_id)
+        # return html_content
 
 
     @cherrypy.expose
