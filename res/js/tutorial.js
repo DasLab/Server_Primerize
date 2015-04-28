@@ -7,3 +7,11 @@ $(document).ready(function () {
     $("#wait").fadeIn(1000);
   });
 });
+
+$(window).on("scroll", function () {
+	if ($(this).scrollTop() > $(window).height()/2) {
+		$('#up').fadeIn();
+	} else {
+		$('#up').fadeOut();
+	}
+});

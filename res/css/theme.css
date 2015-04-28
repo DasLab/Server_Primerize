@@ -43,13 +43,15 @@ label {
   border-color: #112d52;
 }
 .navbar .navbar-brand {
-  color: #fef159;
-  font-weight: bold;
   background-image: url("/res/images/bg_rna.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
-.navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
+.navbar .navbar-brand > span {
+  color: #fef159;
+  font-weight: bold;
+}
+.navbar .navbar-brand:hover > span, .navbar .navbar-brand:focus > span {
   color: #fec78a;
   text-decoration: blink;
 }

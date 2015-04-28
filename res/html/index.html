@@ -50,29 +50,50 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
+            <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Result retrieval</h3>
+              </div>
+              <div id="col-1" class="panel-body">
+                <form method='get' action='/result'>
+                  <div class="col-md-12">
+                    <p data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result.">
+                      <label for="job_id"><span class="lead"><span class="label label-violet">JOB_ID</span></span>:&nbsp;&nbsp;</label>
+                      <input name="job_id" type="text" value="" style="width:60%" maxlength="32" placeholder="Enter a JOB_ID"/>
+                    <input type="submit" id="btn_retrieve" class="btn btn-blue btn-sm pull-right" value="&nbsp;Retrieve&nbsp;"/>&nbsp;
+                    </p>
+                    <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (7 days).</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
             <div class="panel panel-green">
               <div class="panel-heading">
                 <h3 class="panel-title">How to use</h3>
               </div>
-              <div id="col-1" class="panel-body">
+              <div id="col-2" class="panel-body">
                 <p>
                   New users can read the 
-                  <a class="btn btn-success btn-sm path_tutorial" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Tutorial&nbsp;&nbsp;</a> for detailed explanations.
+                  <a class="btn btn-inverse btn-sm path_tutorial" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Tutorial&nbsp;&nbsp;</a> for detailed explanations.
                 </p>
                 <p> 
                   Please also try out the
-                  <a class="btn btn-inverse btn-sm path_demo" href="" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
+                  <a class="btn btn-success btn-sm path_demo" href="" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
                 </p>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="panel panel-danger">
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title">Package download</h3>
               </div>
-              <div id="col-2"   class="panel-body">
+              <div id="col-3" class="panel-body">
                 <p>
                    Advanced academic users may opt to download the source code package. 
                 </p>
@@ -82,15 +103,15 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="panel panel-info">
+          <div class="col-md-6">
+            <div class="panel panel-warning">
               <div class="panel-heading">
                 <h3 class="panel-title">Contact us</h3>
               </div>
-              <div id="col-3" class="panel-body">
+              <div id="col-4" class="panel-body">
                 <p> 
                   Please feel free to 
-                  <a class="btn btn-info btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> the Das Lab for further questions/issues regarding the web server, suggestions for improvements, citations, or commercial use authorization.
+                  <a class="btn btn-danger btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> the Das Lab for further questions/issues regarding the web server, suggestions for improvements, citations, or commercial use authorization.
                 </p>
               </div>
             </div>
@@ -113,10 +134,11 @@
     <script src="/res/js/util.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
-        var col_h = Math.max(parseInt($("#col-1").css("height")), parseInt($("#col-2").css("height")), parseInt($("#col-3").css("height")));
+        var col_h = Math.max(parseInt($("#col-1").css("height")), parseInt($("#col-2").css("height")), parseInt($("#col-3").css("height")), parseInt($("#col-4").css("height")));
         $("#col-1").css("height", col_h);
         $("#col-2").css("height", col_h);
         $("#col-3").css("height", col_h);
+        $("#col-4").css("height", col_h);
       });
     </script>
 

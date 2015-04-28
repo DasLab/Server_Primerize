@@ -67,6 +67,15 @@ p.cap:first-letter {
 	background-color: #caefc1;
 	border-color: #50cc32;
 }
+.btn-blue {
+	background-color: #3ed4e7;
+	border-color: #31a9b8;
+	color: #fff !important;
+}
+.btn-blue:hover {
+	background-color: #82e3ee;
+	border-color: #3ed4e7;
+}
 
 .panel-heading {
 	background-color: #fff;
@@ -194,7 +203,9 @@ p.cap:first-letter {
 .label-dark-red {
 	background-color: #d86f5c;
 }
-
+.label-inverse {
+	background-color: #000;
+}
 .label-white {
 	color: #fff;
 }
