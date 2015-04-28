@@ -198,3 +198,20 @@ p.cap:first-letter {
 .label-white {
 	color: #fff;
 }
+
+.alert-orange {
+	border-bottom: 5px solid #ff912e !important;
+	background-color: #ffdec0 !important;
+}
+.alert-success {
+	border-bottom: 5px solid #29be92 !important;
+	background-color: #beebde !important;
+}
+.alert-danger {
+	border-bottom: 5px solid #ff5c2b !important;
+	background-color: #ffcebf !important;
+}
+.alert-warning {
+	border-bottom: 5px solid #fec78a !important;
+	background-color: #fefacd !important;
+}

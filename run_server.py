@@ -124,9 +124,9 @@ class rest:
                     script += "<br/>"
         else:
             script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br/><div class=\"alert alert-success\" title=\"No alerts\"><p>"
-            script += "<b>SUCCESS</b>: No potential mis-priming found. See results below."
+            script += "<b>SUCCESS</b>: No potential mis-priming found. See results below.<br/>"
 
-        script +=  "</p></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"alert alert-info\"> <b>Time elapsed</b>: %.1f" % t_total + " s.</div></div></div>"
+        script +=  "__NOTE_T7__</p></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"alert alert-orange\"> <b>Time elapsed</b>: %.1f" % t_total + " s.</div></div></div>"
 
         script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table table-hover\" ><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
         for line in self.lines_primers:
@@ -187,13 +187,16 @@ class rest:
             f.write("NUM_PRIMERS: %d" % num_primers)
         f.write("\nMAX_LENGTH: %d\nMIN_LENGTH: %d\n" % (max_length, min_length))
         if "1" in is_t7:
-            f.write("CHECK_T7: feature enabled, ")
+            str_t7 = "CHECK_T7: feature enabled, "
             if flag:
-                f.write("T7 promoter sequence present.\n")
+                str_t7 = str_t7 + "T7 promoter sequence present.\n"
             else:
-                f.write("T7 promoter sequence missing, automatically prepended.\n")
+                str_t7 = str_t7 + "T7 promoter sequence missing, automatically prepended.\n"
         else:
-            f.write("CHECK_T7: feature disabled.\n")
+            str_t7 = "CHECK_T7: feature disabled.\n"
+        f.write(str_t7)
+        script = script.replace("__NOTE_T7__", str_t7.replace("\n","").replace("CHECK_T7","<b>CHECK_T7</b>"))
+
         f.write("\n\nOUTPUT\n======\n")
         for line in self.lines_warning:
             if line[0] == "@":
