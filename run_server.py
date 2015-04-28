@@ -39,7 +39,11 @@ class rest:
 
     @cherrypy.expose
     def result(self, job_id):
-        return load_html("cache/result_%s.html" % job_id)
+        file_name = "cache/result_%s.html" % job_id
+        if os.path.exists(file_name):
+            return load_html(file_name)
+        else:
+            return load_html(PATH_404)
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
@@ -134,24 +138,24 @@ class rest:
                 num = "<tr class=\"warning\"><td>" + num + "<span class=\"label label-info\">F</span></b>"
             script += num + "</td><td><em>" + line[1] + "</em></td><td style=\"word-break: break-all;\">" + line[2] + "</td></tr>"
 
-        script += "</tbody></table></div></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-success\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Assembly Scheme</h2></div><div class=\"panel-body\"><pre>"
+        script += "</tbody></table></div></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-green\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Assembly Scheme</h2></div><div class=\"panel-body\"><pre>"
         for line in self.lines_assembly:
             if line:
                 if line[0] == "~":
-                    script += "<span class=\"bg-primary\">" + line[1:] + "</span><br/>"
+                    script += "<span class=\"label-white label-primary\">" + line[1:] + "</span><br/>"
                 elif line[0] == "=":
-                    script += "<span class=\"bg-warning\">" + line[1:] + "</span><br/>"
+                    script += "<span class=\"label-warning\">" + line[1:] + "</span><br/>"
                 elif line[0] == "^":
                     for char in line[1:]:
                         if char in ("A","T","C","G"):
-                            script += "<span class=\"bg-info\">" + char + "</span>"
+                            script += "<span class=\"label-info\">" + char + "</span>"
                         else:
                             script += char
                     script += "<br/>"
                 elif line[0] == "!":
                     for char in line[1:]:
                         if char in ("A","T","C","G"):
-                            script += "<span class=\"bg-danger\">" + char + "</span>"
+                            script += "<span class=\"label-white label-danger\">" + char + "</span>"
                         else:
                             script += char
                     script += "<br/>"
