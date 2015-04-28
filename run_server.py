@@ -20,7 +20,7 @@ class rest:
         return load_html(PATH_HOME)
     @cherrypy.expose
     def design(self):
-        return load_html(PATH_DESIGN).replace("__SEQ__", "").replace("__MIN_TM__", str(DEF_MIN_TM)).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(DEF_MAX_LEN)).replace("__MIN_LEN__", str(DEF_MIN_LEN)).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__RESULT__", "")
+        return load_html(PATH_DESIGN).replace("__SEQ__", "").replace("__MIN_TM__", str(DEF_MIN_TM)).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(DEF_MAX_LEN)).replace("__MIN_LEN__", str(DEF_MIN_LEN)).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
     @cherrypy.expose
     def home(self):
         return load_html(PATH_HOME)
@@ -38,7 +38,7 @@ class rest:
         return load_html(PATH_ABOUT)
 
     @cherrypy.expose
-    def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
+    def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
 
         seq = sequence.upper().replace("U", "T")
         sequence = ""
@@ -50,7 +50,7 @@ class rest:
                 return rest.design(self)
 
             msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input.</p></div>"
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
 
 
         try:
@@ -64,11 +64,13 @@ class rest:
         except ValueError:
             if not (type(num_primers) is int): num_primers = num_primers[0]
             msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input.</p></div>"
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
         if num_primers != DEF_NUM_PRM and num_primers % 2 != 0:
             msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.</p></div>"
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
+        if "1" in is_t7: (sequence, flag) = is_t7_present(sequence)
         if not tag: tag = "primer"
+
 
         t0 = time.time()
         f_run = subprocess.check_output(["matlab", "-nojvm", "-nodisplay", "-nosplash", "-r", "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()" % (sequence, min_Tm, num_primers, max_length, min_length)], shell=False)
@@ -79,7 +81,7 @@ class rest:
         lines = [line.replace("\n","") for line in lines]
         if lines[-2] and lines[-2][0] == "?":
             msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: No solution found, please adjust advanced options.</p></div>"
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", msg)
+            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
 
         sec_break = [i for i in range(len(lines)) if lines[i] == "#"]
         self.lines_warning = lines[sec_break[0] : sec_break[1]]
@@ -173,6 +175,14 @@ class rest:
         else:
             f.write("NUM_PRIMERS: %d" % num_primers)
         f.write("\nMAX_LENGTH: %d\nMIN_LENGTH: %d\n" % (max_length, min_length))
+        if "1" in is_t7:
+            f.write("CHECK_T7: feature enabled, ")
+            if flag:
+                f.write("T7 promoter sequence present.\n")
+            else:
+                f.write("T7 promoter sequence missing, automatically prepended.\n")
+        else:
+            f.write("CHECK_T7: feature disabled.\n")
         f.write("\n\nOUTPUT\n======\n")
         for line in self.lines_warning:
             if line[0] == "@":
@@ -192,7 +202,7 @@ class rest:
 
         script = script.replace("__FILE_NAME__", u"cache/" + file_name).replace("__JOB_ID___", file_name[-10:-4])
         f.close()
-        return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers).replace("__RESULT__", script)
+        return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
 
 
     @cherrypy.expose
@@ -207,7 +217,7 @@ class rest:
     @cherrypy.expose
     def demo_P4P6(self):
         self.cleanup_old()
-        return self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0")    
+        return self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1")    
 
 
     @cherrypy.expose

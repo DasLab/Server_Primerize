@@ -33,7 +33,7 @@ def is_valid_email(input):
     return 1
 
 
-def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers):
+def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
     script = load_html(PATH_DESIGN)
     if type(min_Tm) is float: min_Tm = str(min_Tm)
     if type(num_primers) is int: num_primers = str(num_primers)
@@ -45,15 +45,28 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
     else:
         is_num_primers = ""
         is_num_primers_disabled = "disabled=\"disabled\""
+    if "1" in is_t7:
+        is_t7 = "checked"
+    else:
+        is_t7 = ""
 
     if num_primers in (str(DEF_NUM_PRM), " ","auto"): num_primers = "auto"
-    script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled)
+    script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled).replace("__IS_T7__", is_t7)
     return script
 
 
 def is_valid_sequence(sequence):
-	res = "A,G,C,U,T".split(",")
-	for e in sequence.upper():
-		if e not in res:
-			return 0
-	return 1
+    res = "A,G,C,U,T".split(",")
+    for e in sequence.upper():
+        if e not in res:
+            return 0
+    return 1
+
+
+def is_t7_present(sequence):
+    if sequence[:20] == seq_T7:
+        return (sequence, 1)
+    else:
+        return (seq_T7 + sequence, 0)
+
+

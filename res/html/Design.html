@@ -125,6 +125,13 @@
                       <input name="num_primers" type="text" value="__NUM_PRIMERS__" style="width:25%" id="text_num_primers" __IS_NUM_PRMS_DIS__/>
                       <input name="num_primers" type="hidden" value=""/>
                     </p>
+                    <p data-toggle="tooltip" data-placement="left" title="Check if T7 promoter (TTCTAATACGACTCACTATA) is present in input sequence. If not, it will be prepended automatically." >
+                      <input name="is_t7" type="checkbox" value="1" id="check_t7" __IS_T7__>
+                        <label for="is_t7">&nbsp;check for <b>T7</b> promoter sequence</label>
+                      </input>
+                      <br/>
+                      <input name="is_t7" type="hidden" value="0" checked>
+                    </p>
                   </div>
                 </div>
               </div>
