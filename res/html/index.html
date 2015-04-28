@@ -13,9 +13,10 @@
     <!-- Bootstrap core CSS -->
     <link href="/res/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="/res/css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- <link href="/res/css/bootstrap/bootstrap-theme.min.css" rel="stylesheet"> -->
     <!-- Custom styles for this template -->
     <link href="/res/css/theme.css" rel="stylesheet">
+    <link href="/res/css/palette.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -50,43 +51,43 @@
 
         <div class="row">
           <div class="col-md-4">
-            <div id="col-1" class="panel panel-success">
+            <div class="panel panel-green">
               <div class="panel-heading">
                 <h3 class="panel-title">How to use</h3>
               </div>
-              <div class="panel-body">
+              <div id="col-1" class="panel-body">
                 <p>
                   New users can read the 
                   <a class="btn btn-success btn-sm path_tutorial" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Tutorial&nbsp;&nbsp;</a> for detailed explanations.
                 </p>
                 <p> 
                   Please also try out the
-                  <a class="btn btn-warning btn-sm path_demo" href="" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
+                  <a class="btn btn-inverse btn-sm path_demo" href="" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
                 </p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div id="col-2" class="panel panel-danger">
+            <div class="panel panel-danger">
               <div class="panel-heading">
                 <h3 class="panel-title">Package download</h3>
               </div>
-              <div class="panel-body">
+              <div id="col-2"   class="panel-body">
                 <p>
                    Advanced academic users may opt to download the source code package. 
                 </p>
                 <p>
-                  Please read the Terms and Conditions before <a class="btn btn-danger btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a>.
+                  Please read the Terms and Conditions before <a class="btn btn-warning btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a>.
                 </p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div id="col-3" class="panel panel-info">
+            <div class="panel panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title">Contact us</h3>
               </div>
-              <div class="panel-body">
+              <div id="col-3" class="panel-body">
                 <p> 
                   Please feel free to 
                   <a class="btn btn-info btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> the Das Lab for further questions/issues regarding the web server, suggestions for improvements, citations, or commercial use authorization.
@@ -112,7 +113,7 @@
     <script src="/res/js/util.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
-        var col_h = Math.max($("#col-1").height(), $("#col-2").height(), $("#col-3").height());
+        var col_h = Math.max(parseInt($("#col-1").css("height")), parseInt($("#col-2").css("height")), parseInt($("#col-3").css("height")));
         $("#col-1").css("height", col_h);
         $("#col-2").css("height", col_h);
         $("#col-3").css("height", col_h);
