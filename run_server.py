@@ -225,7 +225,7 @@ class Root:
             f.write("%s\t%s\t25nm\tSTD\n" % (line[0].replace("primer", tag), line[2]))
         f.write("------/* END */------\n------/* NOTE: use \"Lab Ready\" for \"Normalization\" */------\n")
 
-        script = script.replace("__FILE_NAME__", file_name).replace("__JOB_ID___", job_id)
+        script = script.replace("__FILE_NAME__", "/"+file_name).replace("__JOB_ID___", job_id)
         f.close()
 
         f = open("cache/result_%s.html" % job_id, "w")
