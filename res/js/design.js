@@ -29,6 +29,11 @@ $(document).ready(function () {
   });
 
   $("#btn_submit").on("click", function () {
+    var job_id = Math.random().toString(16).substring(2, 15) + Math.random().toString(16).substring(2, 15);
+    $("#job_id").val(job_id.toString());
+    $("#modal_id").text(job_id.toString());
+
+    $("#modal_wait").modal("show");
     $("#wait").fadeIn(1000);
   });
   $("#btn_demo").on("click", function () {

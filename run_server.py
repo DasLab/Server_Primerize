@@ -11,7 +11,10 @@ from const import *
 from helper import *
 
 
-class rest:
+class Root:
+
+    _cp_config = {'error_page.404': PATH_404, 'request.error_response': PATH_500}
+
     def __init__(self):
         pass
 
@@ -47,7 +50,7 @@ class rest:
             return load_html(PATH_404)
 
     @cherrypy.expose
-    def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
+    def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
 
         seq = sequence.upper().replace("U", "T")
         sequence = ""
@@ -124,7 +127,7 @@ class rest:
                             script += char 
                     script += "<br/>"
         else:
-            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-10\"><h2>Output Result:</h2></div><div class=\"col-md-2\"><p class=\"text-right\"><b>Job ID</b>: __JOB_ID___</p><a href=\"__FILE_NAME__\" class=\"btn btn-info pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br/><div class=\"alert alert-success\" title=\"No alerts\"><p>"
+            script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br/><div class=\"alert alert-success\" title=\"No alerts\"><p>"
             script += "<b>SUCCESS</b>: No potential mis-priming found. See results below.<br/>"
 
         script +=  "__NOTE_T7__</p></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"alert alert-orange\"> <b>Time elapsed</b>: %.1f" % t_total + " s.</div></div></div>"
@@ -176,7 +179,7 @@ class rest:
 
 
         # f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
-        job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]
+        # job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]
         file_name = "cache/result_%s.txt" % job_id
         f = open(file_name, "w")
 
@@ -238,7 +241,7 @@ class rest:
     @cherrypy.expose
     def demo_P4P6(self):
         self.cleanup_old()
-        return self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1")    
+        return self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))    
 
 
     @cherrypy.expose
@@ -266,6 +269,9 @@ class rest:
                 script = script.replace("__IS_SUBSCRIBE__", "") 
             return script.replace("__SCRIPT__", "<script src=\"/res/js/download_error.js\"></script>")
 
+    @cherrypy.expose
+    def test(self):
+        'raise ValueError'
 
 if __name__ == "__main__":
     server_state = "dev"
@@ -288,5 +294,5 @@ if __name__ == "__main__":
     #print os.path.abspath(os.path.join(__file__, "static"))
     #cherrypy.quickstart( rest(), "/", "development.conf" )
     
-    cherrypy.quickstart(rest(), "", config=QUICKSTART_CONFIG)
+    cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
 

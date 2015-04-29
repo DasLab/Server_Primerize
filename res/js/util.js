@@ -19,8 +19,8 @@ $(document).ready(function () {
   var path_license = "/license";
   var path_download = "/download";
   var path_about = "/about";
-  var path_navbar = "/res/html/_navbar.html";
-  var path_footer = "/res/html/_footer.html";
+  var path_navbar = "/res/html/_navbar.html?";
+  var path_footer = "/res/html/_footer.html?";
   
 	var url = window.location.href;
 
@@ -34,7 +34,7 @@ $(document).ready(function () {
     } else if (url.indexOf("download") > -1 || (url.indexOf("icense") > -1)) {
       $("#nav_download").addClass("active");
     } else {
-      $("#nav_logo").css("text-decoration","underline");
+      $("#nav_logo > span").css("text-decoration","underline");
     }
 
     $("#footer").load(path_footer, function () {
@@ -63,10 +63,6 @@ $(document).ready(function () {
       $(".path_about").each(function () {
         $(this).attr("href", path_about + $(this).attr("href"));
       });
-
-      $(".bgimg").css("background-image", 'url("' + path_background_rna + '")');
-      $(".navbar .navbar-brand").css("background-image", 'url("' + path_background_rna + '")');
-      $(".modal").css("background-image", 'url("' + path_button_loading + '")');
 
       $(".dropdown-toggle").dropdown();
       $(".dropdown").hover(

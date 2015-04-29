@@ -80,19 +80,26 @@
                </div>
                <textarea class="form-control" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence">__SEQ__</textarea>
                <br/>
-               <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
-               <a href="" class="btn btn-default path_design">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
-               <span>
-                <input id="is_agree" type="checkbox" checked="yes" required="required" style="display:none">
-                  <label for="is_agree" style="display:none">
-                    <i>
-                      Please read the 
-                      <a href="" class="path_license">Terms and Conditions</a>.
-                    </i>
-                  </label>
-                </input>
-               </span>
-               <a href="" id="btn_demo" class="btn btn-success pull-right path_demo" style="color: #ffffff;" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
+
+               <input name="job_id"  id="job_id" type="text" style="display:none" value="" />
+
+               <div class="row">
+                <div class="col-md-12">
+                   <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
+                   <a href="" class="btn btn-default path_design">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                   <span>
+                    <input id="is_agree" type="checkbox" checked="yes" required="required" style="display:none">
+                      <label for="is_agree" style="display:none">
+                        <i>
+                          Please read the 
+                          <a href="" class="path_license">Terms and Conditions</a>.
+                        </i>
+                      </label>
+                    </input>
+                   </span>
+                   <a href="" id="btn_demo" class="btn btn-success pull-right path_demo" style="color: #ffffff;" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
+                 </div>
+               </div>
               </div>
             </div>
             <div class="col-md-3">
@@ -145,7 +152,29 @@
    </div>
    <hr/>
 
-   <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
+    <div id="modal_wait" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalWait" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content panel-primary">
+          <div class="modal-header panel-heading">
+            <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
+          </div>
+          <div class="modal-body panel-body">
+            <div class="col-md-12">
+              <h3> Your 
+                <span class="label label-violet">JOB_ID</span> is: 
+                <span class="label label-inverse" id="modal_id"></span>
+              </h3>
+              <br/>
+              <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
+              <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 7 days.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="/res/js/bootstrap/bootstrap.min.js"></script>

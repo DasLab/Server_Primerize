@@ -44,14 +44,12 @@ label {
 }
 .navbar .navbar-brand {
   background-image: url("/res/images/bg_rna.png");
+  color: #fef159;
+  font-weight: bold;
   background-size: cover;
   background-repeat: no-repeat;
 }
-.navbar .navbar-brand > span {
-  color: #fef159;
-  font-weight: bold;
-}
-.navbar .navbar-brand:hover > span, .navbar .navbar-brand:focus > span {
+.navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
   color: #fec78a;
   text-decoration: blink;
 }
@@ -243,7 +241,7 @@ h1.section>span.num {
     color: #7cafd3;
     opacity:0.8;
 }
-.modal {
+#wait.modal {
   display:    none;
   position:   fixed;
   z-index:    1000;
@@ -257,6 +255,14 @@ h1.section>span.num {
   background-image: url("/res/images/fg_load.gif"); 
   background-position: center center;
   background-size: 48px;
+}
+
+.modal-dialog { 
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -25%) !important;
 }
 
 .btn-inverse {

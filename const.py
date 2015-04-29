@@ -13,6 +13,7 @@ PATH_LICENSE = "res/html/license.html"
 PATH_DOWNLOAD = "res/html/download.html"
 PATH_ABOUT = "res/html/about.html"
 PATH_404 = "res/html/_404.html"
+PATH_500 = "res/html/_500.html"
 
 QUICKSTART_CONFIG = {
         "/res/css": {
