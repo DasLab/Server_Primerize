@@ -5,13 +5,11 @@ import os
 import subprocess
 import sys
 import time
+import random 
 # import re
 # from scipy.stats import *
 from const import *
 from helper import *
-
-import logging
-from logging import handlers
 
 class Root:
 
@@ -23,8 +21,8 @@ class Root:
 
     _cp_config = {
         'error_page.404': PATH_404,
-        'request.error_response': handle_error,
-        'request.show_tracebacks': False,
+        # 'request.error_response': handle_error,
+        # 'request.show_tracebacks': False,
     }
 
     @cherrypy.expose
@@ -251,7 +249,10 @@ class Root:
     def demo_P4P6(self):
         self.cleanup_old()
         return self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))    
-
+    @cherrypy.expose
+    def test_random(self):
+        seq = seq_T7 + ''.join(random.choice('CGTA') for _ in xrange(500))
+        return self.design_primers(seq, "scRNA", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))  
 
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
