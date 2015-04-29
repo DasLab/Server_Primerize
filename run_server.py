@@ -89,6 +89,7 @@ class Root:
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
         if "1" in is_t7: (sequence, flag) = is_t7_present(sequence)
         if not tag: tag = "primer"
+        create_wait_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
 
 
         t0 = time.time()
