@@ -21,8 +21,8 @@ class Root:
 
     _cp_config = {
         'error_page.404': PATH_404,
-        # 'request.error_response': handle_error,
-        # 'request.show_tracebacks': False,
+        'request.error_response': handle_error,
+        'request.show_tracebacks': False,
     }
 
     @cherrypy.expose
@@ -282,6 +282,9 @@ class Root:
     # @cherrypy.expose
     # def test(self):
     #     raise ValueError
+    @cherrypy.expose
+    def error(self):
+        raise ValueError
 
 
 
