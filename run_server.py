@@ -10,13 +10,22 @@ import time
 from const import *
 from helper import *
 
+import logging
+from logging import handlers
 
 class Root:
 
-    _cp_config = {'error_page.404': PATH_404, 'request.error_response': PATH_500}
-
     def __init__(self):
         pass
+    def handle_error():
+        cherrypy.response.status = 500
+        cherrypy.response.body = load_html(PATH_500)
+
+    _cp_config = {
+        'error_page.404': PATH_404,
+        'request.error_response': handle_error,
+        'request.show_tracebacks': False,
+    }
 
     @cherrypy.expose
     def index(self):
@@ -269,9 +278,11 @@ class Root:
                 script = script.replace("__IS_SUBSCRIBE__", "") 
             return script.replace("__SCRIPT__", "<script src=\"/res/js/download_error.js\"></script>")
 
-    @cherrypy.expose
-    def test(self):
-        'raise ValueError'
+    # @cherrypy.expose
+    # def test(self):
+    #     raise ValueError
+
+
 
 if __name__ == "__main__":
     server_state = "dev"
@@ -288,7 +299,7 @@ if __name__ == "__main__":
     cherrypy.config.update( {
         "server.socket_host":socket_host, 
         "server.socket_port":8080,
-        "tools.staticdir.root": os.path.abspath(os.path.join(os.path.dirname(__file__), ""))
+        "tools.staticdir.root": os.path.abspath(os.path.join(os.path.dirname(__file__), "")),
         #"tools.statiddir.root": "/Users/skullnite/Downloads"
     } )
     #print os.path.abspath(os.path.join(__file__, "static"))
