@@ -70,11 +70,11 @@
         <a id="tab_1" href="#web_input" class="panel panel-primary">
           <h4 class="panel-heading">Section #1: Website Input</h4>
         </a>
-        <a id="tab_2" href="#web_output_primers" class="panel panel-info">
-          <h4 class="panel-heading">Section #2: Website Output Primers</h4>
+        <a id="tab_2" href="#web_retrev" class="panel panel-info">
+          <h4 class="panel-heading">Section #2: Result Retrieval</h4>
         </a>
-        <a id="tab_3" href="#web_output_assembly" class="panel panel-light-blue">
-          <h4 class="panel-heading">Section #3: Website Output Assmebly</h4>
+        <a id="tab_3" href="#web_output" class="panel panel-light-blue">
+          <h4 class="panel-heading">Section #3: Website Output</h4>
         </a>
         <a id="tab_4" href="#txt_output" class="panel panel-success">
           <h4 class="panel-heading">Section #4: Downloadable Output</h4>
@@ -201,9 +201,107 @@
 
     <div class="container theme-showcase li-info" role="main">
       <br/>
-      <div class="panel-info" id="web_output_primers">
+      <div class="panel-info" id="web_retrev">
         <div class="panel-heading">
-          <span class="lead"><b><span class="sec">Section</span> <span class="num">#2 & #3</span>: Website Output</b></span>
+          <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: Result Retrieval</b></span>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-12">
+            <h4> Once submitted, a modal window will be displayed on the web page, showing the <span class="label label-violet">JOB_ID</span> :</h4>
+            <br/>
+            <div class="dialog modal-lg center-block tutorial">
+              <div class="modal-content panel-primary">
+                <div class="modal-header panel-heading">
+                  <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
+                </div>
+                <div class="modal-body panel-body">
+                  <div class="col-md-12">
+                    <h3> Your 
+                      <span class="label label-violet">JOB_ID</span> is: 
+                      <span class="label label-inverse" id="modal_id">0123456789abcdef</span>
+                    </h3>
+                    <br/>
+                    <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
+                    <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 7 days.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/><hr/>           
+            <h4>
+              When the calculation is completed, the result page will automatically be shown. The run results are retrievable through the <a href="/" class="btn btn-primary">&nbsp;&nbsp;Home&nbsp;&nbsp;</a> page with the unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.
+            </h4>
+            <br/>
+            <div class="row tutorial">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <div class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Result retrieval</h3>
+                  </div>
+                  <div id="col-1" class="panel-body">
+                    <form method='get' action='/result'>
+                      <div class="col-md-12">
+                        <p data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result. JOB_ID is the unique 16-digit hexadecimal key.">
+                          <label for="job_id"><span class="lead"><span class="label label-violet">JOB_ID</span></span>:&nbsp;&nbsp;</label>
+                          <input name="job_id" type="text" value="" style="width:60%" maxlength="32" placeholder="Enter a JOB_ID"/>
+                          <input type="submit" id="btn_retrieve" class="btn btn-blue btn-sm pull-right" value="&nbsp;Retrieve&nbsp;" disabled/>&nbsp;
+                        </p>
+                        <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (7 days).</p>
+                      </div>
+                  </div>
+                </div>  
+              </div>
+              <div class="col-md-2"></div>
+            </div>       
+            <hr/>           
+            <h4>Before the calculation is finished, the result page will indicate that the query is being processed. Once finished, the actual results will replace this temporary page:</h4>
+            <br/>
+            <div class="row tutorial">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    <span class="sr-only"></span>
+                  </div>
+                </div>
+                <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
+                <br/>
+                <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
+                <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 7 days.</p>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <hr/>           
+            <h4>For long inputs, we encourage the user to download the source code and run locally, which enables more options. If the server encounters an internal error while processing the run, the following page will be shown.</h4>
+            <br/>
+            <div class="row tutorial">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    <span class="sr-only"></span>
+                  </div>
+                </div>
+                <h3 class="modal-title" id="myModalLabel">Primerize has difficulty in your query...</h3>
+                <br/>
+                <p>Primerize encountered an internal error while processing your query. Sorry for the inconvenience. </p>
+                <p>We will investigate and fix the problem.</p>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="container theme-showcase li-light-blue" role="main">
+      <br/>
+      <div class="panel-light-blue" id="web_output">
+        <div class="panel-heading">
+          <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: Website Output</b></span>
         </div>
         <br/>
         <div class="row">
@@ -317,8 +415,42 @@
                 </div>
               </div>
           </div>
-
         </div>
+      </div>
+
+      <hr/>           
+      <h4>Depending on the input, the following field might show instead of the <span class="label label-warning">WARNING</span> as above.</h4>
+      <br/>
+      <div class="row ">
+        <div class="col-md-12">
+          <div class="alert alert-success tutorial" >
+            <p class="tutorial">
+              <b>SUCCESS</b>: No potential mis-priming found. See results below.
+              <br/>
+              <b>CHECK_T7</b>: feature disabled.
+            </p>
+          </div>
+          <div class="alert alert-danger tutorial" >
+            <p class="tutorial">
+              <b>FAILURE</b>: No solution found, please adjust advanced options.
+            </p>
+          </div>
+          <div class="alert alert-danger tutorial" >
+            <p class="tutorial">
+              <b>ERROR</b>: Invalid sequence input.
+            </p>
+          </div>
+          <div class="alert alert-danger tutorial" >
+            <p class="tutorial">
+              <b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.
+            </p>
+          </div>
+          <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="SUCCESS indicates no potential mis-priming was detected."/>
+          <img style="position:absolute;display:block;right:5%;top:31%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="FAILURE indicates no solution was found using the current setting. You might try adjusting the advanced options."/>
+          <img style="position:absolute;display:block;right:5%;top:55%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, usually due to illegal characters' presense."/>
+          <img style="position:absolute;display:block;right:5%;top:78%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid input for # number of primers."/>
+        </div>
+
       </div>
     </div>
     <hr/>
