@@ -54,7 +54,7 @@ class Root:
         if os.path.exists(file_name):
             return load_html(file_name)
         else:
-            return load_html(PATH_404)
+            raise cherrypy.NotFound()
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
@@ -66,9 +66,12 @@ class Root:
                 sequence += char
         if len(sequence) < 60 or not is_valid_sequence(sequence):
             if not sequence:
-                return rest.design(self)
+                return Root.design(self)
 
-            msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input.</p></div>"
+            if len(sequence) < 60:
+                msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input (should be <u>at least <b>60</b> nt</u> long).</p></div>"
+            else:
+                msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input (should be composed of A, C, G, T and U).</p></div>"
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
 
 
@@ -87,7 +90,7 @@ class Root:
         if num_primers != DEF_NUM_PRM and num_primers % 2 != 0:
             msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.</p></div>"
             return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
-        if "1" in is_t7: (sequence, flag) = is_t7_present(sequence)
+        if "1" in is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
         if not tag: tag = "primer"
         create_wait_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
 
@@ -138,7 +141,7 @@ class Root:
                 script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br/><div class=\"alert alert-success\" title=\"No alerts\"><p>"
                 script += "<b>SUCCESS</b>: No potential mis-priming found. See results below.<br/>"
 
-            script +=  "__NOTE_T7__</p></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"alert alert-orange\"> <b>Time elapsed</b>: %.1f" % t_total + " s.</div></div></div>"
+            script += "</p></div><div class=\"row\"><div class=\"col-md-10\"><div class=\"alert alert-default\"><p>__NOTE_T7__</p></div></div><div class=\"col-md-2\"><div class=\"alert alert-orange text-center\"> <b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>" % t_total
 
             script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table table-hover\" ><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
             for line in self.lines_primers:
@@ -185,7 +188,6 @@ class Root:
 
             script += "</pre></div></div></div></div></p></div>"
 
-
             # f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
             # job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]
             file_name = "cache/result_%s.txt" % job_id
@@ -199,15 +201,19 @@ class Root:
                 f.write("NUM_PRIMERS: %d" % num_primers)
             f.write("\nMAX_LENGTH: %d\nMIN_LENGTH: %d\n" % (max_length, min_length))
             if "1" in is_t7:
-                str_t7 = "CHECK_T7: feature enabled, "
+                str_t7 = "T7_CHECK: feature enabled (uncheck the option to disable). T7 promoter sequence "
                 if flag:
-                    str_t7 = str_t7 + "T7 promoter sequence present.\n"
+                    str_t7 = str_t7 + "is present, no action was taken.\n"
                 else:
-                    str_t7 = str_t7 + "T7 promoter sequence missing, automatically prepended.\n"
+                    str_t7 = str_t7 + "was absent, Primerize automatically prepended it. \n"
+                if is_G:
+                    str_t7 += "SUCCESS: T7 promoter sequence is followed by nucleotide G.\n"
+                else:
+                    str_t7 += "WARNING: T7 promoter sequence is NOT followed by nucleotide G. Consider modifying the sequence for better transcription.\n"
             else:
-                str_t7 = "CHECK_T7: feature disabled.\n"
-            f.write(str_t7)
-            script = script.replace("__NOTE_T7__", str_t7.replace("\n","").replace("CHECK_T7","<b>CHECK_T7</b>"))
+                str_t7 = "T7_CHECK: feature disabled (check the option to enable). No checking was performed.\n"
+            f.write(str_t7.replace("SUCCESS","T7_CHECK").replace("WARNING","T7_CHECK"))
+            script = script.replace("__NOTE_T7__", str_t7.replace("\n","<br/>").replace("T7_CHECK","<b>T7_CHECK</b>").replace("SUCCESS", "<b>SUCCESS</b>").replace("WARNING", "<b>WARNING</b>").replace("NOT", "<u><b>NOT</b></u>").replace("nucleotide G", "nucleotide <u>G</u>"))
 
             f.write("\n\nOUTPUT\n======\n")
             for line in self.lines_warning:
@@ -235,7 +241,7 @@ class Root:
             f.close()
         except:
             create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
-        raise cherrypy.HTTPRedirect("result/%s" % job_id)
+        raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
         # return html_content
 
 

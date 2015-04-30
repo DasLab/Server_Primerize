@@ -64,10 +64,13 @@ def is_valid_sequence(sequence):
 
 
 def is_t7_present(sequence):
+    is_G = 0
     if sequence[:20] == seq_T7:
-        return (sequence, 1)
+        if sequence[20] == 'G': is_G = 1
+        return (sequence, 1, is_G)
     else:
-        return (seq_T7 + sequence, 0)
+        if sequence[0] == 'G': is_G = 1
+        return (seq_T7 + sequence, 0, is_G)
 
 
 def create_wait_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
