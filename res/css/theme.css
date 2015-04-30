@@ -193,9 +193,9 @@ a:hover {
   text-decoration: underline;
 }
 
-h1.section {
+h2.section {
   background-color: #000;
-  color: #7cafd3;
+  color: #ffcebf;
   padding: 15px;
   box-shadow: 0 0 15px #000;
   -moz-box-shadow: 0 0 15px #000;
@@ -205,11 +205,11 @@ h1.section {
   -webkit-border-radius: 10px;
 }
 
-h1.section>span.sec {
+h2.section>span.sec {
   color: #fff;
 }
 
-h1.section>span.num {
+h2.section>span.num {
   color: #ff0;
 }
 
