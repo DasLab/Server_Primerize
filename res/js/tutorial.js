@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#sidebar").css("width", $("#navbar").width() - $("#main").width() - 25);
+  $("#sidebar").css("width", $("#navbar").width() - $("#main").width() - 30);
   $("#sidebar").affix({
         offset: {
           top: $("#main").position().top

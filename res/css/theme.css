@@ -287,7 +287,7 @@ a.btn-default {
 @media (min-width: 500px) {
   #sidebar.affix-top {
     position: static;
-    margin-top: 15px;
+    margin-top: 0px;
   }
   
   #sidebar.affix {
