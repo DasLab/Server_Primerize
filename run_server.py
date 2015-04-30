@@ -2,10 +2,11 @@ import binascii
 import cherrypy
 import glob
 import os
+import random 
 import subprocess
 import sys
 import time
-import random 
+import traceback
 # import re
 # from scipy.stats import *
 from const import *
@@ -107,9 +108,22 @@ class Root:
 
                 lines = [line.replace("\n","") for line in lines]
                 if lines[-2] and lines[-2][0] == "?":
-                    msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>FAILURE</b>: No solution found, please adjust advanced options.</p></div>"
-                    return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
+                    pass
+            except:
+                print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
+                print traceback.format_exc()
+                create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
+                raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
 
+            # when no solution found
+            if lines[-2] and lines[-2][0] == "?":
+                msg = "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-danger\"><p><b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class=\"btn btn-warning btn-sm path_about\" href=\"#contact\" style=\"color: #ffffff;\">Contact</a> us to track down the problem.</li></ul></p></div>"
+                msg = msg.replace("__JOB_ID___", job_id).replace("__FILE_NAME__", "/cache/result_%s.txt" % job_id)
+                html_content = html_content.replace("__RESULT__", msg)
+                create_res_html(html_content, job_id)
+                raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
+            
+            try:
                 sec_break = [i for i in range(len(lines)) if lines[i] == "#"]
                 self.lines_warning = lines[sec_break[0] : sec_break[1]]
                 self.lines_primers = lines[sec_break[1] + 2 : sec_break[2]]
@@ -241,8 +255,9 @@ class Root:
 
                 html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
                 create_res_html(html_content, job_id)
-            except Exception as e:
-                print "\033[41mError(s)\033[0m encountered: \033[94m", e, "\033[0m"
+            except:
+                print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
+                print traceback.format_exc()
                 create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
 
         raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
