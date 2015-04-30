@@ -282,3 +282,20 @@ a.btn {
 a.btn-default {
   color: #000 !important;
 }
+
+
+@media (min-width: 500px) {
+  #sidebar.affix-top {
+    position: static;
+    margin-top: 15px;
+  }
+  
+  #sidebar.affix {
+    position: fixed;
+    top: 75px;
+  }
+}
+
+.affix,.affix-top {
+   position:static;
+}
