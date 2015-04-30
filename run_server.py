@@ -59,6 +59,7 @@ class Root:
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
 
+        html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7)
         seq = sequence.upper().replace("U", "T")
         sequence = ""
         for char in seq:
@@ -69,180 +70,182 @@ class Root:
                 return Root.design(self)
 
             if len(sequence) < 60:
-                msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input (should be <u>at least <b>60</b> nt</u> long).</p></div>"
+                msg = "Invalid sequence input (should be <u>at least <b>60</b> nt</u> long)."
             else:
-                msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid sequence input (should be composed of A, C, G, T and U).</p></div>"
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
+                msg = "Invalid sequence input (should be composed of A, C, G, T and U)."
+            premature_return(msg, html_content, job_id)
+        else:            
 
+            try:
+                min_Tm = float(min_Tm)
+                if ("1" not in is_num_primers) or not num_primers or num_primers in (str(DEF_NUM_PRM), "auto"):
+                    num_primers = DEF_NUM_PRM
+                else:
+                    if num_primers[0] == "auto":
+                        num_primers = DEF_NUM_PRM
+                    else:
+                        num_primers = int(num_primers[0])
+                max_length = int(max_length)
+                min_length = int(min_length)
+            except ValueError:
+                if not (type(num_primers) is int): num_primers = num_primers[0]
+                msg = "Invalid advanced options input."
+                premature_return(msg, html_content, job_id)
+            if num_primers != DEF_NUM_PRM and num_primers % 2 != 0:
+                msg = "Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>."
+                premature_return(msg, html_content, job_id)
+            if "1" in is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
+            if not tag: tag = "primer"
+            create_wait_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
 
-        try:
-            min_Tm = float(min_Tm)
-            if ("1" not in is_num_primers) or not num_primers or num_primers in (str(DEF_NUM_PRM), "auto"):
-                num_primers = DEF_NUM_PRM
-            else:
-                num_primers = int(num_primers[0])
-            max_length = int(max_length)
-            min_length = int(min_length)
-        except ValueError:
-            if not (type(num_primers) is int): num_primers = num_primers[0]
-            msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input.</p></div>"
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
-        if num_primers != DEF_NUM_PRM and num_primers % 2 != 0:
-            msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.</p></div>"
-            return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
-        if "1" in is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
-        if not tag: tag = "primer"
-        create_wait_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
+            try:
+                t0 = time.time()
+                f_run = subprocess.check_output(["matlab", "-nojvm", "-nodisplay", "-nosplash", "-r", "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()" % (sequence, min_Tm, num_primers, max_length, min_length)], shell=False)
+                # f_run = subprocess.check_output(["octave", "--eval", "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()" % (sequence, min_Tm, num_primers, max_length, min_length)], shell=False)
+                lines = f_run.split("\n")
+                t_total = time.time() - t0
 
-        try:
-            t0 = time.time()
-            f_run = subprocess.check_output(["matlab", "-nojvm", "-nodisplay", "-nosplash", "-r", "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()" % (sequence, min_Tm, num_primers, max_length, min_length)], shell=False)
-            # f_run = subprocess.check_output(["octave", "--eval", "design_primers(\'%s\',%d,%d,[],%d,%d,[],1); exit()" % (sequence, min_Tm, num_primers, max_length, min_length)], shell=False)
-            lines = f_run.split("\n")
-            t_total = time.time() - t0
+                lines = [line.replace("\n","") for line in lines]
+                if lines[-2] and lines[-2][0] == "?":
+                    msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>FAILURE</b>: No solution found, please adjust advanced options.</p></div>"
+                    return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
 
-            lines = [line.replace("\n","") for line in lines]
-            if lines[-2] and lines[-2][0] == "?":
-                msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>FAILURE</b>: No solution found, please adjust advanced options.</p></div>"
-                return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
+                sec_break = [i for i in range(len(lines)) if lines[i] == "#"]
+                self.lines_warning = lines[sec_break[0] : sec_break[1]]
+                self.lines_primers = lines[sec_break[1] + 2 : sec_break[2]]
+                self.lines_assembly = lines[sec_break[2] + 1 : -1]
 
-            sec_break = [i for i in range(len(lines)) if lines[i] == "#"]
-            self.lines_warning = lines[sec_break[0] : sec_break[1]]
-            self.lines_primers = lines[sec_break[1] + 2 : sec_break[2]]
-            self.lines_assembly = lines[sec_break[2] + 1 : -1]
+                script = ""
+                if self.lines_warning != ['#']:
+                    script += "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
+                    for line in self.lines_warning:
+                        if line[0] == "@":
+                            script += "<b>WARNING</b>"
+                            for char in line[8:]:
+                                if char == "F":
+                                    script += "</b><span class=\"label label-info\">"
+                                elif char == "R":
+                                    script += "</b><span class=\"label label-danger\">" 
+                                elif char == "{":
+                                    script += "<font style=\"text-transform: uppercase;\"><b>"
+                                elif char == "}":
+                                    script += "</span></font>"
+                                elif char == "[":
+                                    script += "<span class=\"label label-success\">"
+                                elif char == "]":
+                                    script += "</span>"
+                                elif char == "(":
+                                    script += "<span class=\"label label-default\">"
+                                elif char == ")":
+                                    script += "</span>"
+                                else:
+                                    script += char 
+                            script += "<br/>"
+                else:
+                    script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br/><div class=\"alert alert-success\" title=\"No alerts\"><p>"
+                    script += "<b>SUCCESS</b>: No potential mis-priming found. See results below.<br/>"
 
-            script = ""
-            if self.lines_warning != ['#']:
-                script += "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"alert alert-warning\" title=\"Mispriming alerts\"><p>"
+                script += "</p></div><div class=\"row\"><div class=\"col-md-10\"><div class=\"alert alert-default\"><p>__NOTE_T7__</p></div></div><div class=\"col-md-2\"><div class=\"alert alert-orange text-center\"> <b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>" % t_total
+
+                script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table table-hover\" ><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
+                for line in self.lines_primers:
+                    line = line.split("\t")
+                    num = "<b>" + line[0][7:]
+                    if int(line[0][7:]) % 2 == 0:
+                        num = "<tr><td>" + num + "<span class=\"label label-danger\">R</span></b>"
+                    else:
+                        num = "<tr class=\"warning\"><td>" + num + "<span class=\"label label-info\">F</span></b>"
+                    script += num + "</td><td><em>" + line[1] + "</em></td><td style=\"word-break: break-all;\">" + line[2] + "</td></tr>"
+
+                script += "</tbody></table></div></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-green\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Assembly Scheme</h2></div><div class=\"panel-body\"><pre>"
+                for line in self.lines_assembly:
+                    if line:
+                        if line[0] == "~":
+                            script += "<span class=\"label-white label-primary\">" + line[1:] + "</span><br/>"
+                        elif line[0] == "=":
+                            script += "<span class=\"label-warning\">" + line[1:] + "</span><br/>"
+                        elif line[0] == "^":
+                            for char in line[1:]:
+                                if char in seq_valid:
+                                    script += "<span class=\"label-info\">" + char + "</span>"
+                                else:
+                                    script += char
+                            script += "<br/>"
+                        elif line[0] == "!":
+                            for char in line[1:]:
+                                if char in seq_valid:
+                                    script += "<span class=\"label-white label-danger\">" + char + "</span>"
+                                else:
+                                    script += char
+                            script += "<br/>"
+                        else:
+                            for char in line[1:]:
+                                if char == "{":
+                                    script += "<kbd>"
+                                elif char == "}":
+                                    script += "</kbd>" 
+                                else:
+                                    script += char 
+                            script += "<br/>"
+                    else:
+                        script += "<br/>"
+
+                script += "</pre></div></div></div></div></p></div>"
+
+                # f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
+                # job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]
+                file_name = "cache/result_%s.txt" % job_id
+                f = open(file_name, "w")
+
+                f.write("Primerize Result\n\nINPUT\n=====\n%s\n" % sequence)
+                f.write("#\nMIN_TM: %.1f\n" % min_Tm)
+                if num_primers == DEF_NUM_PRM:
+                    f.write("NUM_PRIMERS: auto (unspecified)")
+                else:
+                    f.write("NUM_PRIMERS: %d" % num_primers)
+                f.write("\nMAX_LENGTH: %d\nMIN_LENGTH: %d\n" % (max_length, min_length))
+                if "1" in is_t7:
+                    str_t7 = "T7_CHECK: feature enabled (uncheck the option to disable). T7 promoter sequence "
+                    if flag:
+                        str_t7 = str_t7 + "is present, no action was taken.\n"
+                    else:
+                        str_t7 = str_t7 + "was absent, Primerize automatically prepended it. \n"
+                    if is_G:
+                        str_t7 += "SUCCESS: T7 promoter sequence is followed by nucleotide G.\n"
+                    else:
+                        str_t7 += "WARNING: T7 promoter sequence is NOT followed by nucleotide G. Consider modifying the sequence for better transcription.\n"
+                else:
+                    str_t7 = "T7_CHECK: feature disabled (check the option to enable). No checking was performed.\n"
+                f.write(str_t7.replace("SUCCESS","T7_CHECK").replace("WARNING","T7_CHECK"))
+                script = script.replace("__NOTE_T7__", str_t7.replace("\n","<br/>").replace("T7_CHECK","<b>T7_CHECK</b>").replace("SUCCESS", "<b>SUCCESS</b>").replace("WARNING", "<b>WARNING</b>").replace("NOT", "<u><b>NOT</b></u>").replace("nucleotide G", "nucleotide <u>G</u>"))
+
+                f.write("\n\nOUTPUT\n======\n")
                 for line in self.lines_warning:
                     if line[0] == "@":
-                        script += "<b>WARNING</b>"
-                        for char in line[8:]:
-                            if char == "F":
-                                script += "</b><span class=\"label label-info\">"
-                            elif char == "R":
-                                script += "</b><span class=\"label label-danger\">" 
-                            elif char == "{":
-                                script += "<font style=\"text-transform: uppercase;\"><b>"
-                            elif char == "}":
-                                script += "</span></font>"
-                            elif char == "[":
-                                script += "<span class=\"label label-success\">"
-                            elif char == "]":
-                                script += "</span>"
-                            elif char == "(":
-                                script += "<span class=\"label label-default\">"
-                            elif char == ")":
-                                script += "</span>"
-                            else:
-                                script += char 
-                        script += "<br/>"
-            else:
-                script += "<div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" title=\"Output in plain text\" download>&nbsp;Download&nbsp;</a></div></div><br/><div class=\"alert alert-success\" title=\"No alerts\"><p>"
-                script += "<b>SUCCESS</b>: No potential mis-priming found. See results below.<br/>"
+                        f.write("%s\n" % line[1:].replace("{","").replace("}","").replace("(","").replace(")","").replace("[","").replace("]","").replace("Ff","").replace("Rr",""))
+                f.write("#\n")
+                for line in self.lines_primers:
+                    f.write("%s\n" % line)
+                f.write("#\n")
+                for line in self.lines_assembly:
+                    if line and line[0] in ("$","!","^","=","~"):
+                        f.write("%s\n" % line[1:].replace("{","").replace("}",""))
+                f.write("#\n\n------/* IDT USER: for primer ordering, copy and paste to Bulk Input */------\n------/* START */------\n")
+                for line in self.lines_primers:
+                    line = line.split("\t")
+                    f.write("%s\t%s\t25nm\tSTD\n" % (line[0].replace("primer", tag), line[2]))
+                f.write("------/* END */------\n------/* NOTE: use \"Lab Ready\" for \"Normalization\" */------\n")
 
-            script += "</p></div><div class=\"row\"><div class=\"col-md-10\"><div class=\"alert alert-default\"><p>__NOTE_T7__</p></div></div><div class=\"col-md-2\"><div class=\"alert alert-orange text-center\"> <b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>" % t_total
+                script = script.replace("__FILE_NAME__", "/"+file_name).replace("__JOB_ID___", job_id)
+                f.close()
 
-            script += "<div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-primary\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Designed Primers</h2></div><div class=\"panel-body\"><table class=\"table table-hover\" ><thead><tr><th class=\"col-md-1\">#</th><th class=\"col-md-1\">Length</th><th class=\"col-md-10\">Sequence</th></tr></thead><tbody>"
-            for line in self.lines_primers:
-                line = line.split("\t")
-                num = "<b>" + line[0][7:]
-                if int(line[0][7:]) % 2 == 0:
-                    num = "<tr><td>" + num + "<span class=\"label label-danger\">R</span></b>"
-                else:
-                    num = "<tr class=\"warning\"><td>" + num + "<span class=\"label label-info\">F</span></b>"
-                script += num + "</td><td><em>" + line[1] + "</em></td><td style=\"word-break: break-all;\">" + line[2] + "</td></tr>"
+                html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
+                create_res_html(html_content, job_id)
+            except Exception as e:
+                print "\033[41mError(s)\033[0m encountered: \033[94m", e, "\033[0m"
+                create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
 
-            script += "</tbody></table></div></div></div></div><div class=\"row\"><div class=\"col-md-12\"><div class=\"panel panel-green\"><div class=\"panel-heading\"><h2 class=\"panel-title\">Assembly Scheme</h2></div><div class=\"panel-body\"><pre>"
-            for line in self.lines_assembly:
-                if line:
-                    if line[0] == "~":
-                        script += "<span class=\"label-white label-primary\">" + line[1:] + "</span><br/>"
-                    elif line[0] == "=":
-                        script += "<span class=\"label-warning\">" + line[1:] + "</span><br/>"
-                    elif line[0] == "^":
-                        for char in line[1:]:
-                            if char in ("A","T","C","G"):
-                                script += "<span class=\"label-info\">" + char + "</span>"
-                            else:
-                                script += char
-                        script += "<br/>"
-                    elif line[0] == "!":
-                        for char in line[1:]:
-                            if char in ("A","T","C","G"):
-                                script += "<span class=\"label-white label-danger\">" + char + "</span>"
-                            else:
-                                script += char
-                        script += "<br/>"
-                    else:
-                        for char in line[1:]:
-                            if char == "{":
-                                script += "<kbd>"
-                            elif char == "}":
-                                script += "</kbd>" 
-                            else:
-                                script += char 
-                        script += "<br/>"
-                else:
-                    script += "<br/>"
-
-            script += "</pre></div></div></div></div></p></div>"
-
-            # f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
-            # job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]
-            file_name = "cache/result_%s.txt" % job_id
-            f = open(file_name, "w")
-
-            f.write("Primerize Result\n\nINPUT\n=====\n%s\n" % sequence)
-            f.write("#\nMIN_TM: %.1f\n" % min_Tm)
-            if num_primers == DEF_NUM_PRM:
-                f.write("NUM_PRIMERS: auto (unspecified)")
-            else:
-                f.write("NUM_PRIMERS: %d" % num_primers)
-            f.write("\nMAX_LENGTH: %d\nMIN_LENGTH: %d\n" % (max_length, min_length))
-            if "1" in is_t7:
-                str_t7 = "T7_CHECK: feature enabled (uncheck the option to disable). T7 promoter sequence "
-                if flag:
-                    str_t7 = str_t7 + "is present, no action was taken.\n"
-                else:
-                    str_t7 = str_t7 + "was absent, Primerize automatically prepended it. \n"
-                if is_G:
-                    str_t7 += "SUCCESS: T7 promoter sequence is followed by nucleotide G.\n"
-                else:
-                    str_t7 += "WARNING: T7 promoter sequence is NOT followed by nucleotide G. Consider modifying the sequence for better transcription.\n"
-            else:
-                str_t7 = "T7_CHECK: feature disabled (check the option to enable). No checking was performed.\n"
-            f.write(str_t7.replace("SUCCESS","T7_CHECK").replace("WARNING","T7_CHECK"))
-            script = script.replace("__NOTE_T7__", str_t7.replace("\n","<br/>").replace("T7_CHECK","<b>T7_CHECK</b>").replace("SUCCESS", "<b>SUCCESS</b>").replace("WARNING", "<b>WARNING</b>").replace("NOT", "<u><b>NOT</b></u>").replace("nucleotide G", "nucleotide <u>G</u>"))
-
-            f.write("\n\nOUTPUT\n======\n")
-            for line in self.lines_warning:
-                if line[0] == "@":
-                    f.write("%s\n" % line[1:].replace("{","").replace("}","").replace("(","").replace(")","").replace("[","").replace("]","").replace("Ff","").replace("Rr",""))
-            f.write("#\n")
-            for line in self.lines_primers:
-                f.write("%s\n" % line)
-            f.write("#\n")
-            for line in self.lines_assembly:
-                if line and line[0] in ("$","!","^","=","~"):
-                    f.write("%s\n" % line[1:].replace("{","").replace("}",""))
-            f.write("#\n\n------/* IDT USER: for primer ordering, copy and paste to Bulk Input */------\n------/* START */------\n")
-            for line in self.lines_primers:
-                line = line.split("\t")
-                f.write("%s\t%s\t25nm\tSTD\n" % (line[0].replace("primer", tag), line[2]))
-            f.write("------/* END */------\n------/* NOTE: use \"Lab Ready\" for \"Normalization\" */------\n")
-
-            script = script.replace("__FILE_NAME__", "/"+file_name).replace("__JOB_ID___", job_id)
-            f.close()
-
-            f = open("cache/result_%s.html" % job_id, "w")
-            html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
-            f.write(html_content)
-            f.close()
-        except:
-            create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
         raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
-        # return html_content
 
 
     @cherrypy.expose

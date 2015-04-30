@@ -1,3 +1,4 @@
+import cherrypy
 import os
 import string
 
@@ -36,7 +37,10 @@ def is_valid_email(input):
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
     script = load_html(PATH_DESIGN)
     if type(min_Tm) is float: min_Tm = str(min_Tm)
-    if type(num_primers) is int: num_primers = str(num_primers)
+    if type(num_primers) is int: 
+        num_primers = str(num_primers)
+    elif type(num_primers) is list:
+        num_primers = ''.join(num_primers)
     if type(max_length) is int: max_length = str(max_length)
     if type(min_length) is int: min_length = str(min_length)
     if "1" in is_num_primers:
@@ -49,8 +53,8 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
         is_t7 = "checked"
     else:
         is_t7 = ""
+    if num_primers in (str(DEF_NUM_PRM), " ","auto", ""): num_primers = "auto"
 
-    if num_primers in (str(DEF_NUM_PRM), " ","auto"): num_primers = "auto"
     script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled).replace("__IS_T7__", is_t7)
     return script
 
@@ -73,15 +77,18 @@ def is_t7_present(sequence):
         return (seq_T7 + sequence, 0, is_G)
 
 
+def create_res_html(html_content, job_id):
+    f = open("cache/result_%s.html" % job_id, "w")
+    f.write(html_content)
+    f.close()
+
+
 def create_wait_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
     script = "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"progress\"><div class=\"progress-bar progress-bar-striped active\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"><span class=\"sr-only\"></span></div></div><h3 class=\"modal-title\" id=\"myModalLabel\">Primerize is running...</h3><br/><p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p><p>You can close the browser and retrieve the result later using the above unique <span class=\"label label-violet\">JOB_ID</span>. The cached result expires after 7 days.</p></div>"
     script = script.replace("__JOB_ID___", job_id).replace("__FILE_NAME__", "/cache/result_%s.txt" % job_id)
 
     html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script)
-
-    f = open("cache/result_%s.html" % job_id, "w")
-    f.write(html_content)
-    f.close()
+    create_res_html(html_content, job_id)
 
 
 def create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
@@ -92,7 +99,13 @@ def create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, 
     script_500 = script_500[script_500.find("<div class=\"starter-template\">"):script_500.find("<div class=\"bs-docs-footer\"")]
 
     html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script + script_500)
+    create_res_html(html_content, job_id)
 
-    f = open("cache/result_%s.html" % job_id, "w")
-    f.write(html_content)
-    f.close()
+
+def premature_return(msg, html_content, job_id):
+    msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: " + msg + "</p></div>"
+    html_content = html_content.replace("__RESULT__", msg)
+    create_res_html(html_content, job_id)
+    raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
+
+
