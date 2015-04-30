@@ -100,7 +100,7 @@ class Root:
 
             lines = [line.replace("\n","") for line in lines]
             if lines[-2] and lines[-2][0] == "?":
-                msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>ERROR</b>: No solution found, please adjust advanced options.</p></div>"
+                msg = "<br/><hr/><div class=\"container theme-showcase\"><h2>Output Result:</h2><div class=\"alert alert-danger\"><p><b>FAILURE</b>: No solution found, please adjust advanced options.</p></div>"
                 return get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", msg)
 
             sec_break = [i for i in range(len(lines)) if lines[i] == "#"]
