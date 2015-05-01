@@ -49,7 +49,7 @@
             We have examples for new users, see 
             <a class="btn btn-success btn-sm path_demo" href="" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>. 
             For further questions, please feel free to 
-            <a class="btn btn-danger btn-sm path_about" href="#contact" style="color: #ffffff;">Contact Us</a>. 
+            <a class="btn btn-danger btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us. 
             Additionally, source code package is available for 
             <a class="btn btn-warning btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a>. 
             Please read the Terms and Conditions.
@@ -229,6 +229,20 @@
             </div>
           </div>
         </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="alert alert-warning center-block tutorial" id="warn_500">
+              <b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
+            </div>
+            <img style="position:absolute;display:block;right:5%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 500 nt."/>
+            <div class="alert alert-orange center-block tutorial" id="warn_1000">
+              <b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm path_license disabled" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
+            </div>
+            <img style="position:absolute;display:block;right:5%;top:60%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 1000 nt."/>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
       </div>
       <hr/>
 
@@ -250,17 +264,23 @@
                   </div>
                   <div class="modal-body panel-body">
                     <div class="col-md-12">
-                      <h3> Your 
+                      <h3 class="text-center"> Your 
                         <span class="label label-violet">JOB_ID</span> is: 
                         <span class="label label-inverse" id="modal_id">0123456789abcdef</span>
                       </h3>
                       <br/>
                       <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
                       <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 7 days.</p>
+                      <br/>
+                      <p class="text-center">
+                        <b>Please copy/paste this link: 
+                        <br/><code><span id="url_id">http://primerize.stanford.edu/result?job_id=0123456789abcdef</span></code></b>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
+              <img style="position:absolute;display:block;right:15%;top:6%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window showing unique JOB_ID and retrieval URL link."/>
               <br/><hr/>           
               <h4>
                 When the calculation is completed, the result page will automatically be shown. The run results are retrievable through the <a href="/" class="btn btn-primary">&nbsp;&nbsp;Home&nbsp;&nbsp;</a> page with the unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.
@@ -348,6 +368,7 @@
               <img style="position:absolute;display:block;right:60%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="JOB_ID" data-content="The unique 16-digit hexadecimal key for each run." />
               <a href="" class="btn btn-info pull-right tutorial" style="color: #ffffff;" title="Output in plain text" download disabled="disabled">&nbsp;Save Result&nbsp;</a>
               <img style="position:absolute;display:block;right:35%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="Save Results" data-content="Save the webpage output results in plain text file. Each run has its unique job key." />
+             <img style="position:absolute;display:block;right:35%;top:135%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported. "/>
             </div>
           </div>
           <br/>
@@ -359,16 +380,26 @@
               <br/>
               <b>WARNING</b>: Primer <b>4</b><span class="label label-danger">R</span> can misprime with <span class="label label-default">4</span>-residue overlap to position <span class="label label-success">66</span>, which is covered by primers  <b>2</b><span class="label label-danger">R</span>.
               <br/>
-              <b>CHECK_T7</b>: feature enabled, T7 promoter sequence present.
             </p>
           </div>
           <div class="row">
-            <div class="col-md-12">
-              <div class="tutorial alert alert-orange">
-               <b>Time elapsed</b>: 2.3 s.
+            <div class="col-md-10">
+              <div class="alert alert-default tutorial">
+                <p>
+                  <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
+                  <br/>
+                  <b>SUCCESS</b>: T7 promoter sequence is followed by nucleotide <u>G</u>.
+                </p>
+              </div>
+              <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback of T7 promoter checking. If feature is enabled, it will report presence, any actions taken, and whether the T7 region is followed by nucleotide G for efficient transcription initiation."/>
+            </div>
+            <div class="col-md-2">
+              <div class="alert alert-orange text-center tutorial">
+                <b>Time elapsed</b>: 
+                <br/>
+                <i>2.3</i> s.
              </div>
-             <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Timer" data-content="Total runtime for this job (including program initiation)."/>
-             <img style="position:absolute;display:block;right:5%;top:-150%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported. T7 promoter checking is also shown here."/>
+             <img style="position:absolute;display:block;left:-5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Timer" data-content="Total runtime for this job (including program initiation)."/>
            </div>
           </div>
           <div class="row">
@@ -427,7 +458,8 @@
               </div>
             </div>
           </div>
-          <div class="row" id="web_output_assembly">
+          <br/>
+          <div class="row">
            <div class="col-md-12">
             <div class="panel panel-green">
               <div class="panel-heading tutorial">
@@ -452,36 +484,107 @@
         </div>
 
         <hr/>           
-        <h4>Depending on the input, the following field might show instead of the <span class="label label-warning">WARNING</span> as above.</h4>
+        <h4>Depending on the input, one of the following fields might show up instead of the <span class="label label-warning">WARNING</span> as above.</h4>
         <br/>
         <div class="row ">
           <div class="col-md-12">
             <div class="alert alert-success tutorial" >
               <p class="tutorial">
                 <b>SUCCESS</b>: No potential mis-priming found. See results below.
-                <br/>
-                <b>CHECK_T7</b>: feature disabled.
               </p>
             </div>
+            <img style="position:absolute;display:block;right:52%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Warnings" data-content="SUCCESS indicates no potential mis-priming was detected."/>
+          </div>
+          <div class="col-md-6">
             <div class="alert alert-danger tutorial" >
               <p class="tutorial">
-                <b>FAILURE</b>: No solution found, please adjust advanced options.
+                <b>ERROR</b>: Invalid sequence input (should be <u>at least <b>60</b> nt</u> long).
               </p>
             </div>
+            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to short length."/>
+          </div>
+          <div class="col-md-6">
             <div class="alert alert-danger tutorial" >
               <p class="tutorial">
-                <b>ERROR</b>: Invalid sequence input.
+                <b>ERROR</b>: Invalid sequence input (should be composed of A, C, G, T and U).
               </p>
             </div>
+            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to illegal characters' presense."/>
+          </div> 
+          <div class="col-md-6">
+            <div class="alert alert-danger tutorial" >
+              <p class="tutorial">
+                <b>ERROR</b>: Invalid advanced options input.
+              </p>
+            </div>
+            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid advanced options input."/>
+          </div> 
+          <div class="col-md-6">
             <div class="alert alert-danger tutorial" >
               <p class="tutorial">
                 <b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="SUCCESS indicates no potential mis-priming was detected."/>
-            <img style="position:absolute;display:block;right:5%;top:31%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="FAILURE indicates no solution was found using the current setting. You might try adjusting the advanced options."/>
-            <img style="position:absolute;display:block;right:5%;top:55%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, usually due to illegal characters' presense."/>
-            <img style="position:absolute;display:block;right:5%;top:78%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid input for # number of primers."/>
+            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid input for # number of primers."/>
+          </div> 
+          <div class="col-md-6">
+            <div class="alert alert-default tutorial" >
+              <p class="tutorial">
+                <b>T7_CHECK</b>: feature disabled (check the option to enable). No checking was performed.
+              </p>
+            </div>
+            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when disabled."/>
+          </div> 
+          <div class="col-md-6">
+            <div class="alert alert-default tutorial" >
+              <p class="tutorial">
+                <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence was absent, Primerize automatically prepended it.
+                <br/>
+                <b>SUCCESS</b>: T7 promoter sequence is followed by nucleotide <u>G</u>.
+              </p>
+            </div>
+            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and G follows T7 region."/>
+          </div> 
+          <div class="col-md-6">
+            <div class="alert alert-default tutorial" >
+              <p class="tutorial">
+                <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
+                <br/>
+                <b>WARNING</b>: T7 promoter sequence is <u><b>NOT</b></u> followed by nucleotide <u>G</u>. Consider modifying the sequence for better transcription.
+              </p>
+            </div>
+            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was not added and G did not follow T7 region."/>
+          </div> 
+          <div class="col-md-6">
+            <div class="alert alert-default tutorial" >
+              <p class="tutorial">
+                <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence was absent, Primerize automatically prepended it.
+                <br/>
+                <b>WARNING</b>: T7 promoter sequence is <u><b>NOT</b></u> followed by nucleotide <u>G</u>. Consider modifying the sequence for better transcription.
+              </p>
+            </div>
+            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and G did not follow T7 region."/>
+          </div> 
+        </div>
+        <hr/>           
+        <h4>You might encounter a <span class="label label-danger">FAILURE</span> case.</h4>
+        <h4>This happens when Primerize was not able to find a solution using the given input sequence in combination with specified advanced options. The following page will be shown:</h4>
+        <br/>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger tutorial" >
+              <p>
+                <b>FAILURE</b>: No solution found (Primerize run finished without errors).
+                <br/>
+                <ul>
+                  <li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li>
+                  <li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li>
+                  <li>For further information, please feel free to <a class="btn btn-warning btn-sm path_about disabled" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li>
+                </ul>
+              </p>
+            </div>
+            <img style="position:absolute;display:block;right:3%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="FAILURE indicates no solution was found using the current setting. You might try adjusting the advanced options."/>
           </div>
 
         </div>
@@ -515,7 +618,8 @@ MIN_TM: 60
 NUM_PRIMERS: auto (unspecified)
 MAX_LENGTH: 60
 MIN_LENGTH: 15
-CHECK_T7: feature enabled, T7 promoter sequence present.
+T7_CHECK: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
+T7_CHECK: T7 promoter sequence is followed by nucleotide G.
 
 
 OUTPUT
