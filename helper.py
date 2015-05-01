@@ -79,7 +79,7 @@ def is_t7_present(sequence):
 
 def create_res_html(html_content, job_id):
     f = open("cache/result_%s.html" % job_id, "w")
-    f.write(html_content)
+    f.write(html_content.encode('utf-8', 'ignore'))
     f.close()
 
 
