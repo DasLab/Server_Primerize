@@ -312,6 +312,21 @@ class Root:
     @cherrypy.expose
     def error(self):
         raise ValueError
+    @cherrypy.expose
+    def demo_error(self):
+        return load_html(PATH_DEMO_ERROR)
+    @cherrypy.expose
+    def demo_fail(self):
+        return load_html(PATH_DEMO_FAIL)
+    @cherrypy.expose
+    def demo_wait(self):
+        return load_html(PATH_DEMO_WAIT)
+    @cherrypy.expose
+    def demo_404(self):
+        return load_html(PATH_404)
+    @cherrypy.expose
+    def demo_500(self):
+        return load_html(PATH_500)
 
 
 
