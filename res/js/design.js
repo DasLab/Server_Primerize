@@ -1,4 +1,4 @@
-function show_modal () {
+function show_modal() {
   var job_id = Math.random().toString(16).substring(2, 15) + Math.random().toString(16).substring(2, 15);
   $("#job_id").val(job_id.toString());
   $("#modal_id").text(job_id.toString());
@@ -11,6 +11,30 @@ function show_modal () {
   $("#modal_warn_1000").css("display", $("#warn_1000").css("display"));
 }
 
+function track_input_length() {
+  var l = $("#sequence").val().length;
+
+  $("#count").text(l);
+  if (l < 60) {
+      $("#count").parent().parent().css({"color":"red", "background-color":"white"});
+      $("#warn_500, #warn_1000").css("display", "none");
+  } else {
+      $("#count").parent().parent().css({"color":"black", "background-color":"white"});
+      if (l > 500) {
+        if (l > 1000) {
+          $("#count").parent().parent().css({"color":"red", "background-color":"black"});
+          $("#warn_1000").css("display", "inline-block");
+          $("#warn_500").css("display", "none");
+        } else {
+          $("#count").parent().parent().css({"color":"orange", "background-color":"black"});
+          $("#warn_500").css("display", "inline-block");
+          $("#warn_1000").css("display", "none");
+        }
+      } else {
+        $("#warn_500, #warn_1000").css("display", "none");
+      }
+  }
+}
 
 $(document).ready(function () {
   // $("#is_agree").on("click", function () {
@@ -25,29 +49,7 @@ $(document).ready(function () {
   //   }
   // });
   $("#warn_500, #warn_1000").css("display", "none");
-
-  $("#sequence").on("keyup", function () {
-    $("#count").text($(this).val().length);
-    if ($(this).val().length < 60) {
-        $("#count").parent().parent().css({"color":"red", "background-color":"white"});
-        $("#warn_500, #warn_1000").css("display", "none");
-    } else {
-        $("#count").parent().parent().css({"color":"black", "background-color":"white"});
-        if ($(this).val().length > 500) {
-          if ($(this).val().length > 1000) {
-            $("#count").parent().parent().css({"color":"red", "background-color":"black"});
-            $("#warn_1000").css("display", "inline-block");
-            $("#warn_500").css("display", "none");
-          } else {
-            $("#count").parent().parent().css({"color":"orange", "background-color":"black"});
-            $("#warn_500").css("display", "inline-block");
-            $("#warn_1000").css("display", "none");
-          }
-        } else {
-          $("#warn_500, #warn_1000").css("display", "none");
-        }
-    }
-  });
+  track_input_length();
 
   $("#check_num_primers").on("click", function () {
     if ($(this).is(":checked")) {
@@ -57,11 +59,8 @@ $(document).ready(function () {
     }
   });
 
-  $("#btn_submit").on("click", function () {
-    show_modal();
-  });
-  $("#btn_demo").on("click", function () {
-    show_modal();
-  });
+  $("#sequence").on("keyup", function () { track_input_length(); });
+  $("#btn_submit").on("click", function () { show_modal(); });
+  $("#btn_demo").on("click", function () { show_modal(); });
   
 });
