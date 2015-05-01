@@ -17,6 +17,11 @@ PATH_ABOUT = "res/html/about.html"
 PATH_404 = "res/html/_404.html"
 PATH_500 = "res/html/_500.html"
 
+PATH_DEMO_ERROR = "res/html/example_error.html"
+PATH_DEMO_FAIL = "res/html/example_fail.html"
+PATH_DEMO_WAIT = "res/html/example_wait.html"
+
+
 QUICKSTART_CONFIG = {
         "/res/css": {
             "tools.staticdir.on": True,
