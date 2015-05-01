@@ -1,3 +1,17 @@
+function show_modal () {
+  var job_id = Math.random().toString(16).substring(2, 15) + Math.random().toString(16).substring(2, 15);
+  $("#job_id").val(job_id.toString());
+  $("#modal_id").text(job_id.toString());
+  $("#url_id").text('http://primerize.stanford.edu/result?job_id='.concat(job_id.toString()));
+
+  $("#modal_wait").modal("show");
+  $("#wait").fadeIn(1000);
+
+  $("#modal_warn_500").css("display", $("#warn_500").css("display"));
+  $("#modal_warn_1000").css("display", $("#warn_1000").css("display"));
+}
+
+
 $(document).ready(function () {
   // $("#is_agree").on("click", function () {
   //   if ($(this).is(":checked")) {
@@ -44,16 +58,10 @@ $(document).ready(function () {
   });
 
   $("#btn_submit").on("click", function () {
-    var job_id = Math.random().toString(16).substring(2, 15) + Math.random().toString(16).substring(2, 15);
-    $("#job_id").val(job_id.toString());
-    $("#modal_id").text(job_id.toString());
-    $("#url_id").text('http://primerize.stanford.edu/result?job_id='.concat(job_id.toString()));
-
-    $("#modal_wait").modal("show");
-    $("#wait").fadeIn(1000);
+    show_modal();
   });
   $("#btn_demo").on("click", function () {
-    $("#wait").fadeIn(1000);
+    show_modal();
   });
   
 });
