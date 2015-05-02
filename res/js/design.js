@@ -6,6 +6,7 @@ function show_modal() {
 
   // $("#wait").fadeIn(1000);
   $("#modal_wait").modal("show");
+  console.log('!')
 
   $("#modal_warn_500").css("display", $("#warn_500").css("display"));
   $("#modal_warn_1000").css("display", $("#warn_1000").css("display"));
@@ -60,18 +61,23 @@ $(document).ready(function () {
   });
 
   $("#sequence").on("keyup", function () { track_input_length(); });
-  $("#btn_submit").on("click", function () { 
-    event.preventDefault();
-    show_modal(); 
+  if (navigator.userAgent.indexOf("Chrome") > -1 | navigator.userAgent.indexOf("Firefox") > -1) {
     // stupid safari!!
-    setTimeout(function(){ $("#form").trigger("submit"); }, 0);
-  });
-  $("#btn_demo").on("click", function () { 
-    event.preventDefault();
-    show_modal(); 
-    setTimeout(function(){ location.href = "/demo_P4P6"; }, 0);
-
-  });
+    $("#btn_submit").on("click", function () { show_modal(); });
+    $("#btn_demo").on("click", function () { show_modal(); });
+  } else {
+    // stupid safari!!
+    $("#btn_submit").on("click", function () { 
+      event.preventDefault();
+      show_modal(); 
+      setTimeout(function(){ $("#form").trigger("submit"); }, 0);
+    });
+    $("#btn_demo").on("click", function () { 
+      event.preventDefault();
+      show_modal(); 
+      setTimeout(function(){ location.href = "/demo_P4P6"; }, 0);
+    });
+  } 
   
 });
 
