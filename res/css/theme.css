@@ -263,6 +263,8 @@ h2.section>span.num {
     top: 25%;
     left: 50%;
     transform: translate(-50%, -25%) !important;
+    -ms-transform: translate(-50%, -25%) !important;
+    -webkit-transform: translate(-50%, -25%) !important;
 }
 
 .btn-inverse {

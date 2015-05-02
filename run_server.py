@@ -276,11 +276,11 @@ class Root:
     @cherrypy.expose
     def demo_P4P6(self):
         self.cleanup_old()
-        return self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))    
+        self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))    
     @cherrypy.expose
     def test_random(self):
         seq = seq_T7 + ''.join(random.choice('CGTA') for _ in xrange(500))
-        return self.design_primers(seq, "scRNA", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))  
+        self.design_primers(seq, "scRNA", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))  
 
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):

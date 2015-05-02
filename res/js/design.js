@@ -4,8 +4,8 @@ function show_modal() {
   $("#modal_id").text(job_id.toString());
   $("#url_id").text('http://primerize.stanford.edu/result?job_id='.concat(job_id.toString()));
 
+  // $("#wait").fadeIn(1000);
   $("#modal_wait").modal("show");
-  $("#wait").fadeIn(1000);
 
   $("#modal_warn_500").css("display", $("#warn_500").css("display"));
   $("#modal_warn_1000").css("display", $("#warn_1000").css("display"));
@@ -60,7 +60,20 @@ $(document).ready(function () {
   });
 
   $("#sequence").on("keyup", function () { track_input_length(); });
-  $("#btn_submit").on("click", function () { show_modal(); });
-  $("#btn_demo").on("click", function () { show_modal(); });
+  $("#btn_submit").on("click", function () { 
+    event.preventDefault();
+    show_modal(); 
+    // stupid safari!!
+    setTimeout(function(){ $("#form").trigger("submit"); }, 0);
+  });
+  $("#btn_demo").on("click", function () { 
+    event.preventDefault();
+    show_modal(); 
+    setTimeout(function(){ location.href = "/demo_P4P6"; }, 0);
+
+  });
   
 });
+
+
+

@@ -39,7 +39,7 @@
 
     <div class="navbar navbar-fixed-top" role="navigation" id="navbar"></div>
 
-     <div class="starter-template">
+    <div class="starter-template">
       <div class="container theme-showcase" role="main">
         
 <!--         <div class="alert alert-warning" role="alert">
@@ -47,7 +47,7 @@
           <p><b>WARNING</b>: We are fixing some server issues. Currently you may experience slow runs of the server. Sorry for the inconvenience.</p>
         </div>
  -->
-        <form method='get' action='/design_primers'>
+        <form method='get' action='/design_primers' id='form'>
           <div class="row">
             <div class="col-md-12">
               <h2>Input Data:</h2>
@@ -85,9 +85,9 @@
 
                <div class="row">
                 <div class="col-md-12">
-                   <input type="submit" id="btn_submit" class="btn btn-primary" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
-                   <a href="" class="btn btn-default path_design">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                   <span style="display:none">
+                  <input type="submit" class="btn btn-primary" id="btn_submit" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
+                  <a class="btn btn-default path_design">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span style="display:none">
                     <input id="is_agree" type="checkbox" checked="yes" required="required">
                       <label for="is_agree">
                         <i>
@@ -97,7 +97,9 @@
                       </label>
                     </input>
                    </span>
-                   <a href="" id="btn_demo" class="btn btn-success pull-right path_demo" style="color: #ffffff;" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
+                   <a id="btn_demo" class="btn btn-success pull-right path_demo" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+                    &nbsp;&nbsp;Demo&nbsp;&nbsp;
+                  </a>
                  </div>
                </div>
               </div>
@@ -161,14 +163,14 @@
       </div>
       <div id="result">__RESULT__</div>
     </div>
-   </div>
-   <hr/>
+   <!-- </div> -->
+    <hr/>
 
-    <div id="modal_wait" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalWait" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+    <div id="modal_wait" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalWait" aria-hidden="true">
+      <div class="modal-dialog modal-lg" id="modal_dialog">
         <div class="modal-content panel-primary">
           <div class="modal-header panel-heading">
-            <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
+            <h3 class="modal-title">Primerize is running...</h3>
           </div>
           <div class="modal-body panel-body">
             <div class="col-md-12">
