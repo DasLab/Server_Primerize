@@ -31,9 +31,11 @@ User-agent: msnbot-media
 User-agent: Slurp
 User-agent: Yahoo-Blogs
 User-agent: Yahoo-MMCrawler
+
 # Directories
 Disallow: /cache/
 Disallow: /src/
+
 # Files
 Disallow: /const.py
 Disallow: /const.pyc
@@ -42,6 +44,7 @@ Disallow: /helper.pyc
 Disallow: /run_server.py
 Disallow: /README.md
 Disallow: /LICENSE.md
+
 # Paths (clean URLs)
 Disallow: /demo_500/
 Disallow: /demo_404/
@@ -52,6 +55,8 @@ Disallow: /error/
 Disallow: /test_random/
 Disallow: /submit_download/
 Disallow: /cleanup_old/
+
 # Paths (no clean URLs)
 Disallow: /result?job_id=*/
+
 Crawl-delay: 600
