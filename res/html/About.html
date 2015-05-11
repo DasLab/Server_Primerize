@@ -43,13 +43,10 @@
             <div class="panel-body">
             <img class="path_logo_primerize" src="" style="clear:both;float:right;" height="128"/>
               <p class="cap">
-                Custom RNA synthesis is of high demand in biological and biotechnology research. While full synthesis is timely and costly, primer assembly of DNA templates and <i>in vitro</i> transcription provide an easy and fast alternative for noncoding RNAs with lengths up to 500 nucleotides. However, available primer design tools for such tasks are not currently effective: they do not optimize primer boundaries against mispriming; are mainly optimized to adjust codons for protein synthesis rather than the fixed sequences of RNA problems; and have not been widely tested for non-coding RNA synthesis.  
+                Custom RNA synthesis is of high demand in biological and biotechnology research. Compared to chemical synthesis of RNA, strategies that leverage primer assembly of DNA templates and subsequent <i>in vitro</i> transcription by T7 RNA polymerase are rapid and cost-effective, and RNA lengths up to hundreds of nucleotides are readily achievable. Creating RNAs via this route requires preparing DNA templates, which can be assembled at low cost from mixtures of short primers with lengths up to 60 nucleotides via the polymerase chain reaction (PCR). This problem can be challenging particularly if one wishes to avoid primer 3´ ends that might misprime into incorrect locations and be extended by DNA polymerase into undesired products, and if one is not allowed to change the sequence. On one hand, there has been substantial work on developing algorithms for designing primers for PCR assembly into DNA templates, with special methods to make codon adjustments for protein synthesis, to optimize primer boundaries against incorrect hybridization of primers, and to assemble large genes. On the other hand with the terminated support of previous web servers, automated primer design tools that optimize against mispriming still require software download, installation, and time to learn.
               </p>
               <p>
-                Since 2010, we have used an efficient algorithm for primer design that has been stringently tested in synthesis of nearly 1000 RNA sequences from our lab and from citizen scientists in the <a href="http://eterna.cmu.edu/" target="_blank">EteRNA</a> videogame/synthetic biology project, already fueling 15 publications including the first <i>in vivo</i> validated structure of a cellular internal ribosomal entry site. 
-              </p>
-              <p>
-                Previously, our command-line MATLAB scripts required nontrivial efforts for setup for other labs. Here we present an online version of <u><b>Primerize</b></u> that is integrative and user-friendly, and should be broadly used by the RNA community. The server itself has been prepared for 2015 NAR Web Server issue, and was launched in December 2014.
+                We previously developed a dynamic programming-based algorithm to design primers that can be PCR-assembled into templates for high-throughput RNA synthesis and simple kit or bead-based purification. Given a desired DNA template sequence, this method, named Primerize herein, is optimized to reduce mispriming during PCR by avoiding primer boundaries that might anneal to incorrect sequences. The algorithm has been tested in the synthesis and rapid purification of numerous RNA sequences from our lab with lengths up to 300 nucleotides. In each of these applications, the sequence and purity of the transcribed RNA was verified by reverse transcription and capillary electrophoresis methods. Nevertheless, these scripts previously required MATLAB installation to run and nontrivial efforts to set up. Requests to use this algorithm and the lack of other primer design servers motivated us to prepare an online version of Primerize that should be more broadly useable by the RNA community. 
               </p>
             </div>
           </div>
@@ -79,9 +76,14 @@
             </div>
             <div class="panel-body">
               <p class="cap">
-               Primerize (previously named NA_thermo), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
+               Primerize (previously named <code>NA_thermo</code>), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
               </p>
-
+              <p>
+                The algorithm designs forward (sense strand) and reverse (anti-sense strand) primers that minimize the total length, and therefore the total synthesis cost, of the oligonucleotides. Although developed independently, Primerize is a special case of the general <b>‘Gapped Oligo Design’</b> algorithm described and mathematically analyzed in detail by <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4375554" target="_blank">Thachuk and Condon</a>, optimizing the mispriming score and sequence spanning instead of T<sub>m</sub>.
+              </p>
+              <p>
+                We reasoned that mis-hybridizations would occasionally occur and be recognized by DNA polymerase, and since the primer’s 3´-most nucleotide would be bound to the complement, the products could be extended by the polymerase. Thus we introduced and experimentally tested a score term misprime, whose purpose was to reduce artifacts from mispriming during PCR assemblies. A heuristic score was defined based on the number of contiguous reverse complement matches of the 3´-most n nucleotides of the primer on a possible touchdown site; the score was incremented by 10 for A/T pairings and 12.5 for G/C pairings for each match. 
+              </p>
             </div>
           </div>
           <div class="panel panel-info" id="citation">
@@ -97,11 +99,17 @@
                 </p>
               </blockquote>
               <br/>
-              Please cite use of Primerize with:
+              Publications using Primerize design:
               <br/>
               <blockquote class="h5">
                 <p>
-                  Lee J., <i>et al.</i> (<b>2013</b>). <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html" target="_blank">RNA design rules from a massive open laboratory.</a> <i>Proceedings of the National Academy of Sciences</i> <b>111(6)</b>: 2122-2127.
+                  Miao Z., <i>et al.</i> (<b>2015</b>). <a href="" target="_blank">RNA-Puzzles Round II: assessment of RNA structure prediction programs applied to three large RNA structures.</a> <i>RNA</i> <b>AOP</b>: -.
+                </p>
+                <p>
+                  Tian S., <i>et al.</i> (<b>2014</b>). <a href="http://rnajournal.cshlp.org/content/early/2014/09/01/rna.044321.114" target="_blank">High-throughput mutate-map-rescue evaluates SHAPE-directed RNA structure and uncovers excited states.</a> <i>RNA</i> <b>20</b>: 1815-1826.
+                </p>
+                <p>
+                  Lee J., <i>et al.</i> (<b>2013</b>). <a href="http://www.pnas.org/content/111/6/2122.abstract" target="_blank">RNA design rules from a massive open laboratory.</a> <i>Proceedings of the National Academy of Sciences</i> <b>111(6)</b>: 2122-2127.
                 </p>
                 <p>
                   Kladwang W., <i>et al.</i> (<b>2011</b>). <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html" target="_blank">A two-dimensional mutate-and-map strategy for non-coding RNA structure.</a> <i>Nature chemistry</i> <b>3</b>: 954-962.
