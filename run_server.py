@@ -39,6 +39,9 @@ class Root:
     def tutorial(self):
         return load_html(PATH_TUTORIAL)
     @cherrypy.expose
+    def protocol(self):
+        return load_html(PATH_PROTOCOL)
+    @cherrypy.expose
     def license(self):
         return load_html(PATH_LICENSE)
     @cherrypy.expose

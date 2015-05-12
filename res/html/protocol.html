@@ -32,7 +32,7 @@
   <body>
 
     <div class="navbar navbar-fixed-top" role="navigation" id="navbar"></div>
-
+!!!!!
    <div class="starter-template" id="down">
     <div class="container theme-showcase" role="main">
       <div class="jumbotron">
@@ -40,7 +40,7 @@
           <h1>Welcome to Primerize!</h1>
           <img class="path_logo_primerize" src="" style="clear:both; float:right;"/>
           <p>
-            This tutorial walks you through the basics of website interface, explains parameters and results. Hover mouse to the 
+            This tutorial walks you through the basics of website interface, explains parameters and results, shows how to channel the output to IDT Bulk Ordering, and more importantly, in-house protocol for how to PCR assemble the template <i>in vitro</i>. Hover mouse to the 
             <img style="opacity:0.85;" class="path_button_question" src="" height="40" data-toggle="popover" data-placement="bottom" title="Question mark" data-content="Hover mouse for detailed descriptions."/> 
             for detailed descriptions. 
           </p>
@@ -90,18 +90,32 @@
                     <b>Result Retrieval</b>
                   </a>
               </li>
-              <li class="li-success">
+              <li class="li-light-blue">
                   <a id="tab_3" href="#web_output">
                     Section #3: 
                     <br/>
                     <b>Website Output</b>
                   </a>
               </li>
-              <li class="li-green">
+              <li class="li-success">
                   <a id="tab_4" href="#txt_output">
                     Section #4:
                     <br/>
                     <b>Downloadable Output</b>
+                  </a>
+              </li>
+              <li class="li-green">
+                  <a id="tab_5" href="#idt_bulk">
+                    Section #5: 
+                    <br/>
+                    <b>IDT Bulk Ordering</b>
+                  </a>
+              </li>
+              <li class="li-violet">
+                  <a id="tab_6" href="#PCR">
+                    Section #6: 
+                    <br/>
+                    <b>PCR Assembly</b>
                   </a>
               </li>
             </ul>
@@ -342,9 +356,9 @@
       </div>
       <hr/>
 
-      <div class="container theme-showcase li-success" role="main">
+      <div class="container theme-showcase li-light-blue" role="main">
         <br/>
-        <div class="panel-success" id="web_output">
+        <div class="panel-light-blue" id="web_output">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: Website Output</b></span>
           </div>
@@ -585,9 +599,9 @@
       </div>
       <hr/>
 
-      <div class="container theme-showcase li-green" role="main">
+      <div class="container theme-showcase li-success" role="main">
         <br/>
-        <div class="panel-green" id="txt_output">
+        <div class="panel-success" id="txt_output">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#4</span>: Downloadable Output</b></span>
           </div>
@@ -671,8 +685,273 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
           </div>
         </div>
       </div>
-      <br/>
+      <hr id="" />
 
+      <div class="container theme-showcase li-green" role="main">
+        <br/>
+        <div class="panel-green" id="idt_bulk">
+          <div class="panel-heading">
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#5</span>: IDT Bulk Ordering</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-danger">
+                <div class="panel-heading tutorial">
+                  <h2 class="panel-title">Bulk Format Ordering at IDT DNA Oligos</h2>
+                </div>
+                <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="IDT Bulk Format" data-content="How to input Primerize results to IDT Bulk ordering interface." />
+                <div class="panel-body">
+
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h4> First, go to 
+                        <a href="https://www.idtdna.com/site/order/oligoentry">
+                          &ldquo;<mark>Custom DNA Oligos</mark>&rdquo;
+                        </a>
+                      </h4>
+                      <br/>
+                      <div class="well well-sm">
+                        <div class="row">
+                          <div class="col-md-5 form-inline select-mobile hidden-xs tutorial">
+                              <label class="checkbox">
+                                  <input type="checkbox" data-bind="checked: AllChecked" disabled="disabled">
+                                  <span class="hidden-sm">Select </span><span>All</span>
+                              </label>
+                              &nbsp;
+                              <div class="btn-group btn-group-sm">
+                                  <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" data-bind="enable: EnableSelectedButton " disabled="disabled"> Actions: <span class="caret"></span> </button>
+                              </div>
+                          </div>
+                          <div class="col-md-4 form-inline select-mobile tutorial">
+                              <div class="input-group input-group-sm">
+                                  <span class="input-group-addon">Items:</span>
+                                  <input type="number" min="1" max="99" data-bind="value: NewNumEntries" class="form-control" value="1" disabled="disabled">
+                                  <span class="input-group-btn">
+                                      <button class="btn btn-default btn-sm" type="button" disabled="disabled">Go</button>
+                                  </span>
+                              </div>
+                          </div>
+                          <div class="col-md-3 select-mobile hidden-xs">
+                              <button class="btn btn-info btn-sm btn-block" disabled="disabled"> Bulk Input</button>
+                              <img style="position:absolute;display:block;right:-25%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Bulk Input" data-content="Then click this button to open the Bulk Input feeder window." />
+                          </div>
+                        </div>
+                      </div>
+                      <h4> Click the &ldquo;<mark>Bulk Input</mark>&rdquo; button. </h4>
+                    </div>
+                  </div>
+                  <hr/>
+                  
+                  <h4> Then paste the IDT section in the text box, and adjust the choices properly.</h4>
+                  <div class="col-md-12">
+                    <h4 class="tutorial">Bulk Input</h4>
+                    <br/>
+                    <div class="row tutorial">
+                      <div class="col-md-8">
+                        <label for="delimiter">Choose a delimiter</label>
+                        <u> Download an Excel template</u>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <select required="true" class="tutorial" disabled="disabled">
+                            <option value="1">Tab/Excel</option>
+                        </select>
+                        <img style="position:absolute;display:block;left:20%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Delimiter Choice" data-content="You do not need to modify this, the default is &ldquo;Tab&rdquo;." />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <br/><br/>
+                        <div class="tutorial">
+                          <textarea class="form-control tutorial" rows="29" type="text" disabled="disabled">----------Name & Sequence are required.----------
+----------Default scale is 25nmole.----------
+----------Default purification is standard desalt.----------
+----------Purification options vary by scale.----------
+----------Do not include column header row.----------
+
+Example:
+
+Seq1    ATCGTATGCTGATCTGATCAC    25nm    STD
+Seq2    AACGTTTGCTGATCTAATCAC    25nm    STD
+Seq3    TTCGCATGCCGATCAGATCAC   25nm    STD
+
+Etc...</textarea>
+
+                        </div>
+                        <img style="position:absolute;display:block;right:50%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Input" data-content="Directly copy and paste the IDT section from the text output file to here. Parameters are set to 25nm scale and standard desalting." />
+                        <div class="pull-right tutorial">
+                          <span style="padding-left: 10px;"># Entries:</span>
+                          <span id="NumEntries" type="text" data-bind="text: OligoCollection().length"></span>
+                        </div>
+                      </div>
+                      <div class="col-md-4 tutorial">
+                        <table class="table table-condensed">
+                          <thead>
+                            <tr><th>Code</th><th>Scale</th></tr>
+                          </thead>
+                          <tbody>
+                            <tr><td>25nm</td><td>25 nmole</td></tr>
+                            <tr><td>100nm</td><td>100 nmole</td></tr>
+                            <tr><td>250nm</td><td>250 nmole</td></tr>
+                            <tr><td>1um</td><td>1 &mu;mole</td></tr>
+                            <tr><td>5um</td><td>5 &mu;mole</td></tr>
+                            <tr><td>10um</td><td>10 &mu;mole</td></tr>
+                            <tr><td>4nmU</td><td>4 nmole Ultramer&trade;</td></tr>
+                            <tr><td>20nmU</td><td>20 nmole Ultramer&trade;</td></tr>
+                            <tr><td>PU</td><td>PAGE Ultramer&trade;</td></tr>
+                            <tr><td>25nmS</td><td>25 nmole Sameday</td></tr>
+                          </tbody>
+                        </table>
+                        <table class="table table-condensed">
+                          <thead>
+                            <tr><th>Code</th><th>Purification</th></tr>
+                          </thead>
+                          <tbody >
+                            <tr><td>STD</td><td>Standard Desalting</td></tr>
+                            <tr><td>PAGE</td><td>PAGE $50.00</td></tr>
+                            <tr><td>HPLC</td><td>HPLC $45.00</td></tr>
+                            <tr><td>IEHPLC</td><td>IE HPLC $45.00</td></tr>
+                            <tr><td>RNASE</td><td>RNase Free HPLC $75.00</td></tr>
+                            <tr><td>DUALHPLC</td><td>Dual HPLC $80.00</td></tr>
+                            <tr><td>PAGEHPLC</td><td>Dual PAGE & HPLC $130.00</td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <hr/>
+                    <div class="row">
+                      <div class="col-md-4 tutorial">
+                        <label class="control-label hidden-xs">Normalization</label>
+                        <select class="form-control input-sm" disabled="disabled" value="1">
+                          <option value="1">Lab Ready</option>
+                        </select>
+                      </div>
+                      <img style="position:absolute;display:block;right:50%;bottom:2%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Normalization" data-content="Make sure to choose &ldquo;Lab Ready&rdquo; for all primers." />
+                      <div class="col-md-8 tutorial">
+                        <button type="button" class="btn btn-default pull-right" disabled="disabled">Update</button>
+                      </div>
+                    </div>
+                    <br/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="container theme-showcase li-violet" role="main">
+        <br/>
+        <div class="panel-violet" id="PCR">
+          <div class="panel-heading">
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#6</span>: PCR Assembly Protocol</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h2 class="panel-title">Experimental Setup for PCR Assembly of Template</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="col-md-12">
+                    <h4>PCR Recipe</h4>
+                    Using P4P6_2HP as an example, mix the following components in a PCR tube:
+                    <br/>
+                    <br/>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
+                          <tr><td><em>10 mM</em></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
+                          <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">1</span> &mu;M</b></em></td>
+                            <td>Primer <b>2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
+                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>26.0</td></tr>
+                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <h4>PCR Conditions</h4>
+            <br/>
+          </div>
+           <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="col-md-6">Steps</th>
+                    <th class="col-md-3">Time</th>
+                    <th class="col-md-3">Temperature</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><em>Denaturation</em></td><td>30 s</td><td>98 &deg;C</td></tr>
+                  <tr><td><em>Denaturation</em></td><td>10 s</td><td>98 &deg;C</td></tr>
+                  <tr><td><em>Annealing</em></td><td>30 s</td><td>60 &deg;C*</td></tr>
+                  <tr><td><em>Extension</em></td><td>30 s</td><td>72 &deg;C</td></tr>
+                  <tr><td><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat 30 cycles</em></td></tr>
+                  <tr><td><em>Final Extension</em></td><td>10 min</td><td>72 &deg;C</td></tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-1">
+                 <span class="pull-right"><i>Note</i>: </span>
+                </div>
+                <div class="col-md-11">
+                 <p>
+                  1. For terminal primers (1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span>), use <b>100 &mu;M</b>. For internal primers (2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span>), dilute to <b>1 &mu;M</b>. Add 2.0 &mu;l of each primer to mixture.
+                  <br/>
+                 </p>
+                 <p>
+                  2. Use stock of 10 mM dNTPs, which has 10 mM of each dATP, dTTP, dCTP, dGTP mixed together. 
+                 </p>
+                 <p>
+                  3. Choose annealing temperature wisely. We recommend to use the same as <code>min_TM</code> by Primerize design, which is usually between 60-64 &deg;C.
+                 </p>
+                 <p>
+                  4. Check PCR product on 4% agarose gel. If assembly is unsuccessful with shorter mis-priming products, we suggest try raising the annealing temperature to reduce mis-priming. Alternatively, splitting the assembly into separate sub-pools (i.e. primer 1-4 and primer 5-6) and do an additional round of full assembly.
+                 </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

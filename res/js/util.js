@@ -16,6 +16,7 @@ $(document).ready(function () {
   var path_design = "/design";
   var path_demo = "/demo_P4P6";
   var path_tutorial = "/tutorial";
+  var path_protocol = "/protocol";
   var path_license = "/license";
   var path_download = "/download";
   var path_about = "/about";
@@ -29,6 +30,8 @@ $(document).ready(function () {
       $("#nav_design").addClass("active");
     } else if (url.indexOf("tutorial") > -1) {
       $("#nav_tutorial").addClass("active");
+    } else if (url.indexOf("protocol") > -1) {
+      $("#nav_protocol").addClass("active");
     } else if (url.indexOf("about") > -1) {
       $("#nav_about").addClass("active");
     } else if (url.indexOf("download") > -1 || (url.indexOf("icense") > -1)) {
@@ -57,6 +60,9 @@ $(document).ready(function () {
       $(".path_demo").attr("href", path_demo);
       $(".path_tutorial").each(function () {
         $(this).attr("href", path_tutorial + $(this).attr("href"));
+      });
+      $(".path_protocol").each(function () {
+        $(this).attr("href", path_protocol + $(this).attr("href"));
       });
       $(".path_license").attr("href", path_license);
       $(".path_download").attr("href", path_download);
