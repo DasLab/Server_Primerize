@@ -248,7 +248,7 @@
               <div class="dialog modal-lg center-block tutorial">
                 <div class="modal-content panel-primary">
                   <div class="modal-header panel-heading">
-                    <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
+                    <h3 class="modal-title" id="myModalLabel">Primerize is running ...</h3>
                   </div>
                   <div class="modal-body panel-body">
                     <div class="col-md-12">
@@ -271,7 +271,27 @@
                   </div>
                 </div>
               </div>
-              <img style="position:absolute;display:block;right:15%;top:6%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window showing unique JOB_ID and retrieval URL link."/>
+              <br/>
+              <h4> A similar modal window will be displayed on the web page for demo :</h4>
+              <br/>
+              <div class="dialog modal-lg center-block tutorial">
+                <div class="modal-content panel-primary">
+                  <div class="modal-header panel-heading">
+                    <h3 class="modal-title">Primerize is running ...</h3>
+                  </div>
+                  <div class="modal-body panel-body">
+                    <h3 class="text-center">
+                      Preparing <span class="label label-warning">DEMO</span> using <span class="label label-danger">P4P6_2HP</span> ...
+                    </h3>
+                    <br/>
+                    <img class="center-block path_button_loading" width="48px" style="opacity:0.5;"/>
+                    <br/>
+                  </div>
+                </div>
+              </div>
+
+              <img style="position:absolute;display:block;right:15%;top:4%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window showing unique JOB_ID and retrieval URL link."/>
+              <img style="position:absolute;display:block;right:15%;top:33%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window for demo."/>
               <br/><hr/>           
               <h4>
                 When the calculation is completed, the result page will automatically be shown. The run results are retrievable through the <a href="/" class="btn btn-primary">&nbsp;&nbsp;Home&nbsp;&nbsp;</a> page with the unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.
@@ -289,8 +309,8 @@
                         <div class="col-md-12">
                           <p data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result. JOB_ID is the unique 16-digit hexadecimal key.">
                             <label for="job_id"><span class="lead"><span class="label label-violet">JOB_ID</span></span>:&nbsp;&nbsp;</label>
-                            <input name="job_id" type="text" value="" style="width:60%" maxlength="32" placeholder="Enter a JOB_ID"/>
-                            <input type="submit" id="btn_retrieve" class="btn btn-blue btn-sm pull-right" value="&nbsp;Retrieve&nbsp;" disabled/>&nbsp;
+                            <input name="job_id" type="text" value="" style="width:60%" maxlength="32" placeholder="Enter a JOB_ID" disabled/>
+                            <input type="submit" id="btn_retrieve" class="btn btn-inverse btn-sm pull-right" value="&nbsp;Retrieve&nbsp;" disabled/>&nbsp;
                           </p>
                           <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (3 months).</p>
                         </div>
