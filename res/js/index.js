@@ -7,7 +7,7 @@ $(document).ready(function () {
   $("#col-4").css("height", col_h);
 
   $("#btn_retrieve").on("click", function () { $("#wait").fadeIn(1000); });
-  $("#btn_demo").on("click", function () { $("#wait").fadeIn(1000); });
+  $("#btn_demo").on("click", function () { $("#modal_demo").modal("show"); });
   
 });
 

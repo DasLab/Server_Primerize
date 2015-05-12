@@ -37,9 +37,7 @@ $(document).ready(function () {
     $('html, body').stop().animate({scrollTop: $($(this).attr("href")).offset().top - 75}, 500);
   });
 
-  $("#btn_demo").on('click', function () {
-    $("#wait").fadeIn(1000);
-  });
+  $("#btn_demo").on('click', function () { $("#modal_demo").modal("show"); });
 });
 
 $(window).on("scroll", function () {

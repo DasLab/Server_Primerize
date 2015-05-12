@@ -62,7 +62,6 @@ class Root:
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
-
         html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7)
         seq = sequence.upper().replace("U", "T")
         sequence = ""
@@ -208,7 +207,7 @@ class Root:
                     else:
                         script += "<br/>"
 
-                script += "</pre></div></div></div></div></p></div>"
+                script += "</pre></div></div></div></div> </div>"
 
                 # f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
                 # job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]

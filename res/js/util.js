@@ -22,6 +22,7 @@ $(document).ready(function () {
   var path_about = "/about";
   var path_navbar = "/res/html/_navbar.html?";
   var path_footer = "/res/html/_footer.html?";
+  var path_modal = "/res/html/_demo.html?";
   
 	var url = window.location.href;
 
@@ -45,7 +46,10 @@ $(document).ready(function () {
       $("#favicon").attr("href", path_icon + "?");
       var today = new Date();
       $("#cp_year").text(today.getFullYear());
-      
+
+      $("#modal_demo").load(path_modal, function () {
+        $(".path_button_loading").attr("src", path_button_loading);
+      });
       $(".path_logo_primerize").attr("src", path_logo_primerize);
       $(".path_logo_das").attr("src", path_logo_das);
       $(".path_logo_stanford").attr("src", path_logo_stanford);

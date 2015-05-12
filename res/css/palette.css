@@ -166,6 +166,9 @@ p.cap:first-letter {
 .li-orange {
 	border-left: 5px solid #ff912e;
 }
+.li-magenta {
+	border-left: 5px solid #ff69bc;
+}
 
 /*.label-default {
 	background-color: #a19193;
