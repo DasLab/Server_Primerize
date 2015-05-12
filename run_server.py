@@ -207,7 +207,7 @@ class Root:
                     else:
                         script += "<br/>"
 
-                script += "</pre></div></div></div></div> </div>"
+                script += "</pre></div></div></div></div><p class=\"lead\"><b><u><i>What next?</i></u></b> Try our suggested experimental <a class=\"btn btn-info btn-sm path_protocol\" href=\"\" role=\"button\" style=\"color: #ffffff;\">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.</p> </div>"
 
                 # f = tempfile.NamedTemporaryFile(mode="w+b", prefix="result_", suffix=".txt", dir="cache", delete=False)
                 # job_id = binascii.b2a_hex(os.urandom(7)) #f.name[-17:]
