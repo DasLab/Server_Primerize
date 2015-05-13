@@ -32,33 +32,29 @@
   <body>
 
     <div class="navbar navbar-fixed-top" role="navigation" id="navbar"></div>
-!!!!!
    <div class="starter-template" id="down">
     <div class="container theme-showcase" role="main">
       <div class="jumbotron">
         <div class="container">
           <h1>Welcome to Primerize!</h1>
-          <img class="path_logo_primerize" src="" style="clear:both; float:right;"/>
+          <img class="path_logo_primerize" src="" style="clear:both; float:right; padding-left: 20px;"/>
           <p>
-            This tutorial walks you through the basics of website interface, explains parameters and results, shows how to channel the output to IDT Bulk Ordering, and more importantly, in-house protocol for how to PCR assemble the template <i>in vitro</i>. Hover mouse to the 
+            This protocol shows you how to channel the output to IDT Bulk Ordering, and in-house experiment protocol for how to PCR assemble the template <i>in vitro</i>. 
+          </p>
+          <p>
+            Hover mouse to the 
             <img style="opacity:0.85;" class="path_button_question" src="" height="40" data-toggle="popover" data-placement="bottom" title="Question mark" data-content="Hover mouse for detailed descriptions."/> 
             for detailed descriptions. 
           </p>
           <br/>
           <p>
-            We have examples for new users, see 
-            <a class="btn btn-success btn-sm path_demo" href="" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>. 
-            For further questions, please feel free to 
-            <a class="btn btn-danger btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us. 
-            Additionally, source code package is available for 
-            <a class="btn btn-warning btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a>. 
-            Please read the Terms and Conditions.
+            Ready to use? Go
+            <a class="btn btn-primary btn-lg path_design" href="" role="button" style="color: #ffffff;">&nbsp;Primerize!&nbsp;</a>
           </p>
           <br/>
           <p>
-            Ready to use? Go
-            <a class="btn btn-primary btn-lg path_design" href="" role="button" style="color: #ffffff;">&nbsp;Primerize!&nbsp;</a>
-            <br/>
+            For further questions, please feel free to 
+            <a class="btn btn-success btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us. 
           </p>
         </div>
       </div>
@@ -76,44 +72,16 @@
           </div>
           <div class="panel-body scroll_nav">
             <ul class="nav" role="tablist" id="scroll_nav">
-              <li class="li-primary">
-                <a id="tab_1" href="#web_input">
-                  Section #1: 
-                  <br/>
-                  <b>Website Input</b>
-                </a>
-              </li>
-              <li class="li-info">
-                  <a id="tab_2" href="#web_retrev">
-                    Section #2: 
-                    <br/>
-                    <b>Result Retrieval</b>
-                  </a>
-              </li>
-              <li class="li-light-blue">
-                  <a id="tab_3" href="#web_output">
-                    Section #3: 
-                    <br/>
-                    <b>Website Output</b>
-                  </a>
-              </li>
-              <li class="li-success">
-                  <a id="tab_4" href="#txt_output">
-                    Section #4:
-                    <br/>
-                    <b>Downloadable Output</b>
-                  </a>
-              </li>
-              <li class="li-green">
-                  <a id="tab_5" href="#idt_bulk">
-                    Section #5: 
+              <li class="li-danger">
+                  <a id="tab_1" href="#idt_bulk">
+                    Section #1: 
                     <br/>
                     <b>IDT Bulk Ordering</b>
                   </a>
               </li>
               <li class="li-violet">
-                  <a id="tab_6" href="#PCR">
-                    Section #6: 
+                  <a id="tab_2" href="#PCR">
+                    Section #2: 
                     <br/>
                     <b>PCR Assembly</b>
                   </a>
@@ -125,578 +93,18 @@
     </div>
 
     <div class="pull-right" id="main">
-      <div class="container theme-showcase li-primary" role="main">
-        <div class="panel-primary" id="web_input">
-          <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: Website Input</b></span>
-          </div>
-          <div class="row">
-            <div class="col-md-12 tutorial">
-              <h2>Input Data:</h2>
-            </div>
-            <div class="col-md-9">
-              <div class="bgimg">
-               <p class="tutorial">
-                <label for="tag"><b>Name Tag</b>:&nbsp;&nbsp;</label>
-                <input name="tag" type="text" value="P4P6_2HP" style="width:50%" maxlength="32" placeholder="Enter a tag" disabled="disabled" /> &nbsp;&nbsp;(optional)
-               </p>
-               <p class="tutorial">
-                <label for="sequence"><b>Sequence</b>:</label>
-               </p>
-               <div class="row">
-                <div class="col-md-10 tutorial">
-                 <ul>
-                  <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
-                  <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
-                  <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
-                 </ul>
-                </div>
-                <div class="col-md-2">
-                 <p class="text-right tutorial">
-                  <br/>
-                  <br/>
-                  <i>Length: <b><span id="count">259</span></b> nt</i>
-                 </p>
-                 <img style="position:absolute;display:block;right:25%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
-                </div>
-               </div>
-               <img style="position:absolute;display:block;right:50%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
-               <textarea class="form-control tutorial" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
-               <img style="position:absolute;display:block;right:50%;top:65%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
-               <br/>
-               <input type="submit" id="btn_submit" class="btn btn-primary tutorial" value="&nbsp;Primerize!&nbsp;" disabled="disabled"/>&nbsp;
-               <a href="" class="btn btn-default tutorial path_design" disabled="disabled">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
-               <span class="tutorial">
-                <input id="is_agree" type="checkbox" checked="yes" required="required" style="display:none">
-                  <label for="is_agree" style="display:none">
-                    <i>
-                      Please read the 
-                      <a href="" class="path_license">Terms and Conditions</a>.
-                    </i>
-                  </label>
-                </input>
-               </span>
-               <img style="position:absolute;display:block;right:50%;top:90%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Terms and Conditions" data-content="You must agree to use."/>
-               <a href="/example_P4P6" id="btn_demo" class="btn btn-success pull-right tutorial" style="color: #ffffff;" data-toggle="popover" data-placement="bottom" disabled="disabled">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
-               <img style="position:absolute;display:block;right:12%;top:90%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="panel panel-default">
-                <div class="panel-heading" data-toggle="popover" data-placement="left">
-                  <h3 class="panel-title tutorial">Advanced Options</h3>
-                  <img style="position:absolute;display:block;right:10%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-content="This part is optional. It enables more options for guided design. Parameters for primer length, primer number and annealing temperature can be specified." data-toggle="popover" data-placement="left" title="Advanced Options"/>
-                </div>
-                <div class="panel-body">
-                  <div class="input-group">
-                    <p class="tutorial">
-                      <label for="min_Tm">minimum <b>Tm</b>:</label>
-                      <input name="min_Tm" type="text" value="60.0" style="width:25%" disabled="disabled"/>
-                      &deg;C
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="MIN_TM" data-content="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C"/>
-                    <p class="tutorial">
-                      <label for="max_length">maximum <b>length</b> of primers:</label>
-                      <input name="max_length" type="text" value="60" style="width:25%" disabled="disabled"/> nt 
-                      <br/>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:22%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="MAX_LENGTH" data-content="Maximum length for each primer. Default = 60 nt."/>
-                    <p class="tutorial">
-                      <label for="min_length">minimum <b>length</b> of primers:</label>
-                      <input name="min_length" type="text" value="15" style="width:25%" disabled="disabled"/> nt 
-                      <br/>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:42%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="MIN_LENGTH" data-content="Minimum length for each primer. Default = 15 nt."/>
-                    <p class="tutorial">
-                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers">
-                        <label for="is_num_primers">&nbsp;<b>#</b> number of primers:</label>
-                      </input>
-                      <br/>
-                      <input name="is_num_primers" type="hidden" value="0" checked disabled="disabled">
-                      <input name="num_primers" type="text" value="auto" style="width:25%" id="text_num_primers" disabled="disabled"/>
-                      <input name="num_primers" type="hidden" value="" disabled="disabled"/>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:62%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="NUM_PRIMERS" data-content="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only. Check the checkbox to enable use."/>
-                    <p class="tutorial">
-                      <input name="is_t7" type="checkbox" value="1" id="check_t7" checked>
-                        <label for="is_t7">&nbsp;check for <b>T7</b> promoter sequence</label>
-                      </input>
-                      <br/>
-                      <input name="is_t7" type="hidden" value="0" checked>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:85%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="CHECK_T7" data-content="Check if T7 promoter (TTCTAATACGACTCACTATA) is present in input sequence. If not, it will be prepended automatically. Check the checkbox to enable use."/>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br/>
-        <div class="row">
-          <div class="col-md-9">
-            <div class="alert alert-warning center-block tutorial" id="warn_500">
-              <b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 500 nt."/>
-            <div class="alert alert-orange center-block tutorial" id="warn_1000">
-              <b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm path_license disabled" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:60%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 1000 nt."/>
-          </div>
-          <div class="col-md-3"></div>
-        </div>
-      </div>
-      <hr/>
 
-      <div class="container theme-showcase li-info" role="main">
+
+      <div class="container theme-showcase li-danger" role="main">
         <br/>
-        <div class="panel-info" id="web_retrev">
+        <div class="panel-danger" id="idt_bulk">
           <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: Result Retrieval</b></span>
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: IDT Bulk Ordering</b></span>
           </div>
           <br/>
           <div class="row">
             <div class="col-md-12">
-              <h4> Once submitted, a modal window will be displayed on the web page, showing the <span class="label label-violet">JOB_ID</span> :</h4>
-              <br/>
-              <div class="dialog modal-lg center-block tutorial">
-                <div class="modal-content panel-primary">
-                  <div class="modal-header panel-heading">
-                    <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
-                  </div>
-                  <div class="modal-body panel-body">
-                    <div class="col-md-12">
-                      <h3 class="text-center"> Your 
-                        <span class="label label-violet">JOB_ID</span> is: 
-                        <span class="label label-inverse" id="modal_id">0123456789abcdef</span>
-                      </h3>
-                      <br/>
-                      <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
-                      <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
-                      <br/>
-                      <p class="text-center">
-                        <b>Please copy/paste this link: 
-                        <br/><code><span id="url_id">http://primerize.stanford.edu/result?job_id=0123456789abcdef</span></code></b>
-                      </p>
-                      <br/>
-                      <img class="center-block path_button_loading" width="48px" />
-                      <br/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <img style="position:absolute;display:block;right:15%;top:6%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window showing unique JOB_ID and retrieval URL link."/>
-              <br/><hr/>           
-              <h4>
-                When the calculation is completed, the result page will automatically be shown. The run results are retrievable through the <a href="/" class="btn btn-primary">&nbsp;&nbsp;Home&nbsp;&nbsp;</a> page with the unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.
-              </h4>
-              <br/>
-              <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="panel panel-danger">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Result retrieval</h3>
-                    </div>
-                    <div id="col-1" class="panel-body">
-                      <form method='get' action='/result'>
-                        <div class="col-md-12">
-                          <p data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result. JOB_ID is the unique 16-digit hexadecimal key.">
-                            <label for="job_id"><span class="lead"><span class="label label-violet">JOB_ID</span></span>:&nbsp;&nbsp;</label>
-                            <input name="job_id" type="text" value="" style="width:60%" maxlength="32" placeholder="Enter a JOB_ID"/>
-                            <input type="submit" id="btn_retrieve" class="btn btn-blue btn-sm pull-right" value="&nbsp;Retrieve&nbsp;" disabled/>&nbsp;
-                          </p>
-                          <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (3 months).</p>
-                        </div>
-                    </div>
-                  </div>  
-                </div>
-                <div class="col-md-2"></div>
-              </div>       
-              <hr/>           
-              <h4>Before the calculation is finished, the result page will indicate that the query is being processed. Once finished, the actual results will replace this temporary page:</h4>
-              <br/>
-              <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                      <span class="sr-only"></span>
-                    </div>
-                  </div>
-                  <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
-                  <br/>
-                  <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
-                  <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
-                </div>
-                <div class="col-md-2"></div>
-              </div>
-              <hr/>           
-              <h4>For long inputs, we encourage the user to <a class="btn btn-warning btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. If the server encounters an internal error while processing the run, the following page will be shown.</h4>
-              <br/>
-              <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                      <span class="sr-only"></span>
-                    </div>
-                  </div>
-                  <h3 class="modal-title" id="myModalLabel">Primerize has difficulty in your query...</h3>
-                  <br/>
-                  <p>Primerize encountered an internal error while processing your query. Sorry for the inconvenience. </p>
-                  <p>We will investigate and fix the problem.</p>
-                  <p>For further information, please feel free to <a class="btn btn-warning btn-sm path_about disabled" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</p>
-                </div>
-                <div class="col-md-2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr/>
-
-      <div class="container theme-showcase li-light-blue" role="main">
-        <br/>
-        <div class="panel-light-blue" id="web_output">
-          <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: Website Output</b></span>
-          </div>
-          <br/>
-          <div class="row">
-            <div class="col-md-8">
-              <h2 class="tutorial">Output Result:</h2>
-            </div>
-            <div class="col-md-4">
-              <h4 class="text-right tutorial">
-                <span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">0123456789abcdef</span>
-              </h4>
-              <img style="position:absolute;display:block;right:60%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="JOB_ID" data-content="The unique 16-digit hexadecimal key for each run." />
-              <a href="" class="btn btn-info pull-right tutorial" style="color: #ffffff;" title="Output in plain text" download disabled="disabled">&nbsp;Save Result&nbsp;</a>
-              <img style="position:absolute;display:block;right:35%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="Save Results" data-content="Save the webpage output results in plain text file. Each run has its unique job key." />
-             <img style="position:absolute;display:block;right:35%;top:135%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported. "/>
-            </div>
-          </div>
-          <br/>
-          <div class="alert alert-warning" >
-            <p class="tutorial">
-              <b>WARNING</b>: Primer <b>2</b><span class="label label-danger">R</span> can misprime with <span class="label label-default">4</span>-residue overlap to position <span class="label label-success">23</span>, which is covered by primers  <b>1</b><span class="label label-info">F</span>.
-              <br/>
-              <b>WARNING</b>: Primer <b>3</b><span class="label label-info">F</span> can misprime with <span class="label label-default">7</span>-residue overlap to position <span class="label label-success">220</span>, which is covered by primers  <b>5</b><span class="label label-info">F</span>. <b>6</b><span class="label label-danger">R</span>.
-              <br/>
-              <b>WARNING</b>: Primer <b>4</b><span class="label label-danger">R</span> can misprime with <span class="label label-default">4</span>-residue overlap to position <span class="label label-success">66</span>, which is covered by primers  <b>2</b><span class="label label-danger">R</span>.
-              <br/>
-              <b>WARNING</b>: One-pot PCR assembly may fail due to mispriming; consider first assembling fragments in a preliminary PCR round (subpool).
-              <br/>
-            </p>
-          </div>
-          <div class="row">
-            <div class="col-md-10">
-              <div class="alert alert-default tutorial">
-                <p>
-                  <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
-                  <br/>
-                  <b>SUCCESS</b>: T7 promoter sequence is followed by nucleotide <u>G</u>.
-                </p>
-              </div>
-              <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback of T7 promoter checking. If feature is enabled, it will report presence, any actions taken, and whether the T7 region is followed by nucleotide G for efficient transcription initiation."/>
-            </div>
-            <div class="col-md-2">
-              <div class="alert alert-orange text-center tutorial">
-                <b>Time elapsed</b>: 
-                <br/>
-                <i>2.3</i> s.
-             </div>
-             <img style="position:absolute;display:block;left:-5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Timer" data-content="Total runtime for this job (including program initiation)."/>
-           </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-primary">
-                <div class="panel-heading tutorial">
-                  <h2 class="panel-title">Designed Primers</h2>
-                </div>
-                <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Table of Primers" data-content="Complete set of primers listed." />
-                <div class="panel-body">
-                  <table class="table tutorial">
-                    <thead>
-                      <tr>
-                        <th class="col-md-1">#</th>
-                        <th class="col-md-1">Length</th>
-                        <th class="col-md-10">Sequence</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><b>1<span class="label label-info">F</span></b></td>
-                        <td><em>60</em></td>
-                        <td>TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG</td>
-                      </tr>
-                      <tr>
-                        <td><b>2<span class="label label-danger">R</span></b></td>
-                        <td><em>60</em></td>
-                        <td>TTTCCCCTGAGACTTGGTACTGAACGGCTGTTGACCCCTTTCCCGCAATTCCGTTGTTGG</td>
-                      </tr>
-                      <tr>
-                        <td><b>3<span class="label label-info">F</span></b></td>
-                        <td><em>59</em></td>
-                        <td>ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACG</td>
-                      </tr>
-                      <tr>
-                        <td><b>4<span class="label label-danger">R</span></b></td>
-                        <td><em>59</em></td>
-                        <td>GTTGACTTAGGACTTGGCTGCGTGGTTAGGACCATGTCCGTCAGCTTATTACCATACCC</td>
-                      </tr>
-                      <tr>
-                        <td><b>5<span class="label label-info">F</span></b></td>
-                        <td><em>60</em></td>
-                        <td>CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG</td>
-                      </tr>
-                      <tr>
-                        <td><b>6<span class="label label-danger">R</span></b></td>
-                        <td><em>59</em></td>
-                        <td>GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <img style="position:absolute;display:block;right:91%;top:12%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Number" data-content="Numbering of all primers. Foward (F) and reverse (R) primers (in assembly) are labelled." />
-                  <img style="position:absolute;display:block;right:81%;top:12%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Length" data-content="Length of all primers." />
-                  <img style="position:absolute;display:block;right:50%;top:12%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="bottom" title="Primer Sequence" data-content="Sequnces of all primers, written from 5' to 3'." />
-                </div>
-              </div>
-            </div>
-          </div>
-          <br/>
-          <div class="row">
-           <div class="col-md-12">
-            <div class="panel panel-green">
-              <div class="panel-heading tutorial">
-                <h2 class="panel-title">Assembly Scheme</h2>
-              </div>
-              <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Assembly Scheme" data-content="Graphical illustration of the assembly scheme." />
-              <div class="panel-body">
-                <pre class="tutorial"><span class="label-white label-primary">TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC</span><br/><br/><span class="label-info">TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG</span>->1<br/>                                          |||||||||||||||||| <kbd>63.0</kbd><br/>                                       2<-<span class="label-white label-danger">GGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTT</span><br/>                                                                                    |||||||||||||||||| <kbd>60.2</kbd><br/>                                                                                    <span class="label-info">ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC</span><br/>                                                                                                                          ||||||||||||||||<br/>                                                                                                                       4<-<span class="label-white label-danger">CCCATACCATTATTCG</span><br/>                                                                                                                                            <br/><span class="label-warning">AAGATTATGCTGAGTGATATCCGGTTTCCGCAGCTCATCTGCGGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTTGAAACTCTACCGGAACGTTTCCCATACCATTATTCG</span><br/><br/><br/><span class="label-white label-primary">TGACGGACATGGTCCTAACCACGCAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGAGTAGCTGACAAAAAGAAACAACAACAACAAC</span><br/>                                                                                                                       
-<span class="label-info">TGACG</span>->3<br/>||||| <kbd>60.4</kbd><br/><span class="label-white label-danger">ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTG</span><br/>                       |||||||||||||||||||| <kbd>60.5</kbd><br/>                       <span class="label-info">CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG</span>->5                                   
-                                                              ||||||||||||||||||||| <kbd>62.4</kbd>                             
-                                                           6<-<span class="label-white label-danger">TACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG</span>
-          <br/><span class="label-warning">ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTGTCTAGAAGACAACTATACCTACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG</span>
-                  </pre>
-                    <img style="position:absolute;display:block;right:5%;top:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence." />
-                    <img style="position:absolute;display:block;right:5%;top:42%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence in reverse complement." />
-                    <img style="position:absolute;display:block;right:45%;top:22%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="top" title="Primers" data-content="Primers listed above in the assembly scheme, written in their directions (forward/reverse)." />
-                    <img style="position:absolute;display:block;right:20%;top:22%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Annealing Temperature" data-content="Annealing temperature of the &ldquo;bridging&rdquo; region between each neighboring primer pairs." />
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-
-        <hr/>           
-        <h4>Depending on the input, one of the following fields might show up instead of the <span class="label label-warning">WARNING</span> as above.</h4>
-        <br/>
-        <div class="row ">
-          <div class="col-md-12">
-            <div class="alert alert-success tutorial" >
-              <p class="tutorial">
-                <b>SUCCESS</b>: No potential mis-priming found. See results below.
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:52%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="Warnings" data-content="SUCCESS indicates no potential mis-priming was detected."/>
-          </div>
-          <div class="col-md-6">
-            <div class="alert alert-danger tutorial" >
-              <p class="tutorial">
-                <b>ERROR</b>: Invalid sequence input (should be <u>at least <b>60</b> nt</u> long).
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to short length."/>
-          </div>
-          <div class="col-md-6">
-            <div class="alert alert-danger tutorial" >
-              <p class="tutorial">
-                <b>ERROR</b>: Invalid sequence input (should be composed of A, C, G, T and U).
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to illegal characters' presense."/>
-          </div> 
-          <div class="col-md-6">
-            <div class="alert alert-danger tutorial" >
-              <p class="tutorial">
-                <b>ERROR</b>: Invalid advanced options input.
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid advanced options input."/>
-          </div> 
-          <div class="col-md-6">
-            <div class="alert alert-danger tutorial" >
-              <p class="tutorial">
-                <b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid input for # number of primers."/>
-          </div> 
-          <div class="col-md-6">
-            <div class="alert alert-default tutorial" >
-              <p class="tutorial">
-                <b>T7_CHECK</b>: feature disabled (check the option to enable). No checking was performed.
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when disabled."/>
-          </div> 
-          <div class="col-md-6">
-            <div class="alert alert-default tutorial" >
-              <p class="tutorial">
-                <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence was absent, Primerize automatically prepended it.
-                <br/>
-                <b>SUCCESS</b>: T7 promoter sequence is followed by nucleotide <u>G</u>.
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and G follows T7 region."/>
-          </div> 
-          <div class="col-md-6">
-            <div class="alert alert-default tutorial" >
-              <p class="tutorial">
-                <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
-                <br/>
-                <b>WARNING</b>: T7 promoter sequence is <u><b>NOT</b></u> followed by nucleotide <u>G</u>. Consider modifying the sequence for better transcription.
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was not added and G did not follow T7 region."/>
-          </div> 
-          <div class="col-md-6">
-            <div class="alert alert-default tutorial" >
-              <p class="tutorial">
-                <b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence was absent, Primerize automatically prepended it.
-                <br/>
-                <b>WARNING</b>: T7 promoter sequence is <u><b>NOT</b></u> followed by nucleotide <u>G</u>. Consider modifying the sequence for better transcription.
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and G did not follow T7 region."/>
-          </div> 
-        </div>
-        <hr/>           
-        <h4>You might encounter a <span class="label label-danger">FAILURE</span> case.</h4>
-        <h4>This happens when Primerize was not able to find a solution using the given input sequence in combination with specified advanced options. The following page will be shown:</h4>
-        <br/>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="alert alert-danger tutorial" >
-              <p>
-                <b>FAILURE</b>: No solution found (Primerize run finished without errors).
-                <br/>
-                <ul>
-                  <li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li>
-                  <li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li>
-                  <li>For further information, please feel free to <a class="btn btn-warning btn-sm path_about disabled" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li>
-                </ul>
-              </p>
-            </div>
-            <img style="position:absolute;display:block;right:3%;top:50%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="FAILURE indicates no solution was found using the current setting. You might try adjusting the advanced options."/>
-          </div>
-
-        </div>
-      </div>
-      <hr/>
-
-      <div class="container theme-showcase li-success" role="main">
-        <br/>
-        <div class="panel-success" id="txt_output">
-          <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#4</span>: Downloadable Output</b></span>
-          </div>
-          <br/>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-warning">
-                <div class="panel-heading tutorial">
-                  <h2 class="panel-title">Plain Text File</h2>
-                </div>
-                <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Text Output" data-content="An example of P4P6-2HP Demo text output file. Results are same as seen in webpage." />
-                <div class="panel-body">
-
-<pre class="tutorial">
-Primerize Result
-
-INPUT
-=====
-TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACGGACATGGTCCTAACCACGCAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGAGTAGCTGACAAAAAGAAACAACAACAACAAC
-#
-MIN_TM: 60
-NUM_PRIMERS: auto (unspecified)
-MAX_LENGTH: 60
-MIN_LENGTH: 15
-T7_CHECK: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
-T7_CHECK: T7 promoter sequence is followed by nucleotide G.
-
-
-OUTPUT
-======
-WARNING: Primer 2 can misprime with 4-residue overlap to position 23, which is covered by primers  1.
-WARNING: Primer 3 can misprime with 7-residue overlap to position 220, which is covered by primers  5. 6.
-WARNING: Primer 4 can misprime with 4-residue overlap to position 66, which is covered by primers  2.
-#
-primer-1  60  TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG
-primer-2  60  TTTCCCCTGAGACTTGGTACTGAACGGCTGTTGACCCCTTTCCCGCAATTCCGTTGTTGG
-primer-3  59  ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACG
-primer-4  59  GTTGACTTAGGACTTGGCTGCGTGGTTAGGACCATGTCCGTCAGCTTATTACCATACCC
-primer-5  60  CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG
-primer-6  59  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT
-#
-TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC
-                                                                                                                                          
-TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG->1                                                                           
-                                          |||||||||||||||||| 63.0                                                                       
-                                       2<-GGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTT                                    
-                                                                                    |||||||||||||||||| 60.2                             
-                                                                                    ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC
-                                                                                                                          ||||||||||||||||
-                                                                                                                       4<-CCCATACCATTATTCG
-                                                                                                                                          
-AAGATTATGCTGAGTGATATCCGGTTTCCGCAGCTCATCTGCGGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTTGAAACTCTACCGGAACGTTTCCCATACCATTATTCG
-TGACGGACATGGTCCTAACCACGCAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGAGTAGCTGACAAAAAGAAACAACAACAACAAC
-                                                                                                                         
-TGACG->3                                                                                                                 
-||||| 60.4                                                                                                             
-ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTG                                                                              
-                       |||||||||||||||||||| 60.5                                                                       
-                       CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG->5                                   
-                                                              ||||||||||||||||||||| 62.4                               
-                                                           6<-TACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG
-                                                                                                                         
-ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTGTCTAGAAGACAACTATACCTACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG
-#
-
-------/* IDT USER: for primer ordering, copy and paste to Bulk Input */------
-------/* START */------
-P4P4_2HP-1  TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG  25nm  STD
-P4P4_2HP-2  TTTCCCCTGAGACTTGGTACTGAACGGCTGTTGACCCCTTTCCCGCAATTCCGTTGTTGG  25nm  STD
-P4P4_2HP-3  ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACG   25nm  STD
-P4P4_2HP-4  GTTGACTTAGGACTTGGCTGCGTGGTTAGGACCATGTCCGTCAGCTTATTACCATACCC   25nm  STD
-P4P4_2HP-5  CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG  25nm  STD
-P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  STD
-------/* END */------
-------/* NOTE: use "Lab Ready" for "Normalization" */------
-</pre>
-                  <img style="position:absolute;display:block;right:35%;bottom:10%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="right" title="IDT Bulk Ordering" data-content="Directly copy and paste this section into IDT Bulk Ordering Input. (See below)" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr id="" />
-
-      <div class="container theme-showcase li-green" role="main">
-        <br/>
-        <div class="panel-green" id="idt_bulk">
-          <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#5</span>: IDT Bulk Ordering</b></span>
-          </div>
-          <br/>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-danger">
+              <div class="panel panel-green">
                 <div class="panel-heading tutorial">
                   <h2 class="panel-title">Bulk Format Ordering at IDT DNA Oligos</h2>
                 </div>
@@ -848,25 +256,275 @@ Etc...</textarea>
         <br/>
         <div class="panel-violet" id="PCR">
           <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#6</span>: PCR Assembly Protocol</b></span>
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: PCR Assembly Protocol</b></span>
           </div>
           <br/>
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h2 class="panel-title">Experimental Setup for PCR Assembly of Template</h2>
+                  <h2 class="panel-title">PCR Recipe (Single-Round)</h2>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-12">
-                    <h4>PCR Recipe</h4>
-                    Using P4P6_2HP as an example, mix the following components in a PCR tube:
+                    Using <span class="label label-warning">P4P6_2HP</span> as an example, mix the following components in a PCR tube:
                     <br/>
                     <br/>
                   </div>
                   <div class="row">
-                    <div class="col-md-1"></div>
+                    <div class="col-md-3"></div>
                     <div class="col-md-6">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
+                          <tr><td><em>10 mM</em> <sup style="color:#209874;"><b>(1)</b></sup></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
+                          <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">1</span> &mu;M</b></em> <sup style="color:#209874;"><b>(2)</b></sup></td>
+                            <td>Primer <b>2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">100</span> &mu;M</b></em> <sup style="color:#209874;"><b>(2)</b></sup></td>
+                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>26.0</td></tr>
+                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-1">
+                         <span class="pull-right"><i><b><u>Note</u></b></i>: </span>
+                        </div>
+                        <div class="col-md-11">
+                         <p>
+                          <span style="color:#209874;"><b>(1)</b></span> 
+                          Use stock of 10 mM dNTPs, which has 10 mM of each dATP, dTTP, dCTP, dGTP mixed together. 
+                         </p>
+                         <p>
+                          <span style="color:#209874;"><b>(2)</b></span> 
+                          For terminal primers (1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span>), use <b><span style="color:blue">100</span> &mu;M</b>. For internal primers (2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span>), dilute to <b><span style="color:blue">1</span> &mu;M</b>. Add 2.0 &mu;l of each primer to mixture.
+                         </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-orange">
+                <div class="panel-heading">
+                  <h2 class="panel-title">PCR Conditions</h2>
+                </div>
+                <div class="panel-body">
+                   <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-md-6">Steps</th>
+                            <th class="col-md-3">Time</th>
+                            <th class="col-md-3">Temperature</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>Denaturation</em></td><td>30 s</td><td>98 &deg;C</td></tr>
+                          <tr><td><em>Denaturation</em></td><td>10 s</td><td>98 &deg;C</td></tr>
+                          <tr><td><em>Annealing</em></td><td>30 s</td><td>60 &deg;C <sup style="color:#209874;"><b>(3, 4)</b></sup></td></tr>
+                          <tr><td><em>Extension</em></td><td>30 s</td><td>72 &deg;C</td></tr>
+                          <tr><td><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat 30 cycles</em></td></tr>
+                          <tr><td><em>Final Extension</em></td><td>10 min</td><td>72 &deg;C</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3"></div>
+                    
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-1">
+                         <span class="pull-right"><i><b><u>Note</u></b></i>: </span>
+                        </div>
+                        <div class="col-md-11">
+                         <p>
+                          <span style="color:#209874;"><b>(3)</b></span> 
+                          Choose annealing temperature wisely. We recommend to use the same as <code>min_T<sub>m</sub></code> by Primerize design, which is usually between 60-64 &deg;C.
+                         </p>
+                         <p>
+                          <span style="color:#209874;"><b>(4)</b></span> 
+                          Check PCR product on 4% agarose gel. If assembly is unsuccessful with shorter mis-priming products, we suggest try raising the annealing temperature to reduce mis-priming. Alternatively, splitting the assembly into separate sub-pools (i.e. primer 1-4 and primer 5-6) and do an additional round of full assembly (see below).
+                         </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h2 class="panel-title">PCR Recipe (Multiple-Round)</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="col-md-12">
+                    <p>
+                      When the aforementioned fast '1-pot' recipe does not yield pure assembled DNA fragments (usually due to mispriming), there are alternative strategies that split the full assembly into 'sub-pools' or pots, and assemble in a second round using the pre-assembled pieces as building blocks. 
+                    </p>
+                    <hr/>
+                  </div>
+                  <div class="col-md-12">
+                    <h3><span class="label label-success">Strategy 1: '2-Round'</span></h3>
+                    <p>aaa</p>
+                    <br/>
+                    
+                    <div class="row">
+                      <div class="col-md-9" style="border: 5px solid #ff912e; padding-top: 20px;">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>1 <span class="label label-info">F</span></b>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-1"></div>
+                          <div class="col-md-4">
+                            <div class="progress" id="mid-1">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>3 <span class="label label-info">F</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-2"></div>
+                          <div class="col-md-5">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>2 <span class="label label-danger">R</span></b>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-1"></div>
+                          <div class="col-md-4">
+                            <div class="progress" id="mid-2">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>4 <span class="label label-danger">R</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3"></div>
+                    </div>
+                    <br/>
+
+                    <div class="row">
+                      <div class="col-md-9">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            Sub-Pool 1
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            DNA
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3"></div>
+                      <div class="col-md-9">
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-11">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Sub-Pool 2
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3"></div>
+                      <div class="col-md-9" style="border: 5px solid #d86f5c; padding-top: 20px;">
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-4">
+                            <div class="progress" id="mid-3">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>3 <span class="label label-info">F</span></b>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-1"></div>
+                          <div class="col-md-4">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>5 <span class="label label-info">F</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-4"></div>
+                          <div class="col-md-4">
+                            <div class="progress" id="mid-4">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>4 <span class="label label-danger">R</span></b>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-1"></div>
+                          <div class="col-md-3">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;" >
+                                Primer <b>6 <span class="label label-danger">R</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br/><br/>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                      <h4><span class="label label-orange">Sub-Pool 1</span></h4>
                       <table class="table">
                         <thead>
                           <tr>
@@ -881,77 +539,342 @@ Etc...</textarea>
                           <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
                           <tr>
                             <td><em><b><span style="color:blue">1</span> &mu;M</b></em></td>
-                            <td>Primer <b>2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span></b></td>
+                            <td>Primer <b>2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span></b></td>
                             <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
+                            <td>Primer <b>1<span class="label label-info">F</span>, 4<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>30.0</td></tr>
+                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-5 li-light-blue" >
+                      <h4><span class="label label-dark-red">Sub-Pool 2</span></h4>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
+                          <tr><td><em>10 mM</em></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
+                          <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">1</span> &mu;M</b></em></td>
+                            <td>Primer <b>4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
+                            <td>Primer <b>3<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>30.0</td></tr>
+                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <h4><span class="label label-inverse">Final Pool</span></h4>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
+                          <tr><td><em>10 mM</em></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
+                          <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                          <tr>
+                            <td></td>
+                            <td>Product from sub-pools <span class="label label-orange">1</span>, <span class="label label-dark-red">2</span></td>
+                            <td>7.0 <i>(each)</i></td>
                           </tr>
                           <tr>
                             <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
                             <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
-                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>26.0</td></tr>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>20.0</td></tr>
                           <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
                         </tbody>
                       </table>
                     </div>
+                    <div class="col-md-3"></div>
                   </div>
+                  <hr/>
+
+                  <div class="col-md-12">
+                    <h3><span class="label label-success">Strategy 2: 'Couple'</span></h3>
+                    <p>aaa</p>
+                    <br/>
+                    
+                    <div class="row">
+                      <div class="col-md-6" style="border: 5px solid #ff912e; padding-top: 20px;">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>1 <span class="label label-info">F</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-8">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>2 <span class="label label-danger">R</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-1"></div>
+                      <div class="col-md-5" style="border: 5px solid #3ed4e7; padding-top: 20px;">
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-7">
+                            <div class="progress" id="mid-1">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>5 <span class="label label-info">F</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6"></div>
+                          <div class="col-md-6">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>6 <span class="label label-danger">R</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-11">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Sub-Pool 1
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-1"></div>
+                      <div class="col-md-5">
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-11">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Sub-Pool 3
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            DNA
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4"></div>
+                      <div class="col-md-5">
+                        <div class="row">
+                          <div class="col-md-11">
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Sub-Pool 2
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4"></div>
+                      <div class="col-md-5" style="border: 5px solid #d86f5c; padding-top: 20px;">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="progress" id="mid-3">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>3 <span class="label label-info">F</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-4"></div>
+                          <div class="col-md-7">
+                            <div class="progress" id="mid-4">
+                              <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                Primer <b>4 <span class="label label-danger">R</span></b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br/><br/>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
+                          <tr><td><em>10 mM</em></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
+                          <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1">
+                      <h4>&nbsp;</h4>
+                      <table class="table">
+                        <tbody>
+                          <tr><td><em><b><span style="color:blue">100</span> &mu;M</b></em></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3">
+                      <h4><span class="label label-orange">Sub-Pool 1</span></h4>
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>Primer <b>1<span class="label label-info">F</span>, 2<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3 li-light-blue">
+                      <h4><span class="label label-dark-red">Sub-Pool 2</span></h4>
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>Primer <b>3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3 li-light-blue">
+                      <h4><span class="label label-info">Sub-Pool 3</span></h4>
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <table class="table">
+                        <thead style="color:#fff;">
+                          <tr>
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>34.0</td></tr>
+                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3"></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <h4><span class="label label-inverse">Final Pool</span></h4>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
+                          <tr><td><em>10 mM</em></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
+                          <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                          <tr>
+                            <td></td>
+                            <td>Product from sub-pools <span class="label label-orange">1</span>, <span class="label label-dark-red">2</span>, <span class="label label-info">3</span></td>
+                            <td>7.0 <i>(each)</i></td>
+                          </tr>
+                          <tr>
+                            <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
+                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>2.0 <i>(each)</i></td>
+                          </tr>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>13.0</td></tr>
+                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3"></div>
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-md-12">
-            <h4>PCR Conditions</h4>
-            <br/>
-          </div>
-           <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-6">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="col-md-6">Steps</th>
-                    <th class="col-md-3">Time</th>
-                    <th class="col-md-3">Temperature</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td><em>Denaturation</em></td><td>30 s</td><td>98 &deg;C</td></tr>
-                  <tr><td><em>Denaturation</em></td><td>10 s</td><td>98 &deg;C</td></tr>
-                  <tr><td><em>Annealing</em></td><td>30 s</td><td>60 &deg;C*</td></tr>
-                  <tr><td><em>Extension</em></td><td>30 s</td><td>72 &deg;C</td></tr>
-                  <tr><td><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat 30 cycles</em></td></tr>
-                  <tr><td><em>Final Extension</em></td><td>10 min</td><td>72 &deg;C</td></tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-1">
-                 <span class="pull-right"><i>Note</i>: </span>
-                </div>
-                <div class="col-md-11">
-                 <p>
-                  1. For terminal primers (1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span>), use <b>100 &mu;M</b>. For internal primers (2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span>), dilute to <b>1 &mu;M</b>. Add 2.0 &mu;l of each primer to mixture.
-                  <br/>
-                 </p>
-                 <p>
-                  2. Use stock of 10 mM dNTPs, which has 10 mM of each dATP, dTTP, dCTP, dGTP mixed together. 
-                 </p>
-                 <p>
-                  3. Choose annealing temperature wisely. We recommend to use the same as <code>min_TM</code> by Primerize design, which is usually between 60-64 &deg;C.
-                 </p>
-                 <p>
-                  4. Check PCR product on 4% agarose gel. If assembly is unsuccessful with shorter mis-priming products, we suggest try raising the annealing temperature to reduce mis-priming. Alternatively, splitting the assembly into separate sub-pools (i.e. primer 1-4 and primer 5-6) and do an additional round of full assembly.
-                 </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
+      <br/>
     </div>
   </div>
 </div>

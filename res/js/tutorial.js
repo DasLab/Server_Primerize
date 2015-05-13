@@ -26,6 +26,10 @@ function resize() {
       degree = 2;
     }
   }
+
+  // $("#mid-3").css("width", $("#mid-1").css("width"));
+  // $("#mid-2").css("width", $("#mid-4").css("width"));
+
 }
 
 var degree = 0;

@@ -35,106 +35,114 @@
 
     <div class="container theme-showcase" role="main">
       <div class="starter-template">
-        <div class="col-md-6" class="row" class="panel panel-primary">
-          <div class="panel panel-primary">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h2 class="panel-title">Primerize Server</h2>
+              </div>
+              <div class="panel-body">
+              <img class="path_logo_primerize" src="" style="clear:both;float:right;" height="128"/>
+                <p class="cap">
+                  Custom RNA synthesis is of high demand in biological and biotechnology research. Compared to chemical synthesis of RNA, strategies that leverage primer assembly of DNA templates and subsequent <i>in vitro</i> transcription by T7 RNA polymerase are rapid and cost-effective, and RNA lengths up to hundreds of nucleotides are readily achievable. Creating RNAs via this route requires preparing DNA templates, which can be assembled at low cost from mixtures of short primers with lengths up to 60 nucleotides via the polymerase chain reaction (PCR). 
+                </p>
+                <p>
+                  This problem can be challenging particularly if one wishes to avoid primer 3´ ends that might misprime into incorrect locations and be extended by DNA polymerase into undesired products, and if one is not allowed to change the sequence. On one hand, there has been substantial work on developing algorithms for designing primers for PCR assembly into DNA templates, with special methods to make codon adjustments for protein synthesis, to optimize primer boundaries against incorrect hybridization of primers, and to assemble large genes. On the other hand with the terminated support of previous web servers, automated primer design tools that optimize against mispriming still require software download, installation, and time to learn.
+                </p>
+                <p>
+                  We previously developed a dynamic programming-based algorithm to design primers that can be PCR-assembled into templates for high-throughput RNA synthesis and simple kit or bead-based purification. Given a desired DNA template sequence, this method, named Primerize herein, is optimized to reduce mispriming during PCR by avoiding primer boundaries that might anneal to incorrect sequences. The algorithm has been tested in the synthesis and rapid purification of numerous RNA sequences from our lab with lengths up to 300 nucleotides. In each of these applications, the sequence and purity of the transcribed RNA was verified by reverse transcription and capillary electrophoresis methods. Nevertheless, these scripts previously required MATLAB installation to run and nontrivial efforts to set up. Requests to use this algorithm and the lack of other primer design servers motivated us to prepare an online version of Primerize that should be more broadly useable by the RNA community. 
+                </p>
+              </div>
+            </div>
+            <div class="panel panel-success" >
+                <div class="panel-heading">
+                  <h2 class="panel-title">Primerize</h2>
+                </div>
+                <div class="panel-body">
+                  <p class="cap">
+                   Primerize (previously named <code>NA_thermo</code>), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
+                  </p>
+                  <p>
+                    The algorithm designs forward (sense strand) and reverse (anti-sense strand) primers that minimize the total length, and therefore the total synthesis cost, of the oligonucleotides. Although developed independently, Primerize is a special case of the general <b>‘Gapped Oligo Design’</b> algorithm described and mathematically analyzed in detail by <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4375554" target="_blank">Thachuk and Condon</a>, optimizing the mispriming score and sequence spanning instead of T<sub>m</sub>.
+                  </p>
+                  <p>
+                    We reasoned that mis-hybridizations would occasionally occur and be recognized by DNA polymerase, and since the primer’s 3´-most nucleotide would be bound to the complement, the products could be extended by the polymerase. Thus we introduced and experimentally tested a score term misprime, whose purpose was to reduce artifacts from mispriming during PCR assemblies. A heuristic score was defined based on the number of contiguous reverse complement matches of the 3´-most n nucleotides of the primer on a possible touchdown site; the score was incremented by 10 for A/T pairings and 12.5 for G/C pairings for each match. 
+                  </p>
+                </div>
+              </div>
+            </div>
+          <div class="col-md-6">
+            <div class="panel panel-danger" id="privacy">
+              <div class="panel-heading">
+                <h2 class="panel-title">Disclaimer</h2>
+              </div>
+              <div class="panel-body">
+                <h4><span class="label label-orange">Privacy</span></h4>
+                <p>
+                  Users of the server are anonymized. Please note that input data and result on the servers are not encrypted by sessions, thus anyone with the <span class="label label-violet">JOB_ID</span> may download a particular result within expiration (3 months). However, the chance of guessing the randomly generated <span class="label label-violet">JOB_ID</span> of any particular result is relatively small. 
+                </p>
+                <h4><span class="label label-green">Disclosure</span></h4>
+                <p>
+                  No relevant financial relationship or commercial interest with <a href="http://www.idtdna.com">Integrated DNA Technologies (IDT)</a> exists.
+                </p>
+              </div>
+            </div>
+            <div class="panel panel-info" id="citation">
+              <div class="panel-heading">
+                <h2 class="panel-title">Citation</h2>
+              </div>
+              <div class="panel-body">
+                Please cite use of Primerize Server with:
+                <br/>
+                <blockquote class="h5" style="line-height: 140%; font-weight: normal">
+                  <p>
+                    Tian S., <i>et al.</i> (<b>2015</b>) <a href="" target="_blank"><u>Primerize: automated primer assembly for transcribing interesting RNAs.</u></a> <i>Nucleic Acid Research</i> <b>manuscript accepted</b>.
+                  </p>
+                </blockquote>
+                Publications using Primerize design:
+                <br/>
+                <blockquote class="h5" style="line-height: 140%; font-weight: normal">
+                  <p>
+                    Miao Z., <i>et al.</i> (<b>2015</b>) <a href="http://rnajournal.cshlp.org/content/early/2015/04/16/rna.049502.114" target="_blank"><u>RNA-Puzzles Round II: assessment of RNA structure prediction programs applied to three large RNA structures.</u></a> <i>RNA</i> <b>21(6)</b>: (AOP).
+                  </p>
+                  <p>
+                    Tian S., <i>et al.</i> (<b>2014</b>) <a href="http://rnajournal.cshlp.org/content/20/11/1815" target="_blank"><u>High-throughput mutate-map-rescue evaluates SHAPE-directed RNA structure and uncovers excited states.</u></a> <i>RNA</i> <b>20(11)</b>: 1815-1826.
+                  </p>
+                  <p>
+                    Kladwang W., <i>et al.</i> (<b>2014</b>) <a href="http://pubs.acs.org/doi/abs/10.1021/bi5003426" target="_blank"><u>Standardization of RNA Chemical Mapping Experiments.</u></a> <i>Biochemistry</i> <b>53(19)</b>: 3063-3065
+                  </p>
+                  <p>
+                    Lee J., <i>et al.</i> (<b>2013</b>) <a href="http://www.pnas.org/content/111/6/2122" target="_blank"><u>RNA design rules from a massive open laboratory.</u></a> <i>Proceedings of the National Academy of Sciences</i> <b>111(6)</b>: 2122-2127.
+                  </p>
+                  <p>
+                    Kladwang W., <i>et al.</i> (<b>2011</b>) <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html" target="_blank"><u>A two-dimensional mutate-and-map strategy for non-coding RNA structure.</u></a> <i>Nature Chemistry</i> <b>3</b>: 954-962.
+                  </p>
+                </blockquote>
+              </div>
+          </div>
+          <div class="panel panel-warning" id="contact">
             <div class="panel-heading">
-              <h2 class="panel-title">Primerize Server</h2>
+              <h2 class="panel-title">Contact</h2>
             </div>
             <div class="panel-body">
-            <img class="path_logo_primerize" src="" style="clear:both;float:right;" height="128"/>
-              <p class="cap">
-                Custom RNA synthesis is of high demand in biological and biotechnology research. Compared to chemical synthesis of RNA, strategies that leverage primer assembly of DNA templates and subsequent <i>in vitro</i> transcription by T7 RNA polymerase are rapid and cost-effective, and RNA lengths up to hundreds of nucleotides are readily achievable. Creating RNAs via this route requires preparing DNA templates, which can be assembled at low cost from mixtures of short primers with lengths up to 60 nucleotides via the polymerase chain reaction (PCR). This problem can be challenging particularly if one wishes to avoid primer 3´ ends that might misprime into incorrect locations and be extended by DNA polymerase into undesired products, and if one is not allowed to change the sequence. On one hand, there has been substantial work on developing algorithms for designing primers for PCR assembly into DNA templates, with special methods to make codon adjustments for protein synthesis, to optimize primer boundaries against incorrect hybridization of primers, and to assemble large genes. On the other hand with the terminated support of previous web servers, automated primer design tools that optimize against mispriming still require software download, installation, and time to learn.
-              </p>
-              <p>
-                We previously developed a dynamic programming-based algorithm to design primers that can be PCR-assembled into templates for high-throughput RNA synthesis and simple kit or bead-based purification. Given a desired DNA template sequence, this method, named Primerize herein, is optimized to reduce mispriming during PCR by avoiding primer boundaries that might anneal to incorrect sequences. The algorithm has been tested in the synthesis and rapid purification of numerous RNA sequences from our lab with lengths up to 300 nucleotides. In each of these applications, the sequence and purity of the transcribed RNA was verified by reverse transcription and capillary electrophoresis methods. Nevertheless, these scripts previously required MATLAB installation to run and nontrivial efforts to set up. Requests to use this algorithm and the lack of other primer design servers motivated us to prepare an online version of Primerize that should be more broadly useable by the RNA community. 
-              </p>
-            </div>
-          </div>
-          <div class="panel panel-danger" id="privacy">
-            <div class="panel-heading">
-              <h2 class="panel-title">Disclaimer</h2>
-            </div>
-            <div class="panel-body">
-              <h4><span class="label label-orange">Privacy</span></h4>
-              <p>
-                Users of the server are anonymized. Please note that input data and result on the servers are not encrypted by sessions, thus anyone with the <span class="label label-violet">JOB_ID</span> may download a particular result within expiration (3 months). However, the chance of guessing the randomly generated <span class="label label-violet">JOB_ID</span> of any particular result is relatively small. 
-              </p>
-              <h4><span class="label label-green">Disclosure</span></h4>
-              <p>
-                No relevant financial relationship or commercial interest with <a href="http://www.idtdna.com">Integrated DNA Technologies (IDT)</a> exists.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6" class="row" class="panel panel-primary">
-          <div class="panel panel-success" >
-            <div class="panel-heading">
-              <h2 class="panel-title">Primerize</h2>
-            </div>
-            <div class="panel-body">
-              <p class="cap">
-               Primerize (previously named <code>NA_thermo</code>), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
-              </p>
-              <p>
-                The algorithm designs forward (sense strand) and reverse (anti-sense strand) primers that minimize the total length, and therefore the total synthesis cost, of the oligonucleotides. Although developed independently, Primerize is a special case of the general <b>‘Gapped Oligo Design’</b> algorithm described and mathematically analyzed in detail by <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4375554" target="_blank">Thachuk and Condon</a>, optimizing the mispriming score and sequence spanning instead of T<sub>m</sub>.
-              </p>
-              <p>
-                We reasoned that mis-hybridizations would occasionally occur and be recognized by DNA polymerase, and since the primer’s 3´-most nucleotide would be bound to the complement, the products could be extended by the polymerase. Thus we introduced and experimentally tested a score term misprime, whose purpose was to reduce artifacts from mispriming during PCR assemblies. A heuristic score was defined based on the number of contiguous reverse complement matches of the 3´-most n nucleotides of the primer on a possible touchdown site; the score was incremented by 10 for A/T pairings and 12.5 for G/C pairings for each match. 
-              </p>
-            </div>
-          </div>
-          <div class="panel panel-info" id="citation">
-            <div class="panel-heading">
-              <h2 class="panel-title">Citation</h2>
-            </div>
-            <div class="panel-body">
-              Please cite use of Primerize Server with:
-              <br/>
-              <blockquote class="h5" style="line-height: 140%; font-weight: normal">
-                <p>
-                  Tian S., <i>et al.</i> (<b>2015</b>) <a href="" target="_blank"><u>Primerize: automated primer assembly for transcribing interesting RNAs.</u></a> <i>Nucleic Acid Research</i> <b>manuscript accepted</b>.
-                </p>
-              </blockquote>
-              Publications using Primerize design:
-              <br/>
-              <blockquote class="h5" style="line-height: 140%; font-weight: normal">
-                <p>
-                  Miao Z., <i>et al.</i> (<b>2015</b>) <a href="" target="_blank"><u>RNA-Puzzles Round II: assessment of RNA structure prediction programs applied to three large RNA structures.</u></a> <i>RNA</i> <b>21(6)</b>: AOP-.
-                </p>
-                <p>
-                  Tian S., <i>et al.</i> (<b>2014</b>) <a href="http://rnajournal.cshlp.org/content/early/2014/09/01/rna.044321.114" target="_blank"><u>High-throughput mutate-map-rescue evaluates SHAPE-directed RNA structure and uncovers excited states.</u></a> <i>RNA</i> <b>20(11)</b>: 1815-1826.
-                </p>
-                <p>
-                  Lee J., <i>et al.</i> (<b>2013</b>) <a href="http://www.pnas.org/content/111/6/2122.abstract" target="_blank"><u>RNA design rules from a massive open laboratory.</u></a> <i>Proceedings of the National Academy of Sciences</i> <b>111(6)</b>: 2122-2127.
-                </p>
-                <p>
-                  Kladwang W., <i>et al.</i> (<b>2011</b>) <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html" target="_blank"><u>A two-dimensional mutate-and-map strategy for non-coding RNA structure.</u></a> <i>Nature Chemistry</i> <b>3</b>: 954-962.
-                </p>
-              </blockquote>
-            </div>
-        </div>
-        <div class="panel panel-warning" id="contact">
-          <div class="panel-heading">
-            <h2 class="panel-title">Contact</h2>
-          </div>
-          <div class="panel-body">
-            <div class="col-md-5">
-              <h4 style="line-height: 140%;">
-                <span class="label label-primary pull-right">Principal Investigator</span>
-                <br/>
-                <span class="label label-success pull-right">Server Team</span>
-              </h4>
-            </div>
-            <div class="col-md-7">
-              <h4 style="line-height: 140%;">
-                <span class="label label-inverse pull-left"><a href="mailto:rhiju@stanford.edu" target="_blank" style="color:#fff;">Rhiju Das</a></span>
-                <br/>
-                <span class="label label-inverse pull-left"><a href="mailto:t47@stanford.edu" target="_blank" style="color:#fff;">Siqi Tian</a></span>
-                <br/>
-                <span class="label label-default pull-left">Joseph Yesselman</span>
-                <br/>
-                <span class="label label-default pull-left">Pablo Cordero</span>
-              </h4>
+              <div class="col-md-5">
+                <h4 style="line-height: 140%;">
+                  <span class="label label-primary pull-right">Principal Investigator</span>
+                  <br/>
+                  <span class="label label-success pull-right">Server Team</span>
+                </h4>
+              </div>
+              <div class="col-md-7">
+                <h4 style="line-height: 140%;">
+                  <span class="label label-inverse pull-left"><a href="mailto:rhiju@stanford.edu" target="_blank" style="color:#fff;">Rhiju Das</a></span>
+                  <br/>
+                  <span class="label label-inverse pull-left"><a href="mailto:t47@stanford.edu" target="_blank" style="color:#fff;">Siqi Tian</a></span>
+                  <br/>
+                  <span class="label label-default pull-left">Joseph Yesselman</span>
+                  <br/>
+                  <span class="label label-default pull-left">Pablo Cordero</span>
+                </h4>
+              </div>
             </div>
           </div>
         </div>
