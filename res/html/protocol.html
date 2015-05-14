@@ -39,7 +39,7 @@
           <h1>Welcome to Primerize!</h1>
           <img class="path_logo_primerize" src="" style="clear:both; float:right; padding-left: 20px;"/>
           <p>
-            This protocol shows you how to channel the output to IDT Bulk Ordering, and in-house experiment protocol for how to PCR assemble the template <i>in vitro</i>. 
+            This protocol shows you how to design DNA templates, how to channel the output to IDT Bulk Ordering, and illustrates an in-house experiment protocol for how to PCR assemble the template <i>in vitro</i>. 
           </p>
           <p>
             Hover mouse to the 
@@ -73,18 +73,38 @@
           <div class="panel-body scroll_nav">
             <ul class="nav" role="tablist" id="scroll_nav">
               <li class="li-danger">
-                  <a id="tab_1" href="#idt_bulk">
+                  <a id="tab_1" href="#temp_design">
                     Section #1: 
+                    <br/>
+                    <b>DNA Template Design</b>
+                  </a>
+              </li>
+              <li class="li-magenta">
+                  <a id="tab_2" href="#idt_bulk">
+                    Section #2: 
                     <br/>
                     <b>IDT Bulk Ordering</b>
                   </a>
               </li>
               <li class="li-violet">
-                  <a id="tab_2" href="#PCR">
-                    Section #2: 
+                  <a id="tab_3" href="#PCR">
+                    Section #3: 
                     <br/>
                     <b>PCR Assembly</b>
                   </a>
+                  <ul >
+                    <li><a id="tab_31" href="#PCR_sr"><b>PCR Recipe <u>(Single-Round)</u></b></a></li>
+                    <li><a id="tab_32" href="#PCR_cond"><b>PCR Conditions</b></a></li>
+                    <li>
+                      <a id="tab_33" href="#PCR_mr"><b>PCR Recipe <u>(Multiple-Round)</u></b></a>
+                      <ul>
+                        <li><a id="tab_331" href="#PCR_2r">Strategy 1: <u>'2-Round'</u></a></li>
+                        <li><a id="tab_332" href="#PCR_cp">Strategy 2: <u>'Couple'</u></a></li>
+                      </ul>
+                    </li>
+                    <li><a id="tab_34" href="#PCR_pr"><b>PCR Product Purification</b></a></li>
+                  </ul>
+
               </li>
             </ul>
           </div>
@@ -94,12 +114,92 @@
 
     <div class="pull-right" id="main">
 
-
       <div class="container theme-showcase li-danger" role="main">
         <br/>
-        <div class="panel-danger" id="idt_bulk">
+        <div class="panel-danger" id="temp_design">
           <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: IDT Bulk Ordering</b></span>
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: DNA Template Design</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                To prepare RNA by <i>in vitro</i> transcription, a DNA template corresponding to the RNA sequence of interest is required.  In addition to the actual RNA sequence of interest, the DNA sequence requires 5´ and 3´ extensions, some of which will be transcribed into the RNA. These extensions are as follows:
+              </p>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+                  T7 Promoter
+                </div>
+                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+                  5´ Buffer
+                </div>
+                <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                  Sequence of Interest
+                </div>
+                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+                  3´ Buffer
+                </div>
+                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+                  Tail
+                </div>
+              </div>
+              <h4><span class="label label-success">T7 Promoter</span></h4>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <p>
+                    A T7 promoter sequence on the 5´ end of the DNA, which provides a region for the T7 RNA polymerase to bind to initiate transcription.  This region is <b><u>NOT</u></b> transcribed, and will not be a part of the resulting RNA. The T7 promoter sequence (20 bases) to be added to the DNA template is as follows:
+                  </p>
+                  <p><kbd>TTCTA ATACG ACTCA CTATA</kbd></p>
+                </div>
+              </div>
+              <h4><span class="label label-danger">Tail</span></h4>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <p>
+                    A 3´ tail extension, required for primer extension experiments.  For structure mapping experiments, the modified RNA is reverse transcribed into DNA, which is then read by a sequencer.  Reverse transcription requires the presence of a primer (18 – 20 bases), complimentary to the 3´ end of the RNA, which is then extended all the way to the 5´ end of the RNA, or to other stops within the RNA sequence, depending upon the modification being used. This means that modifications in the last ~20 bases in the RNA, cannot be read out using primer extension. To help read out the entire sequence of interest, and to save time on fluorescent labeling of primers, we add a 3´ tail extension with a shared primer binding site. This 3´ tail should be added to the DNA template sequence, and this will be transcribed into RNA.
+                  </p>
+                  <p>
+                    The 3´ tail does not have any particular sequence requirement, but an A-rich tail is preferable. Note that the 3´ tail should not interfere with the structure of the RNA being probed.  An example of a 3´ tail is as follows:
+                  </p>
+                  <p><code>AAAAC AAAAC</code> <kbd>AAAGA AACAA CAACA ACAAC</kbd></p>
+                  <p>
+                    The <kbd>inverse colored region</kbd> (right) is a sequence that we repeatedly re-use as a primer binding site, which we call <mark>‘Tail2’</mark>. It is critical (see below) to check <i>in silico</i> that this tail has negligible likelihood of base pairing with your sequence of interest.
+                  </p>
+                  <p>
+                    The <code>highlighted region</code> (left) is a 3´ buffer when no reference hairpin is used. When reference hairpins are used, the 3´ buffer can be adjusted (see below).
+                  </p>
+                </div>
+              </div>
+              <h4><span class="label label-warning">5´ & 3´ Buffer</span></h4>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <p>
+                    The last band observed in RNA modification experiments followed by capillary (or gel) electrophoresis, corresponding to the 5´ end of the RNA, is often dark and reduces the readout of the first 5 bases in the RNA.  This buffer region, of ~ 10 – 15 bases ensures that the whole RNA sequence of interest can be read out adequately in an electrophoresis experiment.  This 5´ buffer region also needs to be added to the DNA template, and will also be transcribed into RNA.
+                  </p>
+                  <p>
+                    As with the 3´ tail, no specific sequence is required, except that it should not interfere with the structure of the actual RNA, by forming alternative secondary structures.  It is preferable to have the first ~ 2-3 bases be <mark>‘G’</mark> for best results.  An example of a 5´ tail is as follows:
+                  <p><kbd>GGAAA AAUAA</kbd></p>
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+
+      <div class="container theme-showcase li-magenta" role="main">
+        <br/>
+        <div class="panel-magenta" id="idt_bulk">
+          <div class="panel-heading">
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: IDT Bulk Ordering</b></span>
           </div>
           <br/>
           <div class="row">
@@ -256,12 +356,12 @@ Etc...</textarea>
         <br/>
         <div class="panel-violet" id="PCR">
           <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: PCR Assembly Protocol</b></span>
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: PCR Assembly Protocol</b></span>
           </div>
           <br/>
           <div class="row">
             <div class="col-md-12">
-              <div class="panel panel-default">
+              <div class="panel panel-default" id="PCR_sr">
                 <div class="panel-heading">
                   <h2 class="panel-title">PCR Recipe (Single-Round)</h2>
                 </div>
@@ -328,7 +428,7 @@ Etc...</textarea>
           <hr/>
           <div class="row">
             <div class="col-md-12">
-              <div class="panel panel-orange">
+              <div class="panel panel-orange" id="PCR_cond">
                 <div class="panel-heading">
                   <h2 class="panel-title">PCR Conditions</h2>
                 </div>
@@ -382,7 +482,7 @@ Etc...</textarea>
           <hr/>
           <div class="row">
             <div class="col-md-12">
-              <div class="panel panel-default">
+              <div class="panel panel-default" id="PCR_mr">
                 <div class="panel-heading">
                   <h2 class="panel-title">PCR Recipe (Multiple-Round)</h2>
                 </div>
@@ -394,8 +494,9 @@ Etc...</textarea>
                     <hr/>
                   </div>
                   <div class="col-md-12">
-                    <h3><span class="label label-success">Strategy 1: '2-Round'</span></h3>
-                    <p>aaa</p>
+                    <h3 id="PCR_2r"><span class="label label-success">Strategy 1: '2-Round'</span></h3>
+                    <p>The '2-Round' strategy attempts to assemble sub-pools of 'half' of the full sequence, and extend the 'half' pieces together in a second round PCR. This might be helpful when there are mispriming sites across the sequence, and partitioning them into separate pools avoid such issues.</p>
+                    <p>Please make sure that the sub-pools overlap, and each sub-pool consists of even number of primers. Otherwise the PCR will not work as desired.</p>
                     <br/>
                     
                     <div class="row">
@@ -619,8 +720,9 @@ Etc...</textarea>
                   <hr/>
 
                   <div class="col-md-12">
-                    <h3><span class="label label-success">Strategy 2: 'Couple'</span></h3>
-                    <p>aaa</p>
+                    <h3 id="PCR_cp"><span class="label label-success">Strategy 2: 'Couple'</span></h3>
+                    <p>The 'Couple' strategy is one step further of the '2-Round' approach, that further divides the assembly into sub-pools of primer pairs. It is rare when neighboring primers have mispriming sites other than the designed region. Thus, breaking the assembly down to 'couples' is likely to work.</p>
+                    <p>Please make sure that the sub-pools overlap. Otherwise the PCR will not work as desired.</p>
                     <br/>
                     
                     <div class="row">
@@ -806,7 +908,7 @@ Etc...</textarea>
                       <table class="table">
                         <tbody>
                           <tr>
-                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>5<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                         </tbody>
@@ -867,6 +969,24 @@ Etc...</textarea>
                     <div class="col-md-3"></div>
                   </div>
 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-light-blue" id="PCR_pr">
+                <div class="panel-heading">
+                  <h2 class="panel-title">PCR Product Purification</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="col-md-12">
+                    <p class="lead">
+                      Please follow the instructions by <a href="https://www.beckmancoulter.com/wsrportal/ajax/downloadDocument/B37419AA.pdf?autonomyId=TP_DOC_150180&documentName=B37419AA.pdf" target="_blank">Agencourt AMPure XP</a>.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
