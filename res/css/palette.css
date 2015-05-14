@@ -132,6 +132,10 @@ p.cap:first-letter {
 	border-bottom: 5px solid #ff912e !important;
 	background-color: #ffdec0 !important;
 }
+.panel-magenta > .panel-heading {
+	border-bottom: 5px solid #ff69bc !important;
+	background-color: #ffd2ea !important;
+}
 
 .li-default {
 	border-left: 5px solid #a19193;
