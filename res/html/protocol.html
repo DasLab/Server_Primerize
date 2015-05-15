@@ -148,7 +148,7 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                   <p>
-                    A T7 promoter sequence on the 5´ end of the DNA, which provides a region for the T7 RNA polymerase to bind to initiate transcription.  This region is <b><u>NOT</u></b> transcribed, and will not be a part of the resulting RNA. The T7 promoter sequence (20 bases) to be added to the DNA template is as follows:
+                    A <a href="http://parts.igem.org/Promoters/Catalog/T7" target="_blank">T7 promoter sequence</a> on the 5´ end of the DNA, which provides a region for the T7 RNA polymerase to bind to initiate transcription. This region is <b><u>NOT</u></b> transcribed, and will not be a part of the resulting RNA. The T7 promoter sequence (<u>20 bases</u>) to be added to the DNA template is as follows:
                   </p>
                   <p><kbd>TTCTA ATACG ACTCA CTATA</kbd></p>
                 </div>
@@ -158,17 +158,14 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                   <p>
-                    A 3´ tail extension, required for primer extension experiments.  For structure mapping experiments, the modified RNA is reverse transcribed into DNA, which is then read by a sequencer.  Reverse transcription requires the presence of a primer (18 – 20 bases), complimentary to the 3´ end of the RNA, which is then extended all the way to the 5´ end of the RNA, or to other stops within the RNA sequence, depending upon the modification being used. This means that modifications in the last ~20 bases in the RNA, cannot be read out using primer extension. To help read out the entire sequence of interest, and to save time on fluorescent labeling of primers, we add a 3´ tail extension with a shared primer binding site. This 3´ tail should be added to the DNA template sequence, and this will be transcribed into RNA.
+                    A 3´ tail extension, <b>required</b> for primer extension experiments. For structure mapping experiments, the modified RNA is reverse transcribed into DNA, which is then read by a sequencer. Reverse transcription requires the presence of a primer (<u>18 – 20 bases</u>), complimentary to the 3´ end of the RNA, which is then extended all the way to the 5´ end of the RNA, or to other stops within the RNA sequence, depending upon the modification being used. This means that modifications in the last <u>~20 bases</u> in the RNA, cannot be read out using primer extension. To help read out the entire sequence of interest, and to save time on fluorescent labeling of primers, we add a 3´ tail extension with a shared primer binding site. This 3´ tail should be added to the DNA template sequence, and this will be transcribed into RNA.
                   </p>
                   <p>
-                    The 3´ tail does not have any particular sequence requirement, but an A-rich tail is preferable. Note that the 3´ tail should not interfere with the structure of the RNA being probed.  An example of a 3´ tail is as follows:
+                    The 3´ tail does not have any particular sequence requirement, but an <mark><b>A-rich</b></mark> tail is preferable. Note that the 3´ tail should not interfere with the structure of the RNA being probed. An example of a 3´ tail is as follows:
                   </p>
-                  <p><code>AAAAC AAAAC</code> <kbd>AAAGA AACAA CAACA ACAAC</kbd></p>
+                  <p><kbd>AAAGA AACAA CAACA ACAAC</kbd></p>
                   <p>
-                    The <kbd>inverse colored region</kbd> (right) is a sequence that we repeatedly re-use as a primer binding site, which we call <mark>‘Tail2’</mark>. It is critical (see below) to check <i>in silico</i> that this tail has negligible likelihood of base pairing with your sequence of interest.
-                  </p>
-                  <p>
-                    The <code>highlighted region</code> (left) is a 3´ buffer when no reference hairpin is used. When reference hairpins are used, the 3´ buffer can be adjusted (see below).
+                    This a sequence that we repeatedly re-use as a primer binding site, which we call <code>‘<b><u>Tail2</u></b>’</code>. It is critical (see below) to check <i>in silico</i> that this tail has negligible likelihood of base pairing with your sequence of interest.
                   </p>
                 </div>
               </div>
@@ -177,11 +174,36 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                   <p>
-                    The last band observed in RNA modification experiments followed by capillary (or gel) electrophoresis, corresponding to the 5´ end of the RNA, is often dark and reduces the readout of the first 5 bases in the RNA.  This buffer region, of ~ 10 – 15 bases ensures that the whole RNA sequence of interest can be read out adequately in an electrophoresis experiment.  This 5´ buffer region also needs to be added to the DNA template, and will also be transcribed into RNA.
+                    The last band observed in RNA modification experiments followed by capillary (or gel) electrophoresis, corresponding to the 5´ end of the RNA, is often dark and reduces the readout of the first 5 bases in the RNA. This buffer region, of <u>~10 – 15 bases</u> ensures that the whole RNA sequence of interest can be read out adequately in an electrophoresis experiment.  This 5´ buffer region also needs to be added to the DNA template, and will also be transcribed into RNA.
                   </p>
                   <p>
-                    As with the 3´ tail, no specific sequence is required, except that it should not interfere with the structure of the actual RNA, by forming alternative secondary structures.  It is preferable to have the first ~ 2-3 bases be <mark>‘G’</mark> for best results.  An example of a 5´ tail is as follows:
-                  <p><kbd>GGAAA AAUAA</kbd></p>
+                    As with the 3´ tail, no specific sequence is required, except that it should not interfere with the structure of the actual RNA, by forming alternative secondary structures.  It is preferable to have the first <u>~2 - 3 bases</u> be <code><b>G</b></code> for <a href="http://openwetware.org/wiki/Image:T7_primer_design_for_RNA_antisense_probes.png" target="_blank">best results</a>. When no <b><i>reference hairpin</i></b> is used, an example of a 5´ leader is as follows:
+                  </p>
+                  <p>
+                    <span class="label label-warning">5´ Buffer</span>:&nbsp;&nbsp;&nbsp;
+                    <kbd><span style="color:#3ed4e7;">GG</span>AAA AAUAA</kbd>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label label-warning">3´ Buffer</span>:&nbsp;&nbsp;&nbsp;
+                    <kbd>AAAAC AAAAC</kbd>
+                  </p>
+                  <p>We recommend the use of <b><i>reference hairpins</i></b>, as described in:</p>
+                  <blockquote class="h5" style="line-height: 140%; font-weight: normal">
+                    <p>
+                      Kladwang W., <i>et al.</i> (<b>2014</b>) <a href="http://pubs.acs.org/doi/abs/10.1021/bi5003426" target="_blank"><u>Standardization of RNA Chemical Mapping Experiments.</u></a> <i>Biochemistry</i> <b>53(19)</b>: 3063-3065
+                    </p>
+                  </blockquote>         
+                  <p>An example of 5´ & 3´ Buffer region with <b><i>reference hairpins</i></b> is as follows:</p>
+                  <p>
+                    <span class="label label-warning">5´ Buffer</span>:&nbsp;&nbsp;&nbsp;
+                    <kbd>
+                      <span style="color:#fff;">GGA</span><span style="color:#29be92;">GA CCUC</span><span style="color:#ff5c2b;">G AGUA</span><span style="color:#29be92;">G AGGUC</span><span style="color:#fff;"> AAAA</span>
+                    </kbd>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="label label-warning">3´ Buffer</span>:&nbsp;&nbsp;&nbsp;
+                    <kbd>
+                      <span style="color:#fff;">AAA</span><span style="color:#29be92;">CA ACUC</span><span style="color:#ff5c2b;">G AGUA</span><span style="color:#29be92;">G AGUUG</span><span style="color:#fff;"> ACAAC</span>
+                    </kbd>
+                  </p>
                 </div>
               </div>
               <h4><span class="label label-primary">Sequence of Interest</span></h4>
@@ -189,7 +211,10 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                   <p>
-                    It is important that you do a quick consistency check -- you want to avoid having the added 5´ and 3´ flanking sequences base pair with the region of interest. You can run the complete sequences into programs like ViennaFold (link)  or  Quickfold (link) as quick checks that the predicted structures of the RNAs remain the same with and without the flanking sequences. You may also wish to design a second set of flanking sequences; measurements on the extra set will serve as a control for perturbations from the flanking regions. Finally, you can create the RNA without flanking sequences, and separately label primers internal to the RNA.
+                    It is important that you do a quick consistency check -- <b>you want to avoid having the added 5´ and 3´ flanking sequences base pair with the region of interest</b>. You can run the complete sequences into programs like <a href="http://rna.tbi.univie.ac.at/cgi-bin/RNAfold.cgi" target="_blank"><u>Vienna RNAfold</u></a> or <a href="http://www.nupack.org/partition/new" target="_blank"><u>NUPACK</u></a> as quick checks that the predicted structures of the RNAs remain the same with and without the flanking sequences.
+                  </p>
+                  <p>
+                    You may also wish to design a second set of flanking sequences; measurements on the extra set will serve as a control for perturbations from the flanking regions. Finally, you can create the RNA without flanking sequences, and separately label primers internal to the RNA.
                   </p>
                 </div>
               </div>
@@ -988,9 +1013,24 @@ Etc...</textarea>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-12">
-                    <p class="lead">
-                      Please follow the instructions by <a href="https://www.beckmancoulter.com/wsrportal/ajax/downloadDocument/B37419AA.pdf?autonomyId=TP_DOC_150180&documentName=B37419AA.pdf" target="_blank">Agencourt AMPure XP</a>.
-                    </p>
+                    <p><i>
+                      For full details, please follow the instructions by <a href="https://www.beckmancoulter.com/wsrportal/ajax/downloadDocument/B37419AA.pdf?autonomyId=TP_DOC_150180&documentName=B37419AA.pdf" target="_blank"><u>Agencourt AMPure XP</u></a>.
+                    </i></p>
+                    <ol>
+                      <li>Mix <abbr title="">40 &mu;l</abbr> of <mark>PCR reaction</mark> with <abbr title="">72 &mu;l</abbr> <b>(1.8x)</b> <mark>Ampure beads</mark> by pipetting up-down <u>10</u> times.</li>
+                      <li>Leave at room temperature (RT) for <u>10 min</u> on <i>orbital shaker</i> for binding.</li>
+                      <li>Separate bead by placing on a <i>24-post magnetic stand</i> for <u>7-10 min</u>.</li>
+                      <li>Discard supernatant, rinse beads with <abbr title="">200 &mu;l</abbr> <mark>70% ethanol</mark>, leave RT for <u>30 sec</u>, discard liquid.</li>
+                      <li>Rince with <abbr title="">200 &mu;l</abbr> <mark>70% ethanol</mark> again, leave RT for <u>30 sec</u>, discard liquid.</li>
+                      <li>RT dry <u>15-20 min</u> on <i>the 24-post magnetic stand</i>, till the beads are completly dry and appear 'cracked'.</li>
+                      <li>Add <abbr title="">35 &mu;l</abbr> <mark>ddH<sub>2</sub>O</mark>, mix the beads, leave RT for <u>5 min</u> on <i>orbital shaker</i>.</li>
+                      <li>Separate bead by placing on a <i>24-post magnetic stand</i> for <u>3-5 min</u>.</li>
+                      <li>
+                        Keep <mark>supernatant</mark> and check the concentration of DNA with <i>Nanodrop spectrophotometer</i>.
+                        <br/>
+                        &nbsp;&nbsp;&nbsp;<b>DNA (&mu;M)</b> = <b>A<sub>260</sub></b> x 50,000 / 660 / <b>length (bp)</b>
+                      </li>
+                    </ol>
                   </div>
                 </div>
               </div>
