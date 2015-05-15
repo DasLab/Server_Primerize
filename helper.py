@@ -70,10 +70,10 @@ def is_valid_sequence(sequence):
 def is_t7_present(sequence):
     is_G = 0
     if sequence[:20] == seq_T7:
-        if sequence[20] == 'G': is_G = 1
+        if sequence[20:22] == 'GG': is_G = 1
         return (sequence, 1, is_G)
     else:
-        if sequence[0] == 'G': is_G = 1
+        if sequence[0:2] == 'GG': is_G = 1
         return (seq_T7 + sequence, 0, is_G)
 
 

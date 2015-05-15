@@ -230,13 +230,13 @@ class Root:
                     else:
                         str_t7 = str_t7 + "was absent, Primerize automatically prepended it. \n"
                     if is_G:
-                        str_t7 += "SUCCESS: T7 promoter sequence is followed by nucleotide G.\n"
+                        str_t7 += "SUCCESS: T7 promoter sequence is followed by nucleotides GG.\n"
                     else:
-                        str_t7 += "WARNING: T7 promoter sequence is NOT followed by nucleotide G. Consider modifying the sequence for better transcription.\n"
+                        str_t7 += "WARNING: T7 promoter sequence is NOT followed by nucleotides GG. Consider modifying the sequence for better transcription.\n"
                 else:
                     str_t7 = "T7_CHECK: feature disabled (check the option to enable). No checking was performed.\n"
                 f.write(str_t7.replace("SUCCESS","T7_CHECK").replace("WARNING","T7_CHECK"))
-                script = script.replace("__NOTE_T7__", str_t7.replace("\n","<br/>").replace("T7_CHECK","<b>T7_CHECK</b>").replace("SUCCESS", "<b>SUCCESS</b>").replace("WARNING", "<b>WARNING</b>").replace("NOT", "<u><b>NOT</b></u>").replace("nucleotide G", "nucleotide <u>G</u>"))
+                script = script.replace("__NOTE_T7__", str_t7.replace("\n","<br/>").replace("T7_CHECK","<b>T7_CHECK</b>").replace("SUCCESS", "<b>SUCCESS</b>").replace("WARNING", "<b>WARNING</b>").replace("NOT", "<u><b>NOT</b></u>").replace("nucleotides GG", "nucleotides <u>GG</u>"))
 
                 f.write("\n\nOUTPUT\n======\n")
                 for line in self.lines_warning:
