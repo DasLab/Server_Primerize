@@ -3,6 +3,7 @@ function show_modal() {
   $("#job_id").val(job_id.toString());
   $("#modal_id").text(job_id.toString());
   $("#url_id").text('http://primerize.stanford.edu/result?job_id='.concat(job_id.toString()));
+  $("#copy-button").attr("data-clipboard-text", $("#url_id").text());
 
   // $("#wait").fadeIn(1000);
   $("#modal_wait").modal("show");

@@ -182,9 +182,12 @@
               <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
               <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
               <br/>
-              <p class="text-center">
-                <b>Please copy/paste this link: 
-                <br/><code><span id="url_id"></span></code></b>
+              <p class="text-center well" >
+                <b>
+                  Please <button id="copy-button" data-clipboard-text="" class="btn btn-success">Copy</button> this link: 
+                  <br/>
+                  <code><span id="url_id"></span></code>
+                </b>
               </p>
               <br/>
               <img class="center-block path_button_loading" width="48px" style="opacity:0.5;"/>
@@ -210,8 +213,10 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script type="text/javascript" src="/res/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/js/zeroclipboard/ZeroClipboard.min.js"></script>
 
     <script type="text/javascript" src="/res/js/design.js"></script>
     <script type="text/javascript" src="/res/js/util.js"></script>
+    <script type="text/javascript" src="/res/js/clip.js"></script>
   </body>
 </html>
