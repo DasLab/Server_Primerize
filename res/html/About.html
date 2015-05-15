@@ -54,24 +54,7 @@
                 </p>
               </div>
             </div>
-            <div class="panel panel-success" >
-                <div class="panel-heading">
-                  <h2 class="panel-title">Primerize</h2>
-                </div>
-                <div class="panel-body">
-                  <p class="cap">
-                   Primerize (previously named <code>NA_thermo</code>), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
-                  </p>
-                  <p>
-                    The algorithm designs forward (sense strand) and reverse (anti-sense strand) primers that minimize the total length, and therefore the total synthesis cost, of the oligonucleotides. Although developed independently, Primerize is a special case of the general <b>‘Gapped Oligo Design’</b> algorithm described and mathematically analyzed in detail by <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4375554" target="_blank">Thachuk and Condon</a>, optimizing the mispriming score and sequence spanning instead of T<sub>m</sub>.
-                  </p>
-                  <p>
-                    We reasoned that mis-hybridizations would occasionally occur and be recognized by DNA polymerase, and since the primer’s 3´-most nucleotide would be bound to the complement, the products could be extended by the polymerase. Thus we introduced and experimentally tested a score term misprime, whose purpose was to reduce artifacts from mispriming during PCR assemblies. A heuristic score was defined based on the number of contiguous reverse complement matches of the 3´-most n nucleotides of the primer on a possible touchdown site; the score was incremented by 10 for A/T pairings and 12.5 for G/C pairings for each match. 
-                  </p>
-                </div>
-              </div>
-            </div>
-          <div class="col-md-6">
+
             <div class="panel panel-danger" id="privacy">
               <div class="panel-heading">
                 <h2 class="panel-title">Disclaimer</h2>
@@ -84,6 +67,25 @@
                 <h4><span class="label label-green">Disclosure</span></h4>
                 <p>
                   No relevant financial relationship or commercial interest with <a href="http://www.idtdna.com">Integrated DNA Technologies (IDT)</a> exists.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="panel panel-success" >
+              <div class="panel-heading">
+                <h2 class="panel-title">Primerize</h2>
+              </div>
+              <div class="panel-body">
+                <p class="cap">
+                 Primerize (previously named <code>NA_thermo</code>), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
+                </p>
+                <p>
+                  The algorithm designs forward (sense strand) and reverse (anti-sense strand) primers that minimize the total length, and therefore the total synthesis cost, of the oligonucleotides. Although developed independently, Primerize is a special case of the general <b>‘Gapped Oligo Design’</b> algorithm described and mathematically analyzed in detail by <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4375554" target="_blank">Thachuk and Condon</a>, optimizing the mispriming score and sequence spanning instead of T<sub>m</sub>.
+                </p>
+                <p>
+                  We reasoned that mis-hybridizations would occasionally occur and be recognized by DNA polymerase, and since the primer’s 3´-most nucleotide would be bound to the complement, the products could be extended by the polymerase. Thus we introduced and experimentally tested a score term misprime, whose purpose was to reduce artifacts from mispriming during PCR assemblies. A heuristic score was defined based on the number of contiguous reverse complement matches of the 3´-most n nucleotides of the primer on a possible touchdown site; the score was incremented by 10 for A/T pairings and 12.5 for G/C pairings for each match. 
                 </p>
               </div>
             </div>
@@ -122,33 +124,45 @@
                   </p>
                 </blockquote>
               </div>
-          </div>
-          <div class="panel panel-warning" id="contact">
-            <div class="panel-heading">
-              <h2 class="panel-title">Contact</h2>
             </div>
-            <div class="panel-body">
-              <div class="col-md-5">
-                <h4 style="line-height: 140%;">
-                  <span class="label label-primary pull-right">Principal Investigator</span>
-                  <br/>
-                  <span class="label label-success pull-right">Server Team</span>
-                </h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-warning" id="contact">
+              <div class="panel-heading">
+                <h2 class="panel-title">Contact</h2>
               </div>
-              <div class="col-md-7">
-                <h4 style="line-height: 140%;">
-                  <span class="label label-inverse pull-left"><a href="mailto:rhiju@stanford.edu" target="_blank" style="color:#fff;">Rhiju Das</a></span>
+              <div class="panel-body">
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                  <h4 style="line-height: 140%;">
+                    <span class="label label-primary pull-right">Principal Investigator</span>
+                    <br/>
+                    <span class="label label-success pull-right">Server Team</span>
+                  </h4>
+                </div>
+                <div class="col-md-3">
+                  <h4 style="line-height: 140%;">
+                    <span class="label label-inverse pull-left"><a href="mailto:rhiju@stanford.edu" target="_blank" style="color:#fff;">Rhiju Das</a></span>
+                    <br/>
+                    <span class="label label-inverse pull-left"><a href="mailto:t47@stanford.edu" target="_blank" style="color:#fff;">Siqi Tian</a></span>
+                    <br/>
+                    <span class="label label-default pull-left">Joseph Yesselman</span>
+                    <br/>
+                    <span class="label label-default pull-left">Pablo Cordero</span>
+                  </h4>
+                </div>
+                <div class="col-md-6">
                   <br/>
-                  <span class="label label-inverse pull-left"><a href="mailto:t47@stanford.edu" target="_blank" style="color:#fff;">Siqi Tian</a></span>
-                  <br/>
-                  <span class="label label-default pull-left">Joseph Yesselman</span>
-                  <br/>
-                  <span class="label label-default pull-left">Pablo Cordero</span>
-                </h4>
+                  <p>Please feel free to Contact the Das Lab for further questions/issues regarding the web server, suggestions for improvements, citations, or commercial use authorization.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
