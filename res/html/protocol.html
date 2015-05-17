@@ -1108,15 +1108,15 @@ Etc...</textarea>
                           <td>1</td>
                           <td>Mix <abbr title=""><b>40 &mu;l</b></abbr> of <span class="label label-primary">PCR reaction</span> with <abbr title=""><b>72 &mu;l</b></abbr> <b>(1.8x)</b> <span class="label label-success">Ampure beads</span> by pipetting up-down <u>10</u> times.</td>
                         </tr>
-                        <tr>
+                        <tr class="active">
                           <td>2</td>
-                          <td>Leave at room temperature (RT) for <span class="label label-inverse">10 min</span> on <i>orbital shaker</i> for binding.</td>
+                          <td>Leave at room temperature (RT) for <span class="label label-inverse">10 min</span> on <mark><i>orbital shaker</i></mark> for binding.</td>
                         </tr>
                         <tr>
                           <td>3</td>
                           <td>Separate bead by placing on a <mark><i>24-post magnetic stand</i></mark> for <span class="label label-inverse">7-10 min</span>.</td>
                         </tr>
-                        <tr>
+                        <tr class="active">
                           <td>4</td>
                           <td>Discard supernatant, rinse beads with <abbr title=""><b>200 &mu;l</b></abbr> <span class="label label-danger">70% ethanol</span>, leave RT for <span class="label label-inverse">30 sec</span>, discard liquid.</td>
                         </tr>
@@ -1124,7 +1124,7 @@ Etc...</textarea>
                           <td>5</td>
                           <td>Rince with <abbr title=""><b>200 &mu;l</b></abbr> <span class="label label-danger">70% ethanol</span> again, leave RT for <span class="label label-inverse">30 sec</span>, discard liquid.</td>
                         </tr>
-                        <tr>
+                        <tr class="active">
                           <td>6</td>
                           <td>RT dry <span class="label label-inverse">15-20 min</span> on <mark><i>24-post magnetic stand</i></mark>, till the beads are completly dry and appear 'cracked'.</td>
                         </tr>
@@ -1132,7 +1132,7 @@ Etc...</textarea>
                           <td>7</td>
                           <td>Add <abbr title=""><b>35 &mu;l</b></abbr> <span class="label label-warning">ddH<sub>2</sub>O</span>, mix the beads, leave RT for <span class="label label-inverse">5 min</span> on <mark><i>orbital shaker</i></mark>.</td>
                         </tr>
-                        <tr>
+                        <tr class="active">
                           <td>8</td>
                           <td>Separate bead by placing on a <mark><i>24-post magnetic stand</i></mark> for <span class="label label-inverse">3-5 min</span>.</td>
                         </tr>
@@ -1143,8 +1143,39 @@ Etc...</textarea>
 
                       </tbody>
                     </table>
-                    <div class="col-md-8">
-                      <p class="well text-center"><b>DNA (&mu;M)</b> = <b>A<sub>260</sub></b> x 50,000 / 660 / <b>length (bp)</b></p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="well text-center"><b>DNA (&mu;M)</b> = <b>A<sub>260</sub></b> x 50,000 / 660 / <b>length (bp)</b></p>
+                      </div>
+                      <div class="col-md-6 li-orange">
+                        <div class="col-md-2">
+                          <label for="A260"><b>A<sub>260</sub></b> :</label>
+                        </div>
+                        <div class="col-md-4">
+                          <input type="text" id="A260" value="" class="form-control" />
+                        </div>
+                        <div class="col-md-2">
+                          <label for="conc_DNA"><b>DNA (&mu;M)</b> :</label>
+                        </div>
+                        <div class="col-md-4">
+                          <input type="text" id="conc_DNA" value="" class="form-control" />
+                        </div>
+                      </div>
+                      <div class="col-md-6 li-orange">
+                        <div class="col-md-2">
+                          <label for="lbp"><b>length (bp)</b> :</label>
+                        </div>
+                        <div class="col-md-4">
+                          <input type="text" id="lbp" value="" class="form-control form-inline" />
+                        </div>
+                        <div class="col-md-6">
+                          <span class="pull-right">
+                            <a id="clc_DNA" class="btn btn-default">Clear</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a id="calc_DNA" class="btn btn-info">Calculate</a>
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1187,6 +1218,7 @@ Etc...</textarea>
     <script type="text/javascript" src="/res/js/bootstrap/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="/res/js/tutorial.js"></script>
+    <script type="text/javascript" src="/res/js/protocol.js"></script>
     <script type="text/javascript" src="/res/js/util.js"></script>
 
   </body>
