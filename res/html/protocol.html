@@ -39,7 +39,7 @@
           <h1>Welcome to Primerize!</h1>
           <img class="path_logo_primerize" src="" style="clear:both; float:right; padding-left: 20px;"/>
           <p>
-            This protocol shows you how to design DNA templates, how to channel the output to IDT Bulk Ordering, and illustrates an in-house experiment protocol for how to PCR assemble the template <i>in vitro</i>. 
+            This protocol shows you how to design DNA templates, how to channel the output to IDT Bulk Ordering, and illustrates our in-house experiment protocol for how to PCR assemble and transcribe the template <i>in vitro</i>. 
           </p>
           <p>
             Hover mouse to the 
@@ -104,7 +104,17 @@
                     </li>
                     <li><a id="tab_34" href="#PCR_pr"><b>PCR Product Purification</b></a></li>
                   </ul>
-
+              </li>
+              <li class="li-dark-red">
+                  <a id="tab_4" href="#TX">
+                    Section #4: 
+                    <br/>
+                    <b><i>In Vitro</i> Transcription</b>
+                  </a>
+                  <ul >
+                    <li><a id="tab_41" href="#TX_sr"><b>IVT Recipe</b></a></li>
+                    <li><a id="tab_42" href="#TX_pr"><b>IVT Product Purification</b></a></li>
+                  </ul>
               </li>
             </ul>
           </div>
@@ -474,9 +484,9 @@ Etc...</textarea>
                   <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
-                          <tr>
+                          <tr class="active">
                             <th class="col-md-3">Concentration</th>
                             <th class="col-md-6">Components</th>
                             <th class="col-md-3">Volume (&mu;l)</th>
@@ -497,7 +507,7 @@ Etc...</textarea>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>26.0</td></tr>
-                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                          <tr class="active"><td><em>Total</em></td><td></td><td>50.0</td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -536,16 +546,16 @@ Etc...</textarea>
                    <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
-                          <tr>
+                          <tr class="active">
                             <th class="col-md-6">Steps</th>
                             <th class="col-md-3">Time</th>
                             <th class="col-md-3">Temperature</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr><td><em>Denaturation</em></td><td>30 s</td><td>98 &deg;C</td></tr>
+                          <tr><td><em>Initial Denaturation</em></td><td>30 s</td><td>98 &deg;C</td></tr>
                           <tr><td><em>Denaturation</em></td><td>10 s</td><td>98 &deg;C</td></tr>
                           <tr><td><em>Annealing</em></td><td>30 s</td><td>60 &deg;C <sup style="color:#209874;"><b>(3, 4)</b></sup></td></tr>
                           <tr><td><em>Extension</em></td><td>30 s</td><td>72 &deg;C</td></tr>
@@ -589,7 +599,7 @@ Etc...</textarea>
                 <div class="panel-body">
                   <div class="col-md-12">
                     <p>
-                      When the aforementioned fast '1-pot' recipe does not yield pure assembled DNA fragments (usually due to mispriming), there are alternative strategies that split the full assembly into 'sub-pools' or pots, and assemble in a second round using the pre-assembled pieces as building blocks. 
+                      When the aforementioned fast '1-pot' recipe does not yield pure assembled DNA fragments (usually due to mispriming), there are alternative strategies that split the full assembly into 'sub-pools' or pots, and assemble in a second round using the pre-assembled pieces as building blocks. When Primerize gives warnings about misprimings, we carry out both the one-shot protocol above and the following multiple-round strategies as well, evaluating attainment of full-length DNA template by agarose gel.
                     </p>
                     <hr/>
                   </div>
@@ -726,9 +736,9 @@ Etc...</textarea>
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
                       <h4><span class="label label-orange">Sub-Pool 1</span></h4>
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
-                          <tr>
+                          <tr class="active">
                             <th class="col-md-3">Concentration</th>
                             <th class="col-md-6">Components</th>
                             <th class="col-md-3">Volume (&mu;l)</th>
@@ -749,15 +759,15 @@ Etc...</textarea>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>30.0</td></tr>
-                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                          <tr class="active"><td><em>Total</em></td><td></td><td>50.0</td></tr>
                         </tbody>
                       </table>
                     </div>
                     <div class="col-md-5 li-light-blue" >
                       <h4><span class="label label-dark-red">Sub-Pool 2</span></h4>
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
-                          <tr>
+                          <tr class="active">
                             <th class="col-md-3">Concentration</th>
                             <th class="col-md-6">Components</th>
                             <th class="col-md-3">Volume (&mu;l)</th>
@@ -778,7 +788,7 @@ Etc...</textarea>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>30.0</td></tr>
-                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                          <tr class="active"><td><em>Total</em></td><td></td><td>50.0</td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -788,9 +798,9 @@ Etc...</textarea>
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
                       <h4><span class="label label-inverse">Final Pool</span></h4>
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
-                          <tr>
+                          <tr class="active">
                             <th class="col-md-3">Concentration</th>
                             <th class="col-md-6">Components</th>
                             <th class="col-md-3">Volume (&mu;l)</th>
@@ -811,7 +821,7 @@ Etc...</textarea>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>20.0</td></tr>
-                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                          <tr class="active"><td><em>Total</em></td><td></td><td>50.0</td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -954,9 +964,9 @@ Etc...</textarea>
                   <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
-                          <tr>
+                          <tr class="active">
                             <th class="col-md-3">Concentration</th>
                             <th class="col-md-6">Components</th>
                             <th class="col-md-3">Volume (&mu;l)</th>
@@ -983,9 +993,9 @@ Etc...</textarea>
                     </div>
                     <div class="col-md-3">
                       <h4><span class="label label-orange">Sub-Pool 1</span></h4>
-                      <table class="table">
+                      <table class="table table-hover">
                         <tbody>
-                          <tr>
+                          <tr class="warning">
                             <td>Primer <b>1<span class="label label-info">F</span>, 2<span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
@@ -994,9 +1004,9 @@ Etc...</textarea>
                     </div>
                     <div class="col-md-3 li-light-blue">
                       <h4><span class="label label-dark-red">Sub-Pool 2</span></h4>
-                      <table class="table">
+                      <table class="table table-hover">
                         <tbody>
-                          <tr>
+                          <tr class="danger">
                             <td>Primer <b>3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
@@ -1005,9 +1015,9 @@ Etc...</textarea>
                     </div>
                     <div class="col-md-3 li-light-blue">
                       <h4><span class="label label-info">Sub-Pool 3</span></h4>
-                      <table class="table">
+                      <table class="table table-hover">
                         <tbody>
-                          <tr>
+                          <tr class="info">
                             <td>Primer <b>5<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
@@ -1018,7 +1028,7 @@ Etc...</textarea>
                   <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead style="color:#fff;">
                           <tr>
                             <th class="col-md-3">Concentration</th>
@@ -1028,7 +1038,7 @@ Etc...</textarea>
                         </thead>
                         <tbody>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>34.0</td></tr>
-                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                          <tr class="active"><td><em>Total</em></td><td></td><td>50.0</td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -1039,9 +1049,9 @@ Etc...</textarea>
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
                       <h4><span class="label label-inverse">Final Pool</span></h4>
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
-                          <tr>
+                          <tr class="active">
                             <th class="col-md-3">Concentration</th>
                             <th class="col-md-6">Components</th>
                             <th class="col-md-3">Volume (&mu;l)</th>
@@ -1062,7 +1072,7 @@ Etc...</textarea>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>13.0</td></tr>
-                          <tr><td><em>Total</em></td><td></td><td>50.0</td></tr>
+                          <tr class="active"><td><em>Total</em></td><td></td><td>50.0</td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -1086,21 +1096,56 @@ Etc...</textarea>
                     <p><i>
                       For full details, please follow the instructions by <a href="https://www.beckmancoulter.com/wsrportal/ajax/downloadDocument/B37419AA.pdf?autonomyId=TP_DOC_150180&documentName=B37419AA.pdf" target="_blank"><u>Agencourt AMPure XP</u></a>.
                     </i></p>
-                    <ol>
-                      <li>Mix <abbr title="">40 &mu;l</abbr> of <mark>PCR reaction</mark> with <abbr title="">72 &mu;l</abbr> <b>(1.8x)</b> <mark>Ampure beads</mark> by pipetting up-down <u>10</u> times.</li>
-                      <li>Leave at room temperature (RT) for <u>10 min</u> on <i>orbital shaker</i> for binding.</li>
-                      <li>Separate bead by placing on a <i>24-post magnetic stand</i> for <u>7-10 min</u>.</li>
-                      <li>Discard supernatant, rinse beads with <abbr title="">200 &mu;l</abbr> <mark>70% ethanol</mark>, leave RT for <u>30 sec</u>, discard liquid.</li>
-                      <li>Rince with <abbr title="">200 &mu;l</abbr> <mark>70% ethanol</mark> again, leave RT for <u>30 sec</u>, discard liquid.</li>
-                      <li>RT dry <u>15-20 min</u> on <i>the 24-post magnetic stand</i>, till the beads are completly dry and appear 'cracked'.</li>
-                      <li>Add <abbr title="">35 &mu;l</abbr> <mark>ddH<sub>2</sub>O</mark>, mix the beads, leave RT for <u>5 min</u> on <i>orbital shaker</i>.</li>
-                      <li>Separate bead by placing on a <i>24-post magnetic stand</i> for <u>3-5 min</u>.</li>
-                      <li>
-                        Keep <mark>supernatant</mark> and check the concentration of DNA with <i>Nanodrop spectrophotometer</i>.
-                        <br/>
-                        &nbsp;&nbsp;&nbsp;<b>DNA (&mu;M)</b> = <b>A<sub>260</sub></b> x 50,000 / 660 / <b>length (bp)</b>
-                      </li>
-                    </ol>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr class="active">
+                          <td class="col-md-1"><b>Step</b></td>
+                          <td class="col-md-11"><b>Procedure</b></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Mix <abbr title=""><b>40 &mu;l</b></abbr> of <span class="label label-primary">PCR reaction</span> with <abbr title=""><b>72 &mu;l</b></abbr> <b>(1.8x)</b> <span class="label label-success">Ampure beads</span> by pipetting up-down <u>10</u> times.</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Leave at room temperature (RT) for <span class="label label-inverse">10 min</span> on <i>orbital shaker</i> for binding.</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Separate bead by placing on a <mark><i>24-post magnetic stand</i></mark> for <span class="label label-inverse">7-10 min</span>.</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Discard supernatant, rinse beads with <abbr title=""><b>200 &mu;l</b></abbr> <span class="label label-danger">70% ethanol</span>, leave RT for <span class="label label-inverse">30 sec</span>, discard liquid.</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Rince with <abbr title=""><b>200 &mu;l</b></abbr> <span class="label label-danger">70% ethanol</span> again, leave RT for <span class="label label-inverse">30 sec</span>, discard liquid.</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>RT dry <span class="label label-inverse">15-20 min</span> on <mark><i>24-post magnetic stand</i></mark>, till the beads are completly dry and appear 'cracked'.</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>Add <abbr title=""><b>35 &mu;l</b></abbr> <span class="label label-warning">ddH<sub>2</sub>O</span>, mix the beads, leave RT for <span class="label label-inverse">5 min</span> on <mark><i>orbital shaker</i></mark>.</td>
+                        </tr>
+                        <tr>
+                          <td>8</td>
+                          <td>Separate bead by placing on a <mark><i>24-post magnetic stand</i></mark> for <span class="label label-inverse">3-5 min</span>.</td>
+                        </tr>
+                        <tr>
+                          <td>9</td>
+                          <td>Keep <span class="label label-warning">supernatant</span> and check the concentration of DNA with <mark><i>Nanodrop spectrophotometer</i></mark>.</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                    <div class="col-md-8">
+                      <p class="well text-center"><b>DNA (&mu;M)</b> = <b>A<sub>260</sub></b> x 50,000 / 660 / <b>length (bp)</b></p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1109,8 +1154,27 @@ Etc...</textarea>
 
         </div>
       </div>
-      <br/>
+
+      <hr/>
+      <div class="container theme-showcase li-dark-red" role="main">
+        <br/>
+        <div class="panel-dark-red" id="TX">
+          <div class="panel-heading">
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#4</span>: <i><u>I</u>n <u>V</u>itro</i> <u>T</u>ranscription (IVT)</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <br/>
+
+
   </div>
 </div>
 <hr/>
