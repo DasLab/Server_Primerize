@@ -3,7 +3,7 @@ $(document).ready(function () {
   var str_title = "Primerize: Primer Design for PCR Assembly";
   var path_icon = "/res/images/ico_primerize.png?";
 
-  var path_logo_primerize = "/res/images/logo_primerize.png";
+  var path_logo_primerize = "/res/images/logo_primerize_2.png";
   var path_logo_das = "/res/images/logo_das.jpg";
   var path_logo_stanford = "/res/images/logo_stanford.png";
   var path_logo_eterna = "/res/images/logo_eterna_flat2.png";
