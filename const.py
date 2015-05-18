@@ -44,6 +44,10 @@ QUICKSTART_CONFIG = {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "res/images"
             },
+        "/res/images/docs": {
+            "tools.staticdir.on": True,
+            "tools.staticdir.dir": "res/images/docs"
+            },
         "/res/html": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "res/html"

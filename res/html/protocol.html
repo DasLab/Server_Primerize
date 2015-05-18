@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="nofollow">
     <meta name="description" content="">
-    <meta name="keywords" content="primerize, tutorial, help, PCR">
+    <meta name="keywords" content="primerize, tutorial, help, PCR, IVT">
     <meta name="author" content="T47">
     <link rel="shortcut icon" href="" id="favicon">
 
@@ -407,7 +407,7 @@ Etc...</textarea>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-12">
-                    Using <span class="label label-warning">P4P6_2HP</span> as an example, mix the following components in a PCR tube:
+                    Using <span class="label label-warning">P4P6_2HP</span> as an example, mix the following components in a <u>P</u>olymerase <u>C</u>hain <u>R</u>eaction (PCR) tube:
                     <br/>
                     <br/>
                   </div>
@@ -1093,6 +1093,9 @@ Etc...</textarea>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-12">
+                    <p>
+                      We recommend use of magenetic beads to purify the PCR Product. Other purification methods, <i>e.g.</i> spin columns and ethanol precipitation, should also suffice.  
+                    </p>
                     <p><i>
                       For full details, please follow the instructions by <a href="https://www.beckmancoulter.com/wsrportal/ajax/downloadDocument/B37419AA.pdf?autonomyId=TP_DOC_150180&documentName=B37419AA.pdf" target="_blank"><u>Agencourt AMPure XP</u></a>.
                     </i></p>
@@ -1149,10 +1152,10 @@ Etc...</textarea>
                       </div>
                       <div class="col-md-6 li-orange">
                         <div class="col-md-2">
-                          <label for="A260"><b>A<sub>260</sub></b> :</label>
+                          <label for="A260_DNA"><b>A<sub>260</sub></b> :</label>
                         </div>
                         <div class="col-md-4">
-                          <input type="text" id="A260" value="" class="form-control" />
+                          <input type="text" id="A260_DNA" value="" class="form-control" />
                         </div>
                         <div class="col-md-2">
                           <label for="conc_DNA"><b>DNA (&mu;M)</b> :</label>
@@ -1163,10 +1166,10 @@ Etc...</textarea>
                       </div>
                       <div class="col-md-6 li-orange">
                         <div class="col-md-2">
-                          <label for="lbp"><b>length (bp)</b> :</label>
+                          <label for="l_DNA"><b>length (bp)</b> :</label>
                         </div>
                         <div class="col-md-4">
-                          <input type="text" id="lbp" value="" class="form-control form-inline" />
+                          <input type="text" id="l_DNA" value="" class="form-control form-inline" />
                         </div>
                         <div class="col-md-6">
                           <span class="pull-right">
@@ -1177,6 +1180,85 @@ Etc...</textarea>
                         </div>
                       </div>
                     </div>
+
+                    <hr/>
+                    <p>
+                      We recommend use of agarose gels to visualize the size of DNA template for confirmation of the success of PCR assembly. For DNA gels, we prepare 4 % agarose gel in 1x TBE with <u>Et</u>hidium <u>Br</u>omide (EtBr). Please follow the procedures below: 
+                    </p>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr class="active">
+                          <td class="col-md-1"><b>Step</b></td>
+                          <td class="col-md-11"><b>Procedure</b></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Prepare <abbr title=""><b>150 ml</b></abbr> <span class="label label-primary">1x TBE</span> by mixing <abbr title=""><b>15 ml</b></abbr> <span class="label label-primary">10x TBE</span> with <abbr title=""><b>135 ml</b></abbr> <span class="label label-warning">ddH<sub>2</sub>O</span>, then add <abbr title=""><b>7.5 &mu;l</b></abbr> <span class="label label-danger">10 mg/ml EtBr</span> <sup style="color:#209874;"><b>(5)</b></sup>, mix well.</td>
+                        </tr>
+                        <tr class="active">
+                          <td>2</td>
+                          <td>Weigh <abbr title=""><b>3.0 g</b></abbr> of <span class="label label-violet">agarose</span>, add into <mark><i>1-liter bottle</i></mark>. Then add <abbr title=""><b>75 ml</b></abbr> <span class="label label-primary">1x TBE</span> buffer (containing <span class="label label-danger">EtBr</span>), heat by <mark><i>microwave</i></mark> for <span class="label label-inverse">1 min 45 sec</span> <sup style="color:#209874;"><b>(6)</b></sup>, until it melts down.</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Wait for <span class="label label-inverse">5 min</span> for the gel solution to coll down to <abbr title="">~ 60 &deg;C</abbr>. Pour the gel into gel box and insert the comb. Allow gel to solidify at RT for <span class="label label-inverse">30 min</span>.</td>
+                        </tr>
+                        <tr class="active">
+                          <td>4</td>
+                          <td>Aliquot <abbr title=""><b>2.5 &mu;l</b></abbr> of <span class="label label-orange">sample</span> and add <abbr title=""><b>2.5 &mu;l</b></abbr> of <span class="label label-warning">ddH<sub>2</sub>O</span>, then add <abbr title=""><b>2.0 &mu;l</b></abbr> <span class="label label-light-blue">6x DNA Loading Buffer</span>.</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>When the gel is fully solidified, remove the comb, and pour the rest of <span class="label label-primary">1x TBE</span> buffer into gel box. Make sure the gel is fully emersed.</td>
+                        </tr>
+                        <tr class="active">
+                          <td>6</td>
+                          <td>Load <span class="label label-orange">samples</span> into lanes, flanked by <abbr title=""><b>7.0 &mu;l</b></abbr> <span class="label label-light-blue">DNA ladders</span> (10 bp & 20 bp).</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>Attach and turn on <mark><i>power supply</i></mark>, run electrophoresis at <abbr title=""><b>15 W</b></abbr> for <span class="label label-inverse">30 min</span>.</td>
+                        </tr>
+                        <tr class="active">
+                          <td>8</td>
+                          <td>Once the run is finished, turn off <mark><i>power supply</i></mark>. Visualize the gel on a <mark><i>scanner</i></mark>, <i>e.g. <mark>gel documentation system</mark></i>.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img class="path_pcr_ele center-block well" />
+                        <p class="text-center">Gel box setup.</p>
+                      </div>
+                      <div class="col-md-6">
+                        <img class="path_pcr_gel center-block well" />
+                        <p class="text-center">Example gel image: 4 % agrose in 1x TBE with EtBr, 15 W 20 min.</p>
+                      </div>
+                    </div>
+                    <br/>
+
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-1">
+                         <span class="pull-right"><i><b><u>Note</u></b></i>: </span>
+                        </div>
+                        <div class="col-md-11">
+                         <p>
+                          <span style="color:#209874;"><b>(5)</b></span> 
+                          <span class="label label-danger">EtBr</span> bleaches when exposed to light. <span class="label label-danger">EtBr</span> is also <b>carcinogen</b> and always use gloves when handling gel mix and buffer.
+                         </p>
+                         <p>
+                          <span style="color:#209874;"><b>(6)</b></span> 
+                          Divide the microwave time into <span class="label label-inverse">1 min</span>, <span class="label label-inverse">30 sec</span>, and <span class="label label-inverse">15 sec</span>. Gently shake the bottle between intervals.
+                         </p>
+                         
+                        </div>
+                      </div>
+                    </div>
+
+
                   </div>
                 </div>
               </div>
@@ -1196,12 +1278,128 @@ Etc...</textarea>
           <br/>
           <div class="row">
             <div class="col-md-12">
-
-
+              <div class="panel panel-default" id="TX_sr">
+                <div class="panel-heading">
+                  <h2 class="panel-title">IVT Recipe</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr class="active">
+                            <th class="col-md-3">Concentration</th>
+                            <th class="col-md-6">Components</th>
+                            <th class="col-md-3">Volume (&mu;l)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td><em>10x</em></td><td>TX Buffer</td><td>4.0</td></tr>
+                          <tr><td><em>1 M</em></td><td>DTT</td><td>1.6</td></tr>
+                          <tr><td><em>10 mM</em> <sup style="color:#209874;"><b>(1)</b></sup></td><td>NTPs (A,U,C,G)</td><td>4.0</td></tr>
+                          <tr><td><em>40 %</em></td><td>PEG-8000</td><td>4.0</td></tr>
+                          <tr><td><em>1x</em></td><td>NEB T7 RNA Polymerase</td><td>2.4</td></tr>
+                          <tr class="active"><td><em>Subtotal</em></td><td></td><td>16.0</td></tr>
+                          <tr><td></td><td>dsDNA Template (<i><u>8 pmol</u></i>)</td><td><em>x</em> <sup style="color:#209874;"><b>(2)</b></sup></td></tr>
+                          <tr><td></td><td>ddH<sub>2</sub>O</td><td>24.0 - <em>x</em></td></tr>
+                          <tr class="active"><td><em>Total</em></td><td></td><td>40.0</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-1">
+                         <span class="pull-right"><i><b><u>Note</u></b></i>: </span>
+                        </div>
+                        <div class="col-md-11">
+                         <p>
+                          <span style="color:#209874;"><b>(1)</b></span> 
+                          Use stock of 10 mM NTPs, which has 10 mM of each ATP, UTP, CTP, GTP mixed together. 
+                         </p>
+                         <p>
+                          <span style="color:#209874;"><b>(2)</b></span> 
+                          Use 8 pmol of dsDNA template, the volume of which is calculated as:
+                         </p>
+                         <p class="well"><b>DNA (&mu;l)</b> = 8.0 / <b>DNA (&mu;M)</b></p>
+                         <p>Where DNA (&mu;M) is calculated as previously described.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <hr/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-light-blue" id="TX_pr">
+                <div class="panel-heading">
+                  <h2 class="panel-title">IVT Product Purification</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="col-md-12">
+                    <p>
+                      The purification steps for IVT Product is the same as PCR Product, with one exception for short RNAs <sup style="color:#209874;"><b>(3)</b></sup>. Please see <a href="#PCR_pr">previous section</a> for details.
+                    </p>
+                    <div class="row">
+                      <div class="col-md-1">
+                       <span class="pull-right"><i><b><u>Note</u></b></i>: </span>
+                      </div>
+                      <div class="col-md-11">
+                       <p>
+                        <span style="color:#209874;"><b>(3)</b></span> 
+                        For RNA constructs that are shorter than <u><b>150 nt</b></u>, we recommend adding <span class="label label-brown">40 % PEG-8000</span> to the <span class="label label-success">Ampure beads</span> to a final concentration of <u><b>15-20 %</b></u> to facilitate nucleic acid binding to the beads.
+                       </p>
+                     </div>
+                   </div>
+                    <br/>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="well text-center"><b>RNA (&mu;M)</b> = <b>A<sub>260</sub></b> x 40,000 / 330 / <b>length (nt)</b></p>
+                      </div>
+                      <div class="col-md-6 li-orange">
+                        <div class="col-md-2">
+                          <label for="A260_RNA"><b>A<sub>260</sub></b> :</label>
+                        </div>
+                        <div class="col-md-4">
+                          <input type="text" id="A260_RNA" value="" class="form-control" />
+                        </div>
+                        <div class="col-md-2">
+                          <label for="conc_RNA"><b>RNA (&mu;M)</b> :</label>
+                        </div>
+                        <div class="col-md-4">
+                          <input type="text" id="conc_RNA" value="" class="form-control" />
+                        </div>
+                      </div>
+                      <div class="col-md-6 li-orange">
+                        <div class="col-md-2">
+                          <label for="l_RNA"><b>length (nt)</b> :</label>
+                        </div>
+                        <div class="col-md-4">
+                          <input type="text" id="l_RNA" value="" class="form-control form-inline" />
+                        </div>
+                        <div class="col-md-6">
+                          <span class="pull-right">
+                            <a id="clc_RNA" class="btn btn-default">Clear</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a id="calc_RNA" class="btn btn-info">Calculate</a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+
     </div>
     <br/>
 

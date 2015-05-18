@@ -12,6 +12,9 @@ $(document).ready(function () {
   var path_button_top = "/res/images/fg_top.png";
   var path_button_question = "/res/images/fg_question.png";
 
+  var path_pcr_ele = '/res/images/docs/PCR_electrophoresis.jpg';
+  var path_pcr_gel = '/res/images/docs/PCR_gel.png';
+
   var path_home = "/home";
   var path_design = "/design";
   var path_demo = "/demo_P4P6";
@@ -58,6 +61,9 @@ $(document).ready(function () {
       $(".path_button_loading").attr("src", path_button_loading);
       $(".path_button_top").attr("src", path_button_top);
       $(".path_button_question").attr("src", path_button_question);
+
+      $(".path_pcr_ele").attr("src", path_pcr_ele);
+      $(".path_pcr_gel").attr("src", path_pcr_gel);
 
       $(".path_home").attr("href", path_home);
       $(".path_design").attr("href", path_design);
