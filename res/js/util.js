@@ -14,6 +14,7 @@ $(document).ready(function () {
 
   var path_pcr_ele = '/res/images/docs/PCR_electrophoresis.jpg';
   var path_pcr_gel = '/res/images/docs/PCR_gel.png';
+  var path_tx_gel = '/res/images/docs/TX_gel.jpg';
 
   var path_home = "/home";
   var path_design = "/design";
@@ -64,6 +65,7 @@ $(document).ready(function () {
 
       $(".path_pcr_ele").attr("src", path_pcr_ele);
       $(".path_pcr_gel").attr("src", path_pcr_gel);
+      $(".path_tx_gel").attr("src", path_tx_gel);
 
       $(".path_home").attr("href", path_home);
       $(".path_design").attr("href", path_design);
