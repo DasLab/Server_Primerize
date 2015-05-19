@@ -22,6 +22,7 @@ PATH_DEMO_ERROR = "res/html/example_error.html"
 PATH_DEMO_FAIL = "res/html/example_fail.html"
 PATH_DEMO_WAIT = "res/html/example_wait.html"
 
+PATH_ADMIN = "res/html/admin.html"
 
 QUICKSTART_CONFIG = {
         "/res/css": {
@@ -56,13 +57,18 @@ QUICKSTART_CONFIG = {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "cache"
             },
-        "/src": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "src"
+            
+        "/src/primerize_release.zip": {
+            "tools.staticfile.on": True,
+            "tools.staticfile.filename": "primerize_release.zip"
             },
-        "/": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": ""
+        "/LICENSE.md": {
+            "tools.staticfile.on": True,
+            "tools.staticfile.filename": "LICENSE.md"
+            },
+        "/robots.txt": {
+            "tools.staticfile.on": True,
+            "tools.staticfile.filename": "robots.txt"
             }
         }
 

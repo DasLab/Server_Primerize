@@ -288,7 +288,6 @@ class Root:
 
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
-
         is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
 
         if is_valid:
@@ -333,6 +332,9 @@ class Root:
     def demo_500(self):
         return load_html(PATH_500)
 
+    @cherrypy.expose
+    def admin(self):
+        return load_html(PATH_ADMIN)
 
 
 if __name__ == "__main__":
@@ -344,8 +346,14 @@ if __name__ == "__main__":
         raise SystemError("ERROR: Only can do development or release")
     if server_state == "release":
         socket_host = "171.65.23.206"
+        HOST_DIR = '/Users/daslab/installs/Primerize_server/'
     else:
         socket_host = "127.0.0.1"
+        HOST_DIR = '/MATLAB_Code/Primerize_Server/'
+
+    for i in ("/robots.txt", "/LICENSE.md", "/src/primerize_release.zip"):
+        QUICKSTART_CONFIG[i]['tools.staticfile.filename'] = HOST_DIR + i[1:]
+
 
     cherrypy.config.update( {
         "server.socket_host":socket_host, 
