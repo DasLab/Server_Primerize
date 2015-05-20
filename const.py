@@ -1,4 +1,7 @@
 from cherrypy.lib import auth_digest
+import os
+
+MEDIA_DIR = os.path.join(os.path.abspath("."))
 
 USERS = {'daslab': 'labdas123'}
 
@@ -30,40 +33,34 @@ PATH_DEMO_WAIT = "res/html/example_wait.html"
 PATH_ADMIN = "res/html/admin.html"
 
 QUICKSTART_CONFIG = {
-        "/res/css": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/css"
+        "/": {
+            "tools.staticdir.root": MEDIA_DIR,
+            "log.access_file": 'log_access.log',
+            "log.error_file": 'log_error.log',
+            'log.screen': False,
             },
-        "/res/js": {
+        "/res": {
             "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/js"
+            "tools.staticdir.dir": "res"
             },
-        "/res/images": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/images"
-            },
-        "/res/html": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/html"
-            },
-
         "/cache": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "cache"
             },
-            
+
         "/src/primerize_release.zip": {
             "tools.staticfile.on": True,
-            "tools.staticfile.filename": "primerize_release.zip"
+            "tools.staticfile.filename": os.path.join(MEDIA_DIR, "src/primerize_release.zip")
             },
         "/LICENSE.md": {
             "tools.staticfile.on": True,
-            "tools.staticfile.filename": "LICENSE.md"
+            "tools.staticfile.filename": os.path.join(MEDIA_DIR, "LICENSE.md")
             },
         "/robots.txt": {
             "tools.staticfile.on": True,
-            "tools.staticfile.filename": "robots.txt"
+            "tools.staticfile.filename": os.path.join(MEDIA_DIR, "robots.txt")
             },
+
         '/admin': {
             'tools.auth_digest.on': True,
             'tools.auth_digest.realm': 'localhost',

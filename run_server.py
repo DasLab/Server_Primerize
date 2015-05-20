@@ -366,15 +366,9 @@ if __name__ == "__main__":
         socket_host = "171.65.23.206"
     else:
         socket_host = "127.0.0.1"
-
-    for i in ("/robots.txt", "/LICENSE.md", "/src/primerize_release.zip"):
-        QUICKSTART_CONFIG[i]['tools.staticfile.filename'] = os.path.join(MEDIA_DIR, i[1:])
-
-
     cherrypy.config.update( {
         "server.socket_host":socket_host, 
         "server.socket_port":8080,
-        "tools.staticdir.root": os.path.abspath(os.path.join(os.path.dirname(__file__), "")),
     } )
     
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)

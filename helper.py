@@ -4,7 +4,6 @@ import string
 import sys
 
 from const import *
-MEDIA_DIR = os.path.join(os.path.abspath("."))
 
 
 def load_html(file_name):
