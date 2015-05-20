@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="nofollow">
+    <meta name="description" content="">
+    <meta name="keywords" content="primerize, home">
+    <meta name="author" content="T47">
+    <link rel="shortcut icon" href="" id="favicon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/res/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <!-- <link href="/res/css/bootstrap/bootstrap-theme.min.css" rel="stylesheet"> -->
+    <!-- Custom styles for this template -->
+    <link href="/res/css/theme.css" rel="stylesheet">
+    <link href="/res/css/palette.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top" role="navigation" id="navbar"></div>
+
+   <div class="starter-template" id="down">
+    <div class="container theme-showcase" role="main">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="panel panel-warning" id="sidebar" >
+            <div class="panel-heading">
+              <h3 class="panel-title">Sections</h3>
+            </div>
+            <div class="panel-body scroll_nav">
+              <ul class="nav" role="tablist" id="scroll_nav">
+                <li class="li-danger">
+                    <a id="tab_1" href="#temp_design">
+                      Section #1: 
+                      <br/>
+                      <b>DNA Template Design</b>
+                    </a>
+                </li>
+                <li class="li-magenta">
+                    <a id="tab_2" href="#idt_bulk">
+                      Section #2: 
+                      <br/>
+                      <b>IDT Bulk Ordering</b>
+                    </a>
+                </li>
+                <li class="li-violet">
+                    <a id="tab_3" href="#PCR">
+                      Section #3: 
+                      <br/>
+                      <b>PCR Assembly</b>
+                    </a>
+                    <ul >
+                      <li><a id="tab_31" href="#PCR_sr"><b>PCR Recipe <u>(Single-Round)</u></b></a></li>
+                      <li><a id="tab_32" href="#PCR_cond"><b>PCR Conditions</b></a></li>
+                      <li>
+                        <a id="tab_33" href="#PCR_mr"><b>PCR Recipe <u>(Multiple-Round)</u></b></a>
+                        <ul>
+                          <li><a id="tab_331" href="#PCR_2r">Strategy 1: <u>'2-Round'</u></a></li>
+                          <li><a id="tab_332" href="#PCR_cp">Strategy 2: <u>'Couple'</u></a></li>
+                        </ul>
+                      </li>
+                      <li><a id="tab_34" href="#PCR_pr"><b>PCR Product Purification</b></a></li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10" id="main">
+          <div class="jumbotron">
+            <div class="container">
+              <h1>Primerize Admin Page</h1>
+              <img class="path_logo_primerize" src="" style="clear:both; float:right; padding-left: 20px;"/>
+              <p>
+                This page shows server status, system parameters, and explains the CherryPy framework setup.
+              </p>
+            </div>
+          </div>
+          <div class="container-fluid li-success" role="main">
+            <div class="panel-success" id="sys_stat">
+              <div class="panel-heading">
+                <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: System Status</b></span>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-4">
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th>Back End</th><th>Version</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr class="info"><td><span class="label label-primary">python</span></td><td><i>__PYTHON_VER__</i></td></tr>
+                      <tr class="info"><td><span class="label label-danger">CherryPy</span></td><td><i>__CHERRYPY_VER__</i></td></tr>
+                      <tr class="info"><td><span class="label label-violet">MATLAB</span></td><td><i>__MATLAB_VER__</i></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-4">
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th>Front End</th><th>Version</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr class="warning"><td><span class="label label-orange">jQuery</span></td><td><i>__JQUERY_VER__</i></td></tr>
+                      <tr class="warning"><td><span class="label label-dark-red">Bootstrap</span></td><td><i>__BOOTSTRAP_VER__</i></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-4">
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th>Syetem</th><th>Version</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr class="danger"><td><span class="label label-info">Linux</span></td><td><i>__LINUX_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-light-blue" style="color:#000;">Apache</span></td><td><i>__APACHE_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-green">Git</span></td><td><i>__GIT_VER__</i></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th></th><th>Used / Total</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Disk Space</td><td><i>__DISK_SP__</i></td></tr>
+                    </tbody>
+                  </table>
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th></th><th>Size</th><th># of Files</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Cache Folder</td><td><i>__CACHE_SZ__</i></td><td><i>__CACHE_N__</i></td></tr>
+                    </tbody>
+                  </table>
+                  <a id="clear" href="cleanup_old" target="_blank" class="btn btn-warning">&nbsp;Clean&nbsp;</a>
+                  &nbsp;&nbsp;<b><u>Note:</u></b> only results older than 3 months will be deleted.
+                </div>
+                <div class="col-md-6">
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th>Program</th><th>Path</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr class="success"><td><span class="label label-inverse">Primerize</span></td><td><code>__PRIMERIZE_PATH__</code></td></tr>
+                      <tr class="success"><td><span class="label label-default">NA_thermo</span></td><td><code>__NATHERMO_PATH__</code></td></tr>
+                      <tr class="success"><td><span class="label label-primary">python</span></td><td><code>__PYTHON_PATH__</code></td></tr>
+                      <tr class="success"><td><span class="label label-violet">MATLAB</span></td><td><code>__MATLAB_PATH__</code></td></tr>
+                    </tbody>
+                  </table>                  
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+    <div id="wait" class="modal"></div>
+
+   <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
+
+       <!-- Latest compiled and minified JavaScript -->
+    <script type="text/javascript" src="/res/js/jquery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/res/js/bootstrap/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/res/js/admin.js"></script>
+    <script type="text/javascript" src="/res/js/util.js"></script>
+
+  </body>
+</html>

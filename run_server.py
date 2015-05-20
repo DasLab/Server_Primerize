@@ -334,7 +334,26 @@ class Root:
 
     @cherrypy.expose
     def admin(self):
-        return load_html(PATH_ADMIN)
+        script = load_html(PATH_ADMIN)
+        ver_matab = os.popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed \'s/ (.*//g\'').readlines()[0]
+        ver_jquery = os.popen('ls res/js/jquery/jquery-*.min.js').readlines()[0].replace('res/js/jquery/jquery-', '').replace('.min.js\n', '')
+        f = open('res/js/bootstrap/bootstrap.min.js')
+        f.readline()
+        ver_bootstrap = f.readline()
+        ver_bootstrap = ver_bootstrap[ver_bootstrap.find('v')+1: ver_bootstrap.find('(')]
+        f.close()
+        ver_git = os.popen('git --version | sed \'s/.*version //g\'').readlines()[0]
+        script = script.replace("__PYTHON_VER__", '%s.%s.%s' % (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)).replace("__CHERRYPY_VER__", cherrypy.__version__).replace("__MATLAB_VER__", ver_matab).replace("__JQUERY_VER__", ver_jquery).replace("__BOOTSTRAP_VER__", ver_bootstrap).replace("__LINUX_VER__", os.popen('uname -r').readlines()[0]).replace("__APACHE_VER__", '').replace("__GIT_VER__", ver_git)
+
+        disk_sp = os.popen('df -h | head -2 | tail -1').readlines()[0].split()
+        disk_sp = '%s / %s' % (disk_sp[2], disk_sp[1])
+        cache_n = str(int(os.popen('ls -l cache | wc -l').readlines()[0].strip()) - 1)
+        cache_sz = os.popen('du -h cache/').readlines()[0].split()[0]
+        script = script.replace("__DISK_SP__", disk_sp).replace("__CACHE_SZ__", cache_sz).replace("__CACHE_N__", cache_n)
+
+        script = script.replace("__PRIMERIZE_PATH__", os.popen('pwd').readlines()[0]).replace("__NATHERMO_PATH__", '').replace("__PYTHON_PATH__", os.popen('which python').readlines()[0]).replace("__MATLAB_PATH__", os.popen('which matlab | xargs ls -lah | sed \'s/.*-> //g\'').readlines()[0])
+
+        return script
 
 
 if __name__ == "__main__":

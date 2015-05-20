@@ -55,6 +55,7 @@ Disallow: /error/
 Disallow: /test_random/
 Disallow: /submit_download/
 Disallow: /cleanup_old/
+Disallow: /admin/
 
 # Paths (no clean URLs)
 Disallow: /result?job_id=*/
