@@ -350,13 +350,11 @@ if __name__ == "__main__":
         raise SystemError("ERROR: Only can do development or release")
     if server_state == "release":
         socket_host = "171.65.23.206"
-        HOST_DIR = '/Users/daslab/installs/Primerize_server/'
     else:
         socket_host = "127.0.0.1"
-        HOST_DIR = '/MATLAB_Code/Primerize_Server/'
 
     for i in ("/robots.txt", "/LICENSE.md", "/src/primerize_release.zip"):
-        QUICKSTART_CONFIG[i]['tools.staticfile.filename'] = HOST_DIR + i[1:]
+        QUICKSTART_CONFIG[i]['tools.staticfile.filename'] = MEDIA_DIR + i[1:]
 
 
     cherrypy.config.update( {

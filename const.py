@@ -1,3 +1,7 @@
+from cherrypy.lib import auth_digest
+
+USERS = {'daslab': 'labdas123'}
+
 DEF_MIN_TM = 60.0
 DEF_MAX_LEN = 60
 DEF_MIN_LEN = 15
@@ -69,6 +73,12 @@ QUICKSTART_CONFIG = {
         "/robots.txt": {
             "tools.staticfile.on": True,
             "tools.staticfile.filename": "robots.txt"
-            }
-        }
+            },
+        '/admin': {
+            'tools.auth_digest.on': True,
+            'tools.auth_digest.realm': 'localhost',
+            'tools.auth_digest.get_ha1': auth_digest.get_ha1_dict_plain(USERS),
+            'tools.auth_digest.key': 'a565c27146791cfb'
+           }
+       }
 

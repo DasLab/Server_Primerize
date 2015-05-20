@@ -4,7 +4,6 @@ import string
 import sys
 
 from const import *
-
 MEDIA_DIR = os.path.join(os.path.abspath("."))
 
 
@@ -12,7 +11,7 @@ def load_html(file_name):
     f = open(file_name, "r")
     lines = f.readlines()
     f.close()
-    script = "".join(lines)
+    script = "".join(lines).replace('jquery.min.js', 'jquery-%s.min.js' % get_jquery_ver())
     return script
 
 
@@ -126,8 +125,8 @@ def get_full_sys_stat():
     
     disk_sp = os.popen('df -h | head -2 | tail -1').readlines()[0].split()
     ver += '%s / %s' % (disk_sp[2], disk_sp[1]) + '\t'
-    ver += os.popen('du -h cache/').readlines()[0].strip().split()[0] + '\t'
     ver += str(int(os.popen('ls -l cache | wc -l').readlines()[0].strip()) - 1) + '\t'
+    ver += os.popen('du -h cache/').readlines()[0].strip().split()[0] + '\t'
 
     ver += os.popen('pwd').readlines()[0].strip() + '\t'
     ver += 'N/A\t'
@@ -137,3 +136,9 @@ def get_full_sys_stat():
     f = open('src/sys_ver.txt', 'w')
     f.write(ver)
     f.close()
+
+
+def get_jquery_ver():
+    return os.popen('ls res/js/jquery/jquery-*.min.js').readlines()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip()
+
+

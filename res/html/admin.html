@@ -138,26 +138,35 @@
                 <div class="col-md-6">
                   <table class="table">
                     <thead>
-                      <tr class="active"><th></th><th>Used / Total</th></tr>
+                      <tr class="active"><th></th><th>Size (Used / Total)</th></tr>
                     </thead>
                     <tbody>
                       <tr><td>Disk Space</td><td><i>__DISK_SP__</i></td></tr>
                     </tbody>
                   </table>
-                  <table class="table">
-                    <thead>
-                      <tr class="active"><th></th><th>Size</th><th># of Files</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr><td>Cache Folder</td><td><i>__CACHE_SZ__</i></td><td><i>__CACHE_N__</i></td></tr>
-                    </tbody>
-                  </table>
-                  <a id="refresh" href="get_sys" target="_blank" class="btn btn-warning">&nbsp;Refresh&nbsp;</a>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <a id="clear" href="cleanup_old" target="_blank" class="btn btn-warning">&nbsp;Clean&nbsp;</a>
-                  <p><b><u>Note:</u></b> only results older than 3 months will be deleted.</p>
                 </div>
                 <div class="col-md-6">
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th></th><th># of Files</th><th>Size</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Cache Folder</td><td><i>__CACHE_N__</i></td><td><i>__CACHE_SZ__</i></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a id="refresh" href="get_sys" target="_blank" class="btn btn-primary">&nbsp;Refresh&nbsp;</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a id="clear" href="cleanup_old" target="_blank" class="btn btn-warning">&nbsp;Clean&nbsp;</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <b><u>Note:</u></b> only results older than 3 months will be deleted.
+                  </p>
+                  <br/>
                   <table class="table">
                     <thead>
                       <tr class="active"><th>Program</th><th>Path</th></tr>
@@ -168,8 +177,9 @@
                       <tr class="success"><td><span class="label label-primary">python</span></td><td><code>__PYTHON_PATH__</code></td></tr>
                       <tr class="success"><td><span class="label label-violet">MATLAB</span></td><td><code>__MATLAB_PATH__</code></td></tr>
                     </tbody>
-                  </table>                  
+                  </table>     
                 </div>
+              </div>             
 
             </div>
           </div>
@@ -183,7 +193,7 @@
    <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
 
        <!-- Latest compiled and minified JavaScript -->
-    <script type="text/javascript" src="/res/js/jquery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/res/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/res/js/bootstrap/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="/res/js/admin.js"></script>
