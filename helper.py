@@ -146,7 +146,7 @@ def get_jquery_ver():
 
 def send_email_notice(content):
     msg = MIMEText(content)
-    msg['Subject']  = 'CherryPy: Primerize error log'
+    msg['Subject']  = '[CherryPy] ERROR (EXTERNAL IP): Primerize error log'
     msg['To'] = ADMIN['email']
     msg['From'] = EMAIL['USER']
 
@@ -155,7 +155,6 @@ def send_email_notice(content):
     s.login(EMAIL['USER'], EMAIL['PASSWORD'])
     s.sendmail(msg['From'], msg['To'], msg.as_string())
     s.quit()
-
 
 
 

@@ -1,7 +1,9 @@
 import cherrypy
 from cherrypy.lib import auth_digest
+import datetime
 import os
 import traceback
+import threading
 
 from const import *
 from helper import load_html, send_email_notice
@@ -15,8 +17,13 @@ def secureheaders():
 cherrypy.tools.secureheaders = cherrypy.Tool('before_finalize', secureheaders)
 
 def error_page_500():
-    content = traceback.format_exc()
-    if cherrypy.config.get('server_state') == "release": send_email_notice(content)
+    content = 'CLIENT_IP: ' + cherrypy.request.remote.ip + '\n'
+    content += 'TIME: ' + str(datetime.datetime.now()) + '\n\n'
+    content += str(cherrypy.request.header_list).replace('),', '),\n') + '\n\n'
+    content += str(traceback.format_exc())
+    if cherrypy.config.get('server_state') == "release": 
+        t = threading.Thread(target=send_email_notice, kwargs={'content':content})
+        t.start()
     cherrypy.response.status = 500
     cherrypy.response.body = load_html(PATH['500'])
 

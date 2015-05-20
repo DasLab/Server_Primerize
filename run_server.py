@@ -108,7 +108,7 @@ class Root:
                 create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
                 raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
 
-            # time.sleep(5)
+            time.sleep(5)
 
             # when no solution found
             if lines[-2] and lines[-2][0] == "?":
