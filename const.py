@@ -1,8 +1,12 @@
-from cherrypy.lib import auth_digest
 import os
-
 MEDIA_DIR = os.path.join(os.path.abspath("."))
 
+import cherrypy
+import traceback
+
+from helper import load_html
+
+from cherrypy.lib import auth_digest
 USERS = {'daslab': 'labdas123'}
 
 DEF_MIN_TM = 60.0
@@ -32,12 +36,30 @@ PATH_DEMO_WAIT = "res/html/example_wait.html"
 
 PATH_ADMIN = "res/html/admin.html"
 
+
+def error_page_500():
+    print traceback.format_exc()
+    cherrypy.response.status = 500
+    cherrypy.response.body = load_html(PATH_500)
+
+def error_page_404(status, message, traceback, version):
+    return load_html(PATH_404)
+
+def error_page_403(status, message, traceback, version):
+    return load_html(PATH_403)
+
+
 QUICKSTART_CONFIG = {
         "/": {
             "tools.staticdir.root": MEDIA_DIR,
             "log.access_file": 'log_access.log',
             "log.error_file": 'log_error.log',
             'log.screen': False,
+            'error_page.401': error_page_403,
+            'error_page.403': error_page_403,
+            'error_page.404': error_page_404,
+            'request.error_response': error_page_500,
+            'request.show_tracebacks': False,
             },
         "/res": {
             "tools.staticdir.on": True,
