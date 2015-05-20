@@ -7,8 +7,7 @@ import subprocess
 import sys
 import time
 import traceback
-# import re
-# from scipy.stats import *
+
 from const import *
 from helper import *
 
@@ -20,25 +19,25 @@ class Root:
 
     @cherrypy.expose(['index'])
     def home(self):
-        return load_html(PATH_HOME)
+        return load_html(PATH['HOME'])
     @cherrypy.expose(['help','intro'])
     def tutorial(self):
-        return load_html(PATH_TUTORIAL)
+        return load_html(PATH['TUTORIAL'])
     @cherrypy.expose(['exp','experiment','resource'])
     def protocol(self):
-        return load_html(PATH_PROTOCOL)
+        return load_html(PATH['PROTOCOL'])
     @cherrypy.expose(['readme','copyright'])
     def license(self):
-        return load_html(PATH_LICENSE)
+        return load_html(PATH['LICENSE'])
     @cherrypy.expose(['package','repository'])
     def download(self):
-        return load_html(PATH_DOWNLOAD).replace("__SCRIPT__", "<script src=\"/res/js/download.js\"></script>")
+        return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", "<script src=\"/res/js/download.js\"></script>")
     @cherrypy.expose(['citation','primerize','contact'])
     def about(self):
-        return load_html(PATH_ABOUT)
+        return load_html(PATH['ABOUT'])
 
 
-    @cherrypy.expose
+    @cherrypy.expose(['find','retrieve'])
     def result(self, job_id):
         if not job_id: raise cherrypy.HTTPRedirect("home")
         file_name = "cache/result_%s.html" % job_id
@@ -49,7 +48,7 @@ class Root:
 
     @cherrypy.expose
     def design(self):
-        return load_html(PATH_DESIGN).replace("__SEQ__", "").replace("__MIN_TM__", str(DEF_MIN_TM)).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(DEF_MAX_LEN)).replace("__MIN_LEN__", str(DEF_MIN_LEN)).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
+        return load_html(PATH['DESIGN']).replace("__SEQ__", "").replace("__MIN_TM__", str(ARG['DEF_MIN_TM'])).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(ARG['DEF_MAX_LEN'])).replace("__MIN_LEN__", str(ARG['DEF_MIN_LEN'])).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
@@ -72,11 +71,11 @@ class Root:
 
             try:
                 min_Tm = float(min_Tm)
-                if ("1" not in is_num_primers) or not num_primers or num_primers in (str(DEF_NUM_PRM), "auto"):
-                    num_primers = DEF_NUM_PRM
+                if ("1" not in is_num_primers) or not num_primers or num_primers in (str(ARG['DEF_NUM_PRM']), "auto"):
+                    num_primers = ARG['DEF_NUM_PRM']
                 else:
                     if num_primers[0] == "auto":
-                        num_primers = DEF_NUM_PRM
+                        num_primers = ARG['DEF_NUM_PRM']
                     else:
                         num_primers = int(num_primers[0])
                 max_length = int(max_length)
@@ -85,7 +84,7 @@ class Root:
                 if not (type(num_primers) is int): num_primers = num_primers[0]
                 msg = "Invalid advanced options input."
                 premature_return(msg, html_content, job_id)
-            if num_primers != DEF_NUM_PRM and num_primers % 2 != 0:
+            if num_primers != ARG['DEF_NUM_PRM'] and num_primers % 2 != 0:
                 msg = "Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>."
                 premature_return(msg, html_content, job_id)
             if "1" in is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
@@ -176,14 +175,14 @@ class Root:
                             script += "<span class=\"label-warning\">" + line[1:] + "</span><br/>"
                         elif line[0] == "^":
                             for char in line[1:]:
-                                if char in seq_valid:
+                                if char in SEQ['valid']:
                                     script += "<span class=\"label-info\">" + char + "</span>"
                                 else:
                                     script += char
                             script += "<br/>"
                         elif line[0] == "!":
                             for char in line[1:]:
-                                if char in seq_valid:
+                                if char in SEQ['valid']:
                                     script += "<span class=\"label-white label-danger\">" + char + "</span>"
                                 else:
                                     script += char
@@ -209,7 +208,7 @@ class Root:
 
                 f.write("Primerize Result\n\nINPUT\n=====\n%s\n" % sequence)
                 f.write("#\nMIN_TM: %.1f\n" % min_Tm)
-                if num_primers == DEF_NUM_PRM:
+                if num_primers == ARG['DEF_NUM_PRM']:
                     f.write("NUM_PRIMERS: auto (unspecified)")
                 else:
                     f.write("NUM_PRIMERS: %d" % num_primers)
@@ -258,13 +257,13 @@ class Root:
 
         raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
 
-    @cherrypy.expose
+    @cherrypy.expose(['demo','P4P6'])
     def demo_P4P6(self):
-        self.design_primers(seq_P4P6, "P4P6_2HP", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))    
+        self.design_primers(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MAX_LEN']), str(ARG['DEF_MIN_LEN']), "0", "1", binascii.b2a_hex(os.urandom(7)))    
     @cherrypy.expose
     def test_random(self):
-        seq = seq_T7 + ''.join(random.choice('CGTA') for _ in xrange(500))
-        self.design_primers(seq, "scRNA", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))  
+        seq = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(500))
+        self.design_primers(seq, "scRNA", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MAX_LEN']), str(ARG['DEF_MIN_LEN']), "0", "1", binascii.b2a_hex(os.urandom(7)))  
 
 
     @cherrypy.expose
@@ -280,10 +279,10 @@ class Root:
                 f.write("0")
             f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
             f.close()
-            return load_html(PATH_DOWNLOAD).replace("__SCRIPT__", "<script src=\"/res/js/download_link.js\"></script>")
+            return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", "<script src=\"/res/js/download_link.js\"></script>")
 
         else:
-            script = load_html(PATH_DOWNLOAD)
+            script = load_html(PATH['DOWNLOAD'])
             script = script.replace("__F_NAME__", first_name).replace("__L_NAME__", last_name).replace("__EMAIL__", email).replace("__INST__", inst).replace("__DEPT__", dept)
             if "1" in is_subscribe: 
                 script = script.replace("__IS_SUBSCRIBE__", "checked=\"yes\"") 
@@ -297,24 +296,24 @@ class Root:
         raise ValueError
     @cherrypy.expose
     def demo_error(self):
-        return load_html(PATH_DEMO_ERROR)
+        return load_html(PATH['DEMO_ERROR'])
     @cherrypy.expose
     def demo_fail(self):
-        return load_html(PATH_DEMO_FAIL)
+        return load_html(PATH['DEMO_FAIL'])
     @cherrypy.expose
     def demo_wait(self):
-        return load_html(PATH_DEMO_WAIT)
+        return load_html(PATH['DEMO_WAIT'])
     @cherrypy.expose
     def demo_404(self):
-        return load_html(PATH_404)
+        return load_html(PATH['404'])
     @cherrypy.expose
     def demo_500(self):
-        return load_html(PATH_500)
+        return load_html(PATH['500'])
 
 
     @cherrypy.expose
     def admin(self):
-        script = load_html(PATH_ADMIN)
+        script = load_html(PATH['ADMIN'])
         f = open('src/sys_ver.txt', 'r')
         (ver_python, ver_cherrypy, ver_matlab, ver_jquery, ver_bootstrap, ver_linux, ver_apache, ver_git, disk_sp, cache_n, cache_sz, path_primerize, path_nathermo, path_python, path_matlab) = tuple(f.readlines()[0].split('\t'))
         f.close()
@@ -324,7 +323,7 @@ class Root:
 
     @cherrypy.expose
     def cleanup_old(self):
-        older = time.time() - JOB_KEEP_EXPIRE * 86400
+        older = time.time() - ARG['JOB_KEEP_EXPIRE'] * 86400
 
         for f in glob.glob("cache/*"):
             if (os.stat(f).st_mtime < older):

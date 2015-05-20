@@ -3,7 +3,7 @@ import os
 import string
 import sys
 
-from const import *
+from const import PATH, SEQ, ARG
 
 
 def load_html(file_name):
@@ -34,7 +34,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
-    script = load_html(PATH_DESIGN)
+    script = load_html(PATH['DESIGN'])
     if type(min_Tm) is float: min_Tm = str(min_Tm)
     if type(num_primers) is int: 
         num_primers = str(num_primers)
@@ -52,7 +52,7 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
         is_t7 = "checked"
     else:
         is_t7 = ""
-    if num_primers in (str(DEF_NUM_PRM), " ","auto", ""): num_primers = "auto"
+    if num_primers in (str(ARG['DEF_NUM_PRM']), " ","auto", ""): num_primers = "auto"
 
     script = script.replace("__SEQ__", sequence).replace("__MIN_TM__", min_Tm).replace("__NUM_PRIMERS__", num_primers).replace("__MAX_LEN__", max_length).replace("__MIN_LEN__", min_length).replace("__TAG__", tag).replace("__LEN__", str(len(sequence))).replace("__IS_NUM_PRMS__", is_num_primers).replace("__IS_NUM_PRMS_DIS__", is_num_primers_disabled).replace("__IS_T7__", is_t7)
     return script
@@ -61,19 +61,19 @@ def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_l
 def is_valid_sequence(sequence):
     res = "A,G,C,U,T".split(",")
     for e in sequence.upper():
-        if e not in res:
+        if e not in SEQ['valid']:
             return 0
     return 1
 
 
 def is_t7_present(sequence):
     is_G = 0
-    if sequence[:20] == seq_T7:
+    if sequence[:20] == SEQ['T7']:
         if sequence[20:22] == 'GG': is_G = 1
         return (sequence, 1, is_G)
     else:
         if sequence[0:2] == 'GG': is_G = 1
-        return (seq_T7 + sequence, 0, is_G)
+        return (SEQ['T7'] + sequence, 0, is_G)
 
 
 def create_res_html(html_content, job_id):
@@ -94,7 +94,7 @@ def create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, 
     script = "<br/><hr/><div class=\"container theme-showcase\"><div class=\"row\"><div class=\"col-md-8\"><h2>Output Result:</h2></div><div class=\"col-md-4\"><h4 class=\"text-right\"><span class=\"label label-violet\">JOB_ID</span>: <span class=\"label label-inverse\">__JOB_ID___</span></h4><a href=\"__FILE_NAME__\" class=\"btn btn-blue pull-right\" style=\"color: #ffffff;\" title=\"Output in plain text\" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class=\"progress\"><div class=\"progress-bar progress-bar-danger progress-bar-striped\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"><span class=\"sr-only\"></span></div></div><h3 class=\"modal-title\" id=\"myModalLabel\">Primerize has difficulty in your query...</h3><br/><p>Primerize encountered an internal error while processing your query. Sorry for the inconvenience. </p><p>We will investigate and fix the problem.</p><p>For further information, please feel free to <a class=\"btn btn-warning btn-sm path_about\" href=\"#contact\" style=\"color: #ffffff;\">Contact</a> us to track down the problem.</p></div>"
     script = script.replace("__JOB_ID___", job_id).replace("__FILE_NAME__", "/cache/result_%s.txt" % job_id)
 
-    script_500 = load_html(PATH_500)
+    script_500 = load_html(PATH['500'])
     script_500 = script_500[script_500.find("<div class=\"starter-template\">"):script_500.find("<div class=\"bs-docs-footer\"")]
 
     html_content = get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7).replace("__RESULT__", script + script_500)
