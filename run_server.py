@@ -17,6 +17,7 @@ class Root:
     def __init__(self):
         pass
     def handle_error():
+        print traceback.format_exc()
         cherrypy.response.status = 500
         cherrypy.response.body = load_html(PATH_500)
 
