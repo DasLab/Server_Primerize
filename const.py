@@ -37,19 +37,20 @@ EMAIL = {
     'PASSWORD': 'daslab4ever',
     'PORT': 587,    
 }
-ADMIN = {'t47': ('Siqi Tian', 't47@stanford.edu')}
+ADMIN = {
+    'email': 't47@stanford.edu',
+    'login': {'daslab': EMAIL['PASSWORD']},
+}
 
 
 import os
 MEDIA_DIR = os.path.join(os.path.abspath("."))
 
 import cherrypy
+from cherrypy.lib import auth_digest
 import traceback
 
 from helper import load_html, send_email_notice
-
-from cherrypy.lib import auth_digest
-USERS = {'daslab': 'labdas123'}
 
 
 def secureheaders():
@@ -112,7 +113,7 @@ QUICKSTART_CONFIG = {
     '/admin': {
         'tools.auth_digest.on': True,
         'tools.auth_digest.realm': 'localhost',
-        'tools.auth_digest.get_ha1': auth_digest.get_ha1_dict_plain(USERS),
+        'tools.auth_digest.get_ha1': auth_digest.get_ha1_dict_plain(ADMIN['login']),
         'tools.auth_digest.key': 'a565c27146791cfb'
    }
 }
