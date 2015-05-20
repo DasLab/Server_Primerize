@@ -1,6 +1,7 @@
 import cherrypy
 import os
 import string
+import sys
 
 from const import *
 
@@ -109,3 +110,30 @@ def premature_return(msg, html_content, job_id):
     raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
 
 
+def get_full_sys_stat():
+    ver  = '%s.%s.%s\t' % (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
+    ver += cherrypy.__version__ + '\t'
+    ver += os.popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed \'s/ (.*//g\'').readlines()[0].strip() + '\t'
+    ver += os.popen('ls res/js/jquery/jquery-*.min.js').readlines()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip() + '\t'
+    f = open('res/js/bootstrap/bootstrap.min.js')
+    f.readline()
+    ver_bootstrap = f.readline()
+    ver += ver_bootstrap[ver_bootstrap.find('v')+1: ver_bootstrap.find('(')].strip() + '\t'
+    f.close()
+    ver += os.popen('uname -r').readlines()[0].strip() + '\t'
+    ver += 'N/A\t'
+    ver += os.popen('git --version | sed \'s/.*version //g\'').readlines()[0].strip() + '\t'
+    
+    disk_sp = os.popen('df -h | head -2 | tail -1').readlines()[0].split()
+    ver += '%s / %s' % (disk_sp[2], disk_sp[1]) + '\t'
+    ver += os.popen('du -h cache/').readlines()[0].strip().split()[0] + '\t'
+    ver += str(int(os.popen('ls -l cache | wc -l').readlines()[0].strip()) - 1) + '\t'
+
+    ver += os.popen('pwd').readlines()[0].strip() + '\t'
+    ver += 'N/A\t'
+    ver += os.popen('which python').readlines()[0].strip() + '\t'
+    ver += os.popen('which matlab | xargs ls -lah | sed \'s/.*-> //g\'').readlines()[0].strip()
+
+    f = open('src/sys_ver.txt', 'w')
+    f.write(ver)
+    f.close()
