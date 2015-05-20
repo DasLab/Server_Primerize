@@ -316,6 +316,8 @@ class Root:
         return load_html(PATH_404)
     @cherrypy.expose
     def demo_500(self):
+        print MEDIA_DIR
+        print QUICKSTART_CONFIG
         return load_html(PATH_500)
 
     @cherrypy.expose
@@ -354,7 +356,7 @@ if __name__ == "__main__":
         socket_host = "127.0.0.1"
 
     for i in ("/robots.txt", "/LICENSE.md", "/src/primerize_release.zip"):
-        QUICKSTART_CONFIG[i]['tools.staticfile.filename'] = MEDIA_DIR + i[1:]
+        QUICKSTART_CONFIG[i]['tools.staticfile.filename'] = os.path.join(MEDIA_DIR, i[1:])
 
 
     cherrypy.config.update( {
