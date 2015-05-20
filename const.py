@@ -33,30 +33,19 @@ QUICKSTART_CONFIG = {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "res/css"
             },
-        "/res/css/bootstrap": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/css/bootstrap"
-            },
         "/res/js": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "res/js"
-            },
-        "/res/js/bootstrap": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/js/bootstrap"
             },
         "/res/images": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "res/images"
             },
-        "/res/images/docs": {
-            "tools.staticdir.on": True,
-            "tools.staticdir.dir": "res/images/docs"
-            },
         "/res/html": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "res/html"
             },
+
         "/cache": {
             "tools.staticdir.on": True,
             "tools.staticdir.dir": "cache"

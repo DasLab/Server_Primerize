@@ -16,16 +16,19 @@ class Root:
 
     def __init__(self):
         pass
-    def handle_error():
+    def error_page_500():
         print traceback.format_exc()
         cherrypy.response.status = 500
         cherrypy.response.body = load_html(PATH_500)
+    def error_page_404(status, message, traceback, version):
+        return load_html(PATH_404)
 
     _cp_config = {
-        'error_page.404': PATH_404,
-        'request.error_response': handle_error,
+        'error_page.404': error_page_404,
+        'request.error_response': error_page_500,
         'request.show_tracebacks': False,
     }
+
 
     @cherrypy.expose
     def index(self):
@@ -51,6 +54,7 @@ class Root:
     @cherrypy.expose
     def about(self):
         return load_html(PATH_ABOUT)
+
 
     @cherrypy.expose
     def result(self, job_id):
@@ -276,6 +280,7 @@ class Root:
         seq = seq_T7 + ''.join(random.choice('CGTA') for _ in xrange(500))
         self.design_primers(seq, "scRNA", str(DEF_MIN_TM), str(DEF_NUM_PRM), str(DEF_MAX_LEN), str(DEF_MIN_LEN), "0", "1", binascii.b2a_hex(os.urandom(7)))  
 
+
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
         is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
@@ -300,6 +305,7 @@ class Root:
                 script = script.replace("__IS_SUBSCRIBE__", "") 
             return script.replace("__SCRIPT__", "<script src=\"/res/js/download_error.js\"></script>")
 
+
     @cherrypy.expose
     def error(self):
         raise ValueError
@@ -317,9 +323,8 @@ class Root:
         return load_html(PATH_404)
     @cherrypy.expose
     def demo_500(self):
-        print MEDIA_DIR
-        print QUICKSTART_CONFIG
         return load_html(PATH_500)
+
 
     @cherrypy.expose
     def admin(self):
@@ -330,6 +335,7 @@ class Root:
 
         script = script.replace("__PYTHON_VER__", ver_python).replace("__CHERRYPY_VER__", ver_cherrypy).replace("__MATLAB_VER__", ver_matlab).replace("__JQUERY_VER__", ver_jquery).replace("__BOOTSTRAP_VER__", ver_bootstrap).replace("__LINUX_VER__", ver_linux).replace("__APACHE_VER__", ver_apache).replace("__GIT_VER__", ver_git).replace("__DISK_SP__", disk_sp).replace("__CACHE_SZ__", cache_sz).replace("__CACHE_N__", cache_n).replace("__PRIMERIZE_PATH__", path_primerize).replace("__NATHERMO_PATH__", path_nathermo).replace("__PYTHON_PATH__", path_python).replace("__MATLAB_PATH__", path_matlab)
         return script
+
     @cherrypy.expose
     def cleanup_old(self):
         older = time.time() - JOB_KEEP_EXPIRE * 86400
@@ -338,6 +344,7 @@ class Root:
             if (os.stat(f).st_mtime < older):
                 os.remove(f)
         return '<html><body onLoad="window.close()"></body></html>'
+
     @cherrypy.expose
     def get_sys(self):
         get_full_sys_stat()
@@ -364,10 +371,7 @@ if __name__ == "__main__":
         "server.socket_host":socket_host, 
         "server.socket_port":8080,
         "tools.staticdir.root": os.path.abspath(os.path.join(os.path.dirname(__file__), "")),
-        #"tools.statiddir.root": "/Users/skullnite/Downloads"
     } )
-    #print os.path.abspath(os.path.join(__file__, "static"))
-    #cherrypy.quickstart( rest(), "/", "development.conf" )
     
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
 
