@@ -1,9 +1,11 @@
 import cherrypy
+from email.mime.text import MIMEText
 import os
+import smtplib
 import string
 import sys
 
-from const import PATH, SEQ, ARG
+from const import PATH, SEQ, ARG, EMAIL, ADMIN
 
 
 def load_html(file_name):
@@ -139,5 +141,21 @@ def get_full_sys_stat():
 
 def get_jquery_ver():
     return os.popen('ls res/js/jquery/jquery-*.min.js').readlines()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip()
+
+
+def send_email_notice(content):
+    msg = MIMEText(content)
+    msg['Subject']  = 'CherryPy: Primerize error log'
+    msg['To'] = ADMIN['t47'][1]
+    msg['From'] = EMAIL['USER']
+
+    s = smtplib.SMTP(EMAIL['HOST'], EMAIL['PORT'])
+    s.starttls()
+    s.login(EMAIL['USER'], EMAIL['PASSWORD'])
+    s.sendmail(msg['From'], msg['To'], msg.as_string())
+    s.quit()
+
+
+
 
 

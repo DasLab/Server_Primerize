@@ -31,6 +31,14 @@ PATH = {
     'ADMIN': "res/html/admin.html",
 }
 
+EMAIL = {
+    'HOST': 'smtp.gmail.com',
+    'USER': 'stanfordrmdb@gmail.com',
+    'PASSWORD': 'daslab4ever',
+    'PORT': 587,    
+}
+ADMIN = {'t47': ('Siqi Tian', 't47@stanford.edu')}
+
 
 import os
 MEDIA_DIR = os.path.join(os.path.abspath("."))
@@ -38,7 +46,7 @@ MEDIA_DIR = os.path.join(os.path.abspath("."))
 import cherrypy
 import traceback
 
-from helper import load_html
+from helper import load_html, send_email_notice
 
 from cherrypy.lib import auth_digest
 USERS = {'daslab': 'labdas123'}
@@ -49,11 +57,13 @@ def secureheaders():
     headers['X-Frame-Options'] = 'DENY'
     headers['X-XSS-Protection'] = '1; mode=block'
     headers['Content-Security-Policy'] = "default-src='self'"
-
 cherrypy.tools.secureheaders = cherrypy.Tool('before_finalize', secureheaders)
 
 def error_page_500():
-    print traceback.format_exc()
+    content = traceback.format_exc()
+    print content
+    if cherrypy.config.get('server_state') == "release": send_email_notice(content)
+
     cherrypy.response.status = 500
     cherrypy.response.body = load_html(PATH['500'])
 

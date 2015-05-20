@@ -350,7 +350,10 @@ if __name__ == "__main__":
     cherrypy.config.update( {
         "server.socket_host":socket_host, 
         "server.socket_port":8080,
+        "server_state":server_state,
     } )
     
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
+    wsgiapp = cherrypy.Application(StringGenerator(), '/', config=QUICKSTART_CONFIG)
+
 
