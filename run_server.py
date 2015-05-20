@@ -22,8 +22,12 @@ class Root:
         cherrypy.response.body = load_html(PATH_500)
     def error_page_404(status, message, traceback, version):
         return load_html(PATH_404)
+    def error_page_403(status, message, traceback, version):
+        return load_html(PATH_403)
 
     _cp_config = {
+        'error_page.401': error_page_403,
+        'error_page.403': error_page_403,
         'error_page.404': error_page_404,
         'request.error_response': error_page_500,
         'request.show_tracebacks': False,
