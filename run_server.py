@@ -343,15 +343,10 @@ if __name__ == "__main__":
     if server_state not in ("dev","release"):
         print "Usage:\n\tpython run_server.py [flag]\n\n\tflag\t[required]\tuse \"release\" for hosting server\n\t\t\t\tuse \"dev\" for development test\n"
         raise SystemError("ERROR: Only can do development or release")
-    if server_state == "release":
-        socket_host = "171.65.23.206"
-    else:
-        socket_host = "127.0.0.1"
-    cherrypy.config.update( {
-        "server.socket_host":socket_host, 
-        "server.socket_port":8080,
-        "server_state":server_state,
-    } )
+    cherrypy.config.update({"server_state": server_state})
+    
+    if server_state != "release":
+        cherrypy.config.update({"server.socket_host": "127.0.0.1"})
     
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
     wsgiapp = cherrypy.Application(StringGenerator(), '/', config=QUICKSTART_CONFIG)

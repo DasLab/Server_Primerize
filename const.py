@@ -5,7 +5,6 @@ ARG = {
     'DEF_NUM_PRM': -1,
     'JOB_KEEP_EXPIRE': 90,    
 }
-
 SEQ = {
     'P4P6': "TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC",
     'T7': "TTCTAATACGACTCACTATA",
@@ -43,11 +42,9 @@ ADMIN = {
 }
 
 
-import os
-MEDIA_DIR = os.path.join(os.path.abspath("."))
-
 import cherrypy
 from cherrypy.lib import auth_digest
+import os
 import traceback
 
 from helper import load_html, send_email_notice
@@ -62,9 +59,7 @@ cherrypy.tools.secureheaders = cherrypy.Tool('before_finalize', secureheaders)
 
 def error_page_500():
     content = traceback.format_exc()
-    print content
     if cherrypy.config.get('server_state') == "release": send_email_notice(content)
-
     cherrypy.response.status = 500
     cherrypy.response.body = load_html(PATH['500'])
 
@@ -75,13 +70,16 @@ def error_page_403(status, message, traceback, version):
     return load_html(PATH['403'])
 
 
+MEDIA_DIR = os.path.join(os.path.abspath("."))
 QUICKSTART_CONFIG = {
     "/": {
         "tools.staticdir.root": MEDIA_DIR,
         "tools.secureheaders.on": True,
+
         "log.access_file": 'log_access.log',
         "log.error_file": 'log_error.log',
         'log.screen': False,
+
         'error_page.401': error_page_403,
         'error_page.403': error_page_403,
         'error_page.404': error_page_404,
@@ -117,4 +115,10 @@ QUICKSTART_CONFIG = {
         'tools.auth_digest.key': 'a565c27146791cfb'
    }
 }
+
+SERVER_IP = "171.65.23.206"
+cherrypy.config.update({
+    "server.socket_host": SERVER_IP,
+    "server.socket_port": 8080,
+})
 
