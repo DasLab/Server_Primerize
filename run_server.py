@@ -18,28 +18,22 @@ class Root:
     def __init__(self):
         pass
 
-    @cherrypy.expose
-    def index(self):
-        raise cherrypy.HTTPRedirect("home")
-    @cherrypy.expose
-    def design(self):
-        return load_html(PATH_DESIGN).replace("__SEQ__", "").replace("__MIN_TM__", str(DEF_MIN_TM)).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(DEF_MAX_LEN)).replace("__MIN_LEN__", str(DEF_MIN_LEN)).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
-    @cherrypy.expose
+    @cherrypy.expose(['index'])
     def home(self):
         return load_html(PATH_HOME)
-    @cherrypy.expose
+    @cherrypy.expose(['help','intro'])
     def tutorial(self):
         return load_html(PATH_TUTORIAL)
-    @cherrypy.expose
+    @cherrypy.expose(['exp','experiment','resource'])
     def protocol(self):
         return load_html(PATH_PROTOCOL)
-    @cherrypy.expose
+    @cherrypy.expose(['readme','copyright'])
     def license(self):
         return load_html(PATH_LICENSE)
-    @cherrypy.expose
+    @cherrypy.expose(['package','repository'])
     def download(self):
         return load_html(PATH_DOWNLOAD).replace("__SCRIPT__", "<script src=\"/res/js/download.js\"></script>")
-    @cherrypy.expose
+    @cherrypy.expose(['citation','primerize','contact'])
     def about(self):
         return load_html(PATH_ABOUT)
 
@@ -52,6 +46,10 @@ class Root:
             return load_html(file_name)
         else:
             raise cherrypy.NotFound()
+
+    @cherrypy.expose
+    def design(self):
+        return load_html(PATH_DESIGN).replace("__SEQ__", "").replace("__MIN_TM__", str(DEF_MIN_TM)).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(DEF_MAX_LEN)).replace("__MIN_LEN__", str(DEF_MIN_LEN)).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
