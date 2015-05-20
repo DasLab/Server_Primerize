@@ -3,6 +3,7 @@ from email.mime.text import MIMEText
 import os
 import smtplib
 import string
+import subprocess
 import sys
 
 from const import *
@@ -114,26 +115,26 @@ def premature_return(msg, html_content, job_id):
 def get_full_sys_stat():
     ver  = '%s.%s.%s\t' % (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
     ver += cherrypy.__version__ + '\t'
-    ver += os.popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed \'s/ (.*//g\'').readlines()[0].strip() + '\t'
-    ver += os.popen('ls res/js/jquery/jquery-*.min.js').readlines()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip() + '\t'
+    ver += subprocess.Popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed \'s/ (.*//g\'', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('ls res/js/jquery/jquery-*.min.js', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip() + '\t'
     f = open('res/js/bootstrap/bootstrap.min.js')
     f.readline()
     ver_bootstrap = f.readline()
     ver += ver_bootstrap[ver_bootstrap.find('v')+1: ver_bootstrap.find('(')].strip() + '\t'
     f.close()
-    ver += os.popen('uname -r').readlines()[0].strip() + '\t'
+    ver += subprocess.Popen('uname -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += 'N/A\t'
-    ver += os.popen('git --version | sed \'s/.*version //g\'').readlines()[0].strip() + '\t'
+    ver += subprocess.Popen('git --version | sed \'s/.*version //g\'', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     
-    disk_sp = os.popen('df -h | head -2 | tail -1').readlines()[0].split()
+    disk_sp = subprocess.Popen('df -h | head -2 | tail -1', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].split()
     ver += '%s / %s' % (disk_sp[2], disk_sp[1]) + '\t'
-    ver += str(int(os.popen('ls -l cache | wc -l').readlines()[0].strip()) - 1) + '\t'
-    ver += os.popen('du -h cache/').readlines()[0].strip().split()[0] + '\t'
+    ver += str(int(subprocess.Popen('ls -l cache | wc -l', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()) - 1) + '\t'
+    ver += subprocess.Popen('du -h cache/', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[0] + '\t'
 
-    ver += os.popen('pwd').readlines()[0].strip() + '\t'
+    ver += subprocess.Popen('pwd', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += 'N/A\t'
-    ver += os.popen('which python').readlines()[0].strip() + '\t'
-    ver += os.popen('which matlab | xargs ls -lah | sed \'s/.*-> //g\'').readlines()[0].strip()
+    ver += subprocess.Popen('which python', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('which matlab | xargs ls -lah | sed \'s/.*-> //g\'', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
 
     f = open('src/sys_ver.txt', 'w')
     f.write(ver)
@@ -141,7 +142,7 @@ def get_full_sys_stat():
 
 
 def get_jquery_ver():
-    return os.popen('ls res/js/jquery/jquery-*.min.js').readlines()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip()
+    return subprocess.Popen('ls res/js/jquery/jquery-*.min.js', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip()
 
 
 def send_email_notice(content):
