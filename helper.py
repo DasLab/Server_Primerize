@@ -5,7 +5,8 @@ import smtplib
 import string
 import sys
 
-from const import PATH, SEQ, ARG, EMAIL, ADMIN
+from const import *
+from config import *
 
 
 def load_html(file_name):

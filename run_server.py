@@ -9,6 +9,7 @@ import time
 import traceback
 
 from const import *
+from config import *
 from helper import *
 
 
@@ -343,10 +344,11 @@ if __name__ == "__main__":
     if server_state not in ("dev","release"):
         print "Usage:\n\tpython run_server.py [flag]\n\n\tflag\t[required]\tuse \"release\" for hosting server\n\t\t\t\tuse \"dev\" for development test\n"
         raise SystemError("ERROR: Only can do development or release")
-    cherrypy.config.update({"server_state": server_state})
-    
-    if server_state != "release":
-        cherrypy.config.update({"server.socket_host": "127.0.0.1"})
+    elif server_state != "release":
+        cherrypy.config.update({
+            "server.socket_host": "127.0.0.1",
+            "server_state": 'dev',
+        })
     
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
     wsgiapp = cherrypy.Application(StringGenerator(), '/', config=QUICKSTART_CONFIG)
