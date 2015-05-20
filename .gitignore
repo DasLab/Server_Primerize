@@ -1,2 +1,4 @@
 *.pyc
 cache/*
+src/sys_ver.txt
+src/usr_tab.csv
