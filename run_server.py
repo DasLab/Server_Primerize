@@ -32,7 +32,7 @@ class Root:
         return load_html(PATH['LICENSE'])
     @cherrypy.expose(['package','repository'])
     def download(self):
-        return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", "<script src=\"/res/js/download.js\"></script>")
+        return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", '<script type="text/javascript" src="/' + PATH['JS_DOWNLOAD']+'"></script>')
     @cherrypy.expose(['citation','primerize','contact'])
     def about(self):
         return load_html(PATH['ABOUT'])
@@ -108,7 +108,7 @@ class Root:
                 create_err_html(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
                 raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
 
-            time.sleep(5)
+            # time.sleep(5)
 
             # when no solution found
             if lines[-2] and lines[-2][0] == "?":
@@ -280,7 +280,7 @@ class Root:
                 f.write("0")
             f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
             f.close()
-            return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", "<script src=\"/res/js/download_link.js\"></script>")
+            return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", '<script type="text/javascript" src="/' + PATH['JS_DOWNLOAD_LINK']+'"></script>')
 
         else:
             script = load_html(PATH['DOWNLOAD'])
@@ -289,7 +289,7 @@ class Root:
                 script = script.replace("__IS_SUBSCRIBE__", "checked=\"yes\"") 
             else:
                 script = script.replace("__IS_SUBSCRIBE__", "") 
-            return script.replace("__SCRIPT__", "<script src=\"/res/js/download_error.js\"></script>")
+            return script.replace("__SCRIPT__", '<script type="text/javascript" src="/' + PATH['JS_DOWNLOAD_ERR']+'"></script>')
 
 
     @cherrypy.expose

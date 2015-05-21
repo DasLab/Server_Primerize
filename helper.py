@@ -14,7 +14,11 @@ def load_html(file_name):
     f = open(file_name, "r")
     lines = f.readlines()
     f.close()
-    script = "".join(lines).replace('jquery.min.js', 'jquery-%s.min.js' % get_jquery_ver())
+
+    script = "".join(lines)
+    script = script.replace('class="path_css_bootstrap"', 'href="/' + PATH['CSS_BOOTSTRAP'] + '"').replace('class="path_css_theme"', 'href="/' + PATH['CSS_THEME'] + '"').replace('class="path_css_palette"', 'href="/' + PATH['CSS_PALETTE'] + '"')
+    script = script.replace('class="path_js_jquery"', 'src="/' + PATH['JS_JQUERY'] + '"').replace('class="path_js_bootstrap"', 'src="/' + PATH['JS_BOOTSTRAP'] + '"').replace('class="path_js_zeroclipboard"', 'src="/' + PATH['JS_ZEROCLIPBOARD'] + '"').replace('class="path_js_admin"', 'src="/' + PATH['JS_ADMIN'] + '"').replace('class="path_js_clip"', 'src="/' + PATH['JS_CLIP'] + '"').replace('class="path_js_design_1d"', 'src="/' + PATH['JS_DESIGN_1D'] + '"').replace('class="path_js_download_err"', 'src="/' + PATH['JS_DOWNLOAD_ERR'] + '"').replace('class="path_js_download_link"', 'src="/' + PATH['JS_DOWNLOAD_LINK'] + '"').replace('class="path_js_download"', 'src="/' + PATH['JS_DOWNLOAD'] + '"').replace('class="path_js_index"', 'src="/' + PATH['JS_INDEX'] + '"').replace('class="path_js_license"', 'src="/' + PATH['JS_LICENSE'] + '"').replace('class="path_js_protocol"', 'src="/' + PATH['JS_PROTOCOL'] + '"').replace('class="path_js_tutorial"', 'src="/' + PATH['JS_TUTORIAL'] + '"').replace('class="path_js_util"', 'src="/' + PATH['JS_UTIL'] + '"')
+
     return script
 
 
@@ -139,10 +143,6 @@ def get_full_sys_stat():
     f = open('src/sys_ver.txt', 'w')
     f.write(ver)
     f.close()
-
-
-def get_jquery_ver():
-    return subprocess.Popen('ls res/js/jquery/jquery-*.min.js', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].replace('res/js/jquery/jquery-', '').replace('.min.js', '').strip()
 
 
 def send_email_notice(content):

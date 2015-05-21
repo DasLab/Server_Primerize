@@ -1,3 +1,9 @@
+import subprocess
+
+def get_jquery_ver():
+    return subprocess.Popen('ls res/js/jquery-*.min.js', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].replace('res/js/jquery-', '').replace('.min.js', '').strip()
+
+
 ARG = {
     'DEF_MIN_TM': 60.0,
     'DEF_MAX_LEN': 60,
@@ -27,6 +33,25 @@ PATH = {
     'DEMO_WAIT': "res/html/example_wait.html",
 
     'ADMIN': "res/html/admin.html",
+
+    'JS_JQUERY': 'res/js/jquery-%s.min.js' % get_jquery_ver(),
+    'JS_BOOTSTRAP': "res/js/bootstrap.min.js",
+    'JS_ZEROCLIPBOARD': "res/js/ZeroClipboard.min.js",
+    'JS_ADMIN': "res/js/_admin.js",
+    'JS_CLIP': "res/js/_clip.js",
+    'JS_DESIGN_1D': "res/js/_design_1d.js",
+    'JS_DOWNLOAD_ERR': "res/js/_download_error.js",
+    'JS_DOWNLOAD_LINK': "res/js/_download_link.js",
+    'JS_DOWNLOAD': "res/js/_download.js",
+    'JS_INDEX': "res/js/_index.js",
+    'JS_LICENSE': "res/js/_license.js",
+    'JS_PROTOCOL': "res/js/_protocol.js",
+    'JS_TUTORIAL': "res/js/_tutorial.js",
+    'JS_UTIL': "res/js/_util.js",
+
+    'CSS_BOOTSTRAP': "res/css/bootstrap.min.css",
+    'CSS_THEME': "res/css/theme.css",
+    'CSS_PALETTE': "res/css/palette.css",
 }
 
 EMAIL = {

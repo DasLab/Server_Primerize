@@ -29,7 +29,7 @@ $(document).ready(function () {
   var path_navbar = "/res/html/_navbar.html?";
   var path_footer = "/res/html/_footer.html?";
   var path_modal = "/res/html/_demo.html?";
-  
+
 	var url = window.location.href;
 
   $("#navbar").load(path_navbar, function () {
