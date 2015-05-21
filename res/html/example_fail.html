@@ -147,10 +147,10 @@
           <div class="row">
             <div class="col-md-9">
               <div class="alert alert-warning center-block" id="warn_500">
-                <b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
+                <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
               </div>
               <div class="alert alert-orange center-block" id="warn_1000">
-                <b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
+                <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
               </div>
             </div>
             <div class="col-md-3"></div>
@@ -158,7 +158,7 @@
 
         </form>
       </div>
-      <div id="result"><br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">8d808be2d5e1d866</span></h4><a href="/cache/result_8d808be2d5e1d866.txt" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div></div>
+      <div id="result"><br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">8d808be2d5e1d866</span></h4><a href="/cache/result_8d808be2d5e1d866.txt" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div></div>
     </div>
    </div>
    <hr/>
@@ -167,7 +167,7 @@
       <div class="modal-dialog modal-lg" id="modal_dialog">
         <div class="modal-content panel-primary">
           <div class="modal-header panel-heading">
-            <h3 class="modal-title">Primerize is running ...</h3>
+            <h3 class="modal-title"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running ...</h3>
           </div>
           <div class="modal-body panel-body">
             <div class="col-md-12">
@@ -181,7 +181,7 @@
               <br/>
               <p class="text-center well" >
                 <b>
-                  Please <button id="copy-button" data-clipboard-text="" class="btn btn-success">Copy</button> this link: 
+                  <span class="glyphicon glyphicon-copy"></span>&nbsp;&nbsp;Please <button id="copy-button" data-clipboard-text="" class="btn btn-success">Copy</button> this link: 
                   <br/>
                   <code><span id="url_id"></span></code>
                 </b>
@@ -193,10 +193,10 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="alert alert-warning center-block" id="modal_warn_500">
-                  <b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
                 </div>
                 <div class="alert alert-orange center-block" id="modal_warn_1000">
-                  <b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
                 </div>
               </div>
             </div>
