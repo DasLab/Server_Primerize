@@ -78,28 +78,28 @@
           </div>
           <div class="panel-body scroll_nav">
             <ul class="nav" role="tablist" id="scroll_nav">
-              <li class="li-primary">
-                <a id="tab_1" href="#web_input">
-                  Section #1: 
-                  <br/>
-                  <b>Website Input</b>
-                </a>
-              </li>
-              <li class="li-info">
-                  <a id="tab_2" href="#web_retrev">
-                    Section #2: 
+              <li class="li-success">
+                  <a id="tab_1" href="#web_retrev">
+                    Section #1: 
                     <br/>
                     <b>Result Retrieval</b>
                   </a>
               </li>
-              <li class="li-success">
+              <li class="li-dark-green">
+                <a id="tab_2" href="#web_input">
+                  Section #2: 
+                  <br/>
+                  <b>Website Input</b>
+                </a>
+              </li>
+              <li class="li-green">
                   <a id="tab_3" href="#web_output">
                     Section #3: 
                     <br/>
                     <b>Website Output</b>
                   </a>
               </li>
-              <li class="li-green">
+              <li class="li-light-blue">
                   <a id="tab_4" href="#txt_output">
                     Section #4:
                     <br/>
@@ -113,10 +113,141 @@
     </div>
 
     <div class="pull-right" id="main">
-      <div class="container theme-showcase li-primary" role="main">
-        <div class="panel-primary" id="web_input">
+      <div class="container theme-showcase li-success" role="main">
+        <div class="panel-success" id="web_retrev">
           <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: Website Input</b></span>
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: Result Retrieval</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              <h4> Once submitted, a modal window will be displayed on the web page, showing the <span class="label label-violet">JOB_ID</span> :</h4>
+              <br/>
+              <div class="dialog modal-lg center-block tutorial">
+                <div class="modal-content panel-primary">
+                  <div class="modal-header panel-heading">
+                    <h3 class="modal-title" id="myModalLabel">Primerize is running ...</h3>
+                  </div>
+                  <div class="modal-body panel-body">
+                    <div class="col-md-12">
+                      <h3 class="text-center"> Your 
+                        <span class="label label-violet">JOB_ID</span> is: 
+                        <span class="label label-inverse" id="modal_id">0123456789abcdef</span>
+                      </h3>
+                      <br/>
+                      <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
+                      <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
+                      <br/>
+                      <p class="text-center well" >
+                        <b>
+                          Please <button id="copy-button" data-clipboard-text="http://primerize.stanford.edu/result?job_id=0123456789abcdef" class="btn btn-success disabled">Copy</button> this link: 
+                          <br/>
+                          <code><span id="url_id">http://primerize.stanford.edu/result?job_id=0123456789abcdef</span></code>
+                        </b>
+                      </p>
+                      <br/>
+                      <img class="center-block path_button_loading" width="48px" />
+                      <br/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br/>
+              <h4> A similar modal window will be displayed on the web page for demo :</h4>
+              <br/>
+              <div class="dialog modal-lg center-block tutorial">
+                <div class="modal-content panel-primary">
+                  <div class="modal-header panel-heading">
+                    <h3 class="modal-title">Primerize is running ...</h3>
+                  </div>
+                  <div class="modal-body panel-body">
+                    <h3 class="text-center">
+                      Preparing <span class="label label-warning">DEMO</span> using <span class="label label-danger">P4P6_2HP</span> ...
+                    </h3>
+                    <br/>
+                    <img class="center-block path_button_loading" width="48px" style="opacity:0.5;"/>
+                    <br/>
+                  </div>
+                </div>
+              </div>
+
+              <img style="position:absolute;display:block;right:15%;top:4%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window showing unique JOB_ID and retrieval URL link."/>
+              <img style="position:absolute;display:block;right:15%;top:35.5%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window for demo."/>
+              <br/><hr/>           
+              <h4>
+                When the calculation is completed, the result page will automatically be shown. The run results are retrievable through the <a href="/" class="btn btn-primary">&nbsp;&nbsp;Home&nbsp;&nbsp;</a> page with the unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.
+              </h4>
+              <br/>
+              <div class="row tutorial">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <div class="panel panel-danger">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Result retrieval</h3>
+                    </div>
+                    <div id="col-1" class="panel-body">
+                      <form method='get' action='/result'>
+                        <div class="col-md-12">
+                          <p data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result. JOB_ID is the unique 16-digit hexadecimal key.">
+                            <label for="job_id"><span class="lead"><span class="label label-violet">JOB_ID</span></span>:&nbsp;&nbsp;</label>
+                            <input name="job_id" type="text" value="" style="width:60%" maxlength="32" placeholder="Enter a JOB_ID" disabled/>
+                            <input type="submit" id="btn_retrieve" class="btn btn-inverse btn-sm pull-right" value="&nbsp;Retrieve&nbsp;" disabled/>&nbsp;
+                          </p>
+                          <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (3 months).</p>
+                        </div>
+                    </div>
+                  </div>  
+                </div>
+                <div class="col-md-2"></div>
+              </div>       
+              <hr/>           
+              <h4>Before the calculation is finished, the result page will indicate that the query is being processed. Once finished, the actual results will replace this temporary page:</h4>
+              <br/>
+              <div class="row tutorial">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                      <span class="sr-only"></span>
+                    </div>
+                  </div>
+                  <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
+                  <br/>
+                  <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
+                  <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <hr/>           
+              <h4>For long inputs, we encourage the user to <a class="btn btn-warning btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. If the server encounters an internal error while processing the run, the following page will be shown.</h4>
+              <br/>
+              <div class="row tutorial">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                      <span class="sr-only"></span>
+                    </div>
+                  </div>
+                  <h3 class="modal-title" id="myModalLabel">Primerize has difficulty in your query...</h3>
+                  <br/>
+                  <p>Primerize encountered an internal error while processing your query. Sorry for the inconvenience. </p>
+                  <p>We will investigate and fix the problem.</p>
+                  <p>For further information, please feel free to <a class="btn btn-warning btn-sm path_about disabled" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</p>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="container theme-showcase li-dark-green" role="main">
+        <br/>
+        <div class="panel-dark-green" id="web_input">
+          <div class="panel-heading">
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: Website Input</b></span>
           </div>
           <div class="row">
             <div class="col-md-12 tutorial">
@@ -236,140 +367,9 @@
       </div>
       <hr/>
 
-      <div class="container theme-showcase li-info" role="main">
+      <div class="container theme-showcase li-green" role="main">
         <br/>
-        <div class="panel-info" id="web_retrev">
-          <div class="panel-heading">
-            <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: Result Retrieval</b></span>
-          </div>
-          <br/>
-          <div class="row">
-            <div class="col-md-12">
-              <h4> Once submitted, a modal window will be displayed on the web page, showing the <span class="label label-violet">JOB_ID</span> :</h4>
-              <br/>
-              <div class="dialog modal-lg center-block tutorial">
-                <div class="modal-content panel-primary">
-                  <div class="modal-header panel-heading">
-                    <h3 class="modal-title" id="myModalLabel">Primerize is running ...</h3>
-                  </div>
-                  <div class="modal-body panel-body">
-                    <div class="col-md-12">
-                      <h3 class="text-center"> Your 
-                        <span class="label label-violet">JOB_ID</span> is: 
-                        <span class="label label-inverse" id="modal_id">0123456789abcdef</span>
-                      </h3>
-                      <br/>
-                      <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
-                      <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
-                      <br/>
-                      <p class="text-center well" >
-                        <b>
-                          Please <button id="copy-button" data-clipboard-text="http://primerize.stanford.edu/result?job_id=0123456789abcdef" class="btn btn-success disabled">Copy</button> this link: 
-                          <br/>
-                          <code><span id="url_id">http://primerize.stanford.edu/result?job_id=0123456789abcdef</span></code>
-                        </b>
-                      </p>
-                      <br/>
-                      <img class="center-block path_button_loading" width="48px" />
-                      <br/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br/>
-              <h4> A similar modal window will be displayed on the web page for demo :</h4>
-              <br/>
-              <div class="dialog modal-lg center-block tutorial">
-                <div class="modal-content panel-primary">
-                  <div class="modal-header panel-heading">
-                    <h3 class="modal-title">Primerize is running ...</h3>
-                  </div>
-                  <div class="modal-body panel-body">
-                    <h3 class="text-center">
-                      Preparing <span class="label label-warning">DEMO</span> using <span class="label label-danger">P4P6_2HP</span> ...
-                    </h3>
-                    <br/>
-                    <img class="center-block path_button_loading" width="48px" style="opacity:0.5;"/>
-                    <br/>
-                  </div>
-                </div>
-              </div>
-
-              <img style="position:absolute;display:block;right:15%;top:4%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window showing unique JOB_ID and retrieval URL link."/>
-              <img style="position:absolute;display:block;right:15%;top:33%;opacity:0.85;" class="path_button_question" src="" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window for demo."/>
-              <br/><hr/>           
-              <h4>
-                When the calculation is completed, the result page will automatically be shown. The run results are retrievable through the <a href="/" class="btn btn-primary">&nbsp;&nbsp;Home&nbsp;&nbsp;</a> page with the unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.
-              </h4>
-              <br/>
-              <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="panel panel-danger">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Result retrieval</h3>
-                    </div>
-                    <div id="col-1" class="panel-body">
-                      <form method='get' action='/result'>
-                        <div class="col-md-12">
-                          <p data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result. JOB_ID is the unique 16-digit hexadecimal key.">
-                            <label for="job_id"><span class="lead"><span class="label label-violet">JOB_ID</span></span>:&nbsp;&nbsp;</label>
-                            <input name="job_id" type="text" value="" style="width:60%" maxlength="32" placeholder="Enter a JOB_ID" disabled/>
-                            <input type="submit" id="btn_retrieve" class="btn btn-inverse btn-sm pull-right" value="&nbsp;Retrieve&nbsp;" disabled/>&nbsp;
-                          </p>
-                          <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (3 months).</p>
-                        </div>
-                    </div>
-                  </div>  
-                </div>
-                <div class="col-md-2"></div>
-              </div>       
-              <hr/>           
-              <h4>Before the calculation is finished, the result page will indicate that the query is being processed. Once finished, the actual results will replace this temporary page:</h4>
-              <br/>
-              <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                      <span class="sr-only"></span>
-                    </div>
-                  </div>
-                  <h3 class="modal-title" id="myModalLabel">Primerize is running...</h3>
-                  <br/>
-                  <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
-                  <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
-                </div>
-                <div class="col-md-2"></div>
-              </div>
-              <hr/>           
-              <h4>For long inputs, we encourage the user to <a class="btn btn-warning btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. If the server encounters an internal error while processing the run, the following page will be shown.</h4>
-              <br/>
-              <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                      <span class="sr-only"></span>
-                    </div>
-                  </div>
-                  <h3 class="modal-title" id="myModalLabel">Primerize has difficulty in your query...</h3>
-                  <br/>
-                  <p>Primerize encountered an internal error while processing your query. Sorry for the inconvenience. </p>
-                  <p>We will investigate and fix the problem.</p>
-                  <p>For further information, please feel free to <a class="btn btn-warning btn-sm path_about disabled" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</p>
-                </div>
-                <div class="col-md-2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr/>
-
-      <div class="container theme-showcase li-success" role="main">
-        <br/>
-        <div class="panel-success" id="web_output">
+        <div class="panel-green" id="web_output">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: Website Output</b></span>
           </div>
@@ -619,9 +619,9 @@
       </div>
       <hr/>
 
-      <div class="container theme-showcase li-green" role="main">
+      <div class="container theme-showcase li-light-blue" role="main">
         <br/>
-        <div class="panel-green" id="txt_output">
+        <div class="panel-light-blue" id="txt_output">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#4</span>: Downloadable Output</b></span>
           </div>
