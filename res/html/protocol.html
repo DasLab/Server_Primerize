@@ -73,26 +73,38 @@
           <div class="panel-body scroll_nav">
             <ul class="nav" role="tablist" id="scroll_nav">
               <li class="li-danger">
+                  <a id="tab_1" href="#pipe">
+                    <b>Pipeline Overview</b>
+                  </a>
+              </li>
+              <li class="li-magenta">
                   <a id="tab_1" href="#temp_design">
                     Section #1: 
                     <br/>
                     <b>DNA Template Design</b>
                   </a>
               </li>
-              <li class="li-magenta">
-                  <a id="tab_2" href="#idt_bulk">
+
+              <li class="li-violet" role="tab">
+                  <a id="tab_2" href="#IDT">
                     Section #2: 
                     <br/>
-                    <b>IDT Bulk Ordering</b>
+                    <b>IDT Oligo Ordering</b>
+                    <span class="caret pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_2" aria-expanded="true" aria-controls="collapse_tab_2"></span>
                   </a>
+                  <ul id="collapse_tab_2" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapse_tab_2">
+                    <li><a id="tab_21" href="#idt_bulk">IDT <b>Bulk</b> Ordering</a></li>
+                    <li><a id="tab_22" href="#idt_plate">IDT <b>Plate</b> Ordering</a></li>
+                  </ul>
               </li>
-              <li class="li-violet">
+              <li class="li-dark-red">
                   <a id="tab_3" href="#PCR">
                     Section #3: 
                     <br/>
                     <b>PCR Assembly</b>
+                    <span class="caret pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
                   </a>
-                  <ul >
+                  <ul id="collapse_tab_3" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapse_tab_3">
                     <li><a id="tab_31" href="#PCR_sr"><b>PCR Recipe <u>(Single-Round)</u></b></a></li>
                     <li><a id="tab_32" href="#PCR_cond"><b>PCR Conditions</b></a></li>
                     <li>
@@ -105,16 +117,24 @@
                     <li><a id="tab_34" href="#PCR_pr"><b>PCR Product Purification</b></a></li>
                   </ul>
               </li>
-              <li class="li-dark-red">
+              <li class="li-brown">
                   <a id="tab_4" href="#TX">
                     Section #4: 
                     <br/>
                     <b><i>In Vitro</i> Transcription</b>
+                    <span class="glyphicon glyphicon-triangle-bottom pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
                   </a>
-                  <ul >
+                  <ul id="collapse_tab_4" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapse_tab_4">
                     <li><a id="tab_41" href="#TX_sr"><b>IVT Recipe</b></a></li>
                     <li><a id="tab_42" href="#TX_pr"><b>IVT Product Purification</b></a></li>
                   </ul>
+              </li>
+              <li class="li-orange">
+                  <a id="tab_5" href="#par_prep">
+                    Section #5: 
+                    <br/>
+                    <b>Massively Parallel Preparation</b>
+                  </a>
               </li>
             </ul>
           </div>
