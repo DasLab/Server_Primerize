@@ -39,17 +39,15 @@
           <h1>Welcome to Primerize!</h1>
           <img class="path_logo_primerize" src="" style="clear:both; float:right; padding-left: 20px;"/>
           <p>
-            This protocol shows you how to design DNA templates, how to channel the output to IDT Bulk Ordering, and illustrates our in-house experiment protocol for how to PCR assemble and transcribe the template <i>in vitro</i>. 
+            This protocol demystifies the mutate-map-rescue pipeline experimental setup.
+          </p>
+          <p>
+            This page shows you how to design DNA templates, how to channel the output to IDT Oligo Ordering in two formats, and illustrates our in-house experiment protocol for how to PCR assemble, how to transcribe the template <i>in vitro</i>, and how to prepare plates of RNA in parallel fashion. 
           </p>
           <p>
             Hover mouse to the 
             <img style="opacity:0.85;" class="path_button_question" src="" height="40" data-toggle="popover" data-placement="bottom" title="Question mark" data-content="Hover mouse for detailed descriptions."/> 
             for detailed descriptions. 
-          </p>
-          <br/>
-          <p>
-            Ready to use? Go
-            <a class="btn btn-primary btn-lg path_design" href="" role="button" style="color: #ffffff;">&nbsp;Primerize!&nbsp;</a>
           </p>
           <br/>
           <p>
@@ -72,7 +70,7 @@
           </div>
           <div class="panel-body scroll_nav">
             <ul class="nav" role="tablist" id="scroll_nav">
-              <li class="li-danger">
+              <li class="li-danger disabled">
                   <a id="tab_1" href="#pipe">
                     <b>Pipeline Overview</b>
                   </a>
@@ -90,7 +88,7 @@
                     Section #2: 
                     <br/>
                     <b>IDT Oligo Ordering</b>
-                    <span class="caret pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_2" aria-expanded="true" aria-controls="collapse_tab_2"></span>
+                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_2" aria-expanded="true" aria-controls="collapse_tab_2"></span>
                   </a>
                   <ul id="collapse_tab_2" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapse_tab_2">
                     <li><a id="tab_21" href="#idt_bulk">IDT <b>Bulk</b> Ordering</a></li>
@@ -102,7 +100,7 @@
                     Section #3: 
                     <br/>
                     <b>PCR Assembly</b>
-                    <span class="caret pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
+                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
                   </a>
                   <ul id="collapse_tab_3" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapse_tab_3">
                     <li><a id="tab_31" href="#PCR_sr"><b>PCR Recipe <u>(Single-Round)</u></b></a></li>
@@ -122,14 +120,14 @@
                     Section #4: 
                     <br/>
                     <b><i>In Vitro</i> Transcription</b>
-                    <span class="glyphicon glyphicon-triangle-bottom pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
+                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
                   </a>
                   <ul id="collapse_tab_4" class="panel-collapse collapse " role="tabpanel" aria-labelledby="collapse_tab_4">
                     <li><a id="tab_41" href="#TX_sr"><b>IVT Recipe</b></a></li>
                     <li><a id="tab_42" href="#TX_pr"><b>IVT Product Purification</b></a></li>
                   </ul>
               </li>
-              <li class="li-orange">
+              <li class="li-orange disabled">
                   <a id="tab_5" href="#par_prep">
                     Section #5: 
                     <br/>
@@ -146,7 +144,25 @@
 
       <div class="container theme-showcase li-danger" role="main">
         <br/>
-        <div class="panel-danger" id="temp_design">
+        <div class="panel-danger" id="pipe">
+          <div class="panel-heading">
+            <span class="lead"><b>Pipeline Overview</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              Coming soon ...
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+
+
+      <div class="container theme-showcase li-magenta" role="main">
+        <br/>
+        <div class="panel-magenta" id="temp_design">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: DNA Template Design</b></span>
           </div>
@@ -255,16 +271,16 @@
       <hr/>
 
 
-      <div class="container theme-showcase li-magenta" role="main">
+      <div class="container theme-showcase li-violet" role="main">
         <br/>
-        <div class="panel-magenta" id="idt_bulk">
+        <div class="panel-violet" id="IDT">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: IDT Bulk Ordering</b></span>
           </div>
           <br/>
           <div class="row">
             <div class="col-md-12">
-              <div class="panel panel-green">
+              <div class="panel panel-green" id="idt_bulk">
                 <div class="panel-heading tutorial">
                   <h2 class="panel-title">Bulk Format Ordering at IDT DNA Oligos</h2>
                 </div>
@@ -408,13 +424,27 @@ Etc...</textarea>
               </div>
             </div>
           </div>
+
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-info" id="idt_plate">
+                <div class="panel-heading tutorial">
+                  <h2 class="panel-title">Plate Format Ordering at IDT DNA Oligos</h2>
+                </div>
+                <div class="panel-body">
+                  Comming soon ...
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <hr/>
 
-      <div class="container theme-showcase li-violet" role="main">
+      <div class="container theme-showcase li-dark-red" role="main">
         <br/>
-        <div class="panel-violet" id="PCR">
+        <div class="panel-dark-red" id="PCR">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: PCR Assembly Protocol</b></span>
           </div>
@@ -1291,9 +1321,9 @@ Etc...</textarea>
       </div>
 
       <hr/>
-      <div class="container theme-showcase li-dark-red" role="main">
+      <div class="container theme-showcase li-brown" role="main">
         <br/>
-        <div class="panel-dark-red" id="TX">
+        <div class="panel-brown" id="TX">
           <div class="panel-heading">
             <span class="lead"><b><span class="sec">Section</span> <span class="num">#4</span>: <i><u>I</u>n <u>V</u>itro</i> <u>T</u>ranscription (IVT)</b></span>
           </div>
@@ -1499,7 +1529,24 @@ Etc...</textarea>
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
+      <hr/>
+      <div class="container theme-showcase li-orange" role="main">
+        <br/>
+        <div class="panel-orange" id="par_prep">
+          <div class="panel-heading">
+            <span class="lead"><b><span class="sec">Section</span> <span class="num">#5</span>: Massively Parallel Preparation</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                Coming soon ...
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
