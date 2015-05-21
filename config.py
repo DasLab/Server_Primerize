@@ -80,7 +80,8 @@ QUICKSTART_CONFIG = {
    }
 }
 
-SERVER_IP = "171.65.23.206"
+# SERVER_IP = "171.65.23.206"
+SERVER_IP = "0.0.0.0"
 cherrypy.config.update({
     "server.socket_host": SERVER_IP,
     "server.socket_port": 8080,

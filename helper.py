@@ -12,7 +12,7 @@ from run_server import script_navbar, script_footer, script_modal
 
 
 def load_html(file_name):
-    f = open(file_name, "r")
+    f = open(os.path.join(MEDIA_DIR, file_name), "r")
     lines = f.readlines()
     f.close()
 
