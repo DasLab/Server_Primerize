@@ -19,13 +19,15 @@ $(document).ready(function () {
   var path_tx_gel = '/res/images/docs/TX_gel.jpg';
 
   var path_home = "/home";
-  var path_design = "/design";
-  var path_demo = "/demo_P4P6";
   var path_tutorial = "/tutorial";
   var path_protocol = "/protocol";
   var path_license = "/license";
   var path_download = "/download";
   var path_about = "/about";
+
+  var path_design_1d = "/design_1d";
+  var path_demo_1d = "/demo_1d_P4P6";
+
   var path_navbar = "/res/html/_navbar.html?";
   var path_footer = "/res/html/_footer.html?";
   var path_modal = "/res/html/_demo.html?";
@@ -72,8 +74,8 @@ $(document).ready(function () {
       $(".path_tx_gel").attr("src", path_tx_gel);
 
       $(".path_home").attr("href", path_home);
-      $(".path_design").attr("href", path_design);
-      $(".path_demo").attr("href", path_demo);
+      $(".path_design_1d").attr("href", path_design_1d);
+      $(".path_demo_1d").attr("href", path_demo_1d);
       $(".path_tutorial").each(function () {
         $(this).attr("href", path_tutorial + $(this).attr("href"));
       });

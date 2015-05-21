@@ -28,9 +28,9 @@ PATH = {
     '403': "res/html/_403.html",
     '404': "res/html/_404.html",
     '500': "res/html/_500.html",
-    'DEMO_ERROR': "res/html/example_error.html",
-    'DEMO_FAIL': "res/html/example_fail.html",
-    'DEMO_WAIT': "res/html/example_wait.html",
+    'DEMO_1D_ERROR': "res/html/example_error.html",
+    'DEMO_1D_FAIL': "res/html/example_fail.html",
+    'DEMO_1D_WAIT': "res/html/example_wait.html",
 
     'ADMIN': "res/html/admin.html",
 

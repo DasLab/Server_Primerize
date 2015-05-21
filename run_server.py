@@ -47,8 +47,8 @@ class Root:
         else:
             raise cherrypy.NotFound()
 
-    @cherrypy.expose
-    def design(self):
+    @cherrypy.expose(['design'])
+    def design_1d(self):
         return load_html(PATH['DESIGN']).replace("__SEQ__", "").replace("__MIN_TM__", str(ARG['DEF_MIN_TM'])).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(ARG['DEF_MAX_LEN'])).replace("__MIN_LEN__", str(ARG['DEF_MIN_LEN'])).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
 
     @cherrypy.expose
@@ -258,8 +258,8 @@ class Root:
 
         raise cherrypy.HTTPRedirect("result?job_id=%s" % job_id)
 
-    @cherrypy.expose(['demo','P4P6'])
-    def demo_P4P6(self):
+    @cherrypy.expose(['demo','P4P6','demo_P4P6'])
+    def demo_1d_P4P6(self):
         self.design_primers(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MAX_LEN']), str(ARG['DEF_MIN_LEN']), "0", "1", binascii.b2a_hex(os.urandom(7)))    
     @cherrypy.expose
     def test_random(self):
@@ -295,15 +295,15 @@ class Root:
     @cherrypy.expose
     def error(self):
         raise ValueError
-    @cherrypy.expose
-    def demo_error(self):
-        return load_html(PATH['DEMO_ERROR'])
-    @cherrypy.expose
-    def demo_fail(self):
-        return load_html(PATH['DEMO_FAIL'])
-    @cherrypy.expose
-    def demo_wait(self):
-        return load_html(PATH['DEMO_WAIT'])
+    @cherrypy.expose(['demo_error'])
+    def demo_1d_error(self):
+        return load_html(PATH['DEMO_1D_ERROR'])
+    @cherrypy.expose(['demo_fail'])
+    def demo_1d_fail(self):
+        return load_html(PATH['DEMO_1D_FAIL'])
+    @cherrypy.expose(['demo_wait'])
+    def demo_1d_wait(self):
+        return load_html(PATH['DEMO_1D_WAIT'])
     @cherrypy.expose
     def demo_404(self):
         return load_html(PATH['404'])
