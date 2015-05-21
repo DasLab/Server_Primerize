@@ -209,6 +209,7 @@ class Root:
                                     script += "<span class=\"label-white label-danger\">" + char + "</span>"
                                 else:
                                     if char.isdigit():
+                                        script = script[:-1]
                                         script += '<b>' + char + ' </b>'
                                     else:
                                         script += char
