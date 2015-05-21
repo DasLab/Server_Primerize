@@ -324,13 +324,12 @@ class Root:
 
     @cherrypy.expose
     def cleanup_old(self):
-        older = time.time() - ARG['JOB_KEEP_EXPIRE'] * 86400
+        older = time.time() - JOB_KEEP_EXPIRE * 86400
 
         for f in glob.glob("cache/*"):
             if (os.stat(f).st_mtime < older):
                 os.remove(f)
-        return '<html><body onLoad="window.close()"></body></html>'
-
+        return self.get_sys()
     @cherrypy.expose
     def get_sys(self):
         get_full_sys_stat()

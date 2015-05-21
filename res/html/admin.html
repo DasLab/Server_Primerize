@@ -35,8 +35,8 @@
    <div class="starter-template" id="down">
     <div class="container theme-showcase" role="main">
       <div class="row">
-        <div class="col-md-2">
-          <div class="panel panel-warning" id="sidebar" >
+        <div class="col-md-3">
+          <div class="panel panel-violet" id="sidebar" >
             <div class="panel-heading">
               <h3 class="panel-title">Sections</h3>
             </div>
@@ -49,38 +49,62 @@
                       <b>System Status</b>
                     </a>
                 </li>
-                <li class="li-magenta">
-                    <a id="tab_2" href="#idt_bulk">
+                <li class="li-warning">
+                    <a id="tab_2" href="#sys_ovw">
                       Section #2: 
                       <br/>
-                      <b>IDT Bulk Ordering</b>
+                      <b>Overview</b>
                     </a>
                 </li>
-                <li class="li-violet">
-                    <a id="tab_3" href="#PCR">
+                <li class="li-primary">
+                    <a id="tab_3" href="#sys_bked">
                       Section #3: 
                       <br/>
-                      <b>PCR Assembly</b>
+                      <b>Back End</b>
                     </a>
                     <ul >
-                      <li><a id="tab_31" href="#PCR_sr"><b>PCR Recipe <u>(Single-Round)</u></b></a></li>
-                      <li><a id="tab_32" href="#PCR_cond"><b>PCR Conditions</b></a></li>
+                      <li><a id="tab_31" href="#sys_bked_const"><code>const.py</code></a></li>
+                      <li><a id="tab_32" href="#sys_bked_config"><code>config.py</code></a></li>
+                      <li><a id="tab_33" href="#sys_bked_helper"><code>helper.py</code></a></li>
                       <li>
-                        <a id="tab_33" href="#PCR_mr"><b>PCR Recipe <u>(Multiple-Round)</u></b></a>
+                        <a id="tab_34" href="#sys_bked_runserver"><b><code>run_server.py</code></b></a>
                         <ul>
-                          <li><a id="tab_331" href="#PCR_2r">Strategy 1: <u>'2-Round'</u></a></li>
-                          <li><a id="tab_332" href="#PCR_cp">Strategy 2: <u>'Couple'</u></a></li>
+                          <li><a id="tab_341" href="#">Functions</a></li>
+                          <li><a id="tab_342" href="#"><code>design_primers()</code></a></li>
                         </ul>
                       </li>
-                      <li><a id="tab_34" href="#PCR_pr"><b>PCR Product Purification</b></a></li>
                     </ul>
+                </li>
+                <li class="li-danger">
+                    <a id="tab_4" href="#">
+                      Section #4: 
+                      <br/>
+                      <b>Front End</b>
+                    </a>
+                    <ul >
+                      <li><a id="tab_41" href="#"><code>res/html</code></a></li>
+                      <li><a id="tab_42" href="#"><code>res/js</code></a></li>
+                      <li><a id="tab_43" href="#"><code>res/css</code> & <code>res/images</code></a></li>
+                      <li><a id="tab_44" href="#"><code>src</code></a></li>
+                    </ul>
+                </li>
+                <li class="li-default">
+                    <a id="tab_5" href="#">
+                      Section #5: 
+                      <br/>
+                      <b>Misc</b>
+                    </a>
+                    <ul >
+                      <li><a id="tab_51" href="#">...</a></li>
+                    </ul>
+
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div class="col-md-10" id="main">
+        <div class="col-md-9" id="main">
           <div class="jumbotron">
             <div class="container">
               <h1>Primerize Admin Page</h1>
@@ -158,10 +182,10 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                  <p class="well well-sm">
+                    &nbsp;&nbsp;
                     <a id="refresh" href="get_sys" target="_blank" class="btn btn-primary">&nbsp;Refresh&nbsp;</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;
                     <a id="clear" href="cleanup_old" target="_blank" class="btn btn-warning">&nbsp;Clean&nbsp;</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <b><u>Note:</u></b> only results older than 3 months will be deleted.
@@ -180,9 +204,151 @@
                   </table>     
                 </div>
               </div>             
-
             </div>
           </div>
+
+          <hr/>
+          <div class="container-fluid li-warning" role="main">
+            <div class="panel-warning" id="sys_ovw">
+              <div class="panel-heading">
+                <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: Overview</b></span>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-12">
+                  The <code>Primerize_Server</code> repository (<u><a href="https://github.com/DasLab/Primerize_server" target="_blank">https://github.com/DasLab/Primerize_server</a></u>) has the following overall structure:
+                  <br/><br/>
+
+                  <ul class="lead">
+                    <li style="list-style-type: none;"><span class="label label-inverse">root</span></li>
+                    <ul>
+                      <li style="list-style-type: disc;"><span class="label label-primary">cache</span></li>
+                      <ul>
+                        <li style="list-style-type: circle;">...</li>
+                      </ul>
+                      <li style="list-style-type: disc;"><span class="label label-primary">res</span></li>
+                      <ul>
+                        <li style="list-style-type: circle;"><span class="label label-success">css</span></li>
+                        <ul>
+                          <li><span class="label label-default">bootstrap</span></li>
+                          <ul>
+                            <li>...</li>
+                          </ul>
+                          <li><span class="label label-dark-red">theme.css</span></li>
+                          <li><span class="label label-dark-red">palette.css</span></li>
+                        </ul>
+                        <li style="list-style-type: circle;"><span class="label label-success">html</span></li>
+                        <ul>
+                          <li><span class="label label-violet">index.html</span></li>
+                          <li><span class="label label-violet">design.html</span></li>
+                          <li>...</li>
+                        </ul>
+                        <li style="list-style-type: circle;"><span class="label label-success">images</span></li>
+                        <ul>
+                          <li><span class="label label-default">doc</span></li>
+                          <ul>
+                            <li><span class="label label-info">PCR_gel.png</span></li>
+                            <li>...</li>
+                          </ul>
+                          <li><span class="label label-info">bg_rna.png</span></li>
+                          <li><span class="label label-info">fg_load.gif</span></li>
+                          <li><span class="label label-info">logo_primerize.png</span></li>
+                          <li>...</li>
+                        </ul>
+                        <li style="list-style-type: circle;"><span class="label label-success">js</span></li>
+                        <ul>
+                          <li><span class="label label-default">bootstrap</span></li>
+                          <ul>
+                            <li>...</li>
+                          </ul>
+                          <li><span class="label label-default">jquery</span></li>
+                          <ul>
+                            <li>...</li>
+                          </ul>
+                          <li><span class="label label-default">zeroclipboard</span></li>
+                          <ul>
+                            <li>...</li>
+                          </ul>
+                          <li><span class="label label-orange">design.js</span></li>
+                          <li><span class="label label-orange">util.js</span></li>
+                          <li>...</li>
+                        </ul>
+                      </ul>
+                      <li style="list-style-type: disc;"><span class="label label-primary">src</span></li>
+                      <ul>
+                        <li style="list-style-type: circle;"><span class="label label-green">primerize_release.zip</span></li>
+                        <li style="list-style-type: circle;">...</li>
+                      </ul>
+                      <li style="list-style-type: disc;"><span class="label label-danger">const.py</span></li>
+                      <li style="list-style-type: disc;"><span class="label label-danger">config.py</span></li>
+                      <li style="list-style-type: disc;"><span class="label label-danger">helper.py</span></li>
+                      <li style="list-style-type: disc;"><span class="label label-danger">run_server.py</span></li>
+                      <li style="list-style-type: disc;"><span class="label label-default">robots.txt</span></li>
+                      <li style="list-style-type: disc;"><span class="label label-default">.gitignore</span></li>
+                      <li style="list-style-type: disc;"><span class="label label-default">LICENSE.md</span></li>
+                      <li style="list-style-type: disc;"><span class="label label-default">README.md</span></li>
+                    </ul>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="container-fluid li-primary" role="main">
+            <div class="panel-primary" id="sys_bked">
+              <div class="panel-heading">
+                <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: Back End</b></span>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>Primerize server is based on <b><a href="http://www.cherrypy.org/" target="_blank">CherryPy</a></b> framework. For basic concepts and documentation of CherryPy, please read <u><a href="http://cherrypy.readthedocs.org/" target="_blank">here</a></u>.
+                  
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_bked_const"><span class="label label-danger">const.py</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      <code>const.py</code> stores <b><u>constants</u></b>, including:
+                      <ul>
+                        <li>For CherryPy framework, <code>ADMIN</code> information (<mark>/admin</mark> login and notification email) and <code>EMAIL</code> gmail account for sending out emails.</li>
+                        <li>Default parameters for <code>design_primers()</code>, e.g. <code>DEF_MIN_TM</code>.</li>
+                        <li>Default sequences for <code>P4P6</code> and <code>T7</code>.</li>
+                        <li><code>PATH</code> information about all static <mark>HTML</mark> files.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_bked_config"><span class="label label-danger">config.py</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      <code>config.py</code> handles CherryPy <b><u>configuration</u></b>, including:
+                      <ul>
+                        <li><abbr title="">staticfile</abbr> and <abbr title="">staticdir</abbr> config.</li>
+                        <ul>
+                          <li><mark>/src/primerize_release.zip</mark> (for download), <mark>/LICENSE.md</mark> (for license display), and <mark>/robots.txt</mark> (to shield off bad crawlers) need to be accessible.</li>
+                        </ul>
+                        <li><abbr title="">log</abbr> and <abbr title="">error_page</abbr> handlers.</li>
+                        <ul>
+                          <li>Errors are handled by <code>error_page_403</code>, <code>error_page_404</code>, and <code>error_page_500</code> functions. <b>Traceback</b> and <b>client</b> infomaton are recorded and emailed to admin.</li>
+                        </ul>
+                        <li><mark>/admin</mark> authentification and <abbr title="">secureheader</abbr>.</li>
+                        <ul>
+                          <li><mark>/admin</mark> (this page) requires autherization defined by <code>ADMIN['login']</code>.</li>
+                          <li>Primerize uses <abbr title="">secureheader</abbr> communication by <code>secureheaders()</code>.</li>
+                        </ul>
+                        <li><abbr title="">socket</abbr> information and <abbr title="">ip</abbr>.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

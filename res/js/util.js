@@ -11,6 +11,8 @@ $(document).ready(function () {
   var path_button_loading = "/res/images/fg_load.gif";
   var path_button_top = "/res/images/fg_top.png";
   var path_button_question = "/res/images/fg_question.png";
+  var path_background_404 = "/res/images/bg_404.png";
+  var path_background_500 = "/res/images/bg_500.png";
 
   var path_pcr_ele = '/res/images/docs/PCR_electrophoresis.jpg';
   var path_pcr_gel = '/res/images/docs/PCR_gel.png';
@@ -62,6 +64,8 @@ $(document).ready(function () {
       $(".path_button_loading").attr("src", path_button_loading);
       $(".path_button_top").attr("src", path_button_top);
       $(".path_button_question").attr("src", path_button_question);
+      $(".path_background_404").attr("src", path_background_404);
+      $(".path_background_500").attr("src", path_background_500);
 
       $(".path_pcr_ele").attr("src", path_pcr_ele);
       $(".path_pcr_gel").attr("src", path_pcr_gel);
