@@ -30,8 +30,7 @@
   </head>
 
   <body>
-
-    <div class="navbar navbar-fixed-top" role="navigation" id="navbar"></div>
+    __NAVBAR__
 
     <div class="container theme-showcase" role="main">
       <div class="starter-template">
@@ -39,7 +38,7 @@
           <div class="col-md-6">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h2 class="panel-title">Primerize Server</h2>
+                <h2 class="panel-title"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Primerize Server</h2>
               </div>
               <div class="panel-body">
               <img class="path_logo_primerize" src="" style="clear:both;float:right;" height="128"/>
@@ -57,16 +56,16 @@
 
             <div class="panel panel-danger" id="privacy">
               <div class="panel-heading">
-                <h2 class="panel-title">Disclaimer</h2>
+                <h2 class="panel-title"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;&nbsp;Disclaimer</h2>
               </div>
               <div class="panel-body">
-                <h4><span class="label label-orange">Privacy</span></h4>
+                <h4><span class="label label-orange"><span class="glyphicon glyphicon-eye-close"></span>&nbsp;&nbsp;Privacy</span></h4>
                 <p>
                   Users of the server are anonymized. Please note that input data and result on the servers are not encrypted by sessions, thus anyone with the <span class="label label-violet">JOB_ID</span> may download a particular result within expiration (3 months). However, the chance of guessing the randomly generated <span class="label label-violet">JOB_ID</span> of any particular result is relatively small. 
                 </p>
-                <h4><span class="label label-green">Disclosure</span></h4>
+                <h4><span class="label label-green"><span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;Disclosure</span></h4>
                 <p>
-                  No relevant financial relationship or commercial interest with <a href="http://www.idtdna.com">Integrated DNA Technologies (IDT)</a> exists.
+                  No relevant financial relationship or commercial interest with <a href="http://www.idtdna.com" target="_blank">Integrated DNA Technologies (IDT)&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> exists.
                 </p>
               </div>
             </div>
@@ -75,14 +74,14 @@
           <div class="col-md-6">
             <div class="panel panel-success" >
               <div class="panel-heading">
-                <h2 class="panel-title">Primerize</h2>
+                <h2 class="panel-title"><span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;Primerize</h2>
               </div>
               <div class="panel-body">
                 <p class="cap">
                  Primerize (previously named <code>NA_thermo</code>), is an in-house set of MATLAB scripts developed by the Das Lab. It is a small archive of primer design and nucleic acid thermodynamic scripts used by the Das lab at Stanford for high-throughput RNA synthesis and design.
                 </p>
                 <p>
-                  The algorithm designs forward (sense strand) and reverse (anti-sense strand) primers that minimize the total length, and therefore the total synthesis cost, of the oligonucleotides. Although developed independently, Primerize is a special case of the general <b>‘Gapped Oligo Design’</b> algorithm described and mathematically analyzed in detail by <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4375554" target="_blank">Thachuk and Condon</a>, optimizing the mispriming score and sequence spanning instead of T<sub>m</sub>.
+                  The algorithm designs forward (sense strand) and reverse (anti-sense strand) primers that minimize the total length, and therefore the total synthesis cost, of the oligonucleotides. Although developed independently, Primerize is a special case of the general <b>‘Gapped Oligo Design’</b> algorithm described and mathematically analyzed in detail by <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4375554" target="_blank">Thachuk and Condon&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>, optimizing the mispriming score and sequence spanning instead of T<sub>m</sub>.
                 </p>
                 <p>
                   We reasoned that mis-hybridizations would occasionally occur and be recognized by DNA polymerase, and since the primer’s 3´-most nucleotide would be bound to the complement, the products could be extended by the polymerase. Thus we introduced and experimentally tested a score term misprime, whose purpose was to reduce artifacts from mispriming during PCR assemblies. A heuristic score was defined based on the number of contiguous reverse complement matches of the 3´-most n nucleotides of the primer on a possible touchdown site; the score was incremented by 10 for A/T pairings and 12.5 for G/C pairings for each match. 
@@ -91,43 +90,43 @@
             </div>
             <div class="panel panel-info" id="citation">
               <div class="panel-heading">
-                <h2 class="panel-title">Citation</h2>
+                <h2 class="panel-title"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Citation</h2>
               </div>
               <div class="panel-body">
                 <b>Please cite use of Primerize Server with:</b>
                 <br/>
                 <blockquote class="h5 alert alert-orange" style="line-height: 140%; font-weight: normal">
                   <p>
-                    Tian S., <i>et al.</i> (<b>2015</b>) <a href="" target="_blank"><u>Primerize: automated primer assembly for transcribing interesting RNAs.</u></a> <i>Nucleic Acid Research</i> <b>manuscript accepted</b>.
+                    Tian S., <i>et al.</i> (<b>2015</b>) <a href="http://nar.oxfordjournals.org/content/early/2015/05/20/nar.gkv538" target="_blank"><u>Primerize: automated primer assembly for transcribing interesting RNAs.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>Nucleic Acid Research</i> <b>doi: 10.1093/nar/gkv538</b>.
                   </p>
                 </blockquote>
                 <b>Publications of <u>mutate-map-rescue</u> pipeline:</b>
                 <br/>
                 <blockquote class="h5" style="line-height: 140%; font-weight: normal">
                   <p>
-                    Tian S., <i>et al.</i> (<b>2014</b>) <a href="http://rnajournal.cshlp.org/content/20/11/1815" target="_blank"><u>High-throughput mutate-map-rescue evaluates SHAPE-directed RNA structure and uncovers excited states.</u></a> <i>RNA</i> <b>20(11)</b>: 1815-1826.
+                    Tian S., <i>et al.</i> (<b>2014</b>) <a href="http://rnajournal.cshlp.org/content/20/11/1815" target="_blank"><u>High-throughput mutate-map-rescue evaluates SHAPE-directed RNA structure and uncovers excited states.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>RNA</i> <b>20(11)</b>: 1815-1826.
                   </p>
                   <p>
-                    Kladwang W., <i>et al.</i> (<b>2011</b>) <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html" target="_blank"><u>A two-dimensional mutate-and-map strategy for non-coding RNA structure.</u></a> <i>Nature Chemistry</i> <b>3</b>: 954-962.
+                    Kladwang W., <i>et al.</i> (<b>2011</b>) <a href="http://www.nature.com/nchem/journal/v3/n12/full/nchem.1176.html" target="_blank"><u>A two-dimensional mutate-and-map strategy for non-coding RNA structure.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>Nature Chemistry</i> <b>3</b>: 954-962.
                   </p>
                 </blockquote>
                 <b>Other publications using Primerize design:</b>
                 <br/>
                 <blockquote class="h5" style="line-height: 140%; font-weight: normal">
                   <p>
-                    Cheng C., <i>et al.</i> (<b>2015</b>) <a href="" target="_blank"><u>Consistent and blind inference of RNA tertiary folds through multidimensional chemical mapping.</u></a> <i>eLife</i> <b>, accepted</b>: .
+                    Cheng C., <i>et al.</i> (<b>2015</b>) <a href="" target="_blank"><u>Consistent and blind inference of RNA tertiary folds through multidimensional chemical mapping.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>eLife</i> <b>, accepted</b>: .
                   </p>
                   <p>
-                    Miao Z., <i>et al.</i> (<b>2015</b>) <a href="http://rnajournal.cshlp.org/content/21/6/1066" target="_blank"><u>RNA-Puzzles Round II: assessment of RNA structure prediction programs applied to three large RNA structures.</u></a> <i>RNA</i> <b>21(6)</b>: 1066-1084.
+                    Miao Z., <i>et al.</i> (<b>2015</b>) <a href="http://rnajournal.cshlp.org/content/21/6/1066" target="_blank"><u>RNA-Puzzles Round II: assessment of RNA structure prediction programs applied to three large RNA structures.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>RNA</i> <b>21(6)</b>: 1066-1084.
                   </p>
                   <p>
-                    Kladwang W., <i>et al.</i> (<b>2014</b>) <a href="http://pubs.acs.org/doi/abs/10.1021/bi5003426" target="_blank"><u>Standardization of RNA Chemical Mapping Experiments.</u></a> <i>Biochemistry</i> <b>53(19)</b>: 3063-3065
+                    Kladwang W., <i>et al.</i> (<b>2014</b>) <a href="http://pubs.acs.org/doi/abs/10.1021/bi5003426" target="_blank"><u>Standardization of RNA Chemical Mapping Experiments.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>Biochemistry</i> <b>53(19)</b>: 3063-3065
                   </p>
                   <p>
-                    Lee J., <i>et al.</i> (<b>2013</b>) <a href="http://www.pnas.org/content/111/6/2122" target="_blank"><u>RNA design rules from a massive open laboratory.</u></a> <i>Proceedings of the National Academy of Sciences</i> <b>111(6)</b>: 2122-2127.
+                    Lee J., <i>et al.</i> (<b>2013</b>) <a href="http://www.pnas.org/content/111/6/2122" target="_blank"><u>RNA design rules from a massive open laboratory.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>Proceedings of the National Academy of Sciences</i> <b>111(6)</b>: 2122-2127.
                   </p>
                   <p>
-                    Cordero P., <i>et al.</i> (<b>2012</b>) <a href="http://pubs.acs.org/doi/abs/10.1021/bi3008802" target="_blank"><u>Quantitative Dimethyl Sulfate Mapping for Automated RNA Secondary Structure Inference.</u></a> <i>Biochemistry</i> <b>51(36)</b>: 7037-7039.
+                    Cordero P., <i>et al.</i> (<b>2012</b>) <a href="http://pubs.acs.org/doi/abs/10.1021/bi3008802" target="_blank"><u>Quantitative Dimethyl Sulfate Mapping for Automated RNA Secondary Structure Inference.</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> <i>Biochemistry</i> <b>51(36)</b>: 7037-7039.
                   </p>
                 </blockquote>
               </div>
@@ -139,7 +138,7 @@
           <div class="col-md-12">
             <div class="panel panel-warning" id="contact">
               <div class="panel-heading">
-                <h2 class="panel-title">Contact</h2>
+                <h2 class="panel-title"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact</h2>
               </div>
               <div class="panel-body">
                 <div class="col-md-1"></div>
@@ -152,9 +151,9 @@
                 </div>
                 <div class="col-md-3">
                   <h4 style="line-height: 140%;">
-                    <span class="label label-inverse pull-left"><a href="mailto:rhiju@stanford.edu" target="_blank" style="color:#fff;">Rhiju Das</a></span>
+                    <span class="label label-inverse pull-left">Rhiju Das</span><a href="mailto:rhiju@stanford.edu" target="_blank"><span class="glyphicon glyphicon-envelope pull-right"></span></a>
                     <br/>
-                    <span class="label label-inverse pull-left"><a href="mailto:t47@stanford.edu" target="_blank" style="color:#fff;">Siqi Tian</a></span>
+                    <span class="label label-inverse pull-left">Siqi Tian</span><a href="mailto:t47@stanford.edu" target="_blank"><span class="glyphicon glyphicon-envelope pull-right"></span></a>
                     <br/>
                     <span class="label label-default pull-left">Joseph Yesselman</span>
                     <br/>
@@ -175,7 +174,7 @@
   </div>
   <hr/>
   
-   <div class="bs-docs-footer" role="contentinfo" id="footer"></div>
+  __FOOTER__
 
     <!-- Latest compiled and minified JavaScript -->
     <script type="text/javascript" class="path_js_jquery"></script>
