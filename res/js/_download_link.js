@@ -8,7 +8,7 @@ $(document).ready(function () {
   $("#is_subscribe").attr("checked", "checked");
 
   $("#message").attr("class", "alert alert-success");
-  $("#message").html("<b class=\"lead\">Your registration was successful.</b><br/>You will be notified about future Primerize updates depending on your subscription preference.<br/><br/>Your download should start automatically. If not, please <a href=\"/src/primerize_release.zip\"><i>click here</i></a>.");
+  $("#message").html("<span class=\"glyphicon glyphicon-ok-sign\"></span>&nbsp;&nbsp;<b class=\"lead\">Your registration was successful.</b><br/>You will be notified about future Primerize updates depending on your subscription preference.<br/><br/>Your download should start automatically. If not, please <a href=\"/src/primerize_release.zip\"><i>click here</i><span class=\"glyphicon glyphicon-floppy-save\"></span>&nbsp;&nbsp;</a>.");
 
   $("head").append("<meta http-equiv=\"refresh\" content=\"1;url=/src/primerize_release.zip\">");
 

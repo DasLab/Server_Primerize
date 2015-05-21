@@ -28,74 +28,62 @@ $(document).ready(function () {
   var path_design_1d = "/design_1d";
   var path_demo_1d = "/demo_1d_P4P6";
 
-  var path_navbar = "/res/html/_navbar.html?";
-  var path_footer = "/res/html/_footer.html?";
-  var path_modal = "/res/html/_demo.html?";
-
 	var url = window.location.href;
 
-  $("#navbar").load(path_navbar, function () {
-    if (url.indexOf("design") > -1 || url.indexOf("example") > -1) {
-      $("#nav_design").addClass("active");
-    } else if (url.indexOf("tutorial") > -1) {
-      $("#nav_tutorial").addClass("active");
-    } else if (url.indexOf("protocol") > -1) {
-      $("#nav_protocol").addClass("active");
-    } else if (url.indexOf("about") > -1) {
-      $("#nav_about").addClass("active");
-    } else if (url.indexOf("download") > -1 || (url.indexOf("icense") > -1)) {
-      $("#nav_download").addClass("active");
-    } else {
-      $("#nav_logo > span").css("text-decoration","underline");
-    }
+  if (url.indexOf("design") > -1 || url.indexOf("example") > -1) {
+    $("#nav_design").addClass("active");
+  } else if (url.indexOf("tutorial") > -1) {
+    $("#nav_tutorial").addClass("active");
+  } else if (url.indexOf("protocol") > -1) {
+    $("#nav_protocol").addClass("active");
+  } else if (url.indexOf("about") > -1) {
+    $("#nav_about").addClass("active");
+  } else if (url.indexOf("download") > -1 || (url.indexOf("icense") > -1)) {
+    $("#nav_download").addClass("active");
+  } else {
+    $("#nav_logo > span").css("text-decoration","underline");
+  }
 
-    $("#footer").load(path_footer, function () {
-      document.title = str_title;
-      $("#favicon").attr("href", path_icon + "?");
-      var today = new Date();
-      $("#cp_year").text(today.getFullYear());
+  document.title = str_title;
+  $("#favicon").attr("href", path_icon + "?");
+  var today = new Date();
+  $("#cp_year").text(today.getFullYear());
 
-      $("#modal_demo").load(path_modal, function () {
-        $(".path_button_loading").attr("src", path_button_loading);
-      });
-      $(".path_logo_primerize").attr("src", path_logo_primerize);
-      $(".path_logo_das").attr("src", path_logo_das);
-      $(".path_logo_stanford").attr("src", path_logo_stanford);
-      $(".path_logo_eterna").attr("src", path_logo_eterna);
-      $(".path_background_rna").attr("src", path_background_rna);
-      $(".path_button_loading").attr("src", path_button_loading);
-      $(".path_button_top").attr("src", path_button_top);
-      $(".path_button_question").attr("src", path_button_question);
-      $(".path_background_404").attr("src", path_background_404);
-      $(".path_background_500").attr("src", path_background_500);
+  $(".path_logo_primerize").attr("src", path_logo_primerize);
+  $(".path_logo_das").attr("src", path_logo_das);
+  $(".path_logo_stanford").attr("src", path_logo_stanford);
+  $(".path_logo_eterna").attr("src", path_logo_eterna);
+  $(".path_background_rna").attr("src", path_background_rna);
+  $(".path_button_loading").attr("src", path_button_loading);
+  $(".path_button_top").attr("src", path_button_top);
+  $(".path_button_question").attr("src", path_button_question);
+  $(".path_background_404").attr("src", path_background_404);
+  $(".path_background_500").attr("src", path_background_500);
 
-      $(".path_pcr_ele").attr("src", path_pcr_ele);
-      $(".path_pcr_gel").attr("src", path_pcr_gel);
-      $(".path_tx_gel").attr("src", path_tx_gel);
+  $(".path_pcr_ele").attr("src", path_pcr_ele);
+  $(".path_pcr_gel").attr("src", path_pcr_gel);
+  $(".path_tx_gel").attr("src", path_tx_gel);
 
-      $(".path_home").attr("href", path_home);
-      $(".path_design_1d").attr("href", path_design_1d);
-      $(".path_demo_1d").attr("href", path_demo_1d);
-      $(".path_tutorial").each(function () {
-        $(this).attr("href", path_tutorial + $(this).attr("href"));
-      });
-      $(".path_protocol").each(function () {
-        $(this).attr("href", path_protocol + $(this).attr("href"));
-      });
-      $(".path_license").attr("href", path_license);
-      $(".path_download").attr("href", path_download);
-      $(".path_about").each(function () {
-        $(this).attr("href", path_about + $(this).attr("href"));
-      });
-
-      $(".dropdown-toggle").dropdown();
-      $(".dropdown").hover(
-        function () { $(this).addClass('open') },
-        function () { $(this).removeClass('open') }
-      );
-
-    });
+  $(".path_home").attr("href", path_home);
+  $(".path_design_1d").attr("href", path_design_1d);
+  $(".path_demo_1d").attr("href", path_demo_1d);
+  $(".path_tutorial").each(function () {
+    $(this).attr("href", path_tutorial + $(this).attr("href"));
   });
+  $(".path_protocol").each(function () {
+    $(this).attr("href", path_protocol + $(this).attr("href"));
+  });
+  $(".path_license").attr("href", path_license);
+  $(".path_download").attr("href", path_download);
+  $(".path_about").each(function () {
+    $(this).attr("href", path_about + $(this).attr("href"));
+  });
+
+  $(".dropdown-toggle").dropdown();
+  $(".dropdown").hover(
+    function () { $(this).addClass('open') },
+    function () { $(this).removeClass('open') }
+  );
     
 	$("[data-toggle='popover']").popover({trigger: "hover"});
 	$("[data-toggle='tooltip']").tooltip();

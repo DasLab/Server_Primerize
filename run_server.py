@@ -12,6 +12,25 @@ from const import *
 from config import *
 from helper import *
 
+global script_navbar, script_footer, script_modal
+
+def load_html_parts():
+    f = open(PATH['_NAVBAR'], "r")
+    lines = f.readlines()
+    f.close()
+    script_navbar = "".join(lines)
+    f = open(PATH['_FOOTER'], "r")
+    lines = f.readlines()
+    f.close()
+    script_footer = "".join(lines)
+    f = open(PATH['_MODAL'], "r")
+    lines = f.readlines()
+    f.close()
+    script_modal = "".join(lines)
+    return (script_navbar, script_footer, script_modal)
+    
+(script_navbar, script_footer, script_modal) = load_html_parts()
+
 
 class Root:
 
@@ -348,7 +367,8 @@ if __name__ == "__main__":
             "server.socket_host": "127.0.0.1",
             "server_state": 'dev',
         })
-    
+
+
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
     wsgiapp = cherrypy.Application(StringGenerator(), '/', config=QUICKSTART_CONFIG)
 

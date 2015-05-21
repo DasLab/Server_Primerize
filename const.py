@@ -25,6 +25,10 @@ PATH = {
     'DOWNLOAD': "res/html/download.html",
     'ABOUT': "res/html/about.html",
 
+    '_NAVBAR': "res/html/_navbar.html",
+    '_FOOTER': "res/html/_footer.html",
+    '_MODAL': "res/html/_demo.html",
+
     '403': "res/html/_403.html",
     '404': "res/html/_404.html",
     '500': "res/html/_500.html",
