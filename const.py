@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 def get_jquery_ver():
@@ -17,6 +18,8 @@ SEQ = {
     'T7': "TTCTAATACGACTCACTATA",
     'valid': ("A","T","C","G","U"),
 }
+
+MEDIA_DIR = os.path.join(os.path.abspath("."))
 
 PATH = {
     'HOME': "res/html/index.html",

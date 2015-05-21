@@ -34,7 +34,6 @@ def error_page_403(status, message, traceback, version):
     return load_html(PATH['403'])
 
 
-MEDIA_DIR = os.path.join(os.path.abspath("."))
 QUICKSTART_CONFIG = {
     "/": {
         "tools.staticdir.root": MEDIA_DIR,

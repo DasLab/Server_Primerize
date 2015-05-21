@@ -377,8 +377,7 @@ if __name__ == "__main__":
             "server_state": 'dev',
         })
 
-
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
-    wsgiapp = cherrypy.Application(StringGenerator(), '/', config=QUICKSTART_CONFIG)
+    # wsgiapp = cherrypy.Application(StringGenerator(), '/', config=QUICKSTART_CONFIG)
 
 
