@@ -84,5 +84,6 @@ SERVER_IP = "0.0.0.0"
 cherrypy.config.update({
     "server.socket_host": SERVER_IP,
     "server.socket_port": 8080,
+    "server.thread_pool": 100,
     "server_state": 'release',
 })
