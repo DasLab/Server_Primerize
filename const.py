@@ -22,8 +22,9 @@ SEQ = {
 MEDIA_DIR = os.path.join(os.path.abspath("."))
 
 PATH = {
+    'DESIGN_1D': "res/html/design_1d.html",
+
     'HOME': "res/html/index.html",
-    'DESIGN': "res/html/design.html",
     'TUTORIAL': "res/html/tutorial.html",
     'PROTOCOL': "res/html/protocol.html",
     'LICENSE': "res/html/license.html",

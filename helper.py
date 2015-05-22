@@ -44,7 +44,7 @@ def is_valid_email(input):
 
 
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
-    script = load_html(PATH['DESIGN'])
+    script = load_html(PATH['DESIGN_1D'])
     if type(min_Tm) is float: min_Tm = str(min_Tm)
     if type(num_primers) is int: 
         num_primers = str(num_primers)

@@ -68,7 +68,7 @@ class Root:
 
     @cherrypy.expose(['design'])
     def design_1d(self):
-        return load_html(PATH['DESIGN']).replace("__SEQ__", "").replace("__MIN_TM__", str(ARG['DEF_MIN_TM'])).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(ARG['DEF_MAX_LEN'])).replace("__MIN_LEN__", str(ARG['DEF_MIN_LEN'])).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
+        return load_html(PATH['DESIGN_1D']).replace("__SEQ__", "").replace("__MIN_TM__", str(ARG['DEF_MIN_TM'])).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(ARG['DEF_MAX_LEN'])).replace("__MIN_LEN__", str(ARG['DEF_MIN_LEN'])).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
 
     @cherrypy.expose
     def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
