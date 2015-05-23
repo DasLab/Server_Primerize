@@ -37,13 +37,9 @@ Disallow: /cache/
 Disallow: /src/
 
 # Files
-Disallow: /const.py
-Disallow: /const.pyc
-Disallow: /helper.py
-Disallow: /helper.pyc
-Disallow: /run_server.py
-Disallow: /README.md
-Disallow: /LICENSE.md
+Disallow: /*.py
+Disallow: /*.pyc
+Disallow: /*.md
 
 # Paths (clean URLs)
 Disallow: /demo_500/
@@ -55,6 +51,7 @@ Disallow: /error/
 Disallow: /test_random/
 Disallow: /submit_download/
 Disallow: /cleanup_old/
+Disallow: /get_sys/
 Disallow: /admin/
 
 # Paths (no clean URLs)
