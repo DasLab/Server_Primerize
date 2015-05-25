@@ -344,10 +344,14 @@ class Root:
     def admin(self):
         script = load_html(PATH['ADMIN'])
         f = open('src/sys_ver.txt', 'r')
-        (ver_python, ver_cherrypy, ver_matlab, ver_jquery, ver_bootstrap, ver_linux, ver_apache, ver_git, disk_sp, cache_n, cache_sz, path_primerize, path_nathermo, path_python, path_matlab) = tuple(f.readlines()[0].split('\t'))
+        (ver_linux, ver_python, ver_cherrypy, ver_matlab, ver_rdatkit, ver_jquery, ver_bootstrap, ver_ssh, ver_screen, ver_tty, ver_apache, ver_git, ver_gcc, ver_clang, ver_cmake, ver_numpy, ver_scipy, ver_matplotlib, ver_celery, ver_simplejson, ver_setuptools, ver_pip, ver_octave, disk_sp, cache_n, cache_sz, path_primerize, path_nathermo, path_python, path_matlab) = tuple(f.readlines()[0].split('\t'))
         f.close()
 
-        script = script.replace("__PYTHON_VER__", ver_python).replace("__CHERRYPY_VER__", ver_cherrypy).replace("__MATLAB_VER__", ver_matlab).replace("__JQUERY_VER__", ver_jquery).replace("__BOOTSTRAP_VER__", ver_bootstrap).replace("__LINUX_VER__", ver_linux).replace("__APACHE_VER__", ver_apache).replace("__GIT_VER__", ver_git).replace("__DISK_SP__", disk_sp).replace("__CACHE_SZ__", cache_sz).replace("__CACHE_N__", cache_n).replace("__PRIMERIZE_PATH__", path_primerize).replace("__NATHERMO_PATH__", path_nathermo).replace("__PYTHON_PATH__", path_python).replace("__MATLAB_PATH__", path_matlab)
+        script = script.replace("__LINUX_VER__", ver_linux).replace("__PYTHON_VER__", ver_python).replace("__CHERRYPY_VER__", ver_cherrypy).replace("__MATLAB_VER__", ver_matlab).replace("__RDATKIT_VER__", ver_rdatkit).replace("__JQUERY_VER__", ver_jquery).replace("__BOOTSTRAP_VER__", ver_bootstrap)
+        script = script.replace("__SSH_VER__", ver_ssh).replace("__SCREEN_VER__", ver_screen).replace("__TTY_VER__", ver_tty).replace("__APACHE_VER__", ver_apache).replace("__GIT_VER__", ver_git).replace("__GCC_VER__", ver_gcc).replace("__CLANG_VER__", ver_clang).replace("__CMAKE_VER__", ver_cmake)
+        script = script.replace("__NUMPY_VER__", ver_numpy).replace("__SCIPY_VER__", ver_scipy).replace("__MATPLOTLIB_VER__", ver_matplotlib).replace("__CELERY_VER__", ver_celery).replace("__SIMPLEJSON_VER__", ver_simplejson).replace("__SETUPTOOLS_VER__", ver_setuptools).replace("__PIP_VER__", ver_pip).replace("__OCTAVE_VER__", ver_octave)
+
+        script = script.replace("__DISK_SP__", disk_sp).replace("__CACHE_SZ__", cache_sz).replace("__CACHE_N__", cache_n).replace("__PRIMERIZE_PATH__", path_primerize).replace("__NATHERMO_PATH__", path_nathermo).replace("__PYTHON_PATH__", path_python).replace("__MATLAB_PATH__", path_matlab)
         return script
 
     @cherrypy.expose

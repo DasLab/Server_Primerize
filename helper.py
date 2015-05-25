@@ -10,6 +10,9 @@ from const import *
 from config import *
 from run_server import script_navbar, script_footer, script_modal
 
+from rdatkit import settings
+import numpy, scipy, matplotlib, celery, simplejson, setuptools, pip
+
 
 def load_html(file_name):
     f = open(os.path.join(MEDIA_DIR, file_name), "r")
@@ -119,20 +122,32 @@ def premature_return(msg, html_content, job_id):
 
 
 def get_full_sys_stat():
-    ver  = '%s.%s.%s\t' % (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
+    ver = subprocess.Popen('uname -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += '%s.%s.%s\t' % (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
     ver += cherrypy.__version__ + '\t'
-    tmp = subprocess.Popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed %s' % "'s/ (.*//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
-    if tmp.find('\n') != -1: tmp = tmp[tmp.find('\n')+1:].strip()
-    ver += tmp + '\t'
+    ver += subprocess.Popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed %s' % "'s/ (.*//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\n')[-1] + '\t'
+    ver += settings.VERSION + '\t'
+
     ver += subprocess.Popen('ls %s' % os.path.join(MEDIA_DIR, 'res/js/jquery-*.min.js'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].replace(os.path.join(MEDIA_DIR, 'res/js/jquery-'), '').replace('.min.js', '').strip() + '\t'
     f = open(os.path.join(MEDIA_DIR, 'res/js/bootstrap.min.js'))
     f.readline()
     ver_bootstrap = f.readline()
     ver += ver_bootstrap[ver_bootstrap.find('v')+1: ver_bootstrap.find('(')].strip() + '\t'
     f.close()
-    ver += subprocess.Popen('uname -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+
+    ver += subprocess.Popen('ssh -V 2> temp.txt && sed %s temp.txt | sed %s | sed %s' % ("'s/^OpenSSH\_//g'", "'s/,.*//'", "'s/[a-z]/./g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('screen --version | sed %s | sed %s | sed %s' % ("'s/.*version//g'", "'s/(.*//g'", "'s/ //g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('tty --version | head -1 | sed %s' % "'s/.*) //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+
     ver += subprocess.Popen('apachectl -v | head -1 | sed %s | sed %s' % ("'s/.*\///g'", "'s/[a-zA-Z \(\)]//g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += subprocess.Popen("git --version | sed 's/.*version //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+
+    ver += subprocess.Popen('gcc --version | head -1 | sed %s' % "'s/.*) //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('clang --version | head -1 | sed %s | sed %s' % ("'s/.*version //g'", "'s/[ (-].*//g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('cmake --version | head -1 | sed %s | sed %s' % ("'s/.*version//g'", "'s/ //g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+
+    ver += "%s\t%s\t%s\t%s\t%s\t%s\t%s\t" % (numpy.__version__, scipy.__version__, matplotlib.__version__, celery.__version__, simplejson.__version__, setuptools.__version__, pip.__version__)
+    ver += subprocess.Popen('octave --version | head -1 | sed %s' % "'s/.*version //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     
     disk_sp = subprocess.Popen('df -h | head -2 | tail -1', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].split()
     ver += '%s / %s' % (disk_sp[2], disk_sp[1]) + '\t'
@@ -147,6 +162,7 @@ def get_full_sys_stat():
     f = open('src/sys_ver.txt', 'w')
     f.write(ver)
     f.close()
+    subprocess.Popen('rm temp.txt', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
 def send_email_notice(content):
