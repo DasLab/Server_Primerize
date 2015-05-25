@@ -128,7 +128,7 @@
                 <div class="col-md-4">
                   <table class="table">
                     <thead>
-                      <tr class="active"><th>Back End</th><th>Version</th></tr>
+                      <tr class="active"><th><span class="glyphicon glyphicon-hdd"></span>&nbsp;&nbsp;Back End</th><th><span class="glyphicon glyphicon-check"></span>&nbsp;&nbsp;Version</th></tr>
                     </thead>
                     <tbody>
                       <tr class="info"><td><span class="label label-inverse">Linux</span></td><td><i>__LINUX_VER__</i></td></tr>
@@ -140,7 +140,7 @@
                   </table>
                   <table class="table">
                     <thead>
-                      <tr class="active"><th>Front End</th><th>Version</th></tr>
+                      <tr class="active"><th><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Front End</th><th><span class="glyphicon glyphicon-check"></span>&nbsp;&nbsp;Version</th></tr>
                     </thead>
                     <tbody>
                       <tr class="warning"><td><span class="label label-orange">jQuery</span></td><td><i>__JQUERY_VER__</i></td></tr>
@@ -151,7 +151,7 @@
                 <div class="col-md-4">
                   <table class="table">
                     <thead>
-                      <tr class="active"><th>System</th><th>Version</th></tr>
+                      <tr class="active"><th><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;System</th><th><span class="glyphicon glyphicon-check"></span>&nbsp;&nbsp;Version</th></tr>
                     </thead>
                     <tbody>
                       <tr class=""><td><span class="label label-info">ssh</span></td><td><i>__SSH_VER__</i></td></tr>
@@ -168,7 +168,7 @@
                 <div class="col-md-4">
                   <table class="table">
                     <thead>
-                      <tr class="active"><th>Package</th><th>Version</th></tr>
+                      <tr class="active"><th><span class="glyphicon glyphicon-inbox"></span>&nbsp;&nbsp;Package</th><th><span class="glyphicon glyphicon-check"></span>&nbsp;&nbsp;Version</th></tr>
                     </thead>
                     <tbody>
                       <tr class="danger"><td><span class="label label-green">numpy</span></td><td><i>__NUMPY_VER__</i></td></tr>
@@ -188,20 +188,20 @@
                 <div class="col-md-6">
                   <table class="table">
                     <thead>
-                      <tr class="active"><th></th><th>Size (Used / Total)</th></tr>
+                      <tr class="active"><th></th><th><span class="glyphicon glyphicon-share"></span>&nbsp;&nbsp;Size (Used / Total)</th></tr>
                     </thead>
                     <tbody>
-                      <tr><td>Disk Space</td><td><i>__DISK_SP__</i></td></tr>
+                      <tr><td><span class="glyphicon glyphicon-scale"></span>&nbsp;&nbsp;Disk Space</td><td><i>__DISK_SP__</i></td></tr>
                     </tbody>
                   </table>
                 </div>
                 <div class="col-md-6">
                   <table class="table">
                     <thead>
-                      <tr class="active"><th></th><th># of Files</th><th>Size</th></tr>
+                      <tr class="active"><th></th><th># of Files</th><th><span class="glyphicon glyphicon-share"></span>&nbsp;&nbsp;Size</th></tr>
                     </thead>
                     <tbody>
-                      <tr><td>Cache Folder</td><td><i>__CACHE_N__</i></td><td><i>__CACHE_SZ__</i></td></tr>
+                      <tr><td><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;&nbsp;Cache Folder</td><td><i>__CACHE_N__</i></td><td><i>__CACHE_SZ__</i></td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -219,12 +219,12 @@
                   <br/>
                   <table class="table">
                     <thead>
-                      <tr class="active"><th>Program</th><th>Path</th></tr>
+                      <tr class="active"><th><span class="glyphicon glyphicon-compressed"></span>&nbsp;&nbsp;Program</th><th><span class="glyphicon glyphicon-console"></span>&nbsp;&nbsp;Path</th></tr>
                     </thead>
                     <tbody>
                       <tr class="success"><td><span class="label label-inverse">Primerize</span></td><td><code>__PRIMERIZE_PATH__</code></td></tr>
                       <tr class="success"><td><span class="label label-default">NA_thermo</span></td><td><code>__NATHERMO_PATH__</code></td></tr>
-                      <tr class="success"><td><span class="label label-primary">python</span></td><td><code>__PYTHON_PATH__</code></td></tr>
+                      <tr class="success"><td><span class="label label-primary">Python</span></td><td><code>__PYTHON_PATH__</code></td></tr>
                       <tr class="success"><td><span class="label label-violet">MATLAB</span></td><td><code>__MATLAB_PATH__</code></td></tr>
                     </tbody>
                   </table>     
@@ -246,75 +246,86 @@
                 <div class="col-md-12">
                   The <code>Primerize_Server</code> repository (<u><a href="https://github.com/DasLab/Primerize_server" target="_blank">https://github.com/DasLab/Primerize_server</a></u>) has the following overall structure:
                   <br/><br/>
+                </div>
 
+                <div class="col-md-6">
                   <ul class="lead">
-                    <li style="list-style-type: none;"><span class="label label-inverse">root</span></li>
+                    <li style="list-style-type: none;"><span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;<span class="label label-inverse">root</span></li>
                     <ul>
-                      <li style="list-style-type: disc;"><span class="label label-primary">cache</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-primary">res</span></li>
+                      <ul>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-success">css</span></li>
+                        <ul>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-default">bootstrap.min.css</span></li>
+                          <li>...</li>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-dark-red">theme.css</span></li>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-dark-red">palette.css</span></li>
+                        </ul>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-success">js</span></li>
+                        <ul>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-default">bootstrap.min.js</span></li>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-default">jquery-1.11.X.js</span></li>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-default">ZeroClipboard.min.js</span></li>
+                          <li>...</li>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-orange">_design.js</span></li>
+                          <li><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-orange">_util.js</span></li>
+                          <li>...</li>
+                        </ul>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-success">html</span></li>
+                        <ul>
+                          <li><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<span class="label label-violet">_navbar.html</span></li>
+                          <li><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<span class="label label-violet">_404.html</span></li>
+                          <li>...</li>
+                          <li><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<span class="label label-violet">index.html</span></li>
+                          <li><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<span class="label label-violet">design.html</span></li>
+                          <li>...</li>
+                        </ul>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-success">fonts</span></li>
+                        <ul>
+                          <li>...</li>
+                        </ul>
+                      </ul>
+                    </ul>
+                  </ul>
+                </div>
+                <div class="col-md-6 li-default">
+                  <ul class="lead">
+                    <li style="list-style-type: none;"><span class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;<span class="label label-inverse">root</span></li>
+                    <ul>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-primary">res</span></li>
+                      <ul>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-success">images</span></li>
+                        <ul>
+                          <li><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-default">doc</span></li>
+                          <ul>
+                            <li><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;<span class="label label-info">PCR_gel.png</span></li>
+                            <li>...</li>
+                          </ul>
+                          <li><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;<span class="label label-info">bg_rna.png</span></li>
+                          <li><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;<span class="label label-info">fg_load.gif</span></li>
+                          <li><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;<span class="label label-info">logo_primerize.png</span></li>
+                          <li>...</li>
+                        </ul>
+                      </ul>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-primary">src</span></li>
+                      <ul>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-compressed"></span>&nbsp;&nbsp;<span class="label label-green">primerize_release.zip</span></li>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<span class="label label-green">usr_tab.csv</span></li>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-scale"></span>&nbsp;&nbsp;<span class="label label-default">sys_ver.txt</span></li>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;<span class="label label-default">command.sh</span></li>
+                      </ul>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;&nbsp;<span class="label label-warning">cache</span></li>
                       <ul>
                         <li style="list-style-type: circle;">...</li>
                       </ul>
-                      <li style="list-style-type: disc;"><span class="label label-primary">res</span></li>
-                      <ul>
-                        <li style="list-style-type: circle;"><span class="label label-success">css</span></li>
-                        <ul>
-                          <li><span class="label label-default">bootstrap</span></li>
-                          <ul>
-                            <li>...</li>
-                          </ul>
-                          <li><span class="label label-dark-red">theme.css</span></li>
-                          <li><span class="label label-dark-red">palette.css</span></li>
-                        </ul>
-                        <li style="list-style-type: circle;"><span class="label label-success">html</span></li>
-                        <ul>
-                          <li><span class="label label-violet">index.html</span></li>
-                          <li><span class="label label-violet">design.html</span></li>
-                          <li>...</li>
-                        </ul>
-                        <li style="list-style-type: circle;"><span class="label label-success">images</span></li>
-                        <ul>
-                          <li><span class="label label-default">doc</span></li>
-                          <ul>
-                            <li><span class="label label-info">PCR_gel.png</span></li>
-                            <li>...</li>
-                          </ul>
-                          <li><span class="label label-info">bg_rna.png</span></li>
-                          <li><span class="label label-info">fg_load.gif</span></li>
-                          <li><span class="label label-info">logo_primerize.png</span></li>
-                          <li>...</li>
-                        </ul>
-                        <li style="list-style-type: circle;"><span class="label label-success">js</span></li>
-                        <ul>
-                          <li><span class="label label-default">bootstrap</span></li>
-                          <ul>
-                            <li>...</li>
-                          </ul>
-                          <li><span class="label label-default">jquery</span></li>
-                          <ul>
-                            <li>...</li>
-                          </ul>
-                          <li><span class="label label-default">zeroclipboard</span></li>
-                          <ul>
-                            <li>...</li>
-                          </ul>
-                          <li><span class="label label-orange">design.js</span></li>
-                          <li><span class="label label-orange">util.js</span></li>
-                          <li>...</li>
-                        </ul>
-                      </ul>
-                      <li style="list-style-type: disc;"><span class="label label-primary">src</span></li>
-                      <ul>
-                        <li style="list-style-type: circle;"><span class="label label-green">primerize_release.zip</span></li>
-                        <li style="list-style-type: circle;">...</li>
-                      </ul>
-                      <li style="list-style-type: disc;"><span class="label label-danger">const.py</span></li>
-                      <li style="list-style-type: disc;"><span class="label label-danger">config.py</span></li>
-                      <li style="list-style-type: disc;"><span class="label label-danger">helper.py</span></li>
-                      <li style="list-style-type: disc;"><span class="label label-danger">run_server.py</span></li>
-                      <li style="list-style-type: disc;"><span class="label label-default">robots.txt</span></li>
-                      <li style="list-style-type: disc;"><span class="label label-default">.gitignore</span></li>
-                      <li style="list-style-type: disc;"><span class="label label-default">LICENSE.md</span></li>
-                      <li style="list-style-type: disc;"><span class="label label-default">README.md</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">const.py</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">config.py</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">helper.py</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">run_server.py</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-alert"></span>&nbsp;&nbsp;<span class="label label-default">robots.txt</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-eye-close"></span>&nbsp;&nbsp;<span class="label label-default">.gitignore</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-default">LICENSE.md</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span class="label label-default">README.md</span></li>
                     </ul>
                   </ul>
                 </div>
@@ -326,7 +337,7 @@
           <div class="container-fluid li-primary" role="main">
             <div class="panel-primary" id="sys_bked">
               <div class="panel-heading">
-                <span class="lead"><b><span class="sec">Section</span> <span class="num">#3</span>: Back End</b></span>
+                <span class="lead"><span class="glyphicon glyphicon-hdd"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#3</span>: Back End</b></span>
               </div>
               <br/>
               <div class="row">
