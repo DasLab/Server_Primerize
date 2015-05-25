@@ -66,16 +66,15 @@ $(document).ready(function () {
     $("#btn_demo").on("click", function () { $("#modal_demo").modal("show"); });
   } else {
     // stupid safari!!
+    // console.log("safari");
     $("#btn_submit").on("click", function () { 
       event.preventDefault();
       show_modal(); 
-      console.log("safari");
       setTimeout(function(){ $("#form").trigger("submit"); }, 0);
     });
     $("#btn_demo").on("click", function () { 
       event.preventDefault();
       show_modal(); 
-      console.log("safari");
       setTimeout(function(){ location.href = "/demo_P4P6"; }, 0);
     });
   } 

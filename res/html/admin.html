@@ -90,14 +90,17 @@
                     </ul>
                 </li>
                 <li class="li-default">
-                    <a id="tab_5" href="#">
+                    <a id="tab_5" href="#sys_misc">
                       <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Section #5: 
                       <br/>
                       <b>Misc</b>
                       <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_5" aria-expanded="true" aria-controls="collapse_tab_5"></span>
                     </a>
                     <ul id="collapse_tab_5" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_5">
-                      <li><a id="tab_51" href="#">...</a></li>
+                      <li><a id="tab_51" href="#sys_misc_aws">AWS Setup</a></li>
+                      <li><a id="tab_52" href="#sys_misc_repo">Git Repositories</a></li>
+                      <li><a id="tab_53" href="#sys_misc_run">Run Server</a></li>
+                      <li><a id="tab_54" href="#sys_misc_misc">Misc Setup</a></li>
                     </ul>
 
                 </li>
@@ -244,7 +247,7 @@
               <br/>
               <div class="row">
                 <div class="col-md-12">
-                  The <code>Primerize_Server</code> repository (<a href="https://github.com/DasLab/Primerize_server" target="_blank"><u>https://github.com/DasLab/Primerize_server</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>) has the following overall structure:
+                  The <code>Primerize_server</code> repository (<a href="https://github.com/DasLab/Primerize_server" target="_blank"><u>https://github.com/DasLab/Primerize_server</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>) has the following overall structure:
                   <br/><br/>
                 </div>
 
@@ -468,16 +471,96 @@
               <br/>
               <div class="row">
                 <div class="col-md-12">
-                  <p>Primerize server is based on <b><a href="http://www.cherrypy.org/" target="_blank">CherryPy</a></b> framework. For basic concepts and documentation of CherryPy, please read <u><a href="http://cherrypy.readthedocs.org/" target="_blank">here</a></u>.
-                  
                   <div class="row">
                     <div class="col-md-2">
-                      <p class="lead" id="sys_bked_const"><span class="label label-danger">const.py</span></p>
+                      <p class="lead" id="sys_fted_html"><span class="label label-success">res/html</span></p>
                     </div>
                     <div class="col-md-10">
-                      <code>const.py</code> stores <b><u>constants</u></b>, including:
+                      This is the sub-directory of all <b><u>HTML</u></b> files.
                       <ul>
+                        <li><code>_403.html, _404.html, _500.html</code> are pages for corresponding <abbr title="">HTTP</abbr> error response.</li>
+                        <li><code>_navbar.html, _footer.html, _demo.html</code> are HTML parts that are shared across all pages. They are loaded by <code>load_html_parts()</code> at startup, and replace the corresponding <abbr title="">placeholders</abbr> (<mark><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>NAVBAR<u>&nbsp;&nbsp;&nbsp;&nbsp;</u>, <u>&nbsp;&nbsp;&nbsp;&nbsp;</u>FOOTER<u>&nbsp;&nbsp;&nbsp;&nbsp;</u>, <u>&nbsp;&nbsp;&nbsp;&nbsp;</u>MODAL<u>&nbsp;&nbsp;&nbsp;&nbsp;</u></mark>).</li>
+                        <li>Files with name starting with a letter are main body for each page. Their <mark>css, js</mark> resources are loaded by <code>helper.py</code> defined by <code>PATH</code> in <code>const.py</code>. This is for a centralized system that is easy to update and maintain.</li>
+                        <li><code>tutorial.html</code> and <code>protocol.html</code> are written by hand, and need to be updated manually when there is a change for the targeted pages.</li>
+                        <li>Again, <b>all</b> HTML pages are governed by <code>PATH</code> in <code>const.py</code> as a master list for all paths.</li>
+                        <li>For <code>design_1d.html</code>, <code>download.html</code>, and <code>admin.html</code>, they use <abbr title="">placeholder</abbr> strings (e.g. <mark><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>JOB_ID<u>&nbsp;&nbsp;&nbsp;&nbsp;</u></mark>) that are filled by <code>run_server.py</code>.
+                      </ul>
+                    </div>
+                  </div>
 
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_fted_js"><span class="label label-success">res/js</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      This is the sub-directory for all <b><u>javascript</u></b> scripts.
+                      <ul>
+                        <li>Libraries of <span class="label label-orange">jQuery</span>, <span class="label label-dark-red">Bootstrap</span> and <span class="label label-default">ZeroClipboard</span> are used and stored. For <span class="label label-orange">jQuery</span>, keep the version string in the filename, as the <code>get_jquery_ver()</code> from <code>const.py</code> figures out and points to the filename for each HTML page.</li>
+                        <li><code>_util.js</code> is loaded by <b>all</b> HTML pages. It handles the 'master' list of path for <b><u>images</u></b>, defined by (e.g. <mark>path_logo_primerize</mark>). It also handles the <mark>navbar</mark> highlighting for each page, and relative links (e.g. <mark>path_home</mark>). Additionally, this file fills in the current year for the <mark>footer</mark>, document title and icons, as well as enabling <span class="label label-dark-red">Bootstrap</span> dropdowns and tooltops.</li>
+                        <ul>
+                          <li><b>NOTE</b>: In <b>all</b> HTML files, <b><u>DO NOT</u></b> hardcode URLS in <code>href=""</code>, instead, use the defined classes in <code>_util.js</code>.</li>
+                          <li><b>NOTE</b>: In <b>all</b> HTML files, <b><u>DO NOT</u></b> hardcode links for <abbr title="">static</abbr> images, instead, use the defined classes here.</li>
+                        </ul>
+                        <li><code>_design_1d.js</code> includes a vestigal control for a checkbox of <mark>License Agreement</mark>. This is no longer in use. Also, there is a special treatment for <abbr title="">Safari</abbr> browser for the modal window display timeout. This is an inelegant solution for the problem that Safari fails to display the modal window in parallel with form submission. The solution is to introduce a delay in form submission to win time for the modal window.</li>
+                        <li>The other page-specific <mark>js</mark> files all start with <mark>_</mark>. Some are shared by multiple pages.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_fted_misc">
+                        <span class="label label-success">res/css</span>
+                        <br/>
+                        <span class="label label-success">res/images</span>
+                        <br/>
+                        <span class="label label-success">res/fonts</span>
+                      </p>
+                    </div>
+                    <div class="col-md-10">
+                      These are sub-directories hosting all <b><u>css, images, fonts</u></b> files.
+                      <ul>
+                        <li><span class="label label-success">res/css</span> hosts <span class="label label-dark-red">Bootstrap</span> style spreadsheets, as well as custom files <mark>theme.css</mark> and <mark>palette.css</mark>. <mark>palette.css</mark> specifies the custom color-scheme used by this website, e.g. (<span class="label label-info">label label-info</span>).</li>
+                        <li><span class="label label-success">res/fonts</span> hosts <span class="label label-dark-red">Bootstrap</span> <b>Glyphicons</b>. The relative path between <mark>res/fonts</mark> and <mark>res/js</mark> should not be altered.</li>
+                        <li><span class="label label-success">res/images</span> hosts all <abbr title="">static</abbr> image files. Their loading path is mastered by <code>_util.js</code>. Images for the <mark>/protocol</mark> are stored in <mark>res/images/docs</mark>.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_fted_src"><span class="label label-primary">src</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      This is the sub-directory for all <b><u>other</u></b> files.
+                      <ul>
+                        <li><span class="label label-green">primerize_release.zip</span> is the download source for the <b>Primerize</b> repository.</li>
+                        <li><span class="label label-green">usr_tab.csv</span> is the internal list of user download record. It is updated by the <code>submit_download()</code> expose.</li>
+                        <li><span class="label label-default">command.sh</span> archives the command for running the server. It shows commands for <mark>screen</mark> operations.</li>
+                        <ul>
+                          <li><b>NOTE</b>: the <code>port forwarding</code> is no longer in use. <mark>AWS load balancer</mark> handles it.</li>
+                        </ul>
+                        <li><span class="label label-default">sys_ver.txt</span> is a text file stores the output for <code>get_full_sys_stat()</code> for the Dashboard on this page.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead"><span class="label label-inverse">/</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      This is the <b><u>root</u></b> directory.
+                      <ul>
+                        <li><span class="label label-default">README.md</span>: markdown file for Primerize_server repository.</li>
+                        <li><span class="label label-default">LICENSE.md</span>: license file for Primerize_server repository. It is also loaded by <mark>res/js/_license.js</mark> for <mark>/license</mark> page.</li>
+                        <li><span class="label label-default">.gitignore</span>: list of files ignored by Primerize_server repository.</li>
+                        <li><span class="label label-dark-blue">log_access.log</span> and <span class="label label-dark-blue">log_error.log</span>: log files by CherryPy.</li>
+                        <li><span class="label label-default">robots.txt</span>: (see below).</li>
                       </ul>
                     </div>
                   </div>
@@ -486,12 +569,73 @@
             </div>
           </div>
 
+          <hr/>
+          <div class="container-fluid li-default" role="main">
+            <div class="panel-default" id="sys_misc">
+              <div class="panel-heading">
+                <span class="lead"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#5</span>: Miscellaneous</b></span>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_misc_aws"><span class="label label-info">AWS</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      This is the sub-directory of all <b><u>HTML</u></b> files.
+                      <ul>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_misc_repo"><span class="label label-info">Repository</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      This is the sub-directory of all <b><u>HTML</u></b> files.
+                      <ul>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_misc_run"><span class="label label-info">Run</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      This is the sub-directory of all <b><u>HTML</u></b> files.
+                      <ul>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_misc_misc"><span class="label label-info">Misc</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      This is the sub-directory of all <b><u>HTML</u></b> files.
+                      <ul>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+
         </div>
       </div>
     </div>
 
     <hr/>
     <div id="wait" class="modal"></div>
+    <a href="#down" id="up"><img style="position:fixed;display:block;right:5%;bottom:5%;opacity:0.85;" class="path_button_top" src="" height="60"/></a>
     __FOOTER__
 
        <!-- Latest compiled and minified JavaScript -->
