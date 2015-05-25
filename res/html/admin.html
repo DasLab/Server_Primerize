@@ -63,30 +63,30 @@
                       <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
                     </a>
                     <ul id="collapse_tab_3" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_3">
-                      <li><a id="tab_31" href="#sys_bked_const"><code>const.py</code></a></li>
-                      <li><a id="tab_32" href="#sys_bked_config"><code>config.py</code></a></li>
-                      <li><a id="tab_33" href="#sys_bked_helper"><code>helper.py</code></a></li>
+                      <li><a id="tab_31" href="#sys_bked_const"><span class="label label-danger">const.py</span></a></li>
+                      <li><a id="tab_32" href="#sys_bked_config"><span class="label label-danger">config.py</span></a></li>
+                      <li><a id="tab_33" href="#sys_bked_helper"><span class="label label-danger">helper.py</span></a></li>
                       <li>
-                        <a id="tab_34" href="#sys_bked_runserver"><b><code>run_server.py</code></b></a>
+                        <a id="tab_34" href="#sys_bked_runserver"><b><span class="label label-danger">run_server.py</span></b></a>
                         <ul>
-                          <li><a id="tab_341" href="#">Functions</a></li>
-                          <li><a id="tab_342" href="#"><code>design_primers()</code></a></li>
+                          <li><a id="tab_341" href="#sys_bked_runserver_func">Functions</a></li>
+                          <li><a id="tab_342" href="#sys_bked_runserver_design"><span class="label label-warning">design_primers()</span></a></li>
                         </ul>
                       </li>
                     </ul>
                 </li>
                 <li class="li-danger">
-                    <a id="tab_4" href="#">
+                    <a id="tab_4" href="#sys_fted">
                       <span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Section #4: 
                       <br/>
                       <b>Front End</b>
                       <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
                     </a>
                     <ul id="collapse_tab_4" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_4">
-                      <li><a id="tab_41" href="#"><code>res/html</code></a></li>
-                      <li><a id="tab_42" href="#"><code>res/js</code></a></li>
-                      <li><a id="tab_43" href="#"><code>res/css</code> & <code>res/images</code></a></li>
-                      <li><a id="tab_44" href="#"><code>src</code></a></li>
+                      <li><a id="tab_41" href="#sys_fted_html"><span class="label label-success">res/html</span></a></li>
+                      <li><a id="tab_42" href="#sys_fted_js"><span class="label label-success">res/js</span></a></li>
+                      <li><a id="tab_43" href="#sys_fted_misc"><span class="label label-success">res/css</span> & <span class="label label-success">res/images</span> & <span class="label label-success">res/fonts</span></a></li>
+                      <li><a id="tab_44" href="#sys_fted_src"><span class="label label-primary">src</span></a></li>
                     </ul>
                 </li>
                 <li class="li-default">
@@ -174,9 +174,9 @@
                       <tr class="danger"><td><span class="label label-green">numpy</span></td><td><i>__NUMPY_VER__</i></td></tr>
                       <tr class="danger"><td><span class="label label-green">scipy</span></td><td><i>__SCIPY_VER__</i></td></tr>
                       <tr class="danger"><td><span class="label label-green">matplotlib</span></td><td><i>__MATPLOTLIB_VER__</i></td></tr>
-                      <tr class="danger"><td><span class="label label-green">celery</span></td><td><i>__CELERY_VER__</i></td></tr>
-                      <tr class="danger"><td><span class="label label-green">simplejson</span></td><td><i>__SIMPLEJSON_VER__</i></td></tr>
-                      <tr class="danger"><td><span class="label label-green">setuptools</span></td><td><i>__SETUPTOOLS_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-brown">celery</span></td><td><i>__CELERY_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-brown">simplejson</span></td><td><i>__SIMPLEJSON_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-brown">setuptools</span></td><td><i>__SETUPTOOLS_VER__</i></td></tr>
                       <tr class=""><td><span class="label label-default">pip</span></td><td><i>__PIP_VER__</i></td></tr>
                       <tr class="active"><td style="border-top-width: 5px;"><span class="label label-teal">octave</span></td><td style="border-top-width: 5px;"><i>__OCTAVE_VER__</i></td></tr>
                     </tbody>
@@ -244,7 +244,7 @@
               <br/>
               <div class="row">
                 <div class="col-md-12">
-                  The <code>Primerize_Server</code> repository (<u><a href="https://github.com/DasLab/Primerize_server" target="_blank">https://github.com/DasLab/Primerize_server</a></u>) has the following overall structure:
+                  The <code>Primerize_Server</code> repository (<a href="https://github.com/DasLab/Primerize_server" target="_blank"><u>https://github.com/DasLab/Primerize_server</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>) has the following overall structure:
                   <br/><br/>
                 </div>
 
@@ -342,7 +342,7 @@
               <br/>
               <div class="row">
                 <div class="col-md-12">
-                  <p>Primerize server is based on <b><a href="http://www.cherrypy.org/" target="_blank">CherryPy</a></b> framework. For basic concepts and documentation of CherryPy, please read <u><a href="http://cherrypy.readthedocs.org/" target="_blank">here</a></u>.
+                  <p>Primerize server is based on <b><a href="http://www.cherrypy.org/" target="_blank">CherryPy&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a></b> framework. For basic concepts and documentation of CherryPy, please read <a href="http://cherrypy.readthedocs.org/" target="_blank"><u>here</u>&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.
                   
                   <div class="row">
                     <div class="col-md-2">
@@ -354,10 +354,14 @@
                         <li>For CherryPy framework, <code>ADMIN</code> information (<mark>/admin</mark> login and notification email) and <code>EMAIL</code> gmail account for sending out emails.</li>
                         <li>Default parameters for <code>design_primers()</code>, e.g. <code>DEF_MIN_TM</code>.</li>
                         <li>Default sequences for <code>P4P6</code> and <code>T7</code>.</li>
-                        <li><code>PATH</code> information about all static <mark>HTML</mark> files.</li>
+                        <li><code>MEDIA_DIR</code> for relative path, <code>PATH</code> information about all static <mark>HTML</mark> files. This variable is the 'master' reportoire of all <code>render_to_response()</code> calls, special pages(e.g. <mark>404</mark> and <mark>_navbar</mark>), <mark>js</mark> and <mark>css</mark> paths are also loaded from here.</li>
+                        <li>Default parameter <code>JOB_KEEP_EXPIRE</code> for the result cache life, set to <kbd>90</kbd> days.</li>
+                        <li>Google Analytics <mark>js</mark> tracker code in <code>GA_TRACKER</code>.</li>
                       </ul>
                     </div>
                   </div>
+
+                  <br/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead" id="sys_bked_config"><span class="label label-danger">config.py</span></p>
@@ -371,21 +375,112 @@
                         </ul>
                         <li><abbr title="">log</abbr> and <abbr title="">error_page</abbr> handlers.</li>
                         <ul>
-                          <li>Errors are handled by <code>error_page_403</code>, <code>error_page_404</code>, and <code>error_page_500</code> functions. <b>Traceback</b> and <b>client</b> infomaton are recorded and emailed to admin.</li>
+                          <li>Errors are handled by <code>error_page_403()</code>, <code>error_page_404()</code>, and <code>error_page_500()</code> functions. <b>Traceback</b> and <b>client</b> infomaton are recorded and emailed to admin.</li>
                         </ul>
                         <li><mark>/admin</mark> authentification and <abbr title="">secureheader</abbr>.</li>
                         <ul>
                           <li><mark>/admin</mark> (this page) requires autherization defined by <code>ADMIN['login']</code>.</li>
                           <li>Primerize uses <abbr title="">secureheader</abbr> communication by <code>secureheaders()</code>.</li>
                         </ul>
-                        <li><abbr title="">socket</abbr> information and <abbr title="">ip</abbr>.</li>
+                        <li><abbr title="">socket</abbr> information and <abbr title="">ip</abbr>. <abbr title="">thread_pool</abbr> is set to <kbd>100</kbd> for AWS health check. Other parameters are set according to the run mode:</li>
                         <ul>
-                          <li>
-                        </ul>
+                          <li>For test purposes (<mark>dev</mark>), the <abbr title="">ip</abbr> is <mark>127.0.0.1</mark> ande <abbr title="">server_state</abbr> is <mark>dev</mark>.</li>
+                          <li>For <mark>release</mark> (actual deployment for public at AWS), the <abbr title="">ip</abbr> is <mark>0.0.0.0</mark> and <abbr title="">server_state</abbr> is <mark>release</mark>. The <abbr title="">ip</abbr> and <abbr title="">port</abbr> forwarding is handled by AWS (see below).</li>
+                          <li>The <abbr title="">server_state</abbr> custom flag is for the use of 500 error handler to determine whether to send the admin email notification.</li>
                       </ul>
                     </div>
                   </div>
 
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_bked_helper"><span class="label label-danger">helper.py</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      <code>helper.py</code> is a collection of <b><u>helper</u></b> functions for <code>run_server.py</code>, including:
+                      <ul>
+                        <li><code>load_html()</code> is a function for loading <abbr title="">static</abbr> HTML files from <mark>/res/html/</mark>. It loads and replaces the <mark>_navbar.html</mark> (for shared navigation bar), <mark>_footer.html</mark> (for shared footer), <mark>_demo.html</mark> (for DEMO modal window), and replaces placeholder script <abbr title="">class</abbr> of all <mark>js</mark> and <mark>css</mark> <abbr title="">static</abbr> files. It also appends the <b>Google Analytics</b> <mark>js</mark> tracker script.</li>
+                        <ul>
+                          <li><b>NOTE</b>: You should change <abbr title="">static</abbr> <mark>html, js, css</mark> files here, not anywhere else. Follow the <abbr title="">class</abbr> definitions in the <mark>html</mark>, and use the shared <mark>navbar, footer, modal</mark> this way.</li>
+                          <li><b>NOTE</b>: The <mark>navbar, footer, modal</mark> HTML codes are loaded once at initiation by <code>load_html_parts()</code> from <code>run_server.py</code>. The <code>script_navbar, script_footer, script_modal</code> variables are <abbr title="">global</abbr>.
+                        </ul>
+                        <li><code>is_valid_name()</code> and <code>is_valid_email()</code> are functions for validification of source code download form info.</li>
+                        <li><code>is_valid_sequence()</code> and <code>is_t7_present()</code> are functions for <code>design_primers()</code> input checks.</li>
+                        <li><code>get_first_part_of_page()</code> reads in the default <mark>/res/html/design_1d.html</mark> and fills in the user form, and this will be used in the result return pages rendering.</li>
+                        <li><code>create_wait_html()</code>, <code>create_err_html()</code> and <code>premature_return()</code> all renders response HTML pages, according to run status. They all use <code>create_res_html()</code> for file handling. Input parameters and return messages are passed from main function <code>design_primers()</code>.</li>
+                        <li><code>get_full_sys_stat()</code> is responsible for admin page system versions. It makes multiple <code>subprocess.Popen()</code> calls to collect version information, and stores it in <mark>/src/sys_ver.txt</mark> for parsing when loaded with <code>admin</code> from <code>run_server.py</code>.</li>
+                        <li><code>send_email_notice()</code> send <b>traceback</b> information to <code>ADMIN</code> when error occur in <mark>release</mark> mode.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <br/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_bked_runserver"><span class="label label-danger">run_server.py</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      <code>run_server.py</code> is the <b><u>main</u></b> script for the CherryPy framework. It runs the server in either <mark>dev</mark> or <mark>release</mark> mode by <code>main()</code>. The body is in a <code>Root</code> <mark>class</mark>:
+                      <ul id="sys_bked_runserver_func">
+                        <li><code>home()</code>, <code>tutorial()</code>, <code>protocol()</code>, <code>license()</code> and <code>about()</code> exposes the corresponding page links.</li>
+                        <ul>
+                          <li><b>NOTE</b>: Multiple <abbr title="">alias</abbr> are defined by the <code>@cherrypy.expose</code> line. This is handy to direct different URLs to same page.</li>
+                        </ul>
+                        <li><code>download()</code> exposes the blank page for download form, while <code>submit_download()</code> returns the form submission result depending on the input. They share the same HTML template (<mark>/res/html/download.html</mark>) while loading different <mark>js</mark> files. The <mark>js</mark> files renders the form and return message.</li>
+                        <li><code>admin()</code> renders this admin page. <code>get_sys()</code> and <code>cleanup_old()</code> are callables from <mark>/admin</mark> for system maintenance.</li>
+                        <li><code>demo_404()</code>, <code>demo_500()</code>, <code>demo_1d_wait()</code>, <code>demo_1d_fail()</code>, <code>demo_1d_error()</code> and <code>error()</code> are remnant functions in response to paper review to illustrate status and error handling.</li>
+                        <li><code>result()</code> performs the result retrieval for a particular <span class="label label-violet">JOB_ID</span>, or returns <mark>404</mark> page.</li>
+                        <li><code>demo_1d_P4P6()</code> calls a DEMO job using constants from <code>const.py</code>. <code>test_random()</code> is a remnant function for testing of a random sequence of length <kbd>500</kbd>, for paper review.</li>
+                        <li><code>design_1d()</code> exposes the blank page for 1D design page, while <code>design_primers()</code> (see below) performs the calculation and returns result.</li>
+                      </ul>
+                      <br/>
+
+                      <p id="sys_bked_runserver_design"><span class="label label-warning">design_primers()</span></p>
+                      <ul>
+                        <li>First, the function concatenates the input <mark>sequence</mark> into one string, and checks for the validity of input (length, nucleotides identity, advanced option type and range). If standars are not met, an error page will be returned by calling <code>premature_return()</code>. Otherwise, prepare a placeholder waiting page by <code>create_wait_html()</code> in case of long runs.</li>
+                        <li>Second, the function forks a <mark>MATLAB</mark> session for calculation using <code>subprocess.check_output()</code>. The call is timed and catches exception. If errors occur on the MATLAB part, it will prepare a 500 page by <code>create_err_html()</code>, and also the 500 fires <code>ADMIN</code> email notice.</li>
+                        <ul>
+                          <li><b>NOTE</b>: MATLAB call is using parameters <code>-nojvm</code>, <code>-nodisplay</code>, <code>-nosplash</code>, and <code>-r</code>. Those are explained by <code>matlab -help</code>.</li>
+                        </ul>
+                        <li>Third, the returned results are stripped by <mark>\n</mark>. For cases of <abbr title="">'no solution found'</abbr>, a line starting with <mark>?</mark> is captured and the user is noticed for the failure. Next, the results are parsed and rendered in HTML. </li>
+                        <ul>
+                          <li>Sections of <abbr title="">warning, primers, assembly</abbr> are delimited with <mark>#</mark> lines.</li>
+                          <li>It first make the <abbr title="">WARNING</abbr> field with <i>mis-prime</i> information, as well as download links and timer. Lines of <abbr title="">WARNING</abbr> start with <mark>@</mark>, and perfect cases will make the <abbr title="">SUCCESS</abbr> field instead.</li>
+                          <li>Then, primers are rendered into a <mark>table</mark>, with <span class="label label-info">F</span>/<span class="label label-danger">R</span> coloring.</li>
+                          <li>Last, the assembly lines also take advantage of starting symbols: <mark>~</mark> for <i>sense</i> strand, <mark>=</mark> for <i>anti-sense</i> strand, <mark>^</mark> for forward primers, and <mark>!</mark> for reverse primers. Each line is parsed and color-coded, while <abbr title="">annealing temperature</abbr> and <abbr title="">primer direction</abbr> are highlighted.</li>
+                        </ul>
+                        <li>Last, the output is written to plain text files, together with HTML <mark>/cache</mark> overwritten. Also the <mark>T7_CHECK</mark> section is inserted. The browser is redirected to <code>result()</code> as return.</li>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="container-fluid li-danger" role="main">
+            <div class="panel-danger" id="sys_fted">
+              <div class="panel-heading">
+                <span class="lead"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#4</span>: Front End</b></span>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>Primerize server is based on <b><a href="http://www.cherrypy.org/" target="_blank">CherryPy</a></b> framework. For basic concepts and documentation of CherryPy, please read <u><a href="http://cherrypy.readthedocs.org/" target="_blank">here</a></u>.
+                  
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_bked_const"><span class="label label-danger">const.py</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      <code>const.py</code> stores <b><u>constants</u></b>, including:
+                      <ul>
+
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
