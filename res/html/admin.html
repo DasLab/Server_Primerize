@@ -37,31 +37,32 @@
         <div class="col-md-3">
           <div class="panel panel-violet" id="sidebar" >
             <div class="panel-heading">
-              <h3 class="panel-title">Sections</h3>
+              <h3 class="panel-title"><span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;Sections</h3>
             </div>
             <div class="panel-body scroll_nav">
               <ul class="nav" role="tablist" id="scroll_nav">
                 <li class="li-success">
                     <a id="tab_1" href="#sys_stat">
-                      Section #1: 
+                      <span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Section #1: 
                       <br/>
                       <b>System Status</b>
                     </a>
                 </li>
                 <li class="li-warning">
                     <a id="tab_2" href="#sys_ovw">
-                      Section #2: 
+                      <span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;Section #2: 
                       <br/>
                       <b>Overview</b>
                     </a>
                 </li>
                 <li class="li-primary">
                     <a id="tab_3" href="#sys_bked">
-                      Section #3: 
+                      <span class="glyphicon glyphicon-hdd"></span>&nbsp;&nbsp;Section #3: 
                       <br/>
                       <b>Back End</b>
+                      <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
                     </a>
-                    <ul >
+                    <ul id="collapse_tab_3" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_3">
                       <li><a id="tab_31" href="#sys_bked_const"><code>const.py</code></a></li>
                       <li><a id="tab_32" href="#sys_bked_config"><code>config.py</code></a></li>
                       <li><a id="tab_33" href="#sys_bked_helper"><code>helper.py</code></a></li>
@@ -76,11 +77,12 @@
                 </li>
                 <li class="li-danger">
                     <a id="tab_4" href="#">
-                      Section #4: 
+                      <span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Section #4: 
                       <br/>
                       <b>Front End</b>
+                      <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
                     </a>
-                    <ul >
+                    <ul id="collapse_tab_4" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_4">
                       <li><a id="tab_41" href="#"><code>res/html</code></a></li>
                       <li><a id="tab_42" href="#"><code>res/js</code></a></li>
                       <li><a id="tab_43" href="#"><code>res/css</code> & <code>res/images</code></a></li>
@@ -89,11 +91,12 @@
                 </li>
                 <li class="li-default">
                     <a id="tab_5" href="#">
-                      Section #5: 
+                      <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Section #5: 
                       <br/>
                       <b>Misc</b>
+                      <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_5" aria-expanded="true" aria-controls="collapse_tab_5"></span>
                     </a>
-                    <ul >
+                    <ul id="collapse_tab_5" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_5">
                       <li><a id="tab_51" href="#">...</a></li>
                     </ul>
 
@@ -116,7 +119,9 @@
           <div class="container-fluid li-success" role="main">
             <div class="panel-success" id="sys_stat">
               <div class="panel-heading">
-                <span class="lead"><b><span class="sec">Section</span> <span class="num">#1</span>: System Status</b></span>
+                <span class="lead">
+                  <span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#1</span>: System Status</b>
+                </span>
               </div>
               <br/>
               <div class="row">
@@ -126,13 +131,13 @@
                       <tr class="active"><th>Back End</th><th>Version</th></tr>
                     </thead>
                     <tbody>
-                      <tr class="info"><td><span class="label label-primary">python</span></td><td><i>__PYTHON_VER__</i></td></tr>
+                      <tr class="info"><td><span class="label label-inverse">Linux</span></td><td><i>__LINUX_VER__</i></td></tr>
+                      <tr class="info"><td><span class="label label-primary">Python</span></td><td><i>__PYTHON_VER__</i></td></tr>
                       <tr class="info"><td><span class="label label-danger">CherryPy</span></td><td><i>__CHERRYPY_VER__</i></td></tr>
                       <tr class="info"><td><span class="label label-violet">MATLAB</span></td><td><i>__MATLAB_VER__</i></td></tr>
+                      <tr class="info"><td><span class="label label-success">RDATKit</span></td><td><i>__RDATKIT_VER__</i></td></tr>
                     </tbody>
                   </table>
-                </div>
-                <div class="col-md-4">
                   <table class="table">
                     <thead>
                       <tr class="active"><th>Front End</th><th>Version</th></tr>
@@ -146,12 +151,34 @@
                 <div class="col-md-4">
                   <table class="table">
                     <thead>
-                      <tr class="active"><th>Syetem</th><th>Version</th></tr>
+                      <tr class="active"><th>System</th><th>Version</th></tr>
                     </thead>
                     <tbody>
-                      <tr class="danger"><td><span class="label label-info">Linux</span></td><td><i>__LINUX_VER__</i></td></tr>
-                      <tr class="danger"><td><span class="label label-light-blue" style="color:#000;">Apache</span></td><td><i>__APACHE_VER__</i></td></tr>
-                      <tr class="danger"><td><span class="label label-green">Git</span></td><td><i>__GIT_VER__</i></td></tr>
+                      <tr class=""><td><span class="label label-info">ssh</span></td><td><i>__SSH_VER__</i></td></tr>
+                      <tr class=""><td><span class="label label-info">screen</span></td><td><i>__SCREEN_VER__</i></td></tr>
+                      <tr class=""><td><span class="label label-info">tty</span></td><td><i>__TTY_VER__</i></td></tr>
+                      <tr class=""><td style="border-top-width: 5px;"><span class="label label-default">apache</span></td><td style="border-top-width: 5px;"><i>__APACHE_VER__</i></td></tr>
+                      <tr class=""><td><span class="label label-default">git</span></td><td><i>__GIT_VER__</i></td></tr>
+                      <tr class=""><td style="border-top-width: 5px;"><span class="label label-dark-blue">gcc</span></td><td style="border-top-width: 5px;"><i>__GCC_VER__</i></td></tr>
+                      <tr class=""><td><span class="label label-dark-blue">clang</span></td><td><i>__CLANG_VER__</i></td></tr>
+                      <tr class=""><td><span class="label label-dark-blue">cmake</span></td><td><i>__CMAKE_VER__</i></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-4">
+                  <table class="table">
+                    <thead>
+                      <tr class="active"><th>Package</th><th>Version</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr class="danger"><td><span class="label label-green">numpy</span></td><td><i>__NUMPY_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-green">scipy</span></td><td><i>__SCIPY_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-green">matplotlib</span></td><td><i>__MATPLOTLIB_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-green">celery</span></td><td><i>__CELERY_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-green">simplejson</span></td><td><i>__SIMPLEJSON_VER__</i></td></tr>
+                      <tr class="danger"><td><span class="label label-green">setuptools</span></td><td><i>__SETUPTOOLS_VER__</i></td></tr>
+                      <tr class=""><td><span class="label label-default">pip</span></td><td><i>__PIP_VER__</i></td></tr>
+                      <tr class="active"><td style="border-top-width: 5px;"><span class="label label-teal">octave</span></td><td style="border-top-width: 5px;"><i>__OCTAVE_VER__</i></td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -210,7 +237,9 @@
           <div class="container-fluid li-warning" role="main">
             <div class="panel-warning" id="sys_ovw">
               <div class="panel-heading">
-                <span class="lead"><b><span class="sec">Section</span> <span class="num">#2</span>: Overview</b></span>
+                <span class="lead">
+                  <span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#2</span>: Overview</b>
+                </span>
               </div>
               <br/>
               <div class="row">
