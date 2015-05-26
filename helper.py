@@ -8,10 +8,6 @@ import sys
 
 from const import *
 from config import *
-from run_server import script_navbar, script_footer, script_modal
-
-from rdatkit import settings
-import numpy, scipy, matplotlib, celery, simplejson, setuptools, pip
 
 
 def load_html(file_name):
@@ -134,7 +130,7 @@ def get_full_sys_stat():
     ver += '%s.%s.%s\t' % (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
     ver += cherrypy.__version__ + '\t'
     ver += subprocess.Popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed %s' % "'s/ (.*//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\n')[-1] + '\t'
-    ver += settings.VERSION + '\t'
+    ver += subprocess.Popen('python -c "from rdatkit import settings; print settings.VERSION"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
 
     ver += subprocess.Popen('ls %s' % os.path.join(MEDIA_DIR, 'res/js/jquery-*.min.js'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].replace(os.path.join(MEDIA_DIR, 'res/js/jquery-'), '').replace('.min.js', '').strip() + '\t'
     f = open(os.path.join(MEDIA_DIR, 'res/js/bootstrap.min.js'))
@@ -154,7 +150,8 @@ def get_full_sys_stat():
     ver += subprocess.Popen('clang --version | head -1 | sed %s | sed %s' % ("'s/.*version //g'", "'s/[ (-].*//g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += subprocess.Popen('cmake --version | head -1 | sed %s | sed %s' % ("'s/.*version//g'", "'s/ //g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
 
-    ver += "%s\t%s\t%s\t%s\t%s\t%s\t%s\t" % (numpy.__version__, scipy.__version__, matplotlib.__version__, celery.__version__, simplejson.__version__, setuptools.__version__, pip.__version__)
+
+    ver += subprocess.Popen('python -c "import numpy, scipy, matplotlib, celery, simplejson, setuptools, pip; print %s"' % "numpy.__version__, '\t', scipy.__version__, '\t', matplotlib.__version__, '\t', celery.__version__, '\t', simplejson.__version__, '\t', setuptools.__version__, '\t', pip.__version__", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += subprocess.Popen('octave --version | head -1 | sed %s' % "'s/.*version //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     
     disk_sp = subprocess.Popen('df -h | head -2 | tail -1', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].split()
@@ -164,6 +161,7 @@ def get_full_sys_stat():
 
     ver += subprocess.Popen('pwd', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += subprocess.Popen('find %s -name "NA_?hermo"' % os.path.abspath(".."), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('find %s -name "RDAT*Kit"' % os.path.abspath(".."), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += subprocess.Popen('which python', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += subprocess.Popen("which matlab | xargs ls -lah | sed 's/.*-> //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
 

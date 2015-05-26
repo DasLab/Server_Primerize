@@ -4,6 +4,23 @@ import subprocess
 def get_jquery_ver():
     return subprocess.Popen('ls res/js/jquery-*.min.js', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].replace('res/js/jquery-', '').replace('.min.js', '').strip()
 
+
+def load_html_parts(PATH):
+    f = open(PATH['_NAVBAR'], "r")
+    lines = f.readlines()
+    f.close()
+    script_navbar = "".join(lines)
+    f = open(PATH['_FOOTER'], "r")
+    lines = f.readlines()
+    f.close()
+    script_footer = "".join(lines)
+    f = open(PATH['_MODAL'], "r")
+    lines = f.readlines()
+    f.close()
+    script_modal = "".join(lines)
+    return (script_navbar, script_footer, script_modal)
+
+
 GA_TRACKER = "<script type=\"text/javascript\">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-36037648-2', 'auto'); ga('send', 'pageview'); </script>"
 
 
@@ -63,6 +80,9 @@ PATH = {
     'CSS_THEME': "res/css/theme.css",
     'CSS_PALETTE': "res/css/palette.css",
 }
+
+(script_navbar, script_footer, script_modal) = load_html_parts(PATH)
+
 
 EMAIL = {
     'HOST': 'smtp.gmail.com',
