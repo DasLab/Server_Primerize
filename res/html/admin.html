@@ -97,10 +97,10 @@
                       <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_5" aria-expanded="true" aria-controls="collapse_tab_5"></span>
                     </a>
                     <ul id="collapse_tab_5" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_5">
-                      <li><a id="tab_51" href="#sys_misc_aws">AWS Setup</a></li>
-                      <li><a id="tab_52" href="#sys_misc_repo">Git Repositories</a></li>
-                      <li><a id="tab_53" href="#sys_misc_run">Run Server</a></li>
-                      <li><a id="tab_54" href="#sys_misc_misc">Misc Setup</a></li>
+                      <li><a id="tab_51" href="#sys_misc_aws"><span class="glyphicon glyphicon-text-background"></span>&nbsp;&nbsp;AWS Setup</a></li>
+                      <li><a id="tab_52" href="#sys_misc_repo"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Git Repositories</a></li>
+                      <li><a id="tab_53" href="#sys_misc_run"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Run Server</a></li>
+                      <li><a id="tab_54" href="#sys_misc_misc"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Misc Setup</a></li>
                     </ul>
 
                 </li>
@@ -364,7 +364,7 @@
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead" id="sys_bked_config"><span class="label label-danger">config.py</span></p>
@@ -394,7 +394,7 @@
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead" id="sys_bked_helper"><span class="label label-danger">helper.py</span></p>
@@ -417,7 +417,7 @@
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead" id="sys_bked_runserver"><span class="label label-danger">run_server.py</span></p>
@@ -488,7 +488,7 @@
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead" id="sys_fted_js"><span class="label label-success">res/js</span></p>
@@ -508,7 +508,7 @@
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead" id="sys_fted_misc">
@@ -529,7 +529,7 @@
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead" id="sys_fted_src"><span class="label label-primary">src</span></p>
@@ -548,7 +548,7 @@
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
                       <p class="lead"><span class="label label-inverse">/</span></p>
@@ -580,48 +580,144 @@
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-2">
-                      <p class="lead" id="sys_misc_aws"><span class="label label-info">AWS</span></p>
+                      <p class="lead" id="sys_misc_aws">
+                        <span class="glyphicon glyphicon-text-background"></span>
+                        <br/>
+                        <span class="label label-info">AWS</span>
+                      </p>
                     </div>
                     <div class="col-md-10">
-                      This is the sub-directory of all <b><u>HTML</u></b> files.
-                      <ul>
-                      </ul>
+                      <p>The Primerize server is running as an <b><code>EC2 t2.micro</code></b> instance at <a href="http://aws.amazon.com/" target="_blank">Amazon Web Service&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>, under user account <abbr title="">daslabsu@gmail.com</abbr> (<i>password</i> is the same as <code>ADMIN</code> login).</p>
+                      <p>The instance <mark>ID</mark> is <kbd>i-dd72fe2a</kbd>, in the zone of <mark>us-west-2b</mark>.</p>
+                      <p>The private <mark>IP</mark> is <kbd>172.31.31.41</kbd> and private <mark>DNS</mark> is <kbd>ip-172-31-31-41.us-west-2.compute.internal</kbd>.</p>
+                      <p>The public <mark>IP</mark> is <kbd>52.25.196.60</kbd> and public <mark>DNS</mark> is <kbd>ec2-52-25-196-60.us-west-2.compute.amazonaws.com</kbd>.</p>
+                      <p>You can access the server by <code>ssh</code> using the <span class="label label-warning">amazon.pem</span>:</p>
+                      <pre>ssh -i amazon.pem ubuntu@52.25.196.60</pre>
+                      <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd>. This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">171.65.23.206</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>.</p>
+                      <p>The <abbr title="">load balancer</abbr> forwards <mark>port</mark> <kbd>80</kbd> (HTTP) to <kbd>8080</kbd>, which is the port the <span class="label label-primary">Python</span> is running on. The instance is applied with a <mark>Security Group</mark> that opens both TCP <mark>ports</mark> at <kbd>0.0.0.0</kbd>.</p>
+                      <p>The Primerize server is using a <mark>32 GiB</mark> <code>gp2</code> (General Purpose SSD) disk, <mark>volume ID</mark> is <kbd>vol-eced40fc</kbd>.</p>
                     </div>
                   </div>
 
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
-                      <p class="lead" id="sys_misc_repo"><span class="label label-info">Repository</span></p>
+                      <p class="lead" id="sys_misc_repo">
+                        <span class="glyphicon glyphicon-download-alt"></span>
+                        <br/>
+                        <span class="label label-info">Repository</span>
+                      </p>
                     </div>
                     <div class="col-md-10">
-                      This is the sub-directory of all <b><u>HTML</u></b> files.
-                      <ul>
-                      </ul>
+                      The repositories for Primerize_server are mostly private. Using a valid login, you can access them by:
+
+<pre>git clone https://github.com/DasLab/Primerize_server.git
+git clone https://github.com/DasLab/Primerize.git
+git clone https://github.com/hitrace/rdatkit.git</pre>
+                      
+                      <p>For a complete new setup, you will need to configure RDATKit following <a href="" target="_blank">this instruction&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>. Also, the <code>NA_Thermo</code> (Primerize) should be added to <mark>MATLAB</mark> path. [For current server, all has been done.]</p>
+                      <p>The current server has the following overall structure:</p>
+                      <div class="row">
+                        <div class="col-md-5">
+                          <ul>
+                            <li style="list-style-type: none;"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<span class="label label-info">~</span></li>
+                            <ul>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-violet">MATLAB</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-default">NA_Thermo</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-primary">Primerize_server</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-success">RDATKit</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-danger">RNAstructure</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-danger">ViennaRNA</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;<span class="label label-inverse">.bash_profile</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<span class="label label-inverse">.ver_src</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<span class="label label-inverse">.ver_txt</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;<span class="label label-warning">amazon.pem</span></li>
+                              <li style="list-style-type: disc;"><span class="glyphicon glyphicon-compressed"></span>&nbsp;&nbsp;<span class="label label-danger">VARNAv3-92-src.jar</span></li>
+                            </ul>
+                          </ul>
+                        </div>
+                        <div class="col-md-7">
+                          <ul>
+                            <li style="list-style-type: none;">&nbsp;</li>
+                            <ul>
+                              <li style="list-style-type: none;"><i>MATLAB install</i></li>
+                              <li style="list-style-type: none;"><i>Primerize MATLAB code</i></li>
+                              <li style="list-style-type: none;"><i>Primerize_server root</i></li>
+                              <li style="list-style-type: none;"><i>RDATKit install</i></li>
+                              <li style="list-style-type: none;"><i>RNAstructure install<span class="pull-right">(for future prediction use)</span></i></li>
+                              <li style="list-style-type: none;"><i>ViennaRNA install<span class="pull-right">(for future prediction use)</span></i></li>
+                              <li style="list-style-type: none;"><i>&nbsp;<span class="pull-right">.bash_profile configuration</span></i></li>
+                              <li style="list-style-type: none;"><i>&nbsp;<span class="pull-right">system version display source</span></i></li>
+                              <li style="list-style-type: none;"><i>&nbsp;<span class="pull-right">system version display cache</span></i></li>
+                              <li style="list-style-type: none;"><i>AWS certificate</i></li>
+                              <li style="list-style-type: none;"><i>VARNA source<span class="pull-right">(for future prediction use)</span></i></li>
+                            </ul>
+                          </ul>                        
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
-                      <p class="lead" id="sys_misc_run"><span class="label label-info">Run</span></p>
+                      <p class="lead" id="sys_misc_run">
+                        <span class="glyphicon glyphicon-hourglass"></span>
+                        <br/>
+                        <span class="label label-info">Run</span>
+                      </p>
                     </div>
                     <div class="col-md-10">
-                      This is the sub-directory of all <b><u>HTML</u></b> files.
-                      <ul>
-                      </ul>
+                      <p>To run the server in <b>test</b>/<mark>developer</mark> mode, use:</p>
+                      <pre>python run_server.py dev</pre>
+                      <p>To run the server in <mark>release</mark> mode, use <code>screen</code>:</p>
+<pre>screen
+source ~/.bash_profile
+cd ~/Primerize_server
+python run_Server.py release</pre>
+                      <p>For details, please refer to <mark>src/command.sh</mark>. The <code>source</code> step is required here.</p>
                     </div>
                   </div>
                   
-                  <br/>
+                  <hr/>
                   <div class="row">
                     <div class="col-md-2">
-                      <p class="lead" id="sys_misc_misc"><span class="label label-info">Misc</span></p>
+                      <p class="lead" id="sys_misc_misc">
+                        <span class="glyphicon glyphicon-wrench"></span>
+                        <br/>
+                        <span class="label label-info">Misc</span>
+                      </p>
                     </div>
                     <div class="col-md-10">
-                      This is the sub-directory of all <b><u>HTML</u></b> files.
-                      <ul>
-                      </ul>
+                      <ol>
+                        <li><span class="label label-default">robots.txt</span> is a standard file for web crawlers. Crawlers/spiders can be a huge traffic that jams the server for actual users. The <mark>/robots.txt</mark> is made accessible by <code>const.py</code>. For details, please see <a href="http://www.robotstxt.org/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> and <a href="http://tools.seobook.com/robots-txt/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</li>
+                        <li>For new setup, you will need to make the <mark>/cache</mark> directory.</li>
+                        <li>For new setup, you will need to harlink the <code>matlab</code> excutable, e.g.:
+                          <br/>
+                          <pre>sudo ln -s /home/ubuntu/MATLAB/bin/matlab /usr/bin/matlab</pre>
+                        </li>
+                        <li>For new setup, you will need to run <code>get_sys()</code> command first to generate the <mark>src/sys_ver.txt</mark>, which is not included in the repository. Visit this link in the browser:
+                          <br/>
+                          <pre>http://primerize.stanford.edu/get_sys</pre>
+                        </li>
+                        <li>The current server uses <span class="label label-default">pip</span> to manage all <span class="label label-primary">Python</span> packages. To list outdated packages, use:
+                          <br/>
+                          <pre>pip list --outdated</pre>
+                          Or, use the following command for automatic update, which is also <mark>alias</mark>ed as part of <code>upd_a</code> command:<br/>
+                          <pre>sudo -H pip install -U `pip list -o | grep -v -i warning | cut -f1 -d" " | sed "s/Some//g" | sed "s/Could//g" | tr  "\n|\r" " "`</pre>
+                          The fully automatic update commands <code>upd_a</code> and <code>upd_c</code> are as stated in <mark>.bash_profile</mark>:
+                          <br/>
+<pre>alias upd_a='sudo apt-get update && sudo apt-get upgrade && sudo -H pip install -U `pip list -o | grep -v -i warning | cut -f1 -d" " | sed "s/Some//g" | sed "s/Could//g" | tr  "\n|\r" " "`'
+alias upd_c='sudo apt-get autoclean && sudo apt-get clean && sudo apt-get autoremove'
+</pre>
+                        </li>
+                        <li>The current server setup does <b><u>NOT</u></b> use <span class="label label-default">apache</span>.</li>
+                        <li>Although <span class="label label-teal">octave</span> is installed, it is <b><u>NOT</u></b> used, due to its pooly optimized performance on runtime compared to <span class="label label-violet">MATLAB</span>.</li>
+                        <li>To update the system version display, use:
+                          <br/>
+                          <pre>~/.ver_src</pre>
+                        </li>
+                      </ol>
                     </div>
                   </div>
                 </div>
