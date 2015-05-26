@@ -215,49 +215,8 @@
    </div>
    <hr/>
 
-    <div id="modal_wait" class="modal" tabindex="-1" role="dialog" aria-labelledby="modalWait" aria-hidden="true">
-      <div class="modal-dialog modal-lg" id="modal_dialog">
-        <div class="modal-content panel-primary">
-          <div class="modal-header panel-heading">
-            <h3 class="modal-title"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running ...</h3>
-          </div>
-          <div class="modal-body panel-body">
-            <div class="col-md-12">
-              <h3 class="text-center"> Your 
-                <span class="label label-violet">JOB_ID</span> is: 
-                <span class="label label-inverse" id="modal_id"></span>
-              </h3>
-              <br/>
-              <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
-              <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
-              <br/>
-              <p class="text-center well" >
-                <b>
-                  <span class="glyphicon glyphicon-copy"></span>&nbsp;&nbsp;Please <button id="copy-button" data-clipboard-text="" class="btn btn-success">Copy</button> this link: 
-                  <br/>
-                  <code><span id="url_id"></span></code>
-                </b>
-              </p>
-              <br/>
-              <img class="center-block path_button_loading" width="48px" style="opacity:0.5;"/>
-              <br/>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="alert alert-warning center-block" id="modal_warn_500">
-                  <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
-                </div>
-                <div class="alert alert-orange center-block" id="modal_warn_1000">
-                  <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm path_license" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     __MODAL__
+    __DEMO__
     __FOOTER__
 
     <!-- Latest compiled and minified JavaScript -->

@@ -18,7 +18,11 @@ def load_html_parts(PATH):
     lines = f.readlines()
     f.close()
     script_modal = "".join(lines)
-    return (script_navbar, script_footer, script_modal)
+    f = open(PATH['_DEMO'], "r")
+    lines = f.readlines()
+    f.close()
+    script_demo = "".join(lines)
+    return (script_navbar, script_footer, script_modal, script_demo)
 
 
 GA_TRACKER = "<script type=\"text/javascript\">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-36037648-2', 'auto'); ga('send', 'pageview'); </script>"
@@ -50,7 +54,8 @@ PATH = {
 
     '_NAVBAR': "res/html/_navbar.html",
     '_FOOTER': "res/html/_footer.html",
-    '_MODAL': "res/html/_demo.html",
+    '_MODAL': "res/html/_modal.html",
+    '_DEMO': "res/html/_demo.html",
 
     '403': "res/html/_403.html",
     '404': "res/html/_404.html",
@@ -81,7 +86,7 @@ PATH = {
     'CSS_PALETTE': "res/css/palette.css",
 }
 
-(script_navbar, script_footer, script_modal) = load_html_parts(PATH)
+(script_navbar, script_footer, script_modal, script_demo) = load_html_parts(PATH)
 
 
 EMAIL = {
