@@ -618,14 +618,18 @@
                     </div>
                     <div class="col-md-10">
                       <p>The Primerize server is running as an <b><code>EC2 t2.micro</code></b> instance at <a href="http://aws.amazon.com/" target="_blank">Amazon Web Service&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>, under user account <abbr title="">daslabsu@gmail.com</abbr> (<i>password</i> is the same as <code>ADMIN</code> login).</p>
+                      <p>The Primerize server is using a <mark>32 GiB</mark> <code>gp2</code> (General Purpose SSD) disk, <mark>volume ID</mark> is <kbd>vol-eced40fc</kbd>.</p>
+                      <br/>
                       <p>The instance <mark>ID</mark> is <kbd>i-dd72fe2a</kbd>, in the zone of <mark>us-west-2b</mark>.</p>
                       <p>The private <mark>IP</mark> is <kbd>172.31.31.41</kbd> and private <mark>DNS</mark> is <kbd>ip-172-31-31-41.us-west-2.compute.internal</kbd>.</p>
                       <p>The public <mark>IP</mark> is <kbd>52.25.196.60</kbd> and public <mark>DNS</mark> is <kbd>ec2-52-25-196-60.us-west-2.compute.amazonaws.com</kbd>.</p>
                       <p>You can access the server by <code>ssh</code> using the <span class="label label-warning">amazon.pem</span>:</p>
                       <pre>ssh -i amazon.pem ubuntu@52.25.196.60</pre>
+                      <p>The 'regular' <code>ssh</code> command won't work:</p>
+                      <pre><strike>ssh daslab@primerize.stanford.edu</strike></pre>
+                      <br/>
                       <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd>. This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">171.65.23.206</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>.</p>
                       <p>The <abbr title="">load balancer</abbr> forwards <mark>port</mark> <kbd>80</kbd> (HTTP) to <kbd>8080</kbd>, which is the port the <span class="label label-primary">Python</span> is running on. The instance is applied with a <mark>Security Group</mark> that opens both TCP <mark>ports</mark> at <kbd>0.0.0.0</kbd>.</p>
-                      <p>The Primerize server is using a <mark>32 GiB</mark> <code>gp2</code> (General Purpose SSD) disk, <mark>volume ID</mark> is <kbd>vol-eced40fc</kbd>.</p>
                       <br/>
                       <p>The <mark>IP/DNS</mark> flow is as:</p>
                       <p class="text-center"><code>python run_server.py release</code> @ <kbd>0.0.0.0<span style="color:#ff0;">:8080</span></kbd></p>
@@ -741,7 +745,7 @@ python run_Server.py release</pre>
                       <ol>
                         <li><span class="label label-default">robots.txt</span> is a standard file for web crawlers. Crawlers/spiders can be a huge traffic that jams the server for actual users. The <mark>/robots.txt</mark> is made accessible by <code>const.py</code>. For details, please see <a href="http://www.robotstxt.org/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> and <a href="http://tools.seobook.com/robots-txt/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</li>
                         <li>For new setup, you will need to make the <mark>/cache</mark> directory.</li>
-                        <li>For new setup, you will need to harlink the <code>matlab</code> excutable, e.g.:
+                        <li>For new setup, you will need to harlink the <code>matlab</code> excutable (see below). <abbr title="">alias</abbr> through <mark>.bash_profile</mark> does not work.
                           <br/>
                           <pre>sudo ln -s /home/ubuntu/MATLAB/bin/matlab /usr/bin/matlab</pre>
                         </li>
