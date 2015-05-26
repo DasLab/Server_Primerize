@@ -130,7 +130,7 @@ def premature_return(msg, html_content, job_id):
 
 
 def get_full_sys_stat():
-    ver = subprocess.Popen('uname -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver = subprocess.Popen('uname -r | sed %s' % "'s/[a-z\-]//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += '%s.%s.%s\t' % (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
     ver += cherrypy.__version__ + '\t'
     ver += subprocess.Popen('matlab -nojvm -nodisplay -nosplash -r "fprintf(version); exit();" | tail -1 | sed %s' % "'s/ (.*//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\n')[-1] + '\t'
@@ -143,8 +143,8 @@ def get_full_sys_stat():
     ver += ver_bootstrap[ver_bootstrap.find('v')+1: ver_bootstrap.find('(')].strip() + '\t'
     f.close()
 
-    ver += subprocess.Popen('ssh -V 2> temp.txt && sed %s temp.txt | sed %s | sed %s' % ("'s/^OpenSSH\_//g'", "'s/,.*//'", "'s/[a-z]/./g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
-    ver += subprocess.Popen('screen --version | sed %s | sed %s | sed %s' % ("'s/.*version//g'", "'s/(.*//g'", "'s/ //g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('ssh -V 2> temp.txt && sed %s temp.txt | sed %s | sed %s | sed %s' % ("'s/^OpenSSH\_//g'", "'s/U.*//'", "'s/,.*//g'", "'s/[a-z]/./g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
+    ver += subprocess.Popen('screen --version | sed %s | sed %s | sed %s' % ("'s/.*version//g'", "'s/(.*//g'", "'s/[a-z ]//g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     ver += subprocess.Popen('tty --version | head -1 | sed %s' % "'s/.*) //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
 
     ver += subprocess.Popen('apachectl -v | head -1 | sed %s | sed %s' % ("'s/.*\///g'", "'s/[a-zA-Z \(\)]//g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
