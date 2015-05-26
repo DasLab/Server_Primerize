@@ -67,12 +67,13 @@
                       <li><a id="tab_32" href="#sys_bked_config"><span class="label label-danger">config.py</span></a></li>
                       <li><a id="tab_33" href="#sys_bked_helper"><span class="label label-danger">helper.py</span></a></li>
                       <li>
-                        <a id="tab_34" href="#sys_bked_runserver"><b><span class="label label-danger">run_server.py</span></b></a>
+                        <a id="tab_34" href="#sys_bked_prm"><b><span class="label label-danger">primerize.py</span></b></a>
                         <ul>
-                          <li><a id="tab_341" href="#sys_bked_runserver_func">Functions</a></li>
-                          <li><a id="tab_342" href="#sys_bked_runserver_design"><span class="label label-warning">design_primers()</span></a></li>
+                          <li><a id="tab_342" href="#sys_bked_prm_1d"><span class="label label-warning">design_primers()</span></a></li>
+                          <li><a id="tab_341" href="#sys_bked_prm">...</a></li>
                         </ul>
                       </li>
+                      <li><a id="tab_35" href="#sys_bked_runserver"><b><span class="label label-danger">run_server.py</span></b></a></li>
                     </ul>
                 </li>
                 <li class="li-danger">
@@ -227,6 +228,7 @@
                     <tbody>
                       <tr class="success"><td><span class="label label-inverse">Primerize</span></td><td><code>__PRIMERIZE_PATH__</code></td></tr>
                       <tr class="success"><td><span class="label label-default">NA_thermo</span></td><td><code>__NATHERMO_PATH__</code></td></tr>
+                      <tr class="success"><td><span class="label label-success">RDAT_Kit</span></td><td><code>__RDATKIT_PATH__</code></td></tr>
                       <tr class="success"><td><span class="label label-primary">Python</span></td><td><code>__PYTHON_PATH__</code></td></tr>
                       <tr class="success"><td><span class="label label-violet">MATLAB</span></td><td><code>__MATLAB_PATH__</code></td></tr>
                     </tbody>
@@ -285,6 +287,7 @@
                         </ul>
                         <li style="list-style-type: circle;"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;<span class="label label-success">fonts</span></li>
                         <ul>
+                          <li><span class="glyphicon glyphicon-text-size"></span>&nbsp;&nbsp;<span class="label label-default">glyphicons-regular.ttf</span></li>
                           <li>...</li>
                         </ul>
                       </ul>
@@ -325,6 +328,7 @@
                       <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">const.py</span></li>
                       <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">config.py</span></li>
                       <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">helper.py</span></li>
+                      <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">primerize.py</span></li>
                       <li style="list-style-type: disc;"><span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="label label-danger">run_server.py</span></li>
                       <li style="list-style-type: disc;"><span class="glyphicon glyphicon-alert"></span>&nbsp;&nbsp;<span class="label label-default">robots.txt</span></li>
                       <li style="list-style-type: disc;"><span class="glyphicon glyphicon-eye-close"></span>&nbsp;&nbsp;<span class="label label-default">.gitignore</span></li>
@@ -358,7 +362,7 @@
                         <li>For CherryPy framework, <code>ADMIN</code> information (<mark>/admin</mark> login and notification email) and <code>EMAIL</code> gmail account for sending out emails.</li>
                         <li>Default parameters for <code>design_primers()</code>, e.g. <code>DEF_MIN_TM</code>.</li>
                         <li>Default sequences for <code>P4P6</code> and <code>T7</code>.</li>
-                        <li><code>MEDIA_DIR</code> for relative path, <code>PATH</code> information about all static <mark>HTML</mark> files. This variable is the 'master' reportoire of all <code>render_to_response()</code> calls, special pages(e.g. <mark>404</mark> and <mark>_navbar</mark>), <mark>js</mark> and <mark>css</mark> paths are also loaded from here.</li>
+                        <li><code>MEDIA_DIR</code> for relative path, <code>PATH</code> information about all static <mark>HTML</mark> files. This variable is the 'master' reportoire of all <code>render_to_response()</code> calls, special pages(e.g. <mark>404</mark> and <mark>_navbar</mark>), <mark>js</mark> and <mark>css</mark> paths are also loaded from here. The <mark>navbar, footer, modal</mark> HTML codes are loaded once at initiation by <code>load_html_parts()</code>.</li>
                         <li>Default parameter <code>JOB_KEEP_EXPIRE</code> for the result cache life, set to <kbd>90</kbd> days.</li>
                         <li>Google Analytics <mark>js</mark> tracker code in <code>GA_TRACKER</code>.</li>
                       </ul>
@@ -406,7 +410,7 @@
                         <li><code>load_html()</code> is a function for loading <abbr title="">static</abbr> HTML files from <mark>/res/html/</mark>. It loads and replaces the <mark>_navbar.html</mark> (for shared navigation bar), <mark>_footer.html</mark> (for shared footer), <mark>_demo.html</mark> (for DEMO modal window), and replaces placeholder script <abbr title="">class</abbr> of all <mark>js</mark> and <mark>css</mark> <abbr title="">static</abbr> files. It also appends the <b>Google Analytics</b> <mark>js</mark> tracker script.</li>
                         <ul>
                           <li><b>NOTE</b>: You should change <abbr title="">static</abbr> <mark>html, js, css</mark> files here, not anywhere else. Follow the <abbr title="">class</abbr> definitions in the <mark>html</mark>, and use the shared <mark>navbar, footer, modal</mark> this way.</li>
-                          <li><b>NOTE</b>: The <mark>navbar, footer, modal</mark> HTML codes are loaded once at initiation by <code>load_html_parts()</code> from <code>run_server.py</code>. The <code>script_navbar, script_footer, script_modal</code> variables are <abbr title="">global</abbr>.
+                          <li><b>NOTE</b>: The <mark>navbar, footer, modal</mark> HTML codes are loaded once at initiation by <code>load_html_parts()</code> from <code>const.py</code>.</li>
                         </ul>
                         <li><code>is_valid_name()</code> and <code>is_valid_email()</code> are functions for validification of source code download form info.</li>
                         <li><code>is_valid_sequence()</code> and <code>is_t7_present()</code> are functions for <code>design_primers()</code> input checks.</li>
@@ -417,6 +421,39 @@
                       </ul>
                     </div>
                   </div>
+
+                  <hr/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_bked_prm"><span class="label label-danger">primerize.py</span></p>
+                    </div>
+                    <div class="col-md-10">
+                      <code>primerize.py</code> is the <b><u>main</u></b> script for Primerize functions. It is called by <code>run_server.py</code> to perform calculations and prepare results. Functions for <b>1D</b> primer design is <code>design_primers()</code>:
+                      <hr/>
+
+                      <p id="sys_bked_prm_1d" class="lead"><span class="label label-warning">design_primers()</span></p>
+                      <ul>
+                        <li>The function receives input from form submission of the <mark>/design_1d</mark> page, as well as the <mark>javascript</mark> generated <span class="label label-violet">JOB_ID</span>.</li>
+                        <li>First, the function concatenates the input <mark>sequence</mark> into one string, and checks for the validity of input (length, nucleotides identity, advanced option type and range). If standars are not met, an error page will be returned by calling <code>premature_return()</code>. Otherwise, prepare a placeholder waiting page by <code>create_wait_html()</code> in case of long runs.</li>
+                        <li>Second, the function forks a <mark>MATLAB</mark> session for calculation using <code>subprocess.check_output()</code>. The call is timed and catches exception. If errors occur on the MATLAB part, it will prepare a 500 page by <code>create_err_html()</code>, and also the 500 fires <code>ADMIN</code> email notice.</li>
+                        <ul>
+                          <li><b>NOTE</b>: MATLAB call is using parameters <code>-nojvm</code>, <code>-nodisplay</code>, <code>-nosplash</code>, and <code>-r</code>. Those are explained by <code>matlab -help</code>.</li>
+                        </ul>
+                        <li>Third, the returned results are stripped by <mark>\n</mark>. For cases of <abbr title="">'no solution found'</abbr>, a line starting with <mark>?</mark> is captured and the user is noticed for the failure. Next, the results are parsed and rendered in HTML. </li>
+                        <ul>
+                          <li>Sections of <abbr title="">warning, primers, assembly</abbr> are delimited with <mark>#</mark> lines.</li>
+                          <li>It first make the <abbr title="">WARNING</abbr> field with <i>mis-prime</i> information, as well as download links and timer. Lines of <abbr title="">WARNING</abbr> start with <mark>@</mark>, and perfect cases will make the <abbr title="">SUCCESS</abbr> field instead.</li>
+                          <li>Then, primers are rendered into a <mark>table</mark>, with <span class="label label-info">F</span>/<span class="label label-danger">R</span> coloring.</li>
+                          <li>Last, the assembly lines also take advantage of starting symbols: <mark>~</mark> for <i>sense</i> strand, <mark>=</mark> for <i>anti-sense</i> strand, <mark>^</mark> for forward primers, and <mark>!</mark> for reverse primers. Each line is parsed and color-coded, while <abbr title="">annealing temperature</abbr> and <abbr title="">primer direction</abbr> are highlighted.</li>
+                        </ul>
+                        <li>Last, the output is written to plain text files, together with HTML <mark>/cache</mark> overwritten. Also the <mark>T7_CHECK</mark> section is inserted. The browser is redirected to <code>result()</code> as return.</li>
+                        <ul>
+                          <li><b>NOTE</b>: Cached files are <mark>cache/result_0123456789abcdef.html</mark> and <mark>cache/result_0123456789abcdef.txt</mark>. HTML file cache saves time for result retrieval.</li>
+                        </ul>
+
+                    </div>
+                  </div>
+
 
                   <hr/>
                   <div class="row">
@@ -435,26 +472,8 @@
                         <li><code>demo_404()</code>, <code>demo_500()</code>, <code>demo_1d_wait()</code>, <code>demo_1d_fail()</code>, <code>demo_1d_error()</code> and <code>error()</code> are remnant functions in response to paper review to illustrate status and error handling.</li>
                         <li><code>result()</code> performs the result retrieval for a particular <span class="label label-violet">JOB_ID</span>, or returns <mark>404</mark> page.</li>
                         <li><code>demo_1d_P4P6()</code> calls a DEMO job using constants from <code>const.py</code>. <code>test_random()</code> is a remnant function for testing of a random sequence of length <kbd>500</kbd>, for paper review.</li>
-                        <li><code>design_1d()</code> exposes the blank page for 1D design page, while <code>design_primers()</code> (see below) performs the calculation and returns result.</li>
+                        <li><code>design_1d()</code> exposes the blank page for 1D design page, while <code>design_primers()</code> (see above) performs the calculation and returns result.</li>
                       </ul>
-                      <hr/>
-
-                      <p id="sys_bked_runserver_design" class="lead"><span class="label label-warning">design_primers()</span></p>
-                      <ul>
-                        <li>First, the function concatenates the input <mark>sequence</mark> into one string, and checks for the validity of input (length, nucleotides identity, advanced option type and range). If standars are not met, an error page will be returned by calling <code>premature_return()</code>. Otherwise, prepare a placeholder waiting page by <code>create_wait_html()</code> in case of long runs.</li>
-                        <li>Second, the function forks a <mark>MATLAB</mark> session for calculation using <code>subprocess.check_output()</code>. The call is timed and catches exception. If errors occur on the MATLAB part, it will prepare a 500 page by <code>create_err_html()</code>, and also the 500 fires <code>ADMIN</code> email notice.</li>
-                        <ul>
-                          <li><b>NOTE</b>: MATLAB call is using parameters <code>-nojvm</code>, <code>-nodisplay</code>, <code>-nosplash</code>, and <code>-r</code>. Those are explained by <code>matlab -help</code>.</li>
-                        </ul>
-                        <li>Third, the returned results are stripped by <mark>\n</mark>. For cases of <abbr title="">'no solution found'</abbr>, a line starting with <mark>?</mark> is captured and the user is noticed for the failure. Next, the results are parsed and rendered in HTML. </li>
-                        <ul>
-                          <li>Sections of <abbr title="">warning, primers, assembly</abbr> are delimited with <mark>#</mark> lines.</li>
-                          <li>It first make the <abbr title="">WARNING</abbr> field with <i>mis-prime</i> information, as well as download links and timer. Lines of <abbr title="">WARNING</abbr> start with <mark>@</mark>, and perfect cases will make the <abbr title="">SUCCESS</abbr> field instead.</li>
-                          <li>Then, primers are rendered into a <mark>table</mark>, with <span class="label label-info">F</span>/<span class="label label-danger">R</span> coloring.</li>
-                          <li>Last, the assembly lines also take advantage of starting symbols: <mark>~</mark> for <i>sense</i> strand, <mark>=</mark> for <i>anti-sense</i> strand, <mark>^</mark> for forward primers, and <mark>!</mark> for reverse primers. Each line is parsed and color-coded, while <abbr title="">annealing temperature</abbr> and <abbr title="">primer direction</abbr> are highlighted.</li>
-                        </ul>
-                        <li>Last, the output is written to plain text files, together with HTML <mark>/cache</mark> overwritten. Also the <mark>T7_CHECK</mark> section is inserted. The browser is redirected to <code>result()</code> as return.</li>
-
                     </div>
                   </div>
                 </div>
@@ -503,7 +522,11 @@
                           <li><b>NOTE</b>: In <b>all</b> HTML files, <b><u>DO NOT</u></b> hardcode URLS in <code>href=""</code>, instead, use the defined classes in <code>_util.js</code>.</li>
                           <li><b>NOTE</b>: In <b>all</b> HTML files, <b><u>DO NOT</u></b> hardcode links for <abbr title="">static</abbr> images, instead, use the defined classes here.</li>
                         </ul>
-                        <li><code>_design_1d.js</code> includes a vestigal control for a checkbox of <mark>License Agreement</mark>. This is no longer in use. Also, there is a special treatment for <abbr title="">Safari</abbr> browser for the modal window display timeout. This is an inelegant solution for the problem that Safari fails to display the modal window in parallel with form submission. The solution is to introduce a delay in form submission to win time for the modal window.</li>
+                        <li><code>_design_1d.js</code> handles <mark>javascript</mark> behaviors for the <mark>/design_1d</mark> page.</li>
+                        <ul>
+                          <li><b>NOTE</b>: It includes a vestigal control for a checkbox of <mark>License Agreement</mark>. This is no longer in use. Also, there is a special treatment for <abbr title="">Safari</abbr> browser for the modal window display timeout. This is an inelegant solution for the problem that Safari fails to display the modal window in parallel with form submission. The solution is to introduce a delay in form submission to win time for the modal window.</li>
+                          <li><b>NOTE</b>: It generates a random <span class="label label-violet">JOB_ID</span> on the page, and it was submitted along with the form to <code>design_primers()</code>. This is a compromise for showing the <span class="label label-violet">JOB_ID</span> on the page while processing.</li>
+                        </ul>
                         <li>The other page-specific <mark>js</mark> files all start with <mark>_</mark>. Some are shared by multiple pages.</li>
                       </ul>
                     </div>
@@ -603,6 +626,25 @@
                       <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd>. This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">171.65.23.206</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>.</p>
                       <p>The <abbr title="">load balancer</abbr> forwards <mark>port</mark> <kbd>80</kbd> (HTTP) to <kbd>8080</kbd>, which is the port the <span class="label label-primary">Python</span> is running on. The instance is applied with a <mark>Security Group</mark> that opens both TCP <mark>ports</mark> at <kbd>0.0.0.0</kbd>.</p>
                       <p>The Primerize server is using a <mark>32 GiB</mark> <code>gp2</code> (General Purpose SSD) disk, <mark>volume ID</mark> is <kbd>vol-eced40fc</kbd>.</p>
+                      <br/>
+                      <p>The <mark>IP/DNS</mark> flow is as:</p>
+                      <p class="text-center"><code>python run_server.py release</code> @ <kbd>0.0.0.0<span style="color:#ff0;">:8080</span></kbd></p>
+                      <div class="row">
+                        <div class="col-md-5"><span class="glyphicon glyphicon-arrow-down pull-right"></span></div>
+                        <div class="col-md-7"><p>HTTP Security Group</p></div>
+                      </div>
+                      <p class="text-center"><kbd>ec2-52-25-196-60.us-west-2.compute.amazonaws.com<span style="color:#ff0;">:8080</span></kbd></p>
+                      <div class="row">
+                        <div class="col-md-5"><span class="glyphicon glyphicon-arrow-down pull-right"></span></div>
+                        <div class="col-md-7"><p>Load Balancer Port Forwarding</p></div>
+                      </div>
+                      <p class="text-center"><kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com<span style="color:#ff0;">:80</span></kbd></p>
+                      <div class="row">
+                        <div class="col-md-5"><span class="glyphicon glyphicon-sort pull-right"></span></div>
+                        <div class="col-md-7"><p>Stanford IP/DNS</p></div>
+                      </div>
+                      <p class="text-center"><kbd style="color:#50cc32;">171.65.23.206</kbd> <kbd>primerize.stanford.edu</kbd></p>
+                      
                     </div>
                   </div>
 
@@ -718,7 +760,7 @@ python run_Server.py release</pre>
 alias upd_c='sudo apt-get autoclean && sudo apt-get clean && sudo apt-get autoremove'
 </pre>
                         </li>
-                        <li>The current server setup does <b><u>NOT</u></b> use <span class="label label-default">apache</span>.</li>
+                        <li>The current server setup does <b><u>NOT</u></b> use <span class="label label-default">apache</span>. <span class="label label-danger">CherryPy</span> has built-in WSGI system.</li>
                         <li>Although <span class="label label-teal">octave</span> is installed, it is <b><u>NOT</u></b> used, due to its pooly optimized performance on runtime compared to <span class="label label-violet">MATLAB</span>.</li>
                         <li>To update the system version display, use:
                           <br/>
