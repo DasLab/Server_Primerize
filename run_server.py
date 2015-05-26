@@ -54,7 +54,7 @@ class Root:
         return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", '<script type="text/javascript" src="/' + PATH['JS_DOWNLOAD']+'"></script>')
     @cherrypy.expose(['citation','primerize','contact'])
     def about(self):
-        return load_html(PATH['ABOUT'])
+        return load_html(PATH['ABOUT']).replace("__HISTORY__", load_history())
 
 
     @cherrypy.expose(['find','retrieve'])

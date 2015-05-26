@@ -315,6 +315,7 @@
                         <li style="list-style-type: circle;"><span class="glyphicon glyphicon-compressed"></span>&nbsp;&nbsp;<span class="label label-green">primerize_release.zip</span></li>
                         <li style="list-style-type: circle;"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<span class="label label-green">usr_tab.csv</span></li>
                         <li style="list-style-type: circle;"><span class="glyphicon glyphicon-scale"></span>&nbsp;&nbsp;<span class="label label-default">sys_ver.txt</span></li>
+                        <li style="list-style-type: circle;"><span class="glyphicon glyphicon-scale"></span>&nbsp;&nbsp;<span class="label label-default">sys_hist.txt</span></li>
                         <li style="list-style-type: circle;"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;<span class="label label-default">command.sh</span></li>
                       </ul>
                       <li style="list-style-type: disc;"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;&nbsp;<span class="label label-warning">cache</span></li>
@@ -411,7 +412,7 @@
                         <li><code>is_valid_sequence()</code> and <code>is_t7_present()</code> are functions for <code>design_primers()</code> input checks.</li>
                         <li><code>get_first_part_of_page()</code> reads in the default <mark>/res/html/design_1d.html</mark> and fills in the user form, and this will be used in the result return pages rendering.</li>
                         <li><code>create_wait_html()</code>, <code>create_err_html()</code> and <code>premature_return()</code> all renders response HTML pages, according to run status. They all use <code>create_res_html()</code> for file handling. Input parameters and return messages are passed from main function <code>design_primers()</code>.</li>
-                        <li><code>get_full_sys_stat()</code> is responsible for admin page system versions. It makes multiple <code>subprocess.Popen()</code> calls to collect version information, and stores it in <mark>/src/sys_ver.txt</mark> for parsing when loaded with <code>admin</code> from <code>run_server.py</code>.</li>
+                        <li><code>get_full_sys_stat()</code> is responsible for <mark>/admin</mark> page system versions. It makes multiple <code>subprocess.Popen()</code> calls to collect version information, and stores it in <mark>/src/sys_ver.txt</mark> for parsing when loaded with <code>admin</code> from <code>run_server.py</code>. <code>load_history()</code> is responsible for <mark>/about</mark> page history panels. It reads <mark>src/sys_hist.txt</mark>.</li>
                         <li><code>send_email_notice()</code> send <b>traceback</b> information to <code>ADMIN</code> when error occur in <mark>release</mark> mode.</li>
                       </ul>
                     </div>
@@ -436,9 +437,9 @@
                         <li><code>demo_1d_P4P6()</code> calls a DEMO job using constants from <code>const.py</code>. <code>test_random()</code> is a remnant function for testing of a random sequence of length <kbd>500</kbd>, for paper review.</li>
                         <li><code>design_1d()</code> exposes the blank page for 1D design page, while <code>design_primers()</code> (see below) performs the calculation and returns result.</li>
                       </ul>
-                      <br/>
+                      <hr/>
 
-                      <p id="sys_bked_runserver_design"><span class="label label-warning">design_primers()</span></p>
+                      <p id="sys_bked_runserver_design" class="lead"><span class="label label-warning">design_primers()</span></p>
                       <ul>
                         <li>First, the function concatenates the input <mark>sequence</mark> into one string, and checks for the validity of input (length, nucleotides identity, advanced option type and range). If standars are not met, an error page will be returned by calling <code>premature_return()</code>. Otherwise, prepare a placeholder waiting page by <code>create_wait_html()</code> in case of long runs.</li>
                         <li>Second, the function forks a <mark>MATLAB</mark> session for calculation using <code>subprocess.check_output()</code>. The call is timed and catches exception. If errors occur on the MATLAB part, it will prepare a 500 page by <code>create_err_html()</code>, and also the 500 fires <code>ADMIN</code> email notice.</li>
@@ -483,7 +484,7 @@
                         <li>Files with name starting with a letter are main body for each page. Their <mark>css, js</mark> resources are loaded by <code>helper.py</code> defined by <code>PATH</code> in <code>const.py</code>. This is for a centralized system that is easy to update and maintain.</li>
                         <li><code>tutorial.html</code> and <code>protocol.html</code> are written by hand, and need to be updated manually when there is a change for the targeted pages.</li>
                         <li>Again, <b>all</b> HTML pages are governed by <code>PATH</code> in <code>const.py</code> as a master list for all paths.</li>
-                        <li>For <code>design_1d.html</code>, <code>download.html</code>, and <code>admin.html</code>, they use <abbr title="">placeholder</abbr> strings (e.g. <mark><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>JOB_ID<u>&nbsp;&nbsp;&nbsp;&nbsp;</u></mark>) that are filled by <code>run_server.py</code>.
+                        <li>For <code>design_1d.html</code>, <code>download.html</code>, <code>about.html</code> and <code>admin.html</code>, they use <abbr title="">placeholder</abbr> strings (e.g. <mark><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>JOB_ID<u>&nbsp;&nbsp;&nbsp;&nbsp;</u></mark>) that are filled by <code>run_server.py</code>.
                       </ul>
                     </div>
                   </div>
@@ -544,6 +545,12 @@
                           <li><b>NOTE</b>: the <code>port forwarding</code> is no longer in use. <mark>AWS load balancer</mark> handles it.</li>
                         </ul>
                         <li><span class="label label-default">sys_ver.txt</span> is a text file stores the output for <code>get_full_sys_stat()</code> for the Dashboard on this page.</li>
+                        <li><span class="label label-default">sys_hist.txt</span> is a text file stores the history items for <code>load_history()</code> for the <mark>/about</mark> page. It is manually updated by the admin, following this format:</li>
+                        <ul>
+                          <li>Start a line with <mark>#$#</mark>, followed by <abbr title="">date</abbr> in format of <mark>mmm dd yyyy</mark>.</li>
+                          <li>Separate the <abbr title="">date</abbr> and <abbr title="">event</abbr> with <mark>#|#</mark>.</li>
+                          <li>HTML codes in the <abbr title="">event</abbr> field are accepted. No empty lines. Prepend new entries.</li>
+                        </ul>
                       </ul>
                     </div>
                   </div>
