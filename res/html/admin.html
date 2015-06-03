@@ -739,6 +739,7 @@ git clone https://github.com/hitrace/rdatkit.git</pre>
                         <span class="glyphicon glyphicon-hourglass"></span>
                         <br/>
                         <span class="label label-info">Run</span>
+                        <span class="label label-info">Server</span>
                       </p>
                     </div>
                     <div class="col-md-10">
@@ -750,6 +751,11 @@ source ~/.bash_profile
 cd ~/Primerize_server
 python run_Server.py release</pre>
                       <p>For details, please refer to <mark>src/command.sh</mark>. The <code>source</code> step is required here.</p>
+                      <br/>
+                      <p>When changes has been <code>commit</code> and <code>push</code> to the GitHub repository, you need to sync the local repository at the server. To do so, first <code>ssh</code> in the server as previously mentioned. Then,</p>
+<pre>cd Primerize_server
+git pull</pre>
+                      <p>You may need to type your GitHub login credentials. The CherryPy session in the background will automatically restart the server to reflect the changes.</p>
                     </div>
                   </div>
                   
