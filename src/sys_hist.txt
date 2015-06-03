@@ -1,4 +1,4 @@
-#$# May 27 2015 #|# <b>Primerize</b> is <u>migated</u> to <span class="label label-default">AWS</span> for better performance and reliability.
+#$# Jun 03 2015 #|# <b>Primerize</b> is <u>migated</u> to <span class="label label-default">AWS</span> for better performance and reliability.
 #$# May 25 2015 #|# <span class="label label-danger">ADMIN</span> page is now added for <b>Primerize</b>.
 #$# May 21 2015 #|# <b>Primerize</b> is preparing for 2<sup>nd</sup> phase <i>expansion</i> for <span class="label label-primary">Mutate-and-map</span> and <span class="label label-primary">Mutation/Rescue</span> designs.
 #$# May 21 2015 #|# <b>Primerize</b> <span class="label label-warning">paper</span> is <u>published</u> online at <i>Nucleic Acid Research</i>.

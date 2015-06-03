@@ -99,9 +99,10 @@
                     </a>
                     <ul id="collapse_tab_5" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_5">
                       <li><a id="tab_51" href="#sys_misc_aws"><span class="glyphicon glyphicon-text-background"></span>&nbsp;&nbsp;AWS Setup</a></li>
-                      <li><a id="tab_52" href="#sys_misc_repo"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Git Repositories</a></li>
-                      <li><a id="tab_53" href="#sys_misc_run"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Run Server</a></li>
-                      <li><a id="tab_54" href="#sys_misc_misc"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Misc Setup</a></li>
+                      <li><a id="tab_52" href="#sys_misc_ga"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;Google Analytics</a></li>
+                      <li><a id="tab_53" href="#sys_misc_repo"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Git Repositories</a></li>
+                      <li><a id="tab_54" href="#sys_misc_run"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Run Server</a></li>
+                      <li><a id="tab_55" href="#sys_misc_misc"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Misc Setup</a></li>
                     </ul>
 
                 </li>
@@ -615,7 +616,9 @@
                       <p class="lead" id="sys_misc_aws">
                         <span class="glyphicon glyphicon-text-background"></span>
                         <br/>
-                        <span class="label label-info">AWS</span>
+                        <span class="label label-info">Amazon</span>
+                        <span class="label label-info">Web</span>
+                        <span class="label label-info">Service</span>
                       </p>
                     </div>
                     <div class="col-md-10">
@@ -630,7 +633,7 @@
                       <p>The 'regular' <code>ssh</code> command won't work:</p>
                       <pre><strike>ssh daslab@primerize.stanford.edu</strike></pre>
                       <br/>
-                      <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd>. This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">171.65.23.206</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>.</p>
+                      <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd> (while the <mark>IP</mark> turned out to be <kbd>54.69.129.47</kbd>). This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">171.65.23.206</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>.</p>
                       <p>The <abbr title="">load balancer</abbr> forwards <mark>port</mark> <kbd>80</kbd> (HTTP) to <kbd>8080</kbd>, which is the port the <span class="label label-primary">Python</span> is running on. The instance is applied with a <mark>Security Group</mark> that opens both TCP <mark>ports</mark> at <kbd>0.0.0.0</kbd>.</p>
                       <br/>
                       <p>The <mark>IP/DNS</mark> flow is as:</p>
@@ -650,7 +653,23 @@
                         <div class="col-md-7"><p>Stanford IP/DNS</p></div>
                       </div>
                       <p class="text-center"><kbd style="color:#50cc32;">171.65.23.206</kbd> <kbd>primerize.stanford.edu</kbd></p>
-                      
+                    </div>
+                  </div>
+
+                  <hr/>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <p class="lead" id="sys_misc_ga">
+                        <span class="glyphicon glyphicon-signal"></span>
+                        <br/>
+                        <span class="label label-info">Google</span>
+                        <span class="label label-info">Analytics</span>
+                      </p>
+                    </div>
+                    <div class="col-md-10">
+                      <p>The <a href="http://www.google.com/analytics/" tareget="_blank">Google Analytics&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></a> tracker ID is <kbd style="color:#0ff;">UA-36037648-2</kbd>. You can access the statistics via user account <abbr title="">daslabsu@gmail.com</abbr> (<i>password</i> is <b>NOT</b> the same as <code>ADMIN</code> login; it is recorded on the lab <u>iMac</u>).</p>
+                      <p>The tracker ID <mark>js</mark> code is defined as <code>GA_TRACKER</code> in <code>const.py</code>.</p>
+
                     </div>
                   </div>
 
