@@ -132,6 +132,10 @@ class Root:
     def get_sys(self):
         get_full_sys_stat()
         return '<html><body onLoad="window.close()"></body></html>'
+    @cherrypy.expose
+    def ping_test(self):
+        cherrypy.response.status = 200
+        return ''
 
 
 if __name__ == "__main__":
