@@ -155,7 +155,17 @@ def get_full_sys_stat():
     ver += subprocess.Popen('octave --version | head -1 | sed %s' % "'s/.*version //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
     
     disk_sp = subprocess.Popen('df -h | head -2 | tail -1', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].split()
-    ver += '%s / %s' % (disk_sp[2], disk_sp[1]) + '\t'
+    ver += '%s / %s' % (disk_sp[3], disk_sp[2]) + '\t'
+    if subprocess.Popen('uname', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() == 'Darwin':
+        mem_str = subprocess.Popen('top -l 1 | head -n 10 | grep PhysMem', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+        mem_avail = mem_str[mem_str.find(',')+1:mem_str.find('unused')].strip()
+        mem_used = mem_str[mem_str.find(':')+1:mem_str.find('used')].strip()
+    else:
+        mem_str = subprocess.Popen('free -h', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\n')
+        mem_avail = [x for x in mem_str[2].split(' ') if x][-1]
+        mem_used = [x for x in mem_str[2].split(' ') if x][-2]
+    ver += '%s / %s' % (mem_avail, mem_used) + '\t'
+
     ver += str(int(subprocess.Popen('ls -l %s | wc -l' % os.path.join(MEDIA_DIR, 'cache/'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()) - 1) + '\t'
     ver += subprocess.Popen('du -h %s' % os.path.join(MEDIA_DIR, 'cache/'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[0] + '\t'
 
