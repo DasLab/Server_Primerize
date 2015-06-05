@@ -474,6 +474,8 @@
                         <li><code>download()</code> exposes the blank page for download form, while <code>submit_download()</code> returns the form submission result depending on the input. They share the same HTML template (<mark>/res/html/download.html</mark>) while loading different <mark>js</mark> files. The <mark>js</mark> files renders the form and return message.</li>
                         <li><code>admin()</code> renders this admin page. <code>get_sys()</code> and <code>cleanup_old()</code> are callables from <mark>/admin</mark> for system maintenance.</li>
                         <li><code>demo_404()</code>, <code>demo_500()</code>, <code>demo_1d_wait()</code>, <code>demo_1d_fail()</code>, <code>demo_1d_error()</code> and <code>error()</code> are remnant functions in response to paper review to illustrate status and error handling.</li>
+                        <li><code>ping_test()</code> is an empty <abbr title="">200</abbr> response for <span class="label label-info">AWS</span> <abbr title="">load balancer</abbr> <mark>PING</mark> health check.</li>
+                        <br/>
                         <li><code>result()</code> performs the result retrieval for a particular <span class="label label-violet">JOB_ID</span>, or returns <mark>404</mark> page.</li>
                         <li><code>demo_1d_P4P6()</code> calls a DEMO job using constants from <code>const.py</code>. <code>test_random()</code> is a remnant function for testing of a random sequence of length <kbd>500</kbd>, for paper review.</li>
                         <li><code>design_1d()</code> exposes the blank page for 1D design page, while <code>design_primers()</code> (see above) performs the calculation and returns result.</li>
@@ -636,6 +638,7 @@
                       <br/>
                       <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd> (while the <mark>IP</mark> turned out to be <kbd>54.69.129.47</kbd>). This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">171.65.23.206</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>.</p>
                       <p>The <abbr title="">load balancer</abbr> forwards <mark>port</mark> <kbd>80</kbd> (HTTP) to <kbd>8080</kbd>, which is the port the <span class="label label-primary">Python</span> is running on. The instance is applied with a <mark>Security Group</mark> that opens both TCP <mark>ports</mark> at <kbd>0.0.0.0</kbd>.</p>
+                      <p>The <abbr title="">load balancer</abbr> uses <mark>PING</mark> as health check monitoring. The <mark>PING</mark> target is set to <code>/ping_test</code>, which is defined in <code>run_server.py</code> exclusively for this purpose. Currently, <abbr title="">Timeout</abbr> is set to <kbd>15</kbd> s and <abbr title="">Interval</abbr> as <kbd>300</kbd> s.</p>
                       <br/>
                       <p>The <mark>IP/DNS</mark> flow is as:</p>
                       <p class="text-center"><code>python run_server.py release</code> @ <kbd>0.0.0.0<span style="color:#ff0;">:8080</span></kbd></p>
