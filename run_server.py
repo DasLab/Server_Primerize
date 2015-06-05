@@ -111,6 +111,9 @@ class Root:
         script = load_html(PATH['ADMIN'])
         f = open('src/sys_ver.txt', 'r')
         (ver_linux, ver_python, ver_cherrypy, ver_matlab, ver_rdatkit, ver_jquery, ver_bootstrap, ver_ssh, ver_screen, ver_tty, ver_apache, ver_git, ver_gcc, ver_clang, ver_cmake, ver_numpy, ver_scipy, ver_matplotlib, ver_celery, ver_simplejson, ver_setuptools, ver_pip, ver_octave, disk_sp, mem_sp, cache_n, cache_sz, path_primerize, path_nathermo, path_rdatkit, path_python, path_matlab) = tuple(f.readlines()[0].split('\t'))
+        disk_sp = '<span style="color:#080;">' + disk_sp[:disk_sp.find('/')] + '</span>/<span style="color:#f00;">' + disk_sp[disk_sp.find('/')+1:] + '</span>'
+        mem_sp = '<span style="color:#080;">' + mem_sp[:mem_sp.find('/')] + '</span>/<span style="color:#f00;">' + mem_sp[mem_sp.find('/')+1:] + '</span>'
+        cache_sz = '<span style="color:#00f;">' + cache_sz + '</span>'
         f.close()
 
         script = script.replace("__LINUX_VER__", ver_linux).replace("__PYTHON_VER__", ver_python).replace("__CHERRYPY_VER__", ver_cherrypy).replace("__MATLAB_VER__", ver_matlab).replace("__RDATKIT_VER__", ver_rdatkit).replace("__JQUERY_VER__", ver_jquery).replace("__BOOTSTRAP_VER__", ver_bootstrap)
