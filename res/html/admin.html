@@ -636,7 +636,7 @@
                       <p>The 'regular' <code>ssh</code> command won't work:</p>
                       <pre><strike>ssh daslab@primerize.stanford.edu</strike></pre>
                       <br/>
-                      <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd> (while the <mark>IP</mark> turned out to be <kbd>54.69.129.47</kbd>). This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">171.65.23.206</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>.</p>
+                      <p>For permanant <mark>IP</mark>, the Primerize server uses a <abbr title="">load balancer</abbr>, with <mark>DNS</mark> name <kbd style="color:#ff5c2b;">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</kbd>. This <mark>DNS</mark> is bound to stanford DNS for the server <mark>IP</mark> <kbd style="color:#50cc32;">54.69.129.47</kbd> with <mark>DNS</mark> <kbd>primerize.stanford.edu</kbd>. The old <mark>IP</mark> <kbd>171.65.23.206</kbd> is no longer assigned to us.</p>
                       <p>The <abbr title="">load balancer</abbr> forwards <mark>port</mark> <kbd>80</kbd> (HTTP) to <kbd>8080</kbd>, which is the port the <span class="label label-primary">Python</span> is running on. The instance is applied with a <mark>Security Group</mark> that opens both TCP <mark>ports</mark> at <kbd>0.0.0.0</kbd>.</p>
                       <p>The <abbr title="">load balancer</abbr> uses <mark>PING</mark> as health check monitoring. The <mark>PING</mark> target is set to <code>/ping_test</code>, which is defined in <code>run_server.py</code> exclusively for this purpose. Currently, <abbr title="">Timeout</abbr> is set to <kbd>15</kbd> s and <abbr title="">Interval</abbr> as <kbd>300</kbd> s.</p>
                       <br/>
@@ -656,7 +656,7 @@
                         <div class="col-md-5"><span class="glyphicon glyphicon-sort pull-right"></span></div>
                         <div class="col-md-7"><p>Stanford IP/DNS</p></div>
                       </div>
-                      <p class="text-center"><kbd style="color:#50cc32;">171.65.23.206</kbd> <kbd>primerize.stanford.edu</kbd></p>
+                      <p class="text-center"><kbd style="color:#50cc32;">54.69.129.47</kbd> <kbd>primerize.stanford.edu</kbd></p>
                     </div>
                   </div>
 
