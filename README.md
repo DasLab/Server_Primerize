@@ -1,6 +1,4 @@
-<h2>Primerize PCR Assembly Design Server</h2>
-#### primerize.stanford.edu / 54.69.129.47
-================
+# Primerize PCR Assembly Design Server
 
 This is the repository for **Primerize** PCR primer assembly design server. The release version of the server is freely accessible at [primerize.stanford.edu](http://primerize.stanford.edu).  
 <p align="center">
