@@ -98,7 +98,7 @@ EMAIL = {
 
 ADMIN = {
     'email': 't47@stanford.edu',
-    'login': {'daslab': EMAIL['PASSWORD']},
+    'login': {'daslab': 'daslab4ever'},
 }
 
 JOB_KEEP_EXPIRE = 90   
