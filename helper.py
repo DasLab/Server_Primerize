@@ -183,7 +183,7 @@ def get_full_sys_stat():
 
 def send_email_notice(content):
     msg = MIMEText(content)
-    msg['Subject']  = '[CherryPy] ERROR (EXTERNAL IP): Primerize error log'
+    msg['Subject']  = '[CherryPy] {primerize.stanford.edu} ERROR (EXTERNAL IP): Primerize error log'
     msg['To'] = ADMIN['email']
     msg['From'] = EMAIL['USER']
 

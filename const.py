@@ -91,8 +91,8 @@ PATH = {
 
 EMAIL = {
     'HOST': 'smtp.gmail.com',
-    'USER': 'stanfordrmdb@gmail.com',
-    'PASSWORD': 'daslab4ever',
+    'USER': 'daslabsu@gmail.com',
+    'PASSWORD': 'l4bd4s2014',
     'PORT': 587,    
 }
 
