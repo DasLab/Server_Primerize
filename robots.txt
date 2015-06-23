@@ -51,10 +51,12 @@ Disallow: /demo_error/
 Disallow: /error/
 Disallow: /test_random/
 Disallow: /submit_download/
+
 Disallow: /ping_test/
 Disallow: /cleanup_old/
 Disallow: /get_sys/
 Disallow: /admin/
+
 Disallow: /server-status/
 
 # Paths (no clean URLs)
