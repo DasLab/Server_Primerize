@@ -1,5 +1,14 @@
+function random_id(len) {
+  var id = '';
+  for (var i = 0; i < len; i++) {
+    id += Math.floor(Math.random()*16).toString(16);
+  }
+
+  return id;
+}
+
 function show_modal() {
-  var job_id = Math.random().toString(16).substring(2, 15) + Math.random().toString(16).substring(2, 15);
+  var job_id = random_id(16);
   $("#job_id").val(job_id.toString());
   $("#modal_id").text(job_id.toString());
   $("#url_id").text('http://primerize.stanford.edu/result?job_id='.concat(job_id.toString()));

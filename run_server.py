@@ -3,6 +3,7 @@ import cherrypy
 import glob
 import os
 import random
+import re
 import sys
 import time
 
@@ -40,6 +41,7 @@ class Root:
     @cherrypy.expose(['find','retrieve'])
     def result(self, job_id):
         if not job_id: raise cherrypy.HTTPRedirect("home")
+        if len(job_id) != 16 or not re.match("[0-9a-fA-F]{16}", job_id): raise cherrypy.NotFound()
         file_name = "cache/result_%s.html" % job_id
         if os.path.exists(file_name):
             return load_html(file_name)
