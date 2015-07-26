@@ -56,7 +56,7 @@ class Root:
         return design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
     @cherrypy.expose(['demo','P4P6','demo_P4P6', 'example_P4P6'])
     def demo_1d_P4P6(self):
-        self.design_primers(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MAX_LEN']), str(ARG['DEF_MIN_LEN']), "0", "1", binascii.b2a_hex(os.urandom(7)))    
+        self.design_primers(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MAX_LEN']), str(ARG['DEF_MIN_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))    
     @cherrypy.expose
     def test_random(self):
         seq = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(500))
