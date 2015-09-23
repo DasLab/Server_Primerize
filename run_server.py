@@ -155,6 +155,14 @@ if __name__ == "__main__":
             "server.socket_host": "127.0.0.1",
             "server_state": 'dev',
         })
+    else:
+        cherrypy.config.update({
+            "server.socket_port": 443,
+            "server.ssl_module": "pyopenssl",
+            "server.ssl_certificate": "/home/ubuntu/.ssl_cert/primerize_stanford_edu.crt",
+            "server.ssl_private_key": "/home/ubuntu/.ssl_cert/primerize_stanford_edu.key",
+            "server.ssl_certificate_chain": "/home/ubuntu/.ssl_cert/primerize_stanford_edu.ca-bundle"
+        })
 
     cherrypy.quickstart(Root(), "", config=QUICKSTART_CONFIG)
     # wsgiapp = cherrypy.Application(StringGenerator(), '/', config=QUICKSTART_CONFIG)
