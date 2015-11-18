@@ -1,7 +1,10 @@
 import math
 import numpy
 
-class Nearest_Neighbor:
+numpy.seterr('ignore')
+
+
+class Nearest_Neighbor(object):
     def __init__(self):
         self.T = 273.15 + 37
 
@@ -130,7 +133,7 @@ def convert_sequence(sequence):
     numerical_sequence = numpy.zeros((1, len(sequence)))
     seq2num_dict = {'A': 0, 'C': 1, 'G': 2, 'U': 3, 'T': 3}
 
-    for i in range(len(sequence)):
+    for i in xrange(len(sequence)):
         numerical_sequence[0, i] = seq2num_dict[sequence[i]]
     return numerical_sequence
 
@@ -175,13 +178,13 @@ def precalculate_Tm(sequence, DNA_conc=0.2e-6, monovalent_conc=0.1, divalent_con
     f_GC = numpy.zeros((N_BP, N_BP))
     len_BP = numpy.ones((N_BP, N_BP))
 
-    for i in range(N_BP):
+    for i in xrange(N_BP):
         if (numerical_sequence[0, i] in (1, 2)):
             f_GC[i, i] = 1
 
-    print 'Filling delH, delS matrix...'
-    for i in range(N_BP):
-        for j in range(i + 1, N_BP):
+    print 'Filling delH, delS matrix ...'
+    for i in xrange(N_BP):
+        for j in xrange(i + 1, N_BP):
             delH_matrix[i, j] = delH_matrix[i, j - 1] + NN_parameters.delH_NN[numerical_sequence[0, j - 1], numerical_sequence[0, j]]
             delS_matrix[i, j] = delS_matrix[i, j - 1] + NN_parameters.delS_NN[numerical_sequence[0, j - 1], numerical_sequence[0, j]]
             len_BP[i, j] = len_BP[i, j - 1] + 1
@@ -190,9 +193,9 @@ def precalculate_Tm(sequence, DNA_conc=0.2e-6, monovalent_conc=0.1, divalent_con
             if (numerical_sequence[0, j] in (1, 2)):
                 f_GC[i, j] += 1
 
-    print 'Terminal penalties...'
-    for i in range(N_BP):
-        for j in range(i + 1, N_BP):
+    print 'Terminal penalties ...'
+    for i in xrange(N_BP):
+        for j in xrange(i + 1, N_BP):
             delH_matrix[i, j] += NN_parameters.delH_AT_closing_penalty[numerical_sequence[0, i]]
             delH_matrix[i, j] += NN_parameters.delH_AT_closing_penalty[numerical_sequence[0, j]]
 
@@ -202,9 +205,9 @@ def precalculate_Tm(sequence, DNA_conc=0.2e-6, monovalent_conc=0.1, divalent_con
     Tm = 1000 * numpy.divide(delH_matrix, delS_matrix)
     f_GC = numpy.divide(f_GC, len_BP)
 
-    print 'Ionic strength corrections...'
-    for i in range(N_BP):
-        for j in range(i, N_BP):
+    print 'Ionic strength corrections ...'
+    for i in xrange(N_BP):
+        for j in xrange(i, N_BP):
             Tm[i, j] = ionic_strength_correction(Tm[i, j], monovalent_conc, divalent_conc, f_GC[i, j], len_BP[i, j])
 
     return Tm - 273.15
