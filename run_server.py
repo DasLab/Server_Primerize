@@ -10,7 +10,7 @@ import time
 from const import *
 from config import *
 from helper import *
-from primerize import *
+from wrapper import *
 
 
 class Root:

@@ -29,6 +29,13 @@ def primer_suffix(num):
         return '\033[94m F\033[0m'
 
 
+def primer_suffix_html(num):
+    if num % 2:
+        return '<span class="label label-danger">R</span>'
+    else:
+        return '<span class="label label-info">F</span>'
+
+
 def draw_assembly(sequence, primers, name, COL_SIZE=140):
     N_primers = primers.shape[1]
     seq_line_prev = list(' ' * max(len(sequence), COL_SIZE))

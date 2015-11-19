@@ -60,41 +60,42 @@ class Primer_Assembly(object):
 
 
     def print_assembly(self):
-        print
+        output = '\n'
         x = 0
         for i in xrange(len(self.print_lines)):
             (flag, string) = self.print_lines[i]
             if (flag == '$' and 'xx' in string):
                 Tm = '%2.1f' % self.Tm_overlaps[x]
-                print string.replace('x' * len(Tm), '\033[41m%s\033[0m' % Tm)
+                output += string.replace('x' * len(Tm), '\033[41m%s\033[0m' % Tm) + '\n'
                 x += 1
             elif (flag == '^' or flag == '!'):
                 num = string.replace(' ', '').replace('A', '').replace('G', '').replace('C', '').replace('T', '').replace('-', '').replace('>', '').replace('<', '')
-                print string.replace(num, '\033[100m%s\033[0m' % num)
+                output += string.replace(num, '\033[100m%s\033[0m' % num) + '\n'
             elif (flag == '~'):
-                print '\033[92m%s\033[0m' % string
+                output += '\033[92m%s\033[0m' % string + '\n'
             elif (flag == '='):
-                print '\033[96m%s\033[0m' % string
+                output += '\033[96m%s\033[0m' % string + '\n'
             else:
-                print string
+                output += string + '\n'
+        return output
 
 
     def print_primers(self):
-        print '%s%s\tSEQUENCE' % ('PRIMERS'.ljust(20), 'LENGTH'.ljust(10))
+        output = '%s%s\tSEQUENCE\n' % ('PRIMERS'.ljust(20), 'LENGTH'.ljust(10))
         for i in xrange(len(self.primer_set)):
             name = '%s-\033[100m%s\033[0m%s' % (self.name, i + 1, primer_suffix(i))
-            print '%s%s\t%s' % (name.ljust(39), str(len(self.primer_set[i])).ljust(10), self.primer_set[i])
-        print
+            output += '%s%s\t%s\n' % (name.ljust(39), str(len(self.primer_set[i])).ljust(10), self.primer_set[i])
+        return output + '\n'
 
 
     def print_warnings(self):
-        print
+        output = ''
         for i in xrange(len(self.warnings)):
             warning = self.warnings[i]
-            p_1 = '\033[100m%d\033[0m%s' % (warning[0], primer_suffix(warning[0]))
-            p_2 = ', '.join('\033[100m%d\033[0m%s' % (x, primer_suffix(x)) for x in warning[3])
-            print '\033[93mWARNING\033[0m: Primer %s can misprime with %d-residue overlap to position %s, which is covered by primers: %s' % (p_1.rjust(4), warning[1], str(int(warning[2])).rjust(3), p_2)
-        print
+            p_1 = '\033[100m%d\033[0m%s' % (warning[0], primer_suffix(warning[0] - 1))
+            p_2 = ', '.join('\033[100m%d\033[0m%s' % (x, primer_suffix(x - 1)) for x in warning[3])
+            output += '\033[93mWARNING\033[0m: Primer %s can misprime with %d-residue overlap to position %s, which is covered by primers: %s\n' % (p_1.rjust(4), warning[1], str(int(warning[2])).rjust(3), p_2)
+        return output + '\n'
 
 
 @jit(nopython=True, nogil=True, cache=True)
@@ -309,9 +310,9 @@ def design_primers_1D(sequence, min_Tm=60, NUM_PRIMERS=0, MIN_LENGTH=15, MAX_LEN
     assembly = Primer_Assembly(sequence, min_Tm, NUM_PRIMERS, MIN_LENGTH, MAX_LENGTH, prefix)
     assembly.print_misprime()
     if assembly.is_solution:
-        assembly.print_assembly()
-        assembly.print_primers()
-        assembly.print_warnings()
+        print assembly.print_assembly()
+        print assembly.print_primers()
+        print assembly.print_warnings()
     else:
         print '** No solution found!'
 
