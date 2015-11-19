@@ -2,6 +2,7 @@ import numpy
 
 from util import *
 
+
 def check_misprime(sequence):
     N = len(sequence)
     # length of string subsets

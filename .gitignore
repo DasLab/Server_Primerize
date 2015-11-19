@@ -1,4 +1,5 @@
 *.pyc
+pymerize/__pycache__
 cache/*
 
 src/sys_ver.txt

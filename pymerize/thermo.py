@@ -130,7 +130,7 @@ def convert_sequence(sequence):
     # Easier to keep track of integers in Matlab
     # A,C,G,T --> 1,2,3,4.
     sequence = sequence.upper()
-    numerical_sequence = numpy.zeros((1, len(sequence)))
+    numerical_sequence = numpy.zeros((1, len(sequence)), dtype=numpy.int_)
     seq2num_dict = {'A': 0, 'C': 1, 'G': 2, 'U': 3, 'T': 3}
 
     for i in xrange(len(sequence)):
@@ -141,12 +141,11 @@ def convert_sequence(sequence):
 def ionic_strength_correction(Tm, monovalent_conc, divalent_conc, f_GC, N_BP):
     # From Owczarzy et al., Biochemistry, 2008.
     R = math.sqrt(divalent_conc) / monovalent_conc
-
     Tm_corrected = Tm
     if (R < 0.22):
         # Monovalent dominated
         x = math.log(monovalent_conc)
-        Tm_corrected = 1 / ((1 / Tm) + (4.29 * f_GC - 3.95) * 1e-5 * x + 9.40e-6 * math.pow(x, 2))
+        Tm_corrected = 1.0 / ((1.0 / Tm) + (4.29 * f_GC - 3.95) * 1e-5 * x + 9.40e-6 * math.pow(x, 2))
     else:
         # Divalent dominated
         (a, b, c, d, e, f, g) = (3.92e-5, -9.11e-6, 6.26e-5, 1.42e-5, -4.82e-4, 5.25e-4, 8.31e-5)
@@ -154,12 +153,12 @@ def ionic_strength_correction(Tm, monovalent_conc, divalent_conc, f_GC, N_BP):
         if (R < 6.0):
             # Some competition from monovalent
             y = monovalent_conc
-            a = 3.92e-5 * (0.843 - 0.352 * math.sqrt(y) * math.log(y))
-            d = 1.42e-5 * (1.279 - 4.03e-3 * math.log(y) - 8.03e-3 * math.pow(math.log(y), 2))
-            g = 8.31e-5 * (0.486 - 0.258 * math.log(y) + 5.25e-3 * math.pow(math.log(y), 3))
+            a *= (0.843 - 0.352 * math.sqrt(y) * math.log(y))
+            d *= (1.279 - 4.03e-3 * math.log(y) - 8.03e-3 * math.pow(math.log(y), 2))
+            g *= (0.486 - 0.258 * math.log(y) + f * 10 * math.pow(math.log(y), 3))
 
         x = math.log(divalent_conc)
-        Tm_corrected = 1 / ((1 / Tm) + a + b * x + f_GC * (c + d * x) + (1 / (2 * (N_BP - 1))) * (e + f * x + g * math.pow(x, 2)))
+        Tm_corrected = 1.0 / ((1.0 / Tm) + a + b * x + f_GC * (c + d * x) + (1.0 / (2 * (N_BP - 1))) * (e + f * x + g * math.pow(x, 2)))
     return Tm_corrected
 
 
@@ -167,7 +166,6 @@ def precalculate_Tm(sequence, DNA_conc=0.2e-6, monovalent_conc=0.1, divalent_con
     # This could be sped up significantly, since many of the sums of
     # delH, delG are shared between calculations.
     numerical_sequence = convert_sequence(sequence)
-
     NN_parameters = Nearest_Neighbor()
     delS_DNA_conc = 1.987 * math.log(DNA_conc / 2)
     delS_init = NN_parameters.delS_init + delS_DNA_conc
@@ -211,4 +209,29 @@ def precalculate_Tm(sequence, DNA_conc=0.2e-6, monovalent_conc=0.1, divalent_con
             Tm[i, j] = ionic_strength_correction(Tm[i, j], monovalent_conc, divalent_conc, f_GC[i, j], len_BP[i, j])
 
     return Tm - 273.15
+
+
+def calc_Tm(sequence, DNA_conc=1e-5, monovalent_conc=1.0, divalent_conc=0.0):
+    numerical_sequence = convert_sequence(sequence)
+    NN_parameters = Nearest_Neighbor()
+    delS_DNA_conc = 1.987 * math.log(DNA_conc / 2)
+    delS_sum = NN_parameters.delS_init + delS_DNA_conc
+    delH_sum = NN_parameters.delH_init
+    N_BP = len(sequence)
+
+    for i in xrange(N_BP - 1):
+        delH_sum += NN_parameters.delH_NN[numerical_sequence[0, i], numerical_sequence[0, i + 1]]
+        delS_sum += NN_parameters.delS_NN[numerical_sequence[0, i], numerical_sequence[0, i + 1]]
+
+    delH_sum += NN_parameters.delH_AT_closing_penalty[numerical_sequence[0, 0]]
+    delH_sum += NN_parameters.delH_AT_closing_penalty[numerical_sequence[0, -1]]
+    delS_sum += NN_parameters.delS_AT_closing_penalty[numerical_sequence[0, 0]]
+    delS_sum += NN_parameters.delS_AT_closing_penalty[numerical_sequence[0, -1]]
+
+    Tm = 1000 * delH_sum / delS_sum
+    f_GC = (numpy.sum(numerical_sequence == 1) + numpy.sum(numerical_sequence == 2)) / float(N_BP)
+    Tm = ionic_strength_correction(Tm, monovalent_conc, divalent_conc, f_GC, N_BP)
+    return Tm - 273.15
+
+
 

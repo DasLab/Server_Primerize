@@ -25,7 +25,7 @@ class Primer_Assembly(object):
         self.warnings = []
         self.Tm_overlaps = []
 
-        self.COL_SIZE = 140
+        self.COL_SIZE = 138
         self.WARN_CUTOFF = 3
         self.design_primers()
 
@@ -39,7 +39,8 @@ class Primer_Assembly(object):
         print 'Doing dynamics programming calculation ...'
         (self.scores_start, self.scores_stop, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.MAX_SCORE, self.N_primers) = dynamic_programming(self.NUM_PRIMERS, self.MIN_LENGTH, self.MAX_LENGTH, self.min_Tm, self.N_BP, self.misprime_score_forward, self.misprime_score_reverse, self.Tm_precalculated)
         print 'Doing backtracking ...\n'
-        (self.is_solution, self.primers, self.warnings) = back_tracking(self.N_BP, self.sequence, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.N_primers, self.MAX_SCORE, self.num_match_forward, self.num_match_reverse, self.best_match_forward, self.best_match_reverse, self.WARN_CUTOFF)
+        (self.is_solution, self.primers, self.primer_set, self.warnings) = back_tracking(self.N_BP, self.sequence, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.N_primers, self.MAX_SCORE, self.num_match_forward, self.num_match_reverse, self.best_match_forward, self.best_match_reverse, self.WARN_CUTOFF)
+        (self.bp_lines, self.seq_lines, self.print_lines, self.Tm_overlaps) = draw_assembly(self.sequence, self.primers, self.name, self.COL_SIZE)
 
 
     def print_misprime(self):
@@ -59,27 +60,41 @@ class Primer_Assembly(object):
 
 
     def print_assembly(self):
-        pass
+        print
+        x = 0
+        for i in xrange(len(self.print_lines)):
+            (flag, string) = self.print_lines[i]
+            if (flag == '$' and 'xx' in string):
+                Tm = '%2.1f' % self.Tm_overlaps[x]
+                print string.replace('x' * len(Tm), '\033[41m%s\033[0m' % Tm)
+                x += 1
+            elif (flag == '^' or flag == '!'):
+                num = string.replace(' ', '').replace('A', '').replace('G', '').replace('C', '').replace('T', '').replace('-', '').replace('>', '').replace('<', '')
+                print string.replace(num, '\033[100m%s\033[0m' % num)
+            elif (flag == '~'):
+                print '\033[92m%s\033[0m' % string
+            elif (flag == '='):
+                print '\033[96m%s\033[0m' % string
+            else:
+                print string
 
 
     def print_primers(self):
-        print '\n%s%s\tSEQUENCE' % ('PRIMERS'.ljust(20), 'LENGTH'.ljust(10))
-        for i in xrange(len(self.primers)):
-            if (i % 2):
-                suffix = 'R'
-            else:
-                suffix = 'F'
-            name = '%s-%s%s' % (self.name, i + 1, suffix)
-            print '%s%s\t%s' % (name.ljust(20), str(len(self.primers[i])).ljust(10), self.primers[i])
-        print '\n'
+        print '%s%s\tSEQUENCE' % ('PRIMERS'.ljust(20), 'LENGTH'.ljust(10))
+        for i in xrange(len(self.primer_set)):
+            name = '%s-\033[100m%s\033[0m%s' % (self.name, i + 1, primer_suffix(i))
+            print '%s%s\t%s' % (name.ljust(39), str(len(self.primer_set[i])).ljust(10), self.primer_set[i])
+        print
 
 
     def print_warnings(self):
-        print '\n'
+        print
         for i in xrange(len(self.warnings)):
             warning = self.warnings[i]
-            print 'WARNING: Primer %d can misprime with %d-residue overlap to position %d, which is covered by primers: %s' % (warning[0], warning[1], warning[2], ', '.join('%d' % x for x in warning[3]))
-        print '\n'
+            p_1 = '\033[100m%d\033[0m%s' % (warning[0], primer_suffix(warning[0]))
+            p_2 = ', '.join('\033[100m%d\033[0m%s' % (x, primer_suffix(x)) for x in warning[3])
+            print '\033[93mWARNING\033[0m: Primer %s can misprime with %d-residue overlap to position %s, which is covered by primers: %s' % (p_1.rjust(4), warning[1], str(int(warning[2])).rjust(3), p_2)
+        print
 
 
 @jit(nopython=True, nogil=True, cache=True)
@@ -257,7 +272,7 @@ def back_tracking(N_BP, sequence, scores_final, choice_start_p, choice_start_q, 
             p = choice_start_p[i, j, m - 1]
             q = choice_start_q[i, j, m - 1]
             primers[:, 2 * m - 1] = [q, j, -1]
-        primers[:, 0] = [1, p, 1]
+        primers[:, 0] = [0, p, 1]
         primers = primers.astype(int)
 
         for i in xrange(2 * N_primers):
@@ -269,7 +284,7 @@ def back_tracking(N_BP, sequence, scores_final, choice_start_p, choice_start_q, 
                 end_pos = primers[0, i]
                 if (num_match_reverse[0, end_pos] >= WARN_CUTOFF):
                     problem_primer = find_primers_affected(primers, best_match_reverse[0, end_pos])
-                    misprime_warn.append((i + 1, num_match_reverse[0, end_pos], best_match_reverse[0, end_pos], problem_primer))
+                    misprime_warn.append((i + 1, num_match_reverse[0, end_pos] + 1, best_match_reverse[0, end_pos] + 1, problem_primer))
             else:
                 primer_set.append(primer_seq)
 
@@ -277,9 +292,9 @@ def back_tracking(N_BP, sequence, scores_final, choice_start_p, choice_start_q, 
                 end_pos = primers[1, i]
                 if (num_match_forward[0, end_pos] >= WARN_CUTOFF):
                     problem_primer = find_primers_affected(primers, best_match_forward[0, end_pos])
-                    misprime_warn.append((i + 1, num_match_forward[0, end_pos], best_match_forward[0, end_pos], problem_primer))
+                    misprime_warn.append((i + 1, num_match_forward[0, end_pos] + 1, best_match_forward[0, end_pos] + 1, problem_primer))
 
-    return (is_solution, primer_set, misprime_warn)
+    return (is_solution, primers, primer_set, misprime_warn)
 
 
 def find_primers_affected(primers, pos):
