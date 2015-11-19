@@ -52,20 +52,25 @@ class Root:
     def design_1d(self):
         return load_html(PATH['DESIGN_1D']).replace("__SEQ__", "").replace("__MIN_TM__", str(ARG['DEF_MIN_TM'])).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(ARG['DEF_MAX_LEN'])).replace("__MIN_LEN__", str(ARG['DEF_MIN_LEN'])).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
     @cherrypy.expose
-    def design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id):
+    def wrapper_1d(self, sequence, tag, min_Tm, num_primers, min_length, max_length, is_num_primers, is_t7, job_id):
         return design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
-    @cherrypy.expose(['demo','P4P6','demo_P4P6', 'example_P4P6'])
+    @cherrypy.expose(['demo', 'P4P6', 'demo_P4P6', 'example_P4P6'])
     def demo_1d_P4P6(self):
-        self.design_primers(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MAX_LEN']), str(ARG['DEF_MIN_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))    
+        return self.wrapper_1d(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MIN_LEN']), str(ARG['DEF_MAX_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))    
     @cherrypy.expose
     def test_random(self):
-        seq = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(500))
-        self.design_primers(seq, "scRNA", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MAX_LEN']), str(ARG['DEF_MIN_LEN']), "0", "1", binascii.b2a_hex(os.urandom(7)))  
+        seq = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
+        return self.wrapper_1d(seq, "scRNA", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MIN_LEN']), str(ARG['DEF_MAX_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))
 
 
     @cherrypy.expose
     def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
         is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
+        if not is_valid_name(first_name, "- ", 2): first_name = ''
+        if not is_valid_name(last_name, "- ", 1): last_name = ''
+        if not is_valid_name(inst, "()-, ", 4): inst = ''
+        if not is_valid_name(dept, "()-, ", 4): dept = ''
+        if not is_valid_email(email): email = ''
 
         if is_valid:
             f = open("src/usr_tab.csv", "a")
