@@ -40,7 +40,10 @@ class Primer_Assembly(object):
         (self.scores_start, self.scores_stop, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.MAX_SCORE, self.N_primers) = dynamic_programming(self.NUM_PRIMERS, self.MIN_LENGTH, self.MAX_LENGTH, self.min_Tm, self.N_BP, self.misprime_score_forward, self.misprime_score_reverse, self.Tm_precalculated)
         print 'Doing backtracking ...\n'
         (self.is_solution, self.primers, self.primer_set, self.warnings) = back_tracking(self.N_BP, self.sequence, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.N_primers, self.MAX_SCORE, self.num_match_forward, self.num_match_reverse, self.best_match_forward, self.best_match_reverse, self.WARN_CUTOFF)
-        (self.bp_lines, self.seq_lines, self.print_lines, self.Tm_overlaps) = draw_assembly(self.sequence, self.primers, self.name, self.COL_SIZE)
+        if self.is_solution:
+            (self.bp_lines, self.seq_lines, self.print_lines, self.Tm_overlaps) = draw_assembly(self.sequence, self.primers, self.name, self.COL_SIZE)
+        else:
+            (self.bp_lines, self.seq_lines, self.print_lines) = ([], [], [])
 
 
     def print_misprime(self):
@@ -261,10 +264,10 @@ def back_tracking(N_BP, sequence, scores_final, choice_start_p, choice_start_q, 
     is_solution = True
     primer_set = []
     misprime_warn = []
+    primers = numpy.zeros((3, 2 * N_primers))
     if (min_scroe == MAX_SCORE):
         is_solution = False
     else:
-        primers = numpy.zeros((3, 2 * N_primers))
         primers[:, 2 * N_primers - 1] = [q, N_BP - 1, -1]
         for m in xrange(N_primers - 1, 0, -1):
             i = choice_stop_i[p, q, m]
