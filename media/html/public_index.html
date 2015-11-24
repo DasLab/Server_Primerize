@@ -1,0 +1,98 @@
+{% extends "media/html/_public.html" %}
+
+{% block content %}
+  <div class="jumbotron">
+    <div class="container">
+      <h1 style="padding-bottom:20px;">PCR Assembly Primer Design</h1>
+      <img src="/site_media/images/logo_primerize_2.png" style="clear:both;float:right;padding-left:20px;"/>
+      <p>
+        Primerize is a Web Server for primer designs of DNA sequence PCR assembly. Primerize is optimized to reduce primer boundaries mispriming, is designed for fixed sequences of RNA problems, and passed wide and stringent tests. This efficient algorithm is suitable for extended use such as massively parallel mutagenesis library.
+      </p>
+      <p>
+        Ready to use? Go
+        <a class="btn btn-primary btn-lg" href="/design_1d" role="button" style="color: #ffffff;">&nbsp;Primerize!&nbsp;</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><span class="glyphicon glyphicon-inbox"></span>&nbsp;&nbsp;Result retrieval</h3>
+        </div>
+        <div id="col-1" class="panel-body">
+          <form method="get" action="/result">
+            <div class="col-md-12">
+              <div data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result. JOB_ID is the unique 16-digit hexadecimal key." class="form-group">
+                <label for="job_id" class="col-md-3">
+                  <span class="lead"><span class="label label-violet">JOB_ID</span></span>
+                  :&nbsp;&nbsp;
+                </label>
+                <div class="input-group col-md-9">
+                  <input class="form-control input-sm" name="job_id" type="text" value="" maxlength="32" placeholder="Enter a JOB_ID"/>
+                  <span class="input-group-btn">
+                    <input type="submit" id="btn_retrieve" class="btn btn-inverse btn-sm pull-right" value="&nbsp;Retrieve&nbsp;"/>&nbsp;
+                  </span>
+                </div>
+              </div>
+              <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span>.</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-green">
+        <div class="panel-heading">
+          <h3 class="panel-title"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;How to use</h3>
+        </div>
+        <div id="col-2" class="panel-body">
+          <p style="line-height: 32px;">
+            New users can read the 
+            <a class="btn btn-blue btn-sm" href="/tutorial" role="button" style="color: #ffffff;">&nbsp;&nbsp;Tutorial&nbsp;&nbsp;</a>
+            and
+            <a class="btn btn-info btn-sm" href="/protocol" role="button" style="color: #ffffff;">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a>
+            for design and experiment guidelines. Please also try out the
+            <a class="btn btn-success btn-sm" href="/demo_1d" id="btn_demo" role="button" style="color: #ffffff;">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"><span class="glyphicon glyphicon-compressed"></span>&nbsp;&nbsp;Package download</h3>
+        </div>
+        <div id="col-3" class="panel-body">
+          <p>
+             Advanced academic users may opt to download the source code package. 
+          </p>
+          <p>
+            Please read the Terms and Conditions before <a class="btn btn-warning btn-sm" href="/license" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact us</h3>
+        </div>
+        <div id="col-4" class="panel-body">
+          <p> 
+            Please feel free to 
+            <a class="btn btn-danger btn-sm" href="/about#contact" style="color: #ffffff;">Contact</a> the Das Lab for further questions/issues regarding the web server, suggestions for improvements, citations, or commercial use authorization.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}index{{DEBUG_STR}}.js"></script>  
+{% endblock %}
+

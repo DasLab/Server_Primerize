@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Primerize: Primer Design for PCR Assembly</title>
+    <script type="text/javascript">
+      var DEBUG_DIR = "{{DEBUG_DIR}}", DEBUG_STR = "{{DEBUG_STR}}";
+    </script>
+    <script type="text/javascript" src="/site_media/js/admin/{{DEBUG_DIR}}load{{DEBUG_STR}}.js"></script>  
+    {% block head %}{% endblock %}
+
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '{{tracking_id}}', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top" role="navigation" id="navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/" id="nav_logo">&nbsp;&nbsp;<span>Primerize</span>&nbsp;&nbsp;</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav" id="nav">
+            <li class="dropdown" id="nav_design">
+              <a href="/design_1d" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+                Design
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu nav nav-pills nav-stacked" role="menu">
+                <li class="li-primary"><a href="/design_1d"><span class="glyphicon glyphicon-tint"></span>&nbsp;&nbsp;Single Assembly</a></li>
+                <li class="li-info disabled"><a href="/design_2d"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;Mutate-and-map Plates</a></li>
+                <li class="li-dark-blue disabled"><a href="/design_3d"><span class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;Mutate-map-rescue Sets</a></li>
+              </ul>
+            </li>
+            <li class="dropdown" id="nav_tutorial">
+              <a href="/tutorial" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+                Tutorial
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu nav nav-pills nav-stacked" role="menu">
+                <li class="li-success"><a href="/tutorial#web_retrev"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;Section #1: Result Retrieval</a></li>
+                <li class="li-dark-green"><a href="/tutorial#web_input"><span class="glyphicon glyphicon-console"></span>&nbsp;&nbsp;Section #2: Website Input</a></li>
+                <li class="li-green"><a href="/tutorial#web_output"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;Section #3: Website Output</a></li>
+                <li class="li-light-blue"><a href="/tutorial#txt_output"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Section #4: Downloadable Output</a></li>
+              </ul>
+            </li>
+            <li class="dropdown" id="nav_protocol">
+              <a href="/protocol" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+                Protocol
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu nav nav-pills nav-stacked" role="menu">
+                <li class="li-danger"><a href="/protocol#pipe"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;Pipeline Overview</a></li>
+                <li class="divider"></li>
+                <li class="li-magenta"><a href="/protocol#temp_design"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Section #1: DNA Template Design</a></li>
+                <li class="li-violet"><a href="/protocol#idt_bulk"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Section #2: IDT Oligo Ordering</a></li>
+                <li class="li-dark-red"><a href="/protocol#PCR"><span class="glyphicon glyphicon-transfer"></span>&nbsp;&nbsp;Section #3: PCR Assembly Protocol</a></li>
+                <li class="li-brown"><a href="/protocol#TX"><span class="glyphicon glyphicon-random"></span>&nbsp;&nbsp;Section #4: <i>In Vitro</i> Transcription</a></li>
+                <li class="li-orange"><a href="/protocol#par_prep"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Section #5: Massively Parallel Preparation</a></li>
+              </ul>
+            </li>
+            <li id="nav_download"><a href="/license">Download Package</a></li>
+            <li class="dropdown" id="nav_about">
+              <a href="/about" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+                About
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu nav nav-pills nav-stacked" role="menu">
+                <li class="li-warning"><a href="/about#citation"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Citations</a></li>
+                <li class="li-default"><a href="/about#privacy"><span class="glyphicon glyphicon-eye-close"></span>&nbsp;&nbsp;Privacy Disclosure</a></li>
+                <li class="li-teal"><a href="/about#contact"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact Us</a></li>
+                <li class="divider"></li>
+                <li class="li-gray"><a href="/about#history"><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;History</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="starter-template">
+      <div class="container theme-showcase" role="main">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    {% block footer %}
+      <hr/>
+      <div class="container-fluid starter-template" id="footer" style="padding: 0px 15px;"></div>
+    {% endblock %}
+
+    <a href="#" id="top" style="z-index:2000;">
+      <img style="position:fixed;display:block;left:-5%;bottom:100px;opacity:0.85;z-index:2000;" src="/site_media/images/fg_top_hover.png" name="top" height="60"/>
+    </a>
+    
+    <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}util{{DEBUG_STR}}.js"></script>  
+    {% block script %}{% endblock %}
+  </body>
+</html>
