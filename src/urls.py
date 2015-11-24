@@ -25,7 +25,10 @@ urlpatterns = [
     url(r'^license/$', views.license),
     url(r'^download/$', views.download),
     url(r'^about/$', views.about),
+
+    url(r'^result/$', views.result),
     url(r'^design_1d/$', views.design_1d),
+    url(r'^design_1d_run/$', views.design_1d_run),
 
     url(r'^home/$', RedirectView.as_view(url='/', permanent=True)),
     url(r'^index/$', RedirectView.as_view(url='/', permanent=True)),

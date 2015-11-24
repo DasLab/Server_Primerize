@@ -1,7 +1,7 @@
 {% extends "media/html/_public.html" %}
 
 {% block content %}
-  <form method="post" action="/download/" class="col-md-8">
+  <form method="post" action="/download/" class="col-md-10">
     {% csrf_token %}
     <h3>Please provide your contact information</h3>
     <br/>
@@ -11,68 +11,68 @@
           <h2 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Contact Information</h2>
         </div>
         <div class="panel-body">
-          <div class="row col-md-12">
-            <div class="col-md-3">
-              <span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;First Name: 
-            </div>
-            <div class="col-md-3">
-              <input name="first_name" id="first_name" type="text" value="" class="form-control" required/>
-            </div>
-            <div class="col-md-3">
-              <span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Last Name: 
-            </div>
-            <div class="col-md-3">
-              <input name="last_name" id="last_name" type="text" value="" class="form-control" required/>
-            </div>
-          </div>
-          <br/>
-          <br/>
-          <div class="row col-md-12">
-            <div class="col-md-3">
-            <span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Insititution: 
-            </div>
-            <div class="col-md-3">
-            <input name="inst" id="inst" type="text" value="" class="form-control" required/>
-            </div>
-            <div class="col-md-3">
-            <span class="glyphicon glyphicon-tower"></span>&nbsp;&nbsp;Department: 
-            </div>
-            <div class="col-md-3">
-            <input name="dept" id="dept" type="text" value="" class="form-control" required/>
-            </div>
-          </div>
-          <br/>
           <br/>
           <div class="row">
-            <div class="col-md-3">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;E-mail Address:</div>
-            <div class="col-md-9">
-             <input name="email" id="email" type="email" value="" style="width:75%" class="form-control" required/>
-           </div>
+            <div class="col-md-3">
+              <span class="pull-right"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;First Name:</span>
+            </div>
+            <div class="col-md-3">{{dl_form.first_name}}</div>
+            <div class="col-md-2">
+              <span class="pull-right"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Last Name:</span>
+            </div>
+            <div class="col-md-3">{{dl_form.last_name}}</div>
+            <div class="col-md-1"></div>
           </div>
-          <div class="col-md-12">
-            <br/>
-            <input name="is_subscribe" id="is_subscribe" type="checkbox" value="1"/> 
-            <input type="hidden" name="is_subscribe" value="0" />
-            <label for="is_subscribe">
-              Subscribe to newsletter for future version updates.
-            </label>
-            <br/>
-            <br/>
-            <input type="submit" class="btn btn-primary" value="&nbsp;Submit&nbsp;"/>
-            &nbsp;
-            <a href="/download" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>
-            <br/>
-            <br/>
-           </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-3">
+              <span class="pull-right"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Insititution:</span>
+            </div>
+            <div class="col-md-3">{{dl_form.institution}}</div>
+            <div class="col-md-2">
+              <span class="pull-right"><span class="glyphicon glyphicon-tower"></span>&nbsp;&nbsp;Department:</span>
+            </div>
+            <div class="col-md-3">{{dl_form.department}}</div>
+            <div class="col-md-1"></div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-3">
+              <span class="pull-right"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;E-mail Address:</span>
+            </div>
+            <div class="col-md-8">{{dl_form.email}}</div>
+            <div class="col-md-1"></div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <div class="checkbox" style="display:inline-block;">
+                <label>
+                  {{dl_form.is_subscribe}}
+                  Subscribe to newsletter for future version updates.
+                </label>
+              </div>
+              <span class="pull-right">
+                <input type="submit" class="btn btn-primary" value="&nbsp;Submit&nbsp;"/>
+                &nbsp;
+                <a href="/download" class="btn btn-default">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>
+              </span>
+              <br/>
+            </div>
+            <div class="col-md-1"></div>
           </div>
         </div>
-
-        <div id="message"></div>
       </div>
+
+      <div id="message" class="alert"></div>
     </div>
   </form>
 {% endblock %}
 
 {% block script %}
+  <script type="text/javascript">
+    var flag = {{flag}};
+  </script>
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}download{{DEBUG_STR}}.js"></script>  
 {% endblock %}

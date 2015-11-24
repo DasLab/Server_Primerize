@@ -1,0 +1,142 @@
+{% extends "media/html/_public.html" %}
+
+{% block content %}
+  <div class="col-md-12">
+    <h2>Input Data:</h2>
+  </div>
+  <form method='post' action='/design_1d_run/' id='form'>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-9">
+        <div class="bgimg">
+         <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
+          <label for="tag" class="col-md-2">
+            <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
+          </label>
+          <div class="input-group col-md-7">
+            {{1d_form.tag}}
+            <span class="input-group-addon"><i>optional</i></span>
+          </div>
+         </p>
+         <p>
+          <label for="sequence" class="col-md-2">
+            <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
+          </label>
+         </p>
+
+         <div class="row">
+          <div class="col-md-10">
+           <ul>
+            <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
+            <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
+            <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
+           </ul>
+          </div>
+          <div class="col-md-2">
+           <p class="text-right">
+            <br/>
+            <br/>
+            <i>Length: <b><span id="count"></span></b> nt</i>
+           </p>
+          </div>
+         </div>
+         {{1d_form.sequence}}
+         <br/>
+
+         <input name="job_id"  id="job_id" type="text" style="display:none" value="" />
+
+         <div class="row">
+          <div class="col-md-12">
+            <input type="submit" class="btn btn-primary" id="btn_submit" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
+            <a class="btn btn-default" href="/design_1d">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="display:none">
+              <input id="is_agree" type="checkbox" checked="yes" required="required">
+                <label for="is_agree">
+                  <i>
+                    Please read the 
+                    <a href="/license">Terms and Conditions</a>.
+                  </i>
+                </label>
+              </input>
+             </span>
+             <a id="btn_demo" class="btn btn-success pull-right" href="/demo_1d" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+              &nbsp;&nbsp;Demo&nbsp;&nbsp;
+            </a>
+           </div>
+         </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="More options for guided design. Parameters for primer length, primer number and annealing temperature can be specified.">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <div data-toggle="tooltip" data-placement="left" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
+                <label for="min_Tm">minimum <b>Tm</b>:</label>
+                <div class="input-group" style="margin-left:10px;">
+                  {{1d_form.min_Tm}}
+                  <span class="input-group-addon">&deg;C</span>
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="left" title="Maximum length for each primer. Default = 60 nt.">
+                <label for="max_length">maximum <b>length</b> of primers:</label>
+                <div class="input-group" style="margin-left:10px;">
+                  {{1d_form.max_len}}
+                  <span class="input-group-addon">nt</span>
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="left" title="Minimum length for each primer. Default = 15 nt.">
+                <label for="min_length">minimum <b>length</b> of primers:</label>
+                <div class="input-group" style="margin-left:10px;">
+                  {{1d_form.min_len}}
+                  <span class="input-group-addon">nt</span>
+                </div>
+              </div>
+              <div data-toggle="tooltip" data-placement="left" title="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
+                <div class="checkbox" style="display:inline-block;">
+                  <label>
+                    {{1d_form.is_num_primers}}
+                    &nbsp;<b>#</b> number of primers:
+                  </label>
+                </div>
+                <div class="input-group" style="margin-left:10px;">
+                  {{1d_form.num_primers}}
+                  <span class="input-group-addon">#</span>
+                </div>
+              </div>
+              <div data-toggle="tooltip" data-placement="left" title="Check if T7 promoter (TTCTAATACGACTCACTATA) is present in input sequence. If not, it will be prepended automatically." >
+                <div class="checkbox" style="display:inline-block;">
+                  <label>
+                    {{1d_form.is_check_t7}}
+                    &nbsp;check for <b>T7</b> promoter sequence
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="alert alert-warning center-block" id="warn_500">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
+        </div>
+        <div class="alert alert-orange center-block" id="warn_1000">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm" href="/license" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+  </form>
+  <div id="result"></div>
+ {% endblock %}
+
+{% block script %}
+  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}design_1d{{DEBUG_STR}}.js"></script>  
+  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}zclip{{DEBUG_STR}}.js"></script>  
+{% endblock %}
+

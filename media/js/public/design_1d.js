@@ -1,11 +1,3 @@
-function random_id(len) {
-  var id = '';
-  for (var i = 0; i < len; i++) {
-    id += Math.floor(Math.random()*16).toString(16);
-  }
-
-  return id;
-}
 
 function show_modal() {
   var job_id = random_id(16);
@@ -22,7 +14,7 @@ function show_modal() {
 }
 
 function track_input_length() {
-  var l = $("#sequence").val().length;
+  var l = $("#id_sequence").val().length;
 
   $("#count").text(l);
   if (l < 60) {
@@ -47,29 +39,27 @@ function track_input_length() {
 }
 
 $(document).ready(function () {
-  // $("#is_agree").on("click", function () {
-  //   if ($(this).is(":checked")) {
-  //       $("#btn_submit").removeAttr("disabled");
-  //       $("#btn_demo").removeAttr("disabled");
-  //       $(this).parent().css("color","black");
-  //   } else {
-  //       $("#btn_submit").attr("disabled", "disabled");
-  //       $("#btn_demo").attr("disabled", "disabled");
-  //       $(this).parent().css("color","red");
-  //   }
-  // });
+  $("#id_tag").attr("placeholder", "Enter a tag").addClass("form-control");
+  $("#id_sequence").attr({"rows": 8, "cols": 100, "placeholder": "Enter a sequence"}).addClass("form-control");
+  $("#id_min_Tm").addClass("form-control");
+  $("#id_max_len").addClass("form-control");
+  $("#id_min_len").addClass("form-control");
+  $("#id_num_primers").addClass("form-control");
+
+
   $("#warn_500, #warn_1000").css("display", "none");
   track_input_length();
+  $("#id_sequence").on("keyup", function () { track_input_length(); });
+  if (!$("id_is_num_primers").is(":checked")) { $("#id_num_primers").attr("disabled", "disabled"); }
 
-  $("#check_num_primers").on("click", function () {
+  $("#id_is_num_primers").on("click", function () {
     if ($(this).is(":checked")) {
-        $("#text_num_primers").removeAttr("disabled");
+        $("#id_num_primers").removeAttr("disabled");
     } else {
-        $("#text_num_primers").attr("disabled", "disabled");
+        $("#id_num_primers").attr("disabled", "disabled");
     }
   });
 
-  $("#sequence").on("keyup", function () { track_input_length(); });
   if (navigator.userAgent.indexOf("Chrome") > -1 | navigator.userAgent.indexOf("Firefox") > -1) {
     $("#btn_submit").on("click", function () { show_modal(); });
     $("#btn_demo").on("click", function () { $("#modal_demo").modal("show"); });
@@ -78,7 +68,7 @@ $(document).ready(function () {
     // console.log("safari");
     $("#btn_submit").on("click", function () { 
       event.preventDefault();
-      show_modal(); 
+      show_modal();
       setTimeout(function(){ $("#form").trigger("submit"); }, 0);
     });
     $("#btn_demo").on("click", function () { 

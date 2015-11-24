@@ -138,14 +138,29 @@
           <h2 class="panel-title"><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;History</h2>
         </div>
         <div class="panel-body">
-          <table class="table table-hover">
-            <thead>
-              <tr class="active"><th>Date</th><th>Event</th></tr>
-            </thead>
-            <tbody>
-              {% autoescape off %}{{history}}{% endautoescape %}
-            </tbody>
-          </table>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <table class="table table-hover">
+                <thead>
+                  <tr class="active">
+                    <th><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Date</th>
+                    <th><span class="glyphicon glyphicon-volume-up"></span>&nbsp;&nbsp;Event</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for hist in history %}
+                    <tr>
+                      <td><i>{{hist.date}}</i></td>
+                      <td>{% autoescape off %}{{hist.content_html}}{% endautoescape %}</td>
+                    </tr>
+                  {% endfor %}
+                  <tr><td colspan="2"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
         </div>
       </div>
 

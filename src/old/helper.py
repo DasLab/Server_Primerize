@@ -10,25 +10,6 @@ from const import *
 from config import *
 
 
-def is_valid_name(input, char_allow, length):
-    if len(input) <= length: return 0
-    src = ''.join([string.digits, string.ascii_letters, char_allow])
-    for char in input:
-        if char not in src: return 0
-    return 1
-
-
-def is_valid_email(input):
-    input_split = input.split("@")
-    if len(input_split) != 2: return 0
-    if not is_valid_name(input_split[0], ".-_", 2): return 0
-    input_split = input_split[1].split(".")
-    if len(input_split) == 1: return 0
-    for char in input_split:
-        if not is_valid_name(char, "", 1): return 0
-    return 1
-
-
 def get_first_part_of_page(sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7):
     script = load_html(PATH['DESIGN_1D'])
     if type(min_Tm) is float: min_Tm = str(min_Tm)

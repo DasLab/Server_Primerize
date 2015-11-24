@@ -15,16 +15,6 @@ from wrapper import *
 
 class Root:
 
-    @cherrypy.expose(['find','retrieve'])
-    def result(self, job_id):
-        if not job_id: raise cherrypy.HTTPRedirect("home")
-        if len(job_id) != 16 or not re.match("[0-9a-fA-F]{16}", job_id): raise cherrypy.NotFound()
-        file_name = "cache/result_%s.html" % job_id
-        if os.path.exists(file_name):
-            return load_html(file_name)
-        else:
-            raise cherrypy.NotFound()
-
     @cherrypy.expose(['design'])
     def design_1d(self):
         return load_html(PATH['DESIGN_1D']).replace("__SEQ__", "").replace("__MIN_TM__", str(ARG['DEF_MIN_TM'])).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(ARG['DEF_MAX_LEN'])).replace("__MIN_LEN__", str(ARG['DEF_MIN_LEN'])).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
@@ -38,37 +28,6 @@ class Root:
     def test_random(self):
         seq = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
         return self.design_primers(seq, "scRNA", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MIN_LEN']), str(ARG['DEF_MAX_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))
-
-
-    @cherrypy.expose
-    def submit_download(self, first_name, last_name, email, inst, dept, is_subscribe):
-        is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
-        if not is_valid_name(first_name, "- ", 2): first_name = ''
-        if not is_valid_name(last_name, "- ", 1): last_name = ''
-        if not is_valid_name(inst, "()-, ", 4): inst = ''
-        if not is_valid_name(dept, "()-, ", 4): dept = ''
-        if not is_valid_email(email): email = ''
-
-        if is_valid:
-            f = open("src/usr_tab.csv", "a")
-            f.write("%s," % time.strftime("%c"))
-            if "1" in is_subscribe:
-                f.write("1")
-            else:
-                f.write("0")
-            f.write(",%s,%s,%s,%s,%s\n" % (first_name, last_name, email, inst, dept))
-            f.close()
-            return load_html(PATH['DOWNLOAD']).replace("__SCRIPT__", '<script type="text/javascript" src="/' + PATH['JS_DOWNLOAD_LINK']+'"></script>')
-
-        else:
-            script = load_html(PATH['DOWNLOAD'])
-            script = script.replace("__F_NAME__", first_name).replace("__L_NAME__", last_name).replace("__EMAIL__", email).replace("__INST__", inst).replace("__DEPT__", dept)
-            if "1" in is_subscribe: 
-                script = script.replace("__IS_SUBSCRIBE__", "checked=\"yes\"") 
-            else:
-                script = script.replace("__IS_SUBSCRIBE__", "") 
-            return script.replace("__SCRIPT__", '<script type="text/javascript" src="/' + PATH['JS_DOWNLOAD_ERR']+'"></script>')
-
 
     @cherrypy.expose
     def error(self):

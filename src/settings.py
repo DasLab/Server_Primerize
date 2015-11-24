@@ -86,10 +86,10 @@ PATH = SYS_PATH()
 
 env_arg = simplejson.load(open('%s/config/arg.conf' % MEDIA_ROOT))
 ARG = {
-    'DEF_MIN_TM': env_arg['DEF_MIN_TM'],
-    'DEF_MAX_LEN': env_arg['DEF_MAX_LEN'],
-    'DEF_MIN_LEN': env_arg['DEF_MIN_LEN'],
-    'DEF_NUM_PRM': env_arg['DEF_NUM_PRM'],
+    'MIN_TM': env_arg['MIN_TM'],
+    'MAX_LEN': env_arg['MAX_LEN'],
+    'MIN_LEN': env_arg['MIN_LEN'],
+    'NUM_PRM': env_arg['NUM_PRM'],
 }
 SEQ = {
     'P4P6':env_arg['SEQ_P4P6'],
@@ -177,6 +177,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
     # "src.models.email_form",
     # "src.models.debug_flag",
+    "src.models.ga_tracker",
 )
 
 MIDDLEWARE_CLASSES = (
