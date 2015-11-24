@@ -14,13 +14,6 @@ from wrapper import *
 
 
 class Root:
-
-    @cherrypy.expose(['design'])
-    def design_1d(self):
-        return load_html(PATH['DESIGN_1D']).replace("__SEQ__", "").replace("__MIN_TM__", str(ARG['DEF_MIN_TM'])).replace("__NUM_PRIMERS__", "auto").replace("__MAX_LEN__", str(ARG['DEF_MAX_LEN'])).replace("__MIN_LEN__", str(ARG['DEF_MIN_LEN'])).replace("__TAG__", "").replace("__LEN__", "0").replace("__IS_NUM_PRMS__", "").replace("__IS_NUM_PRMS_DIS__", "disabled=\"disabled\"").replace("__IS_T7__", "checked").replace("__RESULT__", "")
-    @cherrypy.expose
-    def design_primers(self, sequence, tag, min_Tm, num_primers, min_length, max_length, is_num_primers, is_t7, job_id):
-        return design_primers(self, sequence, tag, min_Tm, num_primers, max_length, min_length, is_num_primers, is_t7, job_id)
     @cherrypy.expose(['demo', 'P4P6', 'demo_P4P6', 'example_P4P6'])
     def demo_1d_P4P6(self):
         return self.design_primers(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MIN_LEN']), str(ARG['DEF_MAX_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))    

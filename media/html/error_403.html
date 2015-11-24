@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>DAS LAB + Stanford Biochemistry Department + Stanford University</title>
+    <link href="/site_media/css/{{DEBUG_DIR}}DasStyle{{DEBUG_STR}}.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+      var DEBUG_DIR = "{{DEBUG_DIR}}", DEBUG_STR = "{{DEBUG_STR}}";
+    </script>
+    <script type="text/javascript" src="/site_media/js/admin/{{DEBUG_DIR}}load{{DEBUG_STR}}.js"></script>  
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#main").addClass("DASerr");
+        $("#nav-home").addClass("active");
+      });
+    </script>
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '{{TRACKING_ID}}', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+    <div id="main" class='DASmain'>
+      <div id="dasLOGO" class="fix">
+        <a href="/"><img src="/site_media/images/logo_das.jpg" width="141" height="82"></a>
+      </div>
+      <div id="DasNAV" class="fix">
+        <table width="750" height="34" border="0">
+          <tbody>
+            <tr>
+              <td width="73" align="left" valign="top">
+                <a id="nav-home" href="/" class="nav-hover"><img src="/site_media/images/nav_home.png"></a>
+              </td>
+              <td width="117" align="left" valign="top">
+                <a id="nav-research" href="/research" class="nav-hover"><img src="/site_media/images/nav_research.png"></a>
+              </td>
+              <td width="73" align="left" valign="top">
+                <a id="nav-news" href="/news" class="nav-hover"><img src="/site_media/images/nav_news.png"></a>
+              </td>
+              <td width="94" align="left" valign="top">
+                <a id="nav-people" href="/people" class="nav-hover"><img src="/site_media/images/nav_people.png"></a>
+              </td>
+              <td width="159" align="left" valign="top">
+                <a id="nav-publications" href="/publications" class="nav-hover"><img src="/site_media/images/nav_publications.png"></a>
+              </td>
+              <td width="127" align="left" valign="top">
+                <a id="nav-resources" href="/resources" class="nav-hover"><img src="/site_media/images/nav_resources.png"></a>
+              </td>
+              <td width="77" align="left" valign="top">
+                <a id="nav-contact" href="/contact" class="nav-hover"><img src="/site_media/images/nav_contact.png"></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row bgimg2-lg BODY-ERR">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="panel_left">
+          <img src="/site_media/images/bg_403.png" height=200/>
+          <br/><br/>
+          <p style="font-weight:bold;">This page is for site <span class="label label-success">admin</span> only.</p>
+          <p>Please contact the site <span class="label label-success">admin</span> for administrative tasks (<a target="_blank">&nbsp;<u id="admin_email"></u>&nbsp;&nbsp;<span class="glyphicon glyphicon-envelope"></span>&nbsp;</a>).</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="panel_right">
+          <h2 style="margin-bottom:20px;">
+            <span class="label label-magenta">Translation Abortion</span>
+          </h2>
+          <p style="font-weight:bold; font-size:16px;">
+            <b>
+              Your mRNA <span id="user_1" class="label label-warning">{{sunet_id}}</span> lacks a RBS or IRES to access the ribosome. 
+              <i>trans</i>-splicing with the <span class="label label-success">admin</span> might activate proper gene expression. 
+            </b>
+          </p>
+          <br/>
+          <p><i>In other words,</i></p>
+          <h3><span class="label label-magenta">403: Forbidden</span></h3>
+          <p>
+            The server understood the rquest but refused to fulfill it.
+            <br/>
+            Your login account <span id="user_2" class="label label-warning">{{sunet_id}}</span> lacks the required permission.
+            <br/>
+            <b>For emergency, please use the <span class="label label-warning">daslab</span> shared account.</b>
+          </p>
+        </div>
+      </div>  
+
+      <div id="DasFOOTER" class="fix">
+        <img src="/site_media/images/footer_left.jpg" width="599" height="39" style="float:left;">
+        <a href="/group">
+          <img src="/site_media/images/footer_right.jpg" width="256" height="39" style="float:right;" id="img_group">
+        </a>
+      </div>
+      <div id="DasICON" class="fix">
+        <img src="/site_media/images/footer_link.jpg" width="729" height="54" border="0" usemap="#Map">
+        <map name="Map" id="Map">
+          <area shape="rect" coords="0,9,204,34" href="http://biochem.stanford.edu/" target="_blank">
+          <area shape="rect" coords="226,9,381,46" href="http://med.stanford.edu/" target="_blank">
+          <area shape="rect" coords="405,5,583,49" href="https://physics.stanford.edu/" target="_blank">
+          <area shape="rect" coords="604,4,713,42" href="http://bioxgames.stanford.edu/index.html" target="_blank">
+        </map>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("a.nav-hover").hover(function () {
+          $(this).children().css("border-bottom-color", "#008180");
+        }, function () {
+          $(this).children().css("border-bottom-color", "#fff");
+        });
+
+        $("#DasFOOTER").css({"top": "433px", "display": "inline"});
+        $("#DasICON").css({"top": "488px", "display": "inline"});
+
+        $.ajax({
+          url : "/get_admin",
+          dataType: "json",
+          success: function (data) {
+            $("#admin_email").html(data.email);
+            $("#admin_email").parent().attr("href", "mailto:" + data.email);
+          }
+        });
+
+        $.ajax({
+          url : "/group/get_user",
+          dataType: "json",
+          success: function (data) {
+            console.log(data);
+            $("#user_1").html(data.user);
+            $("#user_2").html(data.user);  
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
+

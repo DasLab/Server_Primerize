@@ -1,10 +1,14 @@
+data/
+cache/
+backup/
 *.pyc
-pymerize/__pycache__
-cache/*
 
-src/sys_ver.txt
-src/usr_tab.csv
+media/js/admin/min/
+media/js/public/min/
+media/js/suit/min/
+media/css/min/
 
-log_access.log
-log_error.log
+src/pymerize/__pycache__
 
+config/t47_dev.py
+config/*.conf

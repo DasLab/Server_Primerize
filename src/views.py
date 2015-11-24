@@ -70,11 +70,12 @@ def result(request):
         job_id = request.GET['job_id']
         if not job_id: return HttpResponseRedirect('/')
         if len(job_id) != 16 or (not re.match('[0-9a-fA-F]{16}', job_id)): return error400(request)
-        file_name = MEDIA_ROOT + '/data/1d/result_%s.html' % job_id
-        if os.path.exists(file_name):
-            return render_to_response(file_name, {}, context_instance=RequestContext(request))
-        else:
+        try:
+            job_entry = Design1D.objects.get(job_id=job_id)
+            job_entry = {'sequence': str(job_entry.sequence), 'tag': str(job_entry.tag), 'params': str(job_entry.params)}
+        except:
             return error404(request)
+        return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm(), 'result_data': job_entry, 'result_job_id': job_id}, context_instance=RequestContext(request))
 
 
 def design_1d(request):
@@ -103,7 +104,7 @@ def design_1d_run(request):
 
         msg = ''
         if len(sequence) < 60:
-            msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long).'
+            msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
         elif num_primers % 2:
             msg = 'Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.'
         if msg:
@@ -116,7 +117,7 @@ def design_1d_run(request):
         job = threading.Thread(target=design_1d_wrapper, args=(sequence, tag, min_Tm, num_primers, max_len, min_len, is_check_t7, job_id))
         job.start()
 
-        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id}), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence':sequence, 'tag': tag, 'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}), content_type='application/json')
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}), content_type='application/json')
 
