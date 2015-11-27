@@ -10,16 +10,16 @@
       <div class="col-md-9">
         <div class="bgimg">
          <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
-          <label for="tag" class="col-md-2">
+          <label for="tag" class="col-md-3">
             <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
           </label>
-          <div class="input-group col-md-7">
+          <div class="input-group col-md-6">
             {{1d_form.tag}}
             <span class="input-group-addon"><i>optional</i></span>
           </div>
          </p>
          <p>
-          <label for="sequence" class="col-md-2">
+          <label for="sequence" class="col-md-3">
             <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
           </label>
          </p>
@@ -59,7 +59,7 @@
                 </label>
               </input>
              </span>
-             <a id="btn_demo" class="btn btn-success pull-right" href="/demo_1d" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+             <a id="btn_demo" class="btn btn-success pull-right" href="/demo_1d_run" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
               &nbsp;&nbsp;Demo&nbsp;&nbsp;
             </a>
            </div>
@@ -136,13 +136,19 @@
  {% endblock %}
 
 {% block script %}
+  <script type="text/javascript">
+    if (isCDN) {
+      document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/' + ver_zclip + '/ZeroClipboard.min.js"><\/script>');
+    } else {
+      document.write('<script type="text/javascript" src="/site_media/js/ZeroClipboard.min.js"><\/script>');
+    }
+  </script>
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}design_1d{{DEBUG_STR}}.js"></script>  
   {% if result_data %}
   <script type="text/javascript">
     var result_data = {% autoescape off %}{{result_data}}{% endautoescape %}, result_job_id = "{{result_job_id}}";
-   </script>
+  </script>
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}result_1d{{DEBUG_STR}}.js"></script>  
   {% endif %}
-  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}zclip{{DEBUG_STR}}.js"></script>  
 {% endblock %}
 

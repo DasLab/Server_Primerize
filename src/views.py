@@ -74,16 +74,16 @@ def result(request):
             job_entry = Design1D.objects.get(job_id=job_id)
             job_entry = {'sequence': str(job_entry.sequence), 'tag': str(job_entry.tag), 'params': str(job_entry.params)}
         except:
-            return error404(request)
-        return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm(), 'result_data': job_entry, 'result_job_id': job_id}, context_instance=RequestContext(request))
+            if job_id != ARG['DEMO_1D_ID']: return error404(request)
+            job_entry = {'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'params': str(simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}))}
+    return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm(), 'result_data': job_entry, 'result_job_id': job_id}, context_instance=RequestContext(request))
 
 
 def design_1d(request):
     return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
 
-def design_1d_run(request):
+def design_1d_run(request, job_id=random_job_id()):
     if request.method != 'POST': return error400(request)
-
     form = Design1DForm(request.POST)
     if form.is_valid():
         sequence = form.cleaned_data['sequence']
@@ -110,23 +110,27 @@ def design_1d_run(request):
         if msg:
             return HttpResponse(simplejson.dumps({'error': msg}), content_type='application/json')
 
-        job_id = random_job_id()
         create_wait_html(job_id)
         job_entry = Design1D(date=datetime.utcnow(), job_id=job_id, sequence=sequence, tag=tag, status='underway', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}))
         job_entry.save()
         job = threading.Thread(target=design_1d_wrapper, args=(sequence, tag, min_Tm, num_primers, max_len, min_len, is_check_t7, job_id))
         job.start()
 
-        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence':sequence, 'tag': tag, 'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}), content_type='application/json')
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}), content_type='application/json')
-
-
-
-
-
-
     return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form}, context_instance=RequestContext(request))
+
+
+def demo_1d(request):
+    return HttpResponseRedirect('/result/?job_id=' + ARG['DEMO_1D_ID'])
+
+def demo_1d_run(request):
+    job_id = ARG['DEMO_1D_ID']
+    create_wait_html(job_id)
+    job = threading.Thread(target=design_1d_wrapper, args=(SEQ['P4P6'], 'P4P6_2HP', ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
+    job.start()
+    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}), content_type='application/json')
 
 
 def ping_test(request):

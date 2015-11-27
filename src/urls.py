@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^result/$', views.result),
     url(r'^design_1d/$', views.design_1d),
     url(r'^design_1d_run/$', views.design_1d_run),
+    url(r'^demo_1d/$', views.demo_1d),
+    url(r'^demo_1d_run/$', views.demo_1d_run),
 
     url(r'^home/$', RedirectView.as_view(url='/', permanent=True)),
     url(r'^index/$', RedirectView.as_view(url='/', permanent=True)),
@@ -47,6 +49,11 @@ urlpatterns = [
 
     url(r'^find/$', RedirectView.as_view(url='/result/', permanent=True)),
     url(r'^retrieve/$', RedirectView.as_view(url='/result/', permanent=True)),
+    url(r'^design/$', RedirectView.as_view(url='/design_1d/', permanent=True)),
+    url(r'^demo/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
+    url(r'^P4P6/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
+    url(r'^demo_P4P6/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
+    url(r'^example_P4P6/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
 
 
     url(r'^get_admin/$', views.get_admin),

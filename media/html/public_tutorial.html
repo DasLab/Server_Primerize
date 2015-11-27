@@ -87,59 +87,30 @@
           <br/>
           <div class="row">
             <div class="col-md-12">
-              <h4> Once submitted, a modal window will be displayed on the web page, showing the <span class="label label-violet">JOB_ID</span> :</h4>
+              <h4>Once submitted, a temporary page will be displayed on the web page, showing the <span class="label label-violet">JOB_ID</span> and indicating that the query is being processed.</h4>
               <br/>
-              <div class="dialog modal-lg center-block tutorial">
-                <div class="modal-content panel-primary">
-                  <div class="modal-header panel-heading">
-                    <h3 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running ...</h3>
-                  </div>
-                  <div class="modal-body panel-body">
-                    <div class="col-md-12">
-                      <h3 class="text-center"> Your 
-                        <span class="label label-violet">JOB_ID</span> is: 
-                        <span class="label label-inverse" id="modal_id">0123456789abcdef</span>
-                      </h3>
-                      <br/>
-                      <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
-                      <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
-                      <br/>
-                      <p class="text-center well" >
-                        <b>
-                          <span class="glyphicon glyphicon-copy"></span>&nbsp;&nbsp;Please <button id="copy-button" data-clipboard-text="http://primerize.stanford.edu/result?job_id=0123456789abcdef" class="btn btn-success disabled">Copy</button> this link: 
-                          <br/>
-                          <code><span id="url_id">http://primerize.stanford.edu/result?job_id=0123456789abcdef</span></code>
-                        </b>
-                      </p>
-                      <br/>
-                      <img class="center-block " src="/site_media/images/fg_load.gif" width="48px" />
-                      <br/>
-                    </div>
-                  </div>
-                </div>
+              <div class="row tutorial">
+                <div class="col-md-1"></div>
+                <div class="col-md-10"><h2><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running...  </h2></div>
+                <div class="col-md-1"></div>
               </div>
               <br/>
-              <h4> A similar modal window will be displayed on the web page for demo :</h4>
-              <br/>
-              <div class="dialog modal-lg center-block tutorial">
-                <div class="modal-content panel-primary">
-                  <div class="modal-header panel-heading">
-                    <h3 class="modal-title"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running ...</h3>
-                  </div>
-                  <div class="modal-body panel-body">
-                    <h3 class="text-center">
-                      Preparing <span class="label label-warning">DEMO</span> using <span class="label label-danger">P4P6_2HP</span> ...
-                    </h3>
-                    <br/>
-                    <img class="center-block " src="/site_media/images/fg_load.gif" width="48px" style="opacity:0.5;"/>
-                    <br/>
-                  </div>
-                </div>
+              <div class="row tutorial">
+                <div class="col-md-1"></div>
+                <div class="col-md-10"><div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div></div></div>
+                <div class="col-md-1"></div>
               </div>
-
-              <img style="position:absolute;display:block;right:15%;top:4%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window showing unique JOB_ID and retrieval URL link."/>
-              <img style="position:absolute;display:block;right:15%;top:35.5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Modal Window" data-content="Popup window for demo."/>
-              <br/><hr/>           
+              <h3 class="text-center tutorial">Your <span class="label label-violet">JOB_ID</span> is: <span class="label label-inverse">0123456789abcdef</span></h3>
+              <br/><br/>
+              <img class="center-block" src="/site_media/images/fg_load.gif" width="48px" style="opacity:0.5;"/>
+              <br/><br/>
+              <div class="row tutorial">
+                <div class="col-md-1"></div>
+                <div class="col-md-5"><p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p><p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 9 months.</p></div>
+                <div class="col-md-5"><p class="text-center well" ><b><span class="glyphicon glyphicon-copy"></span>&nbsp;&nbsp;Please <button id="copy-button" class="btn btn-success" disabled>Copy</button> this link: <br/><code>http://primerize.stanford.edu/result?job_id=0123456789abcdef</code></b></p><br/></div>
+                <div class="col-md-1"></div>
+              </div>
+              <hr/>           
               <h4>
                 When the calculation is completed, the result page will automatically be shown. The run results are retrievable through the <a href="/" class="btn btn-primary">&nbsp;&nbsp;Home&nbsp;&nbsp;</a> page with the unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.
               </h4>
@@ -166,49 +137,31 @@
                               </span>
                             </div>
                           </div>
-                          <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (3 months).</p>
+                          <p>Previous result is retrievable by its unique <span class="label label-violet">JOB_ID</span> before expiration (9 months).</p>
                         </div>
                     </div>
                   </div>  
                 </div>
                 <div class="col-md-2"></div>
               </div>       
-              <hr/>           
-              <h4>Before the calculation is finished, the result page will indicate that the query is being processed. Once finished, the actual results will replace this temporary page:</h4>
-              <br/>
-              <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                      <span class="sr-only"></span>
-                    </div>
-                  </div>
-                  <h3 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running...</h3>
-                  <br/>
-                  <p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p>
-                  <p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 3 months.</p>
-                </div>
-                <div class="col-md-2"></div>
-              </div>
-              <hr/>           
+              <hr/>
               <h4>For long inputs, we encourage the user to <a class="btn btn-warning btn-sm" href="/license" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. If the server encounters an internal error while processing the run, the following page will be shown.</h4>
               <br/>
               <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <h2 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Primerize has difficulty in your query...</h2>
+                  <br/>
                   <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                       <span class="sr-only"></span>
                     </div>
                   </div>
-                  <h3 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Primerize has difficulty in your query...</h3>
-                  <br/>
                   <p>Primerize encountered an internal error while processing your query. Sorry for the inconvenience. </p>
                   <p>We will investigate and fix the problem.</p>
-                  <p>For further information, please feel free to <a class="btn btn-warning btn-sm disabled" href="/about#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</p>
+                  <p>For further information, please feel free to <button class="btn btn-warning btn-sm" href="/about#contact" style="color: #ffffff;" disabled>Contact</button> us to track down the problem.</p>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
               </div>
             </div>
           </div>
@@ -229,11 +182,11 @@
             <div class="col-md-9">
               <div class="bgimg">
                <p class="tutorial">
-                <label for="tag"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;</label>
-                <input name="tag" type="text" value="P4P6_2HP" style="width:50%" maxlength="32" placeholder="Enter a tag" disabled="disabled" /> &nbsp;&nbsp;(optional)
+                <label for="tag" class="col-md-3"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;</label>
+                <div class="input-group col-md-6 tutorial"><input name="tag" type="text" value="P4P6_2HP" class="form-control" disabled="disabled" /><span class="input-group-addon"><i>optional</i></span></div>
                </p>
                <p class="tutorial">
-                <label for="sequence"><span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:</label>
+                <label for="sequence" class="col-md-3"><span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:</label>
                </p>
                <div class="row">
                 <div class="col-md-10 tutorial">
@@ -249,15 +202,15 @@
                   <br/>
                   <i>Length: <b><span id="count">259</span></b> nt</i>
                  </p>
-                 <img style="position:absolute;display:block;right:25%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
+                 <img class="question" style="right:25%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
                 </div>
                </div>
-               <img style="position:absolute;display:block;right:50%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
-               <textarea class="form-control tutorial" name="sequence" id="sequence" rows="6" cols="100" placeholder="Enter a sequence" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
-               <img style="position:absolute;display:block;right:50%;top:65%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
+               <img class="question" style="right:50%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
+               <textarea class="form-control" style="opacity:0.5;" name="sequence" id="sequence" rows="6" cols="100" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
+               <img class="question" style="right:50%;top:65%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
                <br/>
                <input type="submit" id="btn_submit" class="btn btn-primary tutorial" value="&nbsp;Primerize!&nbsp;" disabled="disabled"/>&nbsp;
-               <a href="/design_1d" class="btn btn-default tutorial" disabled="disabled">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+               <button href="/design_1d" class="btn btn-default tutorial" disabled="disabled">&nbsp;&nbsp;Clear&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
                <span class="tutorial">
                 <input id="is_agree" type="checkbox" checked="yes" required="required" style="display:none">
                   <label for="is_agree" style="display:none">
@@ -268,55 +221,63 @@
                   </label>
                 </input>
                </span>
-               <img style="position:absolute;display:block;right:50%;top:90%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Terms and Conditions" data-content="You must agree to use."/>
-               <a href="/demo_1d" id="btn_demo" class="btn btn-success pull-right tutorial" style="color: #ffffff;" data-toggle="popover" data-placement="bottom" disabled="disabled">&nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
-               <img style="position:absolute;display:block;right:12%;top:90%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
+               <img class="question" style="right:50%;top:90%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Terms and Conditions" data-content="You must agree to use."/>
+               <button href="/demo_1d" id="btn_demo" class="btn btn-success pull-right tutorial" style="color: #ffffff;" data-toggle="popover" data-placement="bottom" disabled="disabled">&nbsp;&nbsp;Demo&nbsp;&nbsp;</button>
+               <img class="question" style="right:12%;top:90%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
               </div>
             </div>
             <div class="col-md-3">
               <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="popover" data-placement="left">
                   <h3 class="panel-title tutorial"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
-                  <img style="position:absolute;display:block;right:10%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-content="This part is optional. It enables more options for guided design. Parameters for primer length, primer number and annealing temperature can be specified." data-toggle="popover" data-placement="left" title="Advanced Options"/>
+                  <img class="question" style="right:10%;top:0%" src="/site_media/images/fg_question.png" height="42" data-content="This part is optional. It enables more options for guided design. Parameters for primer length, primer number and annealing temperature can be specified." data-toggle="popover" data-placement="left" title="Advanced Options"/>
                 </div>
                 <div class="panel-body">
                   <div class="input-group">
-                    <p class="tutorial">
+                    <div class="tutorial">
                       <label for="min_Tm">minimum <b>Tm</b>:</label>
-                      <input name="min_Tm" type="text" value="60.0" style="width:25%" disabled="disabled"/>
-                      &deg;C
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MIN_TM" data-content="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C"/>
-                    <p class="tutorial">
+                      <div class="input-group" style="margin-left:10px;">
+                        <input name="min_Tm" type="text" value="60.0" class="form-control" disabled="disabled"/>
+                        <span class="input-group-addon">&deg;C</span>
+                      </div>
+                    </div>
+                    <img class="question" style="right:0%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MIN_TM" data-content="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C"/>
+                    <div style="padding-top:10px;" class="tutorial">
                       <label for="max_length">maximum <b>length</b> of primers:</label>
-                      <input name="max_length" type="text" value="60" style="width:25%" disabled="disabled"/> nt 
-                      <br/>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:22%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MAX_LENGTH" data-content="Maximum length for each primer. Default = 60 nt."/>
-                    <p class="tutorial">
+                      <div class="input-group" style="margin-left:10px;">
+                        <input name="max_length" type="text" value="60" class="form-control" disabled="disabled"/>
+                        <span class="input-group-addon">nt</span>
+                      </div>
+                    </div>
+                    <img class="question" style="right:0%;top:22%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MAX_LENGTH" data-content="Maximum length for each primer. Default = 60 nt."/>
+                    <div style="padding-top: 10px;" class="tutorial">
                       <label for="min_length">minimum <b>length</b> of primers:</label>
-                      <input name="min_length" type="text" value="15" style="width:25%" disabled="disabled"/> nt 
-                      <br/>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:42%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MIN_LENGTH" data-content="Minimum length for each primer. Default = 15 nt."/>
-                    <p class="tutorial">
-                      <input name="is_num_primers" type="checkbox" value="1" id="check_num_primers">
-                        <label for="is_num_primers">&nbsp;<b>#</b> number of primers:</label>
-                      </input>
-                      <br/>
-                      <input name="is_num_primers" type="hidden" value="0" checked disabled="disabled">
-                      <input name="num_primers" type="text" value="auto" style="width:25%" id="text_num_primers" disabled="disabled"/>
-                      <input name="num_primers" type="hidden" value="" disabled="disabled"/>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:62%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="NUM_PRIMERS" data-content="Exact limit of number of primers in design. Default = auto, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only. Check the checkbox to enable use."/>
-                    <p class="tutorial">
-                      <input name="is_t7" type="checkbox" value="1" id="check_t7" checked>
-                        <label for="is_t7">&nbsp;check for <b>T7</b> promoter sequence</label>
-                      </input>
-                      <br/>
-                      <input name="is_t7" type="hidden" value="0" checked>
-                    </p>
-                    <img style="position:absolute;display:block;right:0%;top:85%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="CHECK_T7" data-content="Check if T7 promoter (TTCTAATACGACTCACTATA) is present in input sequence. If not, it will be prepended automatically. Check the checkbox to enable use."/>
+                      <div class="input-group" style="margin-left:10px;">
+                        <input name="min_length" type="text" value="15" class="form-control" disabled="disabled"/>
+                        <span class="input-group-addon">nt</span>
+                      </div>
+                    </div>
+                    <img class="question" style="right:0%;top:42%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="MIN_LENGTH" data-content="Minimum length for each primer. Default = 15 nt."/>
+                    <div class="checkbox tutorial" style="display:inline-block;">
+                      <label>
+                        <input name="is_num_primers" type="checkbox" value="1" disabled>
+                        &nbsp;<b>#</b> number of primers:
+                      </label>
+                    </div>
+                    <div class="input-group tutorial" style="margin-left:10px;">
+                      <input name="num_primers" type="text" value="0" class="form-control" id="text_num_primers" disabled/>
+                      <span class="input-group-addon">#</span>
+                    </div>
+                      
+                    <img class="question" style="right:0%;top:62%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="NUM_PRIMERS" data-content="Exact limit of number of primers in design. Default = 0, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only. Check the checkbox to enable use."/>
+                    <div class="checkbox tutorial" style="display:inline-block;">
+                      <label>
+                        <input name="is_t7" type="checkbox" value="1" id="check_t7" checked disabled>
+                        &nbsp;check for <b>T7</b> promoter sequence
+                      </label>
+                    </div>
+
+                    <img class="question" style="right:0%;top:85%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="CHECK_T7" data-content="Check if T7 promoter (TTCTAATACGACTCACTATA) is present in input sequence. If not, it will be prepended automatically. Check the checkbox to enable use."/>
                   </div>
                 </div>
               </div>
@@ -329,11 +290,11 @@
             <div class="alert alert-warning center-block tutorial" id="warn_500">
               <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>500</b> nt</u>. The runtime exhibits quadratic growth with sequence length. Please make sure you have the <span class="label label-violet">JOB_ID</span> written down for retrieval.
             </div>
-            <img style="position:absolute;display:block;right:5%;top:10%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 500 nt."/>
+            <img class="question" style="right:5%;top:10%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 500 nt."/>
             <div class="alert alert-orange center-block tutorial" id="warn_1000">
-              <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <a class="btn btn-info btn-sm disabled" href="/license" role="button" style="color: #ffffff;">&nbsp;&nbsp;Download&nbsp;&nbsp;</a> the source code and run locally, which enables more options. 
+              <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Your sequence is longer than <u><b>1000</b> nt</u>. The runtime exhibits quadratic growth with sequence length. For long inputs, we encourage the user to <button class="btn btn-info btn-sm" ref="/license" role="button" style="color: #ffffff;" disabled>&nbsp;&nbsp;Download&nbsp;&nbsp;</button> the source code and run locally, which enables more options. 
             </div>
-            <img style="position:absolute;display:block;right:5%;top:60%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 1000 nt."/>
+            <img class="question" style="right:5%;top:60%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="WARNING" data-content="Warning for input sequence of length greater than 1000 nt."/>
           </div>
           <div class="col-md-3"></div>
         </div>
@@ -355,10 +316,10 @@
               <h4 class="text-right tutorial">
                 <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">0123456789abcdef</span>
               </h4>
-              <img style="position:absolute;display:block;right:66%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="JOB_ID" data-content="The unique 16-digit hexadecimal key for each run." />
-              <a href="" class="btn btn-info pull-right tutorial" style="color: #ffffff;" title="Output in plain text" download disabled="disabled">&nbsp;Save Result&nbsp;</a>
-              <img style="position:absolute;display:block;right:35%;top:50%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Save Results" data-content="Save the webpage output results in plain text file. Each run has its unique job key." />
-             <img style="position:absolute;display:block;right:35%;top:135%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported. "/>
+              <img class="question" style="right:66%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="JOB_ID" data-content="The unique 16-digit hexadecimal key for each run." />
+              <button href="" class="btn btn-info pull-right tutorial" style="color: #ffffff;" title="Output in plain text" download disabled="disabled">&nbsp;Save Result&nbsp;</button>
+              <img class="question" style="right:35%;top:50%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Save Results" data-content="Save the webpage output results in plain text file. Each run has its unique job key." />
+             <img class="question" style="right:35%;top:135%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported. "/>
             </div>
           </div>
           <br/>
@@ -383,15 +344,15 @@
                   <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: T7 promoter sequence is followed by nucleotides <u>GG</u>.
                 </p>
               </div>
-              <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback of T7 promoter checking. If feature is enabled, it will report presence, any actions taken, and whether the T7 region is followed by nucleotides GG for efficient transcription initiation."/>
+              <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback of T7 promoter checking. If feature is enabled, it will report presence, any actions taken, and whether the T7 region is followed by nucleotides GG for efficient transcription initiation."/>
             </div>
             <div class="col-md-2">
               <div class="alert alert-orange text-center tutorial">
                 <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>: 
                 <br/>
-                <i>2.3</i> s.
+                <i>0.4</i> s.
              </div>
-             <img style="position:absolute;display:block;left:-5%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Timer" data-content="Total runtime for this job (including program initiation)."/>
+             <img class="question" style="left:-5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Timer" data-content="Total runtime for this job (including program initiation)."/>
            </div>
           </div>
           <div class="row">
@@ -400,7 +361,7 @@
                 <div class="panel-heading tutorial">
                   <h2 class="panel-title"><span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;Designed Primers</h2>
                 </div>
-                <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Table of Primers" data-content="Complete set of primers listed." />
+                <img class="question" style="right:5%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Table of Primers" data-content="Complete set of primers listed." />
                 <div class="panel-body">
                   <table class="table tutorial">
                     <thead>
@@ -443,9 +404,9 @@
                       </tr>
                     </tbody>
                   </table>
-                  <img style="position:absolute;display:block;right:91%;top:12%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Number" data-content="Numbering of all primers. Foward (F) and reverse (R) primers (in assembly) are labelled." />
-                  <img style="position:absolute;display:block;right:81%;top:12%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Length" data-content="Length of all primers." />
-                  <img style="position:absolute;display:block;right:50%;top:12%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Sequence" data-content="Sequnces of all primers, written from 5' to 3'." />
+                  <img class="question" style="right:91%;top:12%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Number" data-content="Numbering of all primers. Foward (F) and reverse (R) primers (in assembly) are labelled." />
+                  <img class="question" style="right:81%;top:12%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Length" data-content="Length of all primers." />
+                  <img class="question" style="right:50%;top:12%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Sequence" data-content="Sequnces of all primers, written from 5' to 3'." />
                 </div>
               </div>
             </div>
@@ -457,7 +418,7 @@
               <div class="panel-heading tutorial">
                 <h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2>
               </div>
-              <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Assembly Scheme" data-content="Graphical illustration of the assembly scheme." />
+              <img class="question" style="right:5%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Assembly Scheme" data-content="Graphical illustration of the assembly scheme." />
               <div class="panel-body">
                 <pre class="tutorial"><span class="label-white label-primary">TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC</span><br/><br/><span class="label-info">TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG</span><span class="label-orange label-white glyphicon glyphicon-circle-arrow-right"></span><b> 1</b><br/>                                          |||||||||||||||||| <kbd>63.0</kbd><br/>                                      <b>2 </b><span class="label-green label-white glyphicon glyphicon-circle-arrow-left"></span><span class="label-white label-danger">GGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTT</span><br/>                                                                                    |||||||||||||||||| <kbd>60.2</kbd><br/>                                                                                    <span class="label-info">ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC</span><br/>                                                                                                                          ||||||||||||||||<br/>                                                                                                                      <b>4 </b><span class="label-green label-white glyphicon glyphicon-circle-arrow-left"></span><span class="label-white label-danger">CCCATACCATTATTCG</span><br/>                                                                                                                                            <br/><span class="label-warning">AAGATTATGCTGAGTGATATCCGGTTTCCGCAGCTCATCTGCGGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTTGAAACTCTACCGGAACGTTTCCCATACCATTATTCG</span><br/><br/><br/><span class="label-white label-primary">TGACGGACATGGTCCTAACCACGCAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGAGTAGCTGACAAAAAGAAACAACAACAACAAC</span><br/>                                                                                                                       
 <span class="label-info">TGACG</span><span class="label-orange label-white glyphicon glyphicon-circle-arrow-right"></span><b> 3</b><br/>||||| <kbd>60.4</kbd><br/><span class="label-white label-danger">ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTG</span><br/>                       |||||||||||||||||||| <kbd>60.5</kbd><br/>                       <span class="label-info">CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG</span><span class="label-orange label-white glyphicon glyphicon-circle-arrow-right"></span><b> 5</b>                                   
@@ -465,10 +426,10 @@
                                                           <b>6 </b><span class="label-green label-white glyphicon glyphicon-circle-arrow-left"></span><span class="label-white label-danger">TACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG</span>
           <br/><span class="label-warning">ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTGTCTAGAAGACAACTATACCTACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG</span>
                   </pre>
-                    <img style="position:absolute;display:block;right:5%;top:10%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence." />
-                    <img style="position:absolute;display:block;right:5%;top:42%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence in reverse complement." />
-                    <img style="position:absolute;display:block;right:45%;top:22%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Primers" data-content="Primers listed above in the assembly scheme, written in their directions (forward/reverse)." />
-                    <img style="position:absolute;display:block;right:20%;top:22%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Annealing Temperature" data-content="Annealing temperature of the &ldquo;bridging&rdquo; region between each neighboring primer pairs." />
+                    <img class="question" style="right:5%;top:10%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence." />
+                    <img class="question" style="right:5%;top:42%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Template Sequence" data-content="Your input sequence in reverse complement." />
+                    <img class="question" style="right:45%;top:22%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Primers" data-content="Primers listed above in the assembly scheme, written in their directions (forward/reverse)." />
+                    <img class="question" style="right:20%;top:22%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Annealing Temperature" data-content="Annealing temperature of the &ldquo;bridging&rdquo; region between each neighboring primer pairs." />
                   </div>
                 </div>
             </div>
@@ -476,9 +437,9 @@
           <br/>
           <div class="col-md-12">
             <p class="lead tutorial">
-              <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol" role="button" style="color: #ffffff;" disabled>&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.
+              <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <button class="btn btn-info btn-sm" href="/protocol" role="button" style="color: #ffffff;" disabled>&nbsp;&nbsp;Protocol&nbsp;&nbsp;</button> for PCR assembly.
             </p>
-            <img style="position:absolute;display:block;right:30%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="What's next?" data-content="Link to protocol page." />
+            <img class="question" style="right:30%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="What's next?" data-content="Link to protocol page." />
           </div>
           <br/>
         </div>
@@ -494,7 +455,7 @@
                 <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: No potential mis-priming found. See results below.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:52%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Warnings" data-content="SUCCESS indicates no potential mis-priming was detected."/>
+            <img class="question" style="right:52%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Warnings" data-content="SUCCESS indicates no potential mis-priming was detected."/>
           </div>
           <div class="col-md-6">
             <div class="alert alert-danger tutorial" >
@@ -502,7 +463,7 @@
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid sequence input (should be <u>at least <b>60</b> nt</u> long).
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to short length."/>
+            <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to short length."/>
           </div>
           <div class="col-md-6">
             <div class="alert alert-danger tutorial" >
@@ -510,7 +471,7 @@
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid sequence input (should be composed of A, C, G, T and U).
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to illegal characters' presense."/>
+            <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to illegal characters' presense."/>
           </div> 
           <div class="col-md-6">
             <div class="alert alert-danger tutorial" >
@@ -518,7 +479,7 @@
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid advanced options input.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid advanced options input."/>
+            <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid advanced options input."/>
           </div> 
           <div class="col-md-6">
             <div class="alert alert-danger tutorial" >
@@ -526,7 +487,7 @@
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:5%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid input for # number of primers."/>
+            <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid input for # number of primers."/>
           </div> 
           <div class="col-md-6">
             <div class="alert alert-default tutorial" >
@@ -534,7 +495,7 @@
                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;<b>T7_CHECK</b>: feature disabled (check the option to enable). No checking was performed.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when disabled."/>
+            <img class="question" style="right:5%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when disabled."/>
           </div> 
           <div class="col-md-6">
             <div class="alert alert-default tutorial" >
@@ -544,7 +505,7 @@
                 <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: T7 promoter sequence is followed by nucleotides <u>GG</u>.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and GG follow T7 region."/>
+            <img class="question" style="right:5%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and GG follow T7 region."/>
           </div> 
           <div class="col-md-6">
             <div class="alert alert-default tutorial" >
@@ -554,7 +515,7 @@
                 <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: T7 promoter sequence is <u><b>NOT</b></u> followed by nucleotides <u>GG</u>. Consider modifying the sequence for better transcription.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was not added and GG did not follow T7 region."/>
+            <img class="question" style="right:5%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was not added and GG did not follow T7 region."/>
           </div> 
           <div class="col-md-6">
             <div class="alert alert-default tutorial" >
@@ -564,7 +525,7 @@
                 <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: T7 promoter sequence is <u><b>NOT</b></u> followed by nucleotides <u>GG</u>. Consider modifying the sequence for better transcription.
               </p>
             </div>
-            <img style="position:absolute;display:block;right:5%;top:25%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and GG did not follow T7 region."/>
+            <img class="question" style="right:5%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and GG did not follow T7 region."/>
           </div> 
         </div>
         <hr/>           
@@ -581,11 +542,11 @@
                 <ul>
                   <li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li>
                   <li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li>
-                  <li>For further information, please feel free to <a class="btn btn-warning btn-sm disabled" href="/about#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li>
+                  <li>For further information, please feel free to <button class="btn btn-warning btn-sm" href="/about#contact" style="color: #ffffff;" disabled>Contact</button> us to track down the problem.</li>
                 </ul>
               </p>
             </div>
-            <img style="position:absolute;display:block;right:3%;top:50%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="FAILURE indicates no solution was found using the current setting. You might try adjusting the advanced options."/>
+            <img class="question" style="right:3%;top:50%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="FAILURE indicates no solution was found using the current setting. You might try adjusting the advanced options."/>
           </div>
 
         </div>
@@ -605,7 +566,7 @@
                 <div class="panel-heading tutorial">
                   <h2 class="panel-title"><span class="glyphicon glyphicon-text-background"></span>&nbsp;&nbsp;Plain Text File</h2>
                 </div>
-                <img style="position:absolute;display:block;right:5%;top:0%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Text Output" data-content="An example of P4P6-2HP Demo text output file. Results are same as seen in webpage." />
+                <img class="question" style="right:5%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Text Output" data-content="An example of P4P6-2HP Demo text output file. Results are same as seen in webpage." />
                 <div class="panel-body">
 
 <pre class="tutorial">
@@ -671,7 +632,7 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
 ------/* END */------
 ------/* NOTE: use "Lab Ready" for "Normalization" */------
 </pre>
-                  <img style="position:absolute;display:block;right:35%;bottom:10%;opacity:0.85;" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="IDT Bulk Ordering" data-content="Directly copy and paste this section into IDT Bulk Ordering Input. (See below)" />
+                  <img class="question" style="right:35%;bottom:10%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="IDT Bulk Ordering" data-content="Directly copy and paste this section into IDT Bulk Ordering Input. (See below)" />
                 </div>
               </div>
             </div>
@@ -691,7 +652,5 @@ P4P4_2HP-6  GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT   25nm  
 {% endblock %}
 
 {% block script %}
-  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}tutorial{{DEBUG_STR}}.js"></script>  
-  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}zclip{{DEBUG_STR}}.js"></script>  
-
+  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}tutorial{{DEBUG_STR}}.js"></script>
 {% endblock %}

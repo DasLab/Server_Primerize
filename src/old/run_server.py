@@ -14,27 +14,10 @@ from wrapper import *
 
 
 class Root:
-    @cherrypy.expose(['demo', 'P4P6', 'demo_P4P6', 'example_P4P6'])
-    def demo_1d_P4P6(self):
-        return self.design_primers(SEQ['P4P6'], "P4P6_2HP", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MIN_LEN']), str(ARG['DEF_MAX_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))    
     @cherrypy.expose
     def test_random(self):
         seq = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
         return self.design_primers(seq, "scRNA", str(ARG['DEF_MIN_TM']), str(ARG['DEF_NUM_PRM']), str(ARG['DEF_MIN_LEN']), str(ARG['DEF_MAX_LEN']), "0", "1", binascii.b2a_hex(os.urandom(8)))
-
-    @cherrypy.expose
-    def error(self):
-        raise ValueError
-    @cherrypy.expose(['demo_error'])
-    def demo_1d_error(self):
-        return load_html(PATH['DEMO_1D_ERROR'])
-    @cherrypy.expose(['demo_fail'])
-    def demo_1d_fail(self):
-        return load_html(PATH['DEMO_1D_FAIL'])
-    @cherrypy.expose(['demo_wait'])
-    def demo_1d_wait(self):
-        return load_html(PATH['DEMO_1D_WAIT'])
-
 
     @cherrypy.expose
     def admin(self):

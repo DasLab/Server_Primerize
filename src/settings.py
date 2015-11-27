@@ -90,6 +90,10 @@ ARG = {
     'MAX_LEN': env_arg['MAX_LEN'],
     'MIN_LEN': env_arg['MIN_LEN'],
     'NUM_PRM': env_arg['NUM_PRM'],
+
+    'DEMO_1D_ID': env_arg['DEMO_1D_ID'],
+    'DEMO_2D_ID': env_arg['DEMO_2D_ID'],
+    'DEMO_3D_ID': env_arg['DEMO_3D_ID'],
 }
 SEQ = {
     'P4P6':env_arg['SEQ_P4P6'],

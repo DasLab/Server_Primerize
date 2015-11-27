@@ -301,3 +301,10 @@ a.btn-default {
 .affix,.affix-top {
    position:static;
 }
+
+.question {
+  position:absolute;
+  display:block;
+  opacity:0.85;
+  z-index:1000;
+}

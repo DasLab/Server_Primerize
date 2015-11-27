@@ -9,6 +9,7 @@ from src.pymerize.primerize import *
 def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length, is_t7, job_id):
     try:
         t0 = time.time()
+        # time.sleep(5)
         if is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
         assembly = Primer_Assembly(sequence, min_Tm, num_primers, min_length, max_length, tag)
         t_total = time.time() - t0
@@ -20,9 +21,10 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
     # when no solution found
     if (not assembly.is_solution):
         html = '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
-        job_entry = Design1D.objects.get(job_id=job_id)
-        job_entry.status = 'fail'
-        job_entry.save()
+        if job_id != ARG['DEMO_1D_ID']:
+            job_entry = Design1D.objects.get(job_id=job_id)
+            job_entry.status = 'fail'
+            job_entry.save()
         return create_res_html(html, job_id)
     
     try:
@@ -125,9 +127,10 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         f.write('------/* END */------\n------/* NOTE: use "Lab Ready" for "Normalization" */------\n')
         f.close()
 
-        job_entry = Design1D.objects.get(job_id=job_id)
-        job_entry.status = 'success'
-        job_entry.save()
+        if job_id != ARG['DEMO_1D_ID']:
+            job_entry = Design1D.objects.get(job_id=job_id)
+            job_entry.status = 'success'
+            job_entry.save()
         create_res_html(script, job_id)
     except:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
