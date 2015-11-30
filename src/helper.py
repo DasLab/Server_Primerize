@@ -55,10 +55,11 @@ def create_wait_html(job_id):
     create_res_html(html, job_id)
 
 
-def create_err_html(job_id):
+def create_err_html(job_id, t_total):
     html = '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Primerize has difficulty in your query...</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><button href="%s" class="btn btn-info pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</button></div></div><br/><div class="progress"><div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%%"><span class="sr-only"></span></div></div><br/><p>Primerize encountered an internal error while processing your query. Sorry for the inconvenience. </p><p>We will investigate and fix the problem.</p><p>For further information, please feel free to <a class="btn btn-warning btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</p></div>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
     job_entry = Design1D.objects.get(job_id=job_id)
-    job_entry.status = 'error'
+    job_entry.status = '4'
+    job_entry.time = t_total
     job_entry.save()
 
     script_500 = ''.join(open(PATH.HTML_PATH['500'], 'r').readlines())

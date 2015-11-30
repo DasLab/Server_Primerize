@@ -14,8 +14,8 @@ from src import views
 admin.site = AdminSitePlus()
 admin.site.index_title = 'Primerize Administration'
 admin.autodiscover()
-# admin.site.login = views.user_login
-# admin.site.logout = views.user_logout
+admin.site.login = views.user_login
+admin.site.logout = views.user_logout
 
 
 urlpatterns = [
@@ -55,7 +55,11 @@ urlpatterns = [
     url(r'^demo_P4P6/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
     url(r'^example_P4P6/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
 
+    url(r'^login/$', views.user_login),
+    url(r'^logout/$', views.user_logout),
+    url(r'^password/$', views.user_password),
 
+    url(r'^get_user/$', views.get_user),
     url(r'^get_admin/$', views.get_admin),
     url(r'^get_js/$', views.get_js),
 
@@ -63,7 +67,13 @@ urlpatterns = [
     url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT + '/media'}),
     url(r'^site_data/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT + '/data'}),
 
-    # url(r'^admin/browse/' + path_end, views.browse),
+    url(r'^error/400/$', views.error400),
+    url(r'^error/401/$', views.error401),
+    url(r'^error/403/$', views.error403),
+    url(r'^error/404/$', views.error404),
+    url(r'^error/500/$', views.error500),
+
+    url(r'^admin/browse/' + path_end, views.browse),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?:LICENSE.md)?$', 'django.views.static.serve', kwargs={'path': 'LICENSE.md', 'document_root': MEDIA_ROOT}),
     url(r'^(?:robots.txt)?$', 'django.views.static.serve', kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),

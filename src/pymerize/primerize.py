@@ -290,7 +290,7 @@ def back_tracking(N_BP, sequence, scores_final, choice_start_p, choice_start_q, 
                     problem_primer = find_primers_affected(primers, best_match_reverse[0, end_pos])
                     misprime_warn.append((i + 1, num_match_reverse[0, end_pos] + 1, best_match_reverse[0, end_pos] + 1, problem_primer))
             else:
-                primer_set.append(primer_seq)
+                primer_set.append(str(primer_seq))
 
                 # mispriming "report"
                 end_pos = primers[1, i]

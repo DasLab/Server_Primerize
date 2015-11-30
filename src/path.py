@@ -14,6 +14,9 @@ class SYS_PATH:
 
             'design_1d': MEDIA_ROOT + '/media/html/public_design_1d.html',
 
+            'login': MEDIA_ROOT + '/media/html/user_login.html',
+            'password': MEDIA_ROOT + '/media/html/user_password.html',
+
             '400': MEDIA_ROOT + '/media/html/error_400.html',
             '401': MEDIA_ROOT + '/media/html/error_401.html',
             '403': MEDIA_ROOT + '/media/html/error_403.html',

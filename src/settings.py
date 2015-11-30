@@ -45,7 +45,6 @@ STATICFILES_DIRS = (root('data'), root('media'))
 env_oauth = simplejson.load(open('%s/config/oauth.conf' % MEDIA_ROOT))
 AWS = env_oauth['AWS']
 GA = env_oauth['GA']
-GCAL = env_oauth['CALENDAR']
 DRIVE = env_oauth['DRIVE']
 GIT = env_oauth['GIT']
 APACHE_ROOT = '/var/www'

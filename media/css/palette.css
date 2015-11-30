@@ -265,6 +265,9 @@ p.cap:first-letter {
 .label-teal {
 	background-color: #008080;
 }
+.label-magenta {
+	background-color: #ff69bc;
+}
 
 .alert-orange {
 	border-bottom: 5px solid #ff912e !important;
@@ -285,4 +288,68 @@ p.cap:first-letter {
 .alert-default {
 	border-bottom: 5px solid #a19193 !important;
 	background-color: #f5f5f5 !important;
+}
+.alert-violet {
+	border-bottom: 5px solid #c28fdd !important;
+	background-color: #ecddf4 !important;
+}
+.alert-info {
+	border-bottom: 5px solid #3ed4e7 !important;
+	background-color: #c5f2f7 !important;
+}
+.alert-light-blue {
+	border-bottom: 5px solid #8ee4cf !important;
+	background-color: #ddf6f0 !important;
+}
+
+.timeline-default {
+	background-color: #a19193;
+}
+.timeline-primary {
+	background-color: #5496d7;
+}
+.timeline-warning {
+	background-color: #eeb211;
+}
+.timeline-danger {
+	background-color: #ff5c2b;
+}
+.timeline-info {
+	background-color: #3ed4e7;
+}
+.timeline-success {
+	background-color: #29be92;
+}
+.timeline-green {
+	background-color: #50cc32;
+}
+.timeline-light-blue {
+	background-color: #8ee4cf;
+}
+.timeline-brown {
+	background-color: #d39a6f;
+}
+.timeline-violet {
+	background-color: #c28fdd;
+}
+.timeline-orange {
+	background-color: #ff912e;
+}
+.timeline-magenta {
+	background-color: #ff69bc;
+}
+.timeline-dark-red {
+	background-color: #d86f5c;
+}
+.timeline-dark-blue {
+	background-color: #7d95c9;
+}
+.timeline-gray {
+	background-color: #b7bac5;
+}
+.timeline-dark-green {
+	background-color: #24920C;
+}
+.timeline-teal {
+	background-color: #008080;
 }
