@@ -180,51 +180,49 @@
               <h2>Input Data:</h2>
             </div>
             <div class="col-md-9">
-              <div class="bgimg">
-               <p class="tutorial">
-                <label for="tag" class="col-md-3"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;</label>
-                <div class="input-group col-md-6 tutorial"><input name="tag" type="text" value="P4P6_2HP" class="form-control" disabled="disabled" /><span class="input-group-addon"><i>optional</i></span></div>
-               </p>
-               <p class="tutorial">
-                <label for="sequence" class="col-md-3"><span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:</label>
-               </p>
-               <div class="row">
-                <div class="col-md-10 tutorial">
-                 <ul>
-                  <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
-                  <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
-                  <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
-                 </ul>
-                </div>
-                <div class="col-md-2">
-                 <p class="text-right tutorial">
-                  <br/>
-                  <br/>
-                  <i>Length: <b><span id="count">259</span></b> nt</i>
-                 </p>
-                 <img class="question" style="right:25%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
-                </div>
-               </div>
-               <img class="question" style="right:50%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
-               <textarea class="form-control" style="opacity:0.5;" name="sequence" id="sequence" rows="6" cols="100" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
-               <img class="question" style="right:50%;top:65%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
-               <br/>
-               <input type="submit" id="btn_submit" class="btn btn-primary tutorial" value="&nbsp;Primerize!&nbsp;" disabled="disabled"/>&nbsp;
-               <button href="/design_1d" class="btn btn-default tutorial" disabled="disabled">&nbsp;&nbsp;Clear&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
-               <span class="tutorial">
-                <input id="is_agree" type="checkbox" checked="yes" required="required" style="display:none">
-                  <label for="is_agree" style="display:none">
-                    <i>
-                      Please read the 
-                      <a href="/license">Terms and Conditions</a>.
-                    </i>
-                  </label>
-                </input>
-               </span>
-               <img class="question" style="right:50%;top:90%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Terms and Conditions" data-content="You must agree to use."/>
-               <button href="/demo_1d" id="btn_demo" class="btn btn-success pull-right tutorial" style="color: #ffffff;" data-toggle="popover" data-placement="bottom" disabled="disabled">&nbsp;&nbsp;Demo&nbsp;&nbsp;</button>
-               <img class="question" style="right:12%;top:90%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
+             <p class="tutorial">
+              <label for="tag" class="col-md-3"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;</label>
+              <div class="input-group col-md-6 tutorial"><input name="tag" type="text" value="P4P6_2HP" class="form-control" disabled="disabled" /><span class="input-group-addon"><i>optional</i></span></div>
+             </p>
+             <p class="tutorial">
+              <label for="sequence" class="col-md-3"><span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:</label>
+             </p>
+             <div class="row bgimg">
+              <div class="col-md-10 tutorial">
+               <ul>
+                <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
+                <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
+                <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
+               </ul>
               </div>
+              <div class="col-md-2">
+               <p class="text-right tutorial">
+                <br/>
+                <br/>
+                <i>Length: <b><span id="count">259</span></b> nt</i>
+               </p>
+               <img class="question" style="right:25%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
+              </div>
+             </div>
+             <img class="question" style="right:50%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
+             <textarea class="form-control" style="opacity:0.5;" name="sequence" id="sequence" rows="6" cols="100" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
+             <img class="question" style="right:50%;top:65%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
+             <br/>
+             <input type="submit" id="btn_submit" class="btn btn-primary tutorial" value="&nbsp;Primerize!&nbsp;" disabled="disabled"/>&nbsp;
+             <button href="/design_1d" class="btn btn-default tutorial" disabled="disabled">&nbsp;&nbsp;Clear&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
+             <span class="tutorial">
+              <input id="is_agree" type="checkbox" checked="yes" required="required" style="display:none">
+                <label for="is_agree" style="display:none">
+                  <i>
+                    Please read the 
+                    <a href="/license">Terms and Conditions</a>.
+                  </i>
+                </label>
+              </input>
+             </span>
+             <img class="question" style="right:50%;top:90%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Terms and Conditions" data-content="You must agree to use."/>
+             <button href="/demo_1d" id="btn_demo" class="btn btn-success pull-right tutorial" style="color: #ffffff;" data-toggle="popover" data-placement="bottom" disabled="disabled">&nbsp;&nbsp;Demo&nbsp;&nbsp;</button>
+             <img class="question" style="right:12%;top:90%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
             </div>
             <div class="col-md-3">
               <div class="panel panel-default">

@@ -8,63 +8,61 @@
     {% csrf_token %}
     <div class="row">
       <div class="col-md-9">
-        <div class="bgimg">
-         <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
-          <label for="tag" class="col-md-3">
-            <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
-          </label>
-          <div class="input-group col-md-6">
-            {{1d_form.tag}}
-            <span class="input-group-addon"><i>optional</i></span>
-          </div>
-         </p>
-         <p>
-          <label for="sequence" class="col-md-3">
-            <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
-          </label>
-         </p>
-
-         <div class="row">
-          <div class="col-md-10">
-           <ul>
-            <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
-            <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
-            <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
-           </ul>
-          </div>
-          <div class="col-md-2">
-           <p class="text-right">
-            <br/>
-            <br/>
-            <i>Length: <b><span id="count"></span></b> nt</i>
-           </p>
-          </div>
-         </div>
-         {{1d_form.sequence}}
-         <br/>
-
-         <input name="job_id"  id="job_id" type="text" style="display:none" value="" />
-
-         <div class="row">
-          <div class="col-md-12">
-            <input type="submit" class="btn btn-primary" id="btn_submit" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
-            <a class="btn btn-default" href="/design_1d">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span style="display:none">
-              <input id="is_agree" type="checkbox" checked="yes" required="required">
-                <label for="is_agree">
-                  <i>
-                    Please read the 
-                    <a href="/license">Terms and Conditions</a>.
-                  </i>
-                </label>
-              </input>
-             </span>
-             <a id="btn_demo" class="btn btn-success pull-right" href="/demo_1d_run" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
-              &nbsp;&nbsp;Demo&nbsp;&nbsp;
-            </a>
-           </div>
-         </div>
+       <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
+        <label for="tag" class="col-md-3">
+          <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
+        </label>
+        <div class="input-group col-md-6">
+          {{1d_form.tag}}
+          <span class="input-group-addon"><i>optional</i></span>
         </div>
+       </p>
+       <p>
+        <label for="sequence" class="col-md-3">
+          <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
+        </label>
+       </p>
+
+       <div class="row bgimg">
+        <div class="col-md-10">
+         <ul>
+          <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
+          <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
+          <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
+         </ul>
+        </div>
+        <div class="col-md-2">
+         <p class="text-right">
+          <br/>
+          <br/>
+          <i>Length: <b><span id="count"></span></b> nt</i>
+         </p>
+        </div>
+       </div>
+       {{1d_form.sequence}}
+       <br/>
+
+       <input name="job_id"  id="job_id" type="text" style="display:none" value="" />
+
+       <div class="row">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-primary" id="btn_submit" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
+          <a class="btn btn-default" href="/design_1d">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="display:none">
+            <input id="is_agree" type="checkbox" checked="yes" required="required">
+              <label for="is_agree">
+                <i>
+                  Please read the 
+                  <a href="/license">Terms and Conditions</a>.
+                </i>
+              </label>
+            </input>
+           </span>
+           <a id="btn_demo" class="btn btn-success pull-right" href="/demo_1d_run" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+            &nbsp;&nbsp;Demo&nbsp;&nbsp;
+          </a>
+         </div>
+       </div>
       </div>
       <div class="col-md-3">
         <div class="panel panel-default">
@@ -144,11 +142,9 @@
     }
   </script>
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}design_1d{{DEBUG_STR}}.js"></script>  
-  {% if result_data %}
+  {% if result_job_id %}
   <script type="text/javascript">
-    var result_data = {% autoescape off %}{{result_data}}{% endautoescape %}, result_job_id = "{{result_job_id}}";
-  </script>
-  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}result_1d{{DEBUG_STR}}.js"></script>  
+    $("#result").load('/site_data/1d/result_{{result_job_id}}.html');  </script>
   {% endif %}
 {% endblock %}
 

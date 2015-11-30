@@ -1,2 +1,0 @@
-T47_DEV = 1
-IS_SLACK = 1
