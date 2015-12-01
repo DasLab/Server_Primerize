@@ -1,15 +1,13 @@
 var xmlhttp = new XMLHttpRequest(), isCDN = false;
-var ver_jquery, ver_bootstrap, ver_swfobj, ver_fullcal, ver_moment, ver_dropz;
+var ver_jquery, ver_bootstrap, ver_d3, ver_zclip;
 xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == XMLHttpRequest.DONE) {
     	if (xmlhttp.status == 200) {
 			var xmlDoc = JSON.parse(xmlhttp.responseText);
 			ver_jquery = xmlDoc.jquery;
 			ver_bootstrap = xmlDoc.bootstrap;
-			ver_swfobj = xmlDoc.swfobj;
-			ver_fullcal= xmlDoc.fullcal;
-			ver_moment = xmlDoc.moment;
-			// ver_dropz = xmlDoc[19];
+			ver_d3 = xmlDoc.d3;
+			ver_zclip = xmlDoc.zclip;
 
 			document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/' + ver_jquery + '/jquery.min.js"><\/script>');
 			document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + ver_bootstrap + '/js/bootstrap.min.js"><\/script>');
@@ -32,8 +30,8 @@ xmlhttp.onreadystatechange = function() {
 		}
 		document.write('<link rel="stylesheet" href="/site_media/css/' + DEBUG_DIR + 'theme' + DEBUG_STR + '.css" \/>');
 		document.write('<link rel="stylesheet" href="/site_media/css/' + DEBUG_DIR + 'palette' + DEBUG_STR + '.css" \>');
-		document.write('<link rel="shortcut icon" href="/site_media/images/icon_daslab.png" \/>');
-		document.write('<link rel="icon" type-"image/gif" href="/site_media/images/icon_daslab.png" \/>');
+		document.write('<link rel="shortcut icon" href="/site_media/images/icon_primerize.png" \/>');
+		document.write('<link rel="icon" type-"image/gif" href="/site_media/images/icon_primerize.png" \/>');
 	}
 }
 xmlhttp.open("GET", "/get_js", false);

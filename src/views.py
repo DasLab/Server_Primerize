@@ -74,14 +74,14 @@ def result(request):
             job_list_entry = JobIDs.objects.get(job_id=job_id)
         except:
             return error404(request)
-        if job_list_entry.type == 1:
+        if job_list_entry.type == '1':
             job_entry = Design1D.objects.get(job_id=job_id)
             params = simplejson.loads(job_entry.params)
             form = Design1DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'min_Tm': params['min_Tm'], 'max_len': params['max_len'], 'min_len': params['min_len'], 'num_primers': params['num_primers'], 'is_num_primers': params['is_num_primers'], 'is_check_t7': params['is_check_t7']})
             return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
-        elif job_list_entry.type == 2:
+        elif job_list_entry.type == '2':
             pass
-        elif job_list_entry.type == 3:
+        elif job_list_entry.type == '3':
             pass
         else:
             raise ValueError
@@ -232,7 +232,7 @@ def get_user(request):
 def get_js(request):
     lines = open('%s/cache/stat_sys.txt' % MEDIA_ROOT, 'r').readlines()
     lines = ''.join(lines).split('\t')
-    json = {'jquery':lines[11], 'bootstrap':lines[12]}
+    json = {'jquery':lines[9], 'bootstrap':lines[10], 'd3':lines[14], 'zclip':lines[15]}
     return HttpResponse(simplejson.dumps(json), content_type='application/json')
 
 

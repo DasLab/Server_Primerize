@@ -17,6 +17,15 @@ class SYS_PATH:
             'login': MEDIA_ROOT + '/media/html/user_login.html',
             'password': MEDIA_ROOT + '/media/html/user_password.html',
 
+            'admin_apache': MEDIA_ROOT + '/media/html/admin_apache.html',
+            'admin_aws': MEDIA_ROOT + '/media/html/admin_aws.html',
+            'admin_ga': MEDIA_ROOT + '/media/html/admin_ga.html',
+            'admin_git': MEDIA_ROOT + '/media/html/admin_git.html',
+            'admin_backup': MEDIA_ROOT + '/media/html/admin_backup.html',
+            'admin_dir': MEDIA_ROOT + '/media/html/admin_dir.html',
+            'admin_doc': MEDIA_ROOT + '/media/html/admin_doc.html',
+            'admin_doc_old': MEDIA_ROOT + '/media/html/admin_doc_old.html',
+
             '400': MEDIA_ROOT + '/media/html/error_400.html',
             '401': MEDIA_ROOT + '/media/html/error_401.html',
             '403': MEDIA_ROOT + '/media/html/error_403.html',

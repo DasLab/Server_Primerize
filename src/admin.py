@@ -4,9 +4,9 @@ from django.utils.html import format_html
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
-# from django.contrib.admin import AdminSite
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from django.core.management import call_command
 
 from datetime import datetime
 import time
@@ -30,7 +30,7 @@ class JobIDsAdmin(admin.ModelAdmin):
 admin.site.register(JobIDs, JobIDsAdmin)
 
 class JobGroupsAdmin(admin.ModelAdmin):
-    list_display = ('tag', 'job_1d', 'job_2d', 'job_3d',)
+    list_display = ('id', 'tag', 'job_1d', 'job_2d', 'job_3d',)
     # ordering = ('-job_id',)
     fieldsets = [
         (format_html('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;Entry'), {'fields': ['tag', 'job_1d', 'job_2d', 'job_3d']}),
@@ -91,12 +91,12 @@ def backup_form(request):
 admin.site.register_view('backup_form', view=backup_form, visible=False)
 
 def backup_now(request):
-    backup_weekly()
+    call_command('backup')
     return backup_stat(request)
 admin.site.register_view('backup_now', view=backup_now, visible=False)
 
 def upload_now(request):
-    gdrive_weekly()
+    call_command('gdrive')
     return backup_stat(request)
 admin.site.register_view('upload_now', view=upload_now, visible=False)
 
@@ -127,7 +127,7 @@ def aws_admin(request):
 admin.site.register_view('aws_admin', view=aws_admin, visible=False)
 
 def ga(request):
-    return render_to_response(PATH.HTML_PATH['admin_ga'], {}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_ga'], {'ga_url': GA['LINK_URL']}, context_instance=RequestContext(request))
 admin.site.register_view('ga/', view=ga, visible=False)
 
 def ga_admin(request):
@@ -177,7 +177,11 @@ admin.site.register_view('dir/', view=dir, visible=False)
 
 def doc(request):
     return render_to_response(PATH.HTML_PATH['admin_doc'], {}, context_instance=RequestContext(request))
-admin.site.register_view('doc/', view=doc, visible=False)
+admin.site.register_view('doc_django/', view=doc, visible=False)
+
+def doc_old(request):
+    return render_to_response(PATH.HTML_PATH['admin_doc_old'], {}, context_instance=RequestContext(request))
+admin.site.register_view('doc_cherrypy/', view=doc_old, visible=False)
 
 
 def get_ver(request):

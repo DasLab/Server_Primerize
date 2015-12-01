@@ -14,15 +14,7 @@
 		"ACCOUNT": "account_id",
 		"ID": "ids",
 		"TRACKING_ID": "tracking_id",
-
-		"CLIENT_ID": "client_id",
-		"CLIENT_SECRET": "client_secret",
-
-		"REFRESH_TOKEN": "refresh_token"
-	},
-
-	"CALENDAR": {
-		"ICS": "private_ics_url",
+		"LINK_URL": "ga_view_url",
 
 		"CLIENT_ID": "client_id",
 		"CLIENT_SECRET": "client_secret",
@@ -31,10 +23,6 @@
 	},
 
 	"DRIVE": {
-		"SCHEDULE_SPREADSHEET_ID": "schedule_spreadsheet_id",
-		"DUTY_SPREADSHEET_ID": "duty_spreadsheet_id",
-		"TEMPLATE_PRESENTATION_ID": "template_presentation_id",
-
 		"CLIENT_ID": "client_id",
 		"CLIENT_SECRET": "client_secret",
 
@@ -42,27 +30,12 @@
 	},
 
 	"GIT": {
-		"CLIENT_ID": "client_id",
-		"CLIENT_SECRET": "client_secret",
-
-		"ACCESS_TOKEN": "access_token"
-	},
-
-	"SLACK": {
-		"BOT_NAME": "bot_name",
-		"ADMIN_NAME": "admin_name",
+		"REPOSITORY": "org_name/repo_name",
 
 		"CLIENT_ID": "client_id",
 		"CLIENT_SECRET": "client_secret",
 
 		"ACCESS_TOKEN": "access_token"
-	},
-
-	"DROPBOX": {
-		"APP_KEY": "app_key",
-		"APP_SECRET": "app_secret",
-	
-		"ACCESS_TOKEN": "access_token"
-	}	
+	}
 }
 

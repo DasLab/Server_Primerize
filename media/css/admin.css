@@ -89,6 +89,7 @@ label {
 .navbar {
   background-color: #2da89c;
   /*border-color: #112d52;*/
+  border-bottom: 0px;
 }
 .navbar .navbar-brand {
   color: #fff;
@@ -325,7 +326,7 @@ h1.section>span.num {
   height:     100%;
   width:      100%;
   background-position: center center;
-  background-size: 96px;
+  background-size: 72px;
   opacity: 0.5;
   background-color: #fff;
   background-repeat: no-repeat;

@@ -67,11 +67,11 @@
           </li>
         </ul>
         <ul class="nav navbar-nav">
-          <li id="nav_external" class="navbar-icon">
+          <li id="nav_public" class="navbar-icon">
             <a href="/">
               <span style="font-weight:bold;">
                 <span class="glyphicon glyphicon-globe"></span>
-                <span id="nav_external_text" style="display:none; color:#ff912e;">&nbsp;&nbsp;Public&nbsp;&nbsp;</span>
+                <span id="nav_public_text" style="display:none; color:#eeb211;">&nbsp;&nbsp;Public&nbsp;&nbsp;</span>
               </span>
             </a>
           </li>
@@ -107,7 +107,7 @@
 
             <li class="dropdown">
               <a><span class="glyphicon glyphicon-user"></span></a>
-              <ul class="dropdown-menu dropdown-menu-right nav nav-pills nav-stacked" role="menu" id="nav_user">
+              <ul class="dropdown-menu dropdown-menu-right nav nav-pills nav-stacked" role="menu" id="nav_profile">
                 <li class="nav-list">
                   <br/>
                   <p><span style="text-decoration:underline; color:gray;">Signed In As:</span></p>
@@ -194,11 +194,11 @@
           </ul>
         </li>
 
-        <li id="nav_global_lg" class="nav-ul nav-ul-lg li-green">
-          <a href="/admin/src/news/" ><span class="lead glyphicon glyphicon-globe"></span></a>
+        <li id="nav_job_lg" class="nav-ul nav-ul-lg li-green">
+          <a href="/admin/src/jobids/" ><span class="lead glyphicon glyphicon-inbox"></span></a>
         </li>
-        <li id="nav_global" class="nav-ul li-green">
-          <a href="/admin/src/news/"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Job Management</a>
+        <li id="nav_job" class="nav-ul li-green">
+          <a href="/admin/src/jobids/"><span class="glyphicon glyphicon-inbox"></span>&nbsp;&nbsp;Job Management</a>
           <ul class="nav-li-sub">
             <li id="nav_job_id" class="nav-li"><span class="glyphicon glyphicon-credit-card nav-icon"></span><a href="/admin/src/jobids/">&nbsp;&nbsp;Job IDs</a></li>
             <li id="nav_job_group" class="nav-li"><span class="glyphicon glyphicon-qrcode nav-icon"></span><a href="/admin/src/jobgroups/">&nbsp;&nbsp;Job Groupings</a></li>
@@ -208,10 +208,10 @@
           </ul>
         </li>
 
-        <li id="nav_internal_lg" class="nav-ul nav-ul-lg li-warning">
-          <a href="/admin/auth/user/" ><span class="lead glyphicon glyphicon-inbox"></span></a>
+        <li id="nav_user_lg" class="nav-ul nav-ul-lg li-warning">
+          <a href="/admin/auth/user/" ><span class="lead glyphicon glyphicon-user"></span></a>
         </li>
-        <li id="nav_internal" class="nav-ul li-warning">
+        <li id="nav_user" class="nav-ul li-warning">
           <a href="/admin/auth/user/"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;User Management</a>
           <ul class="nav-li-sub">
             <li id="nav_auth" class="nav-li"><span class="glyphicon glyphicon-lock nav-icon"></span><a href="/admin/auth/user/">&nbsp;&nbsp;User Autherization</a></li>
@@ -220,8 +220,14 @@
           </ul>
         </li>
 
-        <li id="nav_doc_lg" class="nav-ul nav-ul-lg li-violet"><a href="/admin/doc/"><span class="lead glyphicon glyphicon-book"></span></a></li>
-        <li id="nav_doc" class="nav-ul li-violet"><a href="/admin/doc/"><span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;Documentation</a></li>
+        <li id="nav_doc_lg" class="nav-ul nav-ul-lg li-violet"><a href="/admin/doc_django/"><span class="lead glyphicon glyphicon-book"></span></a></li>
+        <li id="nav_doc" class="nav-ul li-violet">
+          <a href="/admin/doc_django/"><span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;Documentation</a>
+          <ul class="nav-li-sub">
+            <li id="nav_django" class="nav-li"><img src="/site_media/images/icons/django_o.png" class="nav-icon" height="14px"><a href="/admin/doc_django/">&nbsp;&nbsp;Django (Current)</a></li>
+            <li id="nav_cherrypy" class="nav-li"><span class="glyphicon glyphicon-apple nav-icon"></span><a href="/admin/doc_cherrypy/">&nbsp;&nbsp;CherryPy (Obsolete)</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
 

@@ -211,7 +211,7 @@ TEMPLATE_DIRS = (
 
 SUIT_CONFIG = {
     # header
-    'ADMIN_NAME': 'Das Lab Website',
+    'ADMIN_NAME': 'Primerize Admin',
     'HEADER_DATE_FORMAT': 'F d, Y (l)',
     'HEADER_TIME_FORMAT': 'h:i a (e)',
 

@@ -143,8 +143,9 @@
   </script>
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}design_1d{{DEBUG_STR}}.js"></script>  
   {% if result_job_id %}
-  <script type="text/javascript">
-    $("#result").load('/site_data/1d/result_{{result_job_id}}.html');  </script>
+    <script type="text/javascript">
+      $("#result").load('/site_data/1d/result_{{result_job_id}}.html');
+    </script>
   {% endif %}
 {% endblock %}
 

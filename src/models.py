@@ -87,9 +87,9 @@ class JobIDs(models.Model):
 class JobGroups(models.Model):
     sequence = models.TextField(blank=False)
     tag = models.CharField(blank=True, max_length=31, help_text='<span class="glyphicon glyphicon-tag"></span>&nbsp;Prefix/name for sequence.')
-    job_1d = models.ForeignKey(Design1D, null=True, blank=True, verbose_name='Job entry of Design1D', help_text='<span class="glyphicon glyphicon-credit-card"></span>&nbsp;Unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.')
-    job_2d = models.ForeignKey(Design2D, null=True, blank=True, verbose_name='Job ID of Design2D', help_text='<span class="glyphicon glyphicon-credit-card"></span>&nbsp;Unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.')
-    job_3d = models.ForeignKey(Design3D, null=True, blank=True, verbose_name='Job ID of Design3D', help_text='<span class="glyphicon glyphicon-credit-card"></span>&nbsp;Unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.')
+    job_1d = models.OneToOneField(Design1D, null=True, blank=True, verbose_name='Job entry of Design1D', help_text='<span class="glyphicon glyphicon-credit-card"></span>&nbsp;Unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.')
+    job_2d = models.OneToOneField(Design2D, null=True, blank=True, verbose_name='Job ID of Design2D', help_text='<span class="glyphicon glyphicon-credit-card"></span>&nbsp;Unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.')
+    job_3d = models.OneToOneField(Design3D, null=True, blank=True, verbose_name='Job ID of Design3D', help_text='<span class="glyphicon glyphicon-credit-card"></span>&nbsp;Unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.')
 
     class Meta():
         verbose_name = 'Job Group'

@@ -15,27 +15,23 @@ $(document).ready(function() {
         success : function (data) {
             var txt = data.split(/\t/);
 
-            $("#id_news_n").html('<i>' + txt[0] + '</i>');
-            $("#id_news_s").html('<span style="color:#00f;">' + txt[1] + '</span>');
-            $("#id_member_n").html('<i>' + txt[2] + '</i>');
-            $("#id_member_s").html('<span style="color:#00f;">' + txt[3] + '</span>');
-            $("#id_pub_n").html('<i>' + txt[4] + '</i>');
-            $("#id_pub_s").html('<span style="color:#00f;">' + txt[5] + '</span>');
-            $("#id_rot_n").html('<i>' + txt[6] + '</i>');
-            $("#id_rot_s").html('<span style="color:#00f;">' + txt[7] + '</span>');
-            $("#id_spe_n").html('<i>' + txt[8] + '</i>');
-            $("#id_spe_s").html('<span style="color:#00f;">' + txt[9] + '</span>');
+            $("#id_design_1d").html('<i>' + txt[0] + '</i>');
+            $("#id_design_1d_s").html('<span style="color:#00f;">' + txt[1] + '</span>');
+            $("#id_design_2d").html('<i>' + txt[2] + '</i>');
+            $("#id_design_2d_s").html('<span style="color:#00f;">' + txt[3] + '</span>');
+            $("#id_design_3d").html('<i>' + txt[4] + '</i>');
+            $("#id_design_3d_s").html('<span style="color:#00f;">' + txt[5] + '</span>');
 
-            $("#id_mysql_s").html('<span style="color:#00f;">' + txt[10] + '</span>');
-            $("#id_static_s").html('<span style="color:#00f;">' + txt[11] + '</span>');
-            $("#id_apache_s").html('<span style="color:#00f;">' + txt[12] + '</span>');
-            $("#id_config_s").html('<span style="color:#00f;">' + txt[13] + '</span>');
-            $("#id_mysql_p").html($("#id_mysql_p").html() + '<br/><code>' + txt[14] + '</code>');
-            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + txt[15] + '</code>');
-            $("#id_apache_p").html($("#id_apache_p").html() + '<br/><code>' + txt[16] + '</code>');
-            $("#id_config_p").html($("#id_config_p").html() + '<br/><code>' + txt[17] + '</code>');
+            $("#id_mysql_s").html('<span style="color:#00f;">' + txt[6] + '</span>');
+            $("#id_static_s").html('<span style="color:#00f;">' + txt[7] + '</span>');
+            $("#id_apache_s").html('<span style="color:#00f;">' + txt[8] + '</span>');
+            $("#id_config_s").html('<span style="color:#00f;">' + txt[9] + '</span>');
+            $("#id_mysql_p").html($("#id_mysql_p").html() + '<br/><code>' + txt[10] + '</code>');
+            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + txt[11] + '</code>');
+            $("#id_apache_p").html($("#id_apache_p").html() + '<br/><code>' + txt[12] + '</code>');
+            $("#id_config_p").html($("#id_config_p").html() + '<br/><code>' + txt[13] + '</code>');
 
-            var gdrive = txt[18].split(/~|~/);
+            var gdrive = txt[14].split(/~|~/);
             var names = [], sizes = [], times = [];
             for (var i = 0; i < gdrive.length; i += 12) {
                 names.push(gdrive[i+2]);
@@ -57,10 +53,10 @@ $(document).ready(function() {
         dataType: "text",
         success : function (data) {
             var txt = data.split(/\t/);
-            var drive_free = parseFloat(txt[45]), drive_used = parseFloat(txt[44]), drive_total = parseFloat(txt[46]);
+            var drive_free = parseFloat(txt[46]), drive_used = parseFloat(txt[45]), drive_total = parseFloat(txt[47]);
             $("#id_drive_space > div > div.progress-bar-success").css("width", (drive_free / drive_total * 100).toString() + '%' ).html(drive_free + ' G');
             $("#id_drive_space > div > div.progress-bar-danger").css("width", (drive_used / drive_total * 100).toString() + '%' ).html(drive_used + ' G');
-            var disk_sp = txt[37].split(/\//);
+            var disk_sp = txt[36].split(/\//);
             $("#id_disk_space > div > div.progress-bar-success").css("width", (parseFloat(disk_sp[0]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[0]);
             $("#id_disk_space > div > div.progress-bar-danger").css("width", (parseFloat(disk_sp[1]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[1]);
         }
