@@ -94,6 +94,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         assembly = Primer_Assembly(sequence, min_Tm, num_primers, min_length, max_length, tag)
         t_total = time.time() - t0
     except:
+        t_total = time.time() - t0
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
         return create_err_html(job_id, t_total)
