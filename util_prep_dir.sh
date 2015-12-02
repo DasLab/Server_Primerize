@@ -1,7 +1,7 @@
 mkdir backup
 
 mkdir cache
-touch cache/log_alert_admin.log cache/log_cron.log cache/log_django.log cache/log_cron_backup.log cache/log_cron_gdrive.log cache/log_cron_report.log cache/log_cron_version.log
+touch cache/log_alert_admin.log cache/log_cron.log cache/log_django.log cache/log_cron_cleanup.log cache/log_cron_backup.log cache/log_cron_gdrive.log cache/log_cron_report.log cache/log_cron_version.log
 touch cache/stat_backup.txt cache/stat_sys.txt
 
 cp -n config/arg.conf.example config/arg.conf

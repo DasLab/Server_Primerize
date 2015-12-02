@@ -1,14 +1,25 @@
-data/
-cache/
-backup/
+/data/*
+!/data/1d/result_0123456789abcdef.html
+!/data/1d/result_0123456789abcdef.txt
+
+/cache/*
+!/cache
+/backup/*
+!/backup
+
 *.pyc
 
-media/js/admin/min/
-media/js/public/min/
-media/js/suit/min/
-media/css/min/
+/media/js/admin/min/*
+!media/js/admin/min
+/media/js/public/min/*
+!/media/js/public/min
+/media/js/suit/min/*
+!/media/js/suit/min
+/media/css/min/*
+!/media/css/min
 
-src/pymerize/__pycache__/
+/src/pymerize/__pycache__/*
+!/src/pymerize/__pycache__
 
-config/t47_dev.py
-config/*.conf
+/config/t47_dev.py
+/config/*.conf
