@@ -21,6 +21,7 @@ from django.core.management import call_command
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.conf import settings
 
 from src.settings import *
 from src.models import BackupForm
@@ -98,10 +99,15 @@ def set_backup_form(request):
     open('%s/config/cron.conf' % MEDIA_ROOT, 'w').writelines(lines)
 
     try:
-        # cron = subprocess.Popen('crontab -l | cut -d" " -f1-5', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()
-        # if len(cron) > 9:
-        #     subprocess.check_call('crontab -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        call_command('crontab', 'add')            
+        cron = subprocess.Popen('crontab -l | cut -d" " -f1-5', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()
+        if len(cron) > 9:
+            subprocess.check_call('crontab -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+        (_, _, _, _, _, _, _, _, CRONJOBS, _, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
+        settings._wrapped.CRONJOBS = CRONJOBS
+        settings._wrapped.KEEP_BACKUP = KEEP_BACKUP
+        settings._wrapped.KEEP_JOB = KEEP_JOB
+        call_command('crontab', 'add')
         # subprocess.check_call('cd %s && python manage.py crontab add' % MEDIA_ROOT, shell=True, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:
         print "    \033[41mERROR\033[0m: Failed to reset \033[94mcrontab\033[0m schedules."
