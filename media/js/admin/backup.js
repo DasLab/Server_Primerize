@@ -10,7 +10,7 @@ $(document).ready(function() {
     $("lspan").remove();
 
     $.ajax({
-        url : "/admin/get_backup",
+        url : "/admin/get_backup/",
         dataType: "text",
         success : function (data) {
             var txt = data.split(/\t/);
@@ -48,8 +48,8 @@ $(document).ready(function() {
         }
     });
 
-  $.ajax({
-        url : "/admin/get_ver",
+    $.ajax({
+        url : "/admin/get_ver/",
         dataType: "text",
         success : function (data) {
             var txt = data.split(/\t/);
@@ -62,29 +62,6 @@ $(document).ready(function() {
         }
     });
 
-    $.ajax({
-        url : "/admin/backup_form",
-        dataType: "json",
-        success : function (data) {
-            $("#id_time_backup").val(data.time_backup);
-            $("#id_day_backup").val(data.day_backup);
-            $("#id_time_upload").val(data.time_upload);
-            $("#id_day_upload").val(data.day_upload);
-            if (!data.time_backup || !data.day_backup) {
-                $("#banner_backup").removeClass("alert-success").addClass("alert-danger");
-                $("#sign_backup").removeClass("glyphicon-ok-sign").addClass("glyphicon-remove-sign");
-            }
-            if (!data.time_upload || !data.day_upload) {
-                $("#banner_sync").removeClass("alert-success").addClass("alert-danger");
-                $("#sign_sync").removeClass("glyphicon-ok-sign").addClass("glyphicon-remove-sign");
-            }
-
-            $("#id_time_backup").trigger("change");
-            $("#id_time_upload").trigger("change");
-            $("#modal_backup").html('On <span class="label label-primary">' + $("#id_time_backup").val() + '</span> every <span class="label label-inverse">' + weekdayNames[$("#id_day_backup").val()] + '</span> (UTC).');
-            $("#modal_upload").html('On <span class="label label-primary">' + $("#id_time_upload").val() + '</span> every <span class="label label-inverse">' + weekdayNames[$("#id_day_upload").val()] + '</span> (UTC).');
-        }
-    });
 
     $("#id_time_backup, #id_day_backup").on("change", function() {
         var time = $("#id_time_backup").val();
@@ -98,6 +75,20 @@ $(document).ready(function() {
         $("#time_upload_pdt").html(backup.toLocaleTimeString());
         $("#day_upload_pdt").html(weekdayNames[backup.getDay()]);
     });
+
+    if (!$("#id_time_backup").val() || !$("#id_day_backup").val()) {
+        $("#banner_backup").removeClass("alert-success").addClass("alert-danger");
+        $("#sign_backup").removeClass("glyphicon-ok-sign").addClass("glyphicon-remove-sign");
+    }
+    if (!$("#id_time_upload").val() || !$("#id_day_upload").val()) {
+        $("#banner_sync").removeClass("alert-success").addClass("alert-danger");
+        $("#sign_sync").removeClass("glyphicon-ok-sign").addClass("glyphicon-remove-sign");
+    }
+
+    $("#id_time_backup").trigger("change");
+    $("#id_time_upload").trigger("change");
+    $("#modal_backup").html('On <span class="label label-primary">' + $("#id_time_backup").val() + '</span> every <span class="label label-inverse">' + weekdayNames[$("#id_day_backup").val()] + '</span> (UTC).');
+    $("#modal_upload").html('On <span class="label label-primary">' + $("#id_time_upload").val() + '</span> every <span class="label label-inverse">' + weekdayNames[$("#id_day_upload").val()] + '</span> (UTC).');
 
 });
 

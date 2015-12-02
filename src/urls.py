@@ -9,13 +9,15 @@ from adminplus.sites import AdminSitePlus
 from filemanager import path_end
 
 from src.settings import MEDIA_ROOT, STATIC_ROOT, STATIC_URL, DEBUG
+from src import user
 from src import views
+from src import wrapper_1d
 
 admin.site = AdminSitePlus()
 admin.site.index_title = 'Primerize Administration'
 admin.autodiscover()
-admin.site.login = views.user_login
-admin.site.logout = views.user_logout
+admin.site.login = user.user_login
+admin.site.logout = user.user_logout
 
 
 urlpatterns = [
@@ -27,10 +29,11 @@ urlpatterns = [
     url(r'^about/$', views.about),
 
     url(r'^result/$', views.result),
-    url(r'^design_1d/$', views.design_1d),
-    url(r'^design_1d_run/$', views.design_1d_run),
-    url(r'^demo_1d/$', views.demo_1d),
-    url(r'^demo_1d_run/$', views.demo_1d_run),
+    url(r'^design_1d/$', wrapper_1d.design_1d),
+    url(r'^design_1d_run/$', wrapper_1d.design_1d_run),
+    url(r'^demo_1d/$', wrapper_1d.demo_1d),
+    url(r'^demo_1d_run/$', wrapper_1d.demo_1d_run),
+    url(r'^random_1d/$', wrapper_1d.random_1d),
 
     url(r'^home/$', RedirectView.as_view(url='/', permanent=True)),
     url(r'^index/$', RedirectView.as_view(url='/', permanent=True)),
@@ -55,9 +58,9 @@ urlpatterns = [
     url(r'^demo_P4P6/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
     url(r'^example_P4P6/$', RedirectView.as_view(url='/demo_1d/', permanent=True)),
 
-    url(r'^login/$', views.user_login),
-    url(r'^logout/$', views.user_logout),
-    url(r'^password/$', views.user_password),
+    url(r'^login/$', user.user_login),
+    url(r'^logout/$', user.user_logout),
+    url(r'^password/$', user.user_password),
 
     url(r'^get_user/$', views.get_user),
     url(r'^get_admin/$', views.get_admin),
@@ -73,7 +76,7 @@ urlpatterns = [
     url(r'^error/404/$', views.error404),
     url(r'^error/500/$', views.error500),
 
-    url(r'^admin/browse/' + path_end, views.browse),
+    url(r'^admin/browse/' + path_end, user.browse),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?:LICENSE.md)?$', 'django.views.static.serve', kwargs={'path': 'LICENSE.md', 'document_root': MEDIA_ROOT}),
     url(r'^(?:robots.txt)?$', 'django.views.static.serve', kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),

@@ -1,28 +1,20 @@
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
-from django.template import RequestContext#, Template
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.db import IntegrityError
+from django.template import RequestContext
+# from django.contrib import messages
+# from django.db import IntegrityError
 # from django.core.urlresolvers import reverse
-from django.core.mail import send_mail
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response
 
-from filemanager import FileManager
 
 # from src.console import *
-# from src.dash import *
 from src.helper import *
 from src.models import *
 from src.settings import *
-from src.wrapper import *
+from src.wrapper_1d import *
 
 from datetime import datetime
 import re
 import simplejson
-import threading
-import traceback
 
 
 def index(request):
@@ -55,7 +47,7 @@ def download(request):
             email = form.cleaned_data['email']
             is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
             if is_valid:
-                user = SourceDownloader(date=datetime.utcnow(), first_name=first_name, last_name=last_name, institution=inst, department=dept, email=email, is_subscribe=form.cleaned_data['is_subscribe'])
+                user = SourceDownloader(date=datetime.now(), first_name=first_name, last_name=last_name, institution=inst, department=dept, email=email, is_subscribe=form.cleaned_data['is_subscribe'])
                 user.save()
                 flag = 1
 
@@ -85,135 +77,6 @@ def result(request):
             pass
         else:
             raise ValueError
-
-
-def design_1d(request):
-    return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
-
-def design_1d_run(request):
-    if request.method != 'POST': return error400(request)
-    form = Design1DForm(request.POST)
-    if form.is_valid():
-        sequence = form.cleaned_data['sequence']
-        tag = form.cleaned_data['tag']
-        min_Tm = form.cleaned_data['min_Tm']
-        max_len = form.cleaned_data['max_len']
-        min_len = form.cleaned_data['min_len']
-        num_primers = form.cleaned_data['num_primers']
-        is_num_primers = form.cleaned_data['is_num_primers']
-        is_check_t7 = form.cleaned_data['is_check_t7']
-
-        sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
-        if not tag: tag = 'primer'
-        if not min_Tm: min_Tm = ARG['MIN_TM']
-        if not max_len: max_len = ARG['MAX_LEN']
-        if not min_len: min_len = ARG['MIN_LEN']
-        if (not num_primers) or (not is_num_primers): num_primers = ARG['NUM_PRM']
-
-        msg = ''
-        if len(sequence) < 60:
-            msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
-        elif num_primers % 2:
-            msg = 'Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.'
-        if msg:
-            return HttpResponse(simplejson.dumps({'error': msg}), content_type='application/json')
-
-        job_id = random_job_id()
-        create_wait_html(job_id)
-        job_entry = Design1D(date=datetime.utcnow(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}))
-        job_entry.save()
-        job_list_entry = JobIDs(job_id=job_id, type=1)
-        job_list_entry.save()
-        job = threading.Thread(target=design_1d_wrapper, args=(sequence, tag, min_Tm, num_primers, max_len, min_len, is_check_t7, job_id))
-        job.start()
-
-        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}), content_type='application/json')
-    else:
-        return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}), content_type='application/json')
-    return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form}, context_instance=RequestContext(request))
-
-
-def demo_1d(request):
-    return HttpResponseRedirect('/result/?job_id=' + ARG['DEMO_1D_ID'])
-
-def demo_1d_run(request):
-    job_id = ARG['DEMO_1D_ID']
-    create_wait_html(job_id)
-    job = threading.Thread(target=design_1d_wrapper, args=(SEQ['P4P6'], 'P4P6_2HP', ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
-    job.start()
-    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}), content_type='application/json')
-
-
-
-def user_login(request):
-    if request.user.is_authenticated():
-        if request.GET.has_key('next') and 'admin' in request.GET['next']:
-            return error403(request)
-        return HttpResponseRedirect('/')
-
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        messages = 'Invalid username and/or password. Please try again.'
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            flag = form.cleaned_data['flag']
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    if flag == "Admin":
-                        return HttpResponseRedirect('/admin')
-                    else:
-                        return HttpResponseRedirect('/')
-                else:
-                    messages = 'Inactive/disabled account. Please contact us.'
-        return render_to_response(PATH.HTML_PATH['login'], {'form': form, 'messages': messages}, context_instance=RequestContext(request))
-    else:
-        if request.GET.has_key('next') and 'admin' in request.GET['next']:
-            flag = 'Admin'
-        else:
-            flag = 'Member'
-        form = LoginForm(initial={'flag': flag})
-        return render_to_response(PATH.HTML_PATH['login'], {'form': form}, context_instance=RequestContext(request))
-
-@login_required
-def user_password(request):
-    if request.method == 'POST':
-        form = PasswordForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password_old = form.cleaned_data['password_old']
-            password_new = form.cleaned_data['password_new']
-            password_new_rep = form.cleaned_data['password_new_rep']
-            if password_new != password_new_rep:
-                return render_to_response(PATH.HTML_PATH['password'], {'form': form, 'messages': 'New password does not match. Please try again.'}, context_instance=RequestContext(request))
-            if password_new == password_old:
-                return render_to_response(PATH.HTML_PATH['password'], {'form': form, 'messages': 'New password is the same as current. Please try again.'}, context_instance=RequestContext(request))
-
-            user = authenticate(username=username, password=password_old)
-            if user is not None:
-                u = User.objects.get(username=username)
-                u.set_password(password_new)
-                u.save()
-                logout(request)
-                return render_to_response(PATH.HTML_PATH['password'], {'form': form, 'notices': 'Password change successful. Please sign in using new credentials.'}, context_instance=RequestContext(request))
-        form = PasswordForm(initial={'username': request.user.username})
-        return render_to_response(PATH.HTML_PATH['password'], {'form': form, 'messages': 'Invalid username and/or current password, or missing new password.<br/>Please try again.'}, context_instance=RequestContext(request))
-    else:
-        form = PasswordForm(initial={'username': request.user.username})
-        return render_to_response(PATH.HTML_PATH['password'], {'form': form}, context_instance=RequestContext(request))
-
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect("/")
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def browse(request, path):
-    fm = FileManager(MEDIA_ROOT + '/data')
-    return fm.render(request, path)
 
 
 def ping_test(request):

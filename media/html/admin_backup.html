@@ -12,7 +12,7 @@
             <h4 class="italic-title"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;{% trans 'Directory Status' %}</h4>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <a href="/admin/backup_stat" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Refresh</a>
+            <a href="/admin/backup_stat/" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Refresh</a>
           </div>
         </div>
       </div>
@@ -161,6 +161,22 @@
                   </div>
                   <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs"></div>
                 </div>
+                <br/>
+                <div class="row">
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                      <label for="username" class="pull-right">
+                        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+                        &nbsp;&nbsp;Keep Job Results for:
+                      </label>
+                  </div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                    <div class="input-group">
+                      {{form.keep_job}}
+                      <span class="input-group-addon">Months</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="form-group" style="padding:10px;margin-bottom:0px;">
@@ -210,10 +226,12 @@
                         &nbsp;&nbsp;Keep on Google Drive:
                       </label>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                     {{form.keep}}
+                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                    <div class="input-group">
+                      {{form.keep_backup}}
+                      <span class="input-group-addon">Days</span>
+                    </div>
                   </div>
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> Days.</div>
                 </div>
 
               </div>
@@ -222,7 +240,7 @@
               <span class="pull-right">
                 <button type="submit" class="btn btn-info"/><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;Save</button>
                 &nbsp;&nbsp;
-                <button type="button" class="btn btn-default" onclick="location.href='/admin/backup'"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Reset</button>
+                <button type="button" class="btn btn-default" onclick="location.href='/admin/backup/'"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Reset</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </span>
             </div>
@@ -240,9 +258,9 @@
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
               <span class="pull-right">
-                <a href="/admin/backup_now" class="btn btn-danger"/><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Backup Now</a>
+                <a href="/admin/backup_now/" class="btn btn-danger"/><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Backup Now</a>
                 &nbsp;&nbsp;
-                <a href="/admin/upload_now" class="btn btn-blue"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Upload Now</a>
+                <a href="/admin/upload_now/" class="btn btn-blue"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Upload Now</a>
               </span>
             </div>
           </div>
@@ -274,12 +292,16 @@
                   <td id="modal_backup"></td>
                 </tr>
                 <tr>
+                  <td></td>
+                  <td id="modal_keep_job"></td>
+                </tr>
+                <tr>
                   <td><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Sync to Google Drive</td>
                   <td id="modal_upload"></td>
                 </tr>
                 <tr>
                   <td></td>
-                  <td id="modal_keep"></td>
+                  <td id="modal_keep_backup"></td>
                 </tr>
               </tbody>
             </table>
@@ -300,9 +322,8 @@
     $(document).ready(function() {
       $("ul.breadcrumb").append('<li class="active"><span style="color: #000;" class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Backup Schedule</li>');
 
-      $("#id_keep").val({{keep}});
-      $("#modal_keep").html('Keep <span class="label label-orange">' + $("#id_keep").val() + '</span> Days');
-
+      $("#modal_keep_backup").html('Keep <span class="label label-orange">' + $("#id_keep_backup").val() + '</span> Days');
+      $("#modal_keep_job").html('Keep <span class="label label-orange">' + $("#id_keep_job").val() + '</span> Months');
       if ({{flag}}) {$("#modal").modal("show");}
     });
   </script>

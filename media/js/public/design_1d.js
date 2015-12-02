@@ -25,7 +25,17 @@ function track_input_length() {
   }
 }
 
+function ajax_load_html(job_id) {
+  $.ajax({
+      url: '/site_data/1d/result_' + job_id + '.html',
+      cache: false,
+      dataType: "html",
+      success: function(data) { $("#result").html(data); }
+  });
+} 
+
 function ajax_update_result(data) {
+  clearInterval(ajax_timeout);
   if (data.error) {
     html = '<br/><hr/><div class="container theme-showcase"><h2>Output Result:</h2><div class="alert alert-danger"><p><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: ' + data.error + '</p></div>';
     $("#result").html(html);
@@ -43,13 +53,13 @@ function ajax_update_result(data) {
     $("#id_is_check_t7").prop("checked", data.is_check_t7);
 
     ajax_timeout = setInterval(function() {
-      $("#result").load('/site_data/1d/result_' + data.job_id + '.html');
+      ajax_load_html(data.job_id);
       if ($("#result").html().indexOf("Primerize is running") == -1) {
+        clearInterval(ajax_timeout);
         if (window.history.replaceState) {
-          clearInterval(ajax_timeout);
-          window.history.replaceState({} , '', '/result?job_id=' + data.job_id);
+          window.history.replaceState({} , '', '/result/?job_id=' + data.job_id);
         } else {
-          window.location.href = '/result?job_id=' + data.job_id;
+          window.location.href = '/result/?job_id=' + data.job_id;
         }
       }
     }, interval);

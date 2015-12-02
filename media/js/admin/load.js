@@ -34,5 +34,5 @@ xmlhttp.onreadystatechange = function() {
 		document.write('<link rel="icon" type-"image/gif" href="/site_media/images/icon_primerize.png" \/>');
 	}
 }
-xmlhttp.open("GET", "/get_js", false);
+xmlhttp.open("GET", "/get_js/", false);
 xmlhttp.send();

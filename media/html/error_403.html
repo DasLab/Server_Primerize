@@ -38,7 +38,7 @@
   <script type="text/javascript">
     $(document).ready(function () {
       $.ajax({
-        url : "/get_admin",
+        url : "/get_admin/",
         dataType: "json",
         success: function (data) {
           $("#admin_email").html(data.email);
@@ -47,7 +47,7 @@
       });
 
       $.ajax({
-        url : "/get_user",
+        url : "/get_user/",
         dataType: "json",
         success: function (data) {
           $("#user_1").html(data.user);

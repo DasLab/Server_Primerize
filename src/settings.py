@@ -102,9 +102,10 @@ SEQ = {
 
 env_cron = simplejson.load(open('%s/config/cron.conf' % MEDIA_ROOT))
 #     os.getlogin()
-CRONJOBS = env_cron['CRONJOBS'][0:2]
+CRONJOBS = env_cron['CRONJOBS']
 CRONTAB_LOCK_JOBS = env_cron['CRONTAB_LOCK_JOBS']
 KEEP_BACKUP = env_cron['KEEP_BACKUP']
+KEEP_JOB = env_cron['KEEP_JOB']
 
 LOGGING = {
     'version': 1,

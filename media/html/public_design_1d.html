@@ -1,5 +1,10 @@
 {% extends "media/html/_public.html" %}
 
+{% block head%}
+  <meta http-equiv="cache-control" content="no-cache"/>
+  <meta http-equiv="pragma" content="no-cache"/>
+{% endblock %}
+
 {% block content %}
   <div class="col-md-12">
     <h2>Input Data:</h2>
@@ -47,7 +52,7 @@
        <div class="row">
         <div class="col-md-12">
           <input type="submit" class="btn btn-primary" id="btn_submit" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
-          <a class="btn btn-default" href="/design_1d">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-default" href="/design_1d/">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
           <span style="display:none">
             <input id="is_agree" type="checkbox" checked="yes" required="required">
               <label for="is_agree">
@@ -58,7 +63,7 @@
               </label>
             </input>
            </span>
-           <a id="btn_demo" class="btn btn-success pull-right" href="/demo_1d_run" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+           <a id="btn_demo" class="btn btn-success pull-right" href="/demo_1d_run/" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
             &nbsp;&nbsp;Demo&nbsp;&nbsp;
           </a>
          </div>
@@ -144,7 +149,15 @@
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}design_1d{{DEBUG_STR}}.js"></script>  
   {% if result_job_id %}
     <script type="text/javascript">
-      $("#result").load('/site_data/1d/result_{{result_job_id}}.html');
+      var job_id = "{{result_job_id}}";
+      ajax_load_html(job_id);
+      ajax_timeout = setInterval(function() {
+        if ($("#result").html().indexOf("Primerize is running") == -1) {
+          clearInterval(ajax_timeout);
+        } else {
+          ajax_load_html(job_id);
+        }
+      }, 1500);
     </script>
   {% endif %}
 {% endblock %}

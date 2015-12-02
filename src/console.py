@@ -12,12 +12,10 @@ import traceback
 import urllib
 import urllib2
 
-from icalendar import Calendar
 import boto.ec2.cloudwatch, boto.ec2.elb
 import gviz_api
 from github import Github
 import requests
-from slacker import Slacker
 
 from django.core.management import call_command
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError
@@ -69,8 +67,13 @@ def get_backup_form():
     except:
         time_backup = time_upload = day_backup = day_upload = ''
 
-    json = {'day_backup':day_backup, 'day_upload':day_upload, 'time_backup':time_backup, 'time_upload':time_upload}
-    return simplejson.dumps(json)
+    lines = open('%s/config/cron.conf' % MEDIA_ROOT, 'r').readlines()
+    index =  [i for i, line in enumerate(lines) if 'KEEP_BACKUP' in line][0]
+    keep_backup = int(lines[index].split(':')[1].strip().replace(',', ''))
+    index =  [i for i, line in enumerate(lines) if 'KEEP_JOB' in line][0]
+    keep_job = int(lines[index].split(':')[1].strip().replace(',', ''))
+
+    return {'day_backup':day_backup, 'day_upload':day_upload, 'time_backup':time_backup, 'time_upload':time_upload, 'keep_backup':keep_backup, 'keep_job':keep_job}
 
 
 def set_backup_form(request):
@@ -82,32 +85,31 @@ def set_backup_form(request):
     day_backup = form.cleaned_data['day_backup']
     day_upload = form.cleaned_data['day_upload']
 
-    cron_backup = '%s %s * * %s' % (time_backup.hour, time_backup.minute, day_backup)
-    cron_upload = '%s %s * * %s' % (time_upload.hour, time_upload.minute, day_upload)
+    cron_backup = '%s * * %s' % (time_backup.strftime('%M %H'), day_backup)
+    cron_upload = '%s * * %s' % (time_upload.strftime('%M %H'), day_upload)
 
     lines = open('%s/config/cron.conf' % MEDIA_ROOT, 'r').readlines()
 
-    index =  [i for i, line in enumerate(lines) if 'src.cron.backup_weekly' in line or 'src.cron.gdrive_weekly' in line or 'KEEP_BACKUP' in line]
-    lines[index[0]] = '\t\t["%s", "src.cron.backup_weekly", ">> %s/cache/log_cron_backup.log # backup_weekly"],\n' % (cron_backup, MEDIA_ROOT)
-    lines[index[1]] = '\t\t["%s", "src.cron.gdrive_weekly", ">> %s/cache/log_cron_gdrive.log # gdrive_weekly"],\n' % (cron_upload, MEDIA_ROOT)
-    lines[index[2]] = '\t"KEEP_BACKUP": %s\n' % form.cleaned_data['keep']
+    index =  [i for i, line in enumerate(lines) if 'backup' in line or 'gdrive' in line or 'KEEP_BACKUP' in line or 'KEEP_JOB' in line]
+    lines[index[0]] = '\t\t["%s", "django.core.management.call_command", ["backup"], ">> %s/cache/log_cron_backup.log # backup_weekly"],\n' % (cron_backup, MEDIA_ROOT)
+    lines[index[1]] = '\t\t["%s", "django.core.management.call_command", ["gdrive"], ">> %s/cache/log_cron_gdrive.log # gdrive_weekly"],\n' % (cron_upload, MEDIA_ROOT)
+    lines[index[2]] = '\t"KEEP_BACKUP": %s,\n' % form.cleaned_data['keep_backup']
+    lines[index[3]] = '\t"KEEP_JOB": %s\n' % form.cleaned_data['keep_job']
     open('%s/config/cron.conf' % MEDIA_ROOT, 'w').writelines(lines)
 
     try:
-        cron = subprocess.Popen('crontab -l | cut -d" " -f1-5', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()
-        if len(cron) > 9:
-            subprocess.check_call('crontab -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        subprocess.check_call('cd %s && python manage.py crontab add' % MEDIA_ROOT, shell=True, stderr=subprocess.STDOUT)
+        # cron = subprocess.Popen('crontab -l | cut -d" " -f1-5', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()
+        # if len(cron) > 9:
+        #     subprocess.check_call('crontab -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        call_command('crontab', 'add')            
+        # subprocess.check_call('cd %s && python manage.py crontab add' % MEDIA_ROOT, shell=True, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:
         print "    \033[41mERROR\033[0m: Failed to reset \033[94mcrontab\033[0m schedules."
         err = traceback.format_exc()
         ts = '%s\t\tset_backup_form()\n' % time.ctime()
         open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
         open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-        if IS_SLACK: send_notify_slack(SLACK['ADMIN_NAME'], '', [{"fallback":'ERROR', "mrkdwn_in": ["text"], "color":"danger", "text":'*`ERROR`*: *set_backup_form()* @ _%s_\n>```%s```\n' % (time.ctime(), err)}])
         raise Exception('Error with setting crontab scheduled jobs.')
-    else:
-        if IS_SLACK: send_notify_slack(SLACK['ADMIN_NAME'], '', [{"fallback":'SUCCESS', "mrkdwn_in": ["text"], "color":"good", "text":'*SUCCESS*: weekly *backup & sync* set @ _%s_\n' % time.ctime()}])
 
 
 def restyle_apache():
@@ -427,7 +429,6 @@ def dash_ssl(request):
         ts = '%s\t\tdash_ssl()\n' % time.ctime()
         open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
         open('%s/cache/log_cron.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-        if IS_SLACK: send_notify_slack(SLACK['ADMIN_NAME'], '', [{"fallback":'ERROR', "mrkdwn_in": ["text"], "color":"danger", "text":'*`ERROR`*: *dash_ssl()* @ _%s_\n>```%s```\n' % (time.ctime(), err)}])
         raise Exception('Error with checking SSL certificate.')
 
     exp_date = datetime.strptime(exp_date.replace('notAfter=', ''), "%b %d %H:%M:%S %Y %Z").strftime('%Y-%m-%d %H:%M:%S')

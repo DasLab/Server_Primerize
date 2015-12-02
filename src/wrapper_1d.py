@@ -1,9 +1,89 @@
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
+from django.template import RequestContext
+from django.shortcuts import render, render_to_response
+
+from datetime import datetime
+import random
+import re
+import simplejson
+import threading
 import time
 import traceback
 
 from src.helper import *
 from src.models import *
 from src.pymerize.primerize import *
+
+
+def design_1d(request):
+    return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
+
+def design_1d_run(request):
+    if request.method != 'POST': return error400(request)
+    form = Design1DForm(request.POST)
+    if form.is_valid():
+        sequence = form.cleaned_data['sequence']
+        tag = form.cleaned_data['tag']
+        min_Tm = form.cleaned_data['min_Tm']
+        max_len = form.cleaned_data['max_len']
+        min_len = form.cleaned_data['min_len']
+        num_primers = form.cleaned_data['num_primers']
+        is_num_primers = form.cleaned_data['is_num_primers']
+        is_check_t7 = form.cleaned_data['is_check_t7']
+
+        sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
+        if not tag: tag = 'primer'
+        if not min_Tm: min_Tm = ARG['MIN_TM']
+        if not max_len: max_len = ARG['MAX_LEN']
+        if not min_len: min_len = ARG['MIN_LEN']
+        if (not num_primers) or (not is_num_primers): num_primers = ARG['NUM_PRM']
+
+        msg = ''
+        if len(sequence) < 60:
+            msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
+        elif num_primers % 2:
+            msg = 'Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.'
+        if msg:
+            return HttpResponse(simplejson.dumps({'error': msg}), content_type='application/json')
+
+        job_id = random_job_id()
+        create_wait_html(job_id)
+        job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}))
+        job_entry.save()
+        job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
+        job_list_entry.save()
+        job = threading.Thread(target=design_1d_wrapper, args=(sequence, tag, min_Tm, num_primers, max_len, min_len, is_check_t7, job_id))
+        job.start()
+
+        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}), content_type='application/json')
+    else:
+        return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}), content_type='application/json')
+    return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form}, context_instance=RequestContext(request))
+
+
+def demo_1d(request):
+    return HttpResponseRedirect('/result/?job_id=' + ARG['DEMO_1D_ID'])
+
+def demo_1d_run(request):
+    job_id = ARG['DEMO_1D_ID']
+    create_wait_html(job_id)
+    job = threading.Thread(target=design_1d_wrapper, args=(SEQ['P4P6'], 'P4P6_2HP', ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
+    job.start()
+    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}), content_type='application/json')
+
+
+def random_1d(request):
+    sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
+    tag = 'scRNA'
+    job_id = random_job_id()
+    create_wait_html(job_id)
+    job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}))
+    job_entry.save()
+    job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
+    job_list_entry.save()
+    job = threading.Thread(target=design_1d_wrapper, args=(sequence, tag, ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
+    job.start()
+    return HttpResponseRedirect('/result/?job_id=' + job_id)
 
 
 def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length, is_t7, job_id):
@@ -20,7 +100,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
     # when no solution found
     if (not assembly.is_solution):
-        html = '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm path_about" href="#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
+        html = '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
         if job_id != ARG['DEMO_1D_ID']:
             job_entry = Design1D.objects.get(job_id=job_id)
             job_entry.status = '3'
@@ -66,6 +146,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                             script += '<span class="label-white label-orange">' + char + '</span>'
                         else:
                             script += char
+                    script = script.replace('<span class="label-white label-orange">-</span><span class="label-white label-orange">></span>', '<span class="label-white label-orange glyphicon glyphicon-circle-arrow-right"></span>')
             elif line[0] == "!":
                 for char in line[1]:
                     if char in SEQ['valid']:
@@ -74,9 +155,10 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                         if char.isdigit():
                             script += '<b>' + char + '</b>'
                         elif char in ('-', '<', '>'):
-                            script += '<span class="label-green">' + char + '</span>'
+                            script += '<span class="label-white label-green">' + char + '</span>'
                         else:
                             script += char
+                    script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-circle-arrow-left"></span>')
             elif (line[0] == '$'):
                 if line[1].find('xxxx') != -1: 
                     Tm = '%2.1f' % assembly.Tm_overlaps[x]
@@ -86,7 +168,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                     script += line[1]
             script += '<br/>'
 
-        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm path_protocol" href="" role="button" style="color: #ffffff;">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.</p> </div>'
+        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/" role="button" style="color: #ffffff;">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.</p> </div>'
 
         file_name = MEDIA_ROOT + '/data/1d/result_%s.txt' % job_id
         f = open(file_name, 'w')

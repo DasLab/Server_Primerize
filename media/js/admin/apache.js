@@ -2,7 +2,7 @@ var $ = django.jQuery;
 
 function get_apache_stat() {
     $.ajax({
-        url : "/admin/apache_stat",
+        url : "/admin/apache_stat/",
         dataType: "json",
         success : function (data) {
             // console.log(data);

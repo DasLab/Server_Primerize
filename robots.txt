@@ -33,33 +33,37 @@ User-agent: Yahoo-Blogs
 User-agent: Yahoo-MMCrawler
 
 # Directories
+Disallow: /.git/
+Disallow: /backup/
 Disallow: /cache/
+Disallow: /config/
+Disallow: /data/
+Disallow: /media/admin/
+Disallow: /media/fonts/
+Disallow: /media/js/
 Disallow: /src/
 
 # Files
 Disallow: /*.py
 Disallow: /*.pyc
 Disallow: /*.md
-Disallow: /*.log
+Disallow: /*.sh
+Disallow: /.gitignore
 
 # Paths (clean URLs)
-Disallow: /demo_500/
-Disallow: /demo_404/
-Disallow: /demo_wait/
-Disallow: /demo_fail/
-Disallow: /demo_error/
-Disallow: /error/
-Disallow: /test_random/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /logout/
+Disallow: /password/
 Disallow: /submit_download/
 
 Disallow: /ping_test/
-Disallow: /cleanup_old/
-Disallow: /get_sys/
-Disallow: /admin/
+Disallow: /test/
+Disallow: /cgi-bin/
 
 Disallow: /server-status/
 
 # Paths (no clean URLs)
-Disallow: /result?job_id=*/
+Disallow: /result/?job_id=*
 
 Crawl-delay: 600

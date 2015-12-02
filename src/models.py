@@ -78,6 +78,7 @@ class Design3D(models.Model):
 class JobIDs(models.Model):
     job_id = models.CharField(primary_key=True, blank=False, unique=True, max_length=16, verbose_name='Job ID', help_text='<span class="glyphicon glyphicon-credit-card"></span>&nbsp;Unique 16-digit hexadecimal <span class="label label-violet">JOB_ID</span>.')
     type = models.CharField(blank=False, max_length=1, choices=JOB_TYPE_CHOICES, verbose_name='Job Type')
+    date = models.DateField(verbose_name='Submission Date')
 
     class Meta():
         verbose_name = 'Job ID'
@@ -181,7 +182,8 @@ class BackupForm(forms.Form):
     time_upload = forms.TimeField(required=True)
     day_backup = forms.ChoiceField(choices=WEEKDAY_CHOICES)
     day_upload = forms.ChoiceField(choices=WEEKDAY_CHOICES)
-    keep = forms.IntegerField()
+    keep_backup = forms.IntegerField()
+    keep_job = forms.IntegerField()
 
 
 def debug_flag(request):

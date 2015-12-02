@@ -228,7 +228,7 @@ function drawGA(id) {
 
 gapi.analytics.ready(function() {
     $.ajax({
-        url : "/admin/ga_admin",
+        url : "/admin/ga_admin/",
         dataType: "json",
         success: function (data) {
             gapi.analytics.auth.authorize({

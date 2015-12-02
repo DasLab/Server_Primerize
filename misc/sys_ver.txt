@@ -1,1 +1,0 @@
-14.3.0	2.7.8	3.7.0	8.3.0.532	0.6	1.11.3	3.3.4	6.8.1	4.00.03	8.23	2.4.10	2.4.2	5.1.0	6.1.0	3.2.2	1.9.2 	0.15.1 	1.4.3 	3.1.18 	3.7.3 	17.0 	7.0.3	3.8.2	224G / 241G	2773M / 13G	21	528K	/MATLAB_Code/Primerize_Server	/MATLAB_Code/NA_thermo	/MATLAB_Code/RDAT_Kit	/Library/Frameworks/Python.framework/Versions/2.7/bin/python	/Applications/MATLAB_R2014a.app/bin/matlab

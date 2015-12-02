@@ -8,7 +8,7 @@ media/js/public/min/
 media/js/suit/min/
 media/css/min/
 
-src/pymerize/__pycache__
+src/pymerize/__pycache__/
 
 config/t47_dev.py
 config/*.conf
