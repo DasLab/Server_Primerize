@@ -9,28 +9,21 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import environ
 import os
-import simplejson
 
-
+from src.env import *
 from config.t47_dev import *
 # SECURITY WARNING: don't run with debug turned on in production!
 TEMPLATE_DEBUG = DEBUG = T47_DEV
 
+
 root = environ.Path(os.path.dirname(os.path.dirname(__file__)))
 MEDIA_ROOT = root()
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/"
+PATH = SYS_PATH(MEDIA_ROOT)
 # MEDIA_ROOT = os.path.join(os.path.abspath("."))
 FILEMANAGER_STATIC_ROOT = root('media/admin') + '/'
-
-env = environ.Env(DEBUG=DEBUG,) # set default values and casting
-environ.Env.read_env('%s/config/env.conf' % MEDIA_ROOT) # reading .env file
-
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
-
-
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
@@ -41,17 +34,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '' # MEDIA_ROOT + '/media/'
 STATICFILES_DIRS = (root('data'), root('media'))
 
-env_oauth = simplejson.load(open('%s/config/oauth.conf' % MEDIA_ROOT))
-AWS = env_oauth['AWS']
-GA = env_oauth['GA']
-DRIVE = env_oauth['DRIVE']
-GIT = env_oauth['GIT']
-APACHE_ROOT = '/var/www'
+
+(env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('SECRET_KEY')
 
 
-MANAGERS = ADMINS = (
-    (env('ADMIN_NAME'), env('ADMIN_EMAIL')),
-)
+MANAGERS = ADMINS = ( (env('ADMIN_NAME'), env('ADMIN_EMAIL')), )
 EMAIL_NOTIFY = env('ADMIN_EMAIL')
 (EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_USE_TLS, EMAIL_PORT, EMAIL_HOST) = [v for k, v in env.email_url().items() if k in ['EMAIL_HOST_PASSWORD', 'EMAIL_HOST_USER', 'EMAIL_USE_TLS', 'EMAIL_PORT', 'EMAIL_HOST']]
 EMAIL_SUBJECT_PREFIX = '[Django] {primerize.stanford.edu}'
@@ -75,34 +65,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/"
-from src.path import *
-PATH = SYS_PATH()
-
-env_arg = simplejson.load(open('%s/config/arg.conf' % MEDIA_ROOT))
-ARG = {
-    'MIN_TM': env_arg['MIN_TM'],
-    'MAX_LEN': env_arg['MAX_LEN'],
-    'MIN_LEN': env_arg['MIN_LEN'],
-    'NUM_PRM': env_arg['NUM_PRM'],
-
-    'DEMO_1D_ID': env_arg['DEMO_1D_ID'],
-    'DEMO_2D_ID': env_arg['DEMO_2D_ID'],
-    'DEMO_3D_ID': env_arg['DEMO_3D_ID'],
-}
-SEQ = {
-    'P4P6':env_arg['SEQ_P4P6'],
-    'T7': env_arg['SEQ_T7'],
-    'valid': env_arg['SEQ_VALID'],
-}
-
-env_cron = simplejson.load(open('%s/config/cron.conf' % MEDIA_ROOT))
-#     os.getlogin()
-CRONJOBS = env_cron['CRONJOBS']
-CRONTAB_LOCK_JOBS = env_cron['CRONTAB_LOCK_JOBS']
-KEEP_BACKUP = env_cron['KEEP_BACKUP']
-KEEP_JOB = env_cron['KEEP_JOB']
 
 LOGGING = {
     'version': 1,
@@ -148,7 +110,6 @@ LOGGING = {
 
 # Application definition
 INSTALLED_APPS = (
-    # 'sslserver',
     'django_crontab',
 
     'filemanager',
@@ -176,8 +137,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
 
-    # "src.models.email_form",
-    # "src.models.debug_flag",
+    "src.models.debug_flag",
     "src.models.ga_tracker",
 )
 
