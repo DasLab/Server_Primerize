@@ -4,11 +4,9 @@ backup/*.*gz
 cache/*.txt
 cache/*.log
 
-data/primerize_release.zip
-data/1d/*
+data/*
 !data/1d/result_0123456789abcdef.txt
 !data/1d/result_0123456789abcdef.html
-data/2d/*
 !data/**/.gitignore
 
 *.pyc
