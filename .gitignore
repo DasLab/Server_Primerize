@@ -1,25 +1,24 @@
-/data/*
-!/data/1d/result_0123456789abcdef.html
-!/data/1d/result_0123456789abcdef.txt
+!.gitignore
 
-/cache/*
-!/cache
-/backup/*
-!/backup
+backup/*.*gz
+cache/*.txt
+cache/*.log
+
+data/primerize_release.zip
+data/1d/*
+!data/1d/result_0123456789abcdef.txt
+!data/1d/result_0123456789abcdef.html
+data/2d/*
+!data/**/.gitignore
 
 *.pyc
 
-/media/js/admin/min/*
-!media/js/admin/min
-/media/js/public/min/*
-!/media/js/public/min
-/media/js/suit/min/*
-!/media/js/suit/min
-/media/css/min/*
-!/media/css/min
+media/js/admin/min/*.js
+media/js/public/min/*.js
+media/js/suit/min/*.js
+media/css/min/*.js
 
-/src/pymerize/__pycache__/*
-!/src/pymerize/__pycache__
+src/pymerize/__pycache__/*.n*
 
-/config/t47_dev.py
-/config/*.conf
+config/t47_dev.py
+config/*.conf

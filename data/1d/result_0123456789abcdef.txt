@@ -1,0 +1,67 @@
+Primerize Result
+
+INPUT
+=====
+TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC
+#
+MIN_TM: 60.0
+NUM_PRIMERS: auto (unspecified)
+MAX_LENGTH: 60
+MIN_LENGTH: 15
+T7_CHECK: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
+T7_CHECK: T7 promoter sequence is followed by nucleotides GG.
+
+
+OUTPUT
+======
+
+TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC
+                                                                                                                                           
+TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG-> 1                                                                          
+                                          |||||||||||||||||| 63.0                                                                         
+                                      2 <-GGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTT                                    
+                                                                                    |||||||||||||||||| 60.2                               
+                                                                                    ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGC
+                                                                                                                          ||||||||||||||||
+                                                                                                                      4 <-CCCATACCATTATTCG
+                                                                                                                                           
+AAGATTATGCTGAGTGATATCCGGTTTCCGCAGCTCATCTGCGGTTGTTGCCTTAACGCCCTTTCCCCAGTTGTCGGCAAGTCATGGTTCAGAGTCCCCTTTGAAACTCTACCGGAACGTTTCCCATACCATTATTCG
+
+
+TGACGGACATGGTCCTAACCACGCAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGAGTAGCTGACAAAAAGAAACAACAACAACAAC
+                                                                                                                          
+TGACG-> 3                                                                                                                
+||||| 60.4                                                                                                               
+ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTG                                                                              
+                       |||||||||||||||||||| 60.5                                                                         
+                       CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG-> 5                                  
+                                                              ||||||||||||||||||||| 62.4                                 
+                                                          6 <-TACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG
+                                                                                                                          
+ACTGCCTGTACCAGGATTGGTGCGTCGGTTCAGGATTCAGTTGTCTAGAAGACAACTATACCTACGTCAAGTTTTGGTTTGGCAGTCGCTCATCGACTGTTTTTCTTTGTTGTTGTTGTTG
+
+
+PRIMERS             LENGTH    	SEQUENCE
+P4P6_2HP-1 F        60        	TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG
+P4P6_2HP-2 R        60        	TTTCCCCTGAGACTTGGTACTGAACGGCTGTTGACCCCTTTCCCGCAATTCCGTTGTTGG
+P4P6_2HP-3 F        59        	ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACG
+P4P6_2HP-4 R        59        	GTTGACTTAGGACTTGGCTGCGTGGTTAGGACCATGTCCGTCAGCTTATTACCATACCC
+P4P6_2HP-5 F        60        	CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG
+P4P6_2HP-6 R        59        	GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT
+
+WARNING: Primer 2 R can misprime with 4-residue overlap to position  23, which is covered by primers: 1 F
+WARNING: Primer 3 F can misprime with 7-residue overlap to position 220, which is covered by primers: 5 F, 6 R
+WARNING: Primer 4 R can misprime with 4-residue overlap to position  66, which is covered by primers: 2 R
+
+#
+
+------/* IDT USER: for primer ordering, copy and paste to Bulk Input */------
+------/* START */------
+P4P6_2HP-1F	TTCTAATACGACTCACTATAGGCCAAAGGCGTCGAGTAGACGCCAACAACGGAATTGCGG		25nm	STD
+P4P6_2HP-2R	TTTCCCCTGAGACTTGGTACTGAACGGCTGTTGACCCCTTTCCCGCAATTCCGTTGTTGG		25nm	STD
+P4P6_2HP-3F	ACCAAGTCTCAGGGGAAACTTTGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACG		25nm	STD
+P4P6_2HP-4R	GTTGACTTAGGACTTGGCTGCGTGGTTAGGACCATGTCCGTCAGCTTATTACCATACCC		25nm	STD
+P4P6_2HP-5F	CAGCCAAGTCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCG		25nm	STD
+P4P6_2HP-6R	GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT		25nm	STD
+------/* END */------
+------/* NOTE: use "Lab Ready" for "Normalization" */------
