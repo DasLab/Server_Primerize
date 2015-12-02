@@ -174,7 +174,7 @@ def get_backup(request):
     return HttpResponse(lines, content_type='text/plain')
 
 
-admin.site.register_view('sys_stat/', view=sys_stat, visible=False)
+admin.site.register_view('backup/', view=backup, visible=False)
 admin.site.register_view('backup_stat/', view=backup_stat, visible=False)
 admin.site.register_view('backup_form/', view=backup_form, visible=False)
 admin.site.register_view('backup_now/', view=backup_now, visible=False)
@@ -193,8 +193,8 @@ admin.site.register_view('ga_admin/', view=ga_admin, visible=False)
 admin.site.register_view('git/', view=git, visible=False)
 admin.site.register_view('git_stat/', view=git_stat, visible=False)
 
+admin.site.register_view('sys_stat/', view=sys_stat, visible=False)
 admin.site.register_view('ssl_dash/', view=ssl_dash, visible=False)
-admin.site.register_view('backup/', view=backup, visible=False)
 admin.site.register_view('dir/', view=dir, visible=False)
 admin.site.register_view('doc_django/', view=doc, visible=False)
 admin.site.register_view('doc_cherrypy/', view=doc_old, visible=False)

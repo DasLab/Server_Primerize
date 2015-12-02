@@ -1,6 +1,7 @@
 sudo usermod -a -G www-data ubuntu
 
 sudo chgrp -R www-data *
+sudo chgrp -R ubuntu cache
 sudo chown -R ubuntu *.py *.md *.txt src media config .gitignore
 sudo chown -R www-data backup data cache
 
@@ -17,8 +18,8 @@ sudo chmod 750 media/admin media/admin/img media/admin/img/gis media/admin/img/f
 sudo chmod 640 media/css/min/* media/js/public/min/* media/js/admin/min/* media/js/suit/min/*
 sudo chmod 750 media/css/min media/js/public/min media/js/admin/min media/js/suit/min
 
-sudo chmod 640 backup/* cache/*
-sudo chmod 750 backup cache
+sudo chmod 660 backup/* cache/*
+sudo chmod 770 backup cache
 sudo chmod 640 data/primerize_release.zip data/1d/* data/2d/* data/3d/*
 sudo chmod 750 data data/1d data/2d data/3d
 

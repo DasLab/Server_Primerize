@@ -13,7 +13,6 @@ import environ
 import os
 import simplejson
 
-from django.utils.translation import ugettext_lazy as _
 
 from config.t47_dev import *
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -69,9 +68,7 @@ LOGIN_URL = '/signin/'
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 TIME_ZONE = 'America/Los_Angeles'
 LANGUAGE_CODE = 'en-us'
-LANGUAGES = (
-    ('en', _('English')),
-)
+LANGUAGES = ( ('en', 'English'), )
 SITE_ID = 1
 
 USE_I18N = True

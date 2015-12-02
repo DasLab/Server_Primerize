@@ -14,7 +14,7 @@ data/*
 media/js/admin/min/*.js
 media/js/public/min/*.js
 media/js/suit/min/*.js
-media/css/min/*.js
+media/css/min/*.css
 
 src/pymerize/__pycache__/*.n*
 
