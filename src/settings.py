@@ -81,7 +81,9 @@ LOGGING = {
         },
         'file': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024*1024*10,
+            'backupCount' : 10,
             'filename': '%s/cache/log_django.log' % MEDIA_ROOT,
         },
         'email': {
@@ -106,10 +108,12 @@ LOGGING = {
         'django.request': {
             'handlers': ['email'],
             'level': 'ERROR',
+            'propagate': True,
         },
         'django.security': {
             'handlers': ['email'],
             'level': 'ERROR',
+            'propagate': True,
         }
     },
 }
