@@ -5,8 +5,6 @@ cache/*.txt
 cache/*.log
 
 data/*
-!data/1d/result_0123456789abcdef.txt
-!data/1d/result_0123456789abcdef.html
 !data/**/.gitignore
 
 *.pyc
