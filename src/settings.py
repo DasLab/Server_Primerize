@@ -52,7 +52,7 @@ WSGI_APPLICATION = 'src.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 DATABASES = {'default': env.db_url(), }
-LOGIN_URL = '/signin/'
+LOGIN_URL = '/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -92,17 +92,24 @@ LOGGING = {
     },
     'loggers': {
         'django_crontab.crontab': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+        'src': {
+            'handlers': ['file'],
+            'level': 'WARNING',
         },
         'django': {
             'handlers': ['file'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'level': 'WARNING',
         },
         'django.request': {
             'handlers': ['email'],
-            'filters': ['require_debug_false'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
+            'level': 'ERROR',
+        },
+        'django.security': {
+            'handlers': ['email'],
+            'level': 'ERROR',
         }
     },
 }
@@ -141,7 +148,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "src.models.ga_tracker",
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -150,7 +157,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-)
+]
+if not DEBUG: MIDDLEWARE_CLASSES.append('django.middleware.security.SecurityMiddleware')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -188,8 +196,11 @@ SUIT_CONFIG = {
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+if not DEBUG: SECURE_HSTS_SECONDS = 31536000 # one year
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_HOST = env('SSL_HOST')
 SECURE_SSL_REDIRECT = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_SECURE = CSRF_COOKIE_SECURE = (not DEBUG)
+CSRF_COOKIE_HTTPONLY = True
+X_FRAME_OPTIONS = 'DENY'

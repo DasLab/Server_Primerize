@@ -112,7 +112,7 @@ def error500(request):
 
 
 def test(request):
-    print request.META
+    # print request.META
     raise ValueError
     return error400(request)
     # send_notify_emails('test', 'test')

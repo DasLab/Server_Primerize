@@ -27,6 +27,5 @@ sudo chmod 640 config/*.py* config/*.example config/*.conf
 sudo chown www-data config/cron.conf 
 sudo chmod 750 config
 
-sudo chgrp -R ubuntu *.sh
-sudo chown -R ubuntu *.sh
+sudo chown -R ubuntu:ubuntu *.sh
 sudo chmod -R 700 *.sh
