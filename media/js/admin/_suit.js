@@ -186,7 +186,7 @@
     $(function () {
 
         // Fixed submit buttons
-        // $('.inner-right-column').suit_fixed();
+        $('.inner-right-column').suit_fixed();
 
         // Show link to related item after Select
         $('.linked-select').suit_linked_select();

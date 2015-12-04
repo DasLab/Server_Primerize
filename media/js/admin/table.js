@@ -199,15 +199,6 @@ $(document).ready(function () {
 		$("ul.breadcrumb > li:first").next().remove();
 		$("ul.breadcrumb > li:first").next().prepend('<span style="color: #000;" class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;')
 
-		$("img[src$='/static/admin/img/icon-yes.gif']").each(function() {
-			var newElem = $('<span class="label label-green"><span class="glyphicon glyphicon-ok-sign"></span></span>');
-			$(this).replaceWith(newElem);
-		});
-		$("img[src$='/static/admin/img/icon-no.gif']").each(function() {
-			var newElem = $('<span class="label label-danger"><span class="glyphicon glyphicon-remove-sign"></span></span>');
-			$(this).replaceWith(newElem);
-		});
-	
 	}
 
 });
@@ -242,6 +233,11 @@ $(window).load(function () {
 			$('#' + $(this).attr("id") + '_today').attr("href", elem.children().first().attr("href"));
 
 			elem.css("display", "none");
+			$('<p class="datetime input-group"></p>').insertBefore($(this));
+			var p = $(this).prev();
+			$(this).next().detach().appendTo(p);
+			$(this).detach().prependTo(p);
+			$("span.timezonewarning").addClass("label label-default");
 		});
 
 		$(".vTimeField").each(function () {
@@ -271,29 +267,29 @@ $(window).load(function () {
 			$('#' + $(this).attr("id") + '_now').attr("href", elem.children().first().attr("href"));
 
 			elem.css("display", "none");
+			$('<p class="datetime input-group"></p>').insertBefore($(this));
+			var p = $(this).prev();
+			$(this).next().detach().appendTo(p);
+			$(this).detach().prependTo(p);
+			$("span.timezonewarning").addClass("label label-default");
 		});
 
-
 		if ($(location).attr("href").indexOf("admin/auth/user") != -1) {
-			$(".vDateField").each(function () {
-				$(this).parent().contents().filter(function () {return this.data === "Date: ";}).replaceWith("");
-			});
-			$(".vTimeField").each(function () {
-				$(this).parent().contents().filter(function () {return this.data === "Time: ";}).replaceWith("");
-				$('<br/><p class="datetime datetime2 input-group"></p>').insertAfter($(this).parent());
-				$(this).next().detach().appendTo($(this).parent().next().next());
-				$(this).next().detach().insertAfter($(this).parent().next().next());
-				var datetime2 = $(this).parent().next().next();
-				$(this).detach().prependTo(datetime2);
-			});
+			// $(".vDateField").each(function () {
+			// 	$(this).parent().contents().filter(function () {return this.data === "Date: ";}).replaceWith("");
+			// });
+			// $(".vTimeField").each(function () {
+			// 	$(this).parent().contents().filter(function () {return this.data === "Time: ";}).replaceWith("");
+			// });
+			$("span.help-icon").removeClass("help help-tooltip help-icon").addClass("glyphicon glyphicon-question-sign");
 
 			$("select").addClass("form-control").removeClass("filtered");
 			$("input[placeholder='Filter']").addClass("form-control").parent().addClass("input-group");
 			$("<br/>").insertAfter($("input[placeholder='Filter']").parent())
 			$('<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>').insertAfter($("input[placeholder='Filter']"))
-			$("img[src='/static/admin/img/selector-search.gif']").parent().remove();
-			$('<span class="glyphicon glyphicon-question-sign"></span>').insertAfter($("img[src='/static/admin/img/icon-unknown.gif']"))
-			$("img[src='/static/admin/img/icon-unknown.gif']").remove();
+			$("img[src='/static/admin/img/selector-search.svg']").parent().remove();
+			$('<span class="glyphicon glyphicon-question-sign"></span>').insertAfter($("img[src='/static/admin/img/icon-unknown.svg']"))
+			$("img[src='/static/admin/img/icon-unknown.svg']").remove();
 
 			$("a.selector-add").addClass("btn btn-inverse").html('<span class="glyphicon glyphicon-circle-arrow-right"></span>')
 			$("a.selector-remove").addClass("btn btn-default").html('<span class="glyphicon glyphicon-circle-arrow-left"></span>')
@@ -304,11 +300,19 @@ $(window).load(function () {
 			$("a.selector-clearall").addClass("btn btn-default").html('<span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Remove All');
 		}
 
-		$("img[src$='/static/admin/img/icon_changelink.gif']").each(function() {
+		$("img[src$='/static/admin/img/icon-yes.svg']").each(function() {
+			var newElem = $('<span class="label label-green"><span class="glyphicon glyphicon-ok-sign"></span></span>');
+			$(this).replaceWith(newElem);
+		});
+		$("img[src$='/static/admin/img/icon-no.svg']").each(function() {
+			var newElem = $('<span class="label label-danger"><span class="glyphicon glyphicon-remove-sign"></span></span>');
+			$(this).replaceWith(newElem);
+		});
+		$("img[src$='/static/admin/img/icon-changelink.svg']").each(function() {
 			var newElem = $('<span class="label label-warning"><span class="glyphicon glyphicon-edit"></span></span>');
 			$(this).replaceWith(newElem);
 		});
-		$("img[src$='/static/admin/img/icon_addlink.gif']").each(function() {
+		$("img[src$='/static/admin/img/icon-addlink.svg']").each(function() {
 			var newElem = $('<span class="label label-success"><span class="glyphicon glyphicon-plus-sign"></span></span>');
 			$(this).replaceWith(newElem);
 		});
