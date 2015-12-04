@@ -4,6 +4,7 @@ from django.contrib import admin
 # from django.contrib.auth.views import login
 # from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
+from django.views.static import serve
 
 from adminplus.sites import AdminSitePlus
 from filemanager import path_end
@@ -67,8 +68,8 @@ urlpatterns = [
     url(r'^get_js/$', views.get_js),
 
     url(r'^ping_test/$', views.ping_test),
-    url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT + '/media'}),
-    url(r'^site_data/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT + '/data'}),
+    url(r'^site_media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT + '/media'}),
+    url(r'^site_data/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT + '/data'}),
 
     url(r'^error/400/$', views.error400),
     url(r'^error/401/$', views.error401),
@@ -78,8 +79,8 @@ urlpatterns = [
 
     url(r'^admin/browse/' + path_end, user.browse),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^(?:LICENSE.md)?$', 'django.views.static.serve', kwargs={'path': 'LICENSE.md', 'document_root': MEDIA_ROOT}),
-    url(r'^(?:robots.txt)?$', 'django.views.static.serve', kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),
+    url(r'^(?:LICENSE.md)?$', serve, kwargs={'path': 'LICENSE.md', 'document_root': MEDIA_ROOT}),
+    url(r'^(?:robots.txt)?$', serve, kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),
 ] #+ static(STATIC_URL, document_root=STATIC_ROOT)
 
 if DEBUG: urlpatterns.append(url(r'^test/$', views.test))

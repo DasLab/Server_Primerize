@@ -14,7 +14,7 @@ import os
 from src.env import *
 from config.t47_dev import *
 # SECURITY WARNING: don't run with debug turned on in production!
-TEMPLATE_DEBUG = DEBUG = T47_DEV
+DEBUG = T47_DEV
 
 
 root = environ.Path(os.path.dirname(os.path.dirname(__file__)))
@@ -46,6 +46,7 @@ EMAIL_NOTIFY = env('ADMIN_EMAIL')
 (EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_USE_TLS, EMAIL_PORT, EMAIL_HOST) = [v for k, v in env.email_url().items() if k in ['EMAIL_HOST_PASSWORD', 'EMAIL_HOST_USER', 'EMAIL_USE_TLS', 'EMAIL_PORT', 'EMAIL_HOST']]
 EMAIL_SUBJECT_PREFIX = '[Django] {primerize.stanford.edu}'
 
+APPEND_SLASH = True
 ROOT_URLCONF = 'src.urls'
 WSGI_APPLICATION = 'src.wsgi.application'
 
@@ -139,19 +140,6 @@ INSTALLED_APPS = (
     'src',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.request",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.contrib.messages.context_processors.messages",
-
-    "src.models.debug_flag",
-    "src.models.ga_tracker",
-)
-
 MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -164,19 +152,39 @@ MIDDLEWARE_CLASSES = [
 ]
 if not DEBUG: MIDDLEWARE_CLASSES.append('django.middleware.security.SecurityMiddleware')
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
-TEMPLATE_DIRS = (
-    root('media'),
-    root(),
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        'DIRS': [
+            root('media'),
+            root(),
+        ],
+        'OPTIONS': {
+            'debug': T47_DEV,
+            # List of callables that know how to import templates from various sources.
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.request",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.contrib.messages.context_processors.messages",
+
+                "src.models.debug_flag",
+                "src.models.ga_tracker",
+            ]
+        }
+    }
+]
 
 
 SUIT_CONFIG = {
