@@ -46,7 +46,11 @@ class Command(BaseCommand):
             ver_bootstrap = ver_bootstrap[1]
             ver += ver_bootstrap[ver_bootstrap.find('v')+1: ver_bootstrap.find('(')].strip() + '\t'
             ver += subprocess.Popen('python -c "import suit, adminplus; print %s"' % "suit.VERSION, '\t', adminplus.__version__", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
-            ver += '0.0.1\t'
+            if DEBUG:
+                ver += '0.0.2\t'
+            else:
+                open(os.path.join(MEDIA_ROOT, 'data/temp.txt'), 'w').write(subprocess.Popen('pip show django-filemanager', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip())
+                ver += subprocess.Popen('head -4 %s | tail -1 | sed %s' % (os.path.join(MEDIA_ROOT, 'data/temp.txt'),"'s/.*: //g'"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
 
             ver_d3 = open(os.path.join(MEDIA_ROOT, 'media/js/d3.min.js'), 'r').readlines()
             ver_d3 = ''.join(ver_d3)

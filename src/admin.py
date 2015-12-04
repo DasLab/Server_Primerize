@@ -8,7 +8,6 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.core.management import call_command
 
-from datetime import datetime
 import time
 
 from src.console import *
@@ -17,7 +16,7 @@ from src.settings import *
 
 UserAdmin.list_display = ('username', 'email', 'last_login', 'is_active', 'is_staff', 'is_superuser')
 UserAdmin.ordering = ('-is_superuser', '-is_staff', 'username')
-admin.site.unregister(User)
+# admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
 
@@ -69,7 +68,7 @@ class SourceDownloaderAdmin(admin.ModelAdmin):
     ordering = ('-date', 'last_name',)
 
     fieldsets = [
-        (format_html('<span class="glyphicon glyphicon-user"></span>&nbsp;Personal Information'), {'fields': [('first_name', 'last_name'), ('institution', 'department'), 'email', 'is_subscribe']}),
+        (format_html('<span class="glyphicon glyphicon-user"></span>&nbsp;Personal Information'), {'fields': [ 'date', ('first_name', 'last_name'), ('institution', 'department'), 'email', 'is_subscribe']}),
     ]
 admin.site.register(SourceDownloader, SourceDownloaderAdmin)
 
