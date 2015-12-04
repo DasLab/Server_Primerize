@@ -10,7 +10,7 @@
 				<table class="table table-overview applist">
 					<tr>
 		                <th scope="row"><b><span class="glyphicon glyphicon-globe"></span> Link</th>
-		                <td class="active"><a href="/server-status/" target="_blank" class="addlink icon">https://daslab.stanford.edu/server-status/</a></td>
+		                <td class="active"><a href="/server-status/" target="_blank" class="addlink icon">https://{{srv_stat_url}}/server-status/</a></td>
 		                <td class="active"><span class="glyphicon glyphicon-lock"></span> Apache Authorization Required</td>
 		              </tr>
 				</table>
@@ -118,8 +118,6 @@
 											<td id="apache_ver"></td>
 											<td class="text-right"><span class="label label-violet">wsgi</span></td>
 											<td id="apache_wsgi"></td>
-											<td class="text-right"><span class="label label-violet">webauth</span></td>
-											<td id="apache_webauth"></td>
 											<td class="text-right"><span class="label label-violet">ssl</span></td>
 											<td id="apache_ssl"></td>
 										</tr>

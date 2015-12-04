@@ -99,7 +99,7 @@ def apache_stat(request):
     return HttpResponse(restyle_apache(), content_type='application/json')
 
 def apache(request):
-    return render_to_response(PATH.HTML_PATH['admin_apache'], {}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_apache'], {'srv_stat_url':env('SSL_HOST')}, context_instance=RequestContext(request))
 
 
 def aws(request):

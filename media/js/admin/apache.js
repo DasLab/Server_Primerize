@@ -5,8 +5,6 @@ function get_apache_stat() {
         url : "/admin/apache_stat/",
         dataType: "json",
         success : function (data) {
-            // console.log(data);
-
             $("#apache_title").html(data['title']);
             $("#apache_ver").html(data['ver_apache']);
             $("#apache_wsgi").html(data['ver_wsgi']);
@@ -52,6 +50,5 @@ $(document).ready(function() {
 
     get_apache_stat();
     setInterval(function () { get_apache_stat();}, 3000);
-
 });
 

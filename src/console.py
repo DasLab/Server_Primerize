@@ -120,7 +120,7 @@ def set_backup_form(request):
 
 def restyle_apache():
     password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    apache_url = "http://daslab.stanford.edu/server-status/"
+    apache_url = "https://%s/server-status/" % env('SSL_HOST')
     password_mgr.add_password(None, apache_url, env('APACHE_USER'), env('APACHE_PASSWORD'))
     handler = urllib2.HTTPBasicAuthHandler(password_mgr)
     opener = urllib2.build_opener(handler)
@@ -129,7 +129,7 @@ def restyle_apache():
     request = urllib2.urlopen(apache_url)
     response = request.read().split('\n')
 
-    title = 'Apache Server Status for <code>daslab.stanford.edu</code> (via <kbd>%s</kbd> )' % response[4].replace(')</h1>', '')[-13:].replace('via ', '')
+    title = 'Apache Server Status for <code>%s</code> (via <kbd>%s</kbd> )' % (env('SSL_HOST'), response[4].replace(')</h1>', '')[-13:].replace('via ', ''))
     ver = response[6].replace('<dl><dt>Server Version: Apache/', '').replace('(Ubuntu) OpenSSL/', '').replace('mod_wsgi/', '').replace('Python/', '').replace('</dt>', '').split()
     mpm = response[7].replace('<dt>Server MPM: ', '').replace('</dt>', '')
     tz = datetime.utcnow().replace(tzinfo=pytz.utc).astimezone(pytz.timezone("America/Los_Angeles")).tzname()
