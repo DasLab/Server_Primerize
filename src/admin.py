@@ -99,7 +99,7 @@ def apache_stat(request):
     return HttpResponse(restyle_apache(), content_type='application/json')
 
 def apache(request):
-    return render_to_response(PATH.HTML_PATH['admin_apache'], {'srv_stat_url':env('SSL_HOST')}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_apache'], {'host_name':env('SSL_HOST')}, context_instance=RequestContext(request))
 
 
 def aws(request):
@@ -116,7 +116,7 @@ def aws_admin(request):
     return HttpResponse(json, content_type='application/json')
 
 def ga(request):
-    return render_to_response(PATH.HTML_PATH['admin_ga'], {'ga_url': GA['LINK_URL']}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_ga'], {'ga_url':GA['LINK_URL']}, context_instance=RequestContext(request))
 
 def ga_admin(request):
     json = ga_stats()

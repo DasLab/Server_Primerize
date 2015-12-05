@@ -62,6 +62,7 @@ urlpatterns = [
     url(r'^login/?$', user.user_login),
     url(r'^logout/?$', user.user_logout),
     url(r'^password/?$', user.user_password),
+    url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=True)),
 
     url(r'^get_user/?$', views.get_user),
     url(r'^get_admin/?$', views.get_admin),
@@ -78,7 +79,7 @@ urlpatterns = [
     url(r'^error/500/?$', views.error500),
 
     url(r'^admin/browse/' + path_end, user.browse),
-    url(r'^admin/?', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^(?:LICENSE.md)?$', serve, kwargs={'path': 'LICENSE.md', 'document_root': MEDIA_ROOT}),
     url(r'^(?:robots.txt)?$', serve, kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),
 ] #+ static(STATIC_URL, document_root=STATIC_ROOT)
