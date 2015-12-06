@@ -189,7 +189,7 @@ TEMPLATES = [
 
 SUIT_CONFIG = {
     # header
-    'ADMIN_NAME': 'Primerize Admin',
+    'ADMIN_NAME': '%s Admin' % env('SERVER_NAME'),
     'HEADER_DATE_FORMAT': 'F d, Y (l)',
     'HEADER_TIME_FORMAT': 'h:i a (e)',
 

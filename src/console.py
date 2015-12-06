@@ -61,7 +61,7 @@ def get_backup_stat():
 
     gdrive_dir = 'echo'
     if not DEBUG: gdrive_dir = 'cd %s' % APACHE_ROOT
-    ver += '~|~'.join(subprocess.Popen("%s && drive list -q \"title contains 'Primerize_' and (title contains '.gz' or title contains '.tgz')\"" % gdrive_dir, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[4:])
+    ver += '~|~'.join(subprocess.Popen("%s && drive list -q \"title contains '%s_' and (title contains '.gz' or title contains '.tgz')\"" % (gdrive_dir, env('SERVER_NAME')), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[4:])
 
     open(os.path.join(MEDIA_ROOT, 'cache/stat_backup.txt'), 'w').write(ver)
     subprocess.Popen('rm %s' % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -426,7 +426,7 @@ def git_stats(request):
 
 def dash_ssl(request):
     try:
-        subprocess.check_call('echo | openssl s_client -connect primerize.stanford.edu:443 | openssl x509 -noout -enddate > %s' % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        subprocess.check_call('echo | openssl s_client -connect %s:443 | openssl x509 -noout -enddate > %s' % (env('SSL_HOST'), os.path.join(MEDIA_ROOT, 'data/temp.txt')), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         exp_date = subprocess.Popen('sed %s %s' % ("'s/^notAfter\=//g'", os.path.join(MEDIA_ROOT, 'data/temp.txt')), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
         subprocess.check_call('rm %s' % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:

@@ -85,13 +85,15 @@ class Command(BaseCommand):
             self.stdout.write("Time elapsed: %.1f s." % (time.time() - t0))
             sys.exit(1)
         else:
-            if not DEBUG:
+            if DEBUG:
+                self.stdout.write("\033[94m Backed up locally. \033[0m")
+            else:
                 (t_cron, d_cron, t_now) = get_date_time('backup')
                 local_list = subprocess.Popen('ls -gh %s/backup/*.*gz' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()
                 html = 'File\t\t\t\tTime\t\t\t\tSize\n\n'
                 for i in range(0, len(local_list), 8):
                     html += '%s\t\t%s %s, %s\t\t%s\n' % (local_list[i+7], local_list[i+4], local_list[i+5], local_list[i+6], local_list[i+3])
-                send_notify_emails('[System] {%s} Weekly Backup Notice' % env('SSL_HOST'), 'This is an automatic email notification for the success of scheduled weekly backup of the Primerize Server database and static contents.\n\nThe crontab job is scheduled at %s (UTC) on every %sday.\n\nThe last system backup was performed at %s (PDT).\n\n%s\n\nPrimerize Admin\n' % (t_cron, d_cron, t_now, html))
+                send_notify_emails('[System] {%s} Weekly Backup Notice' % env('SSL_HOST'), 'This is an automatic email notification for the success of scheduled weekly backup of the %s Server database and static contents.\n\nThe crontab job is scheduled at %s (UTC) on every %sday.\n\nThe last system backup was performed at %s (PDT).\n\n%s\n\%s Admin\n' % (env('SERVER_NAME'), t_cron, d_cron, t_now, html, env('SERVER_NAME')))
                 self.stdout.write("Admin email (Weekly Backup Notice) sent.")
             get_backup_stat()
             self.stdout.write("Admin Backup Statistics refreshed.")

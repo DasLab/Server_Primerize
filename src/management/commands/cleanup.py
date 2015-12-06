@@ -57,7 +57,7 @@ class Command(BaseCommand):
             self.stdout.write("Time elapsed: %.1f s.\n" % (time.time() - t))
 
             t_now = datetime.datetime.now().strftime('%b %d %Y (%a) @ %H:%M:%S')
-            send_notify_emails('[System] {%s} Quarterly Cleanup Notice' % env('SSL_HOST'), 'This is an automatic email notification for the success of scheduled quarterly cleanup of the Primerize Server local results.\n\nThe crontab job is scheduled at 00:00 (UTC) on 1st day of every 3 months.\n\nThe last system backup was performed at %s (PDT).\n\n%s\n\nPrimerize Admin\n' % (t_now, html))
+            send_notify_emails('[System] {%s} Quarterly Cleanup Notice' % env('SSL_HOST'), 'This is an automatic email notification for the success of scheduled quarterly cleanup of the %s Server local results.\n\nThe crontab job is scheduled at 00:00 (UTC) on 1st day of every 3 months.\n\nThe last system backup was performed at %s (PDT).\n\n%s\n\%s Admin\n' % (env('SERVER_NAME'), t_now, html, env('SERVER_NAME')))
             self.stdout.write("Admin email (Quarterly Cleanup Notice) sent.")
 
             self.stdout.write("All done successfully!")

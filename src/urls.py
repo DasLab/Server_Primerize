@@ -9,13 +9,13 @@ from django.views.static import serve
 from adminplus.sites import AdminSitePlus
 from filemanager import path_end
 
-from src.settings import MEDIA_ROOT, STATIC_ROOT, STATIC_URL, DEBUG
+from src.settings import MEDIA_ROOT, STATIC_ROOT, STATIC_URL, DEBUG, env
 from src import user
 from src import views
 from src import wrapper_1d
 
 admin.site = AdminSitePlus()
-admin.site.index_title = 'Primerize Administration'
+admin.site.index_title = '%s Administration' % env('SERVER_NAME')
 admin.autodiscover()
 admin.site.login = user.user_login
 admin.site.logout = user.user_logout
