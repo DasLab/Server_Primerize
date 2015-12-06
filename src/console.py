@@ -4,6 +4,7 @@ import operator
 import os
 import pytz
 import simplejson
+import smtplib
 import subprocess
 import sys
 import textwrap
@@ -38,7 +39,7 @@ def send_notify_emails(msg_subject, msg_content):
 
 
 def get_date_time(keyword):
-    t_cron = [c[0] for c in CRONJOBS if c[2].find(keyword) != -1][0]
+    t_cron = [c[0] for c in CRONJOBS if ''.join(c[2]).find(keyword) != -1][0]
     d_cron = ['Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur'][int(t_cron.split(' ')[-1])]
     t_cron = datetime.strptime(' '.join(t_cron.split(' ')[0:2]),'%M %H').strftime('%I:%M%p')
     t_now = datetime.now().strftime('%b %d %Y (%a) @ %H:%M:%S')
