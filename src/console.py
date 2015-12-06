@@ -37,6 +37,14 @@ def send_notify_emails(msg_subject, msg_content):
     smtpserver.quit()
 
 
+def get_date_time(keyword):
+    t_cron = [c[0] for c in CRONJOBS if c[1].find(keyword) != -1][0]
+    d_cron = ['Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur'][int(t_cron.split(' ')[-1])]
+    t_cron = datetime.strptime(' '.join(t_cron.split(' ')[0:2]),'%M %H').strftime('%I:%M%p')
+    t_now = datetime.now().strftime('%b %d %Y (%a) @ %H:%M:%S')
+    return (t_cron, d_cron, t_now)
+
+
 def get_backup_stat():
     ver = str(int(subprocess.Popen('ls -l %s | wc -l' % os.path.join(MEDIA_ROOT, 'data/1d/'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()) - 1) + '\t'
     ver += subprocess.Popen('du -h %s' % os.path.join(MEDIA_ROOT, 'data/1d/'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[0] + '\t'

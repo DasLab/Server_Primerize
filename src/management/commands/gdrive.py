@@ -7,6 +7,7 @@ import traceback
 from django.core.management.base import BaseCommand
 
 from src.settings import *
+from src.console import get_date_time, get_backup_stat, send_notify_emails
 
 
 class Command(BaseCommand):
@@ -121,6 +122,18 @@ class Command(BaseCommand):
             self.stdout.write("Time elapsed: %.1f s." % (time.time() - t0))
             sys.exit(1)
         else:
+            if not DEBUG:
+                (t_cron, d_cron, t_now) = get_date_time('gdrive')
+                gdrive_dir = 'echo'
+                if not DEBUG: gdrive_dir = 'cd %s' % APACHE_ROOT
+                gdrive_list = subprocess.Popen("%s && drive list -q \"title contains 'DasLab_'\"" % gdrive_dir, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[4:]
+                html = 'File\t\t\t\tTime\t\t\t\tSize\n\n'
+                for i in range(0, len(gdrive_list), 6):
+                    html += '%s\t\t%s %s\t\t%s %s\n' % (gdrive_list[i+1], gdrive_list[i+4], gdrive_list[i+5], gdrive_list[i+2], gdrive_list[i+3])
+                send_notify_emails('[System] {%s} Weekly Sync Notice' % env('SSL_HOST'), 'This is an automatic email notification for the success of scheduled weekly sync of the Primerize Server backup contents to Google Drive account.\n\nThe crontab job is scheduled at %s (UTC) on every %sday.\n\nThe last system backup was performed at %s (PDT).\n\n%s\n\nPrimerize Admin\n' % (t_cron, d_cron, t_now, html))
+                self.stdout.write("Admin email (Weekly Sync Notice) sent.")
+            get_backup_stat()
+            self.stdout.write("Admin Backup Statistics refreshed.")
+
             self.stdout.write("All done successfully!")
             self.stdout.write("Time elapsed: %.1f s." % (time.time() - t0))
-

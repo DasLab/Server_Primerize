@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand
 
 from src.settings import *
 from src.models import *
+from src.console import send_notify_emails
 
 
 class Command(BaseCommand):
@@ -47,15 +48,17 @@ class Command(BaseCommand):
             open('%s/cache/log_cron_cleanup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
             flag = True
 
-
-        if not flag: self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94m%s\033[0m obsolete job result files removed." % len(all_job))
-        self.stdout.write("Time elapsed: %.1f s.\n" % (time.time() - t))
-
         if flag:
             self.stdout.write("Finished with errors!")
             self.stdout.write("Time elapsed: %.1f s." % (time.time() - t0))
             sys.exit(1)
         else:
+            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94m%s\033[0m obsolete job result files removed." % len(all_job))
+            self.stdout.write("Time elapsed: %.1f s.\n" % (time.time() - t))
+
+            t_now = datetime.datetime.now().strftime('%b %d %Y (%a) @ %H:%M:%S')
+            send_notify_emails('[System] {%s} Quarterly Cleanup Notice' % env('SSL_HOST'), 'This is an automatic email notification for the success of scheduled quarterly cleanup of the Primerize Server local results.\n\nThe crontab job is scheduled at 00:00 (UTC) on 1st day of every 3 months.\n\nThe last system backup was performed at %s (PDT).\n\n%s\n\nPrimerize Admin\n' % (t_now, html))
+            self.stdout.write("Admin email (Quarterly Cleanup Notice) sent.")
+
             self.stdout.write("All done successfully!")
             self.stdout.write("Time elapsed: %.1f s." % (time.time() - t0))
-
