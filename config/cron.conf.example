@@ -1,8 +1,8 @@
 {
 	"CRONJOBS": [
-		["cron_string", "backup_job", ">> path/log_cron.log # backup_weekly"],
-		["cron_string", "upload_job", ">> path/log_cron.log # gdrive_weekly"],
-		["cron_string", "cleanup_job", ">> path/log_cron.log # cleanup_quarterly"]
+		["cron_string", "call_command", ["backup_job"], {}, ">> path/log_cron.log # backup_weekly"],
+		["cron_string", "call_command", ["upload_job"], {}, ">> path/log_cron.log # gdrive_weekly"],
+		["cron_string", "call_command", ["cleanup_job"], {}, ">> path/log_cron.log # cleanup_quarterly"]
 	],
 	"CRONTAB_LOCK_JOBS": true,
 	"KEEP_BACKUP": 60,
