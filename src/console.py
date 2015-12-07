@@ -100,7 +100,7 @@ def set_backup_form(request):
 
     lines = open('%s/config/cron.conf' % MEDIA_ROOT, 'r').readlines()
 
-    index =  [i for i, line in enumerate(lines) if 'backup' in line or 'gdrive' in line or 'KEEP_BACKUP' in line or 'KEEP_JOB' in line]
+    index =  [i for i, line in enumerate(lines) if 'backup_weekly' in line or 'gdrive_weekly' in line or 'KEEP_BACKUP' in line or 'KEEP_JOB' in line]
     lines[index[0]] = '\t\t["%s", "django.core.management.call_command", ["backup"], {}, ">> %s/cache/log_cron_backup.log # backup_weekly"],\n' % (cron_backup, MEDIA_ROOT)
     lines[index[1]] = '\t\t["%s", "django.core.management.call_command", ["gdrive"], {}, ">> %s/cache/log_cron_gdrive.log # gdrive_weekly"],\n' % (cron_upload, MEDIA_ROOT)
     lines[index[2]] = '\t"KEEP_BACKUP": %s,\n' % form.cleaned_data['keep_backup']
