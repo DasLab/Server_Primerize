@@ -16,7 +16,7 @@
     {% csrf_token %}
     <div class="row">
       <div class="col-md-9">
-       <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
+       <div style="padding-bottom:15px;" data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
         <label for="tag" class="col-md-3">
           <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
         </label>
@@ -24,27 +24,23 @@
           {{1d_form.tag}}
           <span class="input-group-addon"><i>optional</i></span>
         </div>
-       </p>
-       <p>
-        <label for="sequence" class="col-md-3">
-          <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
-        </label>
-       </p>
+       </div>
 
        <div class="row bgimg">
-        <div class="col-md-10">
-         <ul>
-          <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
-          <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
-          <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
-         </ul>
-        </div>
-        <div class="col-md-2">
-         <p class="text-right">
-          <br/>
-          <br/>
-          <i>Length: <b><span id="count"></span></b> nt</i>
-         </p>
+        <div class="col-md-12">
+          <label for="sequence" class="col-md-12">
+            <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
+          </label>
+          <div class="col-md-12">
+           <ul>
+            <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
+            <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
+            <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
+           </ul>
+           <p class="text-right">
+            <i>Length: <b><span id="count"></span></b> nt</i>
+           </p>
+          </div>
         </div>
        </div>
        {{1d_form.sequence}}

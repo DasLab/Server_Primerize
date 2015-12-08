@@ -1,6 +1,8 @@
 var ajax_timeout;
 
 function track_input_length() {
+  var val = $("#id_sequence").val().match(/[ACGTUacgtu\ \n]+/g);
+  if (val) { $("#id_sequence").val(val.join('')); }
   var l = $("#id_sequence").val().length;
 
   $("#count").text(l);
@@ -78,12 +80,16 @@ $(document).ready(function () {
   $("#warn_500, #warn_1000").css("display", "none");
   track_input_length();
   $("#id_sequence").on("keyup", function () { track_input_length(); });
+  $("#id_tag").on("keyup", function () {
+    var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
+    if (val) { $(this).val(val.join('')); }
+  });
+
   if ($("#id_is_num_primers").is(":checked")) {
       $("#id_num_primers").removeAttr("disabled");
   } else {
       $("#id_num_primers").attr("disabled", "disabled");
   }
-
   $("#id_is_num_primers").on("click", function () {
     if ($(this).is(":checked")) {
         $("#id_num_primers").removeAttr("disabled");

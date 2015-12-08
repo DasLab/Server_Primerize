@@ -53,8 +53,8 @@ class Design2D(models.Model):
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
     plates = models.TextField(blank=True, verbose_name='Primer Plates', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized array of 2d design.')
-    time = models.FloatField(blank=True, verbose_name='Time Elapsed')
-    status = models.CharField(blank=False, max_length=15, verbose_name='Status')
+    time = models.FloatField(blank=True, verbose_name='Time Elapsed', help_text='<span class="glyphicon glyphicon-time"></span>&nbsp;Unit of <span class="label label-inverse">seconds</span>.')
+    status = models.CharField(blank=False, max_length=1, choices=JOB_STATUS_CHOICES, verbose_name='Status')
 
     class Meta():
         verbose_name = 'Mutate-and-Map Design'
@@ -162,11 +162,11 @@ class Design1DForm(forms.Form):
 
 class Design2DForm(forms.Form):
     sequence = forms.CharField(widget=forms.Textarea, required=True)
-    primers = forms.CharField(widget=forms.Textarea, required=True)
+    primers = forms.CharField(widget=forms.Textarea, required=False)
     tag = forms.CharField(required=False)
     offset = forms.IntegerField(required=False, initial=0)
-    min_muts = forms.IntegerField(required=False, initial=0)
-    max_muts = forms.IntegerField(required=False, initial=0)
+    min_muts = forms.IntegerField(required=False)
+    max_muts = forms.IntegerField(required=False)
     lib = forms.ChoiceField(choices=M2_LIBRARY_CHOICES, initial='1')
     # is_num_primers = forms.BooleanField(required=False, initial=False)
 

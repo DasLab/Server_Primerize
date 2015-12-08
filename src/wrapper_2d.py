@@ -19,55 +19,65 @@ def design_2d(request):
     return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': Design2DForm()}, context_instance=RequestContext(request))
 
 def design_2d_run(request):
-    if request.method != 'POST': return error400(request)
-    form = Design2DForm(request.POST)
-    if form.is_valid():
-        sequence = form.cleaned_data['sequence']
-        tag = form.cleaned_data['tag']
-        min_Tm = form.cleaned_data['min_Tm']
-        max_len = form.cleaned_data['max_len']
-        min_len = form.cleaned_data['min_len']
-        num_primers = form.cleaned_data['num_primers']
-        is_num_primers = form.cleaned_data['is_num_primers']
-        is_check_t7 = form.cleaned_data['is_check_t7']
+    try:
+        if request.method != 'POST': return HttpResponseBadRequest('Invalid request.')
+        form = Design2DForm(request.POST)
+        if form.is_valid():
+            sequence = form.cleaned_data['sequence']
+            tag = form.cleaned_data['tag']
+            primers = form.cleaned_data['primers']
+            offset = form.cleaned_data['offset']
+            min_muts = form.cleaned_data['min_muts']
+            max_muts = form.cleaned_data['max_muts']
+            lib = form.cleaned_data['lib']
 
-        sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
-        if not tag: tag = 'primer'
-        if not min_Tm: min_Tm = ARG['MIN_TM']
-        if not max_len: max_len = ARG['MAX_LEN']
-        if not min_len: min_len = ARG['MIN_LEN']
-        if (not num_primers) or (not is_num_primers): num_primers = ARG['NUM_PRM']
+            sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
+            tag = re.sub('[^a-zA-Z\ \.\-\_]', '', tag)
+            primers = re.sub('[^ACGTUacgtu\ \,]', '', primers)
+            primers = [p.strip() for p in primers.split(',') if p.strip()]
+            if not primers:
+                primers = Primer_Assembly(sequence).primer_set
+            if not tag: tag = 'primer'
+            if not offset: offset = 0
+            if not min_muts: min_muts = 1 - offset
+            if not max_muts: max_muts = len(sequence) + 1 - offset
+            if not lib: lib = '1'
+            which_lib = [int(lib)]
+            which_muts = range(min_muts, max_muts + 1)
 
-        msg = ''
-        if len(sequence) < 60:
-            msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
-        elif num_primers % 2:
-            msg = 'Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.'
-        if msg:
-            return HttpResponse(simplejson.dumps({'error': msg}), content_type='application/json')
+            msg = ''
+            if len(sequence) < 60:
+                msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
+            elif len(primers) % 2:
+                msg = 'Invalid primers input (should be in <b>pairs</b>).'
+            elif min_muts > max_muts:
+                msg = 'Invalid mutation starting and ending positions: <b>starting</b> should be <u>lower or equal</u> than <b>ending</b>.'
+            if msg:
+                return HttpResponse(simplejson.dumps({'error': msg}), content_type='application/json')
 
-        job_id = random_job_id()
-        create_wait_html(job_id)
-        job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}))
-        job_entry.save()
-        job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
-        job_list_entry.save()
-        job = threading.Thread(target=design_2d_wrapper, args=(sequence, tag, min_Tm, num_primers, max_len, min_len, is_check_t7, job_id))
-        job.start()
+            job_id = random_job_id()
+            create_wait_html(job_id, 2)
+            job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, primers=primers, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib}))
+            job_entry.save()
+            job_list_entry = JobIDs(job_id=job_id, type=2, date=datetime.now())
+            job_list_entry.save()
+            job = threading.Thread(target=design_2d_wrapper, args=(sequence, primers, tag, offset, which_muts, which_lib, job_id))
+            job.start()
 
-        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}), content_type='application/json')
-    else:
-        return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}), content_type='application/json')
-    return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form}, context_instance=RequestContext(request))
+            return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'primers': primers, 'min_muts': min_muts, 'max_muts': max_muts, 'offset': offset, 'lib': lib}), content_type='application/json')
+        else:
+            return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}), content_type='application/json')
+        return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form}, context_instance=RequestContext(request))
+    except:
+        print traceback.format_exc()
 
 
 def demo_2d(request):
-    # return HttpResponseRedirect('/result/?job_id=' + ARG['DEMO_2D_ID'])
-    pass
+    return HttpResponseRedirect('/result/?job_id=' + ARG['DEMO_2D_ID'])
 
 def demo_2d_run(request):
     # job_id = ARG['DEMO_2D_ID']
-    # create_wait_html(job_id)
+    # create_wait_html(job_id, 2)
     # job = threading.Thread(target=design_2d_wrapper, args=(SEQ['P4P6'], 'P4P6_2HP', ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
     # job.start()
     # return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}), content_type='application/json')
@@ -78,7 +88,7 @@ def random_2d(request):
     # sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
     # tag = 'scRNA'
     # job_id = random_job_id()
-    # create_wait_html(job_id)
+    # create_wait_html(job_id, 2)
     # job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}))
     # job_entry.save()
     # job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
@@ -89,27 +99,26 @@ def random_2d(request):
     pass
 
 
-def design_2d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length, is_t7, job_id):
+def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, job_id):
     try:
         t0 = time.time()
         # time.sleep(5)
-        if is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
-        assembly = Primer_Assembly(sequence, min_Tm, num_primers, min_length, max_length, tag)
+        plate = Mutate_Map(sequence, primer_set, offset, which_muts, which_lib, tag)
         t_total = time.time() - t0
     except:
         t_total = time.time() - t0
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        return create_err_html(job_id, t_total)
+        return create_err_html(job_id, t_total, 2)
 
     # when no solution found
-    if (not assembly.is_solution):
+    if (plate.is_error):
         html = '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div>' % (job_id, '/site_data/2d/result_%s.txt' % job_id)
         if job_id != ARG['DEMO_2D_ID']:
             job_entry = Design2D.objects.get(job_id=job_id)
             job_entry.status = '3'
             job_entry.save()
-        return create_res_html(html, job_id)
+        return create_res_html(html, job_id, 2)
     
     try:
         script = ''
@@ -219,10 +228,10 @@ def design_2d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
             job_entry.primers = assembly.primer_set
             job_entry.time = t_total
             job_entry.save()
-        create_res_html(script, job_id)
+        create_res_html(script, job_id, 2)
     except:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        create_err_html(job_id, t_total)
+        create_err_html(job_id, t_total, 2)
 
 

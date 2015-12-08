@@ -19,7 +19,7 @@ def design_1d(request):
     return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
 
 def design_1d_run(request):
-    if request.method != 'POST': return error400(request)
+    if request.method != 'POST': return HttpResponseBadRequest('Invalid request.')
     form = Design1DForm(request.POST)
     if form.is_valid():
         sequence = form.cleaned_data['sequence']
@@ -32,6 +32,7 @@ def design_1d_run(request):
         is_check_t7 = form.cleaned_data['is_check_t7']
 
         sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
+        tag = re.sub('[^a-zA-Z\ \.\-\_]', '', tag)
         if not tag: tag = 'primer'
         if not min_Tm: min_Tm = ARG['MIN_TM']
         if not max_len: max_len = ARG['MAX_LEN']
@@ -47,7 +48,7 @@ def design_1d_run(request):
             return HttpResponse(simplejson.dumps({'error': msg}), content_type='application/json')
 
         job_id = random_job_id()
-        create_wait_html(job_id)
+        create_wait_html(job_id, 1)
         job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
@@ -66,7 +67,7 @@ def demo_1d(request):
 
 def demo_1d_run(request):
     job_id = ARG['DEMO_1D_ID']
-    create_wait_html(job_id)
+    create_wait_html(job_id, 1)
     job = threading.Thread(target=design_1d_wrapper, args=(SEQ['P4P6'], 'P4P6_2HP', ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
     job.start()
     return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}), content_type='application/json')
@@ -76,7 +77,7 @@ def random_1d(request):
     sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
     tag = 'scRNA'
     job_id = random_job_id()
-    create_wait_html(job_id)
+    create_wait_html(job_id, 1)
     job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}))
     job_entry.save()
     job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
@@ -97,7 +98,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         t_total = time.time() - t0
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        return create_err_html(job_id, t_total)
+        return create_err_html(job_id, t_total, 1)
 
     # when no solution found
     if (not assembly.is_solution):
@@ -106,7 +107,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
             job_entry = Design1D.objects.get(job_id=job_id)
             job_entry.status = '3'
             job_entry.save()
-        return create_res_html(html, job_id)
+        return create_res_html(html, job_id, 1)
     
     try:
         script = ''
@@ -216,10 +217,10 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
             job_entry.primers = assembly.primer_set
             job_entry.time = t_total
             job_entry.save()
-        create_res_html(script, job_id)
+        create_res_html(script, job_id, 1)
     except:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        create_err_html(job_id, t_total)
+        create_err_html(job_id, t_total, 1)
 
 

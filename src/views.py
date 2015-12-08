@@ -72,7 +72,8 @@ def result(request):
             form = Design1DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'min_Tm': params['min_Tm'], 'max_len': params['max_len'], 'min_len': params['min_len'], 'num_primers': params['num_primers'], 'is_num_primers': params['is_num_primers'], 'is_check_t7': params['is_check_t7']})
             return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
         elif job_list_entry.type == '2':
-            pass
+            job_entry = Design2D.objects.get(job_id=job_id)
+            return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': Design2DForm(), 'result_job_id': job_id}, context_instance=RequestContext(request))
         elif job_list_entry.type == '3':
             pass
         else:

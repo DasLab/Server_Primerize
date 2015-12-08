@@ -7,7 +7,7 @@ from primerize_1d import *
 
 
 class Mutate_Map(object):
-    def __init__(self, sequence, primer_set, offset, which_muts, which_libs, prefix):
+    def __init__(self, sequence, primer_set=[], offset=0, which_muts=[], which_libs=[1], prefix='lib'):
         self.sequence = RNA2DNA(sequence)
 
         self.primer_set = primer_set

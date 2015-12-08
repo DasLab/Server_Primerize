@@ -10,7 +10,7 @@ from util import *
 
 
 class Primer_Assembly(object):
-    def __init__(self, sequence, min_Tm, NUM_PRIMERS, MIN_LENGTH, MAX_LENGTH, prefix):
+    def __init__(self, sequence, min_Tm=60.0, NUM_PRIMERS=0, MIN_LENGTH=15, MAX_LENGTH=60, prefix='primer'):
         self.sequence = RNA2DNA(sequence)
 
         self.min_Tm = min_Tm

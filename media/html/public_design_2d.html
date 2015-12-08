@@ -16,7 +16,7 @@
     {% csrf_token %}
     <div class="row">
       <div class="col-md-9">
-       <p data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
+       <div style="padding-bottom:15px;" data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
         <label for="tag" class="col-md-3">
           <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
         </label>
@@ -24,25 +24,31 @@
           {{2d_form.tag}}
           <span class="input-group-addon"><i>optional</i></span>
         </div>
-       </p>
-       <p>
-        <label for="sequence" class="col-md-3">
-          <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
-        </label>
-       </p>
+       </div>
 
        <div class="row bgimg">
-        <div class="col-md-10">
-         <ul>
-          <li>Please enter your sequence below: nucleotides only, no headers or comments.</li>
-          <li>Valid nucleotides are A, C, G, T, and U; and <u>at least <b>60</b> nt</u> long.</li>
-          <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included.</li>
-         </ul>
+        <div class="col-md-6">
+          <label for="sequence" class="col-md-12">
+            <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
+          </label>
+          <div class="col-md-12">
+           <ul>
+            <li>Please enter your sequence below: valid nucleotides only (A, C, G, T, and U); and <u>at least <b>60</b> nt</u> long.</li>
+            <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included. Please make sure the sequence matches exactly as in <code>Single Assembly</code>.</li>
+           </ul>
+          </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-6">
+          <label for="sequence" class="col-md-12">
+            <span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;<b>Primers</b>:
+          </label>
+          <div class="col-md-12">
+           <ul>
+            <li>Please enter your primer set from <code>Single Assembly</code> below. Please make sure the primer numberings match the previous result.</li>
+            <li>Click "Add Primers" to add more primer pairs.</li>
+           </ul>
+          </div>
          <p class="text-right">
-          <br/>
-          <br/>
           <i>Length: <b><span id="count"></span></b> nt</i>
          </p>
         </div>
@@ -53,31 +59,43 @@
         </div>
         <div class="col-md-6">
           {{2d_form.primers}}
+          <div id="primer_sets">
+            <div style="padding-bottom:10px;" id="primer_1" class="input-group">
+              <span class="input-group-addon">
+                <b>1</b>
+                <span class="label label-info">F</span>
+              </span>
+              <input class="primer_input form-control" type="text" id="id_primer_1" name="id_primer_1"/>
+            </div>
+            <div style="padding-bottom:10px;" id="primer_2" class="input-group">
+              <span class="input-group-addon">
+                <b>2</b>
+                <span class="label label-danger">R</span>
+              </span>
+              <input class="primer_input form-control" type="text" id="id_primer_2" name="id_primer_2"/>
+            </div>
+            <div style="padding-bottom:10px;" id="primer_3" class="input-group">
+              <span class="input-group-addon">
+                <b>3</b>
+                <span class="label label-info">F</span>
+              </span>
+              <input class="primer_input form-control" type="text" id="id_primer_3" name="id_primer_3"/>
+            </div>
+            <div style="padding-bottom:10px;" id="primer_4" class="input-group">
+              <span class="input-group-addon">
+                <b>4</b>
+                <span class="label label-danger">R</span>
+              </span>
+              <input class="primer_input form-control" type="text" id="id_primer_4" name="id_primer_4"/>
+            </div>
+
+          </div>
+          <a class="btn btn-warning" id="btn-add">&nbsp;Add Primers&nbsp;</a>
         </div>
-      </div>
+       </div>
        <br/>
 
        <input name="job_id"  id="job_id" type="text" style="display:none" value="" />
-
-       <div class="row">
-        <div class="col-md-12">
-          <input type="submit" class="btn btn-primary" id="btn_submit" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
-          <a class="btn btn-default" href="/design_2d/">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="display:none">
-            <input id="is_agree" type="checkbox" checked="yes" required="required">
-              <label for="is_agree">
-                <i>
-                  Please read the 
-                  <a href="/license">Terms and Conditions</a>.
-                </i>
-              </label>
-            </input>
-           </span>
-           <a id="btn_demo" class="btn btn-success pull-right" href="/demo_2d_run/" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
-            &nbsp;&nbsp;Demo&nbsp;&nbsp;
-          </a>
-         </div>
-       </div>
       </div>
       <div class="col-md-3">
         <div class="panel panel-default">
@@ -118,6 +136,14 @@
             </div>
           </div>
         </div>
+       <div class="row">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-primary pull-left" id="btn_submit" value="&nbsp;Primerize!&nbsp;"/>&nbsp;
+          <a class="btn btn-default" href="/design_2d/">&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>&nbsp;
+          <a id="btn_demo" class="btn btn-success pull-right" href="/demo_2d_run/" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+          &nbsp;&nbsp;Demo&nbsp;&nbsp;</a>
+         </div>
+       </div>
       </div>
     </div>
     <div class="row">
