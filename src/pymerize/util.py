@@ -124,3 +124,51 @@ def draw_assembly(sequence, primers, name, COL_SIZE=140):
     return (bp_lines, seq_lines, print_lines, Tms)
 
 
+def coord_to_num(coord):
+    coord = coord.upper().strip()
+    row = 'ABCDEFGH'.find(coord[0])
+    if row == -1: return -1
+    col = int(coord[1:])
+    if col < 0 or col > 12: return -1
+    return (col - 1) * 8 + row + 1
+
+
+def num_to_coord(num):
+    if num < 0 or num > 96: return -1
+    row = 'ABCDEFGH'[(num - 1) % 8]
+    col = (num - 1) / 8 + 1
+    return '%s%d' % (row, col)
+
+
+def get_primer_index(primer_set, sequence):
+    N_primers = len(primer_set)
+    primers = numpy.zeros((3, N_primers))
+
+    for n in xrange(N_primers):
+        primer = RNA2DNA(primer_set[n])
+        if n % 2:
+            i = sequence.find(reverse_complement(primer))
+        else:
+            i = sequence.find(primer)
+        if i == -1:
+            return ([], True)
+        else:
+            start_pos = i
+            end_pos = i + len(primer_set[n]) - 1
+            seq_dir = math.copysign(1, 0.5 - n % 2)
+            primers[:, n] = [start_pos, end_pos, seq_dir]
+
+    return (primers, False)
+
+
+def get_mutation(nt, lib):
+    idx = 'ATCG'.find(nt)
+    if lib == 1:
+        return 'TAGC'[idx]
+    elif lib == 2:
+        return 'CCAA'[idx]
+    elif lib == 3:
+        return 'GGTT'[idx]
+
+
+

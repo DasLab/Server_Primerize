@@ -12,7 +12,7 @@ import traceback
 
 from src.helper import *
 from src.models import *
-from src.pymerize.primerize import *
+from src.pymerize.primerize_1d import *
 
 
 def design_1d(request):
