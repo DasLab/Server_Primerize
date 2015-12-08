@@ -20,6 +20,11 @@ def reload_conf(DEBUG, MEDIA_ROOT):
         'MIN_LEN': env_arg['MIN_LEN'],
         'NUM_PRM': env_arg['NUM_PRM'],
 
+        'OFFSET': env_arg['OFFSET_P4P6'],
+        'LIB': env_arg['LIB_P4P6'],
+        'MIN_MUTS': env_arg['MIN_MUTS_P4P6'],
+        'MAX_MUTS': env_arg['MAX_MUTS_P4P6'],
+
         'DEMO_1D_ID': env_arg['DEMO_1D_ID'],
         'DEMO_2D_ID': env_arg['DEMO_2D_ID'],
         'DEMO_3D_ID': env_arg['DEMO_3D_ID'],
@@ -27,6 +32,7 @@ def reload_conf(DEBUG, MEDIA_ROOT):
     SEQ = {
         'P4P6': env_arg['SEQ_P4P6'],
         'T7': env_arg['SEQ_T7'],
+        'PRIMER_SET': env_arg['PRIMER_SET_P4P6'],
         'valid': env_arg['SEQ_VALID'],
     }
 

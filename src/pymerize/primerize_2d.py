@@ -85,10 +85,12 @@ class Mutate_Map(object):
 
 
     def print_constructs(self):
+        output = ''
         for i in xrange(len(self.plates[0])):
             for j in xrange(len(self.plates)):
-                print 'Plate \033[95m%d\033[0m; Primer \033[92m%d\033[0m' % (i + 1, j + 1)
-                print self.plates[j][i].print_constructs(self.primer_set[j])
+                output += 'Plate \033[95m%d\033[0m; Primer \033[92m%d\033[0m' % (i + 1, j + 1)
+                output += self.plates[j][i].print_constructs(self.primer_set[j])
+        return output
 
     def output_constructs(self, path='./'):
         save_construct_key(self.construct_names, self.name, path)
@@ -127,12 +129,11 @@ class Plate_96Well(object):
 
 
 def design_primers_2D(sequence, primer_set=[], offset=0, which_muts=[], which_libs=[1], prefix='lib'):
-    # plate = Mutate_Map(sequence, primer_set, offset, which_muts, which_libs, prefix)
-    plate = Mutate_Map('TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC', ['TTCTAATACGACTCACTATAGGCCAAAGGCGTCGA','TTGACCCCTTTCCCGCAATTCCGTTGTTGGCGTCTACTCGACGCCTTTGGCCTATAGT','TTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGG','CCCTTTGCAAGGCCATCTCAAAGTTTCCCCTGAGACTTGGTACTGAACGGC', 'TGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACGGACATGGTCCTAACCACGCAG', 'CCATATCAACAGAAGATCTGTTGACTTAGGACTTGGCTGCGTGGTTAGGACCATGT', 'TCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGA', 'GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT'], -51, range(102, 261 + 1), [1], 'p4p6')
+    plate = Mutate_Map(sequence, primer_set, offset, which_muts, which_libs, prefix)
     if plate.is_error:
         print '** Invalid input primer_set!'
     else:
-        plate.print_constructs()
+        print plate.print_constructs()
         plate.output_constructs()
         plate.output_spreadsheet()
 

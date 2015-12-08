@@ -92,6 +92,7 @@ function ajax_update_result(data) {
         $("#id_primer_" + (i + 1).toString()).val('');
       }
     }
+    track_primer_list();
 
     ajax_timeout = setInterval(function() {
       ajax_load_html(data.job_id);

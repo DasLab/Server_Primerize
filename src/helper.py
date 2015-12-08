@@ -26,11 +26,11 @@ def is_valid_email(input):
     return 1
 
 
-def is_valid_sequence(sequence):
-    for e in sequence.upper():
-        if e in SEQ['valid']:
-            return 1
-    return 0
+# def is_valid_sequence(sequence):
+#     for e in sequence.upper():
+#         if e in SEQ['valid']:
+#             return 1
+#     return 0
 
 
 def is_t7_present(sequence):
@@ -68,7 +68,7 @@ def create_err_html(job_id, t_total, type):
     job_entry.save()
 
     script_500 = ''.join(open(PATH.HTML_PATH['500'], 'r').readlines())
-    script_500 = script_500[script_500.find('<div class="row bgimg2-lg'):script_500.find('<div id="DasFOOTER"')]
+    script_500 = script_500[script_500.find('<div class="row bgimg2-lg'):script_500.find('endblock') - 3]
     create_res_html(html+script_500, job_id, type)
 
 

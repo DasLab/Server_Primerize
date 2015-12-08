@@ -32,7 +32,7 @@ def design_1d_run(request):
         is_check_t7 = form.cleaned_data['is_check_t7']
 
         sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
-        tag = re.sub('[^a-zA-Z\ \.\-\_]', '', tag)
+        tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
         if not tag: tag = 'primer'
         if not min_Tm: min_Tm = ARG['MIN_TM']
         if not max_len: max_len = ARG['MAX_LEN']
