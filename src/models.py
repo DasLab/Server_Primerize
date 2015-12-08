@@ -20,6 +20,12 @@ JOB_STATUS_CHOICES = (
     ('4', 'Error'),
 )
 
+M2_LIBRARY_CHOICES = (
+    ('1', 'A->T, T->A, C->G, G->C'),
+    ('2', 'A->C, T->C, C->A, G->A'),
+    ('3', 'A->G, T->G, C->T, G->T'),
+)
+
 
 class Design1D(models.Model):
     date = models.DateField(verbose_name='Submission Date')
@@ -43,9 +49,10 @@ class Design2D(models.Model):
     date = models.DateField(verbose_name='Submission Date')
     job_id = models.CharField(primary_key=True, blank=False, unique=True, max_length=16, verbose_name='Job ID')
     sequence = models.TextField(blank=False)
+    primers = models.TextField(blank=True, verbose_name='Primer Set', help_text='<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Serialized array of 1d design.')
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
-
+    plates = models.TextField(blank=True, verbose_name='Primer Plates', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized array of 2d design.')
     time = models.FloatField(blank=True, verbose_name='Time Elapsed')
     status = models.CharField(blank=False, max_length=15, verbose_name='Status')
 
@@ -152,6 +159,17 @@ class Design1DForm(forms.Form):
     num_primers = forms.IntegerField(required=False, min_value=0, initial=0)
     is_num_primers = forms.BooleanField(required=False, initial=False)
     is_check_t7 = forms.BooleanField(required=False, initial=True)
+
+class Design2DForm(forms.Form):
+    sequence = forms.CharField(widget=forms.Textarea, required=True)
+    primers = forms.CharField(widget=forms.Textarea, required=True)
+    tag = forms.CharField(required=False)
+    offset = forms.IntegerField(required=False, initial=0)
+    min_muts = forms.IntegerField(required=False, initial=0)
+    max_muts = forms.IntegerField(required=False, initial=0)
+    lib = forms.ChoiceField(choices=M2_LIBRARY_CHOICES, initial='1')
+    # is_num_primers = forms.BooleanField(required=False, initial=False)
+
 
 class DownloadForm(forms.Form):
     first_name = forms.CharField(required=True)

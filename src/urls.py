@@ -12,7 +12,7 @@ from filemanager import path_end
 from src.settings import MEDIA_ROOT, STATIC_ROOT, STATIC_URL, DEBUG, env
 from src import user
 from src import views
-from src import wrapper_1d
+from src import wrapper_1d, wrapper_2d
 
 admin.site = AdminSitePlus()
 admin.site.index_title = '%s Administration' % env('SERVER_NAME')
@@ -35,6 +35,12 @@ urlpatterns = [
     url(r'^demo_1d/?$', wrapper_1d.demo_1d),
     url(r'^demo_1d_run/?$', wrapper_1d.demo_1d_run),
     url(r'^random_1d/?$', wrapper_1d.random_1d),
+
+    url(r'^design_2d/?$', wrapper_2d.design_2d),
+    url(r'^design_2d_run/?$', wrapper_2d.design_2d_run),
+    url(r'^demo_2d/?$', wrapper_2d.demo_2d),
+    url(r'^demo_2d_run/?$', wrapper_2d.demo_2d_run),
+    url(r'^random_2d/?$', wrapper_2d.random_2d),
 
     url(r'^home/?$', RedirectView.as_view(url='/', permanent=True)),
     url(r'^index/?$', RedirectView.as_view(url='/', permanent=True)),

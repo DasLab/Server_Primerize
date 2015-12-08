@@ -50,6 +50,7 @@ class SYS_PATH(object):
             'about': MEDIA_ROOT + '/media/html/public_about.html',
 
             'design_1d': MEDIA_ROOT + '/media/html/public_design_1d.html',
+            'design_2d': MEDIA_ROOT + '/media/html/public_design_2d.html',
 
             'login': MEDIA_ROOT + '/media/html/user_login.html',
             'password': MEDIA_ROOT + '/media/html/user_password.html',
