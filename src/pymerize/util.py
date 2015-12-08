@@ -1,3 +1,6 @@
+import os
+import xlwt
+
 from thermo import *
 
 
@@ -171,4 +174,67 @@ def get_mutation(nt, lib):
         return 'GGTT'[idx]
 
 
+def print_primer_plate(plate, ref_primer):
+    string = ''
+    for key in sorted(plate.data):
+        string += '\033[94m%s\033[0m' % num_to_coord(key).ljust(5)
+        mut = plate.data[key][0]
+        if mut[-2:] == 'WT':
+            string += ('%s\033[100m%s\033[0m' % (mut[:-2], mut[-2:])).ljust(28)
+        else:
+            string += ('%s\033[96m%s\033[0m\033[93m%s\033[0m\033[91m%s\033[0m' % (mut[:5], mut[5], mut[6:-1], mut[-1])).ljust(45)
+
+        if ref_primer:
+            for i in xrange(len(ref_primer)):
+                if ref_primer[i] != plate.data[key][1][i]:
+                    string += '\033[41m%s\033[0m' % plate.data[key][1][i]
+                else:
+                    string += plate.data[key][1][i]
+
+        else:
+            string += plate.data[key][1]
+        string += '\n'
+
+    if not string: string = '(empty)\n'
+    return string
+
+
+def save_construct_key(keys, prefix, path):
+    f = open(os.path.join(path, '%s_keys.txt' % prefix), 'w')
+    print 'Creating keys file ...'
+    f.write('\n'.join(keys))
+    f.close()
+
+
+def save_plates_excel(plates, N_plates, N_primers, prefix, path):
+    for k in xrange(N_plates):
+        file_name = os.path.join(path, '%s_plate_%d.xls' % (prefix, k + 1))
+        print 'Creating plate file: \033[94m%s\033[0m.' % file_name
+        workbook = xlwt.Workbook()
+
+        for p in xrange(N_primers):
+            primer_sequences = plates[p][k]
+            num_primers_on_plate = primer_sequences.get_count()
+
+            if num_primers_on_plate:
+                sheet = workbook.add_sheet('primer_%d' % (p + 1))
+                sheet.col(1).width = 256 * 15
+                sheet.col(2).width = 256 * 75
+
+                sheet.write(0, 0, 'WellPosition', xlwt.easyxf('font: bold 1'))
+                sheet.write(0, 1, 'Name', xlwt.easyxf('font: bold 1'))
+                sheet.write(0, 2, 'Sequence', xlwt.easyxf('font: bold 1'))
+                sheet.write(0, 3, 'Notes', xlwt.easyxf('font: bold 1'))
+
+                for i, row in enumerate(sorted(primer_sequences.data)):
+                    if 'WT' in primer_sequences.data[row][0]:
+                        sheet.write(i + 1, 0, num_to_coord(row), xlwt.easyxf('font: color blue, italic 1'))
+                        sheet.write(i + 1, 1, primer_sequences.data[row][0], xlwt.easyxf('font: color blue'))
+                        sheet.write(i + 1, 2, primer_sequences.data[row][1], xlwt.easyxf('font: color blue'))
+                    else:
+                        sheet.write(i + 1, 0, num_to_coord(row), xlwt.easyxf('font: italic 1'))
+                        sheet.write(i + 1, 1, primer_sequences.data[row][0])
+                        sheet.write(i + 1, 2, primer_sequences.data[row][1])
+
+        workbook.save(file_name)    
 

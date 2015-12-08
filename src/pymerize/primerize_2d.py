@@ -1,6 +1,4 @@
 import math
-from numba import jit
-import numpy
 import sys
 import time
 
@@ -26,6 +24,7 @@ class Mutate_Map(object):
             self.primer = assembly.primer_set
         if not self.which_muts:
             self.which_muts = range(1 - self.offset, self.N_BP + 1 - self.offset)
+        self.construct_names = list(' ' * (len(self.which_muts) + 1))
 
         self.is_error = False
         self.N_primers = len(self.primer_set)
@@ -39,7 +38,7 @@ class Mutate_Map(object):
         (self.primers, self.is_error) = get_primer_index(self.primer_set, self.sequence)
         if self.is_error: return
         self.plates = [[Plate_96Well() for i in xrange(self.N_plates)] for i in xrange(self.N_primers)]
-        print 'Filling out sequences ...\n'
+        print 'Filling out sequences ...'
 
         for p in xrange(self.N_primers):
             for l_pos in xrange(len(self.which_libs)):
@@ -81,6 +80,7 @@ class Mutate_Map(object):
                                 wt_primer = reverse_complement(wt_primer)
                                 mut_primer = reverse_complement(mut_primer)
 
+                        self.construct_names[n] = well_name
                         self.plates[p][plate_num].set_well(well_tag, well_name, mut_primer)
 
 
@@ -90,12 +90,17 @@ class Mutate_Map(object):
                 print 'Plate \033[95m%d\033[0m; Primer \033[92m%d\033[0m' % (i + 1, j + 1)
                 print self.plates[j][i].print_constructs(self.primer_set[j])
 
+    def output_constructs(self, path='./'):
+        save_construct_key(self.construct_names, self.name, path)
+
+    def output_spreadsheet(self, path='./'):
+        save_plates_excel(self.plates, self.N_plates, self.N_primers, self.name, path)
+
 
 class Plate_96Well(object):
     def __init__(self):
         self.coords = set()
         self.data = {}
-
 
     def set_well(self, coord, tag, primer):
         if coord_to_num(coord) == -1:
@@ -117,43 +122,19 @@ class Plate_96Well(object):
     def get_count(self):
         return len(self.coords)
 
-
-    def print_constructs(self, ref_primer):
-        string = ''
-        for key in sorted(self.data):
-            string += '\033[94m%s\033[0m' % num_to_coord(key).ljust(5)
-            mut = self.data[key][0]
-            if mut[-2:] == 'WT':
-                string += ('%s\033[100m%s\033[0m' % (mut[:-2], mut[-2:])).ljust(28)
-            else:
-                string += ('%s\033[96m%s\033[0m\033[93m%s\033[0m\033[91m%s\033[0m' % (mut[:5], mut[5], mut[6:-1], mut[-1])).ljust(45)
-
-            if ref_primer:
-                for i in xrange(len(ref_primer)):
-                    if ref_primer[i] != self.data[key][1][i]:
-                        string += '\033[41m%s\033[0m' % self.data[key][1][i]
-                    else:
-                        string += self.data[key][1][i]
-
-            else:
-                string += self.data[key][1]
-            string += '\n'
-
-        if not string: string = '(empty)\n'
-        return string
+    def print_constructs(self, ref_primer=''):
+        return print_primer_plate(self, ref_primer)
 
 
 def design_primers_2D(sequence, primer_set=[], offset=0, which_muts=[], which_libs=[1], prefix='lib'):
     # plate = Mutate_Map(sequence, primer_set, offset, which_muts, which_libs, prefix)
     plate = Mutate_Map('TTCTAATACGACTCACTATAGGAACCGCGAGTAGCGGAAATCCAGTAGGAACACTATACTACTGGATAATCAAAGACAAATCTGCCCGAAGGGCTTGAGAACATCGAAACACGATGCAGAGGTGGCAGCCTCCGGTGGGTTAAAACCCAACGTTCTCAACAATAGTGAAAAGCGCGAGTAGCGCAACAAAGAAACAACAACAACAAC', ['TTCTAATACGACTCACTATAGGAACCG','CAGTAGTATAGTGTTCCTACTGGATTTCCGCTACTCGCGGTTCCTATAGTGAGTCGTA','TCCAGTAGGAACACTATACTACTGGATAATCAAAGACAAATCTGCCCGAAGGGCTTG','CCCACCGGAGGCTGCCACCTCTGCATCGTGTTTCGATGTTCTCAAGCCCTTCGGGCAGAT', 'AGCCTCCGGTGGGTTAAAACCCAACGTTCTCAACAATAGTGAAAAGCGCGAGTAGCGCAA', 'GTTGTTGTTGTTGTTTCTTTGTTGCGCTACTCGCGCTTTTCA'], 0, range(41, 168 + 1), [1], 'c1lig')
-    plate.print_constructs()
-    # plate.print_misprime()
-    # if plate.is_solution:
-    #     print plate.print_assembly()
-    #     print plate.print_primers()
-    #     print plate.print_warnings()
-    # else:
-    #     print '** No solution found!'
+    if plate.is_error:
+        print '** Invalid input primer_set!'
+    else:
+        plate.print_constructs()
+        plate.output_constructs()
+        plate.output_spreadsheet()
 
 
 def main():
