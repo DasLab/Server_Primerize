@@ -72,27 +72,8 @@ function ajax_update_result(data) {
     $("#id_max_muts").val(data.max_muts);
     $("#id_lib").val(data.lib);
 
-    var idx = $("#primer_sets").children().last().attr("id");
-    if (idx) {
-      idx = parseInt(idx.substring(idx.indexOf('_') + 1, idx.length));
-    }
-    if (data.primers.length > idx) {
-      for (var i = 0; i < Math.ceil((data.primers.length - idx) / 2); i++) {
-        $("#btn-add").trigger("click");
-      }
-    }
-    var idx = $("#primer_sets").children().last().attr("id");
-    if (idx) {
-      idx = parseInt(idx.substring(idx.indexOf('_') + 1, idx.length));
-    }
-    for (var i = 0; i < idx; i++) {
-      if (i < data.primers.length) {
-        $("#id_primer_" + (i + 1).toString()).val(data.primers[i]);
-      } else {
-        $("#id_primer_" + (i + 1).toString()).val('');
-      }
-    }
-    track_primer_list();
+    sync_primer_input(data.primers);
+    track_input_length();
 
     ajax_timeout = setInterval(function() {
       ajax_load_html(data.job_id);
@@ -108,6 +89,44 @@ function ajax_update_result(data) {
   }
 }
 
+function sync_primer_input(data) {
+  var idx = $("#primer_sets").children().last().attr("id");
+  if (idx) {
+    idx = parseInt(idx.substring(idx.indexOf('_') + 1, idx.length));
+  }
+  if (data.length > idx) {
+    for (var i = 0; i < Math.ceil((data.length - idx) / 2); i++) {
+      expand_primer_input();
+    }
+  }
+  var idx = $("#primer_sets").children().last().attr("id");
+  if (idx) {
+    idx = parseInt(idx.substring(idx.indexOf('_') + 1, idx.length));
+  }
+  for (var i = 0; i < idx; i++) {
+    if (i < data.length) {
+      $("#id_primer_" + (i + 1).toString()).val(data[i]);
+    } else {
+      $("#id_primer_" + (i + 1).toString()).val('');
+    }
+  }
+  track_primer_list();
+}
+
+function expand_primer_input() {
+  var idx = $("#primer_sets").children().last().attr("id");
+  if (idx) {
+    idx = parseInt(idx.substring(idx.indexOf('_') + 1, idx.length));
+  } else {
+    idx = 0;
+  }
+  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 1) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 1).toString() + '" name="id_primer_' + (idx + 1).toString() + '"/></div>').appendTo($("#primer_sets"));
+  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 2) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '"/></div>').appendTo($("#primer_sets"));
+  $("#id_primer_" + (idx + 1).toString()).on("keyup", track_primer_list);
+  $("#id_primer_" + (idx + 2).toString()).on("keyup", track_primer_list);
+}
+
+
 $(document).ready(function () {
   $("#id_tag").attr("placeholder", "Enter a tag").addClass("form-control");
   $("#id_sequence").attr({"rows": 12, "cols": 50, "placeholder": "Enter a sequence"}).addClass("form-control");
@@ -120,25 +139,14 @@ $(document).ready(function () {
 
   $("#warn_500, #warn_1000").css("display", "none");
   track_input_length();
-  $("#id_sequence").on("keyup", function () { track_input_length(); });
+  $("#id_sequence").on("keyup", track_input_length);
   $("#id_tag").on("keyup", function () {
     var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
     if (val) { $(this).val(val.join('')); }
   });
 
   $("input.primer_input").on("keyup", track_primer_list);
-  $("#btn-add").on("click", function () {
-    var idx = $("#primer_sets").children().last().attr("id");
-    if (idx) {
-      idx = parseInt(idx.substring(idx.indexOf('_') + 1, idx.length));
-    } else {
-      idx = 0;
-    }
-    $('<div style="padding-bottom:10px;" id="primer_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 1) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 1).toString() + '" name="id_primer_' + (idx + 1).toString() + '"/></div>').appendTo($("#primer_sets"));
-    $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 2) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '"/></div>').appendTo($("#primer_sets"));
-    $("#id_primer_" + (idx + 1).toString()).on("keyup", track_primer_list);
-    $("#id_primer_" + (idx + 2).toString()).on("keyup", track_primer_list);
-  });
+  $("#btn-add").on("click", expand_primer_input);
 
   $("#form_2d").submit(function(event) {
     $("input.primer_input").prop("disabled", true);

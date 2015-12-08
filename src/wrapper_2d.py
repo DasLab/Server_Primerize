@@ -224,12 +224,12 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         #     f.write('%s-%d%s\t%s\t\t25nm\tSTD\n' % (tag, i + 1, suffix, assembly.primer_set[i]))
         # f.write('------/* END */------\n------/* NOTE: use "Lab Ready" for "Normalization" */------\n')
         # f.close()
-        script = plate.print_constructs()
+        script = plate.print_constructs().replace('\033[96m', '<span class="label label-info">').replace('\033[93m', '<span class="label label-success">').replace('\033[91m', '<span class="label label-danger">').replace('\033[94m', '<span class="label label-primary">').replace('\033[41m', '<span class="label label-magenta">').replace('\033[100m', '<span class="label label-default">').replace('\033[95m', '<span class="label label-violet">').replace('\033[92m', '<span class="label label-orange">').replace('\033[0m', '</span>').replace('\n', '<br/>')
 
         if job_id != ARG['DEMO_2D_ID']:
             job_entry = Design2D.objects.get(job_id=job_id)
             job_entry.status = '2'
-            job_entry.primers = assembly.primer_set
+            # job_entry.plates = assembly.primer_set
             job_entry.time = t_total
             job_entry.save()
         create_res_html(script, job_id, 2)

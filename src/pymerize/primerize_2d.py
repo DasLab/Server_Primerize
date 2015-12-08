@@ -47,7 +47,7 @@ class Mutate_Map(object):
 
                 for m_pos in xrange(-1, len(self.which_muts)):
                     # which construct is this?
-                    n = (1 + len(self.which_muts)) * (lib - 1) + m_pos + 1
+                    n = m_pos + 1
                     plate_num = int(math.floor(n / 96.0))
                     plate_pos = n % 96 + 1
                     well_tag = num_to_coord(plate_pos)
@@ -88,7 +88,7 @@ class Mutate_Map(object):
         output = ''
         for i in xrange(len(self.plates[0])):
             for j in xrange(len(self.plates)):
-                output += 'Plate \033[95m%d\033[0m; Primer \033[92m%d\033[0m' % (i + 1, j + 1)
+                output += 'Plate \033[95m%d\033[0m; Primer \033[92m%d\033[0m\n' % (i + 1, j + 1)
                 output += self.plates[j][i].print_constructs(self.primer_set[j])
         return output
 

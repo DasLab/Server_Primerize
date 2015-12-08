@@ -73,7 +73,10 @@ def result(request):
             return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
         elif job_list_entry.type == '2':
             job_entry = Design2D.objects.get(job_id=job_id)
-            return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': Design2DForm(), 'result_job_id': job_id}, context_instance=RequestContext(request))
+            params = simplejson.loads(job_entry.params)
+            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
+            form = Design2DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset'], 'lib': str(params['which_lib'][0])})
+            return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
         elif job_list_entry.type == '3':
             pass
         else:

@@ -54,6 +54,8 @@ function ajax_update_result(data) {
     $("#id_is_num_primers").prop("checked", data.is_num_primers);
     $("#id_is_check_t7").prop("checked", data.is_check_t7);
 
+    track_input_length();
+
     ajax_timeout = setInterval(function() {
       ajax_load_html(data.job_id);
       if ($("#result").html().indexOf("Primerize is running") == -1) {
@@ -79,7 +81,7 @@ $(document).ready(function () {
 
   $("#warn_500, #warn_1000").css("display", "none");
   track_input_length();
-  $("#id_sequence").on("keyup", function () { track_input_length(); });
+  $("#id_sequence").on("keyup", track_input_length);
   $("#id_tag").on("keyup", function () {
     var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
     if (val) { $(this).val(val.join('')); }

@@ -49,6 +49,6 @@ $(document).ready(function() {
     $("ul.breadcrumb").append('<li class="active"><span style="color: #000;" class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;Apache Status</li>');
 
     get_apache_stat();
-    setInterval(function () { get_apache_stat();}, 3000);
+    setInterval(get_apache_stat, 3000);
 });
 
