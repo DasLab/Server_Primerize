@@ -6,6 +6,7 @@ from datetime import datetime
 import random
 import re
 import simplejson
+import subprocess
 import threading
 import time
 import traceback
@@ -102,11 +103,12 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         # time.sleep(5)
         plate = Mutate_Map(sequence, primer_set, offset, which_muts, which_lib, tag)
         if not plate.is_error:
-            dir_name = '%s/data/2d/asset_%s' % (MEDIA_ROOT, job_id)
+            dir_name = os.path.join(MEDIA_ROOT, 'data/2d/result_%s' % job_id)
             if not os.path.exists(dir_name):
                 os.mkdir(dir_name)
             plate.output_constructs(dir_name)
             plate.output_spreadsheet(dir_name)
+            subprocess.check_call('cd %s && zip -rm result_%s.zip result_%s' % (os.path.join(MEDIA_ROOT, 'data/2d/'), job_id, job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         t_total = time.time() - t0
     except:
         t_total = time.time() - t0

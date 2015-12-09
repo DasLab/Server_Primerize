@@ -42,6 +42,13 @@ def is_t7_present(sequence):
         return (SEQ['T7'] + sequence, 0, is_G)
 
 
+def primer_suffix_html(num):
+    if num % 2:
+        return '<span class="label label-danger">R</span>'
+    else:
+        return '<span class="label label-info">F</span>'
+
+
 def random_job_id():
     return binascii.b2a_hex(os.urandom(8))
 

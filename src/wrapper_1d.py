@@ -115,8 +115,8 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
             script += '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-warning" title="Mispriming alerts"><p>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
             for i in xrange(len(assembly.warnings)):
                 warning = assembly.warnings[i]
-                p_1 = '<b>%d</b>%s' % (warning[0], primer_suffix_html(warning[0] - 1))
-                p_2 = ', '.join('<b>%d</b>%s' % (x, primer_suffix_html(x - 1)) for x in warning[3])
+                p_1 = '<b>%d</b> %s' % (warning[0], primer_suffix_html(warning[0] - 1))
+                p_2 = ', '.join('<b>%d</b> %s' % (x, primer_suffix_html(x - 1)) for x in warning[3])
                 script += '<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Primer %s can misprime with <span class="label label-default">%d</span>-residue overlap to position <span class="label label-success">%s</span>, which is covered by primers: %s.<br/>' % (p_1, warning[1], str(int(warning[2])), p_2)
             script += '<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: One-pot PCR assembly may fail due to mispriming; consider first assembling fragments in a preliminary PCR round (subpool).<br/>'
         else:
@@ -127,7 +127,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
         script += '<div class="row"><div class="col-md-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;Designed Primers</h2></div><div class="panel-body"><table class="table table-striped table-hover" ><thead><tr><th class="col-md-1">#</th><th class="col-md-1">Length</th><th class="col-md-10">Sequence</th></tr></thead><tbody>'
         for i in xrange(len(assembly.primer_set)):
-            script += '<tr><td><b>%d%s</b></td><td><em>%d</td><td style="word-break: break-all;">%s</td></tr>' % (i + 1, primer_suffix_html(i), len(assembly.primer_set[i]), assembly.primer_set[i])
+            script += '<tr><td><b>%d</b> %s</td><td><em>%d</em></td><td style="word-break: break-all;">%s</td></tr>' % (i + 1, primer_suffix_html(i), len(assembly.primer_set[i]), assembly.primer_set[i])
 
         script += '</tbody></table></div></div></div></div><div class="row"><div class="col-md-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre>'
 
