@@ -78,7 +78,6 @@ $(document).ready(function () {
   $("#id_min_len").addClass("form-control");
   $("#id_num_primers").addClass("form-control");
 
-
   $("#warn_500, #warn_1000").css("display", "none");
   track_input_length();
   $("#id_sequence").on("keyup", track_input_length);

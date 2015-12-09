@@ -33,6 +33,10 @@
 
 * { font-family: "Helvetica", Arial, sans-serif; }
 
+textarea.form-control, input.form-control, select.form-control {
+  font-family: "Helvetica";
+}
+
 body {
   padding-top: 50px;
   padding-bottom: 30px;

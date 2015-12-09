@@ -11,6 +11,9 @@ function primer_label(num) {
 function track_primer_list() {
   var value = '';
   $("input.primer_input").each(function () {
+    var l = $(this).val().length;
+    $(this).next().children().children().children().text(l);
+
     var val = $(this).val().match(/[ACGTUacgtu\ ]+/g);
     if (val) { $(this).val(val.join('')); }
     value += $(this).val() + ',';
@@ -27,22 +30,15 @@ function track_input_length() {
 
   $("#count").text(l);
   if (l < 60) {
-      $("#count").parent().parent().css({"color":"red", "background-color":"white"});
-      $("#warn_500, #warn_1000").css("display", "none");
+      $("#count").parent().parent().css({"color":"#ff5c2b"});
   } else {
-      $("#count").parent().parent().css({"color":"black", "background-color":"white"});
+      $("#count").parent().parent().css({"color":"#29be92"});
       if (l > 500) {
         if (l > 1000) {
-          $("#count").parent().parent().css({"color":"red", "background-color":"black"});
-          $("#warn_1000").css("display", "inline-block");
-          $("#warn_500").css("display", "none");
+          $("#count").parent().parent().css({"color":"#ff5c2b"});
         } else {
-          $("#count").parent().parent().css({"color":"orange", "background-color":"black"});
-          $("#warn_500").css("display", "inline-block");
-          $("#warn_1000").css("display", "none");
+          $("#count").parent().parent().css({"color":"#ff912e"});
         }
-      } else {
-        $("#warn_500, #warn_1000").css("display", "none");
       }
   }
 }
@@ -74,6 +70,7 @@ function ajax_update_result(data) {
 
     sync_primer_input(data.primers);
     track_input_length();
+    track_primer_list();
 
     ajax_timeout = setInterval(function() {
       ajax_load_html(data.job_id);
@@ -120,8 +117,8 @@ function expand_primer_input() {
   } else {
     idx = 0;
   }
-  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 1) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 1).toString() + '" name="id_primer_' + (idx + 1).toString() + '"/></div>').appendTo($("#primer_sets"));
-  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 2) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '"/></div>').appendTo($("#primer_sets"));
+  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 1) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 1).toString() + '" name="id_primer_' + (idx + 1).toString() + '"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 1).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
+  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 2) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 2).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
   $("#id_primer_" + (idx + 1).toString()).on("keyup", track_primer_list);
   $("#id_primer_" + (idx + 2).toString()).on("keyup", track_primer_list);
 }
@@ -129,15 +126,14 @@ function expand_primer_input() {
 
 $(document).ready(function () {
   $("#id_tag").attr("placeholder", "Enter a tag").addClass("form-control");
-  $("#id_sequence").attr({"rows": 12, "cols": 50, "placeholder": "Enter a sequence"}).addClass("form-control");
+  $("#id_sequence").attr({"rows": 6, "cols": 50, "placeholder": "Enter a sequence"}).addClass("form-control");
   $("#id_primers").attr({"rows": 12, "cols": 50, "placeholder": "Enter the primer set"}).css("display", "none");
   $("#id_offset").addClass("form-control");
-  $("#id_min_muts").addClass("form-control").css("width", parseInt($("#id_offset").css("width")) - parseInt($("#id_min_muts").next().css("width")));
-  $("#id_max_muts").addClass("form-control").css("width", parseInt($("#id_offset").css("width")) - parseInt($("#id_max_muts").next().css("width")));
-  $("#id_lib").addClass("form-control").css("width", parseInt($("#id_offset").css("width")) + parseInt($("#id_max_muts").next().css("width")));
+  $("#id_min_muts").addClass("form-control");
+  $("#id_max_muts").addClass("form-control");
+  $("#id_lib").addClass("form-control");
 
 
-  $("#warn_500, #warn_1000").css("display", "none");
   track_input_length();
   $("#id_sequence").on("keyup", track_input_length);
   $("#id_tag").on("keyup", function () {

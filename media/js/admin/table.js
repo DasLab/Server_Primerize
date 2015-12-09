@@ -48,13 +48,20 @@ $(document).ready(function () {
 	$("span.add-on").html('<span class="glyphicon glyphicon-calendar"></span>').addClass("input-group-addon").removeClass("add-on");
 
 	$('input[type="checkbox"], input[type="radio"]').each(function() {
-		$(this).parent().addClass("checkbox");
 		if ($(this).next().is("label")) {
+			$(this).parent().addClass("checkbox");
 			$(this).prependTo($(this).next());
 		} else {
-			$(this).parent().removeClass("checkbox");
 			$(this).removeClass("form-control");
 			$(this).next().css("padding-left", "10px");
+			$('<label></label>').insertBefore($(this));
+			var elem = $(this).prev();
+			$(this).next().appendTo(elem);
+			$('<span class="cr"><span class="cr-icon glyphicon glyphicon-ok"></span></span>').prependTo(elem);
+			$(this).prependTo(elem);
+			$('<div class="checkbox"></div>').insertBefore(elem);
+			elem.appendTo(elem.prev());
+			// $(this).replaceWith('<div>' + $(this).html() + '</div>')
 		}
 	});
 	$('p.file-upload > a').each(function() {
