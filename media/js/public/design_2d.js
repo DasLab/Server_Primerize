@@ -126,7 +126,7 @@ function expand_primer_input() {
 
 $(document).ready(function () {
   $("#id_tag").attr("placeholder", "Enter a tag").addClass("form-control");
-  $("#id_sequence").attr({"rows": 6, "cols": 50, "placeholder": "Enter a sequence"}).addClass("form-control");
+  $("#id_sequence").attr({"rows": 6, "cols": 50, "placeholder": "Enter a sequence"}).addClass("form-control").css({"border-bottom-left-radius":"0px", "border-bottom-right-radius":"0px"});
   $("#id_primers").attr({"rows": 12, "cols": 50, "placeholder": "Enter the primer set"}).css("display", "none");
   $("#id_offset").addClass("form-control");
   $("#id_min_muts").addClass("form-control");

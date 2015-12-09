@@ -61,7 +61,6 @@ $(document).ready(function () {
 			$(this).prependTo(elem);
 			$('<div class="checkbox"></div>').insertBefore(elem);
 			elem.appendTo(elem.prev());
-			// $(this).replaceWith('<div>' + $(this).html() + '</div>')
 		}
 	});
 	$('p.file-upload > a').each(function() {
