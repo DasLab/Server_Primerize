@@ -40,9 +40,9 @@ $(document).ready(function() {
             }
             var html = '';
             for (var i = 0; i < names.length; i++) {
-                html += '<tr><td><code>' + names[i] + '</code></td><td><span class="label label-primary">' + times[i] + '</span></td><td><span style="color:#00f;">' + sizes[i] + '</span></td></tr>'
+                html += '<tr><td><code>' + names[i] + '</code></td><td><span class="label label-primary">' + times[i] + '</span></td><td><span style="color:#00f;">' + sizes[i] + '</span></td></tr>';
             }
-            html += '<tr><td colspan="3" style="padding: 0px;"></td></tr>'
+            html += '<tr><td colspan="3" style="padding: 0px;"></td></tr>';
             $("#gdrive_list").html(html);
 
         }
@@ -53,10 +53,10 @@ $(document).ready(function() {
         dataType: "text",
         success : function (data) {
             var txt = data.split(/\t/);
-            var drive_free = parseFloat(txt[46]), drive_used = parseFloat(txt[45]), drive_total = parseFloat(txt[47]);
+            var drive_free = parseFloat(txt[48]), drive_used = parseFloat(txt[47]), drive_total = parseFloat(txt[49]);
             $("#id_drive_space > div > div.progress-bar-success").css("width", (drive_free / drive_total * 100).toString() + '%' ).html(drive_free + ' G');
             $("#id_drive_space > div > div.progress-bar-danger").css("width", (100 - drive_free / drive_total * 100).toString() + '%' ).html(drive_used + ' G');
-            var disk_sp = txt[36].split(/\//);
+            var disk_sp = txt[38].split(/\//);
             $("#id_disk_space > div > div.progress-bar-success").css("width", (parseFloat(disk_sp[0]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[0]);
             $("#id_disk_space > div > div.progress-bar-danger").css("width", (parseFloat(disk_sp[1]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[1]);
         }

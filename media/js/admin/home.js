@@ -39,43 +39,45 @@ $(document).ready(function() {
             $("#id_llvm").html(txt[19]);
             $("#id_nano").html(txt[20]);
             $("#id_gdrive").html(txt[21]);
-            $("#id_curl").html(txt[22]);
-            $("#id_boto").html(txt[23]);
-            $("#id_pygit").html(txt[24]);
+            $("#id_zip").html(txt[22]);
+            $("#id_curl").html(txt[23]);
+            $("#id_boto").html(txt[24]);
+            $("#id_pygit").html(txt[25]);
 
-            $("#id_request").html(txt[25]);
-            $("#id_simplejson").html(txt[26]);
-            $("#id_virtualenv").html(txt[27]);
-            $("#id_pip").html(txt[28]);
+            $("#id_xlwt").html(txt[26]);
+            $("#id_request").html(txt[27]);
+            $("#id_simplejson").html(txt[28]);
+            $("#id_virtualenv").html(txt[29]);
+            $("#id_pip").html(txt[30]);
 
-            $("#id_numpy").html(txt[29]);
-            $("#id_scipy").html(txt[30]);
-            $("#id_matplotlib").html(txt[31]);
-            $("#id_numba").html(txt[32]);
+            $("#id_numpy").html(txt[31]);
+            $("#id_scipy").html(txt[32]);
+            $("#id_matplotlib").html(txt[33]);
+            $("#id_numba").html(txt[34]);
 
-            $("#id_yui").html(txt[33]);
-            $("#id_rdatkit").html(txt[34]);
-            $("#id_primerize").html(txt[35]);
+            $("#id_yui").html(txt[35]);
+            $("#id_rdatkit").html(txt[36]);
+            $("#id_primerize").html(txt[37]);
 
-            var drive_free = parseFloat(txt[46]), drive_used = parseFloat(txt[45]), drive_total = parseFloat(txt[47]);
+            var drive_free = parseFloat(txt[48]), drive_used = parseFloat(txt[47]), drive_total = parseFloat(txt[49]);
             $("#id_drive_space > div > div.progress-bar-success").css("width", (drive_free / drive_total * 100).toString() + '%' ).html(drive_free + ' G');
             $("#id_drive_space > div > div.progress-bar-danger").css("width", (100 - drive_free / drive_total * 100).toString() + '%' ).html(drive_used + ' G');
-            var disk_sp = txt[36].split(/\//);
+            var disk_sp = txt[38].split(/\//);
             $("#id_disk_space > div > div.progress-bar-success").css("width", (parseFloat(disk_sp[0]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[0]);
             $("#id_disk_space > div > div.progress-bar-danger").css("width", (parseFloat(disk_sp[1]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[1]);
-            var mem_sp = txt[37].split(/\//);
+            var mem_sp = txt[39].split(/\//);
             $("#id_memory > div > div.progress-bar-success").css("width", (parseFloat(mem_sp[0]) / (parseFloat(mem_sp[0]) + parseFloat(mem_sp[1])) * 100).toString() + '%' ).html(mem_sp[0]);
             $("#id_memory > div > div.progress-bar-danger").css("width", (parseFloat(mem_sp[1]) / (parseFloat(mem_sp[0]) + parseFloat(mem_sp[1])) * 100).toString() + '%' ).html(mem_sp[1]);
 
-            $("#id_backup").html('<span style="color:#00f;">' + txt[38] + '</span>');
-            var cpu = txt[39].split(/\//);
+            $("#id_backup").html('<span style="color:#00f;">' + txt[40] + '</span>');
+            var cpu = txt[41].split(/\//);
             $("#id_cpu").html('<span style="color:#f00;">' + cpu[0] + '</span> | <span style="color:#080;">' + cpu[1] + '</span> | <span style="color:#00f;">' + cpu[2] + '</span>');
 
-            $("#id_base_dir").html('<code>' + txt[40] + '</code>');
-            $("#id_media_root").html('<code>' + txt[41] + '</code>');
-            $("#id_static_root").html('<code>' + txt[42] + '</code>');
-            $("#id_primerize_path").html('<code>' + txt[43] + '</code>');
-            $("#id_rdatkit_path").html('<code>' + txt[44] + '</code>');
+            $("#id_base_dir").html('<code>' + txt[42] + '</code>');
+            $("#id_media_root").html('<code>' + txt[43] + '</code>');
+            $("#id_static_root").html('<code>' + txt[44] + '</code>');
+            $("#id_primerize_path").html('<code>' + txt[45] + '</code>');
+            $("#id_rdatkit_path").html('<code>' + txt[46] + '</code>');
         }
     });
 
