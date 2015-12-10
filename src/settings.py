@@ -9,21 +9,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 
 from src.env import *
-from config.t47_dev import *
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = T47_DEV
 
-
-root = environ.Path(os.path.dirname(os.path.dirname(__file__)))
-MEDIA_ROOT = root()
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/"
-PATH = SYS_PATH(MEDIA_ROOT)
-# MEDIA_ROOT = os.path.join(os.path.abspath("."))
-FILEMANAGER_STATIC_ROOT = root('media/admin') + '/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
@@ -35,16 +23,9 @@ STATIC_ROOT = '' # MEDIA_ROOT + '/media/'
 STATICFILES_DIRS = (root('data'), root('media'))
 
 
-(env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-
-
-MANAGERS = ADMINS = ( (env('ADMIN_NAME'), env('ADMIN_EMAIL')), )
-EMAIL_NOTIFY = env('ADMIN_EMAIL')
-(EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_USE_TLS, EMAIL_PORT, EMAIL_HOST) = [v for k, v in env.email_url().items() if k in ['EMAIL_HOST_PASSWORD', 'EMAIL_HOST_USER', 'EMAIL_USE_TLS', 'EMAIL_PORT', 'EMAIL_HOST']]
-EMAIL_SUBJECT_PREFIX = '{%s}' % env('SERVER_NAME')
 
 APPEND_SLASH = True
 ROOT_URLCONF = 'src.urls'
@@ -153,38 +134,36 @@ MIDDLEWARE_CLASSES = [
 if not DEBUG: MIDDLEWARE_CLASSES.append('django.middleware.security.SecurityMiddleware')
 
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-        # Always use forward slashes, even on Windows.
-        # Don't forget to use absolute paths, not relative paths.
-        'DIRS': [
-            root('media'),
-            root(),
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    'DIRS': [
+        root('media'),
+        root(),
+    ],
+    'OPTIONS': {
+        'debug': DEBUG,
+        # List of callables that know how to import templates from various sources.
+        'loaders': [
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
         ],
-        'OPTIONS': {
-            'debug': T47_DEV,
-            # List of callables that know how to import templates from various sources.
-            'loaders': [
-                'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader',
-            ],
-            'context_processors': [
-                "django.contrib.auth.context_processors.auth",
-                "django.template.context_processors.debug",
-                "django.template.context_processors.i18n",
-                "django.template.context_processors.request",
-                "django.template.context_processors.media",
-                "django.template.context_processors.static",
-                "django.contrib.messages.context_processors.messages",
+        'context_processors': [
+            "django.contrib.auth.context_processors.auth",
+            "django.template.context_processors.debug",
+            "django.template.context_processors.i18n",
+            "django.template.context_processors.request",
+            "django.template.context_processors.media",
+            "django.template.context_processors.static",
+            "django.contrib.messages.context_processors.messages",
 
-                "src.models.debug_flag",
-                "src.models.ga_tracker",
-            ]
-        }
+            "src.models.debug_flag",
+            "src.models.ga_tracker",
+        ]
     }
-]
+}]
 
 
 SUIT_CONFIG = {

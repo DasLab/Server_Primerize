@@ -1,5 +1,10 @@
 import environ
+import os
 import simplejson
+
+from config.t47_dev import *
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = IS_DEVEL
 
 
 def reload_conf(DEBUG, MEDIA_ROOT):
@@ -84,4 +89,15 @@ class SYS_PATH(object):
 
             'TMPDIR': MEDIA_ROOT + '/temp/',
         }
+
+
+root = environ.Path(os.path.dirname(os.path.dirname(__file__)))
+MEDIA_ROOT = root()
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/"
+PATH = SYS_PATH(MEDIA_ROOT)
+# MEDIA_ROOT = os.path.join(os.path.abspath("."))
+FILEMANAGER_STATIC_ROOT = root('media/admin') + '/'
+
+(env, AWS, GA, GCAL, DRIVE, GIT, SLACK, DROPBOX, APACHE_ROOT, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP) = reload_conf(DEBUG, MEDIA_ROOT)
 
