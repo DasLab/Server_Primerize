@@ -33,8 +33,10 @@
 
 * { font-family: "Helvetica", Arial, sans-serif; }
 
-textarea.monospace, input.monospace, select.monospace {
+textarea.monospace, input.monospace, select.monospace, td.monospace {
   font-family: "Courier" !important;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 textarea.translucent, input.translucent {
@@ -49,6 +51,11 @@ input.job_id, select.job_id {
   background-color: #000;
   color: #fff;
 }
+
+pre > span {
+  font-family: inherit;
+}
+
 
 .checkbox > label {
   padding-left: 0px;

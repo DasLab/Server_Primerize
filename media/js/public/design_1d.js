@@ -7,17 +7,17 @@ function track_input_length() {
 
   $("#count").text(l);
   if (l < 60) {
-      $("#count").parent().parent().css({"color":"red", "background-color":"white"});
+      $("#count").parent().parent().css("color", "#ff5c2b");
       $("#warn_500, #warn_1000").css("display", "none");
   } else {
-      $("#count").parent().parent().css({"color":"black", "background-color":"white"});
+      $("#count").parent().parent().css("color", "#29be92");
       if (l > 500) {
         if (l > 1000) {
-          $("#count").parent().parent().css({"color":"red", "background-color":"black"});
+          $("#count").parent().parent().css("color", "#ff5c2b");
           $("#warn_1000").css("display", "inline-block");
           $("#warn_500").css("display", "none");
         } else {
-          $("#count").parent().parent().css({"color":"orange", "background-color":"black"});
+          $("#count").parent().parent().css("color", "#ff912e");
           $("#warn_500").css("display", "inline-block");
           $("#warn_1000").css("display", "none");
         }
@@ -71,14 +71,15 @@ function ajax_update_result(data) {
 }
 
 $(document).ready(function () {
+  $("#warn_500, #warn_1000").css("display", "none");
+
   $("#id_tag").attr("placeholder", "Enter a tag").addClass("form-control");
-  $("#id_sequence").attr({"rows": 8, "cols": 100, "placeholder": "Enter a sequence"}).addClass("form-control");
+  $("#id_sequence").attr({"rows": 15, "cols": 100, "placeholder": "Enter a sequence"}).addClass("form-control monospace translucent").css({"border-bottom-left-radius":"0px", "border-bottom-right-radius":"0px"});
   $("#id_min_Tm").addClass("form-control");
   $("#id_max_len").addClass("form-control");
   $("#id_min_len").addClass("form-control");
   $("#id_num_primers").addClass("form-control");
 
-  $("#warn_500, #warn_1000").css("display", "none");
   track_input_length();
   $("#id_sequence").on("keyup", track_input_length);
   $("#id_tag").on("keyup", function () {
@@ -98,24 +99,6 @@ $(document).ready(function () {
         $("#id_num_primers").attr("disabled", "disabled");
     }
   });
-
-  // if (navigator.userAgent.indexOf("Chrome") > -1 | navigator.userAgent.indexOf("Firefox") > -1) {
-  //   $("#btn_submit").on("click", function () { show_modal(); });
-  //   $("#btn_demo").on("click", function () { $("#modal_demo").modal("show"); });
-  // } else {
-  //   // stupid safari!!
-  //   // console.log("safari");
-  //   $("#btn_submit").on("click", function () { 
-  //     event.preventDefault();
-  //     show_modal();
-  //     setTimeout(function(){ $("#form").trigger("submit"); }, 0);
-  //   });
-  //   $("#btn_demo").on("click", function () { 
-  //     event.preventDefault();
-  //     show_modal(); 
-  //     setTimeout(function(){ location.href = "/demo_P4P6"; }, 0);
-  //   });
-  // } 
 
   $("#form_1d").submit(function(event) {
     $.ajax({

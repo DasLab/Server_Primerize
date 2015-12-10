@@ -102,7 +102,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
     # when no solution found
     if (not assembly.is_solution):
-        html = '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
+        html = '<br/><hr/><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download disabled>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;">Contact</a> us to track down the problem.</li></ul></p></div>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
         if job_id != ARG['DEMO_1D_ID']:
             job_entry = Design1D.objects.get(job_id=job_id)
             job_entry.status = '3'
@@ -112,7 +112,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
     try:
         script = ''
         if len(assembly.warnings):
-            script += '<br/><hr/><div class="container theme-showcase"><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-warning" title="Mispriming alerts"><p>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
+            script += '<br/><hr/><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download>&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-warning" title="Mispriming alerts"><p>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
             for i in xrange(len(assembly.warnings)):
                 warning = assembly.warnings[i]
                 p_1 = '<b>%d</b> %s' % (warning[0], primer_suffix_html(warning[0] - 1))
@@ -127,9 +127,9 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
         script += '<div class="row"><div class="col-md-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;Designed Primers</h2></div><div class="panel-body"><table class="table table-striped table-hover" ><thead><tr><th class="col-md-1">#</th><th class="col-md-1">Length</th><th class="col-md-10">Sequence</th></tr></thead><tbody>'
         for i in xrange(len(assembly.primer_set)):
-            script += '<tr><td><b>%d</b> %s</td><td><em>%d</em></td><td style="word-break: break-all;">%s</td></tr>' % (i + 1, primer_suffix_html(i), len(assembly.primer_set[i]), assembly.primer_set[i])
+            script += '<tr><td><b>%d</b> %s</td><td><em>%d</em></td><td style="word-break:break-all" class="monospace">%s</td></tr>' % (i + 1, primer_suffix_html(i), len(assembly.primer_set[i]), assembly.primer_set[i])
 
-        script += '</tbody></table></div></div></div></div><div class="row"><div class="col-md-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre>'
+        script += '</tbody></table></div></div></div></div><div class="row"><div class="col-md-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
 
         x = 0
         for line in assembly.print_lines:
@@ -148,7 +148,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                             script += '<span class="label-white label-orange">' + char + '</span>'
                         else:
                             script += char
-                    script = script.replace('<span class="label-white label-orange">-</span><span class="label-white label-orange">></span>', '<span class="label-white label-orange glyphicon glyphicon-circle-arrow-right"></span>')
+                    script = script.replace('<span class="label-white label-orange">-</span><span class="label-white label-orange">></span>', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>')
             elif line[0] == "!":
                 for char in line[1]:
                     if char in SEQ['valid']:
@@ -160,7 +160,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                             script += '<span class="label-white label-green">' + char + '</span>'
                         else:
                             script += char
-                    script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-circle-arrow-left"></span>')
+                    script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>')
             elif (line[0] == '$'):
                 if line[1].find('xxxx') != -1: 
                     Tm = '%2.1f' % assembly.Tm_overlaps[x]
@@ -170,7 +170,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                     script += line[1]
             script += '<br/>'
 
-        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/" role="button" style="color: #ffffff;">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.</p> </div>'
+        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/" role="button" style="color: #ffffff;">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.</p>'
 
         file_name = MEDIA_ROOT + '/data/1d/result_%s.txt' % job_id
         f = open(file_name, 'w')

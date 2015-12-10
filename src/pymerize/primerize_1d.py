@@ -25,7 +25,7 @@ class Primer_Assembly(object):
         self.warnings = []
         self.Tm_overlaps = []
 
-        self.COL_SIZE = 138
+        self.COL_SIZE = 142
         self.WARN_CUTOFF = 3
         self.design_primers()
 

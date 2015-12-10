@@ -30,14 +30,14 @@ function track_input_length() {
 
   $("#count").text(l);
   if (l < 60) {
-      $("#count").parent().parent().css({"color":"#ff5c2b"});
+      $("#count").parent().parent().css("color", "#ff5c2b");
   } else {
-      $("#count").parent().parent().css({"color":"#29be92"});
+      $("#count").parent().parent().css("color", "#29be92");
       if (l > 500) {
         if (l > 1000) {
-          $("#count").parent().parent().css({"color":"#ff5c2b"});
+          $("#count").parent().parent().css("color", "#ff5c2b");
         } else {
-          $("#count").parent().parent().css({"color":"#ff912e"});
+          $("#count").parent().parent().css("color", "#ff912e");
         }
       }
   }

@@ -123,18 +123,18 @@
         <input name="job_id"  id="job_id" type="text" style="display:none" value="" />
         <div class="col-md-3">
           <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="More options for guided design. Parameters for primer length, primer number and annealing temperature can be specified.">
+            <div class="panel-heading" data-toggle="tooltip" data-placement="bottom" title="More options for guided design. Parameters for primer length, primer number and annealing temperature can be specified.">
               <h3 class="panel-title"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
             </div>
             <div class="panel-body">
-              <div data-toggle="tooltip" data-placement="left" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
+              <div data-toggle="tooltip" data-placement="bottom" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
                 <label for="offset">sequence <b>offset</b>:</label>
                 <div class="input-group" style="margin-left:10px;">
                   {{2d_form.offset}}
                   <span class="input-group-addon">nt</span>
                 </div>
               </div>
-              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="left" title="Maximum length for each primer. Default = 60 nt.">
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Maximum length for each primer. Default = 60 nt.">
                 <label for="min_mut">mutation <b>starting</b> position:</label>
                 <div class="input-group" style="margin-left:10px;">
                   <span class="input-group-addon">@</span>
@@ -142,7 +142,7 @@
                   <span class="input-group-addon">nt</span>
                 </div>
               </div>
-              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="left" title="Minimum length for each primer. Default = 15 nt.">
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Minimum length for each primer. Default = 15 nt.">
                 <label for="max_mut">mutation <b>ending</b> position:</label>
                 <div class="input-group" style="margin-left:10px;">
                   <span class="input-group-addon">@</span>
@@ -150,7 +150,7 @@
                   <span class="input-group-addon">nt</span>
                 </div>
               </div>
-              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="left" title="Exact limit of number of primers in design. Default = 0, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Exact limit of number of primers in design. Default = 0, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
                 <label for="max_mut">mutation <b>library</b> choice:</label>
                 <div style="margin-left:10px;">
                   {{2d_form.lib}}
@@ -162,22 +162,22 @@
           <div class="row">
             <div class="col-md-12">
               <p>
-                <button type="submit" class="form-control btn btn-primary" id="btn_submit">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn_submit">
                   <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;Primerize!
                 </button>
               </p>
               <p>
-                <a class="form-control btn btn-warning" id="btn-add">
+                <a class="btn btn-warning btn-block" id="btn-add">
                   <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Primers
                 </a>
               </p>
               <p>
-                <a id="btn_demo" class="form-control btn btn-success" href="/demo_2d_run/" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+                <a id="btn_demo" class="btn btn-success btn-block" href="/demo_2d_run/" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
                   <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Show Demo
                 </a>
               </p>
               <p>
-                <a class="form-control btn btn-default" href="/design_2d/">
+                <a class="btn btn-default btn-block" href="/design_2d/">
                   <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Clear Form
                 </a>
               </p>
