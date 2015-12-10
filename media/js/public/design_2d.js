@@ -117,8 +117,8 @@ function expand_primer_input() {
   } else {
     idx = 0;
   }
-  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 1) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 1).toString() + '" name="id_primer_' + (idx + 1).toString() + '"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 1).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
-  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 2) + '</span><input class="primer_input form-control" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 2).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
+  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 1) + '</span><input class="primer_input form-control monospace translucent" type="text" id="id_primer_' + (idx + 1).toString() + '" name="id_primer_' + (idx + 1).toString() + '"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 1).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
+  $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + primer_label(idx + 2) + '</span><input class="primer_input form-control monospace translucent" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 2).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
   $("#id_primer_" + (idx + 1).toString()).on("keyup", track_primer_list);
   $("#id_primer_" + (idx + 2).toString()).on("keyup", track_primer_list);
 }
@@ -126,7 +126,7 @@ function expand_primer_input() {
 
 $(document).ready(function () {
   $("#id_tag").attr("placeholder", "Enter a tag").addClass("form-control");
-  $("#id_sequence").attr({"rows": 6, "cols": 50, "placeholder": "Enter a sequence"}).addClass("form-control").css({"border-bottom-left-radius":"0px", "border-bottom-right-radius":"0px"});
+  $("#id_sequence").attr({"rows": 6, "cols": 50, "placeholder": "Enter a sequence"}).addClass("form-control monospace translucent").css({"border-bottom-left-radius":"0px", "border-bottom-right-radius":"0px"});
   $("#id_primers").attr({"rows": 12, "cols": 50, "placeholder": "Enter the primer set"}).css("display", "none");
   $("#id_offset").addClass("form-control");
   $("#id_min_muts").addClass("form-control");

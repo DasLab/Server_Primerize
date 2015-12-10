@@ -33,13 +33,21 @@
 
 * { font-family: "Helvetica", Arial, sans-serif; }
 
-textarea.form-control, input.form-control, select.form-control {
-  font-family: "Courier";
+textarea.monospace, input.monospace, select.monospace {
+  font-family: "Courier" !important;
+}
+
+textarea.translucent, input.translucent {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-input.form-control:disabled, input.form-control:readonly {
+input.translucent:disabled, input.translucent:readonly {
   background-color: rgba(204, 204, 204, 1);
+}
+
+input.job_id, select.job_id {
+  background-color: #000;
+  color: #fff;
 }
 
 .checkbox > label {
