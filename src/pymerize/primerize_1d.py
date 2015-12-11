@@ -3,6 +3,7 @@ from numba import jit
 import numpy
 import sys
 import time
+import traceback
 
 from misprime import *
 from thermo import *
@@ -31,19 +32,22 @@ class Primer_Assembly(object):
 
 
     def design_primers(self):
-        print 'Precalculataing Tm matrix ...'
-        self.Tm_precalculated = precalculate_Tm(self.sequence)
-        print 'Precalculataing misprime score ...'
-        (self.num_match_forward, self.num_match_reverse, self.best_match_forward, self.best_match_reverse, self.misprime_score_forward, self.misprime_score_reverse) = check_misprime(self.sequence)
+        try:
+            print 'Precalculataing Tm matrix ...'
+            self.Tm_precalculated = precalculate_Tm(self.sequence)
+            print 'Precalculataing misprime score ...'
+            (self.num_match_forward, self.num_match_reverse, self.best_match_forward, self.best_match_reverse, self.misprime_score_forward, self.misprime_score_reverse) = check_misprime(self.sequence)
 
-        print 'Doing dynamics programming calculation ...'
-        (self.scores_start, self.scores_stop, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.MAX_SCORE, self.N_primers) = dynamic_programming(self.NUM_PRIMERS, self.MIN_LENGTH, self.MAX_LENGTH, self.min_Tm, self.N_BP, self.misprime_score_forward, self.misprime_score_reverse, self.Tm_precalculated)
-        print 'Doing backtracking ...\n'
-        (self.is_solution, self.primers, self.primer_set, self.warnings) = back_tracking(self.N_BP, self.sequence, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.N_primers, self.MAX_SCORE, self.num_match_forward, self.num_match_reverse, self.best_match_forward, self.best_match_reverse, self.WARN_CUTOFF)
-        if self.is_solution:
-            (self.bp_lines, self.seq_lines, self.print_lines, self.Tm_overlaps) = draw_assembly(self.sequence, self.primers, self.name, self.COL_SIZE)
-        else:
-            (self.bp_lines, self.seq_lines, self.print_lines) = ([], [], [])
+            print 'Doing dynamics programming calculation ...'
+            (self.scores_start, self.scores_stop, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.MAX_SCORE, self.N_primers) = dynamic_programming(self.NUM_PRIMERS, self.MIN_LENGTH, self.MAX_LENGTH, self.min_Tm, self.N_BP, self.misprime_score_forward, self.misprime_score_reverse, self.Tm_precalculated)
+            print 'Doing backtracking ...\n'
+            (self.is_solution, self.primers, self.primer_set, self.warnings) = back_tracking(self.N_BP, self.sequence, self.scores_final, self.choice_start_p, self.choice_start_q, self.choice_stop_i, self.choice_stop_j, self.N_primers, self.MAX_SCORE, self.num_match_forward, self.num_match_reverse, self.best_match_forward, self.best_match_reverse, self.WARN_CUTOFF)
+            if self.is_solution:
+                (self.bp_lines, self.seq_lines, self.print_lines, self.Tm_overlaps) = draw_assembly(self.sequence, self.primers, self.name, self.COL_SIZE)
+            else:
+                (self.bp_lines, self.seq_lines, self.print_lines) = ([], [], [])
+        except:
+            self.is_solution = False
 
 
     def print_misprime(self):
