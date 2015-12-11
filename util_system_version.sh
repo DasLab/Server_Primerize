@@ -61,7 +61,7 @@ htop $(htop --version | head -1 | sed 's/.*htop //g' | sed 's/ \-.*//g') | \
 awscli $(aws --version 2> temp.txt && sed 's/ Python.*//g' temp.txt | sed 's/.*\///g') $(tput sgr 0)" >> ~/.ver_txt
 
 echo -e "\n\n$(tput setab 15)$(tput setaf 16) Primerize PCR Assembly Design Server $(tput sgr 0)" >> ~/.ver_txt
-echo -e "$(tput setab 15)$(tput setaf 16) primerize.stanford.edu / 52.33.71.43 $(tput sgr 0)\n" >> ~/.ver_txt
+echo -e "$(tput setab 15)$(tput setaf 16) primerize.stanford.edu / 52.33.204.5 $(tput sgr 0)\n" >> ~/.ver_txt
 rm temp.txt
 echo "Done."
 
