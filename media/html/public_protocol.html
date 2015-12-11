@@ -298,7 +298,7 @@
                   <p>
                     A <a href="http://parts.igem.org/Promoters/Catalog/T7" target="_blank">T7 promoter sequence&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a> on the 5´ end of the DNA, which provides a region for the T7 RNA polymerase to bind to initiate transcription. This region is <b><u>NOT</u></b> transcribed, and will not be a part of the resulting RNA. The T7 promoter sequence (<u>20 bases</u>) to be added to the DNA template is as follows:
                   </p>
-                  <p><kbd>TTCTA ATACG ACTCA CTATA</kbd></p>
+                  <p><kbd style="font-family:monospace;">TTCTA ATACG ACTCA CTATA</kbd></p>
                 </div>
               </div>
               <h4><span class="label label-danger">Tail</span></h4>
@@ -311,7 +311,7 @@
                   <p>
                     The 3´ tail does not have any particular sequence requirement, but an <mark><b>A-rich</b></mark> tail is preferable. Note that the 3´ tail should not interfere with the structure of the RNA being probed. An example of a 3´ tail is as follows:
                   </p>
-                  <p><kbd>AAAGA AACAA CAACA ACAAC</kbd></p>
+                  <p><kbd style="font-family:monospace;">AAAGA AACAA CAACA ACAAC</kbd></p>
                   <p>
                     This a sequence that we repeatedly re-use as a primer binding site, which we call <code>‘<b><u>Tail2</u></b>’</code>. It is critical (see below) to check <i>in silico</i> that this tail has negligible likelihood of base pairing with your sequence of interest.
                   </p>
@@ -329,10 +329,10 @@
                   </p>
                   <p>
                     <span class="label label-warning">5´ Buffer</span>:&nbsp;&nbsp;&nbsp;
-                    <kbd><span style="color:#3ed4e7;">GG</span>AAA AAUAA</kbd>
+                    <kbd style="font-family:monospace;"><span style="color:#3ed4e7; font-family:monospace;">GG</span>AAA AAUAA</kbd>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label label-warning">3´ Buffer</span>:&nbsp;&nbsp;&nbsp;
-                    <kbd>AAAAC AAAAC</kbd>
+                    <kbd style="font-family:monospace;">AAAAC AAAAC</kbd>
                   </p>
                   <p>We recommend the use of <b><i>reference hairpins</i></b>, as described in:</p>
                   <blockquote class="h5" style="line-height: 140%; font-weight: normal">
@@ -343,13 +343,13 @@
                   <p>An example of 5´ & 3´ Buffer region with <b><i>reference hairpins</i></b> is as follows:</p>
                   <p>
                     <span class="label label-warning">5´ Buffer</span>:&nbsp;&nbsp;&nbsp;
-                    <kbd>
-                      <span style="color:#fff;">GGA</span><span style="color:#29be92;">GA CCUC</span><span style="color:#ff5c2b;">G AGUA</span><span style="color:#29be92;">G AGGUC</span><span style="color:#fff;"> AAAA</span>
+                    <kbd style="font-family:monospace;">
+                      <span style="color:#fff; font-family:monospace;">GGA</span><span style="color:#29be92; font-family:monospace;">GA CCUC</span><span style="color:#ff5c2b; font-family:monospace;">G AGUA</span><span style="color:#29be92; font-family:monospace;">G AGGUC</span><span style="color:#fff; font-family:monospace;"> AAAA</span>
                     </kbd>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="label label-warning">3´ Buffer</span>:&nbsp;&nbsp;&nbsp;
-                    <kbd>
-                      <span style="color:#fff;">AAA</span><span style="color:#29be92;">CA ACUC</span><span style="color:#ff5c2b;">G AGUA</span><span style="color:#29be92;">G AGUUG</span><span style="color:#fff;"> ACAAC</span>
+                    <kbd style="font-family:monospace;">
+                      <span style="color:#fff; font-family:monospace;">AAA</span><span style="color:#29be92; font-family:monospace;">CA ACUC</span><span style="color:#ff5c2b; font-family:monospace;">G AGUA</span><span style="color:#29be92; font-family:monospace;">G AGUUG</span><span style="color:#fff; font-family:monospace;"> ACAAC</span>
                     </kbd>
                   </p>
                 </div>
@@ -682,7 +682,7 @@ Etc...</textarea>
                     <div class="col-md-3">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                          Primer <b>1 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                          Primer <b>1 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                         </div>
                       </div>
                     </div>
@@ -691,7 +691,7 @@ Etc...</textarea>
                       <div class="col-md-10">
                         <div class="progress" id="mid-1">
                           <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                            Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                           </div>
                         </div>
                       </div>
@@ -700,7 +700,7 @@ Etc...</textarea>
                       <div class="col-md-10">
                         <div class="progress">
                           <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            Primer <b>5 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                            Primer <b>5 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                           </div>
                         </div>
                       </div>
@@ -713,7 +713,7 @@ Etc...</textarea>
                       <div class="col-md-10">
                         <div class="progress">
                           <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>2 <span class="label label-danger">R</span></b>
+                            <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>2 <span class="label label-danger">R</span></b>
                           </div>
                         </div>
                       </div>
@@ -723,7 +723,7 @@ Etc...</textarea>
                       <div class="col-md-9">
                         <div class="progress" id="mid-1">
                           <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
+                            <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
                           </div>
                         </div>
                       </div>
@@ -731,7 +731,7 @@ Etc...</textarea>
                     <div class="col-md-3">
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                          <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>6 <span class="label label-danger">R</span></b>
+                          <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>6 <span class="label label-danger">R</span></b>
                         </div>
                       </div>
                     </div>
@@ -764,12 +764,12 @@ Etc...</textarea>
                           <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
                           <tr>
                             <td><em><b><span style="color:blue">1</span> &mu;M</b></em> <sup style="color:#209874;"><b>(2)</b></sup></td>
-                            <td>Primer <b>2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span></b></td>
+                            <td>Primer <b>2 <span class="label label-danger">R</span>, 3 <span class="label label-info">F</span>, 4 <span class="label label-danger">R</span>, 5 <span class="label label-info">F</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr>
                             <td><em><b><span style="color:blue">100</span> &mu;M</b></em> <sup style="color:#209874;"><b>(2)</b></sup></td>
-                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>1 <span class="label label-info">F</span>, 6 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>26.0</td></tr>
@@ -790,7 +790,7 @@ Etc...</textarea>
                          </p>
                          <p>
                           <span style="color:#209874;"><b>(2)</b></span> 
-                          For terminal primers (1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span>), use <b><span style="color:blue">100</span> &mu;M</b>. For internal primers (2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span>), dilute to <b><span style="color:blue">1</span> &mu;M</b>. Add 2.0 &mu;l of each primer to mixture.
+                          For terminal primers (<b>1</b> <span class="label label-info">F</span>, <b>6</b> <span class="label label-danger">R</span>), use <b><span style="color:blue">100</span> &mu;M</b>. For internal primers (<b>2</b> <span class="label label-danger">R</span>, <b>3</b> <span class="label label-info">F</span>, <b>4</b> <span class="label label-danger">R</span>, <b>5</b> <span class="label label-info">F</span>), dilute to <b><span style="color:blue">1</span> &mu;M</b>. Add 2.0 &mu;l of each primer to mixture.
                          </p>
                         </div>
                       </div>
@@ -881,7 +881,7 @@ Etc...</textarea>
                           <div class="col-md-4">
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                Primer <b>1 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                                Primer <b>1 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                               </div>
                             </div>
                           </div>
@@ -889,7 +889,7 @@ Etc...</textarea>
                           <div class="col-md-4">
                             <div class="progress" id="mid-1">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                                Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                               </div>
                             </div>
                           </div>
@@ -900,7 +900,7 @@ Etc...</textarea>
                           <div class="col-md-5">
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>2 <span class="label label-danger">R</span></b>
+                                <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>2 <span class="label label-danger">R</span></b>
                               </div>
                             </div>
                           </div>
@@ -908,7 +908,7 @@ Etc...</textarea>
                           <div class="col-md-4">
                             <div class="progress" id="mid-2">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
+                                <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
                               </div>
                             </div>
                           </div>
@@ -960,7 +960,7 @@ Etc...</textarea>
                           <div class="col-md-4">
                             <div class="progress" id="mid-3">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                                Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                               </div>
                             </div>
                           </div>
@@ -968,7 +968,7 @@ Etc...</textarea>
                           <div class="col-md-4">
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                Primer <b>5 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                                Primer <b>5 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                               </div>
                             </div>
                           </div>
@@ -979,7 +979,7 @@ Etc...</textarea>
                           <div class="col-md-4">
                             <div class="progress" id="mid-4">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
+                                <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
                               </div>
                             </div>
                           </div>
@@ -987,7 +987,7 @@ Etc...</textarea>
                           <div class="col-md-3">
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;" >
-                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>6 <span class="label label-danger">R</span></b>
+                                <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>6 <span class="label label-danger">R</span></b>
                               </div>
                             </div>
                           </div>
@@ -1016,12 +1016,12 @@ Etc...</textarea>
                           <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
                           <tr>
                             <td><em><b><span style="color:blue">1</span> &mu;M</b></em></td>
-                            <td>Primer <b>2<span class="label label-danger">R</span>, 3<span class="label label-info">F</span></b></td>
+                            <td>Primer <b>2 <span class="label label-danger">R</span>, 3 <span class="label label-info">F</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr>
                             <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
-                            <td>Primer <b>1<span class="label label-info">F</span>, 4<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>1 <span class="label label-info">F</span>, 4 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>30.0</td></tr>
@@ -1045,12 +1045,12 @@ Etc...</textarea>
                           <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
                           <tr>
                             <td><em><b><span style="color:blue">1</span> &mu;M</b></em></td>
-                            <td>Primer <b>4<span class="label label-danger">R</span>, 5<span class="label label-info">F</span></b></td>
+                            <td>Primer <b>4 <span class="label label-danger">R</span>, 5 <span class="label label-info">F</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr>
                             <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
-                            <td>Primer <b>3<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>3 <span class="label label-info">F</span>, 6 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>30.0</td></tr>
@@ -1083,7 +1083,7 @@ Etc...</textarea>
                           </tr>
                           <tr>
                             <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
-                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>1 <span class="label label-info">F</span>, 6 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>20.0</td></tr>
@@ -1107,7 +1107,7 @@ Etc...</textarea>
                           <div class="col-md-6">
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                Primer <b>1 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                                Primer <b>1 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                               </div>
                             </div>
                           </div>
@@ -1117,7 +1117,7 @@ Etc...</textarea>
                           <div class="col-md-8">
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>2 <span class="label label-danger">R</span></b>
+                                <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>2 <span class="label label-danger">R</span></b>
                               </div>
                             </div>
                           </div>
@@ -1130,7 +1130,7 @@ Etc...</textarea>
                           <div class="col-md-7">
                             <div class="progress" id="mid-1">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                Primer <b>5 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                                Primer <b>5 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                               </div>
                             </div>
                           </div>
@@ -1141,7 +1141,7 @@ Etc...</textarea>
                           <div class="col-md-6">
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>6 <span class="label label-danger">R</span></b>
+                                <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>6 <span class="label label-danger">R</span></b>
                               </div>
                             </div>
                           </div>
@@ -1207,7 +1207,7 @@ Etc...</textarea>
                           <div class="col-md-6">
                             <div class="progress" id="mid-3">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-circle-arrow-right"></span></b>
+                                Primer <b>3 <span class="label label-info">F</span> <span class="glyphicon glyphicon-arrow-right"></span></b>
                               </div>
                             </div>
                           </div>
@@ -1218,7 +1218,7 @@ Etc...</textarea>
                           <div class="col-md-7">
                             <div class="progress" id="mid-4">
                               <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                <span class="glyphicon glyphicon-circle-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
+                                <span class="glyphicon glyphicon-arrow-left"></span> Primer <b>4 <span class="label label-danger">R</span></b>
                               </div>
                             </div>
                           </div>
@@ -1262,7 +1262,7 @@ Etc...</textarea>
                       <table class="table table-hover">
                         <tbody>
                           <tr class="warning">
-                            <td>Primer <b>1<span class="label label-info">F</span>, 2<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>1 <span class="label label-info">F</span>, 2 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                         </tbody>
@@ -1273,7 +1273,7 @@ Etc...</textarea>
                       <table class="table table-hover">
                         <tbody>
                           <tr class="danger">
-                            <td>Primer <b>3<span class="label label-info">F</span>, 4<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>3 <span class="label label-info">F</span>, 4 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                         </tbody>
@@ -1284,7 +1284,7 @@ Etc...</textarea>
                       <table class="table table-hover">
                         <tbody>
                           <tr class="info">
-                            <td>Primer <b>5<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>5 <span class="label label-info">F</span>, 6 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                         </tbody>
@@ -1334,7 +1334,7 @@ Etc...</textarea>
                           </tr>
                           <tr>
                             <td><em><b><span style="color:blue">100</span> &mu;M</b></em></td>
-                            <td>Primer <b>1<span class="label label-info">F</span>, 6<span class="label label-danger">R</span></b></td>
+                            <td>Primer <b>1 <span class="label label-info">F</span>, 6 <span class="label label-danger">R</span></b></td>
                             <td>2.0 <i>(each)</i></td>
                           </tr>
                           <tr><td></td><td>ddH<sub>2</sub>O</td><td>13.0</td></tr>
@@ -1444,9 +1444,9 @@ Etc...</textarea>
                         </div>
                         <div class="col-md-6">
                           <span class="pull-right">
-                            <a id="clc_DNA" class="btn btn-default">Clear</a>
+                            <a id="clc_DNA" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;Clear</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a id="calc_DNA" class="btn btn-info">Calculate</a>
+                            <a id="calc_DNA" class="btn btn-info"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Calculate</a>
                           </span>
                         </div>
                       </div>
@@ -1667,9 +1667,9 @@ Etc...</textarea>
                         </div>
                         <div class="col-md-6">
                           <span class="pull-right">
-                            <a id="clc_RNA" class="btn btn-default">Clear</a>
+                            <a id="clc_RNA" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;Clear</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a id="calc_RNA" class="btn btn-info">Calculate</a>
+                            <a id="calc_RNA" class="btn btn-info"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Calculate</a>
                           </span>
                         </div>
                       </div>
@@ -1824,7 +1824,7 @@ Etc...</textarea>
                     <div class="col-md-11">
                      <p>
                       <span style="color:#209874;"><b>(12)</b></span> 
-                      Do not forget that the plates of primer 2<span class="label label-danger">R</span> and 3<span class="label label-info">F</span> should be diluted to <b>1 &mu;M</b> for final use.
+                      Do not forget that the plates of primer <b>2</b> <span class="label label-danger">R</span> and <b>3</b> <span class="label label-info">F</span> should be diluted to <b>1 &mu;M</b> for final use.
                      </p>
                      <p>
                       <span style="color:#209874;"><b>(13)</b></span> 
