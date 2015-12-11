@@ -48,6 +48,7 @@ class Primer_Assembly(object):
                 (self.bp_lines, self.seq_lines, self.print_lines) = ([], [], [])
         except:
             self.is_solution = False
+            print traceback.format_exc()
 
 
     def print_misprime(self):
