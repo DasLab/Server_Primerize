@@ -34,7 +34,7 @@ class Command(BaseCommand):
                 elif job.type == '2':
                     obj = Design2D.objects.get(job_id=job.job_id)
                     obj.delete()
-                    subprocess.Popen('rm -rf %s/data/2d/%s' % (MEDIA_ROOT, job.job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.Popen('rm -rf %s/data/2d/result_%s.*' % (MEDIA_ROOT, job.job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 elif job.type == '3':
                     obj = Design3D.objects.get(job_id=job.job_id)
                     obj.delete()
