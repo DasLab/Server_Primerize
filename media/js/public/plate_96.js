@@ -44,7 +44,7 @@ function draw_96_plate(job_id) {
       success: function(data) {
         var x_data = d3.range(1, 13), y_data = 'ABCDEFGH'.split('');
         var tooltip = d3.select("body").append("div")
-                        .attr("class", "tooltip")
+                        .attr("class", "svg_tooltip")
                         .style("opacity", 0);
 
         for (var plt_key in data.plates) {
@@ -100,7 +100,7 @@ function draw_96_plate(job_id) {
                                 tooltip.transition().duration(200)
                                     .style("opacity", .9);
                                 tooltip.html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td><p><span class="label label-primary">' + d.pos + '</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>' + label + '</p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td style="word-break:break-all"><code style="padding:0px; border-radius:0px;">' + d.sequence + '</code></td></tr></tbody></table>')
-                                    .style({"left": pageX + "px", "top": (pageY - 28) + "px"});
+                                    .style({"left": (pageX - 180) + "px", "top": (pageY + 20) + "px"});
                             }, 200);                                    
                         }
                     })

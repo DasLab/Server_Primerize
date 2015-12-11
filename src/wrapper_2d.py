@@ -129,7 +129,31 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         script = '<br/><hr/><div class="row"><div class="col-md-8"><h2>Output Result:</h2></div><div class="col-md-4"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download>&nbsp;Save Result&nbsp;</a></div></div><br/>' % (job_id, '/site_data/2d/result_%s.zip' % job_id)
         script += '<div class="row"><div class="col-md-10"><div class="alert alert-default"><p>__NOTE_T7__</p></div></div><div class="col-md-2"><div class="alert alert-orange text-center"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
 
-        script += '<div class="row"><div class="col-md-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
+        script += '<div class="row"><div class="col-md-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
+        json = {'plates': {}}
+        for i in xrange(plate.N_plates):
+            json['plates'][i + 1] = {'primers': {}}
+            script += '<div class="row"><div class="col-md-12"><p class="lead">Plate # <span class="label label-orange">%d</span></p></div></div><div class="row">' % (i + 1)
+
+            for j in xrange(plate.N_primers):
+                primer_sequences = plate.plates[j][i]
+                num_primers_on_plate = primer_sequences.get_count()
+
+                if num_primers_on_plate:
+                    json['plates'][i + 1]['primers'][j + 1] = []
+                    script += '<div class="col-md-3"><div class="thumbnail"><div id="svg_plt_%d_prm_%d"></div><div class="caption"><p class="text-center center-block" style="margin-bottom:0px;"><i>Primer</i> <b>%d</b> %s</p></div></div></div>' % (i + 1, j + 1, j + 1, primer_suffix_html(j))
+
+                    for k in xrange(96):
+                        if primer_sequences.data.has_key(k + 1):
+                            row = primer_sequences.data[k + 1]
+                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': row[0], 'pos': num_to_coord(k + 1), 'sequence': row[1]})
+                        else:
+                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
+
+            script += '</div>'
+
+        open(os.path.join(MEDIA_ROOT, 'data/2d/result_%s.json' % job_id), 'w').write(simplejson.dumps(json))
+        script += '</div></div></div></div></div><div class="row"><div class="col-md-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
 
         (_, _, print_lines, Tm_overlaps) = draw_assembly(plate.sequence, plate.primers, plate.name)
         x = 0
@@ -170,33 +194,8 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                 elif '|' in line[1]:
                     script += line[1]
             script += '<br/>'
-        script += '</pre></div></div></div></div><div class="row"><div class="col-md-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
+        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/" role="button" style="color: #ffffff;">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.</p>'
 
-        json = {'plates': {}}
-        for i in xrange(plate.N_plates):
-            json['plates'][i + 1] = {'primers': {}}
-            script += '<div class="row"><div class="col-md-12"><p class="lead">Plate # <span class="label label-orange">%d</span></p></div></div><div class="row">' % (i + 1)
-
-            for j in xrange(plate.N_primers):
-                primer_sequences = plate.plates[j][i]
-                num_primers_on_plate = primer_sequences.get_count()
-
-                if num_primers_on_plate:
-                    json['plates'][i + 1]['primers'][j + 1] = []
-                    script += '<div class="col-md-3"><div class="thumbnail"><div id="svg_plt_%d_prm_%d"></div><div class="caption"><p class="text-center center-block" style="margin-bottom:0px;"><i>Primer</i> <b>%d</b> %s</p></div></div></div>' % (i + 1, j + 1, j + 1, primer_suffix_html(j))
-
-                    for k in xrange(96):
-                        if primer_sequences.data.has_key(k + 1):
-                            row = primer_sequences.data[k + 1]
-                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': row[0], 'pos': num_to_coord(k + 1), 'sequence': row[1]})
-                        else:
-                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
-
-
-            script += '</div>'
-
-        open(os.path.join(MEDIA_ROOT, 'data/2d/result_%s.json' % job_id), 'w').write(simplejson.dumps(json))
-        script += '</div></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/" role="button" style="color: #ffffff;">&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.</p>'
         # script += plate.print_constructs().replace('\033[96m', '<span class="label label-info">').replace('\033[93m', '<span class="label label-success">').replace('\033[91m', '<span class="label label-danger">').replace('\033[94m', '<span class="label label-primary">').replace('\033[41m', '<span class="label label-magenta">').replace('\033[100m', '<span class="label label-default">').replace('\033[95m', '<span class="label label-violet">').replace('\033[92m', '<span class="label label-orange">').replace('\033[0m', '</span>').replace('\n', '<br/>')
 
         if job_id != ARG['DEMO_2D_ID']:
