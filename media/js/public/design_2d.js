@@ -48,7 +48,10 @@ function ajax_load_html(job_id) {
       url: '/site_data/2d/result_' + job_id + '.html',
       cache: false,
       dataType: "html",
-      success: function(data) { $("#result").html(data); }
+      success: function(data) {
+        $("#result").html(data);
+        draw_96_plate(job_id);
+      }
   });
 } 
 

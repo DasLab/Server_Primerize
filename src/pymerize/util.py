@@ -32,7 +32,7 @@ def primer_suffix(num):
         return '\033[94m F\033[0m'
 
 
-def draw_assembly(sequence, primers, name, COL_SIZE=140):
+def draw_assembly(sequence, primers, name, COL_SIZE=142):
     N_primers = primers.shape[1]
     seq_line_prev = list(' ' * max(len(sequence), COL_SIZE))
     bp_lines = []
@@ -154,7 +154,7 @@ def get_primer_index(primer_set, sequence):
             seq_dir = math.copysign(1, 0.5 - n % 2)
             primers[:, n] = [start_pos, end_pos, seq_dir]
 
-    return (primers, False)
+    return (primers.astype(int), False)
 
 
 def get_mutation(nt, lib):

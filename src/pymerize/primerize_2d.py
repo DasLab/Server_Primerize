@@ -21,7 +21,7 @@ class Mutate_Map(object):
             self.primer_set[i] = RNA2DNA(self.primer_set[i])
         if not self.primer_set:
             assembly = Primer_Assembly(sequence)
-            self.primer = assembly.primer_set
+            self.primer_set = assembly.primer_set
         if not self.which_muts:
             self.which_muts = range(1 - self.offset, self.N_BP + 1 - self.offset)
         self.construct_names = list(' ' * (len(self.which_muts) + 1))

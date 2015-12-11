@@ -127,6 +127,20 @@ pre > span {
 }
 
 
+
+div.tooltip {   
+  position: absolute;
+  text-align: left;
+  font: 16px Arial;
+  padding: 10px 15px;
+  background-color: #000000;
+  border: 1px solid #fbad24;
+  border-radius: 5px;
+  color: #ffffff;
+  width: 360px;
+}
+
+
 body {
   padding-top: 50px;
   padding-bottom: 30px;

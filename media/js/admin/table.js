@@ -137,7 +137,7 @@ $(document).ready(function () {
 		$("td.field-job_id").each(function() { $(this).html("<kbd>" + $(this).html() + "</kbd>"); });
 		$("td.field-status").each(function() { $(this).html(render_status($(this).html())); });
 		$("td.field-sequence").css("word-break", "break-all");
-		$("td.field-sequence").each(function() { $(this).html("<code>" + $(this).html() + "</code>"); });
+		$("td.field-sequence").each(function() { $(this).html('<code style="padding:0px; border-radius:0px;">' + $(this).html() + "</code>"); });
 
 		$("th.column-date > div.text > a").html('<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Submission Date');
 		$("th.column-job_id > div.text > a").html('<span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Job ID');
@@ -159,7 +159,7 @@ $(document).ready(function () {
 		$("td.field-job_id").each(function() { $(this).html("<kbd>" + $(this).html() + "</kbd>"); });
 		$("td.field-status").each(function() { $(this).html(render_status($(this).html())); });
 		$("td.field-sequence").css("word-break", "break-all");
-		$("td.field-sequence").each(function() { $(this).html("<code>" + $(this).html() + "</code>"); });
+		$("td.field-sequence").each(function() { $(this).html('<code style="padding:0px; border-radius:0px;">' + $(this).html() + "</code>"); });
 
 		$("th.column-date > div.text > a").html('<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Submission Date');
 		$("th.column-job_id > div.text > a").html('<span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Job ID');
