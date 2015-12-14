@@ -55,3 +55,18 @@ $(window).on("scroll", function () {
     }
   }, 200));
 });
+
+
+function resize() {
+  $("#col-res-l").css("height", "auto");
+  $("#col-res-r").css("height", "auto");
+
+  var col_h = Math.max(parseInt($("#col-res-l").css("height")), parseInt($("#col-res-r").css("height")));
+  $("#col-res-l").css("height", col_h);
+  $("#col-res-r").css("height", col_h);
+}
+
+$(window).on("resize", function() {
+  clearTimeout($.data(this, 'resizeTimer'));
+  $.data(this, 'resizeTimer', setTimeout(resize(), 200));
+});
