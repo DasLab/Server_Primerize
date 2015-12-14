@@ -21,17 +21,5 @@ $(document).ready(function () {
     $("#conc_RNA").val('');
   });
 
-  $('ul.panel-collapse').on('show.bs.collapse', function () {
-    $(this).parent().find("a>span.glyphicon.pull-right")
-      .removeClass("glyphicon-triangle-bottom")
-      .addClass("glyphicon-triangle-top");
-  });
-  $('ul.panel-collapse').on('hide.bs.collapse', function () {
-    $(this).parent().find("a>span.glyphicon.pull-right")
-      .removeClass("glyphicon-triangle-top")
-      .addClass("glyphicon-triangle-bottom");
-  });
-
-
 });
 
