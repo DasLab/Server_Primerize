@@ -83,17 +83,25 @@ def demo_2d_run(request):
 
 
 def random_2d(request):
-    # sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
-    # tag = 'scRNA'
-    # job_id = random_job_id()
-    # create_wait_html(job_id, 2)
-    # job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}))
-    # job_entry.save()
-    # job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
-    # job_list_entry.save()
-    # job = threading.Thread(target=design_2d_wrapper, args=(sequence, tag, ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
-    # job.start()
-    # return HttpResponseRedirect('/result/?job_id=' + job_id)
+    sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
+    primers = Primer_Assembly(sequence).primer_set
+    tag = 'scRNA'
+    offset = 0
+    min_muts = 1 + len(SEQ['T7']) - offset
+    max_muts = len(sequence) + 1 - offset
+    lib = '1'
+    which_lib = [int(lib)]
+    which_muts = range(min_muts, max_muts + 1)
+
+    job_id = random_job_id()
+    create_wait_html(job_id, 2)
+    job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, primers=primers, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib}))
+    job_entry.save()
+    job_list_entry = JobIDs(job_id=job_id, type=2, date=datetime.now())
+    job_list_entry.save()
+    job = threading.Thread(target=design_2d_wrapper, args=(sequence, primers, tag, offset, which_muts, which_lib, job_id))
+    job.start()
+    return HttpResponseRedirect('/result/?job_id=' + job_id)
     pass
 
 
