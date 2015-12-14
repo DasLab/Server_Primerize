@@ -158,8 +158,12 @@ $(document).ready(function () {
       success: function(data) { ajax_update_result(data); },
     });
     $("input.primer_input").prop("disabled", false);
+    $("input.primer_input").prop("readonly", false);
+    $("#id_sequence").prop("readonly", false);
+    $("#btn-add").prop("disabled", false);
     event.preventDefault();
   });
+  
   $("#btn_demo").on("click", function(event) {
     $.ajax({
       type: "GET",

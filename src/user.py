@@ -1,8 +1,9 @@
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
+from django.http import HttpResponseRedirect
+#, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render_to_response
 
 from filemanager import FileManager
 

@@ -1,6 +1,7 @@
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponse
+#, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render_to_response
 
 from datetime import datetime
 import random
@@ -19,7 +20,7 @@ def design_1d(request):
     return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
 
 def design_1d_run(request):
-    if request.method != 'POST': return HttpResponseBadRequest('Invalid request.')
+    if request.method != 'POST': return error400(request)
     form = Design1DForm(request.POST)
     if form.is_valid():
         sequence = form.cleaned_data['sequence']
@@ -103,7 +104,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
     # when no solution found
     if (not assembly.is_solution):
-        html = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><button class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" disabled><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</button></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact&nbsp;</a> us to track down the problem.</li></ul></p></div>' % (job_id)
+        html = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse" id="disp_job_id">%s</span></h4><button class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" disabled><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</button></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact&nbsp;</a> us to track down the problem.</li></ul></p></div>' % (job_id)
         if job_id != ARG['DEMO_1D_ID']:
             job_entry = Design1D.objects.get(job_id=job_id)
             job_entry.status = '3'
@@ -111,7 +112,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         return create_res_html(html, job_id, 1)
     
     try:
-        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-warning" title="Mispriming alerts"><p>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
+        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse" id="disp_job_id">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-warning" title="Mispriming alerts"><p>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
         if len(assembly.warnings):
             for i in xrange(len(assembly.warnings)):
                 warning = assembly.warnings[i]
@@ -170,7 +171,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                     script += line[1]
             script += '<br/>'
 
-        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#PCR" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly. Or go ahead for <code>Mutate-and-Map Plates</code> <a class="btn btn-primary btn-sm" href="/design_2d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design&nbsp;</a>.</p><script type="text/javascript">resize();</script>'
+        script += '</pre></div></div></div></div><div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#PCR" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly. Or go ahead for <code>Mutate-and-Map Plates</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-1d-to-2d" class="btn btn-primary btn-lg btn-block" href="/design_2d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design&nbsp;</a></div></div><script type="text/javascript">resize();</script>'
 
         file_name = MEDIA_ROOT + '/data/1d/result_%s.txt' % job_id
         f = open(file_name, 'w')

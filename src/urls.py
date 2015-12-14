@@ -55,6 +55,8 @@ else:
         url(r'^demo_2d_run/?$', wrapper_2d.demo_2d_run),
         url(r'^random_2d/?$', wrapper_2d.random_2d),
 
+        url(r'^design_2d_from_1d/?$', wrapper_2d.design_2d_from_1d),
+
         url(r'^home/?$', RedirectView.as_view(url='/', permanent=True)),
         url(r'^index/?$', RedirectView.as_view(url='/', permanent=True)),
         url(r'^help/?$', RedirectView.as_view(url='/tutorial/', permanent=True)),

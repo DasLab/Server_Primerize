@@ -1,6 +1,7 @@
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponse
+#, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render_to_response
 
 from datetime import datetime
 import random
@@ -16,11 +17,11 @@ from src.models import *
 from src.pymerize.primerize_2d import *
 
 
-def design_2d(request):
-    return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': Design2DForm()}, context_instance=RequestContext(request))
+def design_2d(request, form=Design2DForm(), from_1d=False):
+    return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
 
 def design_2d_run(request):
-    if request.method != 'POST': return HttpResponseBadRequest('Invalid request.')
+    if request.method != 'POST': return error400(request)
     form = Design2DForm(request.POST)
     if form.is_valid():
         sequence = form.cleaned_data['sequence']
@@ -104,7 +105,6 @@ def random_2d(request):
     job = threading.Thread(target=design_2d_wrapper, args=(sequence, primers, tag, offset, which_muts, which_lib, job_id))
     job.start()
     return HttpResponseRedirect('/result/?job_id=' + job_id)
-    pass
 
 
 def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, job_id):
@@ -136,8 +136,8 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         return create_res_html(html, job_id, 2)
     
     try:
-        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/>' % (job_id, '/site_data/2d/result_%s.zip' % job_id)
-        script += '<div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-default" id="col-res-l"><p>__NOTE_NUM__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
+        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p></p></div>' % (job_id, '/site_data/2d/result_%s.zip' % job_id)
+        script += '<div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
         json = {'plates': {}}
@@ -182,7 +182,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             warning += '<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Group multiple plates that have fewer than <u>24</u> wells together before ordering.</br>'
             script = script.replace('__NOTE_NUM__', warning)
         else:
-            script = script.replace('<div class="alert alert-default"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
+            script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
         (_, _, print_lines, Tm_overlaps) = draw_assembly(plate.sequence, plate.primers, plate.name)
         x = 0
@@ -239,4 +239,21 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         print traceback.format_exc()
         create_err_html(job_id, t_total, 2)
 
+
+def design_2d_from_1d(request):
+    if request.META.has_key('HTTP_REFERER'):
+        referer_job_id = request.META['HTTP_REFERER']
+        referer_job_id = referer_job_id[referer_job_id.find('?job_id=') + 8:]
+
+        form = Design2DForm()
+        from_1d = False
+        if Design1D.objects.filter(job_id=referer_job_id).exists():
+            job_entry = Design1D.objects.get(job_id=referer_job_id)
+            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
+            form = Design2DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers})
+            from_1d = True
+    else:
+        return error400(request)
+
+    return design_2d(request, form, from_1d)
 

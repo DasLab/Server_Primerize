@@ -167,9 +167,9 @@
                 </button>
               </p>
               <p>
-                <a class="btn btn-warning btn-block" id="btn-add" data-toggle="tooltip" data-placement="bottom" title="Add a pair of primers input.">
+                <button type="button" class="btn btn-warning btn-block" id="btn-add" data-toggle="tooltip" data-placement="bottom" title="Add a pair of primers input.">
                   <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Primers
-                </a>
+                </button>
               </p>
               <p>
                 <a id="btn_demo" class="btn btn-success btn-block" href="/demo_2d_run/" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
@@ -218,5 +218,16 @@
       }, 1500);
     </script>
   {% endif %}
+  {% if from_1d %}
+    <script type="text/javascript">
+      var primer_list = $("#id_primers").val().split(',');
+      sync_primer_input(primer_list);
+
+      $("input.primer_input").prop("readonly", true);
+      $("#id_sequence").prop("readonly", true);
+      $("#btn-add").prop("disabled", true);
+    </script>
+  {% endif %}
+
 {% endblock %}
 
