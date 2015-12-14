@@ -50,7 +50,9 @@ function ajax_load_html(job_id) {
       dataType: "html",
       success: function(data) {
         $("#result").html(data);
-        draw_96_plate(job_id);
+        if ($("#result").html().indexOf("alert-danger") == -1) {
+          draw_96_plate(job_id);
+        }
       }
   });
 } 

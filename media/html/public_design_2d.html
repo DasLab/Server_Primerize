@@ -127,14 +127,14 @@
               <h3 class="panel-title"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
             </div>
             <div class="panel-body">
-              <div data-toggle="tooltip" data-placement="bottom" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
+              <div data-toggle="tooltip" data-placement="bottom" title="Sequence numbering offset, equals to 1 minus the final number of the first nucleotide. Default = 0, i.e. the 1st nucleotide in the sequence will be numbered as 1.">
                 <label for="offset">sequence <b>offset</b>:</label>
                 <div class="input-group" style="margin-left:10px;">
                   {{2d_form.offset}}
                   <span class="input-group-addon">nt</span>
                 </div>
               </div>
-              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Maximum length for each primer. Default = 60 nt.">
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Starting position of mutation region. Use numbering based on offset. Default is NaN, which will be automatically filled with the corresponding number of first nucleotide in the sequence.">
                 <label for="min_mut">mutation <b>starting</b> position:</label>
                 <div class="input-group" style="margin-left:10px;">
                   <span class="input-group-addon hidden-sm hidden-xs">@</span>
@@ -142,7 +142,7 @@
                   <span class="input-group-addon">nt</span>
                 </div>
               </div>
-              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Minimum length for each primer. Default = 15 nt.">
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Ending position of mutation region. Use numbering based on offset. Default is NaN, which will be automatically filled with the corresponding number of last nucleotide in the sequence.">
                 <label for="max_mut">mutation <b>ending</b> position:</label>
                 <div class="input-group" style="margin-left:10px;">
                   <span class="input-group-addon hidden-sm hidden-xs">@</span>
@@ -150,7 +150,7 @@
                   <span class="input-group-addon">nt</span>
                 </div>
               </div>
-              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Exact limit of number of primers in design. Default = 0, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only." >
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Mutation scheme. Three libraries are available. Default = 1." >
                 <label for="max_mut">mutation <b>library</b> choice:</label>
                 <div style="margin-left:10px;">
                   {{2d_form.lib}}
@@ -167,7 +167,7 @@
                 </button>
               </p>
               <p>
-                <a class="btn btn-warning btn-block" id="btn-add">
+                <a class="btn btn-warning btn-block" id="btn-add" data-toggle="tooltip" data-placement="bottom" title="Add a pair of primers input.">
                   <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Primers
                 </a>
               </p>
