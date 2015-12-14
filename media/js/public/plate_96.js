@@ -42,6 +42,9 @@ function draw_96_plate(job_id) {
       cache: false,
       dataType: "json",
       success: function(data) {
+        var unit = parseInt($("[id^='svg_plt_']").first().width() / 30);
+        cell_radius = unit, cell_stroke = unit / 5, tick_width = unit * 3;
+
         var x_data = d3.range(1, 13), y_data = 'ABCDEFGH'.split('');
         var tooltip = d3.select("body").append("div")
                         .attr("class", "svg_tooltip")
