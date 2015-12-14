@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="col-md-12">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <h2>
       Input Data:
       <code class="pull-right">Simple Assembly</code>
@@ -14,13 +14,13 @@
     <form method='post' action='/design_1d_run/' id='form_1d'>
       {% csrf_token %}
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
           <div class="bgimg-lg">
             <div style="padding-bottom:15px;" data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
-              <label for="tag" class="col-md-3">
+              <label for="tag" class="col-lg-3 col-md-3 col-sm-4 col-xs-5">
                 <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
               </label>
-              <div class="input-group col-md-6">
+              <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-7">
                 {{1d_form.tag}}
                 <span class="input-group-addon"><i>optional</i></span>
               </div>
@@ -28,13 +28,13 @@
 
             <div class="row">
               <div class="col-md-12">
-                <label for="sequence" class="col-md-12">
+                <label for="sequence" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
                 </label>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul>
                   <li>Please enter your sequence below: valid nucleotides only (A, C, G, T, and U); and <u>at least <b>60</b> nt</u> long.</li>
                   <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included. Please make sure the sequence matches exactly as in <code>Single Assembly</code>.</li>
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="list-group">
                   {{1d_form.sequence}}
                   <div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px;">
@@ -63,8 +63,8 @@
           </div>
         </div>
         <br/>
-        <input name="job_id"  id="job_id" type="text" style="display:none" value="" />
-        <div class="col-md-3">
+        <input name="job_id" id="job_id" type="text" style="display:none" value="" />
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
           <div class="panel panel-default">
             <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="More options for guided design. Parameters for primer length, primer number and annealing temperature can be specified.">
               <h3 class="panel-title"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
@@ -118,7 +118,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <p>
                 <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn_submit">
                   <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;Primerize!

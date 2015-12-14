@@ -4,12 +4,12 @@ function resize() {
 
   if ($("#sidebar").width() < 200) {
     degree = 1;
-    $("#side").removeClass("col-md-2").addClass("row");
+    $("#side").removeClass("col-lg-2 col-md-2 col-sm-2 col-xs-2").addClass("row");
     $("#main").addClass("row").removeClass("pull-right");
     $("#sidebar").css("width", "auto").removeAttr("data-spy").removeClass("affix").removeClass("affix-top");
     $("#side_con").addClass("container");
   } else {
-    $("#side").addClass("col-md-2").removeClass("row");
+    $("#side").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-2").removeClass("row");
     $("#main").removeClass("row").addClass("pull-right");
     $("#sidebar").attr("data-spy","affix").affix( { offset: { top: $("#main").position().top } } );
     $("#side_con").removeClass("container");

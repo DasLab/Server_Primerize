@@ -36,7 +36,7 @@
 
 <div class="panel-group" id="categories">
   <div class="row">
-    <div class="col-md-2" id="side">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="side">
       <div id="side_con">
         <div class="panel panel-warning" id="sidebar" data-spy="affix">
           <div class="panel-heading">
@@ -86,29 +86,29 @@
           </div>
           <br/>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <h4>Once submitted, a temporary page will be displayed on the web page, showing the <span class="label label-violet">JOB_ID</span> and indicating that the query is being processed.</h4>
               <br/>
               <div class="row tutorial">
-                <div class="col-md-1"></div>
-                <div class="col-md-10"><h2><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running...  </h2></div>
-                <div class="col-md-1"></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><h2><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Primerize is running...  </h2></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
               </div>
               <br/>
               <div class="row tutorial">
-                <div class="col-md-1"></div>
-                <div class="col-md-10"><div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div></div></div>
-                <div class="col-md-1"></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div></div></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
               </div>
               <h3 class="text-center tutorial">Your <span class="label label-violet">JOB_ID</span> is: <span class="label label-inverse">0123456789abcdef</span></h3>
               <br/><br/>
               <img class="center-block" src="/site_media/images/fg_load.gif" width="48px" style="opacity:0.5;"/>
               <br/><br/>
               <div class="row tutorial">
-                <div class="col-md-1"></div>
-                <div class="col-md-5"><p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p><p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 9 months.</p></div>
-                <div class="col-md-5"><p class="text-center well" ><b>Please <button id="copy-button" class="btn btn-success" disabled><span class="glyphicon glyphicon-copy"></span>&nbsp;&nbsp;Copy&nbsp;</button> this link: <br/><code>http://primerize.stanford.edu/result/?job_id=0123456789abcdef</code></b></p><br/></div>
-                <div class="col-md-1"></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6"><p>Your query is being processed. Usually, the calculation is finished within 30 seconds. Depending on the input sequence length and complexity, the run may take longer.</p><p>You can close the browser and retrieve the result later using the above unique <span class="label label-violet">JOB_ID</span>. The cached result expires after 9 months.</p></div>
+                <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4"><p class="text-center well" ><b>Please <button id="copy-button" class="btn btn-success" disabled><span class="glyphicon glyphicon-copy"></span>&nbsp;&nbsp;Copy&nbsp;</button> this link: <br/><code style="word-wrap:break-word;">http://primerize.stanford.edu/result/?job_id=0123456789abcdef</code></b></p><br/></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
               </div>
               <hr/>           
               <h4>
@@ -116,21 +116,21 @@
               </h4>
               <br/>
               <div class="row tutorial">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10">
                   <div class="panel panel-danger">
                     <div class="panel-heading">
                       <h3 class="panel-title"><span class="glyphicon glyphicon-inbox"></span>&nbsp;&nbsp;Result retrieval</h3>
                     </div>
                     <div id="col-1" class="panel-body">
                       <form method='get' action='/result'>
-                        <div class="col-md-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <div data-toggle="tooltip" data-placement="bottom" title="Use JOB_ID to retrieve a run result. JOB_ID is the unique 16-digit hexadecimal key." class="form-group">
-                            <label for="job_id" class="col-md-3">
+                            <label for="job_id" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                               <span class="lead"><span class="label label-violet">JOB_ID</span></span>
                               :&nbsp;&nbsp;
                             </label>
-                            <div class="input-group col-md-9">
+                            <div class="input-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
                               <input class="form-control input-sm" name="job_id" type="text" value="" maxlength="32" disabled placeholder="Enter a JOB_ID"/>
                               <span class="input-group-btn">
                                 <button type="submit" id="btn_retrieve" class="btn btn-inverse btn-sm pull-right" disabled><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;Retrieve&nbsp;</button>
@@ -142,14 +142,14 @@
                     </div>
                   </div>  
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1"></div>
               </div>       
               <hr/>
               <h4>For long inputs, we encourage the user to <a class="btn btn-warning btn-sm" href="/license/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;Download&nbsp;</a> the source code and run locally, which enables more options. If the server encounters an internal error while processing the run, the following page will be shown.</h4>
               <br/>
               <div class="row tutorial">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                   <h2 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Primerize has difficulty in your query...</h2>
                   <br/>
                   <div class="progress">
@@ -161,7 +161,7 @@
                   <p>We will investigate and fix the problem.</p>
                   <p>For further information, please feel free to <button class="btn btn-warning btn-sm" href="/about#contact" style="color: #ffffff;" disabled><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact&nbsp;</button> us to track down the problem.</p>
                 </div>
-                <div class="col-md-1"></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@
             <span class="lead"><span class="glyphicon glyphicon-console"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#2</span>: Website Input</b></span>
           </div>
           <div class="row">
-            <div class="col-md-12 tutorial">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tutorial">
               <h2>Input Data:</h2>
             </div>
             <div class="col-md-9">
@@ -433,7 +433,7 @@
             </div>
           </div>
           <br/>
-          <div class="col-md-12">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <p class="lead tutorial">
               <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <button class="btn btn-info btn-sm" href="/protocol" role="button" style="color: #ffffff;" disabled>&nbsp;&nbsp;Protocol&nbsp;&nbsp;</button> for PCR assembly.
             </p>
@@ -447,7 +447,7 @@
         <h4>Depending on the input, one of the following fields might show up instead of the <span class="label label-warning">WARNING</span> as above.</h4>
         <br/>
         <div class="row ">
-          <div class="col-md-12">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="alert alert-success tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: No potential mis-priming found. See results below.
@@ -455,7 +455,7 @@
             </div>
             <img class="question" style="right:52%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Warnings" data-content="SUCCESS indicates no potential mis-priming was detected."/>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-danger tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid sequence input (should be <u>at least <b>60</b> nt</u> long).
@@ -463,7 +463,7 @@
             </div>
             <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to short length."/>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-danger tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid sequence input (should be composed of A, C, G, T and U).
@@ -471,7 +471,7 @@
             </div>
             <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates problems in the input sequence, due to illegal characters' presense."/>
           </div> 
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-danger tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid advanced options input.
@@ -479,7 +479,7 @@
             </div>
             <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid advanced options input."/>
           </div> 
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-danger tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.
@@ -487,7 +487,7 @@
             </div>
             <img class="question" style="right:5%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="ERROR indicates invalid input for # number of primers."/>
           </div> 
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-default tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;<b>T7_CHECK</b>: feature disabled (check the option to enable). No checking was performed.
@@ -495,7 +495,7 @@
             </div>
             <img class="question" style="right:5%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when disabled."/>
           </div> 
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-default tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;<b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence was absent, Primerize automatically prepended it.
@@ -505,7 +505,7 @@
             </div>
             <img class="question" style="right:5%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was added and GG follow T7 region."/>
           </div> 
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-default tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;<b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence is present, no action was taken.
@@ -515,7 +515,7 @@
             </div>
             <img class="question" style="right:5%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="T7 Promoter Checking" data-content="Feedback when enabled, T7 sequence was not added and GG did not follow T7 region."/>
           </div> 
-          <div class="col-md-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="alert alert-default tutorial" >
               <p class="tutorial">
                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;<b>T7_CHECK</b>: feature enabled (uncheck the option to disable). T7 promoter sequence was absent, Primerize automatically prepended it.
@@ -532,7 +532,7 @@
         <br/>
 
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="alert alert-danger tutorial" >
               <p>
                 <span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).
@@ -559,7 +559,7 @@
           </div>
           <br/>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="panel panel-warning">
                 <div class="panel-heading tutorial">
                   <h2 class="panel-title"><span class="glyphicon glyphicon-text-background"></span>&nbsp;&nbsp;Plain Text File</h2>

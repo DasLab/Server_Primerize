@@ -1,9 +1,19 @@
-$(document).ready(function () {
+function resize() {
+  $("#col-1").css("height", "auto");
+  $("#col-2").css("height", "auto");
+  $("#col-3").css("height", "auto");
+  $("#col-4").css("height", "auto");
+
   var col_h = Math.max(parseInt($("#col-1").css("height")), parseInt($("#col-2").css("height")), parseInt($("#col-3").css("height")), parseInt($("#col-4").css("height")));
   $("#col-1").css("height", col_h);
   $("#col-2").css("height", col_h);
   $("#col-3").css("height", col_h);
   $("#col-4").css("height", col_h);
+}
+
+
+$(document).ready(function () {
+  resize();
 
   $("#btn_retrieve").on("click", function () { $("#wait").fadeIn(1000); });
   $("#btn_retrieve").prop("disabled", true);
@@ -16,6 +26,12 @@ $(document).ready(function () {
 		$("#btn_retrieve").prop("disabled", true);
     }
   });
+});
+
+
+$(window).on("resize", function() {
+  clearTimeout($.data(this, 'resizeTimer'));
+  $.data(this, 'resizeTimer', setTimeout(resize(), 200));
 });
 
 
