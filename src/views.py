@@ -113,6 +113,8 @@ def error404(request):
     return render_to_response(PATH.HTML_PATH['404'], {}, context_instance=RequestContext(request))
 def error500(request):
     return render_to_response(PATH.HTML_PATH['500'], {}, context_instance=RequestContext(request))
+def error503(request):
+    return render_to_response(PATH.HTML_PATH['503'], {}, context_instance=RequestContext(request))
 
 
 def test(request):
