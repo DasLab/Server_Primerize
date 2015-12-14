@@ -37,6 +37,7 @@ def design_1d_run(request):
         if not min_Tm: min_Tm = ARG['MIN_TM']
         if not max_len: max_len = ARG['MAX_LEN']
         if not min_len: min_len = ARG['MIN_LEN']
+        if len(sequence) > 500: min_len = max(30, min_len)
         if (not num_primers) or (not is_num_primers): num_primers = ARG['NUM_PRM']
 
         msg = ''

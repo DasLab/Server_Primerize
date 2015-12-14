@@ -9,6 +9,7 @@ function track_input_length() {
   if (l < 60) {
       $("#count").parent().parent().css("color", "#ff5c2b");
       $("#warn_500, #warn_1000").css("display", "none");
+      $("#btn_submit").prop("disabled", false);
   } else {
       $("#count").parent().parent().css("color", "#29be92");
       if (l > 500) {
@@ -16,10 +17,12 @@ function track_input_length() {
           $("#count").parent().parent().css("color", "#ff5c2b");
           $("#warn_1000").css("display", "inline-block");
           $("#warn_500").css("display", "none");
+          $("#btn_submit").prop("disabled", true);
         } else {
           $("#count").parent().parent().css("color", "#ff912e");
           $("#warn_500").css("display", "inline-block");
           $("#warn_1000").css("display", "none");
+          $("#btn_submit").prop("disabled", false);
         }
       } else {
         $("#warn_500, #warn_1000").css("display", "none");
