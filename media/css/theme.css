@@ -33,10 +33,15 @@
 
 * { font-family: "Helvetica", Arial, sans-serif; }
 
-textarea.monospace, input.monospace, select.monospace, td.monospace {
+textarea.monospace, input.monospace, select.monospace, td.monospace, span.monospace {
   font-family: "Courier" !important;
   font-weight: bold;
   font-size: 16px;
+}
+
+span.monospace > span {
+  font-family: inherit;
+  font-size: 14px;
 }
 
 textarea.translucent, input.translucent {

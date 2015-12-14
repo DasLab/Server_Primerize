@@ -232,11 +232,11 @@
                     <div class="row">
                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="list-group">
-                          <textarea class="form-control monospace translucent" style="opacity:0.5;" name="sequence" id="sequence" rows="9" cols="100" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
+                          <textarea class="form-control monospace translucent" name="sequence" id="sequence" rows="9" cols="100" disabled="disabled" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; opacity: 0.5;">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
                           <img class="question" style="right:50%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
 
-                          <div class="list-group-item disabled tutorial" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px;">
-                            <p class="text-right" style="margin:0px;">
+                          <div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px;">
+                            <p class="text-right tutorial" style="margin:0px;">
                               Length: <i><b><span id="count" style="color:#29be92;">259</span></b></i> nt
                             </p>
                             <img class="question" style="right:15%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
@@ -257,16 +257,15 @@
 
                 </div>
                 <br/>
-                <input name="job_id" id="job_id" type="text" style="display:none" value="" />
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                   <div class="panel panel-default" style="margin-bottom:20px;">
-                    <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="More options for guided design. Parameters for primer length, primer number and annealing temperature can be specified.">
+                    <div class="panel-heading">
                       <h3 class="panel-title tutorial"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
                       <img class="question" style="right:10%;top:0%" src="/site_media/images/fg_question.png" height="42" data-content="This part is optional. It enables more options for guided design. Parameters for primer length, primer number and annealing temperature can be specified." data-toggle="popover" data-placement="left" title="Advanced Options"/>
                     </div>
                     <div class="panel-body">
                       <div class="input-group">
-                        <div class="tutorial" data-toggle="tooltip" data-placement="bottom" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
+                        <div class="tutorial">
                           <label for="min_Tm">minimum <b>Tm</b>:</label>
                           <div class="input-group" style="margin-left:10px;">
                             <input name="min_Tm" type="text" value="60.0" class="form-control" disabled="disabled"/>
@@ -274,7 +273,7 @@
                           </div>
                         </div>
                         <img class="question" style="right:25%;top:7%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="MIN_TM" data-content="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C"/>
-                        <div class="tutorial" style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Maximum length for each primer. Default = 60 nt.">
+                        <div class="tutorial" style="padding-top: 10px;" >
                           <label for="max_length">maximum <b>length</b> of primers:</label>
                           <div class="input-group" style="margin-left:10px;">
                             <input name="max_length" type="text" value="60" class="form-control" disabled="disabled"/>
@@ -282,7 +281,7 @@
                           </div>
                         </div>
                         <img class="question" style="right:25%;top:30%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="MAX_LENGTH" data-content="Maximum length for each primer. Default = 60 nt."/>
-                        <div class="tutorial" style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Minimum length for each primer. Default = 15 nt.">
+                        <div class="tutorial" style="padding-top: 10px;">
                           <label for="min_length">minimum <b>length</b> of primers:</label>
                           <div class="input-group" style="margin-left:10px;">
                             <input name="min_length" type="text" value="15" class="form-control" disabled="disabled"/>
@@ -290,7 +289,7 @@
                           </div>
                         </div>
                         <img class="question" style="right:25%;top:51%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="MIN_LENGTH" data-content="Minimum length for each primer. Default = 15 nt."/>
-                        <div class="tutorial" data-toggle="tooltip" data-placement="bottom" title="Exact limit of number of primers in design. Default = 0, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only.">
+                        <div class="tutorial">
                           <div class="checkbox" style="display:inline-block;">
                             <label>
                               <input name="is_num_primers" type="checkbox" value="1" disabled>
@@ -304,7 +303,7 @@
                           </div>
                         </div>
                         <img class="question" style="right:25%;top:75%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="NUM_PRIMERS" data-content="Exact limit of number of primers in design. Default = 0, i.e. no restriction; solutions have less or more number of primers will not be shown. Even number only. Check the checkbox to enable use."/>
-                        <div class="tutorial" data-toggle="tooltip" data-placement="bottom" title="Check if T7 promoter (TTCTAATACGACTCACTATA) is present in input sequence. If not, it will be prepended automatically.">
+                        <div class="tutorial">
                           <div class="checkbox" style="display:inline-block;">
                             <label>
                               <input name="is_t7" type="checkbox" value="1" id="check_t7" checked disabled>
@@ -325,7 +324,7 @@
                         </button>
                       </p>
                       <p>
-                        <button id="btn_demo" class="btn btn-success btn-block tutorial" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA." disabled>
+                        <button id="btn_demo" class="btn btn-success btn-block tutorial" disabled>
                           <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Show Demo
                         </button>
                         <img class="question" style="right:12%;top:40%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
@@ -674,13 +673,299 @@ P4P6_2HP-6R GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT     25nm
           </div>
         </div>
       </div>
+      
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <br/>
+          <p class="lead">
+            <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.
+          </p>
+        </div>
+      </div>
     </div>
-    <br/>
-    <p class="lead">
-      <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;&nbsp;</a> for PCR assembly.
-    </p>
+    <hr/>
 
-  </div>
+    <div class="container theme-showcase li-green" role="main">
+      <br/>
+      <div class="panel-green" id="web_2d">
+        <div class="panel-heading">
+          <span class="lead"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#3</span>: <code>Mutate-and-Map Plates</code></b></span>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="web_2d_input">
+            <h2 class="tutorial">
+              Input Data:
+              <code class="pull-right">Mutate-and-Map Plates</code>
+            </h2>
+            <form method="post" action="/design_2d_run/" id="form_2d">
+              <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                  <div class="bgimg-lg">
+                    <div style="padding-bottom:15px;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Construct name prefix for all primers; maximum length 32 characters.">
+                      <label for="tag" class="col-lg-3 col-md-3 col-sm-4 col-xs-5 tutorial">
+                        <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
+                      </label>
+                      <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-7 tutorial">
+                        <input id="id_tag" name="tag" type="text" placeholder="Enter a name for your sequence" class="form-control" value="P4P6_2HP">
+                        <span class="input-group-addon"><i>optional</i></span>
+                      </div>
+                      <img class="question" style="right:50%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Name Tag" data-content="Construct name prefix for all primers. Maximum length is 32 characters. This is optional, default is &ldquo;primers&rdquo;."/>
+                    </div>
+
+                    <div class="row tutorial">
+                      <div class="col-md-12">
+                        <label for="sequence" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tutorial">
+                        <ul>
+                          <li>Please enter your sequence below: valid nucleotides only (A, C, G, T, and U); and <u>at least <b>60</b> nt</u> long.</li>
+                          <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included. Please make sure the sequence matches exactly as in <code>Single Assembly</code>.</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="list-group">
+                          <textarea cols="50" id="id_sequence" name="sequence" rows="6" placeholder="Enter your RNA/DNA sequence" class="form-control monospace translucent" style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; opacity: 0.5;" disabled="disabled">TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC</textarea>
+                          <img class="question" style="right:50%;top:25%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Input Sequence" data-content="Your sequence to design. Follow the rules above. Multi-line input is valid and automatically concatenated."/>
+
+                          <div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px;">
+                            <p class="text-right tutorial" style="margin:0px;">
+                              Length: <i style="color: rgb(41, 190, 146);"><b><span id="count">259</span></b></i> nt
+                            </p>
+                            <img class="question" style="right:15%;top:0%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Length Count" data-content="Keeps track of input sequence length, which should be > 60 nt."/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bgimg-lg">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tutorial">
+                        <label for="sequence" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;<b>Primers</b>:
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tutorial">
+                        <ul>
+                          <li>Please enter your primer set from <code>Single Assembly</code> below. Please make sure the primer numberings match the previous result.</li>
+                          <li>Click "Add Primers" to add more primer pairs.</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <textarea cols="50" id="id_primers" name="primers" rows="12" placeholder="Enter the primer set" style="display: none;"></textarea>
+                        <div id="primer_sets">
+                          <div style="padding-bottom:10px;" id="primer_1" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>1</b>
+                              <span class="label label-info">F</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_1" name="id_primer_1" placeholder="Enter primer 1 sequence" value="TTCTAATACGACTCACTATAGGCCAAAGGCGTCGA" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_1">35</span></b></i> nt
+                            </span>
+                          </div>
+                          <div style="padding-bottom:10px;" id="primer_2" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>2</b>
+                              <span class="label label-danger">R</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_2" name="id_primer_2" placeholder="Enter primer 2 sequence" value="TTGACCCCTTTCCCGCAATTCCGTTGTTGGCGTCTACTCGACGCCTTTGGCCTATAGT" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_2">58</span></b></i> nt
+                            </span>
+                          </div>
+                          <div style="padding-bottom:10px;" id="primer_3" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>3</b>
+                              <span class="label label-info">F</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_3" name="id_primer_3" placeholder="Enter primer 3 sequence" value="TTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGG" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_3">43</span></b></i> nt
+                            </span>
+                          </div>
+                          <div style="padding-bottom:10px;" id="primer_4" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>4</b>
+                              <span class="label label-danger">R</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_4" name="id_primer_4" placeholder="Enter primer 4 sequence" value="CCCTTTGCAAGGCCATCTCAAAGTTTCCCCTGAGACTTGGTACTGAACGGC" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_4">51</span></b></i> nt
+                            </span>
+                          </div>
+                          <div style="padding-bottom:10px;" id="primer_5" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>5</b>
+                              <span class="label label-info">F</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_5" name="id_primer_5" placeholder="Enter primer 5 sequence" value="TGAGATGGCCTTGCAAAGGGTATGGTAATAAGCTGACGGACATGGTCCTAACCACGCAG" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_5">59</span></b></i> nt
+                            </span>
+                          </div>
+                          <div style="padding-bottom:10px;" id="primer_6" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>6</b>
+                              <span class="label label-danger">R</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_6" name="id_primer_6" placeholder="Enter primer 6 sequence" value="CCATATCAACAGAAGATCTGTTGACTTAGGACTTGGCTGCGTGGTTAGGACCATGT" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_6">56</span></b></i> nt
+                            </span>
+                          </div>
+                          <div style="padding-bottom:10px;" id="primer_7" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>7</b>
+                              <span class="label label-info">F</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_7" name="id_primer_7" placeholder="Enter primer 7 sequence" value="TCCTAAGTCAACAGATCTTCTGTTGATATGGATGCAGTTCAAAACCAAACCGTCAGCGA" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_7">59</span></b></i> nt
+                            </span>
+                          </div>
+                          <div style="padding-bottom:10px;" id="primer_8" class="input-group tutorial">
+                            <span class="input-group-addon">
+                              <b>8</b>
+                              <span class="label label-danger">R</span>
+                            </span>
+                            <input class="primer_input form-control monospace translucent" type="text" id="id_primer_8" name="id_primer_8" placeholder="Enter primer 8 sequence" value="GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT" disabled>
+                            <span class="input-group-addon">
+                              <i><b><span id="count_primer_8">59</span></b></i> nt
+                            </span>
+                          </div>
+                          <img class="question" style="right:10%;bottom:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Primers Input" data-content="Input Textboxes for primers used for assembly."/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <div class="panel panel-default" style="margin-bottom:20px;">
+                    <div class="panel-heading">
+                      <h3 class="panel-title tutorial"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
+                      <img class="question" style="right:10%;top:0%" src="/site_media/images/fg_question.png" height="42" data-content="This part is optional. It enables more options for guided design. Parameters for offset, mutation ranges and library can be specified." data-toggle="popover" data-placement="left" title="Advanced Options"/>
+                    </div>
+                    <div class="panel-body">
+                      <div class="tutorial">
+                        <label for="offset">sequence <b>offset</b>:</label>
+                        <div class="input-group" style="margin-left:10px;">
+                          <input id="id_offset" name="offset" type="number" value="-51" class="form-control" disabled>
+                          <span class="input-group-addon">nt</span>
+                        </div>
+                      </div>
+                      <img class="question" style="right:25%;top:14%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="OFFSET" data-content="Sequence numbering offset, equals to 1 minus the final number of the first nucleotide. Default = 0, i.e. the 1st nucleotide in the sequence will be numbered as 1."/>
+                      <div class="tutorial" style="padding-top: 10px;">
+                        <label for="min_mut">mutation <b>starting</b> position:</label>
+                        <div class="input-group" style="margin-left:10px;">
+                          <span class="input-group-addon hidden-sm hidden-xs">@</span>
+                          <input id="id_min_muts" name="min_muts" type="number" value="102" class="form-control" disabled>
+                          <span class="input-group-addon">nt</span>
+                        </div>
+                      </div>
+                      <img class="question" style="right:25%;top:26%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="START_MUT" data-content="Starting position of mutation region. Use numbering based on offset. Default is NaN, which will be automatically filled with the corresponding number of first nucleotide in the sequence."/>
+                      <div class="tutorial" style="padding-top: 10px;">
+                        <label for="max_mut">mutation <b>ending</b> position:</label>
+                        <div class="input-group" style="margin-left:10px;">
+                          <span class="input-group-addon hidden-sm hidden-xs">@</span>
+                          <input id="id_max_muts" name="max_muts" type="number" value="261" class="form-control" disabled>
+                          <span class="input-group-addon">nt</span>
+                        </div>
+                      </div>
+                      <img class="question" style="right:25%;top:38%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="END_MUT" data-content="Ending position of mutation region. Use numbering based on offset. Default is NaN, which will be automatically filled with the corresponding number of last nucleotide in the sequence."/>
+
+                      <div class="tutorial" style="padding-top: 10px;">
+                        <label for="max_mut">mutation <b>library</b> choice:</label>
+                        <div style="margin-left:10px;">
+                          <select id="id_lib" name="lib" class="form-control" disabled>
+                            <option value="1" selected="selected">A-&gt;T, T-&gt;A, C-&gt;G, G-&gt;C</option>
+                            <option value="2">A-&gt;C, T-&gt;C, C-&gt;A, G-&gt;A</option>
+                            <option value="3">A-&gt;G, T-&gt;G, C-&gt;T, G-&gt;T</option>
+                          </select>
+                        </div>
+                      </div>
+                      <img class="question" style="right:25%;top:51%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="LIBRARY" data-content="Mutation scheme. Three libraries are available. Default = 1."/>
+                      <br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <p>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block tutorial" id="btn_submit" disabled>
+                          <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;Primerize!
+                        </button>
+                      </p>
+                      <p>
+                        <button type="button" class="btn btn-warning btn-block tutorial" id="btn-add" disabled>
+                          <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Primers
+                        </button>
+                        <img class="question" style="right:12%;top:27%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Add Primers" data-content="Append a pair of input textboxes to the primers list."/>
+                      </p>
+                      <p>
+                        <button id="btn_demo" class="btn btn-success btn-block tutorial" disabled>
+                          <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Show Demo
+                        </button>
+                        <img class="question" style="right:12%;top:52%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Demo" data-content="This provides an example primer design to demonstrate use of Primerize. The sample sequence will be automatically filled with P4P6-2HP RNA (Tetrahymena group-I intron P4P6 domain with referencing hairpins on both ends)."/>
+                      </p>
+                      <p>
+                        <button class="btn btn-default btn-block tutorial" disabled>
+                          <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Clear Form
+                        </button>
+                      </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <br/>
+          <hr/>
+          <div class="row" id="web_2d_output">
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
+              <h2 class="tutorial">Output Result:</h2>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+              <h4 class="text-right tutorial">
+                <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">123456789abcdef0</span>
+              </h4>
+              <img class="question" style="right:66%;top:5%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="JOB_ID" data-content="The unique 16-digit hexadecimal key for each run." />
+              <button href="" class="btn btn-info pull-right tutorial" style="color: #ffffff;" title="Output in plain text" download disabled="disabled"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</button>
+              <img class="question" style="right:35%;top:50%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="top" title="Save Results" data-content="Save the webpage output results in plain text file. Each run has its unique job key." />
+             <img class="question" style="right:35%;top:135%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="left" title="Warnings" data-content="Warning of potential mispriming problems. Mispriming primer numbers and positions are reported. "/>
+            </div>
+          </div>
+          <br/>
+          <div class="alert alert-default" >
+            <p class="tutorial">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Primer <b>2</b> <span class="label label-danger">R</span> can misprime with <span class="label label-default">4</span>-residue overlap to position <span class="label label-success">23</span>, which is covered by primers  <b>1</b> <span class="label label-info">F</span>.
+              <br/>
+              <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Primer <b>3</b> <span class="label label-info">F</span> can misprime with <span class="label label-default">7</span>-residue overlap to position <span class="label label-success">220</span>, which is covered by primers  <b>5</b> <span class="label label-info">F</span>. <b>6</b> <span class="label label-danger">R</span>.
+              <br/>
+              <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Primer <b>4</b> <span class="label label-danger">R</span> can misprime with <span class="label label-default">4</span>-residue overlap to position <span class="label label-success">66</span>, which is covered by primers  <b>2</b> <span class="label label-danger">R</span>.
+              <br/>
+              <span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: One-pot PCR assembly may fail due to mispriming; consider first assembling fragments in a preliminary PCR round (subpool).
+              <br/>
+            </p>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
 {% endblock %}
 
 {% block script %}

@@ -42,8 +42,8 @@ def design_2d_run(request):
         if not offset: offset = 0
         if not min_muts: min_muts = 1 - offset
         min_muts = max(min_muts, 1 - offset)
-        if not max_muts: max_muts = len(sequence) + 1 - offset
-        max_muts = min(max_muts, len(sequence) + 1 - offset)
+        if not max_muts: max_muts = len(sequence) - offset
+        max_muts = min(max_muts, len(sequence) - offset)
         if not lib: lib = '1'
         which_lib = [int(lib)]
         which_muts = range(min_muts, max_muts + 1)
@@ -91,7 +91,7 @@ def random_2d(request):
     tag = 'scRNA'
     offset = 0
     min_muts = 1 + len(SEQ['T7']) - offset
-    max_muts = len(sequence) + 1 - offset
+    max_muts = len(sequence) - offset
     lib = '1'
     which_lib = [int(lib)]
     which_muts = range(min_muts, max_muts + 1)
@@ -136,7 +136,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         return create_res_html(html, job_id, 2)
     
     try:
-        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p></p></div>' % (job_id, '/site_data/2d/result_%s.zip' % job_id)
+        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <span class="monospace pull-right">__SEQ_ANNOT__</span></p></div>' % (job_id, '/site_data/2d/result_%s.zip' % job_id)
         script += '<div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
@@ -183,6 +183,53 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             script = script.replace('__NOTE_NUM__', warning)
         else:
             script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
+
+        
+        start = plate.which_muts[0] + plate.offset - 1
+        end = plate.which_muts[-1] + plate.offset - 1
+        fragments = []
+        if start <= 20:
+            fragments.append(plate.sequence[:start])
+        else:
+            fragments.append(plate.sequence[:10] + '......' + plate.sequence[start - 10:start])
+        if end - start <= 40:
+            fragments.append(plate.sequence[start:end + 1])
+        else:
+            fragments.append(plate.sequence[start:start + 20] + '......' + plate.sequence[end - 19:end + 1])
+        if len(plate.sequence) - end <= 20:
+            fragments.append(plate.sequence[end + 1:])
+        else:
+            fragments.append(plate.sequence[end + 1:end + 11] + '......' + plate.sequence[-10:])
+        
+        labels = ['%d' % (1 - plate.offset), '%d' % plate.which_muts[0], '%d' % plate.which_muts[-1], '%d' % (len(plate.sequence) - plate.offset)]
+        (illustration_1, illustration_2) = ('', '')
+        if len(fragments[0]) >= len(labels[0]):
+            illustration_1 += '<span class="label-white label-default" style="color:#ff7c55;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
+            illustration_2 += '<span style="color:#ff7c55;">%s</span><span>%s</span>' % (labels[0], '&nbsp;' * (len(fragments[0]) - len(labels[0])))
+        elif fragments[0]:
+            illustration_1 += '<span class="label-white label-default" style="color:#ff7c55;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
+            illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[0]))
+
+        if len(fragments[1]) >= len(labels[1]) + len(labels[2]):
+            illustration_1 += '<span class="label-green" style="color:#c28fdd;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:-1] + '</span><span class="label-green" style="color:#c28fdd;">' + fragments[1][-1] + '</span>'
+            illustration_2 += '<span style="color:#c28fdd;">%s</span><span>%s</span><span style="color:#c28fdd;">%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1]) - len(labels[2])), labels[2])
+        elif fragments[1]:
+            if len(fragments[1]) >= len(labels[1]):
+                illustration_1 += '<span class="label-green" style="color:#c28fdd;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:] + '</span>'
+                illustration_2 += '<span style="color:#c28fdd;">%s</span><span>%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1])))
+            else:
+                illustration_1 += '<span class="label-green">' + fragments[1] + '</span>'
+                illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[1]))
+
+        if len(fragments[2]) >= len(labels[3]):
+            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#ff7c55;">' + fragments[2][-1] + '</span>'
+            illustration_2 += '<span>%s</span><span style="color:#ff7c55;">%s</span>' % ('&nbsp;' * (len(fragments[2]) - len(labels[3])), labels[3])
+        elif fragments[2]:
+            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#ff7c55;">' + fragments[2][-1] + '</span>'
+            illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[2]))
+
+        script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p>&nbsp;<span class="monospace pull-right">' + illustration_2)
+
 
         (_, _, print_lines, Tm_overlaps) = draw_assembly(plate.sequence, plate.primers, plate.name)
         x = 0
