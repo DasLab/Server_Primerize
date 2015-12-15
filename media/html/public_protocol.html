@@ -27,7 +27,7 @@
   <hr/>
 </div>
 
-<div class="panel-group" id="categories">
+<div class="" id="categories">
   <div class="row">
     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="side">
       <div id="side_con">
@@ -58,8 +58,8 @@
                     <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_2" aria-expanded="true" aria-controls="collapse_tab_2"></span>
                   </a>
                   <ul id="collapse_tab_2" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_2">
-                    <li><a id="tab_21" href="#idt_bulk"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;IDT Bulk Ordering</a></li>
-                    <li><a id="tab_22" href="#idt_plate"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;IDT Plate Ordering</a></li>
+                    <li><a id="tab_21" href="#idt_bulk">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;IDT Bulk Ordering</a></li>
+                    <li><a id="tab_22" href="#idt_plate">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;IDT Plate Ordering</a></li>
                   </ul>
               </li>
               <li class="li-dark-red">
@@ -70,16 +70,16 @@
                     <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
                   </a>
                   <ul id="collapse_tab_3" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_3">
-                    <li><a id="tab_31" href="#PCR_sr"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;PCR Recipe (Single-Round)</u></b></a></li>
-                    <li><a id="tab_32" href="#PCR_cond"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;PCR Conditions</a></li>
+                    <li><a id="tab_31" href="#PCR_sr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;PCR Recipe (Single-Round)</u></b></a></li>
+                    <li><a id="tab_32" href="#PCR_cond">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;PCR Conditions</a></li>
                     <li>
-                      <a id="tab_33" href="#PCR_mr"><span class="glyphicon glyphicon-duplicate"></span>&nbsp;&nbsp;PCR Recipe (Multiple-Round)</u></b></a>
-                      <ul>
+                      <a id="tab_33" href="#PCR_mr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-duplicate"></span>&nbsp;&nbsp;PCR Recipe (Multiple-Round)</u></b></a>
+                      <ul style="margin-left:25px;">
                         <li><a id="tab_331" href="#PCR_2r">Strategy 1: <u>'2-Round'</u></a></li>
                         <li><a id="tab_332" href="#PCR_cp">Strategy 2: <u>'Couple'</u></a></li>
                       </ul>
                     </li>
-                    <li><a id="tab_34" href="#PCR_pr"><span class="glyphicon glyphicon-filter"></span>&nbsp;&nbsp;PCR Product Purification</a></li>
+                    <li><a id="tab_34" href="#PCR_pr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-filter"></span>&nbsp;&nbsp;PCR Product Purification</a></li>
                   </ul>
               </li>
               <li class="li-brown">
@@ -90,8 +90,8 @@
                     <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
                   </a>
                   <ul id="collapse_tab_4" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_4">
-                    <li><a id="tab_41" href="#TX_sr"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;IVT Recipe</a></li>
-                    <li><a id="tab_42" href="#TX_pr"><span class="glyphicon glyphicon-filter"></span>&nbsp;&nbsp;IVT Product Purification</a></li>
+                    <li><a id="tab_41" href="#TX_sr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;IVT Recipe</a></li>
+                    <li><a id="tab_42" href="#TX_pr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-filter"></span>&nbsp;&nbsp;IVT Product Purification</a></li>
                   </ul>
               </li>
               <li class="li-orange">
@@ -495,7 +495,7 @@ Etc...</textarea>
                       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tutorial">
                         <table class="table table-condensed">
                           <thead>
-                            <tr><th>Code</th><th>Scale</th></tr>
+                            <tr class="active"><th>Code</th><th>Scale</th></tr>
                           </thead>
                           <tbody>
                             <tr><td>25nm</td><td>25 nmole</td></tr>
@@ -505,11 +505,12 @@ Etc...</textarea>
                             <tr><td>5um</td><td>5 &mu;mole</td></tr>
                             <tr><td>10um</td><td>10 &mu;mole</td></tr>
                             <tr><td>...</td><td>...</td></tr>
+                            <tr><td colspan="2" style="padding: 0px;"></td></tr>
                           </tbody>
                         </table>
                         <table class="table table-condensed">
                           <thead>
-                            <tr><th>Code</th><th>Purification</th></tr>
+                            <tr class="active"><th>Code</th><th>Purification</th></tr>
                           </thead>
                           <tbody >
                             <tr><td>STD</td><td>Standard Desalting</td></tr>
@@ -517,6 +518,7 @@ Etc...</textarea>
                             <tr><td>HPLC</td><td>HPLC $45.00</td></tr>
                             <tr><td>IEHPLC</td><td>IE HPLC $45.00</td></tr>
                             <tr><td>...</td><td>...</td></tr>
+                            <tr><td colspan="6" style="padding: 0px;"></td></tr>
                           </tbody>
                         </table>
                       </div>
@@ -580,13 +582,14 @@ Etc...</textarea>
                       <h4> Choose the &ldquo;<mark>25 nmole DNA Plate Oligo</mark>&rdquo; option. </h4>
                       <table class="table tutorial">
                         <thead>
-                          <tr><th>Product</th><th>Pricing</th><th>Length</th><th></th></tr>
+                          <tr class="active"><th>Product</th><th>Pricing</th><th>Length</th><th></th></tr>
                         </thead>
                         <tbody>
                           <tr class="warning"><td>25 nmole DNA Plate Oligo</td><td>$0.19 USD / Base</td><td>15 - 60 Bases</td><td>Order</td></tr>
                           <tr><td>100 nmole DNA Plate Oligo</td><td>$0.29 USD / Base</td><td>10 - 90 Bases</td><td>Order</td></tr>
                           <tr><td>250 nmole DNA Plate Oligo</td><td>$0.49 USD / Base</td><td>5 - 100 Bases</td><td>Order</td></tr>
                           <tr><td>1 umole DNA Plate Oligo</td><td>$1.00 USD / Base</td><td>5 - 100 Bases</td><td>Order</td></tr>
+                          <tr><td colspan="4" style="padding: 0px;"></td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -605,6 +608,7 @@ Etc...</textarea>
                               <tr><td>Email Address</td><td><i>[Your Email]</i></td></tr>
                               <tr><td>Select Plate Well Type</td><td>96 Well Plate</td></tr>
                               <tr><td>Choose Loading Scheme</td><td class="success" style="text-decoration:underline;">Explicitly Entered</td></tr>
+                              <tr><td colspan="2" style="padding: 0px;"></td></tr>
                             </tbody>
                           </table>
                         </div>
@@ -620,6 +624,7 @@ Etc...</textarea>
                               <tr><td>Choose Oligo Amount per Well</td><td class="success" style="text-decoration:underline;">Normalized in NMoles</td></tr>
                               <tr><td>Select Plate Type</td><td class="success" style="text-decoration:underline;">V-Bottom</td></tr>
                               <tr><td>Select Shipping Options</td><td class="success" style="text-decoration:underline;">Wet (frozen on dry ice)</td></tr>
+                              <tr><td colspan="2" style="padding: 0px;"></td></tr>
                             </tbody>
                           </table>
                         </div>
@@ -631,9 +636,10 @@ Etc...</textarea>
                             <tbody>
                               <tr><td>Amount</td><td><i>[leave blank]</i></td></tr>
                               <tr><td>Concentration</td><td class="success" style="text-decoration:underline;">100 uM</td></tr>
-                              <tr><td>Final Volume</td><td class="success" style="text-decoration:underline;">50 uL</td></tr>
+                              <tr><td>Final Volume</td><td class="success" style="text-decoration:underline;">100 uL</td></tr>
                               <tr><td>Ship Remainder?</td><td>No</td></tr>
                               <tr><td>Select Dilutant</td><td class="success" style="text-decoration:underline;">IDTE Buffer pH 8.0</td></tr>
+                              <tr><td colspan="2" style="padding: 0px;"></td></tr>
                             </tbody>
                           </table>
                         </div>
@@ -825,6 +831,7 @@ Etc...</textarea>
                           <tr><td><span class="glyphicon glyphicon-transfer"></span>&nbsp;&nbsp;<em>Extension</em></td><td>30 s</td><td>72 &deg;C</td></tr>
                           <tr><td><span class="glyphicon glyphicon-retweet"></span>&nbsp;&nbsp;<em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat 30 cycles</em></td></tr>
                           <tr><td><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;<em>Final Extension</em></td><td>10 min</td><td>72 &deg;C</td></tr>
+                          <tr><td colspan="3" style="padding: 0px;"></td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -1237,6 +1244,7 @@ Etc...</textarea>
                           <tr><td><em>5x</em></td><td>HF Buffer</td><td>10.0</td></tr>
                           <tr><td><em>10 mM</em></td><td>dNTPs (A,T,C,G)</td><td>1.0</td></tr>
                           <tr><td><em>100x</em></td><td>Phusion Polymerase</td><td>1.0</td></tr>
+                          <tr><td colspan="3" style="padding: 0px;"></td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -1404,7 +1412,7 @@ Etc...</textarea>
                           <td>9</td>
                           <td>Keep <span class="label label-warning">supernatant</span> and check the concentration of DNA with <mark><i>Nanodrop spectrophotometer</i></mark>.</td>
                         </tr>
-
+                        <tr><td colspan="2" style="padding: 0px;"></td></tr>
                       </tbody>
                     </table>
                     <div class="row panel-body" style="padding-bottom:0px;">
@@ -1577,6 +1585,7 @@ Etc...</textarea>
                         </thead>
                         <tbody>
                           <tr><td><span class="glyphicon glyphicon-modal-window"></span>&nbsp;&nbsp;<em>Incubation</em></td><td>4 h</td><td>37 &deg;C</td></tr>
+                          <tr><td colspan="3" style="padding: 0px;"></td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -1714,6 +1723,7 @@ Etc...</textarea>
                           <td>9</td>
                           <td>Once the run is finished, turn off <mark><i>power supply</i></mark>. Visualize the gel on a <mark><i>UV transilluminator</i></mark>, <i>e.g. <mark>gel documentation system</mark></i>.</td>
                         </tr>
+                        <tr><td colspan="2" style="padding: 0px;"></td></tr>
                       </tbody>
                     </table>
                     <div class="row">

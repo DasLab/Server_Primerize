@@ -45,15 +45,15 @@ function track_input_length() {
 
 function ajax_load_html(job_id) {
   $.ajax({
-      url: '/site_data/2d/result_' + job_id + '.html',
-      cache: false,
-      dataType: "html",
-      success: function(data) {
-        $("#result").html(data);
-        if ($("#result").html().indexOf("alert-danger") == -1) {
-          draw_96_plate(job_id);
-        }
+    url: '/site_data/2d/result_' + job_id + '.html',
+    cache: false,
+    dataType: "html",
+    success: function(data) {
+      $("#result").html(data);
+      if ($("#result").html().indexOf("alert-danger") == -1) {
+        draw_96_plate(job_id);
       }
+    }
   });
 } 
 

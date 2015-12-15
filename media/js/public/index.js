@@ -13,7 +13,7 @@ function resize() {
 
 
 $(document).ready(function () {
-  resize();
+  setTimeout(resize, 200);
 
   $("#btn_retrieve").on("click", function () { $("#wait").fadeIn(1000); });
   $("#btn_retrieve").prop("disabled", true);

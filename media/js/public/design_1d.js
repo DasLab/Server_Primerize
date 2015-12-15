@@ -32,10 +32,10 @@ function track_input_length() {
 
 function ajax_load_html(job_id) {
   $.ajax({
-      url: '/site_data/1d/result_' + job_id + '.html',
-      cache: false,
-      dataType: "html",
-      success: function(data) { $("#result").html(data); }
+    url: '/site_data/1d/result_' + job_id + '.html',
+    cache: false,
+    dataType: "html",
+    success: function(data) { $("#result").html(data); }
   });
 } 
 
