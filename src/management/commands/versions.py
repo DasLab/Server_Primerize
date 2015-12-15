@@ -97,12 +97,13 @@ class Command(BaseCommand):
                     mem_used = mem_used[:-1] + ' ' + mem_used[-1]
             else:
                 mem_str = subprocess.Popen('free -h', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\n')
-                mem_avail = [x for x in mem_str[2].split(' ') if x][-1]
+                mem_str = [x for x in mem_str[2].split(' ') if x]
+                mem_avail = mem_str[-1]
                 if mem_avail[-1] == 'G': 
                     mem_avail = str(float(mem_avail[:-1]) * 1024) + ' M'
                 else:
                     mem_avail = mem_avail[:-1] + ' M'
-                mem_used = [x for x in mem_str[2].split(' ') if x][-2]
+                mem_used = mem_str[-2]
                 if mem_used[-1] == 'G': 
                     mem_used = str(float(mem_used[:-1]) * 1024) + ' M'
                 else:
