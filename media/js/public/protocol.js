@@ -21,5 +21,64 @@ $(document).ready(function () {
     $("#conc_RNA").val('');
   });
 
+
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_final.json',
+    dataType: "json",
+    success: function(data) { 
+      draw_single_plate(d3.select("#par_plate_final1"), data.data, false); 
+      draw_single_plate(d3.select("#par_plate_final2"), data.data, false); 
+    }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer1.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer1"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer2.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer2"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer3.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer3"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer4.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer4"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer1_filled.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer1_filled"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer2_filled.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer2_filled"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer3_filled.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer3_filled"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_primer4_filled.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_primer4_filled"), data.data, false); }
+  });
+  $.ajax({
+    url: '/site_media/images/docs/par_plate_helper.json',
+    dataType: "json",
+    success: function(data) { draw_single_plate(d3.select("#par_plate_helper"), data.data, false); }
+  });
+
+
+
+
+
 });
 
