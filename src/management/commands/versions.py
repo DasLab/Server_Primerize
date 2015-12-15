@@ -97,8 +97,16 @@ class Command(BaseCommand):
                     mem_used = mem_used[:-1] + ' ' + mem_used[-1]
             else:
                 mem_str = subprocess.Popen('free -h', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\n')
-                mem_avail = [x for x in mem_str[2].split(' ') if x][-1][:-1] + ' M'
-                mem_used = [x for x in mem_str[2].split(' ') if x][-2][:-1] + ' M'
+                mem_avail = [x for x in mem_str[2].split(' ') if x][-1]
+                if mem_avail[-1] == 'G': 
+                    mem_avail = str(float(mem_avail[:-1]) * 1024) + ' M'
+                else:
+                    mem_avail = mem_avail[:-1] + ' M'
+                mem_used = [x for x in mem_str[2].split(' ') if x][-2]
+                if mem_used[-1] == 'G': 
+                    mem_used = str(float(mem_used[:-1]) * 1024) + ' M'
+                else:
+                    mem_used = mem_used[:-1] + ' M'
             ver += '%s / %s' % (mem_avail, mem_used) + '\t'
             ver += subprocess.Popen('du -h --total %s | tail -1' % os.path.join(MEDIA_ROOT, 'backup/backup_*.*gz'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[0] + '\t'
             ver += cpu + '\t'
