@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#calc_DNA").on('click', function () { 
+  $("#calc_DNA").on('click', function () {
     var A260 = $("#A260_DNA").val(),
       l = $("#l_DNA").val();
     $("#conc_DNA").val(parseFloat(A260) * 50000 / 660 / parseInt(l) );
@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#conc_DNA").val('');
   });
 
-  $("#calc_RNA").on('click', function () { 
+  $("#calc_RNA").on('click', function () {
     var A260 = $("#A260_RNA").val(),
       l = $("#l_RNA").val();
     $("#conc_RNA").val(parseFloat(A260) * 40000 / 330 / parseInt(l) );
@@ -22,12 +22,15 @@ $(document).ready(function () {
   });
 
 
+  var unit = parseInt($("#par_plate_final1").width() / 33);
+  cell_radius = unit, cell_stroke = unit / 5, tick_width = unit * 3;
+
   $.ajax({
     url: '/site_media/images/docs/par_plate_final.json',
     dataType: "json",
-    success: function(data) { 
-      draw_single_plate(d3.select("#par_plate_final1"), data.data, false); 
-      draw_single_plate(d3.select("#par_plate_final2"), data.data, false); 
+    success: function(data) {
+      draw_single_plate(d3.select("#par_plate_final1"), data.data, false);
+      draw_single_plate(d3.select("#par_plate_final2"), data.data, false);
     }
   });
   $.ajax({

@@ -1579,12 +1579,19 @@ Lib1-A261T
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}tutorial{{DEBUG_STR}}.js"></script>
 
   <script type="text/javascript">
-    var job_id = '123456789abcdef0';
     $.ajax({
-      url: '/site_data/2d/result_' + job_id + '.html',
-      cache: false,
-      dataType: "html",
-      success: function(data) { draw_96_plate(job_id); }
+      url: '/site_data/2d/result_{{job_id}}.json',
+      dataType: "json",
+      success: function(data) {
+        var unit = parseInt($("[id^='svg_plt_']").first().width() / 30);
+        cell_radius = unit, cell_stroke = unit / 5, tick_width = unit * 3;
+
+        for (var plt_key in data.plates) {
+          for (var prm_key in data.plates[plt_key].primers) {
+            draw_single_plate(d3.select("#svg_plt_" + plt_key + "_prm_" + prm_key), data.plates[plt_key].primers[prm_key], false);
+          }
+        }
+      }
     });
   </script>
 

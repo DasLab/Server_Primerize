@@ -128,8 +128,8 @@ function draw_single_plate(element, data, flag) {
         .on("mouseout", function(d) {
             if (flag) {
                 d3.select(this).transition().duration(200)
-                    .style("fill", function(d) { return get_fill_color(d.label); })
-                    .style("stroke", function(d) { return get_stroke_color(d.label); });
+                    .style("fill", function(d) { return get_fill_color(d); })
+                    .style("stroke", function(d) { return get_stroke_color(d); });
 
                 if (d.label) {
                     tooltip.transition().duration(200)

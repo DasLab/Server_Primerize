@@ -22,7 +22,7 @@ def index(request):
     return render_to_response(PATH.HTML_PATH['index'], {}, context_instance=RequestContext(request))
 
 def tutorial(request):
-    return render_to_response(PATH.HTML_PATH['tutorial'], {}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['tutorial'], {'job_id': ARG['DEMO_2D_ID']}, context_instance=RequestContext(request))
 
 def protocol(request):
     return render_to_response(PATH.HTML_PATH['protocol'], {}, context_instance=RequestContext(request))
@@ -32,7 +32,7 @@ def license(request):
 
 def about(request):
     history_list = HistoryItem.objects.order_by('-date')
-    return render_to_response(PATH.HTML_PATH['about'], {'history':history_list}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['about'], {'history': history_list}, context_instance=RequestContext(request))
 
 def download(request):
     if request.method != 'POST':
