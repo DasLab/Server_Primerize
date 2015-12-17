@@ -1,31 +1,27 @@
 sudo usermod -a -G www-data ubuntu
 
 sudo chgrp -R www-data *
-# sudo chgrp -R ubuntu cache
 sudo chown -R ubuntu *.py *.md *.txt src media config .gitignore
 sudo chown -R www-data backup data cache
-
 sudo chmod 640 *.py* *.md *.txt .gitignore
-sudo chmod 640 src/*.py* src/management/* src/management/commands/* src/templatetags/* src/pymerize/* 
-sudo chmod 750 src src/management src/management/commands src/templatetags src/pymerize 
-sudo chmod 640 media/css/* media/fonts/* media/html/* media/fonts/Helvetica/* media/js/* media/js/admin/* media/js/public/* media/js/suit/*
-sudo chmod 750 media/css media/fonts media/fonts/Helvetica media/html media/js media/js/admin media/js/public media/js/suit media
-sudo chmod 640 media/images/*.*g* media/images/docs/* media/images/icons/* media/images/old/*
-sudo chmod 750 media/images media/images/docs media/images/icons media/images/old
-sudo chmod 640 media/admin/*.html media/admin/img/*.*g* media/admin/img/gis/* media/admin/img/filemanager/* media/admin/js/*.js 
-sudo chmod 750 media/admin media/admin/img media/admin/img/gis media/admin/img/filemanager media/admin/js 
 
-sudo chmod 640 media/css/min/* media/js/public/min/* media/js/admin/min/* media/js/suit/min/*
-sudo chmod 750 media/css/min media/js/public/min media/js/admin/min media/js/suit/min
+sudo chmod 640 $(find src -type f)
+sudo chmod 750 $(find src -type d)
+sudo chmod 640 $(find media -type f)
+sudo chmod 750 $(find media -type d)
 
-sudo chmod 660 cache/* src/pymerize/__pycache__/*
-sudo chmod 770 cache src/pymerize/__pycache__
-sudo chmod 640 backup/* data/primerize_release.zip data/1d/* data/2d/* data/3d/*
-sudo chmod 750 backup data data/1d data/2d data/3d
+sudo chmod 660 $(find cache -type f)
+sudo chmod 770 $(find cache -type d)
+sudo chmod 660 $(find backup -type f)
+sudo chmod 770 $(find backup -type d)
+sudo chmod 660 $(find data -type f)
+sudo chmod 770 $(find data -type d)
+sudo chmod 660 src/pymerize/__pycache__/*
+sudo chmod 770 src/pymerize/__pycache__
 
-sudo chmod 640 config/*.py* config/*.example config/*.conf
+sudo chmod 640 $(find config -type f)
+sudo chmod 750 $(find config -type d)
 sudo chown www-data config/cron.conf 
-sudo chmod 750 config
 
 sudo chown -R ubuntu:ubuntu *.sh
 sudo chmod -R 700 *.sh

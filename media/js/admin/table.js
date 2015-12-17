@@ -49,6 +49,11 @@ $(document).ready(function () {
 	$("#id_job_id, #id_job_1d, #id_job_2d, #id_job_3d").addClass("monospace job_id");
 	$("span.add-on").html('<span class="glyphicon glyphicon-calendar"></span>').addClass("input-group-addon").removeClass("add-on");
 
+	$('th > div.text > span > input[type="checkbox"]').each(function() {
+		var parent = $(this).parent();
+		$(this).css("display", "");
+		$(this).detach().insertBefore(parent);
+	});
 	$('input[type="checkbox"], input[type="radio"]').each(function() {
 		if ($(this).next().is("label")) {
 			$(this).parent().addClass("checkbox");
@@ -65,6 +70,7 @@ $(document).ready(function () {
 			elem.appendTo(elem.prev());
 		}
 	});
+	
 	$('p.file-upload > a').each(function() {
 		$(this).replaceWith('<div class="form-inline"><label>Current:&nbsp;&nbsp;</label><input class="form-control" disabled="disabled" style="cursor:text;" value="' + $(this).attr("href") + '">&nbsp;&nbsp;<a href="'+ replace_path($(this).attr("href")) + '" class="btn btn-default" target="_blank"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;View&nbsp;&nbsp;</a></div>');
 	});
