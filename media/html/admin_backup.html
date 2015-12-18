@@ -131,26 +131,12 @@
                     <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Weekly Backup
                   </label>
                 </div>
-                <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                      <label for="username" class="pull-right">
-                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                        &nbsp;&nbsp;On:
-                      </label>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                     {{form.time_backup}}
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                      <label for="username" class="pull-right">
-                        &nbsp;&nbsp;Every:
-                      </label>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                     {{form.day_backup}}
-                  </div>
-                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                </div>  
+                <div class="input-group">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;&nbsp;On</span>
+                  {{form.time_backup}}
+                  <span class="input-group-addon">Every</span>
+                  {{form.day_backup}}
+                </div>
                 <br/>
                 <div class="row">
                   <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs"></div>
@@ -163,17 +149,15 @@
                 </div>
                 <br/>
                 <div class="row">
-                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                      <label for="username" class="pull-right">
+                  <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                  <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
                         <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
                         &nbsp;&nbsp;Keep Job Results for:
-                      </label>
                   </div>
-                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <div class="input-group">
-                      {{form.keep_job}}
-                      <span class="input-group-addon">Months</span>
+                     {{form.keep_job}}
+                      <span class="input-group-addon">days</span>
                     </div>
                   </div>
                 </div>
@@ -187,26 +171,12 @@
                     <span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Sync to Google Drive
                   </label>
                 </div>
-                <div class="row">
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                      <label for="username" class="pull-right">
-                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                        &nbsp;&nbsp;On:
-                      </label>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                     {{form.time_upload}}
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                      <label for="username" class="pull-right">
-                        &nbsp;&nbsp;Every:
-                      </label>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                     {{form.day_upload}}
-                  </div>
-                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                </div>  
+                <div class="input-group">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;&nbsp;On</span>
+                  {{form.time_upload}}
+                  <span class="input-group-addon">Every</span>
+                  {{form.day_upload}}
+                </div>
                 <br/>
                 <div class="row">
                   <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs"></div>
@@ -219,49 +189,42 @@
                 </div>
                 <br/>
                 <div class="row">
-                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                      <label for="username" class="pull-right">
+                  <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                  <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
                         <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
                         &nbsp;&nbsp;Keep on Google Drive:
-                      </label>
                   </div>
-                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <div class="input-group">
-                      {{form.keep_backup}}
-                      <span class="input-group-addon">Days</span>
+                     {{form.keep_backup}}
+                      <span class="input-group-addon">days</span>
                     </div>
                   </div>
                 </div>
 
               </div>
             </div>
-            <div class="row">
-              <span class="pull-right">
-                <button type="submit" class="btn btn-info"/><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;Save</button>
-                &nbsp;&nbsp;
-                <button type="button" class="btn btn-default" onclick="location.href='/admin/backup/'"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Reset</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </span>
+            <div class="row" style="padding:10px">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <button type="submit" class="btn btn-info btn-block"/><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;Save</button>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <button type="button" class="btn btn-default btn-block" onclick="location.href='/admin/backup/'"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Reset</button>
+              </div>
             </div>
-            <br/>
 
           </form>
         </div>
 
         <br/>
         <div class="well">
+          <p><b>Note</b>: This may take 1-2 minutes to complete.</p>
           <div class="row">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <p><b>Note</b>: This may take 1-2 minutes to complete.</p>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <a href="/admin/backup_now/" class="btn btn-danger btn-block"/><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Backup Now</a>
             </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-              <span class="pull-right">
-                <a href="/admin/backup_now/" class="btn btn-danger"/><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Backup Now</a>
-                &nbsp;&nbsp;
-                <a href="/admin/upload_now/" class="btn btn-blue"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Upload Now</a>
-              </span>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <a href="/admin/upload_now/" class="btn btn-blue btn-block"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Upload Now</a>
             </div>
           </div>
         </div>
@@ -273,7 +236,7 @@
 
   <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalStat" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content panel-success">
+      <div class="modal-content panel-primary">
         <div class="modal-header panel-heading">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="stat_label">
@@ -282,7 +245,7 @@
           </h4>
         </div>
         <div class="modal-body panel-body">
-          <h2><span class="label label-danger">NEW SETTINGS APPLIED</span></h2>
+          <h2><span class="label label-default">CURRENT SETTINGS</span></h2>
           <br/>
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <table class="table table-hover">
@@ -324,7 +287,18 @@
 
       $("#modal_keep_backup").html('Keep <span class="label label-orange">' + $("#id_keep_backup").val() + '</span> Days');
       $("#modal_keep_job").html('Keep <span class="label label-orange">' + $("#id_keep_job").val() + '</span> Months');
-      if ({{flag}}) {$("#modal").modal("show");}
+
+      {% if flag != -1 %}
+        {% if flag == 1 %}
+          $("div.modal-body > h2 > span.label").removeClass("label-default").addClass("label-danger");
+          $("div.modal-body > h2 > span.label").html("SETTINGS NOT APPLIED");
+        {% else %}
+          $("div.modal-body > h2 > span.label").removeClass("label-default").addClass("label-success");
+          $("div.modal-body > h2 > span.label").html("NEW SETTINGS APPLIED");
+        {% endif %}
+
+        $("#modal").modal("show");
+      {% endif %}
     });
   </script>
 {% endblock %}

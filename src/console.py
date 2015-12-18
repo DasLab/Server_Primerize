@@ -67,57 +67,31 @@ def get_backup_stat():
     subprocess.Popen('rm %s' % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
-def get_backup_form():
-    cron = subprocess.Popen('crontab -l | cut -d" " -f1-5', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()
+def refresh_settings():
+    (_, _, _, _, _, _, _, _, CRONJOBS, _, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
+    settings._wrapped.CRONJOBS = CRONJOBS
+    settings._wrapped.KEEP_BACKUP = KEEP_BACKUP
+    settings._wrapped.KEEP_JOB = KEEP_JOB
+
+
+def get_sys_crontab():
+    cron = subprocess.Popen('crontab -l', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].split('\n')
+    (set_backup, set_upload) = (('', ''), ('', ''))
+    for i in xrange(len(cron)):
+        cron_job = cron[i]
+        array = cron_job.split()
+        if 'backup_weekly' in cron_job:
+            set_backup = ('%s:%s' % (array[1], array[0]), array[4])
+        elif 'gdrive_weekly' in cron_job:
+            set_upload = ('%s:%s' % (array[1], array[0]), array[4])
+
+    return (set_backup, set_upload)
+
+
+def set_sys_crontab():
     try:
-        day_backup = cron[4]
-        day_upload = cron[9]
-        time_backup = '%02d:%02d' % (int(cron[1]), int(cron[0]))
-        time_upload = '%02d:%02d' % (int(cron[6]), int(cron[5]))
-    except:
-        time_backup = time_upload = day_backup = day_upload = ''
-
-    lines = open('%s/config/cron.conf' % MEDIA_ROOT, 'r').readlines()
-    index =  [i for i, line in enumerate(lines) if 'KEEP_BACKUP' in line][0]
-    keep_backup = int(lines[index].split(':')[1].strip().replace(',', ''))
-    index =  [i for i, line in enumerate(lines) if 'KEEP_JOB' in line][0]
-    keep_job = int(lines[index].split(':')[1].strip().replace(',', ''))
-
-    return {'day_backup':day_backup, 'day_upload':day_upload, 'time_backup':time_backup, 'time_upload':time_upload, 'keep_backup':keep_backup, 'keep_job':keep_job}
-
-
-def set_backup_form(request):
-    form = BackupForm(request.POST)
-    if not form.is_valid(): return
-
-    time_backup = form.cleaned_data['time_backup']
-    time_upload = form.cleaned_data['time_upload']
-    day_backup = form.cleaned_data['day_backup']
-    day_upload = form.cleaned_data['day_upload']
-
-    cron_backup = '%s * * %s' % (time_backup.strftime('%M %H'), day_backup)
-    cron_upload = '%s * * %s' % (time_upload.strftime('%M %H'), day_upload)
-
-    lines = open('%s/config/cron.conf' % MEDIA_ROOT, 'r').readlines()
-
-    index =  [i for i, line in enumerate(lines) if 'backup_weekly' in line or 'gdrive_weekly' in line or 'KEEP_BACKUP' in line or 'KEEP_JOB' in line]
-    lines[index[0]] = '\t\t["%s", "django.core.management.call_command", ["backup"], {}, ">> %s/cache/log_cron_backup.log # backup_weekly"],\n' % (cron_backup, MEDIA_ROOT)
-    lines[index[1]] = '\t\t["%s", "django.core.management.call_command", ["gdrive"], {}, ">> %s/cache/log_cron_gdrive.log # gdrive_weekly"],\n' % (cron_upload, MEDIA_ROOT)
-    lines[index[2]] = '\t"KEEP_BACKUP": %s,\n' % form.cleaned_data['keep_backup']
-    lines[index[3]] = '\t"KEEP_JOB": %s\n' % form.cleaned_data['keep_job']
-    open('%s/config/cron.conf' % MEDIA_ROOT, 'w').writelines(lines)
-
-    try:
-        cron = subprocess.Popen('crontab -l | cut -d" " -f1-5', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()
-        if len(cron) > 9:
-            subprocess.check_call('crontab -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-
-        (_, _, _, _, _, _, _, _, CRONJOBS, _, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
-        settings._wrapped.CRONJOBS = CRONJOBS
-        settings._wrapped.KEEP_BACKUP = KEEP_BACKUP
-        settings._wrapped.KEEP_JOB = KEEP_JOB
+        subprocess.Popen('crontab -r', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         call_command('crontab', 'add')
-        # subprocess.check_call('cd %s && python manage.py crontab add' % MEDIA_ROOT, shell=True, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError:
         print "    \033[41mERROR\033[0m: Failed to reset \033[94mcrontab\033[0m schedules."
         err = traceback.format_exc()
@@ -125,6 +99,36 @@ def set_backup_form(request):
         open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
         open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
         raise Exception('Error with setting crontab scheduled jobs.')
+
+
+def get_backup_form():
+    refresh_settings()
+    (set_backup, set_upload) = get_sys_crontab()
+    return {'day_backup':set_backup[1], 'day_upload':set_upload[1], 'time_backup':set_backup[0], 'time_upload':set_upload[0], 'keep_backup':settings._wrapped.KEEP_BACKUP, 'keep_job':settings._wrapped.KEEP_JOB}
+
+
+def set_backup_form(request):
+    form = BackupForm(request.POST)
+    if not form.is_valid(): return 1
+
+    cron_backup = '%s * * %s' % (form.cleaned_data['time_backup'].strftime('%M %H'), form.cleaned_data['day_backup'])
+    cron_upload = '%s * * %s' % (form.cleaned_data['time_upload'].strftime('%M %H'), form.cleaned_data['day_upload'])
+
+    env_cron = simplejson.load(open('%s/config/cron.conf' % MEDIA_ROOT))
+    for i in xrange(len(env_cron['CRONJOBS'])):
+        cron_job = env_cron['CRONJOBS'][i]
+        if 'backup_weekly' in cron_job[-1]:
+            cron_job[0] = cron_backup
+        elif 'gdrive_weekly' in cron_job[-1]:
+            cron_job[0] = cron_upload
+        suffix = cron_job[-1]
+        cron_job[-1] = '>> %s/cache/log_cron.log # %s' % (MEDIA_ROOT, suffix[suffix.rfind(' # ') + 3:])
+    env_cron['KEEP_BACKUP'] = form.cleaned_data['keep_backup']
+    env_cron['KEEP_JOB'] = form.cleaned_data['keep_job']
+    open('%s/config/cron.conf' % MEDIA_ROOT, 'w').writelines(simplejson.dumps(env_cron, sort_keys=True, indent=' ' * 4))
+    refresh_settings()
+    set_sys_crontab()
+    return 0
 
 
 def restyle_apache():

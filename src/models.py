@@ -167,8 +167,7 @@ class Design2DForm(forms.Form):
     offset = forms.IntegerField(required=False, initial=0)
     min_muts = forms.IntegerField(required=False)
     max_muts = forms.IntegerField(required=False)
-    lib = forms.ChoiceField(choices=M2_LIBRARY_CHOICES, initial='1')
-    # is_num_primers = forms.BooleanField(required=False, initial=False)
+    lib = forms.ChoiceField(choices=M2_LIBRARY_CHOICES, initial='1', required=True)
 
 
 class DownloadForm(forms.Form):
@@ -184,6 +183,7 @@ class DownloadForm(forms.Form):
 
 
 WEEKDAY_CHOICES = (
+    ('', '------'),
     ('0', 'Sunday'),
     ('1', 'Monday'),
     ('2', 'Tuesday'),
@@ -198,10 +198,10 @@ class BackupForm(forms.Form):
     # is_upload = forms.BooleanField()
     time_backup = forms.TimeField(required=True)
     time_upload = forms.TimeField(required=True)
-    day_backup = forms.ChoiceField(choices=WEEKDAY_CHOICES)
-    day_upload = forms.ChoiceField(choices=WEEKDAY_CHOICES)
-    keep_backup = forms.IntegerField()
-    keep_job = forms.IntegerField()
+    day_backup = forms.ChoiceField(choices=WEEKDAY_CHOICES, required=True)
+    day_upload = forms.ChoiceField(choices=WEEKDAY_CHOICES, required=True)
+    keep_backup = forms.IntegerField(required=True)
+    keep_job = forms.IntegerField(required=True)
 
 
 def debug_flag(request):

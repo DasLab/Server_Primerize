@@ -149,10 +149,9 @@ def ssl_dash(request):
 
 
 def backup(request):
-    flag = 0
+    flag = -1
     if request.method == 'POST':
-        set_backup_form(request)
-        flag = 1
+        flag = set_backup_form(request)
 
     form = BackupForm(initial=get_backup_form())
     return render_to_response(PATH.HTML_PATH['admin_backup'], {'form':form, 'flag':flag, 'email':EMAIL_HOST_USER}, context_instance=RequestContext(request))
