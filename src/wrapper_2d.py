@@ -202,33 +202,40 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             fragments.append(plate.sequence[end + 1:end + 11] + '......' + plate.sequence[-10:])
         
         labels = ['%d' % (1 - plate.offset), '%d' % plate.which_muts[0], '%d' % plate.which_muts[-1], '%d' % (len(plate.sequence) - plate.offset)]
-        (illustration_1, illustration_2) = ('', '')
+        (illustration_1, illustration_2, illustration_3) = ('', '', '')
         if len(fragments[0]) >= len(labels[0]):
-            illustration_1 += '<span class="label-white label-default" style="color:#ff7c55;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
-            illustration_2 += '<span style="color:#ff7c55;">%s</span><span>%s</span>' % (labels[0], '&nbsp;' * (len(fragments[0]) - len(labels[0])))
+            illustration_1 += '<span class="label-white label-default" style="color:#c28fdd;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
+            illustration_2 += '<span style="color:#c28fdd;">|</span><span>%s</span>' % ('&nbsp;' * (len(fragments[0]) - 1))
+            illustration_3 += '<span style="color:#c28fdd;">%s</span><span>%s</span>' % (labels[0], '&nbsp;' * (len(fragments[0]) - len(labels[0])))
         elif fragments[0]:
-            illustration_1 += '<span class="label-white label-default" style="color:#ff7c55;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
+            illustration_1 += '<span class="label-white label-default" style="color:#c28fdd;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
             illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[0]))
+            illustration_3 += '<span>%s</span>' % ('&nbsp;' * len(fragments[0]))
 
         if len(fragments[1]) >= len(labels[1]) + len(labels[2]):
-            illustration_1 += '<span class="label-green" style="color:#c28fdd;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:-1] + '</span><span class="label-green" style="color:#c28fdd;">' + fragments[1][-1] + '</span>'
-            illustration_2 += '<span style="color:#c28fdd;">%s</span><span>%s</span><span style="color:#c28fdd;">%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1]) - len(labels[2])), labels[2])
+            illustration_1 += '<span class="label-green" style="color:#ff7c55;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:-1] + '</span><span class="label-green" style="color:#ff7c55;">' + fragments[1][-1] + '</span>'
+            illustration_2 += '<span style="color:#ff7c55;">|</span><span>%s</span><span style="color:#ff7c55;">|</span>' % ('&nbsp;' * (len(fragments[1]) - 2))
+            illustration_3 += '<span style="color:#ff7c55;">%s</span><span>%s</span><span style="color:#ff7c55;">%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1]) - len(labels[2])), labels[2])
         elif fragments[1]:
             if len(fragments[1]) >= len(labels[1]):
-                illustration_1 += '<span class="label-green" style="color:#c28fdd;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:] + '</span>'
-                illustration_2 += '<span style="color:#c28fdd;">%s</span><span>%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1])))
+                illustration_1 += '<span class="label-green" style="color:#ff7c55;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:] + '</span>'
+                illustration_2 += '<span style="color:#ff7c55;">|</span><span>%s</span>' % ('&nbsp;' * (len(fragments[1]) - 1))
+                illustration_3 += '<span style="color:#ff7c55;">%s</span><span>%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1])))
             else:
                 illustration_1 += '<span class="label-green">' + fragments[1] + '</span>'
                 illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[1]))
+                illustration_3 += '<span>%s</span>' % ('&nbsp;' * len(fragments[1]))
 
         if len(fragments[2]) >= len(labels[3]):
-            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#ff7c55;">' + fragments[2][-1] + '</span>'
-            illustration_2 += '<span>%s</span><span style="color:#ff7c55;">%s</span>' % ('&nbsp;' * (len(fragments[2]) - len(labels[3])), labels[3])
+            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#c28fdd;">' + fragments[2][-1] + '</span>'
+            illustration_2 += '<span>%s</span><span style="color:#c28fdd;">|</span>' % ('&nbsp;' * (len(fragments[2]) - 1))
+            illustration_3 += '<span>%s</span><span style="color:#c28fdd;">%s</span>' % ('&nbsp;' * (len(fragments[2]) - len(labels[3])), labels[3])
         elif fragments[2]:
-            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#ff7c55;">' + fragments[2][-1] + '</span>'
+            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#c28fdd;">' + fragments[2][-1] + '</span>'
             illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[2]))
+            illustration_3 += '<span>%s</span>' % ('&nbsp;' * len(fragments[2]))
 
-        script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p>&nbsp;<span class="monospace pull-right">' + illustration_2)
+        script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
 
 
         (_, _, print_lines, Tm_overlaps) = draw_assembly(plate.sequence, plate.primers, plate.name)
