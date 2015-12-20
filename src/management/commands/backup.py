@@ -26,7 +26,6 @@ class Command(BaseCommand):
             subprocess.check_call('mysqldump --quick %s -u %s -p%s > %s/backup/backup_mysql' % (env.db()['NAME'], env.db()['USER'], env.db()['PASSWORD'], MEDIA_ROOT), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             tarfile.open('%s/backup/backup_mysql.tgz' % MEDIA_ROOT, 'w:gz').add('%s/backup/backup_mysql' % MEDIA_ROOT, arcname='backup_mysql')
             os.remove('%s/backup/backup_mysql' % MEDIA_ROOT)
-            #subprocess.check_call('gzip -f %s/backup/backup_mysql' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to dump \033[94mMySQL\033[0m database.")
             err = traceback.format_exc()
@@ -43,8 +42,7 @@ class Command(BaseCommand):
         self.stdout.write("#2: Backing up static files...")
         try:
             tarfile.open('%s/backup/backup_static.tgz' % MEDIA_ROOT, 'w:gz').add('%s/data' % MEDIA_ROOT, arcname='data')
-            #subprocess.check_call('cd %s && tar zcf backup/backup_static.tgz data/' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError:
+        except:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mstatic\033[0m files.")
             err = traceback.format_exc()
             ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
@@ -61,12 +59,6 @@ class Command(BaseCommand):
         try:
             pass
             # tarfile.open('%s/backup/backup_apache2.tgz' % MEDIA_ROOT, 'w:gz').add('/etc/apache2', arcname='apache2')
-
-            #shutil.copytree('/etc/apache2/', '%s/backup/' % MEDIA_ROOT)
-            #subprocess.check_call('cp -r /etc/apache2 %s/backup' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            #subprocess.check_call('cd %s/backup && tar zcf backup_apache.tgz apache2/' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            #shutil.rmtree('%s/backup/apache2' % MEDIA_ROOT)
-            #subprocess.check_call('rm -rf %s/backup/apache2' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mapache2\033[0m settings.")
             err = traceback.format_exc()
@@ -83,7 +75,6 @@ class Command(BaseCommand):
         self.stdout.write("#4: Backing up config settings...")
         try:
             tarfile.open('%s/backup/backup_config.tgz' % MEDIA_ROOT, 'w:gz').add('%s/config' % MEDIA_ROOT, arcname='config')
-            #subprocess.check_call('cd %s && tar zcf backup/backup_config.tgz config/' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mconfig\033[0m settings.")
             err = traceback.format_exc()

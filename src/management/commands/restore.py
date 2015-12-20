@@ -25,7 +25,7 @@ class Command(BaseCommand):
             tarfile.open('%s/backup/backup_mysql.tgz' % MEDIA_ROOT, 'r:gz').extractall()
             subprocess.check_call('cat %s/backup/backup_mysql | mysql -u %s -p%s %s' % (MEDIA_ROOT, env.db()['USER'], env.db()['PASSWORD'], env.db()['NAME']), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             os.remove('%s/backup/backup_mysql' % MEDIA_ROOT)
-        except subprocess.CalledProcessError:
+        except:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to overwrite \033[94mMySQL\033[0m database.")
             err = traceback.format_exc()
             ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
@@ -45,11 +45,6 @@ class Command(BaseCommand):
             shutil.rmtree('%s/data' % MEDIA_ROOT)
             shutil.move('%s/backup/data' % MEDIA_ROOT, '%s' % MEDIA_ROOT)
             shutil.rmtree('%s/backup/data' % MEDIA_ROOT)
-            # subprocess.check_call('rm -rf %s/backup/data' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('cd %s/backup && tar zvxf backup_static.tgz' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('rm -rf %s/data' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('mv %s/backup/data %s/' % (MEDIA_ROOT, MEDIA_ROOT), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('rm -rf %s/backup/data' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             if not DEBUG:
                 subprocess.check_call('%s/util_chmod.sh' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except:
@@ -72,11 +67,6 @@ class Command(BaseCommand):
             shutil.rmtree('/etc/apache2')
             shutil.move('%s/backup/apache2' % MEDIA_ROOT, '/etc/apache2')
             shutil.rmtree('%s/backup/apache2' % MEDIA_ROOT)
-            # subprocess.check_call('rm -rf %s/backup/apache2' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('cd %s/backup && tar zvxf backup_apache.tgz' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('rm -rf /etc/apache2', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('mv %s/backup/apache2 /etc/apache2 ' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            # subprocess.check_call('rm -rf %s/backup/apache2' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             if not DEBUG:
                 subprocess.check_call('apache2ctl restart', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except:
