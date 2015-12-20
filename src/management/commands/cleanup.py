@@ -1,5 +1,6 @@
 import datetime
-import subprocess
+import glob
+import os
 import sys
 import time
 import traceback
@@ -29,16 +30,15 @@ class Command(BaseCommand):
                 if job.type == '1':
                     obj = Design1D.objects.get(job_id=job.job_id)
                     obj.delete()
-                    subprocess.Popen('rm %s/data/1d/result_%s.txt' % (MEDIA_ROOT, job.job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                    subprocess.Popen('rm %s/data/1d/result_%s.html' % (MEDIA_ROOT, job.job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    for f in glob.glob('%s/data/1d/result_%s.*') % (MEDIA_ROOT, job.job_id):
+                        os.remove(f)
                 elif job.type == '2':
                     obj = Design2D.objects.get(job_id=job.job_id)
                     obj.delete()
-                    subprocess.Popen('rm -rf %s/data/2d/result_%s.*' % (MEDIA_ROOT, job.job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    for f in glob.glob('%s/data/2d/result_%s.*') % (MEDIA_ROOT, job.job_id):
+                        os.remove(f)
                 elif job.type == '3':
-                    obj = Design3D.objects.get(job_id=job.job_id)
-                    obj.delete()
-                    subprocess.Popen('rm -rf %s/data/3d/%s' % (MEDIA_ROOT, job.job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    pass
                 job.delete()
         except:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to remove JOB_ID \033[94m%s\033." % job.job_id)
@@ -57,7 +57,7 @@ class Command(BaseCommand):
             self.stdout.write("Time elapsed: %.1f s.\n" % (time.time() - t))
 
             t_now = datetime.datetime.now().strftime('%b %d %Y (%a) @ %H:%M:%S')
-            send_notify_emails('{%s} SYSTEM: Quarterly Cleanup Notice' % env('SERVER_NAME'), 'This is an automatic email notification for the success of scheduled quarterly cleanup of the %s Server local results.\n\nThe crontab job is scheduled at 00:00 (UTC) on 1st day of every 3 months.\n\nThe last system backup was performed at %s (PDT).\n\n%s\n\n%s Admin\n' % (env('SERVER_NAME'), t_now, html, env('SERVER_NAME')))
+            send_notify_emails('{%s} SYSTEM: Quarterly Cleanup Notice' % env('SERVER_NAME'), 'This is an automatic email notification for the success of scheduled quarterly cleanup of the %s Server local results.\n\nThe crontab job is scheduled at 00:00 (UTC) on 1st day of every 3 months.\n\nThe last system backup was performed at %s (PDT).\n\n%s Admin\n' % (env('SERVER_NAME'), t_now, env('SERVER_NAME')))
             self.stdout.write("Admin email (Quarterly Cleanup Notice) sent.")
 
             self.stdout.write("All done successfully!")

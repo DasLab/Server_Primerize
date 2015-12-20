@@ -38,6 +38,7 @@ class Command(BaseCommand):
             self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mMySQL\033[0m database dumped.")
         self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
+
         t = time.time()
         self.stdout.write("#2: Backing up static files...")
         try:
@@ -54,10 +55,13 @@ class Command(BaseCommand):
             self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mstatic\033[0m files synced.")
         self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
+
         t = time.time()
         self.stdout.write("#3: Backing up apache2 settings...")
         try:
             pass
+            # tarfile.open('%s/backup/backup_apache2.tgz' % MEDIA_ROOT, 'w:gz').add('/etc/apache2', arcname='apache2')
+
             #shutil.copytree('/etc/apache2/', '%s/backup/' % MEDIA_ROOT)
             #subprocess.check_call('cp -r /etc/apache2 %s/backup' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             #subprocess.check_call('cd %s/backup && tar zcf backup_apache.tgz apache2/' % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -73,6 +77,7 @@ class Command(BaseCommand):
         else:
             self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mapache2\033[0m settings saved.")
         self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+
 
         t = time.time()
         self.stdout.write("#4: Backing up config settings...")

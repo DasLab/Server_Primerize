@@ -26,12 +26,12 @@ $(document).ready(function() {
             $("#id_static_s").html('<span style="color:#00f;">' + txt[7] + '</span>');
             $("#id_apache_s").html('<span style="color:#00f;">' + txt[8] + '</span>');
             $("#id_config_s").html('<span style="color:#00f;">' + txt[9] + '</span>');
-            $("#id_mysql_p").html($("#id_mysql_p").html() + '<br/><code>' + txt[10] + '</code>');
-            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + txt[11] + '</code>');
-            $("#id_apache_p").html($("#id_apache_p").html() + '<br/><code>' + txt[12] + '</code>');
-            $("#id_config_p").html($("#id_config_p").html() + '<br/><code>' + txt[13] + '</code>');
+            $("#id_mysql_p").html($("#id_mysql_p").html() + '<br/><code>' + txt[11] + '</code>');
+            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + txt[12] + '</code>');
+            $("#id_apache_p").html($("#id_apache_p").html() + '<br/><code>' + txt[13] + '</code>');
+            $("#id_config_p").html($("#id_config_p").html() + '<br/><code>' + txt[14] + '</code>');
 
-            var gdrive = txt[14].split(/~|~/);
+            var gdrive = txt[15].split(/~|~/);
             var names = [], sizes = [], times = [];
             for (var i = 0; i < gdrive.length; i += 12) {
                 names.push(gdrive[i+2]);
@@ -53,7 +53,7 @@ $(document).ready(function() {
         dataType: "text",
         success : function (data) {
             var txt = data.split(/\t/);
-            var drive_free = parseFloat(txt[48]), drive_used = parseFloat(txt[47]), drive_total = parseFloat(txt[49]);
+            var drive_free = parseFloat(txt[47]), drive_used = parseFloat(txt[46]), drive_total = parseFloat(txt[48]);
             $("#id_drive_space > div > div.progress-bar-success").css("width", (drive_free / drive_total * 100).toString() + '%' ).html(drive_free + ' G');
             $("#id_drive_space > div > div.progress-bar-danger").css("width", (100 - drive_free / drive_total * 100).toString() + '%' ).html(drive_used + ' G');
             var disk_sp = txt[38].split(/\//);

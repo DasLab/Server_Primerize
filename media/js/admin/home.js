@@ -59,7 +59,7 @@ $(document).ready(function() {
             $("#id_rdatkit").html(txt[36]);
             $("#id_primerize").html(txt[37]);
 
-            var drive_free = parseFloat(txt[48]), drive_used = parseFloat(txt[47]), drive_total = parseFloat(txt[49]);
+            var drive_free = parseFloat(txt[47]), drive_used = parseFloat(txt[46]), drive_total = parseFloat(txt[48]);
             $("#id_drive_space > div > div.progress-bar-success").css("width", (drive_free / drive_total * 100).toString() + '%' ).html(drive_free + ' G');
             $("#id_drive_space > div > div.progress-bar-danger").css("width", (100 - drive_free / drive_total * 100).toString() + '%' ).html(drive_used + ' G');
             var disk_sp = txt[38].split(/\//);
@@ -69,15 +69,22 @@ $(document).ready(function() {
             $("#id_memory > div > div.progress-bar-success").css("width", (parseFloat(mem_sp[0]) / (parseFloat(mem_sp[0]) + parseFloat(mem_sp[1])) * 100).toString() + '%' ).html(mem_sp[0]);
             $("#id_memory > div > div.progress-bar-danger").css("width", (parseFloat(mem_sp[1]) / (parseFloat(mem_sp[0]) + parseFloat(mem_sp[1])) * 100).toString() + '%' ).html(mem_sp[1]);
 
-            $("#id_backup").html('<span style="color:#00f;">' + txt[40] + '</span>');
-            var cpu = txt[41].split(/\//);
+            var cpu = txt[40].split(/\//);
             $("#id_cpu").html('<span style="color:#f00;">' + cpu[0] + '</span> | <span style="color:#080;">' + cpu[1] + '</span> | <span style="color:#00f;">' + cpu[2] + '</span>');
 
-            $("#id_base_dir").html('<code>' + txt[42] + '</code>');
-            $("#id_media_root").html('<code>' + txt[43] + '</code>');
-            $("#id_static_root").html('<code>' + txt[44] + '</code>');
-            $("#id_primerize_path").html('<code>' + txt[45] + '</code>');
-            $("#id_rdatkit_path").html('<code>' + txt[46] + '</code>');
+            $("#id_base_dir").html('<code>' + txt[41] + '</code>');
+            $("#id_media_root").html('<code>' + txt[42] + '</code>');
+            $("#id_static_root").html('<code>' + txt[43] + '</code>');
+            $("#id_primerize_path").html('<code>' + txt[44] + '</code>');
+            $("#id_rdatkit_path").html('<code>' + txt[45] + '</code>');
+        }
+    });
+    $.ajax({
+        url : "/admin/get_backup/",
+        dataType: "text",
+        success : function (data) {
+            var txt = data.split(/\t/);
+            $("#id_backup").html('<span style="color:#00f;">' + txt[10] + '</span>');
         }
     });
 
@@ -85,6 +92,7 @@ $(document).ready(function() {
         url : "/admin/backup_form/",
         dataType: "json",
         success : function (data) {
+
             $("#id_week_backup").html($("#id_week_backup").html() + '<br/>On <span class="label label-primary">' + data.time_backup + '</span> every <span class="label label-inverse">' + weekdayNames[data.day_backup] + '</span> (UTC)');
             $("#id_week_upload").html($("#id_week_upload").html() + '<br/>On <span class="label label-primary">' + data.time_upload + '</span> every <span class="label label-inverse">' + weekdayNames[data.day_upload] + '</span> (UTC)');
 
