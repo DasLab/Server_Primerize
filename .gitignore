@@ -18,3 +18,4 @@ src/pymerize/__pycache__/*.n*
 
 config/t47_dev.py
 config/*.conf
+config/sys/*
