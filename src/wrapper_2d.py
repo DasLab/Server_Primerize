@@ -4,13 +4,17 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 
 from datetime import datetime
+import glob
+import os
 import random
 import re
 import simplejson
-import subprocess
+import shutil
+# import subprocess
 import threading
 import time
 import traceback
+import zipfile
 
 from src.helper import *
 from src.models import *
@@ -118,7 +122,12 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                 os.mkdir(dir_name)
             plate.output_constructs(dir_name)
             plate.output_spreadsheet(dir_name)
-            subprocess.check_call('cd %s && zip -rm result_%s.zip result_%s' % (os.path.join(MEDIA_ROOT, 'data/2d/'), job_id, job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            zf = zipfile.ZipFile('%s/data/2d/result_%s.zip' % (MEDIA_ROOT, job_id), 'w')
+            for f in glob.glob('%s/data/2d/result_%s/*' % (MEDIA_ROOT, job_id)):
+                zf.write(f, os.path.basename(f))
+            zf.close()
+            shutil.rmtree('%s/data/2d/result_%s' % (MEDIA_ROOT, job_id))
+            # subprocess.check_call('cd %s && zip -rm result_%s.zip result_%s' % (os.path.join(MEDIA_ROOT, 'data/2d/'), job_id, job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         t_total = time.time() - t0
     except:
         t_total = time.time() - t0
