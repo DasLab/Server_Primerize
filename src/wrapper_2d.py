@@ -130,7 +130,8 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                 os.mkdir(dir_name)
             plate.output_constructs(dir_name)
             plate.output_spreadsheet(dir_name)
-            zf = zipfile.ZipFile('%s/data/2d/result_%s.zip' % (MEDIA_ROOT, job_id), 'w')
+            plate.output_layout(dir_name)
+            zf = zipfile.ZipFile('%s/data/2d/result_%s.zip' % (MEDIA_ROOT, job_id), 'w', zipfile.ZIP_DEFLATED)
             for f in glob.glob('%s/data/2d/result_%s/*' % (MEDIA_ROOT, job_id)):
                 zf.write(f, os.path.basename(f))
             zf.close()
