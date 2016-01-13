@@ -79,7 +79,7 @@ class Command(BaseCommand):
             ver += subprocess.Popen("java -jar %s/../yuicompressor.jar -V" % MEDIA_ROOT, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
 
             ver += subprocess.Popen('python -c "from rdatkit import settings; print settings.VERSION"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
-            ver += 'N/A\t'
+            ver += subprocess.Popen('python -c "import primerize; print primerize.__version__"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip() + '\t'
 
             disk_sp = subprocess.Popen('df -h | grep "/dev/"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].split()
             ver += '%s / %s' % (disk_sp[3][:-1] + ' G', disk_sp[2][:-1] + ' G') + '\t'
@@ -111,7 +111,11 @@ class Command(BaseCommand):
             ver += '%s / %s' % (mem_avail, mem_used) + '\t'
             ver += cpu + '\t'
 
-            ver += '%s\t%s\t%s\t%s\t%s\t' % (MEDIA_ROOT, MEDIA_ROOT + '/data', MEDIA_ROOT + '/media', os.path.abspath(os.path.join(MEDIA_ROOT, '../NA_Thermo')), os.path.abspath(os.path.join(MEDIA_ROOT, '../RDAT_Kit')))
+            ver += '%s\t%s\t%s\t' % (MEDIA_ROOT, MEDIA_ROOT + '/data', MEDIA_ROOT + '/media')
+            if DEBUG:
+                ver += '%s\t%s\t' % (os.path.abspath(os.path.join(MEDIA_ROOT, '../../MATLAB_Code/NA_Thermo')), os.path.abspath(os.path.join(MEDIA_ROOT, '../../MATLAB_Code/RDAT_Kit')))
+            else:
+                ver += '%s\t%s\t' % (os.path.abspath(os.path.join(MEDIA_ROOT, '../NA_Thermo')), os.path.abspath(os.path.join(MEDIA_ROOT, '../RDAT_Kit')))
 
             gdrive_dir = 'echo'
             if not DEBUG: gdrive_dir = 'cd %s' % APACHE_ROOT
