@@ -193,6 +193,9 @@ p.cap:first-letter {
 .li-magenta {
 	border-left: 5px solid #ff69bc;
 }
+.li-purple {
+	border-left: 5px solid #9c27b0;
+}
 .li-dark-red {
 	border-left: 5px solid #d86f5c;
 }
@@ -207,6 +210,9 @@ p.cap:first-letter {
 }
 .li-teal {
 	border-left: 5px solid #008080;
+}
+.li-lime {
+	border-left: 5px solid #9fc906;
 }
 
 

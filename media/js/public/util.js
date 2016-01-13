@@ -35,10 +35,10 @@ $(document).ready(function () {
     $("#nav_protocol").addClass("active");
   } else if (url.indexOf("about") > -1) {
     $("#nav_about").addClass("active");
-  } else if (url.indexOf("download") > -1 || (url.indexOf("icense") > -1)) {
-    $("#nav_download").addClass("active");
+  } else if (url.indexOf("download") > -1 || (url.indexOf("icense") > -1) || (url.indexOf("docs") > -1)) {
+    $("#nav_code").addClass("active");
   } else {
-    $("#nav_logo > span").css("text-decoration","underline");
+    $("#nav_logo > span").css("text-decoration", "underline");
   }
 });
 
