@@ -11,6 +11,7 @@ import re
 import simplejson
 import shutil
 # import subprocess
+import sys
 import threading
 import time
 import traceback
@@ -18,7 +19,9 @@ import zipfile
 
 from src.helper import *
 from src.models import *
-from src.pymerize.primerize_2d import *
+
+import primerize
+
 
 
 def design_2d(request, form=Design2DForm(), from_1d=False):
@@ -27,6 +30,7 @@ def design_2d(request, form=Design2DForm(), from_1d=False):
 def design_2d_run(request):
     if request.method != 'POST': return error400(request)
     form = Design2DForm(request.POST)
+    msg = ''
     if form.is_valid():
         sequence = form.cleaned_data['sequence']
         tag = form.cleaned_data['tag']
@@ -41,24 +45,24 @@ def design_2d_run(request):
         primers = re.sub('[^ACGTUacgtu\ \,]', '', primers)
         primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
         if not primers:
-            primers = Primer_Assembly(sequence).primer_set
+            assembly = primerize.Primer_Assembly(sequence)
+            assembly.design_primers()
+            if assembly.is_success:
+                primers = assembly.primer_set
+            else:
+                msg = '<b>No assembly solution</b> found for sequence input under default constraints. Please supply a working assembly scheme (primers).'
         if not tag: tag = 'primer'
         if not offset: offset = 0
-        if not min_muts: min_muts = 1 - offset
-        min_muts = max(min_muts, 1 - offset)
-        if not max_muts: max_muts = len(sequence) - offset
-        max_muts = min(max_muts, len(sequence) - offset)
+        (which_muts, min_muts, max_muts) = primerize.util.get_mut_range(min_muts, max_muts, offset, sequence)
         if not lib: lib = '1'
         which_lib = [int(lib)]
-        which_muts = range(min_muts, max_muts + 1)
 
-        msg = ''
         if len(sequence) < 60:
             msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
         elif len(primers) % 2:
             msg = 'Invalid primers input (should be in <b>pairs</b>).'
         elif min_muts > max_muts:
-            msg = 'Invalid mutation starting and ending positions: <b>starting</b> should be <u>lower or equal</u> than <b>ending</b>.'
+            msg = 'Invalid mutation starting and ending positions: <b>starting</b> should be <u>lower than</u> or <u>equal to</u> <b>ending</b>.'
         if msg:
             return HttpResponse(simplejson.dumps({'error': msg}), content_type='application/json')
 
@@ -91,14 +95,17 @@ def demo_2d_run(request):
 
 def random_2d(request):
     sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
-    primers = Primer_Assembly(sequence).primer_set
+    assembly = primerize.Primer_Assembly(sequence)
+    assembly.design_primers()
+    if assembly.is_success:
+        primers = assembly.primer_set
+    else:
+        primers = ''
     tag = 'scRNA'
     offset = 0
-    min_muts = 1 + len(SEQ['T7']) - offset
-    max_muts = len(sequence) - offset
+    (which_muts, min_muts, max_muts) = primerize.util.get_mut_range(None, None, offset, sequence)
     lib = '1'
     which_lib = [int(lib)]
-    which_muts = range(min_muts, max_muts + 1)
 
     job_id = random_job_id()
     create_wait_html(job_id, 2)
@@ -115,8 +122,9 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
     try:
         t0 = time.time()
         # time.sleep(15)
-        plate = Mutate_Map(sequence, primer_set, offset, which_muts, which_lib, tag)
-        if not plate.is_error:
+        plate = primerize.Mutate_Map(sequence, primer_set, offset, which_muts, which_lib, tag)
+        plate.mutate_primers()
+        if plate.is_success:
             dir_name = os.path.join(MEDIA_ROOT, 'data/2d/result_%s' % job_id)
             if not os.path.exists(dir_name):
                 os.mkdir(dir_name)
@@ -136,7 +144,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         return create_err_html(job_id, t_total, 2)
 
     # when no solution found
-    if (plate.is_error):
+    if (not plate.is_success):
         html = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><button class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" disabled><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</button></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the primers input. Make sure the primer sequences and their order are correct, and their assembly match the full sequence. Try again with the correct input.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact&nbsp;</a> us to track down the problem.</li></ul></p>' % (job_id)
         if job_id != ARG['DEMO_2D_ID']:
             job_entry = Design2D.objects.get(job_id=job_id)
@@ -170,7 +178,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                     for k in xrange(96):
                         if primer_sequences.data.has_key(k + 1):
                             row = primer_sequences.data[k + 1]
-                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': row[0], 'pos': num_to_coord(k + 1), 'sequence': row[1]})
+                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': row[0], 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
                         else:
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
 
@@ -247,9 +255,9 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
 
 
-        (_, _, print_lines, Tm_overlaps) = draw_assembly(plate.sequence, plate.primers, plate.name)
+        assembly = primerize.util.draw_assembly(plate.sequence, plate.primers, plate.name)
         x = 0
-        for line in print_lines:
+        for line in assembly['print_lines']:
             if line[0] == '~':
                 script += '<br/><span class="label-white label-primary">' + line[1] + '</span>'
             elif line[0] == '=':
@@ -280,7 +288,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                     script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>')
             elif (line[0] == '$'):
                 if line[1].find('xxxx') != -1: 
-                    Tm = '%2.1f' % Tm_overlaps[x]
+                    Tm = '%2.1f' % assembly['Tm_overlaps'][x]
                     x += 1
                     script += line[1].replace('x' * len(Tm), '<kbd>%s</kbd>' % Tm)
                 elif '|' in line[1]:

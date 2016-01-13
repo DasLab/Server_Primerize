@@ -16,8 +16,6 @@ sudo chmod 660 $(find backup -type f)
 sudo chmod 770 $(find backup -type d)
 sudo chmod 660 $(find data -type f)
 sudo chmod 770 $(find data -type d)
-sudo chmod 660 src/pymerize/__pycache__/*
-sudo chmod 770 src/pymerize/__pycache__
 
 sudo chmod 640 $(find config -type f)
 sudo chmod 750 $(find config -type d)

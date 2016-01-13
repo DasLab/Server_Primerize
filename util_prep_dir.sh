@@ -16,6 +16,4 @@ mkdir data/1d data/2d data/3d
 mkdir media/css/min
 mkdir media/js/admin/min media/js/public/min media/js/suit/min
 
-mkdir src/pymerize/__pycache__
-
 ./util_chmod.sh

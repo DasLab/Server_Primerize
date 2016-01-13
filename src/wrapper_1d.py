@@ -7,13 +7,15 @@ from datetime import datetime
 import random
 import re
 import simplejson
+import sys
 import threading
 import time
 import traceback
 
 from src.helper import *
 from src.models import *
-from src.pymerize.primerize_1d import *
+
+import primerize
 
 
 def design_1d(request):
@@ -94,7 +96,8 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         t0 = time.time()
         # time.sleep(15)
         if is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
-        assembly = Primer_Assembly(sequence, min_Tm, num_primers, min_length, max_length, tag)
+        assembly = primerize.Primer_Assembly(sequence, min_Tm, num_primers, min_length, max_length, tag)
+        assembly.design_primers()
         t_total = time.time() - t0
     except:
         t_total = time.time() - t0
@@ -103,7 +106,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         return create_err_html(job_id, t_total, 1)
 
     # when no solution found
-    if (not assembly.is_solution):
+    if (not assembly.is_success):
         html = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse" id="disp_job_id">%s</span></h4><button class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" disabled><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</button></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the advanced options. Possible solutions might be restricted by stringent options combination, especially by minimum Tm and # number of primers. Try again with relaxed the advanced options.</li><li>Certain input sequence, e.g. polyA or large repeats, might be intrinsically difficult for PCR assembly design.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact&nbsp;</a> us to track down the problem.</li></ul></p></div>' % (job_id)
         if job_id != ARG['DEMO_1D_ID']:
             job_entry = Design1D.objects.get(job_id=job_id)
@@ -133,7 +136,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         script += '<tr><td colspan="3" style="padding: 0px;"></td></tr></tbody></table></div></div></div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
 
         x = 0
-        for line in assembly.print_lines:
+        for line in assembly.assembly['print_lines']:
             if line[0] == '~':
                 script += '<br/><span class="label-white label-primary">' + line[1] + '</span>'
             elif line[0] == '=':
@@ -164,7 +167,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                     script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>')
             elif (line[0] == '$'):
                 if line[1].find('xxxx') != -1: 
-                    Tm = '%2.1f' % assembly.Tm_overlaps[x]
+                    Tm = '%2.1f' % assembly.assembly['Tm_overlaps'][x]
                     x += 1
                     script += line[1].replace('x' * len(Tm), '<kbd>%s</kbd>' % Tm)
                 elif '|' in line[1]:
