@@ -1,18 +1,64 @@
 # Primerize PCR Assembly Design Server
 
-This is the repository for **Primerize** PCR primer assembly design server. The release version of the server is freely accessible at [primerize.stanford.edu](http://primerize.stanford.edu).  
-<p align="center">
-  <img src="res/images/logo_primerize_2.png" alt="Primerize Logo" />
-</p>
-In brief, the Primerize server uses **CherryPy** framework based on **Python**. It calls **MATLAB** scripts in the [*NA_thermo*](https://github.com/DasLab/Primerize) package for calculation. The front-end uses [*jQuery*](http://jquery.com/) and [*Bootstrap*](http://getbootstrap.com/) javascript libraries.  
+<img src="https://primerize.stanford.edu/site_media/images/logo_primerize.png" alt="Primerize Logo" width="200" align="right">
 
-To run server, use:  
-```python
-python run_server.py release/dev
+This is the source code repository for **Primerize** PCR Primer Assembly Design **Server**. The production server is freely accessible at https://primerize.stanford.edu/.
+
+## Installation
+
+**Primerize Server** requires the following *Python* packages as dependencies, most of which can be installed through [`pip`](https://pip.pypa.io/).
+
+```json
+boto >= 2.38.0
+Django >= 1.9.1
+django-adminplus >= 0.5
+django-crontab >= 0.7.0
+django-environ >= 0.4.0
+django-filemanager == 0.0.2
+django-suit >= 0.2.15
+gviz-api.py == 1.8.2
+MySQL-python >= 1.2.5
+PyGithub >= 1.26.0
+pytz >= 2015.7
+requests >= 2.9.1
+simplejson >= 3.8.1
+
+primerize >= 1.1.0
 ```
 
-For comprehensive documentation, please visit the [`/admin`](http://primerize.stanford.edu/admin) page.
+The `primerize` package is available internally at https://github.com/DasLab/Primerize/.
 
----
-by *t47*, May 2015
+The `gviz-api.py` is available at https://github.com/google/google-visualization-python/.
+
+The `django-filemanager` is a modified version of https://github.com/IMGIITRoorkee/django-filemanager/. The source code is available internally. Install with `sudo python setup.py install`.
+
+**Primerize Server** also requires proper setup of `llvm`, `mysql.server`, `apache2`, `lib_wsgi`, `openssl`, `gdrive`, `awscli`, and `cron` jobs.
+
+Lastly, assets preparation is required for the 1st time through running `util_prep_dir.sh`, `util_system_version.sh`, `util_minify.sh`, `util_chmod.sh` and manually replacing `config/*.conf`. For full configuration, please refer to **Documentation**.
+
+
+## Usage
+
+To run the test/dev server, use:
+
+```bash
+cd path/to/server_primerize/repo
+python manage.py runserver
+```
+
+## Documentation
+
+Documentation is available at https://primerize.stanford.edu/admin/doc_django/.
+
+## License
+
+Copyright &copy; of **Primerize Server** source code is described in [LICENSE.md](https://github.com/DasLab/Server_Primerize/blob/master/LICENSE.md).
+
+## Reference
+
+>Tian, S., *et al.* (**2015**)<br/>
+>[Primerize: Automated Primer Assembly for Transcribing Interesting RNAs.](http://nar.oxfordjournals.org/content/43/W1/W522.full)<br/>
+>*Nucleic Acid Research* **43 (W1)**: W522-W526.
+
+by [**t47**](http://t47.io/), *Jan 2016*.
 

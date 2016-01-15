@@ -1,6 +1,6 @@
-## LICENSE for Primerize, v1.0
+## LICENSE for Primerize, v1.1
 
-1. Copyright &copy; 2008-2014 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. Permission to use, copy, and modify, (but not to distribute, transfer or sublicense), this software and its documentation for educational, research and non-profit purposes, without fee, and without a written agreement is hereby granted, provided that you comply with the following terms.  (To obtain a license for commercial use, please contact Ximena Ares at the Stanford Office of Technology Licensing: ximena.ares@stanford.edu, TE 650-724-0960)
+1. Copyright &copy; 2008-2016 The Board of Trustees of the Leland Stanford Junior University. All Rights Reserved. Permission to use, copy, and modify, (but not to distribute, transfer or sublicense), this software and its documentation for educational, research and non-profit purposes, without fee, and without a written agreement is hereby granted, provided that you comply with the following terms.  (To obtain a license for commercial use, please contact Ximena Ares at the Stanford Office of Technology Licensing: ximena.ares@stanford.edu, TE 650-724-0960)
 
 2. You agree to use this software solely for non-commercial internal research purposes and not for commercial use (which includes commercial research or consulting). You agree not to use this software for diagnosis, treatment, cure, prevention, or mitigation of disease or other conditions in man or other animals.  You agree to not distribute nor transfer this software to any other person.
 
