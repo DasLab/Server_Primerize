@@ -30,6 +30,9 @@ sudo chown ubuntu:www-data ../yuicompressor.jar
 sudo chmod 640 ../yuicompressor.jar
 if [ $(whoami) = "ubuntu" ];
 then
+	sudo chown root:ubuntu ../NA_Thermo/build ../NA_Thermo/deprecated_MATLAB ../NA_Thermo/dist ../NA_Thermo/primerize ../NA_Thermo/primerize.egg-info
+	sudo chmod 750 ../NA_Thermo/build ../NA_Thermo/deprecated_MATLAB ../NA_Thermo/dist ../NA_Thermo/primerize ../NA_Thermo/primerize.egg-info
 	sudo chown ubuntu:www-data ../NA_Thermo/LICENSE.md
-	sudo chmod 640 ../NA_Thermo/LICENSE.md
+	sudo chmod 640 ../NA_Thermo/*.md ../NA_Thermo/*.txt ../NA_Thermo/*.py
+
 fi
