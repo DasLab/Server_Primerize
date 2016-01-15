@@ -52,7 +52,11 @@ Documentation is available at https://primerize.stanford.edu/admin/doc_django/.
 
 ## License
 
-Copyright &copy; of **Primerize Server** source code is described in [LICENSE.md](https://github.com/DasLab/Server_Primerize/blob/master/LICENSE.md).
+Copyright &copy; 2014-2016: Das Lab, Department of Biochemistry, Stanford University. All Rights Reserved.
+
+**Primerize Server** source code is proprietary and confidential. Unauthorized copying of this repository, via any medium, is strictly prohibited.
+
+Copyright &copy; of **Primerize** source code is described in [LICENSE.md](https://github.com/DasLab/Primerize/blob/master/LICENSE.md).
 
 ## Reference
 
@@ -60,5 +64,5 @@ Copyright &copy; of **Primerize Server** source code is described in [LICENSE.md
 >[Primerize: Automated Primer Assembly for Transcribing Interesting RNAs.](http://nar.oxfordjournals.org/content/43/W1/W522.full)<br/>
 >*Nucleic Acid Research* **43 (W1)**: W522-W526.
 
-by [**t47**](http://t47.io/), *Jan 2016*.
+by [**t47**](http://t47.io/), *January 2016*.
 
