@@ -45,8 +45,7 @@ def design_2d_run(request):
         primers = re.sub('[^ACGTUacgtu\ \,]', '', primers)
         primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
         if not primers:
-            assembly = primerize.Primer_Assembly(sequence)
-            assembly.design_primers()
+            assembly = prm_1d.design(sequence)
             if assembly.is_success:
                 primers = assembly.primer_set
             else:
@@ -95,8 +94,7 @@ def demo_2d_run(request):
 
 def random_2d(request):
     sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
-    assembly = primerize.Primer_Assembly(sequence)
-    assembly.design_primers()
+    assembly = prm_1d.design(sequence)
     if assembly.is_success:
         primers = assembly.primer_set
     else:
@@ -122,15 +120,15 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
     try:
         t0 = time.time()
         # time.sleep(15)
-        plate = primerize.Mutate_Map(sequence, primer_set, offset, which_muts, which_lib, tag)
-        plate.mutate_primers()
+        plate = prm_2d.design(sequence, primer_set, offset, which_muts, which_lib, tag)
         if plate.is_success:
             dir_name = os.path.join(MEDIA_ROOT, 'data/2d/result_%s' % job_id)
-            if not os.path.exists(dir_name):
-                os.mkdir(dir_name)
-            plate.output_constructs(dir_name)
-            plate.output_spreadsheet(dir_name)
-            plate.output_layout(dir_name)
+            if not os.path.exists(dir_name): os.mkdir(dir_name)
+            plate.save('construct', path=dir_name)
+            plate.save('assembly', path=dir_name)
+            plate.save('table', path=dir_name)
+            plate.save('image', path=dir_name)
+
             zf = zipfile.ZipFile('%s/data/2d/result_%s.zip' % (MEDIA_ROOT, job_id), 'w', zipfile.ZIP_DEFLATED)
             for f in glob.glob('%s/data/2d/result_%s/*' % (MEDIA_ROOT, job_id)):
                 zf.write(f, os.path.basename(f))
@@ -160,14 +158,14 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
         json = {'plates': {}}
         flag = {}
-        for i in xrange(plate.N_plates):
+        for i in xrange(plate.get('N_PLATE')):
             flag[i + 1] = []
             json['plates'][i + 1] = {'primers': {}}
             script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><p class="lead">Plate # <span class="label label-orange">%d</span></p></div></div><div class="row">' % (i + 1)
 
-            for j in xrange(plate.N_primers):
-                primer_sequences = plate.plates[j][i]
-                num_primers_on_plate = primer_sequences.get_count()
+            for j in xrange(plate.get('N_PRIMER')):
+                primer_sequences = plate._data['plates'][j][i]
+                num_primers_on_plate = primer_sequences.get('count')
 
                 if num_primers_on_plate:
                     if num_primers_on_plate < 24:
@@ -177,8 +175,8 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                     script += '<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6"><div class="thumbnail"><div id="svg_plt_%d_prm_%d"></div><div class="caption"><p class="text-center center-block" style="margin-bottom:0px;"><i>Primer</i> <b>%d</b> %s</p></div></div></div>' % (i + 1, j + 1, j + 1, primer_suffix_html(j))
 
                     for k in xrange(96):
-                        if primer_sequences.data.has_key(k + 1):
-                            row = primer_sequences.data[k + 1]
+                        if primer_sequences._data.has_key(k + 1):
+                            row = primer_sequences._data[k + 1]
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': row[0], 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
                         else:
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
@@ -202,9 +200,10 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         else:
             script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
-        
-        start = plate.which_muts[0] + plate.offset - 1
-        end = plate.which_muts[-1] + plate.offset - 1
+
+        offset = plate.get('offset')        
+        start = plate.get('which_muts')[0] + offset - 1
+        end = plate.get('which_muts')[-1] + offset - 1
         fragments = []
         if start <= 20:
             fragments.append(plate.sequence[:start])
@@ -219,7 +218,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         else:
             fragments.append(plate.sequence[end + 1:end + 11] + '......' + plate.sequence[-10:])
         
-        labels = ['%d' % (1 - plate.offset), '%d' % plate.which_muts[0], '%d' % plate.which_muts[-1], '%d' % (len(plate.sequence) - plate.offset)]
+        labels = ['%d' % (1 - offset), '%d' % plate.get('which_muts')[0], '%d' % plate.get('which_muts')[-1], '%d' % (len(plate.sequence) - offset)]
         (illustration_1, illustration_2, illustration_3) = ('', '', '')
         if len(fragments[0]) >= len(labels[0]):
             illustration_1 += '<span class="label-white label-default" style="color:#c28fdd;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
@@ -256,9 +255,8 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
 
 
-        assembly = primerize.util.draw_assembly(plate.sequence, plate.primers, plate.name)
         x = 0
-        for line in assembly['print_lines']:
+        for line in plate._data['assembly'].print_lines:
             if line[0] == '~':
                 script += '<br/><span class="label-white label-primary">' + line[1] + '</span>'
             elif line[0] == '=':
@@ -289,7 +287,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                     script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>')
             elif (line[0] == '$'):
                 if line[1].find('xxxx') != -1: 
-                    Tm = '%2.1f' % assembly['Tm_overlaps'][x]
+                    Tm = '%2.1f' % plate._data['assembly'].Tm_overlaps[x]
                     x += 1
                     script += line[1].replace('x' * len(Tm), '<kbd>%s</kbd>' % Tm)
                 elif '|' in line[1]:
