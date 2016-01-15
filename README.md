@@ -2,7 +2,7 @@
 
 <img src="https://primerize.stanford.edu/site_media/images/logo_primerize.png" alt="Primerize Logo" width="200" align="right">
 
-This is the source code repository for **Primerize** PCR Primer Assembly Design **Server**. The production server is freely accessible at https://primerize.stanford.edu/.
+This is the _Source Code_ repository for **Primerize** PCR Primer Assembly Design **Server**. The production server is freely accessible at https://primerize.stanford.edu/.
 
 ## Installation
 
@@ -52,11 +52,11 @@ Documentation is available at https://primerize.stanford.edu/admin/doc_django/.
 
 ## License
 
-Copyright &copy; 2014-2016: Das Lab, Department of Biochemistry, Stanford University. All Rights Reserved.
+**Copyright &copy; 2014-2016: Das Lab, Stanford University. All Rights Reserved.**
 
-**Primerize Server** source code is proprietary and confidential. Unauthorized copying of this repository, via any medium, is strictly prohibited.
+**Primerize Server** _Source Code_ is proprietary and confidential. Unauthorized copying of this repository, via any medium, is strictly prohibited.
 
-Copyright &copy; of **Primerize** source code is described in [LICENSE.md](https://github.com/DasLab/Primerize/blob/master/LICENSE.md).
+Copyright &copy; of **Primerize** _Source Code_ is described in [LICENSE.md](https://github.com/DasLab/Primerize/blob/master/LICENSE.md).
 
 ## Reference
 

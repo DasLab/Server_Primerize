@@ -4,6 +4,8 @@ sudo chgrp -R www-data *
 sudo chown -R ubuntu *.py *.md *.txt src media config .gitignore
 sudo chown -R www-data backup data cache
 sudo chmod 640 *.py* *.md *.txt .gitignore
+sudo chmod 640 *.py* robots.txt .gitignore
+sudo chmod 600 *.md requirements.txt
 
 sudo chmod 640 $(find src -type f)
 sudo chmod 750 $(find src -type d)
@@ -26,3 +28,8 @@ sudo chmod -R 700 *.sh
 
 sudo chown ubuntu:www-data ../yuicompressor.jar
 sudo chmod 640 ../yuicompressor.jar
+if [ $(whoami) = "ubuntu" ];
+then
+	sudo chown ubuntu:www-data ../NA_Thermo/LICENSE.md
+	sudo chmod 640 ../NA_Thermo/LICENSE.md
+fi
