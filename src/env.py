@@ -58,6 +58,7 @@ class SYS_PATH(object):
             'protocol': MEDIA_ROOT + '/media/html/public_protocol.html',
             'license': MEDIA_ROOT + '/media/html/public_license.html',
             'download': MEDIA_ROOT + '/media/html/public_download.html',
+            'docs': MEDIA_ROOT + '/media/html/public_docs.html',
             'about': MEDIA_ROOT + '/media/html/public_about.html',
 
             'design_1d': MEDIA_ROOT + '/media/html/public_design_1d.html',

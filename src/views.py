@@ -30,6 +30,9 @@ def protocol(request):
 def license(request):
     return render_to_response(PATH.HTML_PATH['license'], {}, context_instance=RequestContext(request))
 
+def docs(request):
+    return render_to_response(PATH.HTML_PATH['docs'], {}, context_instance=RequestContext(request))
+
 def about(request):
     history_list = HistoryItem.objects.order_by('-date')
     return render_to_response(PATH.HTML_PATH['about'], {'history': history_list}, context_instance=RequestContext(request))
