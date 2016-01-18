@@ -106,6 +106,12 @@ def get_js(request):
     json = {'jquery':lines[9], 'bootstrap':lines[10], 'd3':lines[14], 'zclip':lines[15]}
     return HttpResponse(simplejson.dumps(json), content_type='application/json')
 
+def get_ver(request):
+    lines = open('%s/cache/stat_sys.txt' % MEDIA_ROOT, 'r').readlines()
+    lines = ''.join(lines).split('\t')
+    json = {'primerize':lines[37]}
+    return HttpResponse(simplejson.dumps(json), content_type='application/json')
+
 
 def error400(request):
     return render_to_response(PATH.HTML_PATH['400'], {}, context_instance=RequestContext(request))

@@ -92,6 +92,7 @@ else:
         url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=True)),
 
         url(r'^get_js/?$', views.get_js),
+        url(r'^get_ver/?$', views.get_ver),
         url(r'^get_user/?$', views.get_user),
         url(r'^get_admin/?$', views.get_admin),
 

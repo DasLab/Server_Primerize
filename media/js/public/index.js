@@ -15,6 +15,14 @@ function resize() {
 $(document).ready(function () {
   setTimeout(resize, 200);
 
+  $.ajax({
+    url : "/get_ver/",
+    dataType: "json",
+    success : function (data) {
+      $("#primerize_ver").html(data.primerize);
+    }
+  });
+
   $("#btn_retrieve").on("click", function () { $("#wait").fadeIn(1000); });
   $("#btn_retrieve").prop("disabled", true);
   $("#input_job_id").on("keyup", function () {
