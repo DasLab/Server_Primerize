@@ -1,0 +1,305 @@
+class primerize.Primerize_1D(MIN_TM=60.0, NUM_PRIMERS=0, MIN_LENGTH=15, MAX_LENGTH=60, COL_SIZE=142, WARN_CUTOFF=3, prefix='primer')
+	Construct a worker for 1D Primer Design (Simple Assembly).
+
+	Parameters:
+		- MIN_TM		float	(optional)	Minimum annealing temperature for overlapping regions. Unit in Celsius. Positive number only.
+		- NUM_PRIMERS   int		(optional)  Exact limit of number of primers in design. Non-negative even number only. 0 represents "No limit".
+		- MIN_LENGTH	int		(optional)	Minimum length allowed for each primer. Positive number only.
+		- MAX_LENGTH	int		(optional)	Maximum length allowed for each primer. Positive number only.
+		- COL_SIZE		int		(optional)  Column width for assembly output. Positive number only.
+		- WARN_CUTOFF	int		(optional)	Threshold of pairing region length for misprime warning. Positive number only.
+		- prefix		str		(optional)	Construct prefix/name.
+
+	Returns primerize.Primerize_1D object
+
+	Usage:
+		design(sequence, MIN_TM=None, NUM_PRIMERS=None, MIN_LENGTH=None, MAX_LENGTH=None, prefix=None)
+			Run design code to get a PCR Assembly solution for input sequence under specified conditions. Current worker parameters are used for nonspecified optional arguments.
+
+			Parameters:
+				- sequence 		str		(required)		Sequence for assembly design. Valid RNA/DNA sequence only, case insensitive.
+				- MIN_TM		float	(optional)		Minimum annealing temperature for overlapping regions.
+				- NUM_PRIMERS   int		(optional)  	Exact limit of number of primers in design. 
+				- MIN_LENGTH	int		(optional)		Minimum length allowed for each primer. 
+				- MAX_LENGTH	int		(optional)		Maximum length allowed for each primer. 
+				- prefix		str		(optional)		Construct prefix/name.) for details.
+
+			Returns primerize.Design_1D object
+
+		get(key)
+			Get current worker parameters.
+
+			Parameters:
+				- key		str		(required)		Keyword of parameter. Valid keywords are 'MIN_TM', 'NUM_PRIMERS', 'MIN_LENGTH', 'MAX_LENGTH', 'prefix'; case insensitive. Illegal keyword raises AttributeError()
+
+			Returns the value of specified keyword.
+
+		set(key, value)
+			Set current worker parameters.
+				- key 		str		(required)		Keyword of parameter. Valid keywords are the same as primerize_Primerize_1D.get(). Illegal keyword raises AttributeError()
+				- value		auto 	(required)		New value for specified keyword. Type of value must match keyword.  Illegal value raises ValueError()
+
+		reset()
+			Reset current worker parameters to default.
+
+
+
+class primerize.Primerize_2D(offset=0, which_muts=[], which_libs=[1], COL_SIZE=142, prefix='lib')
+	Construct a worker for 2D Primer Design (Mutate-and-Map Plates).
+
+	Parameters:
+		- offset		int 	(optional)	Sequence numbering offset, which is one minus the final number of the first nucleotide.
+		- which_muts	list(int)(optional) Array of mutation positions. Use numbering based on offset. When nonspecified, the entire sequence is included for mutagenesis.
+		- which_libs	list(int)(optional)	Array of mutation library choice. Valid choices are (0, 1, 2). Repeated elements are ignored.
+												0 represents 'A -> T, T -> A, C -> G, G -> C' library;
+												1 represents 'A -> C, T -> C, C -> A, G -> A' library;
+												2 represents 'A -> G, T -> G, C -> T, G -> T' library.
+		- COL_SIZE		int		(optional)  	Column width for assembly output. Positive number only.
+		- prefix		str		(optional)		Construct prefix/name.
+
+	Returns primerize.Primerize_2D object
+
+	Usage:
+		design(sequence, primer_set=[], offset=None, which_muts=None, which_libs=None, prefix=None)
+			Run design code to get library plates for input sequence according to specified library options. Current worker parameters are used for nonspecified optional arguments.
+
+			Parameters:
+				-sequence 		str		(required) 		Sequence for plate design. Valid RNA/DNA sequence only, case insensitive.
+				- primer_set	list(str)(optional)		List of primers to use for assembly. When nonspecified, solution from primerize_Primerize_1D.design() under default condition is used.
+				- which_muts	list(int)(optional)		Array of mutation positions.
+				- which_libs	list(int)(optional)		Array of mutation library choice.
+				- prefix		str		(optional)		Construct prefix/name.
+
+			Returns primerize.Design_2D object
+
+		get(key)
+			Get current worker parameters.
+
+			Parameters:
+				- key 		str			(required)		Keyword of parameter. Valid keywords are 'offset', 'which_muts', 'which_libs', 'COL_SIZE', 'prefix'; case insensitive. Illegal keyword raises AttributeError()
+
+			Returns the value of specified keyword.
+
+		set(key, value)
+			Set current worker parameters.
+				- key  		str			(required)		Keyword of parameter. Valid keywords are the same as primerize_Primerize_2D.get(). Illegal keyword raises AttributeError()
+				- value 	auto 		(required)		New value for specified keyword. Type of value must match keyword. Illegal value raises ValueError()
+
+		reset()
+			Reset current worker parameters to default.
+
+
+
+class primerize.Design_1D(sequence, name, is_success, primer_set, params, data)
+	Result of a primerize.Primerize_1D.design() run.
+
+	Parameters:
+		- sequence 		str		(required) 		Sequence of assembly design.
+		- name 			str		(required)		Construct prefix/name.
+		- is_success	bool	(required)		Flag for whether primerize.Primerize_1D.design() run successfully found a solution.
+		- primer_set 	list(str) (required) 	List of primers for assembly.
+		- params 		dict 	(required)		Dictionary of parameters used for this result. 
+		- data 			dict 	(required) 		Dictionary of result data.
+
+	Returns primerize.Design_1D object
+
+	Usage:
+		get(key)
+			Get result parameters.
+
+			Parameters:
+				- key 		str		(required)		Keyword of parameter. Valid keywords are 'MIN_TM', 'NUM_PRIMERS', 'MIN_LENGTH', 'MAX_LENGTH', 'COL_SIZE', 'WARN_CUTOFF', 'WARNING', 'PRIMER', 'MISPRIME'. Illegal keyword raises AttributeError().
+
+			Returns the value of specified keyword.
+
+		echo(key='')
+			Print part(s) of result in rich-text.
+
+			Parameters:
+				- key 		str		(optional)		Keyword of printing. Valid keywords are 'misprime', 'warning', 'primer', 'assembly'; case insensitive. When nonspecified,  result of all keywords is returned. Illegal keyword raises AttributeError(). If is_success = False, it raises UnboundLocalError().
+
+			Returns str of specified result.
+
+		save(path='./', name=None)
+			Save result to text file.
+
+			Parameters:
+				- path 		str		(optional) 		Path for file saving. Use either relative or absolute path.
+				- name 		ste 	(optional) 		Prefix/name for file name. When nonspecified, current object's name is used.
+
+	Attributes:
+		sequence 		str 	
+		name			str
+		is_success		bool
+		primer_set		list(str)
+		_params 		dict: {
+								'MIN_TM': float, 
+								'NUM_PRIMERS': int, 
+								'MIN_LENGTH': int, 
+								'MAX_LENGTH': int, 
+								'N_BP': int, 
+								'COL_SIZE': int, 
+								'WARN_CUTOFF': int
+								}
+		_data 			dict: {
+								'misprime_score': [str, str],
+								'assembly': primerize.util.Assembly, 
+								'warnings': list(list(int))
+								}
+
+
+
+class primerize.Design_2D(sequence, name, is_success, primeri_set, params, data)
+	Result of a primerize.Primerize_2D.design() run.
+
+	Parameters:
+		- sequence 		str		(required) 		Sequence of assembly design.
+		- name 			str		(required)		Construct prefix/name.
+		- is_success	bool	(required)		Flag for whether primerize.Primerize_1D.design() run successfully found a solution.
+		- primer_set 	list(str) (required) 	List of primers for assembly.
+		- params 		dict 	(required)		Dictionary of parameters used for this result. 
+		- data 			dict 	(required) 		Dictionary of result data.
+
+	Returns primerize.Design_2D object
+
+	Usage:
+		get(key)
+			Get result parameters.
+
+			Parameters:
+				- key 		str		(required)		Keyword of parameter. Valid keywords are 'offset', 'which_muts', 'which_libs', 'N_PRIMER', 'N_PLATE', 'N_CONSTRUCT', 'N_BP', 'PRIMER', 'CONSTRUCT'. Illegal keyword raises AttributeError().
+
+			Returns the value of specified keyword.
+
+		echo(key='')
+			Print part(s) of result in rich-text.
+
+			Parameters:
+				- key 		str		(optional)		Keyword of printing. Valid keywords are 'plate', 'assembly'; case insensitive. When nonspecified,  result of all keywords is returned. Illegal keyword raises AttributeError(). If is_success = False, it raises UnboundLocalError().
+
+			Returns str of specified result.
+
+		save(key='', path='./', name=None)
+			Save part(s) of result to file.
+
+			Parameters:
+				- key 		str		(optional)		Keyword of saving. Valid keywords are 'table', 'image', 'construct', 'assembly'; case insensitive. When nonspecified, files of all keywords are saved. Illegal keyword raises AttributeError(). If is_success = False, it raises UnboundLocalError().
+				- path 		str		(optional) 		Path for file saving. Use either relative or absolute path.
+				- name 		ste 	(optional) 		Prefix/name for file name. When nonspecified, current object's name is used.
+
+	Attributes:
+		sequence 		str 	
+		name			str
+		is_success		bool
+		primer_set		list(str)
+		_params 		dict: {
+								'offset': int, 
+								'which_muts': list(int),
+								'which_libs': list(int),
+								'N_PRIMER': int,
+								'N_PLATE': int,
+								'N_CONSTRUCT': int,
+								'N_BP': int
+								}
+		_data 			dict: {
+								'plates': list(list(primerize.util.Plate_96Well)),
+								'assembly': primerize.util.Assembly, 
+								'construct_names': list(str)
+								}
+
+
+
+class primerize.util.Assembly(sequence, primers, name, COL_SIZE=142)
+	Collection of result data essential for drawing an assembly scheme.
+
+	Parameters:
+		- sequence 		str		(required) 		Sequence of assembly design.
+		- primers 		list(list(int)) 		Numeric representation (end numbering and direction) of primers
+		- name 			str		(required)		Construct prefix/name.
+		- COL_SIZE 		int 	(optional)		Annealing temperatures of overlapping regions.
+
+	Returns primerize.util.Assembly object
+
+	Usage:
+		echo()
+			Print result in rich-text.   
+
+			Returns str of result.
+
+		save(path='./', name=None)
+			Save result to text file.
+
+			Parameters:
+				- path 		str		(optional) 		Path for file saving. Use either relative or absolute path.
+				- name 		ste 	(optional) 		Prefix/name for file name. When nonspecified, current object's name is used.
+
+
+
+class primerize.util.Plate_96Well()
+	Abstraction of 96-well plates.
+
+	Returns primerize.util.Plate_96Well
+
+	Usage:
+		echo(ref_primer='')
+			Print result in rich-text
+
+			Parameters:
+				- ref_primer 		list(str) 	(optional)		List of Wild-type primer_set for highlighting. If nonspecified, highlighting is disabled.
+
+			Returns str of result.
+
+		save(file_name='./', title='')
+			Save plate layout to image file.
+
+			Parameters:
+				- file_name 		str 		(optional) 		File name. Include path into file_name when specifying. Use either relative or absolute path.
+				- title 			str 		(optional) 		Title to display on image. LaTex not supported.
+
+		get(key)
+			Get data of a particular well or number of wells filled.
+
+			Parameters:
+				- key 			str 		(required) 			Keyword for query. Either use 'count' for numer of wells filled, or WellPosition (e.g. 'A1') for well data. Illegal keyword or WellPosition (out of range(0, 96) + 1) raises AttributeError(). Nonexisted coord keyword raises KeyError().
+
+			Returns the data of specified keyword.
+
+		set(coord, tag, primer)
+			Record data of a particular well.
+
+			Parameters:
+				- coord 		str 		(required) 			WellPosition for data. Use same range as primerize.util.Plate_96Well().get(). Existing data for the same well is overwritten. Illegal WellPosition raises AttributeError().
+				- tag 			str 		(required) 			Name tag of well.
+				- primer 		str 		(required) 			Primer seuqence of well. Use sense-strand.
+
+		reset()
+			Reset current worker parameters to default.
+
+	Attributes:
+		coords 		set(str)
+		_data 		dict: {
+						str: tuple(str, str),
+						WellPosition: (tag, primer)
+						}
+
+
+class primerize.thermo.Nearest_Neighbor()
+	Wrapper object of Nearest Neighbor parameters; for internal use.
+
+	Returns primerize.thermo.Nearest_Neighbor
+
+	Attributes:
+		T 							float 
+		delH_NN						numpy.array(float(4, 4))
+		delS_NN 					numpy.array(float(4, 4))
+		delG_NN 					numpy.array(float(4, 4))
+		delH_AT_closing_penalty 	numpy.array(float(1, 4))
+		delS_AT_closing_penalty 	numpy.array(float(1, 4))
+		delG_AT_closing_penalty 	numpy.array(float(1, 4))
+		delH_mismatch				numpy.array(float(4, 4, 4))
+		delS_mismatch				numpy.array(float(4, 4, 4))
+		delG_mismatch				numpy.array(float(4, 4, 4))
+		delH_init					float
+		delS_init					float
+
+
