@@ -135,6 +135,8 @@
           <br/>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <p class="indent_1 lead">Current <code>primerize</code> version = <kbd id="primerize_ver"></kbd></p>
+              <br/>
               <p class="indent_1">To install <code>primerize</code>, simply:</p>
               <pre class="indent_2">    <span class="bash_key">cd</span> <span class="bash_cmd">path/to/primerize/repo</span>
     python <span class="bash_cmd">setup.py</span> <span class="bash_ver">install</span></pre>
@@ -1195,5 +1197,16 @@
 {% block script %}
   <link rel="stylesheet" href="/site_media/css/{{DEBUG_DIR}}code{{DEBUG_STR}}.css" />
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}tutorial{{DEBUG_STR}}.js"></script>  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $.ajax({
+        url : "/get_ver/",
+        dataType: "json",
+        success : function (data) {
+          $("#primerize_ver").html(data.primerize);
+        }
+      });
+    });
+  </script>
 {% endblock %}
 
