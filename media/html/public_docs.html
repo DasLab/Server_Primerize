@@ -21,7 +21,7 @@
 
 <div class="" id="categories">
   <div class="row">
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="side">
+    <div class="col-lg-2 col-md-2 hidden-sm hidden-xs" id="side">
       <div id="side_con">
         <div class="panel panel-warning" id="sidebar" data-spy="affix">
           <div class="panel-heading">
@@ -167,1021 +167,1029 @@
           <br/>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <p id="primerize_1d"><span class="code code_class">class</span> <code>primerize.Primerize_1D</code>(<mark>MIN_TM</mark>=<i class="code code_const">60.0</i>, <mark>NUM_PRIMERS</mark>=<i class="code code_const">0</i>, <mark>MIN_LENGTH</mark>=<i class="code code_const">15</i>, <mark>MAX_LENGTH</mark>=<i class="code code_const">60</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>WARN_CUTOFF</mark>=<i class="code code_const">3</i>, <mark>prefix</mark>=<i class="code code_const">'primer'</i>)</p>
-              <p class="indent_1">Construct a worker for 1D Primer Design (Simple Assembly).</p>
-              <br/>
+              <div id="primerize_1d">
+                <p><span class="code code_class">class</span> <code>primerize.Primerize_1D</code>(<mark>MIN_TM</mark>=<i class="code code_const">60.0</i>, <mark>NUM_PRIMERS</mark>=<i class="code code_const">0</i>, <mark>MIN_LENGTH</mark>=<i class="code code_const">15</i>, <mark>MAX_LENGTH</mark>=<i class="code code_const">60</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>WARN_CUTOFF</mark>=<i class="code code_const">3</i>, <mark>prefix</mark>=<i class="code code_const">'primer'</i>)</p>
+                <p class="indent_1">Construct a worker for 1D Primer Design (Simple Assembly).</p>
+                <br/>
 
-              <p class="indent_1"><b>Parameters</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>MIN_TM</mark></td>
-                    <td><span class="code code_type">float</span></td>
-                    <td><i>(Optional)</i> Minimum annealing temperature for overlapping regions. <u>Unit in Celsius. Positive number only.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>NUM_PRIMERS</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Exact limit of number of primers in design. <u>Non-negative even number only.</u> <i class="code code_const">0</i> represents "No limit".</td>
-                  </tr>
-                  <tr>
-                    <td><mark>MIN_LENGTH</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Minimum length allowed for each primer. <u>Positive number only.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>MAX_LENGTH</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Maximum length allowed for each primer. <u>Positive number only.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>COL_SIZE</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Column width for assembly output. <u>Positive number only.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>WARN_CUTOFF</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Threshold of pairing region length for misprime warning. <u>Positive number only.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>prefix</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Construct prefix/name.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>MIN_TM</mark></td>
+                      <td><span class="code code_type">float</span></td>
+                      <td><i>(Optional)</i> Minimum annealing temperature for overlapping regions. <u>Unit in Celsius. Positive number only.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>NUM_PRIMERS</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Exact limit of number of primers in design. <u>Non-negative even number only.</u> <i class="code code_const">0</i> represents "No limit".</td>
+                    </tr>
+                    <tr>
+                      <td><mark>MIN_LENGTH</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Minimum length allowed for each primer. <u>Positive number only.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>MAX_LENGTH</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Maximum length allowed for each primer. <u>Positive number only.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>COL_SIZE</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Column width for assembly output. <u>Positive number only.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>WARN_CUTOFF</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Threshold of pairing region length for misprime warning. <u>Positive number only.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>prefix</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_1D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Methods</b>:</p>
-              <p class="indent_2">
-                <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>MIN_TM</mark>=<i class="code code_none">None</i>, <mark>NUM_PRIMERS</mark>=<i class="code code_none">None</i>, <mark>MIN_LENGTH</mark>=<i class="code code_none">None</i>, <mark>MAX_LENGTH</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>)
-              </p>
-              <p class="indent_3">Run design code to get a PCR Assembly solution for input sequence under specified conditions. Current worker parameters are used for nonspecified optional arguments.</p>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_1D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
+                <p class="indent_2">
+                  <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>MIN_TM</mark>=<i class="code code_none">None</i>, <mark>NUM_PRIMERS</mark>=<i class="code code_none">None</i>, <mark>MIN_LENGTH</mark>=<i class="code code_none">None</i>, <mark>MAX_LENGTH</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>)
+                </p>
+                <p class="indent_3">Run design code to get a PCR Assembly solution for input sequence under specified conditions. Current worker parameters are used for nonspecified optional arguments.</p>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Sequence for assembly design. <u>Valid RNA/DNA sequence only, case insensitive.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>MIN_TM</mark></td>
-                    <td><span class="code code_type">float</span></td>
-                    <td><i>(Optional)</i> Minimum annealing temperature for overlapping regions.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>NUM_PRIMERS</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Exact limit of number of primers in design.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>MIN_LENGTH</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Minimum length allowed for each primer.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>MAX_LENGTH</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Maximum length allowed for each primer.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>prefix</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Construct prefix/name.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: <code>primerize.Design_1D</code> <span class="code code_class">object</span>.</p>
-              <br/>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Sequence for assembly design. <u>Valid RNA/DNA sequence only, case insensitive.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>MIN_TM</mark></td>
+                      <td><span class="code code_type">float</span></td>
+                      <td><i>(Optional)</i> Minimum annealing temperature for overlapping regions.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>NUM_PRIMERS</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Exact limit of number of primers in design.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>MIN_LENGTH</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Minimum length allowed for each primer.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>MAX_LENGTH</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Maximum length allowed for each primer.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>prefix</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <code>primerize.Design_1D</code> <span class="code code_class">object</span>.</p>
+                <br/>
 
-              <p class="indent_2">
-                <span class="code code_method">get</span>(<mark>key</mark>)
-              </p>
-              <p class="indent_3">Get current worker parameters.</p>
+                <p class="indent_2">
+                  <span class="code code_method">get</span>(<mark>key</mark>)
+                </p>
+                <p class="indent_3">Get current worker parameters.</p>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'MIN_TM'</span>, <span class="code code_const">'NUM_PRIMERS'</span>, <span class="code code_const">'MIN_LENGTH'</span>, <span class="code code_const">'MAX_LENGTH'</span>, <span class="code code_const">'prefix'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
-              <br/>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'MIN_TM'</span>, <span class="code code_const">'NUM_PRIMERS'</span>, <span class="code code_const">'MIN_LENGTH'</span>, <span class="code code_const">'MAX_LENGTH'</span>, <span class="code code_const">'prefix'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
+                <br/>
 
-              <p class="indent_2">
-                <span class="code code_method">set</span>(<mark>key</mark>, <mark>value</mark>)
-              </p>
-              <p class="indent_3">Set current worker parameters.</p>
+                <p class="indent_2">
+                  <span class="code code_method">set</span>(<mark>key</mark>, <mark>value</mark>)
+                </p>
+                <p class="indent_3">Set current worker parameters.</p>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_1D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>value</mark></td>
-                    <td><span class="code code_type">(auto)</span></td>
-                    <td><i>(Required)</i> New value for specified <mark>keyword</mark>. <u>Type of value must match <mark>keyword</mark>.</u> Illegal <mark>value</mark> raises <span class="code code_error">ValueError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_1D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>value</mark></td>
+                      <td><span class="code code_type">(auto)</span></td>
+                      <td><i>(Required)</i> New value for specified <mark>keyword</mark>. <u>Type of value must match <mark>keyword</mark>.</u> Illegal <mark>value</mark> raises <span class="code code_error">ValueError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_2">
-                <span class="code code_method">reset</span>()
-              </p>
-              <p class="indent_3">Reset current worker parameters to default.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">reset</span>()
+                </p>
+                <p class="indent_3">Reset current worker parameters to default.</p>
+                <br/>
+              </div>
               <hr/>
 
+              <div id="primerize_2d">
+                <p><span class="code code_class">class</span> <code>primerize.Primerize_2D</code>(<mark>offset</mark>=<i class="code code_const">0</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>which_libs</mark>=<i class="code code_const">[1]</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>prefix</mark>=<i class="code code_const">'lib'</i>)</p>
+                <p class="indent_1">Construct a worker for 2D Primer Design (Mutate-and-Map Plates).</p>
+                <br/>
 
-              <p id="primerize_2d"><span class="code code_class">class</span> <code>primerize.Primerize_2D</code>(<mark>offset</mark>=<i class="code code_const">0</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>which_libs</mark>=<i class="code code_const">[1]</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>prefix</mark>=<i class="code code_const">'lib'</i>)</p>
-              <p class="indent_1">Construct a worker for 2D Primer Design (Mutate-and-Map Plates).</p>
-              <br/>
+                <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>offset</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Sequence numbering offset, which is <abbr title="offset">one minus the final number of the first nucleotide</abbr>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_muts</mark></td>
+                      <td><span class="code code_type">list(int)</span></td>
+                      <td><i>(Optional)</i> Array of mutation positions. <u>Use numbering based on offset.</u> When nonspecified, the entire sequence is included for mutagenesis.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_libs</mark></td>
+                      <td><span class="code code_type">list(int)</span></td>
+                      <td>
+                        <i>(Optional)</i> Array of mutation library choice. <u>Valid choices are <span class="code code_const">(0, 1, 2)</span></u>. Repeated elements are ignored.
+                        <br/>
+                        <ul>
+                          <li><span class="code code_const">0</span> represents <kbd>A -> T, T -> A, C -> G, G -> C</kbd> library;</li>
+                          <li><span class="code code_const">1</span> represents <kbd>A -> C, T -> C, C -> A, G -> A</kbd> library;</li>
+                          <li><span class="code code_const">2</span> represents <kbd>A -> G, T -> G, C -> T, G -> T</kbd> library.</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr/>
+                      <td><mark>COL_SIZE</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Column width for assembly output. <u>Positive number only.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>prefix</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_1"><b>Parameters</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>offset</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Sequence numbering offset, which is <abbr title="offset">one minus the final number of the first nucleotide</abbr>.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>which_muts</mark></td>
-                    <td><span class="code code_type">list(int)</span></td>
-                    <td><i>(Optional)</i> Array of mutation positions. <u>Use numbering based on offset.</u> When nonspecified, the entire sequence is included for mutagenesis.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>which_libs</mark></td>
-                    <td><span class="code code_type">list(int)</span></td>
-                    <td>
-                      <i>(Optional)</i> Array of mutation library choice. <u>Valid choices are <span class="code code_const">(0, 1, 2)</span></u>. Repeated elements are ignored.
-                      <br/>
-                      <ul>
-                        <li><span class="code code_const">0</span> represents <kbd>A -> T, T -> A, C -> G, G -> C</kbd> library;</li>
-                        <li><span class="code code_const">1</span> represents <kbd>A -> C, T -> C, C -> A, G -> A</kbd> library;</li>
-                        <li><span class="code code_const">2</span> represents <kbd>A -> G, T -> G, C -> T, G -> T</kbd> library.</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr/>
-                    <td><mark>COL_SIZE</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Column width for assembly output. <u>Positive number only.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>prefix</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Construct prefix/name.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_2D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
+                <p class="indent_2">
+                  <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<span class="code code_const">[]</span>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>)
+                </p>
+                <p class="indent_3">Run design code to get library plates for input sequence according to specified library options. Current worker parameters are used for nonspecified optional arguments.</p>
 
-              <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_2D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Methods</b>:</p>
-              <p class="indent_2">
-                <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<span class="code code_const">[]</span>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>)
-              </p>
-              <p class="indent_3">Run design code to get library plates for input sequence according to specified library options. Current worker parameters are used for nonspecified optional arguments.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Sequence for assembly design. <u>Valid RNA/DNA sequence only, case insensitive.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>primer_set</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Optional)</i> List of primers to use for assembly. When nonspecified, solution from <code>primerize_Primerize_1D.design</code> under default condition is used.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>offset</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Sequence numbering offset.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_muts</mark></td>
+                      <td><span class="code code_type">list(int)</span></td>
+                      <td><i>(Optional)</i> Array of mutation positions.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_libs</mark></td>
+                      <td><span class="code code_type">list(int)</span></td>
+                      <td><i>(Optional)</i> Array of mutation library choice.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>prefix</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <code>primerize.Design_2D</code> <span class="code code_class">object</span>.</p>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Sequence for assembly design. <u>Valid RNA/DNA sequence only, case insensitive.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>primer_set</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                    <td><i>(Optional)</i> List of primers to use for assembly. When nonspecified, solution from <code>primerize_Primerize_1D.design</code> under default condition is used.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>offset</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Sequence numbering offset.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>which_muts</mark></td>
-                    <td><span class="code code_type">list(int)</span></td>
-                    <td><i>(Optional)</i> Array of mutation positions.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>which_libs</mark></td>
-                    <td><span class="code code_type">list(int)</span></td>
-                    <td><i>(Optional)</i> Array of mutation library choice.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>prefix</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Construct prefix/name.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: <code>primerize.Design_2D</code> <span class="code code_class">object</span>.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">get</span>(<mark>key</mark>)
+                </p>
+                <p class="indent_3">Get current worker parameters.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">get</span>(<mark>key</mark>)
-              </p>
-              <p class="indent_3">Get current worker parameters.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_libs'</span>, <span class="code code_const">'COL_SIZE  '</span>, <span class="code code_const">'prefix'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_libs'</span>, <span class="code code_const">'COL_SIZE  '</span>, <span class="code code_const">'prefix'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">set</span>(<mark>key</mark>, <mark>value</mark>)
+                </p>
+                <p class="indent_3">Set current worker parameters.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">set</span>(<mark>key</mark>, <mark>value</mark>)
-              </p>
-              <p class="indent_3">Set current worker parameters.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_2D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>value</mark></td>
+                      <td><span class="code code_type">(auto)</span></td>
+                      <td><i>(Required)</i> New value for specified <mark>keyword</mark>. <u>Type of value must match <mark>keyword</mark>.</u> Illegal <mark>value</mark> raises <span class="code code_error">ValueError</span>.</td>
+                    </tr>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_2D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>value</mark></td>
-                    <td><span class="code code_type">(auto)</span></td>
-                    <td><i>(Required)</i> New value for specified <mark>keyword</mark>. <u>Type of value must match <mark>keyword</mark>.</u> Illegal <mark>value</mark> raises <span class="code code_error">ValueError</span>.</td>
-                  </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-
-              <p class="indent_2">
-                <span class="code code_method">reset</span>()
-              </p>
-              <p class="indent_3">Reset current worker parameters to default.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">reset</span>()
+                </p>
+                <p class="indent_3">Reset current worker parameters to default.</p>
+                <br/>
+              </div>
               <hr/>
 
+              <div id="design_1d">
+                <p><span class="code code_class">class</span> <code>primerize.Design_1D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
+                <p class="indent_1">Result of a <code>primerize.Primerize_1D.design</code> run.</p>
+                <br/>
 
-              <p id="design_1d"><span class="code code_class">class</span> <code>primerize.Design_1D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
-              <p class="indent_1">Result of a <code>primerize.Primerize_1D.design</code> run.</p>
-              <br/>
+                <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Sequence of assembly design.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>is_success</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Required)</i> Flag for whether <code>primerize.Primerize_1D.design</code> run successfully found a solution.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>primer_set</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Required)</i> List of primers for assembly.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>params</mark></td>
+                      <td><span class="code code_type">dict</span></td>
+                      <td><i>(Required)</i> Dictionary of parameters used for this result.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>data</mark></td>
+                      <td><span class="code code_type">dict</span></td>
+                      <td><i>(Required)</i> Dictionary of result data.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_1"><b>Parameters</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Sequence of assembly design.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Construct prefix/name.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>is_success</mark></td>
-                    <td><span class="code code_type">bool</span></td>
-                    <td><i>(Required)</i> Flag for whether <code>primerize.Primerize_1D.design</code> run successfully found a solution.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>primer_set</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                    <td><i>(Required)</i> List of primers for assembly.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>params</mark></td>
-                    <td><span class="code code_type">dict</span></td>
-                    <td><i>(Required)</i> Dictionary of parameters used for this result.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>data</mark></td>
-                    <td><span class="code code_type">dict</span></td>
-                    <td><i>(Required)</i> Dictionary of result data.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.Design_1D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
 
-              <p class="indent_1"><b>Returns</b>: <code>primerize.Design_1D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Methods</b>:</p>
+                <p class="indent_2">
+                  <span class="code code_method">get</span>(<mark>key</mark>)
+                </p>
+                <p class="indent_3">Get result parameters.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">get</span>(<mark>key</mark>)
-              </p>
-              <p class="indent_3">Get result parameters.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'MIN_TM'</span>, <span class="code code_const">'NUM_PRIMERS'</span>, <span class="code code_const">'MIN_LENGTH'</span>, <span class="code code_const">'MAX_LENGTH'</span>, <span class="code code_const">'COL_SIZE'</span>, <span class="code code_const">'WARN_CUTOFF'</span>, <span class="code code_const">'WARNING'</span>, <span class="code code_const">'PRIMER'</span>, <span class="code code_const">'MISPRIME'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'MIN_TM'</span>, <span class="code code_const">'NUM_PRIMERS'</span>, <span class="code code_const">'MIN_LENGTH'</span>, <span class="code code_const">'MAX_LENGTH'</span>, <span class="code code_const">'COL_SIZE'</span>, <span class="code code_const">'WARN_CUTOFF'</span>, <span class="code code_const">'WARNING'</span>, <span class="code code_const">'PRIMER'</span>, <span class="code code_const">'MISPRIME'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">echo</span>(<mark>key</mark>=<i class="code code_const">''</i>)
+                </p>
+                <p class="indent_3">Print part(s) of result in rich-text.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">echo</span>(<mark>key</mark>=<i class="code code_const">''</i>)
-              </p>
-              <p class="indent_3">Print part(s) of result in rich-text.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'misprime'</span>, <span class="code code_const">'warning'</span>, <span class="code code_const">'primer'</span>, <span class="code code_const">'assembly'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of specified result.</p>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'misprime'</span>, <span class="code code_const">'warning'</span>, <span class="code code_const">'primer'</span>, <span class="code code_const">'assembly'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of specified result.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">save</span>(<mark>path</mark>=<i class="code code_const">'./'</i>, <mark>name</mark>=<i class="code code_none">None</i>)
+                </p>
+                <p class="indent_3">Save result to text file.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">save</span>(<mark>path</mark>=<i class="code code_const">'./'</i>, <mark>name</mark>=<i class="code code_none">None</i>)
-              </p>
-              <p class="indent_3">Save result to text file.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>path</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Path for file saving. <u>Use either relative or absolute path.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Prefix/name for file name. When nonspecified, current object's name is used.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>path</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Path for file saving. <u>Use either relative or absolute path.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Prefix/name for file name. When nonspecified, current object's name is used.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-
-              <p class="indent_1"><b>Attributes</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
-                    <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>is_success</mark></td>
-                    <td><span class="code code_type">bool</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>primer_set</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>_params</mark></td>
-                    <td><span class="code code_type">dict</span>: { <span class="code code_json">'MIN_TM'</span>: <span class="code code_type">float</span>, <span class="code code_json">'NUM_PRIMERS'</span>: <span class="code code_type">int</span>, <span class="code code_json">'MIN_LENGTH'</span>: <span class="code code_type">int</span>, <span class="code code_json">'MAX_LENGTH'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_BP'</span>: <span class="code code_type">int</span>, <span class="code code_json">'COL_SIZE'</span>: <span class="code code_type">int</span>, <span class="code code_json">'WARN_CUTOFF'</span>: <span class="code code_type">int</span> }</td>
-                  </tr>
-                  <tr>
-                    <td><mark>_data</mark></td>
-                    <td><span class="code code_type">dict</span>: { <span class="code code_json">'misprime_score'</span>: <span class="code code_type">[str, str]</span>, <span class="code code_json">'warnings'</span>: <span class="code code_type">list(list(int))</span>, <span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code> }</td>
-                  </tr>
-                  <tr><td colspan="2"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Attributes</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
+                      <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>is_success</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>primer_set</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>_params</mark></td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'MIN_TM'</span>: <span class="code code_type">float</span>, <span class="code code_json">'NUM_PRIMERS'</span>: <span class="code code_type">int</span>, <span class="code code_json">'MIN_LENGTH'</span>: <span class="code code_type">int</span>, <span class="code code_json">'MAX_LENGTH'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_BP'</span>: <span class="code code_type">int</span>, <span class="code code_json">'COL_SIZE'</span>: <span class="code code_type">int</span>, <span class="code code_json">'WARN_CUTOFF'</span>: <span class="code code_type">int</span> }</td>
+                    </tr>
+                    <tr>
+                      <td><mark>_data</mark></td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'misprime_score'</span>: <span class="code code_type">[str, str]</span>, <span class="code code_json">'warnings'</span>: <span class="code code_type">list(list(int))</span>, <span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code> }</td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                  </tbody>
+                </table>
+              </div>
               <hr/>
 
+              <div id="design_2d">
+                <p><span class="code code_class">class</span> <code>primerize.Design_2D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
+                <p class="indent_1">Result of a <code>primerize.Primerize_2D.design</code> run.</p>
+                <br/>
 
-              <p id="design_2d"><span class="code code_class">class</span> <code>primerize.Design_2D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
-              <p class="indent_1">Result of a <code>primerize.Primerize_2D.design</code> run.</p>
-              <br/>
+                <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Sequence of assembly design.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>is_success</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Required)</i> Flag for whether <code>primerize.Primerize_2D.design</code> run successfully found a solution.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>primer_set</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Required)</i> List of primers for assembly.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>params</mark></td>
+                      <td><span class="code code_type">dict</span></td>
+                      <td><i>(Required)</i> Dictionary of parameters used for this result.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>data</mark></td>
+                      <td><span class="code code_type">dict</span></td>
+                      <td><i>(Required)</i> Dictionary of result data.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_1"><b>Parameters</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Sequence of assembly design.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Construct prefix/name.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>is_success</mark></td>
-                    <td><span class="code code_type">bool</span></td>
-                    <td><i>(Required)</i> Flag for whether <code>primerize.Primerize_2D.design</code> run successfully found a solution.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>primer_set</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                    <td><i>(Required)</i> List of primers for assembly.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>params</mark></td>
-                    <td><span class="code code_type">dict</span></td>
-                    <td><i>(Required)</i> Dictionary of parameters used for this result.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>data</mark></td>
-                    <td><span class="code code_type">dict</span></td>
-                    <td><i>(Required)</i> Dictionary of result data.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.Design_2D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
 
-              <p class="indent_1"><b>Returns</b>: <code>primerize.Design_2D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Methods</b>:</p>
+                <p class="indent_2">
+                  <span class="code code_method">get</span>(<mark>key</mark>)
+                </p>
+                <p class="indent_3">Get result parameters.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">get</span>(<mark>key</mark>)
-              </p>
-              <p class="indent_3">Get result parameters.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_libs'</span>, <span class="code code_const">'N_PRIMER'</span>, <span class="code code_const">'N_PLATE'</span>, <span class="code code_const">'N_CONSTRUCT'</span>, <span class="code code_const">'N_BP'</span>, <span class="code code_const">'PRIMER'</span>, <span class="code code_const">'CONSTRUCT'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_libs'</span>, <span class="code code_const">'N_PRIMER'</span>, <span class="code code_const">'N_PLATE'</span>, <span class="code code_const">'N_CONSTRUCT'</span>, <span class="code code_const">'N_BP'</span>, <span class="code code_const">'PRIMER'</span>, <span class="code code_const">'CONSTRUCT'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">echo</span>(<mark>key</mark>=<i class="code code_const">''</i>)
+                </p>
+                <p class="indent_3">Print part(s) of result in rich-text.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">echo</span>(<mark>key</mark>=<i class="code code_const">''</i>)
-              </p>
-              <p class="indent_3">Print part(s) of result in rich-text.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of specified result.</p>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of specified result.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">save</span>(<mark>key</mark>=<i class="code code_const">''</i>, <mark>path</mark>=<i class="code code_const">'./'</i>, <mark>name</mark>=<i class="code code_none">None</i>)
+                </p>
+                <p class="indent_3">Save result to text file.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">save</span>(<mark>key</mark>=<i class="code code_const">''</i>, <mark>path</mark>=<i class="code code_const">'./'</i>, <mark>name</mark>=<i class="code code_none">None</i>)
-              </p>
-              <p class="indent_3">Save result to text file.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Keyword of saving. <u>Valid keywords are <span class="code code_const">'table'</span>, <span class="code code_const">'image'</span>, <span class="code code_const">'construct'</span>, <span class="code code_const">'assembly'</span>; case insensitive.</u> When nonspecified, files of all keywords are saved. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>path</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Path for file saving. <u>Use either relative or absolute path.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Prefix/name for file name. When nonspecified, current object's name is used.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Keyword of saving. <u>Valid keywords are <span class="code code_const">'table'</span>, <span class="code code_const">'image'</span>, <span class="code code_const">'construct'</span>, <span class="code code_const">'assembly'</span>; case insensitive.</u> When nonspecified, files of all keywords are saved. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>path</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Path for file saving. <u>Use either relative or absolute path.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Prefix/name for file name. When nonspecified, current object's name is used.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-
-              <p class="indent_1"><b>Attributes</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
-                    <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>is_success</mark></td>
-                    <td><span class="code code_type">bool</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>primer_set</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>_params</mark></td>
-                    <td><span class="code code_type">dict</span>: { <span class="code code_json">'offset'</span>: <span class="code code_type">int</span>, <span class="code code_json">'which_muts'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'which_libs'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'N_PRIMER'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_PLATE'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_CONSTRUCT'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_BP'</span>: <span class="code code_type">int</span> }</td>
-                  </tr>
-                  <tr>
-                    <td><mark>_data</mark></td>
-                    <td><span class="code code_type">dict</span>: { <span class="code code_json">'construct_names'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'plates'</span>: <span class="code code_type">list(list(<code>primerize.util.Plate_96Well</code>))</span>, <span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code> }</td>
-                  </tr>
-                  <tr><td colspan="2"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Attributes</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
+                      <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>is_success</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>primer_set</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>_params</mark></td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'offset'</span>: <span class="code code_type">int</span>, <span class="code code_json">'which_muts'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'which_libs'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'N_PRIMER'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_PLATE'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_CONSTRUCT'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_BP'</span>: <span class="code code_type">int</span> }</td>
+                    </tr>
+                    <tr>
+                      <td><mark>_data</mark></td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'construct_names'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'plates'</span>: <span class="code code_type">list(list(<code>primerize.util.Plate_96Well</code>))</span>, <span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code> }</td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                  </tbody>
+                </table>
+              </div>
               <hr/>
 
+              <div id="assembly">
+                <p><span class="code code_class">class</span> <code>primerize.util.Assembly</code>(<mark>sequence</mark>, <mark>primers</mark>, <mark>name</mark>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>)</p>
+                <p class="indent_1">Collection of result data essential for drawing an assembly scheme.</p>
+                <br/>
 
-              <p id="assembly"><span class="code code_class">class</span> <code>primerize.util.Assembly</code>(<mark>sequence</mark>, <mark>primers</mark>, <mark>name</mark>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>)</p>
-              <p class="indent_1">Collection of result data essential for drawing an assembly scheme.</p>
-              <br/>
+                <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Sequence of assembly design.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>primers</mark></td>
+                      <td><span class="code code_type">list(list(int))</span></td>
+                      <td><i>(Required)</i> Numeric representation (end numbering and direction) of primers.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>COL_SIZE</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Column width for assembly output. <u>Positive number only.</u></td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_1"><b>Parameters</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Sequence of assembly design.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>primers</mark></td>
-                    <td><span class="code code_type">list(list(int))</span></td>
-                    <td><i>(Required)</i> Numeric representation (end numbering and direction) of primers.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Construct prefix/name.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>COL_SIZE</mark></td>
-                    <td><span class="code code_type">int</span></td>
-                    <td><i>(Optional)</i> Column width for assembly output. <u>Positive number only.</u></td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.util.Assembly</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
 
-              <p class="indent_1"><b>Returns</b>: <code>primerize.util.Assembly</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Methods</b>:</p>
+                <p class="indent_2">
+                  <span class="code code_method">echo</span>()
+                </p>
+                <p class="indent_3">Print result in rich-text.</p>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
+                <br/>
 
-              <p class="indent_2">
-                <span class="code code_method">echo</span>()
-              </p>
-              <p class="indent_3">Print result in rich-text.</p>
-              <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">save</span>(<mark>path</mark>=<i class="code code_const">'./'</i>, <mark>name</mark>=<i class="code code_none">None</i>)
+                </p>
+                <p class="indent_3">Save result to text file.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">save</span>(<mark>path</mark>=<i class="code code_const">'./'</i>, <mark>name</mark>=<i class="code code_none">None</i>)
-              </p>
-              <p class="indent_3">Save result to text file.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>path</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Path for file saving. <u>Use either relative or absolute path.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Prefix/name for file name. When nonspecified, current object's name is used.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>path</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Path for file saving. <u>Use either relative or absolute path.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Prefix/name for file name. When nonspecified, current object's name is used.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-
-              <p class="indent_1"><b>Attributes</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
-                    <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>sequence</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>primers</mark></td>
-                    <td><span class="code code_type">list(list(int))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>bp_lines</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>seq_lines</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>print_lines</mark></td>
-                    <td><span class="code code_type">list(tuple(str, str))</span>, i.e. <i class="code code_desp">list(tuple(<mark>'marker'</mark>, <mark>'print_line'</mark>))</i></td>
-                  </tr>
-                  <tr>
-                    <td><mark>Tm_overlaps</mark></td>
-                    <td><span class="code code_type">list(float)</span></td>
-                  </tr>
-                  <tr><td colspan="2"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Attributes</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
+                      <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>primers</mark></td>
+                      <td><span class="code code_type">list(list(int))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>bp_lines</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>seq_lines</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>print_lines</mark></td>
+                      <td><span class="code code_type">list(tuple(str, str))</span>, i.e. <i class="code code_desp">list(tuple(<mark>'marker'</mark>, <mark>'print_line'</mark>))</i></td>
+                    </tr>
+                    <tr>
+                      <td><mark>Tm_overlaps</mark></td>
+                      <td><span class="code code_type">list(float)</span></td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                  </tbody>
+                </table>
+              </div>
               <hr/>
 
+              <div id="plate_96well">
+                <p><span class="code code_class">class</span> <code>primerize.util.Plate_96Well</code>()</p>
+                <p class="indent_1">Abstraction of 96-well plates.</p>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.util.Plate_96Well</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
 
-              <p id="plate_96well"><span class="code code_class">class</span> <code>primerize.util.Plate_96Well</code>()</p>
-              <p class="indent_1">Abstraction of 96-well plates.</p>
-              <p class="indent_1"><b>Returns</b>: <code>primerize.util.Plate_96Well</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Methods</b>:</p>
+                <p class="indent_2">
+                  <span class="code code_method">echo</span>(<mark>ref_primer</mark>=<i class="code code_const">''</i>)
+                </p>
+                <p class="indent_3">Print result in rich-text.</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>ref_primer</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Optional)</i> List of Wild-type <mark>primer_set</mark> for highlighting. If nonspecified, highlighting is disabled.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
+                <br/>
 
-              <p class="indent_2">
-                <span class="code code_method">echo</span>(<mark>ref_primer</mark>=<i class="code code_const">''</i>)
-              </p>
-              <p class="indent_3">Print result in rich-text.</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>ref_primer</mark></td>
-                    <td><span class="code code_type">list(str)</span></td>
-                    <td><i>(Optional)</i> List of Wild-type <mark>primer_set</mark> for highlighting. If nonspecified, highlighting is disabled.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">save</span>(<mark>file_name</mark>=<i class="code code_const">'./'</i>, <mark>title</mark>=<i class="code code_const">''</i>)
+                </p>
+                <p class="indent_3">Save plate layout to image file (<kbd>SVG</kbd>).</p>
 
-              <p class="indent_2">
-                <span class="code code_method">save</span>(<mark>file_name</mark>=<i class="code code_const">'./'</i>, <mark>title</mark>=<i class="code code_const">''</i>)
-              </p>
-              <p class="indent_3">Save plate layout to image file (<kbd>SVG</kbd>).</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>file_name</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> File name. Include path into file_name when specifying. <u>Use either relative or absolute path.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>title</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Title to display on image. <u><kbd>LaTex</kbd> <span style="color:red;">NOT</span> supported.</u></td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>file_name</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> File name. Include path into file_name when specifying. <u>Use either relative or absolute path.</u></td>
-                  </tr>
-                  <tr>
-                    <td><mark>title</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Optional)</i> Title to display on image. <u><kbd>LaTex</kbd> <span style="color:red;">NOT</span> supported.</u></td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">get</span>(<mark>key</mark>)
+                </p>
+                <p class="indent_3">Get data of a particular well or number of wells filled.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">get</span>(<mark>key</mark>)
-              </p>
-              <p class="indent_3">Get data of a particular well or number of wells filled.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Either use <span class="code code_const">'count'</span> for number of wells filled, or <i class="code code_class">WellPosition</i> (e.g.) <span class="code code_const">'A1'</span>) for well data.</u> Illegal <mark>keyword</mark> or <i class="code code_class">WellPosition</i> (out of <span class="code code_desp">range(0, 96) + 1</span>) raises <span class="code code_error">AttributeError</span>. Nonexisted <mark>coord</mark> raises <span class="code code_error">KeyError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
+                <br/>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>key</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Either use <span class="code code_const">'count'</span> for number of wells filled, or <i class="code code_class">WellPosition</i> (e.g.) <span class="code code_const">'A1'</span>) for well data.</u> Illegal <mark>keyword</mark> or <i class="code code_class">WellPosition</i> (out of <span class="code code_desp">range(0, 96) + 1</span>) raises <span class="code code_error">AttributeError</span>. Nonexisted <mark>coord</mark> raises <span class="code code_error">KeyError</span>.</td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
-              <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
-              <br/>
+                <p class="indent_2">
+                  <span class="code code_method">set</span>(<mark>coord</mark>, <mark>tag</mark>, <mark>primer</mark>)
+                </p>
+                <p class="indent_3">Record data of a particular well.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">set</span>(<mark>coord</mark>, <mark>tag</mark>, <mark>primer</mark>)
-              </p>
-              <p class="indent_3">Record data of a particular well.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>coord</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> <i class="code code_class">WellPosition</i> for data. <u>Use same range as <code>primerize.util.Plate_96Well.get</code>.</u> Existing data for the same well is overwritten. Illegal <i class="code code_class">WellPosition</i> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>tag</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Name tag of well.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>primer</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Primer seuqence of well. <u>Use sense-strand.</u></td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
 
-              <p class="indent_3"><b>Parameters</b>:</p>
-              <table class="table indent_4">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
-                    <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>coord</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> <i class="code code_class">WellPosition</i> for data. <u>Use same range as <code>primerize.util.Plate_96Well.get</code>.</u> Existing data for the same well is overwritten. Illegal <i class="code code_class">WellPosition</i> raises <span class="code code_error">AttributeError</span>.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>tag</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Name tag of well.</td>
-                  </tr>
-                  <tr>
-                    <td><mark>primer</mark></td>
-                    <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Primer seuqence of well. <u>Use sense-strand.</u></td>
-                  </tr>
-                  <tr><td colspan="3"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_2">
+                  <span class="code code_method">reset</span>()
+                </p>
+                <p class="indent_3">Clear current plate data.</p>
 
-              <p class="indent_2">
-                <span class="code code_method">reset</span>()
-              </p>
-              <p class="indent_3">Clear current plate data.</p>
-
-              <p class="indent_1"><b>Attributes</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
-                    <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>coords</mark></td>
-                    <td><span class="code code_type">set(str)</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>_data</mark></td>
-                    <td><span class="code code_type">dict</span>: { <span class="code code_type">str</span>: <span class="code code_type">tuple(str, str)</span> }, i.e. <i class="code code_desp">dict: {<mark>'coord'</mark>: (<mark>'tag'</mark>, <mark>'primer'</mark>) }</i></td>
-                  </tr>
-                  <tr><td colspan="2"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Attributes</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
+                      <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>coords</mark></td>
+                      <td><span class="code code_type">set(str)</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>_data</mark></td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_type">str</span>: <span class="code code_type">tuple(str, str)</span> }, i.e. <i class="code code_desp">dict: {<mark>'coord'</mark>: (<mark>'tag'</mark>, <mark>'primer'</mark>) }</i></td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                  </tbody>
+                </table>
+              </div>
               <hr/>
 
+              <div id="nearest_neighbor">
+                <p><span class="code code_class">class</span> <code>primerize.thermo.Nearest_Neighbor</code>()</p>
+                <p class="indent_1">Wrapper object of Nearest Neighbor parameters; for internal use.</p>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.thermo.Nearest_Neighbor</code> <span class="code code_class">object</span>.</p>
 
-              <p id="nearest_neighbor"><span class="code code_class">class</span> <code>primerize.thermo.Nearest_Neighbor</code>()</p>
-              <p class="indent_1">Wrapper object of Nearest Neighbor parameters; for internal use.</p>
-              <p class="indent_1"><b>Returns</b>: <code>primerize.thermo.Nearest_Neighbor</code> <span class="code code_class">object</span>.</p>
-
-              <p class="indent_1"><b>Attributes</b>:</p>
-              <table class="table indent_2">
-                <thead>
-                  <tr class="active">
-                    <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
-                    <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><mark>T</mark></td>
-                    <td><span class="code code_type">float</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delH_NN</mark></td>
-                    <td><span class="code code_type">numpy.array(float(4, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delS_NN</mark></td>
-                    <td><span class="code code_type">numpy.array(float(4, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delG_NN</mark></td>
-                    <td><span class="code code_type">numpy.array(float(4, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delH_AT_closing_penalty</mark></td>
-                    <td><span class="code code_type">numpy.array(float(1, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delS_AT_closing_penalty</mark></td>
-                    <td><span class="code code_type">numpy.array(float(1, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delG_AT_closing_penalty</mark></td>
-                    <td><span class="code code_type">numpy.array(float(1, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delH_mismatch</mark></td>
-                    <td><span class="code code_type">numpy.array(float(4, 4, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delS_mismatch</mark></td>
-                    <td><span class="code code_type">numpy.array(float(4, 4, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delG_mismatch</mark></td>
-                    <td><span class="code code_type">numpy.array(float(4, 4, 4))</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>delH_init</mark></td>
-                    <td><span class="code code_type">float</span></td>
-                  </tr>
-                  <tr>
-                    <td><mark>del_init</mark></td>
-                    <td><span class="code code_type">float</span></td>
-                  </tr>
-                  <tr><td colspan="2"></td></tr>
-                </tbody>
-              </table>
+                <p class="indent_1"><b>Attributes</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
+                      <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>T</mark></td>
+                      <td><span class="code code_type">float</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delH_NN</mark></td>
+                      <td><span class="code code_type">numpy.array(float(4, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delS_NN</mark></td>
+                      <td><span class="code code_type">numpy.array(float(4, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delG_NN</mark></td>
+                      <td><span class="code code_type">numpy.array(float(4, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delH_AT_closing_penalty</mark></td>
+                      <td><span class="code code_type">numpy.array(float(1, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delS_AT_closing_penalty</mark></td>
+                      <td><span class="code code_type">numpy.array(float(1, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delG_AT_closing_penalty</mark></td>
+                      <td><span class="code code_type">numpy.array(float(1, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delH_mismatch</mark></td>
+                      <td><span class="code code_type">numpy.array(float(4, 4, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delS_mismatch</mark></td>
+                      <td><span class="code code_type">numpy.array(float(4, 4, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delG_mismatch</mark></td>
+                      <td><span class="code code_type">numpy.array(float(4, 4, 4))</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>delH_init</mark></td>
+                      <td><span class="code code_type">float</span></td>
+                    </tr>
+                    <tr>
+                      <td><mark>del_init</mark></td>
+                      <td><span class="code code_type">float</span></td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

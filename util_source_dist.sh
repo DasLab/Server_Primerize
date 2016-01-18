@@ -1,5 +1,5 @@
 cd ~
-git clone https://github.com/DasLab/Primerize
+git clone https://github.com/DasLab/Primerize --quiet
 sudo cp -r Primerize/* NA_Thermo/
 cd ~/NA_Thermo
 sudo python setup.py install
