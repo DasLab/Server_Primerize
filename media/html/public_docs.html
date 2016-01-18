@@ -219,7 +219,7 @@
               </table>
 
               <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_1D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Usage</b>:</p>
+              <p class="indent_1"><b>Methods</b>:</p>
               <p class="indent_2">
                 <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>MIN_TM</mark>=<i class="code code_none">None</i>, <mark>NUM_PRIMERS</mark>=<i class="code code_none">None</i>, <mark>MIN_LENGTH</mark>=<i class="code code_none">None</i>, <mark>MAX_LENGTH</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>)
               </p>
@@ -386,7 +386,7 @@
               </table>
 
               <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_2D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Usage</b>:</p>
+              <p class="indent_1"><b>Methods</b>:</p>
               <p class="indent_2">
                 <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<span class="code code_const">[]</span>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>)
               </p>
@@ -551,7 +551,7 @@
               </table>
 
               <p class="indent_1"><b>Returns</b>: <code>primerize.Design_1D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Usage</b>:</p>
+              <p class="indent_1"><b>Methods</b>:</p>
 
               <p class="indent_2">
                 <span class="code code_method">get</span>(<mark>key</mark>)
@@ -722,7 +722,7 @@
               </table>
 
               <p class="indent_1"><b>Returns</b>: <code>primerize.Design_2D</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Usage</b>:</p>
+              <p class="indent_1"><b>Methods</b>:</p>
 
               <p class="indent_2">
                 <span class="code code_method">get</span>(<mark>key</mark>)
@@ -888,7 +888,7 @@
               </table>
 
               <p class="indent_1"><b>Returns</b>: <code>primerize.util.Assembly</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Usage</b>:</p>
+              <p class="indent_1"><b>Methods</b>:</p>
 
               <p class="indent_2">
                 <span class="code code_method">echo</span>()
@@ -972,7 +972,7 @@
               <p id="plate_96well"><span class="code code_class">class</span> <code>primerize.util.Plate_96Well</code>()</p>
               <p class="indent_1">Abstraction of 96-well plates.</p>
               <p class="indent_1"><b>Returns</b>: <code>primerize.util.Plate_96Well</code> <span class="code code_class">object</span>.</p>
-              <p class="indent_1"><b>Usage</b>:</p>
+              <p class="indent_1"><b>Methods</b>:</p>
 
               <p class="indent_2">
                 <span class="code code_method">echo</span>(<mark>ref_primer</mark>=<i class="code code_const">''</i>)
@@ -1193,7 +1193,7 @@
 {% endblock %}
 
 {% block script %}
-  <link rel="stylesheet" href="/site_media/css/code.css" />
+  <link rel="stylesheet" href="/site_media/css/{{DEBUG_DIR}}code{{DEBUG_STR}}.css" />
   <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}tutorial{{DEBUG_STR}}.js"></script>  
 {% endblock %}
 
