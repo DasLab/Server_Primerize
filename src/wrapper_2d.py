@@ -124,10 +124,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         if plate.is_success:
             dir_name = os.path.join(MEDIA_ROOT, 'data/2d/result_%s' % job_id)
             if not os.path.exists(dir_name): os.mkdir(dir_name)
-            plate.save('construct', path=dir_name)
-            plate.save('assembly', path=dir_name)
-            plate.save('table', path=dir_name)
-            plate.save('image', path=dir_name)
+            plate.save('', path=dir_name, name=tag)
 
             zf = zipfile.ZipFile('%s/data/2d/result_%s.zip' % (MEDIA_ROOT, job_id), 'w', zipfile.ZIP_DEFLATED)
             for f in glob.glob('%s/data/2d/result_%s/*' % (MEDIA_ROOT, job_id)):
