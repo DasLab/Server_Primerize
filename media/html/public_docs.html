@@ -3,18 +3,10 @@
 {% block content %}
     <div class="jumbotron">
       <div class="container">
-        <h1>Welcome to Primerize!</h1>
+        <h1>Primerize Documentation</h1>
         <img src="/site_media/images/logo_primerize.png" style="clear:both; float:right; padding-left: 20px;"/>
         <p>
-          This protocol demystifies the mutate-map-rescue pipeline experimental setup.
-        </p>
-        <p>
-          This page shows you how to design DNA templates, how to channel the output to IDT Oligo Ordering in two formats, and illustrates our in-house experiment protocol for how to PCR assemble, how to transcribe the template <i>in vitro</i>, and how to prepare plates of RNA in parallel fashion. 
-        </p>
-        <p>
-          Hover mouse to the 
-          <img style="opacity:0.85;" src="/site_media/images/fg_question.png" height="40" data-toggle="popover" data-placement="bottom" title="Question mark" data-content="Hover mouse for detailed descriptions."/> 
-          for detailed descriptions. 
+          This page illustrates basic usage of the <code>primerize</code> <b><i>Python</i></b> package, installation procedures, and detailed reference for <span class="label label-success">class</span> implementation.
         </p>
         <br/>
         <p>
@@ -37,69 +29,37 @@
           </div>
           <div class="panel-body scroll_nav">
             <ul class="nav" role="tablist" id="scroll_nav">
-              <li class="li-danger">
-                  <a id="tab_1" href="#pipe">
-                    <b><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;Pipeline Overview</b>
+              <li class="li-green">
+                  <a id="tab_1" href="#quick_start">
+                    <span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;Section #1: 
+                    <br/>
+                    <b>Quick Start</b>
                   </a>
               </li>
               <li class="li-magenta">
-                  <a id="tab_1" href="#temp_design">
-                    <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Section #1: 
+                  <a id="tab_2" href="#install">
+                    <span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Section #2: 
                     <br/>
-                    <b>DNA Template Design</b>
+                    <b>Installation</b>
                   </a>
               </li>
 
-              <li class="li-violet" role="tab">
-                  <a id="tab_2" href="#IDT">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;Section #2: 
+              <li class="li-primary">
+                  <a id="tab_3" href="#class_reference">
+                    <span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;Section #3: 
                     <br/>
-                    <b>IDT Oligo Ordering</b>
-                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_2" aria-expanded="true" aria-controls="collapse_tab_2"></span>
+                    <b>Class Reference</b>
+                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_class" aria-expanded="true" aria-controls="collapse_tab_class"></span>
                   </a>
-                  <ul id="collapse_tab_2" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_2">
-                    <li><a id="tab_21" href="#idt_bulk">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;IDT Bulk Ordering</a></li>
-                    <li><a id="tab_22" href="#idt_plate">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;IDT Plate Ordering</a></li>
+                  <ul id="collapse_tab_class" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_class">
+                    <li><a id="tab_31" href="#primerize_1d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Primerize_1D()</code></a></li>
+                    <li><a id="tab_32" href="#primerize_2d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Primerize_2D()</code></a></li>
+                    <li><a id="tab_33" href="#design_1d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Design_1D()</code></a></li>
+                    <li><a id="tab_34" href="#design_2d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Design_2D()</code></a></li>
+                    <li><a id="tab_35" href="#assembly">&nbsp;&nbsp;&nbsp;&nbsp;<code>Assembly()</code></a></li>
+                    <li><a id="tab_36" href="#plate_96well">&nbsp;&nbsp;&nbsp;&nbsp;<code>Plate_96Well()</code></a></li>
+                    <li><a id="tab_37" href="#nearest_neighbor">&nbsp;&nbsp;&nbsp;&nbsp;<code>Nearest_Neighbor()</code></a></li>
                   </ul>
-              </li>
-              <li class="li-dark-red">
-                  <a id="tab_3" href="#PCR">
-                    <span class="glyphicon glyphicon-transfer"></span>&nbsp;&nbsp;Section #3: 
-                    <br/>
-                    <b>PCR Assembly</b>
-                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
-                  </a>
-                  <ul id="collapse_tab_3" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_3">
-                    <li><a id="tab_31" href="#PCR_sr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;PCR Recipe (Single-Round)</u></b></a></li>
-                    <li><a id="tab_32" href="#PCR_cond">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;PCR Conditions</a></li>
-                    <li>
-                      <a id="tab_33" href="#PCR_mr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-duplicate"></span>&nbsp;&nbsp;PCR Recipe (Multiple-Round)</u></b></a>
-                      <ul style="margin-left:25px;">
-                        <li><a id="tab_331" href="#PCR_2r">Strategy 1: <u>'2-Round'</u></a></li>
-                        <li><a id="tab_332" href="#PCR_cp">Strategy 2: <u>'Couple'</u></a></li>
-                      </ul>
-                    </li>
-                    <li><a id="tab_34" href="#PCR_pr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-filter"></span>&nbsp;&nbsp;PCR Product Purification</a></li>
-                  </ul>
-              </li>
-              <li class="li-brown">
-                  <a id="tab_4" href="#TX">
-                    <span class="glyphicon glyphicon-random"></span>&nbsp;&nbsp;Section #4: 
-                    <br/>
-                    <b><i>In Vitro</i> Transcription</b>
-                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
-                  </a>
-                  <ul id="collapse_tab_4" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_4">
-                    <li><a id="tab_41" href="#TX_sr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;IVT Recipe</a></li>
-                    <li><a id="tab_42" href="#TX_pr">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-filter"></span>&nbsp;&nbsp;IVT Product Purification</a></li>
-                  </ul>
-              </li>
-              <li class="li-orange">
-                  <a id="tab_5" href="#par_prep">
-                    <span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Section #5: 
-                    <br/>
-                    <b>Massively Parallel Preparation</b>
-                  </a>
               </li>
             </ul>
           </div>
@@ -109,31 +69,103 @@
 
     <div class="pull-right" id="main">
 
-      <div class="container theme-showcase li-magenta" role="main">
+      <div class="container theme-showcase li-green" role="main">
         <br/>
-        <div class="panel-magenta" id="example">
+        <div class="panel-green" id="quick_start">
           <div class="panel-heading">
-            <span class="lead"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#1</span>: DNA Template Design</b></span>
+            <span class="lead"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#1</span>: Quick Start</b></span>
           </div>
           <br/>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <p class="indent_1">For simple Primer Design tasks, follow this example:</p>
+              <pre class="indent_2">    <span class="bash_cmd">import</span> <code>primerize</code>
+
+    prm_1d = <code>primerize.Primerize_1D</code>()
+    job_1d = prm_1d.<span class="bash_cmd">design</span>(<span class="bash_str">'TTCTAATACGACTCACTATA...AAAAAGAAACAACAACAACAAC'</span>, MIN_TM=<span class="bash_num">60.0</span>, NUM_PRIMERS=<span class="bash_num">0</span>, MIN_LENGTH=<span class="bash_num">15</span>, MAX_LENGTH=<span class="bash_num">60</span>, prefix=<span class="bash_str">'P4P6_2HP'</span>)
+    <span class="bash_cmd">if</span> job_1d.<span class="bash_key">is_success</span>:
+        <span class="bash_cmd">print</span> job_1d
+        job_1d.<span class="bash_cmd">save</span>()
+
+    prm_2d = <code>primerize.Primerize_2D</code>()
+    job_2d = prm_2d.<span class="bash_cmd">design</span>(<span class="bash_str">'TTCTAATACGACTCACTATA...AAAAAGAAACAACAACAACAAC'</span>, offset=<span class="bash_num">-51</span>, which_muts=<span class="bash_cmd">range</span>(<span class="bash_num">102, 261 + 1</span>), which_libs=<span class="bash_num">[1]</span>, prefix=<span class="bash_str">'P4P6_2HP'</span>)
+    <span class="bash_cmd">if</span> job_2d.<span class="bash_key">is_success</span>:
+        <span class="bash_cmd">print</span> job_2d
+        job_2d.<span class="bash_cmd">save</span>()
+</pre>
+
+              <br/>
+              <p class="indent_1">For advanced users, the returned <code>Design_1D</code> and <code>Design_2D</code> result <span class="code code_class">class</span> offer methods for <span class="code code_method">get()</span>, <span class="code code_method">save()</span> and <span class="code code_method">echo()</span>:</p>
+
+              <pre class="indent_2">    MIN_TM = job_1d.<span class="bash_cmd">get</span>(<span class="bash_str">'MIN_TM'</span>)
+    <span class="bash_cmd">print</span> job_1d.<span class="bash_cmd">get</span>(<span class="bash_str">'MISPRIME'</span>)
+    <span class="bash_cmd">print</span> job_1d.<span class="bash_cmd">echo</span>(<span class="bash_str">'WARNING'</span>)
+    <span class="bash_cmd">if</span> job_1d.<span class="bash_key">is_success</span>:
+        job_1d.<span class="bash_cmd">save</span>(path=<span class="bash_str">'result/'</span>, name=<span class="bash_str">'Primer'</span>)
+
+    LIB = job_2d.<span class="bash_cmd">get</span>(<span class="bash_str">'which_libs'</span>)
+    N_PRIMER = job_2d.<span class="bash_cmd">get</span>(<span class="bash_str">'N_PRIMER'</span>)
+    <span class="bash_cmd">print job_2d</span>.<span class="bash_cmd">get</span>(<span class="bash_str">'CONSTRUCT'</span>)
+    <span class="bash_cmd">if</span> job_2d.<span class="bash_key">is_success</span>:
+        <span class="bash_cmd">print</span> job_2d.<span class="bash_cmd">echo</span>()
+        job_2d.<span class="bash_cmd">save</span>(<span class="bash_str">'assembly'</span>, path=<span class="bash_str">'result/'</span>, name=<span class="bash_str">'Lib'</span>)</pre>
+
+                <br/>
+                <p class="indent_1">Besides <span class="code code_method">design()</span>, the <code>Primerize_1D</code> and <code>Primerize_2D</code> worker <span class="code code_class">class</span> offer methods for <span class="code code_method">get()</span>, <span class="code code_method">set()</span>, and <span class="code code_method">reset()</span>:</p>
+
+                <pre class="indent_2">    COL_SIZE = prm_1d.<span class="bash_cmd">get</span>(<span class="bash_str">'COL_SIZE'</span>)
+    prm_1d.<span class="bash_cmd">set</span>(<span class="bash_str">'MIN_LENGTH'</span>, <span class="bash_num">30</span>)
+    prm_1d.<span class="bash_cmd">reset</span>()</pre>
+
+                <br/>
+                <p class="indent_1">There are also <code>Assembly</code> and <code>Plate_96Well</code> helper <span class="code code_class">class</span>. For more details, please refer to the <a href="#class_reference"><b>Class Reference</b></a>.</p>
 
             </div>
           </div>
         </div>
       </div>
+      <hr/>
 
-      <div class="container theme-showcase li-primary" role="main">
+      <div class="container theme-showcase li-magenta" role="main">
         <br/>
-        <div class="panel-primary" id="class">
+        <div class="panel-magenta" id="install">
           <div class="panel-heading">
-            <span class="lead"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#1</span>: DNA Template Design</b></span>
+            <span class="lead"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#2</span>: Installation</b></span>
           </div>
           <br/>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <p><span class="code code_class">class</span> <code>primerize.Primerize_1D</code>(<mark>MIN_TM</mark>=<i class="code code_const">60.0</i>, <mark>NUM_PRIMERS</mark>=<i class="code code_const">0</i>, <mark>MIN_LENGTH</mark>=<i class="code code_const">15</i>, <mark>MAX_LENGTH</mark>=<i class="code code_const">60</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>WARN_CUTOFF</mark>=<i class="code code_const">3</i>, <mark>prefix</mark>=<i class="code code_const">'primer'</i>)</p>
+              <p class="indent_1">To install <code>primerize</code>, simply:</p>
+              <pre class="indent_2">    <span class="bash_key">cd</span> <span class="bash_cmd">path/to/primerize/repo</span>
+    python <span class="bash_cmd">setup.py</span> <span class="bash_ver">install</span></pre>
+
+              <br/>
+              <p class="indent_1">For system-wide installation, you must have permissions and use with <span class="code code_desp">sudo</span>.</p>
+              <p class="indent_1"><code>primerize</code> requires the following <i><b>Python</b></i> packages as dependency, all of which can be installed through <span class="code code_desp">pip</span>&nbsp;&nbsp;<a href="https://pip.pypa.io/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>.</p>
+              <pre class="indent_2" style="width:45%;">    <code>matplotlib</code>  >=  <span class="bash_cmd">1.5.0</span>
+    <code>numba</code>       ==  <span class="bash_cmd">0.22.1</span>
+    <code>numpy</code>       >=  <span class="bash_cmd">1.10.1</span>
+    <code>xlwt</code>        >=  <span class="bash_cmd">1.0.0</span></pre>
+
+              <br/>
+              <p class="indent_1">Note that the <code>numba</code>&nbsp;&nbsp;<a href="http://numba.pydata.org/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> is used for its <span class="code code_json">@jit</span>&nbsp;&nbsp;<a href="http://numba.pydata.org/numba-doc/0.22.1/user/jit.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> decorator on loop optimization. <code>numba</code> requires <span class="code code_desp">llvm</span>&nbsp;&nbsp;<a href="http://llvm.org/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>, which can be installed through <span class="code code_desp">apt-get</span>&nbsp;&nbsp;<a href="https://help.ubuntu.com/lts/serverguide/apt-get.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> on <b>Linux</b> or <span class="code code_desp">brew</span>&nbsp;&nbsp;<a href="http://brew.sh/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> on Mac <b>OSX</b>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+
+      <div class="container theme-showcase li-primary" role="main">
+        <br/>
+        <div class="panel-primary" id="class_reference">
+          <div class="panel-heading">
+            <span class="lead"><span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#3</span>: Class Reference</b></span>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <p id="primerize_1d"><span class="code code_class">class</span> <code>primerize.Primerize_1D</code>(<mark>MIN_TM</mark>=<i class="code code_const">60.0</i>, <mark>NUM_PRIMERS</mark>=<i class="code code_const">0</i>, <mark>MIN_LENGTH</mark>=<i class="code code_const">15</i>, <mark>MAX_LENGTH</mark>=<i class="code code_const">60</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>WARN_CUTOFF</mark>=<i class="code code_const">3</i>, <mark>prefix</mark>=<i class="code code_const">'primer'</i>)</p>
               <p class="indent_1">Construct a worker for 1D Primer Design (Simple Assembly).</p>
               <br/>
 
@@ -302,7 +334,7 @@
               <hr/>
 
 
-              <p><span class="code code_class">class</span> <code>primerize.Primerize_2D</code>(<mark>offset</mark>=<i class="code code_const">0</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>which_libs</mark>=<i class="code code_const">[1]</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>prefix</mark>=<i class="code code_const">'lib'</i>)</p>
+              <p id="primerize_2d"><span class="code code_class">class</span> <code>primerize.Primerize_2D</code>(<mark>offset</mark>=<i class="code code_const">0</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>which_libs</mark>=<i class="code code_const">[1]</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>prefix</mark>=<i class="code code_const">'lib'</i>)</p>
               <p class="indent_1">Construct a worker for 2D Primer Design (Mutate-and-Map Plates).</p>
               <br/>
 
@@ -470,7 +502,7 @@
               <hr/>
 
 
-              <p><span class="code code_class">class</span> <code>primerize.Design_1D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
+              <p id="design_1d"><span class="code code_class">class</span> <code>primerize.Design_1D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
               <p class="indent_1">Result of a <code>primerize.Primerize_1D.design</code> run.</p>
               <br/>
 
@@ -641,7 +673,7 @@
               <hr/>
 
 
-              <p><span class="code code_class">class</span> <code>primerize.Design_2D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
+              <p id="design_2d"><span class="code code_class">class</span> <code>primerize.Design_2D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
               <p class="indent_1">Result of a <code>primerize.Primerize_2D.design</code> run.</p>
               <br/>
 
@@ -817,7 +849,7 @@
               <hr/>
 
 
-              <p><span class="code code_class">class</span> <code>primerize.util.Assembly</code>(<mark>sequence</mark>, <mark>primers</mark>, <mark>name</mark>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>)</p>
+              <p id="assembly"><span class="code code_class">class</span> <code>primerize.util.Assembly</code>(<mark>sequence</mark>, <mark>primers</mark>, <mark>name</mark>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>)</p>
               <p class="indent_1">Collection of result data essential for drawing an assembly scheme.</p>
               <br/>
 
@@ -937,7 +969,7 @@
               <hr/>
 
 
-              <p><span class="code code_class">class</span> <code>primerize.util.Plate_96Well</code>()</p>
+              <p id="plate_96well"><span class="code code_class">class</span> <code>primerize.util.Plate_96Well</code>()</p>
               <p class="indent_1">Abstraction of 96-well plates.</p>
               <p class="indent_1"><b>Returns</b>: <code>primerize.util.Plate_96Well</code> <span class="code code_class">object</span>.</p>
               <p class="indent_1"><b>Usage</b>:</p>
@@ -1014,7 +1046,7 @@
                   <tr>
                     <td><mark>key</mark></td>
                     <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> Keyword of parameter. <u>Either use <span class="code code_const">'count'</span> for number of wells filled, or WellPosition (e.g.) <span class="code code_const">'A1'</span>) for well data.</u> Illegal <mark>keyword</mark> or WellPosition (out of <span class="code code_desp">range(0, 96) + 1</span>) raises <span class="code code_error">AttributeError</span>. Nonexisted <mark>coord</mark> raises <span class="code code_error">KeyError</span>.</td>
+                    <td><i>(Required)</i> Keyword of parameter. <u>Either use <span class="code code_const">'count'</span> for number of wells filled, or <i class="code code_class">WellPosition</i> (e.g.) <span class="code code_const">'A1'</span>) for well data.</u> Illegal <mark>keyword</mark> or <i class="code code_class">WellPosition</i> (out of <span class="code code_desp">range(0, 96) + 1</span>) raises <span class="code code_error">AttributeError</span>. Nonexisted <mark>coord</mark> raises <span class="code code_error">KeyError</span>.</td>
                   </tr>
                   <tr><td colspan="3"></td></tr>
                 </tbody>
@@ -1040,7 +1072,7 @@
                   <tr>
                     <td><mark>coord</mark></td>
                     <td><span class="code code_type">str</span></td>
-                    <td><i>(Required)</i> WellPosition for data. <u>Use same range as <code>primerize.util.Plate_96Well.get</code>.</u> Existing data for the same well is overwritten. Illegal WellPosition raises <span class="code code_error">AttributeError</span>.</td>
+                    <td><i>(Required)</i> <i class="code code_class">WellPosition</i> for data. <u>Use same range as <code>primerize.util.Plate_96Well.get</code>.</u> Existing data for the same well is overwritten. Illegal <i class="code code_class">WellPosition</i> raises <span class="code code_error">AttributeError</span>.</td>
                   </tr>
                   <tr>
                     <td><mark>tag</mark></td>
@@ -1084,7 +1116,7 @@
               <hr/>
 
 
-              <p><span class="code code_class">class</span> <code>primerize.thermo.Nearest_Neighbor</code>()</p>
+              <p id="nearest_neighbor"><span class="code code_class">class</span> <code>primerize.thermo.Nearest_Neighbor</code>()</p>
               <p class="indent_1">Wrapper object of Nearest Neighbor parameters; for internal use.</p>
               <p class="indent_1"><b>Returns</b>: <code>primerize.thermo.Nearest_Neighbor</code> <span class="code code_class">object</span>.</p>
 
@@ -1142,7 +1174,7 @@
                     <td><span class="code code_type">float</span></td>
                   </tr>
                   <tr>
-                    <td><mark>delS_init</mark></td>
+                    <td><mark>del_init</mark></td>
                     <td><span class="code code_type">float</span></td>
                   </tr>
                   <tr><td colspan="2"></td></tr>
