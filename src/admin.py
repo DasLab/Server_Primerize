@@ -115,16 +115,11 @@ def aws_stat(request):
     if isinstance(json, HttpResponseBadRequest): return json
     return HttpResponse(json, content_type='application/json')
 
-def aws_admin(request):
-    json = ga_stats()
-    if isinstance(json, HttpResponseBadRequest): return json
-    return HttpResponse(json, content_type='application/json')
-
 def ga(request):
     return render_to_response(PATH.HTML_PATH['admin_ga'], {'ga_url':GA['LINK_URL']}, context_instance=RequestContext(request))
 
-def ga_admin(request):
-    json = ga_stats()
+def ga_stat(request):
+    json = ga_stats(request)
     if isinstance(json, HttpResponseBadRequest): return json
     return HttpResponse(json, content_type='application/json')
 
@@ -188,10 +183,9 @@ admin.site.register_view('apache/', view=apache, visible=False)
 
 admin.site.register_view('aws/', view=aws, visible=False)
 admin.site.register_view('aws_stat/', view=aws_stat, visible=False)
-admin.site.register_view('aws_admin/', view=aws_admin, visible=False)
 
 admin.site.register_view('ga/', view=ga, visible=False)
-admin.site.register_view('ga_admin/', view=ga_admin, visible=False)
+admin.site.register_view('ga_stat/', view=ga_stat, visible=False)
 
 admin.site.register_view('git/', view=git, visible=False)
 admin.site.register_view('git_stat/', view=git_stat, visible=False)

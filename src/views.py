@@ -91,26 +91,26 @@ def ping_test(request):
     return HttpResponse(content="", status=200)
 
 def get_admin(request):
-    return HttpResponse(simplejson.dumps({'email': EMAIL_NOTIFY}), content_type='application/json')
+    return HttpResponse(simplejson.dumps({'email': EMAIL_NOTIFY}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def get_user(request):
     if request.user.username: 
         user = request.user.username
     else:
         user = 'unknown'
-    return HttpResponse(simplejson.dumps({'user': user}), content_type='application/json')
+    return HttpResponse(simplejson.dumps({'user': user}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def get_js(request):
     lines = open('%s/cache/stat_sys.txt' % MEDIA_ROOT, 'r').readlines()
     lines = ''.join(lines).split('\t')
     json = {'jquery':lines[9], 'bootstrap':lines[10], 'd3':lines[14], 'zclip':lines[15]}
-    return HttpResponse(simplejson.dumps(json), content_type='application/json')
+    return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def get_ver(request):
     lines = open('%s/cache/stat_sys.txt' % MEDIA_ROOT, 'r').readlines()
     lines = ''.join(lines).split('\t')
     json = {'primerize':lines[37]}
-    return HttpResponse(simplejson.dumps(json), content_type='application/json')
+    return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
 def error400(request):
