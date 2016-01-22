@@ -63,7 +63,7 @@ else:
         url(r'^(exp|experiment|resource)/?$', RedirectView.as_view(url='/protocol/', permanent=True)),
         url(r'^(readme|copyright)/?$', RedirectView.as_view(url='/license/', permanent=True)),
         url(r'^(package|code|source|repository)/?$', RedirectView.as_view(url='/download/', permanent=True)),
-        url(r'^(documentation|reference|manual)/?$', RedirectView.as_view(url='/docs/', permanent=True)),
+        url(r'^(doc|documentation|reference|manual)/?$', RedirectView.as_view(url='/docs/', permanent=True)),
         url(r'^(citation|contact|primerize)/?$', RedirectView.as_view(url='/about/', permanent=True)),
 
         url(r'^(find|retrieve)/?$', RedirectView.as_view(url='/result/', permanent=True)),
