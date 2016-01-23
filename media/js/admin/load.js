@@ -10,8 +10,6 @@ xmlhttp.onreadystatechange = function() {
 			ver_zclip = xmlDoc.zclip;
 
 			document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/' + ver_jquery + '/jquery.min.js"><\/script>');
-			document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + ver_bootstrap + '/js/bootstrap.min.js"><\/script>');
-			document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + ver_bootstrap + '/css/bootstrap.min.css" \/>');
 			document.write('\
 				<script type="text/javascript"> \
 					if (!window.jQuery) { \
@@ -20,6 +18,8 @@ xmlhttp.onreadystatechange = function() {
 						document.write(\'<link rel="stylesheet" href="/site_media/css/bootstrap.min.css" \/>\'); \
 						isCDN = false; \
 					} else { \
+						document.write(\'<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + ver_bootstrap + '/js/bootstrap.min.js"><\' + \'/script>\'); \
+						document.write(\'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + ver_bootstrap + '/css/bootstrap.min.css" \/>\'); \
 						isCDN = true; \
 					} \
 				\x3C\/script>');
