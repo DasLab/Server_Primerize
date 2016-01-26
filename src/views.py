@@ -7,7 +7,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 
 
-# from src.console import *
+from src.console import *
+from src.env import error400, error401, error403, error404, error500, error503
 from src.helper import *
 from src.models import *
 from src.settings import *
@@ -111,19 +112,6 @@ def get_ver(request):
     json = {'primerize':lines[37]}
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
-
-def error400(request):
-    return render_to_response(PATH.HTML_PATH['400'], {}, context_instance=RequestContext(request))
-def error401(request):
-    return render_to_response(PATH.HTML_PATH['401'], {}, context_instance=RequestContext(request))
-def error403(request):
-    return render_to_response(PATH.HTML_PATH['403'], {}, context_instance=RequestContext(request))
-def error404(request):
-    return render_to_response(PATH.HTML_PATH['404'], {}, context_instance=RequestContext(request))
-def error500(request):
-    return render_to_response(PATH.HTML_PATH['500'], {}, context_instance=RequestContext(request))
-def error503(request):
-    return render_to_response(PATH.HTML_PATH['503'], {}, context_instance=RequestContext(request))
 
 
 def test(request):

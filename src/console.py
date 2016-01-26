@@ -20,14 +20,14 @@ from github import Github
 import requests
 
 from django.core.management import call_command
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
 
+from src.env import error400, error500
 from src.settings import *
 from src.models import BackupForm
-from src.views import error400
 
 suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -456,7 +456,7 @@ def git_stats(request):
                 while (contribs is None and i <= 5):
                     time.sleep(1)
                     contribs = repo.get_stats_contributors()
-                if contribs is None: return HttpResponseServerError("PyGithub failed")
+                if contribs is None: return error500(request)
 
                 for contrib in contribs:
                     a, d = (0, 0)
@@ -486,20 +486,20 @@ def git_stats(request):
 
             if qs == 'c':
                 contribs = repo.get_stats_commit_activity()
-                if contribs is None: return HttpResponseServerError("PyGithub failed")
+                if contribs is None: return error500(request)
                 fields = ['Commits']
                 for contrib in contribs:
                     for i, day in enumerate(contrib.days):
                         data.append({u'Timestamp': contrib.week + timedelta(days=i), u'Commits': day})
             elif qs == 'ad':
                 contribs = repo.get_stats_code_frequency()
-                if contribs is None: return HttpResponseServerError("PyGithub failed")
+                if contribs is None: return error500(request)
                 fields = ['Additions', 'Deletions']
                 for contrib in contribs:
                     data.append({u'Timestamp': contrib.week, u'Additions': contrib.additions, u'Deletions': contrib.deletions})
             elif qs == 'au':
                 contribs = repo.get_stats_contributors()
-                if contribs is None: return HttpResponseServerError("PyGithub failed")
+                if contribs is None: return error500(request)
                 fields = ['Commits', 'Additions', 'Deletions']
                 for contrib in contribs:
                     a, d = (0, 0)

@@ -3,7 +3,7 @@ from django.forms import ModelForm, widgets, DateField, DateInput
 from django.utils.html import format_html
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.core.management import call_command
@@ -128,15 +128,7 @@ def git(request):
 
 def git_stat(request):
     json = git_stats(request)
-    if isinstance(json, HttpResponse):
-        return json
-    elif isinstance(json, HttpResponseServerError):
-        i = 0
-        while (isinstance(json, HttpResponseServerError) and i <= 5):
-            i += 1
-            time.sleep(1)
-            json = git_stats(request)
-        if isinstance(json, HttpResponseServerError): return json
+    if isinstance(json, HttpResponse): return json
     return HttpResponse(json, content_type='application/json')
 
 def ssl_dash(request):

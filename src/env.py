@@ -1,3 +1,6 @@
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+
 import environ
 import os
 import simplejson
@@ -102,4 +105,19 @@ PATH = SYS_PATH(MEDIA_ROOT)
 FILEMANAGER_STATIC_ROOT = root('media/admin') + '/'
 
 (env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
+
+
+
+def error400(request):
+    return render_to_response(PATH.HTML_PATH['400'], {}, context_instance=RequestContext(request))
+def error401(request):
+    return render_to_response(PATH.HTML_PATH['401'], {}, context_instance=RequestContext(request))
+def error403(request):
+    return render_to_response(PATH.HTML_PATH['403'], {}, context_instance=RequestContext(request))
+def error404(request):
+    return render_to_response(PATH.HTML_PATH['404'], {}, context_instance=RequestContext(request))
+def error500(request):
+    return render_to_response(PATH.HTML_PATH['500'], {}, context_instance=RequestContext(request))
+def error503(request):
+    return render_to_response(PATH.HTML_PATH['503'], {}, context_instance=RequestContext(request))
 
