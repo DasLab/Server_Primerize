@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponse
 #, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -14,6 +14,7 @@ import traceback
 
 from src.helper import *
 from src.models import *
+from src.views import error400
 
 import primerize
 
@@ -22,7 +23,7 @@ def design_1d(request):
     return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
 
 def design_1d_run(request):
-    if request.method != 'POST': return HttpResponseBadRequest('400: Bad Request')
+    if request.method != 'POST': return error400(request)
     form = Design1DForm(request.POST)
     if form.is_valid():
         sequence = form.cleaned_data['sequence']

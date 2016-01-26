@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponse
 #, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -19,6 +19,7 @@ import zipfile
 
 from src.helper import *
 from src.models import *
+from src.views import error400
 
 import primerize
 
@@ -28,7 +29,7 @@ def design_2d(request, form=Design2DForm(), from_1d=False):
     return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
 
 def design_2d_run(request):
-    if request.method != 'POST': return HttpResponseBadRequest('400: Bad Request')
+    if request.method != 'POST': return error400(request)
     form = Design2DForm(request.POST)
     msg = ''
     if form.is_valid():

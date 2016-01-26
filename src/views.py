@@ -11,7 +11,6 @@ from django.shortcuts import render_to_response
 from src.helper import *
 from src.models import *
 from src.settings import *
-from src.wrapper_1d import *
 
 from datetime import datetime
 import re
