@@ -20,13 +20,14 @@ from github import Github
 import requests
 
 from django.core.management import call_command
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
 
 from src.settings import *
 from src.models import BackupForm
+from src.views import error400
 
 suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -295,7 +296,7 @@ def aws_stats(request):
             elif sp == '48h':
                 args = {'period':720, 'start_time':datetime.utcnow() - timedelta(hours=48), 'end_time':datetime.utcnow()}
             else:
-                return HttpResponseBadRequest("Invalid query.")
+                return error400(request)
 
             if qs == 'latency':
                 args.update({'metric':['Latency'], 'namespace':'AWS/ELB', 'cols':['Maximum'], 'dims':{}, 'unit':'Seconds', 'calc_rate':False})
@@ -320,9 +321,9 @@ def aws_stats(request):
             elif qs == 'volbytes':
                 args.update({'metric':['VolumeWriteBytes', 'VolumeReadBytes'], 'namespace':'AWS/EBS', 'cols':['Sum'], 'dims':{}, 'unit':'Bytes', 'calc_rate':True})
             else:
-                return HttpResponseBadRequest("Invalid query.")
+                return error400(request)
     else:
-        return HttpResponseBadRequest("Invalid query.")
+        return error400(request)
 
     if args['namespace'] == 'AWS/ELB':
         args['dims'] = {'LoadBalancerName': AWS['ELB_NAME']}
@@ -377,7 +378,7 @@ def ga_stats(request):
                 elif sp == '3m':
                     (d1, d2) = ('90daysAgo', 'yesterday')
                 else:
-                    return HttpResponseBadRequest("Invalid query.")
+                    return error400(request)
 
                 temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=%s&end-date=%s&metrics=ga%ssessions&dimensions=ga%s%s&access_token=%s' % (url_colon, GA['ID'], d1, d2, url_colon, url_colon, dm, access_token)).json()['rows']
                 data = []
@@ -401,7 +402,7 @@ def ga_stats(request):
                 elif sp == 'pageview':
                     (me, dm, field) = ('pageviews', 'userType', 'Page Views')
                 else:
-                    return HttpResponseBadRequest("Invalid query.")
+                    return error400(request)
 
                 temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=30daysAgo&end-date=yesterday&metrics=ga%s%s&dimensions=ga%s%s&access_token=%s' % (url_colon, GA['ID'], url_colon, me, url_colon, dm, access_token)).json()['rows']
                 data = []
@@ -417,7 +418,7 @@ def ga_stats(request):
                 data_table.LoadData(data)
                 return data_table.ToJSonResponse(columns_order=stats, order_by='Timestamp', req_id=req_id)
             else:
-                return HttpResponseBadRequest("Invalid query.")
+                return error400(request)
 
         elif qs == 'geo':
             temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=30daysAgo&end-date=yesterday&metrics=ga%ssessions&dimensions=ga%scountry&access_token=%s' % (url_colon, GA['ID'], url_colon, url_colon, access_token)).json()['rows']
@@ -433,9 +434,9 @@ def ga_stats(request):
             return data_table.ToJSonResponse(columns_order=stats, order_by='Timestamp', req_id=req_id)
 
         else:
-            return HttpResponseBadRequest("Invalid query.")
+            return error400(request)
     else:
-        return HttpResponseBadRequest("Invalid query.")
+        return error400(request)
 
 
 
@@ -510,7 +511,7 @@ def git_stats(request):
                 desp['Contributors'] = ('string', 'Name')
                 del desp['Timestamp']
             else:
-                return HttpResponseBadRequest("Invalid query.")
+                return error400(request)
 
             for field in fields:
                 stats.append(field)
@@ -522,7 +523,7 @@ def git_stats(request):
             results = data_table.ToJSonResponse(columns_order=stats, order_by='Timestamp', req_id=req_id)
             return results
     else:
-        return HttpResponseBadRequest("Invalid query.")
+        return error400(request)
 
 
 def dash_ssl(request):

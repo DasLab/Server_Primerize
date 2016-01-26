@@ -3,7 +3,7 @@ from django.forms import ModelForm, widgets, DateField, DateInput
 from django.utils.html import format_html
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.core.management import call_command
@@ -112,7 +112,7 @@ def aws(request):
 
 def aws_stat(request):
     json = aws_stats(request)
-    if isinstance(json, HttpResponseBadRequest): return json
+    if isinstance(json, HttpResponse): return json
     return HttpResponse(json, content_type='application/json')
 
 def ga(request):
@@ -120,7 +120,7 @@ def ga(request):
 
 def ga_stat(request):
     json = ga_stats(request)
-    if isinstance(json, HttpResponseBadRequest): return json
+    if isinstance(json, HttpResponse): return json
     return HttpResponse(json, content_type='application/json')
 
 def git(request):
@@ -128,7 +128,7 @@ def git(request):
 
 def git_stat(request):
     json = git_stats(request)
-    if isinstance(json, HttpResponseBadRequest):
+    if isinstance(json, HttpResponse):
         return json
     elif isinstance(json, HttpResponseServerError):
         i = 0
