@@ -463,8 +463,11 @@ def git_stats(request):
                     for w in contrib.weeks:
                         a += w.a
                         d += w.d
-                    name = '<i>%s</i> <span style="color:#888">(%s)</span>' % (contrib.author.login, contrib.author.name)
-                    data.append({u'Contributors': name, u'Commits': contrib.total, u'Additions': a, u'Deletions': d})
+                    if contrib.author:
+                        au = '<i>%s</i> <span style="color:#888">(%s)</span>' % (contrib.author.login, contrib.author.name)
+                    else:
+                        au = '(None)'
+                    data.append({u'Contributors': au, u'Commits': contrib.total, u'Additions': a, u'Deletions': d})
                 data = sorted(data, key=operator.itemgetter(u'Commits'))            
                 return simplejson.dumps({'contrib':data}, sort_keys=True, indent=' ' * 4)
             else:
@@ -506,7 +509,11 @@ def git_stats(request):
                     for w in contrib.weeks:
                         a += w.a
                         d += w.d
-                    data.append({u'Contributors': contrib.author.login, u'Commits': contrib.total, u'Additions': a, u'Deletions': d})
+                    if contrib.author:
+                        au = contrib.author.login
+                    else:
+                        au = '(None)'
+                    data.append({u'Contributors': au, u'Commits': contrib.total, u'Additions': a, u'Deletions': d})
                 stats = ['Contributors']
                 desp['Contributors'] = ('string', 'Name')
                 del desp['Timestamp']

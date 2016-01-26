@@ -1,4 +1,4 @@
-from django.conf.urls import include, url, handler404, handler500
+from django.conf.urls import include, url, handler400, handler403, handler404, handler500
 # from django.conf.urls.static import static
 from django.contrib import admin
 # from django.contrib.auth.views import login
@@ -99,6 +99,8 @@ else:
 
     if DEBUG: urlpatterns.append(url(r'^test/?$', views.test))
 
+handler400 = views.error400
+handler403 = views.error403
 handler404 = views.error404
 handler500 = views.error500
 
