@@ -31,6 +31,10 @@ User-agent: msnbot-media
 User-agent: Slurp
 User-agent: Yahoo-Blogs
 User-agent: Yahoo-MMCrawler
+User-agent: Applebot
+User-agent: Twitterbot
+User-agent: Yandexbot
+User-agent: FacebookExternalHit
 
 # Directories
 Disallow: /.git/

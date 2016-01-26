@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 #, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -28,7 +28,7 @@ def design_2d(request, form=Design2DForm(), from_1d=False):
     return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
 
 def design_2d_run(request):
-    if request.method != 'POST': return error400(request)
+    if request.method != 'POST': return HttpResponseBadRequest('400: Bad Request')
     form = Design2DForm(request.POST)
     msg = ''
     if form.is_valid():
