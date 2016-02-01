@@ -450,9 +450,8 @@ def git_stats(request):
 
         if qs in ['init', 'num']:
             if qs == 'init':
-                contribs = repo.get_stats_contributors()
                 data = []
-                i = 0
+                (i, contribs) = (0, None)
                 while (contribs is None and i <= 5):
                     time.sleep(1)
                     contribs = repo.get_stats_contributors()
@@ -489,20 +488,32 @@ def git_stats(request):
             stats = ['Timestamp']
 
             if qs == 'c':
-                contribs = repo.get_stats_commit_activity()
+                (i, contribs) = (0, None)
+                while (contribs is None and i <= 5):
+                    time.sleep(1)
+                    contribs = repo.get_stats_commit_activity()
+                    i += 1
                 if contribs is None: return error500(request)
                 fields = ['Commits']
                 for contrib in contribs:
                     for i, day in enumerate(contrib.days):
                         data.append({u'Timestamp': contrib.week + timedelta(days=i), u'Commits': day})
             elif qs == 'ad':
-                contribs = repo.get_stats_code_frequency()
+                (i, contribs) = (0, None)
+                while (contribs is None and i <= 5):
+                    time.sleep(1)
+                    contribs = repo.get_stats_code_frequency()
+                    i += 1
                 if contribs is None: return error500(request)
                 fields = ['Additions', 'Deletions']
                 for contrib in contribs:
                     data.append({u'Timestamp': contrib.week, u'Additions': contrib.additions, u'Deletions': contrib.deletions})
             elif qs == 'au':
-                contribs = repo.get_stats_contributors()
+                (i, contribs) = (0, None)
+                while (contribs is None and i <= 5):
+                    time.sleep(1)
+                    contribs = repo.get_stats_contributors()
+                    i += 1
                 if contribs is None: return error500(request)
                 fields = ['Commits', 'Additions', 'Deletions']
                 for contrib in contribs:
