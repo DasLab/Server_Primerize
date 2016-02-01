@@ -276,7 +276,9 @@
           </div>
 
           <hr/>
-          <div class="container-fluid starter-template" id="footer" style="padding: 0px 15px;"></div>
+          <div class="container-fluid starter-template" id="footer" style="padding: 0px 15px;">
+            {% include "media/html/_footer.html" %}
+          </div>
         </div>
       </div>
       <!-- END Content -->
@@ -298,11 +300,8 @@
 
     $(document).ready(function(){
       $("#wait").fadeOut(250);
-      $("#footer").load("/site_media/html/_footer.html", function () {
-        var today = new Date();
-        $("#cp_year").text(today.getFullYear());
-      });
-
+      var today = new Date();
+      $("#cp_year").text(today.getFullYear());
     });
 
     $(window).on("beforeunload", function () {

@@ -456,6 +456,7 @@ def git_stats(request):
                 while (contribs is None and i <= 5):
                     time.sleep(1)
                     contribs = repo.get_stats_contributors()
+                    i += 1
                 if contribs is None: return error500(request)
 
                 for contrib in contribs:

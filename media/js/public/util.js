@@ -2,10 +2,8 @@ var scrollTimer, resizeTimer;
 
 $(document).ready(function () {
   $("#wait").fadeOut(500);
-  $("#footer").load("/site_media/html/_footer.html", function () {
-    var today = new Date();
-    $("#cp_year").text(today.getFullYear());
-  });
+  var today = new Date();
+  $("#cp_year").text(today.getFullYear());
 
   $(".dropdown-toggle").dropdown();
   $(".dropdown").hover(
