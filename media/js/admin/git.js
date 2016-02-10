@@ -33,7 +33,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/git_stat/?qs=ad',
         'containerId': 'plot_ad',
@@ -61,7 +61,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'PieChart',
         'dataSourceUrl': '/admin/git_stat/?qs=au',
         'containerId': 'plot_pie',
@@ -90,7 +90,7 @@ $.ajax({
         for (var i = 0; i < data.contrib.length; i++) {
             html += '<tr><td>' + data.contrib[i].Contributors + '</td><td><span class="pull-right" style="color:#00f;">' + data.contrib[i].Commits + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="pull-right" style="color:#080;">' + data.contrib[i].Additions + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="pull-right" style="color:#f00;">' + data.contrib[i].Deletions + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>';
         }
-        html += '<tr><td colspan="4" style="padding: 0px;"></td></tr>'
+        html += '<tr><td colspan="4" style="padding: 0px;"></td></tr>';
         $("#git_table_body").html(html).removeClass('place_holder');
     }
 });

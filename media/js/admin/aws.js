@@ -66,7 +66,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=latency&sp=7d',
         'containerId': 'plot_lat2',
@@ -94,7 +94,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'ColumnChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=request&sp=48h',
         'containerId': 'plot_req1',
@@ -119,7 +119,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=request&sp=7d',
         'containerId': 'plot_req2',
@@ -147,7 +147,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'ColumnChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=cpu&sp=48h',
         'containerId': 'plot_cpu1',
@@ -172,7 +172,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=cpu&sp=7d',
         'containerId': 'plot_cpu2',
@@ -200,7 +200,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=host&sp=7d',
         'containerId': 'plot_host',
@@ -229,7 +229,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=credit&sp=7d',
         'containerId': 'plot_credit',
@@ -257,7 +257,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=status&sp=7d',
         'containerId': 'plot_status',
@@ -286,7 +286,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=network&sp=7d',
         'containerId': 'plot_net',
@@ -313,7 +313,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=volbytes&sp=7d',
         'containerId': 'plot_vol',
@@ -341,7 +341,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=23xx&sp=7d',
         'containerId': 'plot_23xx',
@@ -368,7 +368,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/aws_stat/?qs=45xx&sp=7d',
         'containerId': 'plot_45xx',

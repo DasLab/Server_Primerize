@@ -118,7 +118,7 @@ function draw_single_plate(element, data, flag) {
                         }
 
                         tooltip.transition().duration(200)
-                            .style("opacity", .9);
+                            .style("opacity", 0.9);
                         tooltip.html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td><p><span class="label label-primary">' + d.pos + '</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>' + label + '</p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td style="word-break:break-all"><code style="padding:0px; border-radius:0px;">' + d.sequence + '</code></td></tr></tbody></table>')
                             .style({"left": (pageX - 180) + "px", "top": (pageY + 20) + "px"});
                     }, 200); 
@@ -147,7 +147,9 @@ function draw_96_plate(job_id) {
         dataType: "json",
         success: function(data) {
             var unit = parseInt($("[id^='svg_plt_']").first().width() / 30);
-            cell_radius = unit, cell_stroke = unit / 5, tick_width = unit * 3;
+            cell_radius = unit;
+            cell_stroke = unit / 5;
+            tick_width = unit * 3;
 
             for (var plt_key in data.plates) {
                 for (var prm_key in data.plates[plt_key].primers) {

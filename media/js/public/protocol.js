@@ -23,7 +23,9 @@ $(document).ready(function () {
 
 
   var unit = parseInt($("#par_plate_final1").width() / 33);
-  cell_radius = unit, cell_stroke = unit / 5, tick_width = unit * 3;
+  cell_radius = unit;
+  cell_stroke = unit / 5;
+  tick_width = unit * 3;
 
   $.ajax({
     url: '/site_media/images/docs/par_plate_final.json',

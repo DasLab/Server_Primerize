@@ -107,7 +107,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=chart&sp=7d',
         'containerId': 'chart_7d',
@@ -133,7 +133,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=chart&sp=1m',
         'containerId': 'chart_1m',
@@ -159,7 +159,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'AreaChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=chart&sp=3m',
         'containerId': 'chart_3m',
@@ -186,7 +186,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'PieChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=pie&sp=session',
         'containerId': 'pie_session',
@@ -203,7 +203,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'PieChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=pie&sp=user',
         'containerId': 'pie_user',
@@ -220,7 +220,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'PieChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=pie&sp=browser',
         'containerId': 'pie_browser',
@@ -237,7 +237,7 @@ function drawDash() {
     google.visualization.events.addListener(chart, 'ready', readyHandler);
     chart.draw();
     gviz_handles.push(chart);
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'PieChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=pie&sp=pageview',
         'containerId': 'pie_pageview',
@@ -255,7 +255,7 @@ function drawDash() {
     chart.draw();
     gviz_handles.push(chart);
 
-    var chart = new google.visualization.ChartWrapper({
+    chart = new google.visualization.ChartWrapper({
         'chartType': 'GeoChart',
         'dataSourceUrl': '/admin/ga_stat/?qs=geo',
         'containerId': 'geo_session',
