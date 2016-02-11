@@ -25,7 +25,10 @@ function drawDash() {
                 'monthOutlineColor': {'stroke': '#d86f5c', 'strokeOpacity': 0.8, 'strokeWidth': 2},
                 'dayOfWeekLabel': {'color': '#000'}
             },
-            'colorAxis': { 'minValue': 0, 'colors': ['#e8f9f5', '#5496d7']},
+            'colorAxis': {
+                'values': [0, 3, 6, 9, 12],
+                'colors': ['#f8f8f8', '#fae621', '#5cc861', '#23888d', '#3a518a']
+            },
             'animation': {'startup': true, 'duration': 1000, 'easing': 'inAndOut'}
         }
     });

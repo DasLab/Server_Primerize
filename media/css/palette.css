@@ -43,13 +43,13 @@ p.cap:first-letter {
 	border-color: #ff5c2b;
 }
 .btn-warning {
-	background-color: #fec78a;
-	border-color: #cb9f6e;
+	background-color: #eeb211;
+	border-color: #be8e0d;
 	color: #000 !important;
 }
 .btn-warning:hover {
-	background-color: #fed2a1;
-	border-color: #fec78a;
+	background-color: #f3c958;
+	border-color: #eeb211;
 }
 .btn-primary {
 	background-color: #5496d7;
