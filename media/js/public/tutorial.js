@@ -72,6 +72,6 @@ $(window).on("scroll", function () {
 
 $(window).on("resize", function() {
   clearTimeout($.data(this, 'resizeTimer'));
-  $.data(this, 'resizeTimer', setTimeout(resize(), 200));
+  $.data(this, 'resizeTimer', setTimeout(resize, 200));
 });
 
