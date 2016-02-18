@@ -11,36 +11,27 @@ $(document).ready(function() {
 
     $.ajax({
         url : "/admin/get_backup/",
-        dataType: "text",
+        dataType: "json",
         success : function (data) {
-            var txt = data.split(/\t/);
+            $("#id_design_1d").html('<i>' + data['1d'][0] + '</i>');
+            $("#id_design_1d_s").html('<span style="color:#00f;">' + data['1d'][1] + '</span>');
+            $("#id_design_2d").html('<i>' + data['2d'][0] + '</i>');
+            $("#id_design_2d_s").html('<span style="color:#00f;">' + data['2d'][1] + '</span>');
+            $("#id_design_3d").html('<i>' + data['3d'][0] + '</i>');
+            $("#id_design_3d_s").html('<span style="color:#00f;">' + data['3d'][1] + '</span>');
 
-            $("#id_design_1d").html('<i>' + txt[0] + '</i>');
-            $("#id_design_1d_s").html('<span style="color:#00f;">' + txt[1] + '</span>');
-            $("#id_design_2d").html('<i>' + txt[2] + '</i>');
-            $("#id_design_2d_s").html('<span style="color:#00f;">' + txt[3] + '</span>');
-            $("#id_design_3d").html('<i>' + txt[4] + '</i>');
-            $("#id_design_3d_s").html('<span style="color:#00f;">' + txt[5] + '</span>');
+            $("#id_mysql_s").html('<span style="color:#00f;">' + data.backup.mysql[1] + '</span>');
+            $("#id_static_s").html('<span style="color:#00f;">' + data.backup.static[1] + '</span>');
+            $("#id_apache_s").html('<span style="color:#00f;">' + data.backup.apache[1] + '</span>');
+            $("#id_config_s").html('<span style="color:#00f;">' + data.backup.config[1] + '</span>');
+            $("#id_mysql_p").html($("#id_mysql_p").html() + '<br/><code>' + data.backup.mysql[0] + '</code>');
+            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + data.backup.static[0] + '</code>');
+            $("#id_apache_p").html($("#id_apache_p").html() + '<br/><code>' + data.backup.apache[0] + '</code>');
+            $("#id_config_p").html($("#id_config_p").html() + '<br/><code>' + data.backup.config[0] + '</code>');
 
-            $("#id_mysql_s").html('<span style="color:#00f;">' + txt[6] + '</span>');
-            $("#id_static_s").html('<span style="color:#00f;">' + txt[7] + '</span>');
-            $("#id_apache_s").html('<span style="color:#00f;">' + txt[8] + '</span>');
-            $("#id_config_s").html('<span style="color:#00f;">' + txt[9] + '</span>');
-            $("#id_mysql_p").html($("#id_mysql_p").html() + '<br/><code>' + txt[11] + '</code>');
-            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + txt[12] + '</code>');
-            $("#id_apache_p").html($("#id_apache_p").html() + '<br/><code>' + txt[13] + '</code>');
-            $("#id_config_p").html($("#id_config_p").html() + '<br/><code>' + txt[14] + '</code>');
-
-            var gdrive = txt[15].split(/~|~/);
-            var names = [], sizes = [], times = [];
-            for (var i = 0; i < gdrive.length; i += 12) {
-                names.push(gdrive[i+2]);
-                sizes.push(gdrive[i+4] + ' ' + gdrive[i+6]);
-                times.push(gdrive[i+8] + ' ' + gdrive[i+10]);
-            }
             var html = '';
-            for (var i = 0; i < names.length; i++) {
-                html += '<tr><td><code>' + names[i] + '</code></td><td><span class="label label-primary">' + times[i] + '</span></td><td><span style="color:#00f;">' + sizes[i] + '</span></td></tr>';
+            for (var i = 0; i < data.gdrive.length; i++) {
+                html += '<tr><td><code>' + data.gdrive[i][0] + '</code></td><td><span class="label label-primary">' + data.gdrive[i][2] + '</span></td><td><span style="color:#00f;">' + data.gdrive[i][1] + '</span></td></tr>';
             }
             html += '<tr><td colspan="3" style="padding: 0px;"></td></tr>';
             $("#gdrive_list").html(html);
@@ -50,15 +41,13 @@ $(document).ready(function() {
 
     $.ajax({
         url : "/admin/get_ver/",
-        dataType: "text",
+        dataType: "json",
         success : function (data) {
-            var txt = data.split(/\t/);
-            var drive_free = parseFloat(txt[47]), drive_used = parseFloat(txt[46]), drive_total = parseFloat(txt[48]);
+            var drive_used = parseFloat(data._drive[0]), drive_free = parseFloat(data._drive[1]), drive_total = parseFloat(data._drive[2]);
             $("#id_drive_space > div > div.progress-bar-success").css("width", (drive_free / drive_total * 100).toString() + '%' ).html(drive_free + ' G');
             $("#id_drive_space > div > div.progress-bar-danger").css("width", (100 - drive_free / drive_total * 100).toString() + '%' ).html(drive_used + ' G');
-            var disk_sp = txt[38].split(/\//);
-            $("#id_disk_space > div > div.progress-bar-success").css("width", (parseFloat(disk_sp[0]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[0]);
-            $("#id_disk_space > div > div.progress-bar-danger").css("width", (parseFloat(disk_sp[1]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[1]);
+            $("#id_disk_space > div > div.progress-bar-success").css("width", (parseFloat(data._disk[0]) / (parseFloat(data._disk[0]) + parseFloat(data._disk[1])) * 100).toString() + '%' ).html(data._disk[0]);
+            $("#id_disk_space > div > div.progress-bar-danger").css("width", (parseFloat(data._disk[1]) / (parseFloat(data._disk[0]) + parseFloat(data._disk[1])) * 100).toString() + '%' ).html(data._disk[1]);
         }
     });
 

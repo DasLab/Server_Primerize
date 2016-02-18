@@ -2,6 +2,7 @@
 
 backup/*.*gz
 cache/*.txt
+cache/*.json
 cache/*.log
 
 data/*

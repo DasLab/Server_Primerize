@@ -154,14 +154,14 @@ def doc_old(request):
 
 
 def get_ver(request):
-    lines = open('%s/cache/stat_sys.txt' % MEDIA_ROOT, 'r').readlines()
+    lines = open('%s/cache/stat_sys.json' % MEDIA_ROOT, 'r').readlines()
     lines = ''.join(lines)
-    return HttpResponse(lines, content_type='text/plain')
+    return HttpResponse(lines, content_type='application/json')
 
 def get_backup(request):
-    lines = open('%s/cache/stat_backup.txt' % MEDIA_ROOT, 'r').readlines()
+    lines = open('%s/cache/stat_backup.json' % MEDIA_ROOT, 'r').readlines()
     lines = ''.join(lines)
-    return HttpResponse(lines, content_type='text/plain')
+    return HttpResponse(lines, content_type='application/json')
 
 
 admin.site.register_view('backup/', view=backup, visible=False)

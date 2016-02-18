@@ -11,80 +11,73 @@ $(document).ready(function() {
 
   $.ajax({
         url : "/admin/get_ver/",
-        dataType: "text",
+        dataType: "json",
         success : function (data) {
-            var txt = data.split(/\t/);
+            $("#id_linux").html(data.linux);
+            $("#id_python").html(data.python);
+            $("#id_django").html(data.django);
+            $("#id_django_crontab").html(data.django_crontab);
+            $("#id_django_environ").html(data.django_environ);
+            $("#id_mysql").html(data.mysql);
+            $("#id_apache").html(data.apache);
+            $("#id_wsgi").html(data.mod_wsgi);
+            $("#id_ssl").html(data.openssl);
 
-            $("#id_linux").html(txt[0]);
-            $("#id_python").html(txt[1]);
-            $("#id_django").html(txt[2]);
-            $("#id_django_crontab").html(txt[3]);
-            $("#id_django_environ").html(txt[4]);
-            $("#id_mysql").html(txt[5]);
-            $("#id_apache").html(txt[6]);
-            $("#id_wsgi").html(txt[7]);
-            $("#id_ssl").html(txt[8]);
+            $("#id_jquery").html(data.jquery);
+            $("#id_bootstrap").html(data.bootstrap);
+            $("#id_django_suit").html(data.django_suit);
+            $("#id_django_adminplus").html(data.django_adminplus);
+            $("#id_django_filemanager").html(data.django_filemanager);
+            $("#id_d3").html(data.d3);
+            $("#id_zclip").html(data.zclip);
+            $("#id_gvizapi").html(data.gviz_api);
 
-            $("#id_jquery").html(txt[9]);
-            $("#id_bootstrap").html(txt[10]);
-            $("#id_django_suit").html(txt[11]);
-            $("#id_django_adminplus").html(txt[12]);
-            $("#id_django_filemanager").html(txt[13]);
-            $("#id_d3").html(txt[14]);
-            $("#id_zclip").html(txt[15]);
-            $("#id_gvizapi").html(txt[16]);
+            $("#id_ssh").html(data.ssh);
+            $("#id_git").html(data.git);
+            $("#id_llvm").html(data.llvm);
+            $("#id_nano").html(data.nano);
+            $("#id_gdrive").html(data.gdrive);
+            $("#id_zip").html(data.zip);
+            $("#id_curl").html(data.curl);
+            $("#id_boto").html(data.boto);
+            $("#id_pygit").html(data.pygithub);
 
-            $("#id_ssh").html(txt[17]);
-            $("#id_git").html(txt[18]);
-            $("#id_llvm").html(txt[19]);
-            $("#id_nano").html(txt[20]);
-            $("#id_gdrive").html(txt[21]);
-            $("#id_zip").html(txt[22]);
-            $("#id_curl").html(txt[23]);
-            $("#id_boto").html(txt[24]);
-            $("#id_pygit").html(txt[25]);
+            $("#id_xlwt").html(data.xlwt);
+            $("#id_request").html(data.requests);
+            $("#id_simplejson").html(data.simplejson);
+            $("#id_virtualenv").html(data.virtualenv);
+            $("#id_pip").html(data.pip);
 
-            $("#id_xlwt").html(txt[26]);
-            $("#id_request").html(txt[27]);
-            $("#id_simplejson").html(txt[28]);
-            $("#id_virtualenv").html(txt[29]);
-            $("#id_pip").html(txt[30]);
+            $("#id_numpy").html(data.numpy);
+            $("#id_scipy").html(data.scipy);
+            $("#id_matplotlib").html(data.matplotlib);
+            $("#id_numba").html(data.numba);
 
-            $("#id_numpy").html(txt[31]);
-            $("#id_scipy").html(txt[32]);
-            $("#id_matplotlib").html(txt[33]);
-            $("#id_numba").html(txt[34]);
+            $("#id_yui").html(data.yuicompressor);
+            $("#id_rdatkit").html(data.RDAT_Kit);
+            $("#id_primerize").html(data.NA_Thermo);
 
-            $("#id_yui").html(txt[35]);
-            $("#id_rdatkit").html(txt[36]);
-            $("#id_primerize").html(txt[37]);
-
-            var drive_free = parseFloat(txt[47]), drive_used = parseFloat(txt[46]), drive_total = parseFloat(txt[48]);
+            var drive_used = parseFloat(data._drive[0]), drive_free = parseFloat(data._drive[1]), drive_total = parseFloat(data._drive[2]);
             $("#id_drive_space > div > div.progress-bar-success").css("width", (drive_free / drive_total * 100).toString() + '%' ).html(drive_free + ' G');
             $("#id_drive_space > div > div.progress-bar-danger").css("width", (100 - drive_free / drive_total * 100).toString() + '%' ).html(drive_used + ' G');
-            var disk_sp = txt[38].split(/\//);
-            $("#id_disk_space > div > div.progress-bar-success").css("width", (parseFloat(disk_sp[0]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[0]);
-            $("#id_disk_space > div > div.progress-bar-danger").css("width", (parseFloat(disk_sp[1]) / (parseFloat(disk_sp[0]) + parseFloat(disk_sp[1])) * 100).toString() + '%' ).html(disk_sp[1]);
-            var mem_sp = txt[39].split(/\//);
-            $("#id_memory > div > div.progress-bar-success").css("width", (parseFloat(mem_sp[0]) / (parseFloat(mem_sp[0]) + parseFloat(mem_sp[1])) * 100).toString() + '%' ).html(mem_sp[0]);
-            $("#id_memory > div > div.progress-bar-danger").css("width", (parseFloat(mem_sp[1]) / (parseFloat(mem_sp[0]) + parseFloat(mem_sp[1])) * 100).toString() + '%' ).html(mem_sp[1]);
+            $("#id_disk_space > div > div.progress-bar-success").css("width", (parseFloat(data._disk[0]) / (parseFloat(data._disk[0]) + parseFloat(data._disk[1])) * 100).toString() + '%' ).html(data._disk[0]);
+            $("#id_disk_space > div > div.progress-bar-danger").css("width", (parseFloat(data._disk[1]) / (parseFloat(data._disk[0]) + parseFloat(data._disk[1])) * 100).toString() + '%' ).html(data._disk[1]);
+            $("#id_memory > div > div.progress-bar-success").css("width", (parseFloat(data._mem[0]) / (parseFloat(data._mem[0]) + parseFloat(data._mem[1])) * 100).toString() + '%' ).html(data._mem[0]);
+            $("#id_memory > div > div.progress-bar-danger").css("width", (parseFloat(data._mem[1]) / (parseFloat(data._mem[0]) + parseFloat(data._mem[1])) * 100).toString() + '%' ).html(data._mem[1]);
+            $("#id_cpu").html('<span style="color:#f00;">' + data._cpu[0] + '</span> | <span style="color:#080;">' + data._cpu[1] + '</span> | <span style="color:#00f;">' + data._cpu[2] + '</span>');
 
-            var cpu = txt[40].split(/\//);
-            $("#id_cpu").html('<span style="color:#f00;">' + cpu[0] + '</span> | <span style="color:#080;">' + cpu[1] + '</span> | <span style="color:#00f;">' + cpu[2] + '</span>');
-
-            $("#id_base_dir").html('<code>' + txt[41] + '</code>');
-            $("#id_media_root").html('<code>' + txt[42] + '</code>');
-            $("#id_static_root").html('<code>' + txt[43] + '</code>');
-            $("#id_primerize_path").html('<code>' + txt[44] + '</code>');
-            $("#id_rdatkit_path").html('<code>' + txt[45] + '</code>');
+            $("#id_base_dir").html('<code>' + data._path.root + '</code>');
+            $("#id_media_root").html('<code>' + data._path.media + '</code>');
+            $("#id_static_root").html('<code>' + data._path.data + '</code>');
+            $("#id_primerize_path").html('<code>' + data._path.NA_Thermo + '</code>');
+            $("#id_rdatkit_path").html('<code>' + data._path.RDAT_Kit + '</code>');
         }
     });
     $.ajax({
         url : "/admin/get_backup/",
-        dataType: "text",
+        dataType: "json",
         success : function (data) {
-            var txt = data.split(/\t/);
-            $("#id_backup").html('<span style="color:#00f;">' + txt[10] + '</span>');
+            $("#id_backup").html('<span style="color:#00f;">' + data.backup.all + '</span>');
         }
     });
 
