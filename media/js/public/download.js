@@ -17,7 +17,8 @@ $(document).ready(function () {
 		$("#id_is_subscribe").attr("checked", "checked");
 
 		$("#message").addClass("alert-success");
-		$("#message").html('<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b class="lead">Your registration was successful.</b><br/>You will be notified about future Primerize updates depending on your subscription preference.<br/><br/>Your download should start automatically. If not, please <a href="/site_data/primerize_release.zip"><i>click here</i>&nbsp;&nbsp;<span class="glyphicon glyphicon-floppy-save"></span></a>.');
-		$("head").append('<meta http-equiv="refresh" content="1;url=/site_data/primerize_release.zip">');
+		$("#message").html('<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b class="lead">Your registration was successful.</b><br/>You will be notified about future Primerize updates depending on your subscription preference.<br/><br/>Your download should start automatically. If not, please <a id="a_dl" href="/site_data/Primerize-master.zip" target="_blank" download><i>click here</i>&nbsp;&nbsp;<span class="glyphicon glyphicon-floppy-save"></span></a>.');
+		$("#a_dl")[0].click();
+		// $("head").append('<meta http-equiv="refresh" content="1;url=/site_data/primerize_release.zip">');
 	}
 });

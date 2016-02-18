@@ -1,0 +1,17 @@
+[
+    {
+        "version": "1.1.2",
+        "description": "",
+        "title": "support for python 3.x"
+    },
+    {
+        "version": "1.1.0",
+        "description": "Major release for with restructured and annotated classes.\r\nUpdated README and LICENSE, ready for distribution.",
+        "title": "restructured classes"
+    },
+    {
+        "version": "1.0.1",
+        "description": "Made primerize as python package, i.e. enabling \"import primerize\". \r\nCompleted command-line argparse for primerze_1d and primerze_2d functions.\r\nDisabled @jit \"cache=True\" due to setuptools install.",
+        "title": "primerize as python package"
+    }
+]

@@ -38,8 +38,10 @@ def about(request):
     return render_to_response(PATH.HTML_PATH['about'], {'history': history_list}, context_instance=RequestContext(request))
 
 def download(request):
+    result = simplejson.load(open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'r'))
+
     if request.method != 'POST':
-        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'flag': 0}, context_instance=RequestContext(request))
+        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'flag': 0, 'dist': result}, context_instance=RequestContext(request))
     else:
         flag = -1
         form = DownloadForm(request.POST)
@@ -55,7 +57,7 @@ def download(request):
                 user.save()
                 flag = 1
 
-        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': form, 'flag': flag}, context_instance=RequestContext(request))
+        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': form, 'flag': flag, 'dist': result}, context_instance=RequestContext(request))
 
 
 def result(request):
