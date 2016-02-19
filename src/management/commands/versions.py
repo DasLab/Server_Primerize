@@ -64,7 +64,7 @@ class Command(BaseCommand):
             ver['zclip'] = ver_zclip[ver_zclip.find('v')+1:].strip()
             ver['gviz_api'] = '1.8.2'
 
-            open(os.path.join(MEDIA_ROOT, 'data/temp.txt'), 'w').write(subprocess.Popen('ssh -V 2', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip())
+            open(os.path.join(MEDIA_ROOT, 'data/temp.txt'), 'w').write(subprocess.Popen('ssh -V', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip())
             ver['ssh'] = subprocess.Popen("sed 's/^OpenSSH\_//g' %s | sed 's/U.*//' | sed 's/,.*//g' | sed 's/[a-z]/./g'" % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
             ver['git'] = subprocess.Popen("git --version | sed 's/.*version //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
             ver['llvm'] = subprocess.Popen("llvm-config --version", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
@@ -142,8 +142,36 @@ class Command(BaseCommand):
             if DEBUG: prefix = '_DEBUG'
             ver['_drive'] = subprocess.Popen("%s && drive quota | awk '{ printf $2 \" G\t\"}'" % gdrive_dir, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\t')
 
+
+            if not DEBUG:
+                ver['ubuntu'] = subprocess.Popen("lsb_release -a | head -2 | tail -1 | sed 's/.*Ubuntu //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+                ver['htop'] = subprocess.Popen("htop --version | head -1 | sed 's/.*htop //g' | sed 's/ \-.*//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+                open(os.path.join(MEDIA_ROOT, 'data/temp.txt'), 'w').write(subprocess.Popen('aws --version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip())
+                ver['aws_cli'] = subprocess.Popen("sed 's/ Python.*//g' %s | sed 's/.*\///g'" % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+
+            ver['screen'] = subprocess.Popen("screen --version | sed 's/.*version//g' | sed 's/(.*//g' | sed 's/[a-z ]//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['bash'] = subprocess.Popen("bash --version | head -1 | sed 's/.*version//g' | sed 's/-release.*//g' | sed 's/[ ()]//g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['gcc'] = subprocess.Popen("gcc --version | head -1 | sed 's/.*) //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['make'] = subprocess.Popen("make --version | head -1 | sed 's/.*Make//g' | sed 's/ //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['cmake'] = subprocess.Popen("cmake --version | head -1 | sed 's/.*version//g' | sed 's/ //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['ninja'] = subprocess.Popen("ninja --version", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            open(os.path.join(MEDIA_ROOT, 'data/temp.txt'), 'w').write(subprocess.Popen('javac -version', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip())
+            ver['java'] = subprocess.Popen("sed 's/.*javac//g' %s | sed 's/_/./g'" % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['coreutils'] = subprocess.Popen("tty --version | head -1 | sed 's/.*) //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['wget'] = subprocess.Popen("wget --version | head -1 | sed 's/.*Wget//g' | sed 's/built.*//g' | sed 's/ //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['tar'] = subprocess.Popen("tar --version | head -1 | sed 's/.*)//g' | sed 's/-.*//g' | sed 's/ //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['setuptools']= subprocess.Popen('python -c "import setuptools; print setuptools.__version__"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['tkinter']= subprocess.Popen('python -c "import Tkinter; print Tkinter.Tcl().eval(\'info patchlevel\')"', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+            ver['imagemagick'] = subprocess.Popen("mogrify -version | head -1 | sed 's/\-.*//g' | sed 's/.*ImageMagick //g'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip()
+
+
             open(os.path.join(MEDIA_ROOT, 'cache/stat_sys.json'), 'w').write(simplejson.dumps(ver, indent=' ' * 4, sort_keys=True))
             subprocess.Popen('rm %s' % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+            if not DEBUG:
+                ver_txt = "$(tput setab 1) ubuntu %s | linux %s | screen %s | bash %s | ssh %s $(tput sgr 0)\n$(tput setab 172) gcc %s | make %s | cmake %s | ninja %s | llvm %s | numba %s $(tput sgr 0)\n$(tput setab 11)$(tput setaf 16) python %s | java %s | mysql %s |$(tput sgr 0)$(tput setab 2) apache %s | wsgi %s | openssl %s $(tput sgr 0)\n$(tput setab 22) coreutils %s | wget %s | tar %s | curl %s | gdrive %s | yuicompressor %s $(tput sgr 0)\n$(tput setab 39) tkinter %s | virtualenv %s | setuptools %s | requests %s | simplejson %s $(tput sgr 0)\n$(tput setab 20) django %s | crontab %s | environ %s | suit %s | adminplus %s | filemanager %s $(tput sgr 0)\n$(tput setab 55) numpy %s | scipy %s | matplotlib %s | boto %s | pygithub %s | gviz %s $(tput sgr 0)\n$(tput setab 171) jquery %s | bootstrap %s | d3 %s | zeroclipboard %s |$(tput sgr 0)$(tput setab 15)$(tput setaf 16) rdatkit %s | primerize %s $(tput sgr 0)\n$(tput setab 8) git %s | pip %s | nano %s | imagemagick %s | htop %s | awscli %s $(tput sgr 0)\n\n\n$(tput setab 15)$(tput setaf 16) Primerize PCR Assembly Design Server $(tput sgr 0)\n$(tput setab 15)$(tput setaf 16) primerize.stanford.edu / $(tput setaf 1)52$(tput setaf 16).$(tput setaf 2)33$(tput setaf 16).$(tput setaf 172)204$(tput setaf 16).$(tput setaf 4)5 $(tput sgr 0)\n" % (ver['ubuntu'], ver['linux'], ver['screen'], ver['bash'], ver['ssh'], ver['gcc'], ver['make'], ver['cmake'], ver['ninja'], ver['llvm'], ver['numba'], ver['python'], ver['jav'], ver['mysql'], ver['apache'], ver['mod_wsgi'], ver['openssl'], ver['coreutils'], ver['wget'], ver['tar'], ver['curl'], ver['gdrive'], ver['yuicompressor'], ver['tkinter'], ver['virtualenv'], ver['setuptools'], ver['requests'], ver['simplejson'], ver['django'], ver['django_crontab'], ver['django_environ'], ver['django_suit'], ver['django_adminplus'], ver['django_filemanager'], ver['numpy'], ver['scipy'], ver['matplotlib'], ver['boto'], ver['pygithub'], ver['gviz_api'], ver['jquery'], ver['bootstrap'], ver['d3'], ver['zclip'], ver['RDAT_Kit'], ver['NA_Thermo'], ver['git'], ver['pip'], ver['nano'], ver['imagemagick'], ver['htop'], ver['aws_cli'])
+                open('~/.ver_txt', 'w').write(ver_txt)
+
         except:
             err = traceback.format_exc()
             ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))

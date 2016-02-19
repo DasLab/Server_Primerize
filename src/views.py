@@ -117,7 +117,6 @@ def get_ver(request):
 
 
 def test(request):
-    get_backup_stat()
     # print request.META
     raise ValueError
     return error400(request)
