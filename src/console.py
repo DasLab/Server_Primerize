@@ -383,7 +383,16 @@ def ga_stats(request):
                 else:
                     return error400(request)
 
-                temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=%s&end-date=%s&metrics=ga%ssessions&dimensions=ga%s%s&access_token=%s' % (url_colon, GA['ID'], d1, d2, url_colon, url_colon, dm, access_token)).json()['rows']
+                i = 0
+                while True:
+                    temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=%s&end-date=%s&metrics=ga%ssessions&dimensions=ga%s%s&access_token=%s' % (url_colon, GA['ID'], d1, d2, url_colon, url_colon, dm, access_token)).json()
+                    if temp.has_key('rows'):
+                        temp = temp['rows']
+                        break
+                    time.sleep(2)
+                    i += 1
+                    if i == 3: return error500(request)
+
                 data = []
                 stats = ['Timestamp', 'Sessions']
                 desp = {'Timestamp':('datetime', 'Timestamp'), 'Samples':('number', 'Samples'), 'Unit':('string', 'Count'), 'Sessions':('number', 'Sessions')}
@@ -407,7 +416,16 @@ def ga_stats(request):
                 else:
                     return error400(request)
 
-                temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=30daysAgo&end-date=yesterday&metrics=ga%s%s&dimensions=ga%s%s&access_token=%s' % (url_colon, GA['ID'], url_colon, me, url_colon, dm, access_token)).json()['rows']
+                i = 0
+                while True:
+                    temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=30daysAgo&end-date=yesterday&metrics=ga%s%s&dimensions=ga%s%s&access_token=%s' % (url_colon, GA['ID'], url_colon, me, url_colon, dm, access_token)).json()
+                    if temp.has_key('rows'):
+                        temp = temp['rows']
+                        break
+                    time.sleep(2)
+                    i += 1
+                    if i == 3: return error500(request)
+
                 data = []
                 stats = ['Category', field]
                 desp = {'Samples':('number', 'Samples'), 'Unit':('string', 'Count'), 'Category':('string', 'Category'), field:('number', field)}
@@ -424,7 +442,16 @@ def ga_stats(request):
                 return error400(request)
 
         elif qs == 'geo':
-            temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=30daysAgo&end-date=yesterday&metrics=ga%ssessions&dimensions=ga%scountry&access_token=%s' % (url_colon, GA['ID'], url_colon, url_colon, access_token)).json()['rows']
+            i = 0
+            while True:
+                temp = requests.get('https://www.googleapis.com/analytics/v3/data/ga?ids=ga%s%s&start-date=30daysAgo&end-date=yesterday&metrics=ga%ssessions&dimensions=ga%scountry&access_token=%s' % (url_colon, GA['ID'], url_colon, url_colon, access_token)).json()
+                if temp.has_key('rows'):
+                    temp = temp['rows']
+                    break
+                time.sleep(2)
+                i += 1
+                if i == 3: return error500(request)
+
             data = []
             stats = ['Country', 'Sessions']
             desp = {'Samples':('number', 'Samples'), 'Unit':('string', 'Count'), 'Country':('string', 'Country'), 'Sessions':('number', 'Sessions')}
