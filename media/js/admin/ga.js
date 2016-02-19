@@ -91,7 +91,7 @@ function drawDash() {
             'title': 'Last 24 Hours',
             'titleTextStyle': {'bold': false, 'fontSize': 16},
             'vAxis': {
-                'title': 'Milliseconds (ms)',
+                'title': 'Count (#)',
                 'titleTextStyle': {'bold': true},
             },
             'hAxis': {
@@ -117,7 +117,7 @@ function drawDash() {
             'title': 'Last 7 Days',
             'titleTextStyle': {'bold': false, 'fontSize': 16},
             'vAxis': {
-                'title': 'Milliseconds (ms)',
+                'title': 'Count (#)',
                 'titleTextStyle': {'bold': true},
             },
             'hAxis': {
@@ -143,7 +143,7 @@ function drawDash() {
             'title': 'Last 30 Days',
             'titleTextStyle': {'bold': false, 'fontSize': 16},
             'vAxis': {
-                'title': 'Milliseconds (ms)',
+                'title': 'Count (#)',
                 'titleTextStyle': {'bold': true},
             },
             'hAxis': {
@@ -169,7 +169,7 @@ function drawDash() {
             'title': 'Last 90 Days',
             'titleTextStyle': {'bold': false, 'fontSize': 16},
             'vAxis': {
-                'title': 'Milliseconds (ms)',
+                'title': 'Count (#)',
                 'titleTextStyle': {'bold': true},
             },
             'hAxis': {
