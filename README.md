@@ -34,7 +34,7 @@ The `django-filemanager` is a modified version of https://github.com/IMGIITRoork
 
 **Primerize Server** also requires proper setup of `llvm`, `mysql.server`, `apache2`, `mod_wsgi`, `openssl`, `gdrive`, `awscli`, and `cron` jobs.
 
-Lastly, assets preparation is required for the 1st time through running `util_prep_dir.sh`, `util_system_version.sh`, `util_minify.sh`, `util_chmod.sh` and manually replacing `config/*.conf`. For full configuration, please refer to **Documentation**.
+Lastly, assets preparation is required for the 1st time through running `sudo python manage.py versions`, `sudo python manage.py dist`, `util_prep_dir.sh`, `util_src_dist.sh`, `util_minify.sh`, `util_chmod.sh` and manually replacing `config/*.conf`. For full configuration, please refer to **Documentation**.
 
 
 ## Usage

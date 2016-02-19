@@ -21,11 +21,11 @@ $(document).ready(function() {
             $("#id_design_3d_s").html('<span style="color:#00f;">' + data['3d'][1] + '</span>');
 
             $("#id_mysql_s").html('<span style="color:#00f;">' + data.backup.mysql[1] + '</span>');
-            $("#id_static_s").html('<span style="color:#00f;">' + data.backup.static[1] + '</span>');
+            $("#id_static_s").html('<span style="color:#00f;">' + data.backup.data[1] + '</span>');
             $("#id_apache_s").html('<span style="color:#00f;">' + data.backup.apache[1] + '</span>');
             $("#id_config_s").html('<span style="color:#00f;">' + data.backup.config[1] + '</span>');
             $("#id_mysql_p").html($("#id_mysql_p").html() + '<br/><code>' + data.backup.mysql[0] + '</code>');
-            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + data.backup.static[0] + '</code>');
+            $("#id_static_p").html($("#id_static_p").html() + '<br/><code>' + data.backup.data[0] + '</code>');
             $("#id_apache_p").html($("#id_apache_p").html() + '<br/><code>' + data.backup.apache[0] + '</code>');
             $("#id_config_p").html($("#id_config_p").html() + '<br/><code>' + data.backup.config[0] + '</code>');
 

@@ -71,7 +71,7 @@ def get_backup_stat():
         '3d': [len(glob.glob('%s/data/3d/*' % MEDIA_ROOT)), humansize(get_folder_size('%s/data/3d/*' % MEDIA_ROOT))],
         'backup': {
             'mysql': [os.path.join(MEDIA_ROOT, 'backup/backup_mysql.tgz'), humansize(os.path.getsize('%s/backup/backup_mysql.tgz' % MEDIA_ROOT))],
-            'static': [os.path.join(MEDIA_ROOT, 'backup/backup_static.tgz'), humansize(os.path.getsize('%s/backup/backup_static.tgz' % MEDIA_ROOT))],
+            'data': [os.path.join(MEDIA_ROOT, 'backup/backup_static.tgz'), humansize(os.path.getsize('%s/backup/backup_static.tgz' % MEDIA_ROOT))],
             'apache': [os.path.join(MEDIA_ROOT, 'backup/backup_apache.tgz'), humansize(os.path.getsize('%s/backup/backup_apache.tgz' % MEDIA_ROOT))],
             'config': [os.path.join(MEDIA_ROOT, 'backup/backup_config.tgz'), humansize(os.path.getsize('%s/backup/backup_config.tgz' % MEDIA_ROOT))],
             'all': humansize(get_folder_size('%s/backup/*.*gz' % MEDIA_ROOT)),

@@ -103,15 +103,13 @@ def get_user(request):
     return HttpResponse(simplejson.dumps({'user': user}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def get_js(request):
-    lines = open('%s/cache/stat_sys.txt' % MEDIA_ROOT, 'r').readlines()
-    lines = ''.join(lines).split('\t')
-    json = {'jquery':lines[9], 'bootstrap':lines[10], 'd3':lines[14], 'zclip':lines[15]}
+    stats = simplejson.load(open('%s/cache/stat_sys.json' % MEDIA_ROOT, 'r'))
+    json = {'jquery':stats['jquery'], 'bootstrap':stats['bootstrap'], 'd3':stats['d3'], 'zclip':stats['zclip']}
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def get_ver(request):
-    lines = open('%s/cache/stat_sys.txt' % MEDIA_ROOT, 'r').readlines()
-    lines = ''.join(lines).split('\t')
-    json = {'primerize':lines[37]}
+    stats = simplejson.load(open('%s/cache/stat_sys.json' % MEDIA_ROOT, 'r'))
+    json = {'primerize':stats['NA_Thermo']}
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
