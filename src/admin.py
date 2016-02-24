@@ -8,8 +8,6 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.core.management import call_command
 
-import time
-
 from src.console import *
 from src.models import *
 from src.settings import *

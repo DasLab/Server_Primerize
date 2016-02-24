@@ -94,7 +94,7 @@ class Command(BaseCommand):
             list_apache = subprocess.Popen("%s && drive list -q \"title contains '%s_' and (title contains '_apache.tgz' or title contains '_apache_DEBUG.tgz') and modifiedDate <= '%s'\"| awk '{ printf $1\" \"}'" % (gdrive_dir, env('SERVER_NAME'), old), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[1:]
             list_config = subprocess.Popen("%s && drive list -q \"title contains '%s_' and (title contains '_config.tgz' or title contains '_config_DEBUG.tgz') and modifiedDate <= '%s'\"| awk '{ printf $1\" \"}'" % (gdrive_dir, env('SERVER_NAME'), old), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split()[1:]
             list_all = list_mysql + list_static + list_apache + list_config
-        except:
+        except Exception:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to check obsolete \033[94mbackup\033[0m files.")
             err = traceback.format_exc()
             ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))

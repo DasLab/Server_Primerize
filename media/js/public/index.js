@@ -29,9 +29,9 @@ $(document).ready(function () {
     var val = $(this).val().match(/^([a-fA-F0-9]){0,16}/g);
     if (val) { $(this).val(val.join('')); }
     if ($(this).val().length == 16) {
-		$("#btn_retrieve").prop("disabled", false);
+    $("#btn_retrieve").prop("disabled", false);
     } else {
-		$("#btn_retrieve").prop("disabled", true);
+    $("#btn_retrieve").prop("disabled", true);
     }
   });
 });

@@ -44,7 +44,7 @@ class Command(BaseCommand):
             subprocess.check_call('cd %s/data && curl -O -J -L -u %s:%s https://github.com/%s/archive/master.zip' % (MEDIA_ROOT, GIT["USERNAME"], GIT["PASSWORD"], repo), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             print "Release \033[94mlatest master\033[0m downloaded."
 
-        except:
+        except Exception:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to download release \033[94m%s\033." % ver)
             err = traceback.format_exc()
             ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))

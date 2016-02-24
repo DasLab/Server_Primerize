@@ -28,10 +28,10 @@ $(document).ready(function () {
 });
 
 $(window).on("scroll", function () {
-	if ($(this).scrollTop() > $(window).height()/2) {
-		$('#up').fadeIn();
-	} else {
-		$('#up').fadeOut();
-	}
+  if ($(this).scrollTop() > $(window).height()/2) {
+    $('#up').fadeIn();
+  } else {
+    $('#up').fadeOut();
+  }
 });
 

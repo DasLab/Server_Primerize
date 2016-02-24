@@ -40,7 +40,7 @@ class Command(BaseCommand):
                 elif job.type == '3':
                     pass
                 job.delete()
-        except:
+        except Exception:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to remove JOB_ID \033[94m%s\033." % job.job_id)
             err = traceback.format_exc()
             ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))

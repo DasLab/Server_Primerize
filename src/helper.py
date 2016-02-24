@@ -37,11 +37,11 @@ def is_valid_email(input):
 
 
 def is_t7_present(sequence):
-    if sequence[:20] == SEQ['T7']:
-        is_G = (sequence[20:22] == 'GG')
+    if sequence.startswith(SEQ['T7']):
+        is_G = sequence[20:].startswith('GG')
         return (sequence, 1, is_G)
     else:
-        is_G = (sequence[0:2] == 'GG')
+        is_G = sequence.startswith('GG')
         return (SEQ['T7'] + sequence, 0, is_G)
 
 

@@ -99,7 +99,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         if is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
         assembly = prm_1d.design(sequence, min_Tm, num_primers, min_length, max_length, tag)
         t_total = time.time() - t0
-    except:
+    except Exception:
         t_total = time.time() - t0
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
@@ -206,7 +206,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
             job_entry.time = t_total
             job_entry.save()
         create_res_html(script, job_id, 1)
-    except:
+    except Exception:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
         create_err_html(job_id, t_total, 1)

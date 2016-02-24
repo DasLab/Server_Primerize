@@ -134,7 +134,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             shutil.rmtree('%s/data/2d/result_%s' % (MEDIA_ROOT, job_id))
             # subprocess.check_call('cd %s && zip -rm result_%s.zip result_%s' % (os.path.join(MEDIA_ROOT, 'data/2d/'), job_id, job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         t_total = time.time() - t0
-    except:
+    except Exception:
         t_total = time.time() - t0
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
@@ -302,7 +302,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             job_entry.time = t_total
             job_entry.save()
         create_res_html(script, job_id, 2)
-    except:
+    except Exception:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
         create_err_html(job_id, t_total, 2)
