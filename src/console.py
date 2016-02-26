@@ -61,14 +61,29 @@ def humansize(nbytes):
 
 
 def get_folder_size(path):
-    return sum(os.path.getsize(f) for f in glob.glob(path) if os.path.isfile(f))
+    total = 0
+    for f in glob.glob(path):
+        if os.path.isfile(f):
+            total += os.path.getsize(f)
+        else:
+            total += get_folder_size(f + '/*')
+    return total
 
+def get_folder_num(path):
+    total = 0
+    for f in glob.glob(path):
+        if os.path.isfile(f):
+            total += 1
+        else:
+            total += get_folder_num(f + '/*')
+    return total
+    
 
 def get_backup_stat():
     ver = {
-        '1d': [len(glob.glob('%s/data/1d/*' % MEDIA_ROOT)), humansize(get_folder_size('%s/data/1d/*' % MEDIA_ROOT))],
-        '2d': [len(glob.glob('%s/data/2d/*' % MEDIA_ROOT)), humansize(get_folder_size('%s/data/2d/*' % MEDIA_ROOT))],
-        '3d': [len(glob.glob('%s/data/3d/*' % MEDIA_ROOT)), humansize(get_folder_size('%s/data/3d/*' % MEDIA_ROOT))],
+        '1d': [get_folder_num('%s/data/1d/*' % MEDIA_ROOT), humansize(get_folder_size('%s/data/1d/*' % MEDIA_ROOT))],
+        '2d': [get_folder_num('%s/data/1d/*' % MEDIA_ROOT), humansize(get_folder_size('%s/data/2d/*' % MEDIA_ROOT))],
+        '3d': [get_folder_num('%s/data/1d/*' % MEDIA_ROOT), humansize(get_folder_size('%s/data/3d/*' % MEDIA_ROOT))],
         'backup': {
             'mysql': [os.path.join(MEDIA_ROOT, 'backup/backup_mysql.tgz'), humansize(os.path.getsize('%s/backup/backup_mysql.tgz' % MEDIA_ROOT))],
             'data': [os.path.join(MEDIA_ROOT, 'backup/backup_static.tgz'), humansize(os.path.getsize('%s/backup/backup_static.tgz' % MEDIA_ROOT))],
