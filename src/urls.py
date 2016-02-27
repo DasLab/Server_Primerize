@@ -1,15 +1,12 @@
 from django.conf.urls import include, url, handler400, handler403, handler404, handler500
-# from django.conf.urls.static import static
 from django.contrib import admin
-# from django.contrib.auth.views import login
-# from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 from django.views.static import serve
 
 from adminplus.sites import AdminSitePlus
 from filemanager import path_end
 
-from src.settings import MEDIA_ROOT, STATIC_ROOT, STATIC_URL, DEBUG, IS_MAINTENANCE, env
+from src.settings import MEDIA_ROOT, DEBUG, IS_MAINTENANCE, env
 from src import user
 from src import views
 from src import wrapper_1d, wrapper_2d
@@ -95,8 +92,8 @@ else:
         url(r'^site_data/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT + '/data'}),
         url(r'^LICENSE.md$', serve, kwargs={'path': 'LICENSE.md', 'document_root': MEDIA_ROOT}),
         url(r'^robots.txt$', serve, kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),
-    ] #+ static(STATIC_URL, document_root=STATIC_ROOT)
-
+    ] 
+    
     if DEBUG: urlpatterns.append(url(r'^test/?$', views.test))
 
 handler400 = views.error400

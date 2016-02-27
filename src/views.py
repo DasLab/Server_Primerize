@@ -1,8 +1,5 @@
 from django.http import HttpResponseRedirect, HttpResponse
-#, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
-# from django.db import IntegrityError
-# from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 
 

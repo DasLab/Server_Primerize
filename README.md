@@ -16,6 +16,7 @@ django-crontab >= 0.7.0
 django-environ >= 0.4.0
 django-filemanager == 0.0.2
 django-suit >= 0.2.15
+django-widget-tweaks >= 1.4.1
 gviz-api.py == 1.8.2
 MySQL-python >= 1.2.5
 PyGithub >= 1.26.0

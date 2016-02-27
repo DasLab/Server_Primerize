@@ -384,6 +384,15 @@ h2.section > span.num {
   color: #ff0;
 }
 
+.hidden {
+  display: none
+}
+
+.textarea-group {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
 .comment {
   color: #080;
   font-style: italic;

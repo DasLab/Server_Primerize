@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms
-from django.utils.html import format_html
+# from django.utils.html import format_html
 
 from src.settings import *
 
@@ -194,8 +194,6 @@ WEEKDAY_CHOICES = (
 )
 
 class BackupForm(forms.Form):
-    # is_backup = forms.BooleanField()
-    # is_upload = forms.BooleanField()
     time_backup = forms.TimeField(required=True)
     time_upload = forms.TimeField(required=True)
     day_backup = forms.ChoiceField(choices=WEEKDAY_CHOICES, required=True)

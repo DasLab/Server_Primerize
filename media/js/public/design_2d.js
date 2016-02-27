@@ -130,15 +130,6 @@ function expand_primer_input() {
 
 
 $(document).ready(function () {
-  $("#id_tag").attr("placeholder", "Enter a name for your sequence").addClass("form-control");
-  $("#id_sequence").attr({"rows": 6, "cols": 50, "placeholder": "Enter your RNA/DNA sequence"}).addClass("form-control monospace translucent").css({"border-bottom-left-radius":"0px", "border-bottom-right-radius":"0px"});
-  $("#id_primers").attr({"rows": 12, "cols": 50, "placeholder": "Enter the primer set"}).css("display", "none");
-  $("#id_offset").addClass("form-control");
-  $("#id_min_muts").addClass("form-control");
-  $("#id_max_muts").addClass("form-control");
-  $("#id_lib").addClass("form-control");
-
-
   track_input_length();
   $("#id_sequence").on("keyup", track_input_length);
   $("#id_tag").on("keyup", function () {

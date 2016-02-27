@@ -76,13 +76,6 @@ function ajax_update_result(data) {
 $(document).ready(function () {
   $("#warn_500, #warn_1000").css("display", "none");
 
-  $("#id_tag").attr("placeholder", "Enter a name for your sequence").addClass("form-control");
-  $("#id_sequence").attr({"rows": 15, "cols": 100, "placeholder": "Enter your RNA/DNA sequence"}).addClass("form-control monospace translucent").css({"border-bottom-left-radius":"0px", "border-bottom-right-radius":"0px"});
-  $("#id_min_Tm").addClass("form-control");
-  $("#id_max_len").addClass("form-control");
-  $("#id_min_len").addClass("form-control");
-  $("#id_num_primers").addClass("form-control");
-
   track_input_length();
   $("#id_sequence").on("keyup", track_input_length);
   $("#id_tag").on("keyup", function () {

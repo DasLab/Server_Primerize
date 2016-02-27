@@ -114,6 +114,8 @@ INSTALLED_APPS = (
     'filemanager',
     'adminplus',
     'suit',
+    'widget_tweaks',
+
     'django.contrib.admin.apps.SimpleAdminConfig',
     # 'django.contrib.admin',
     'django.contrib.auth',

@@ -1,4 +1,5 @@
 {% extends "media/html/_public.html" %}
+{% load widget_tweaks %}
 
 {% block head%}
   <meta http-equiv="cache-control" content="no-cache"/>
@@ -21,7 +22,7 @@
                 <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
               </label>
               <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-7">
-                {{1d_form.tag}}
+                {% render_field 1d_form.tag class+="form-control" placeholder="Enter a name for your sequence" %}
                 <span class="input-group-addon"><i>optional</i></span>
               </div>
             </div>
@@ -44,7 +45,7 @@
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="list-group">
-                  {{1d_form.sequence}}
+                {% render_field 1d_form.sequence class+="form-control monospace translucent textarea-group" placeholder="Enter your RNA/DNA sequence" rows="15" cols="100" %}
                   <div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px;">
                     <p class="text-right" style="margin:0px;">
                       Length: <i><b><span id="count"></span></b></i> nt
@@ -73,21 +74,21 @@
                 <div data-toggle="tooltip" data-placement="bottom" title="Minimum annealing temperature for overlapping regions. Default = 60.0 &deg;C">
                   <label for="min_Tm">minimum <b>Tm</b>:</label>
                   <div class="input-group" style="margin-left:10px;">
-                    {{1d_form.min_Tm}}
+                    {% render_field 1d_form.min_Tm class+="form-control" %}
                     <span class="input-group-addon">&deg;C</span>
                   </div>
                 </div>
                 <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Maximum length for each primer. Default = 60 nt.">
                   <label for="max_length">maximum <b>length</b> of primers:</label>
                   <div class="input-group" style="margin-left:10px;">
-                    {{1d_form.max_len}}
+                    {% render_field 1d_form.max_len class+="form-control" %}
                     <span class="input-group-addon">nt</span>
                   </div>
                 </div>
                 <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Minimum length for each primer. Default = 15 nt.">
                   <label for="min_length">minimum <b>length</b> of primers:</label>
                   <div class="input-group" style="margin-left:10px;">
-                    {{1d_form.min_len}}
+                    {% render_field 1d_form.min_len class+="form-control" %}
                     <span class="input-group-addon">nt</span>
                   </div>
                 </div>
@@ -100,7 +101,7 @@
                     </label>
                   </div>
                   <div class="input-group" style="margin-left:10px;">
-                    {{1d_form.num_primers}}
+                    {% render_field 1d_form.num_primers class+="form-control" %}
                     <span class="input-group-addon">#</span>
                   </div>
                 </div>
