@@ -124,7 +124,7 @@ class Command(BaseCommand):
             ver['_cpu']= cpu.replace(' ', '').split('/')
 
             ver['_path'] = {
-                'root' : MEDIA_ROOT,
+                'root': MEDIA_ROOT,
                 'data': MEDIA_ROOT + '/data',
                 'media': MEDIA_ROOT + '/media',
                 'NA_Thermo': '',
@@ -137,10 +137,8 @@ class Command(BaseCommand):
                 ver['_path']['NA_Thermo'] = os.path.abspath(os.path.join(MEDIA_ROOT, '../NA_Thermo'))
                 ver['_path']['RDAT_Kit'] = os.path.abspath(os.path.join(MEDIA_ROOT, '../RDAT_Kit'))
 
-            gdrive_dir = 'echo'
-            if not DEBUG: gdrive_dir = 'cd %s' % APACHE_ROOT
-            prefix = ''
-            if DEBUG: prefix = '_DEBUG'
+            gdrive_dir = 'echo' if DEBUG else 'cd %s' % APACHE_ROOT
+            prefix = '_DEBUG' else ''
             ver['_drive'] = subprocess.Popen("%s && drive quota | awk '{ printf $2 \" G\t\"}'" % gdrive_dir, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].strip().split('\t')
 
 

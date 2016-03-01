@@ -101,11 +101,11 @@ def apache_stat(request):
     return HttpResponse(restyle_apache(), content_type='application/json')
 
 def apache(request):
-    return render_to_response(PATH.HTML_PATH['admin_apache'], {'host_name':env('SSL_HOST')}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_apache'], {'host_name': env('SSL_HOST')}, context_instance=RequestContext(request))
 
 
 def aws(request):
-    return render_to_response(PATH.HTML_PATH['admin_aws'], {'timezone':TIME_ZONE}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_aws'], {'timezone': TIME_ZONE}, context_instance=RequestContext(request))
 
 def aws_stat(request):
     json = aws_stats(request)
@@ -113,7 +113,7 @@ def aws_stat(request):
     return HttpResponse(json, content_type='application/json')
 
 def ga(request):
-    return render_to_response(PATH.HTML_PATH['admin_ga'], {'ga_url':GA['LINK_URL']}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_ga'], {'ga_url': GA['LINK_URL']}, context_instance=RequestContext(request))
 
 def ga_stat(request):
     json = ga_stats(request)
@@ -121,7 +121,7 @@ def ga_stat(request):
     return HttpResponse(json, content_type='application/json')
 
 def git(request):
-    return render_to_response(PATH.HTML_PATH['admin_git'], {'timezone':TIME_ZONE, 'git_repo':GIT['REPOSITORY']}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_git'], {'timezone': TIME_ZONE, 'git_repo': GIT['REPOSITORY']}, context_instance=RequestContext(request))
 
 def git_stat(request):
     json = git_stats(request)
@@ -138,7 +138,7 @@ def backup(request):
         flag = set_backup_form(request)
 
     form = BackupForm(initial=get_backup_form())
-    return render_to_response(PATH.HTML_PATH['admin_backup'], {'form':form, 'flag':flag, 'email':EMAIL_HOST_USER}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['admin_backup'], {'form': form, 'flag': flag, 'email': EMAIL_HOST_USER}, context_instance=RequestContext(request))
 
 def dir(request):
     return render_to_response(PATH.HTML_PATH['admin_dir'], {}, context_instance=RequestContext(request))

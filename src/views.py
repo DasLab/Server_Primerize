@@ -100,12 +100,12 @@ def get_user(request):
 
 def get_js(request):
     stats = simplejson.load(open('%s/cache/stat_sys.json' % MEDIA_ROOT, 'r'))
-    json = {'jquery':stats['jquery'], 'bootstrap':stats['bootstrap'], 'd3':stats['d3'], 'zclip':stats['zclip']}
+    json = {'jquery': stats['jquery'], 'bootstrap': stats['bootstrap'], 'd3': stats['d3'], 'zclip': stats['zclip']}
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def get_ver(request):
     stats = simplejson.load(open('%s/cache/stat_sys.json' % MEDIA_ROOT, 'r'))
-    json = {'primerize':stats['NA_Thermo']}
+    json = {'primerize': stats['NA_Thermo']}
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
