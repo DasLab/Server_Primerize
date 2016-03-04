@@ -148,7 +148,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             job_entry.status = '3'
             job_entry.save()
         return create_res_html(html, job_id, 2)
-    
+
     try:
         script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <span class="monospace pull-right">__SEQ_ANNOT__</span></p></div>' % (job_id, '/site_data/2d/result_%s.zip' % job_id)
         script += '<div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
@@ -215,7 +215,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             fragments.append(plate.sequence[end + 1:])
         else:
             fragments.append(plate.sequence[end + 1:end + 11] + '......' + plate.sequence[-10:])
-        
+
         labels = ['%d' % (1 - offset), '%d' % plate.get('which_muts')[0], '%d' % plate.get('which_muts')[-1], '%d' % (len(plate.sequence) - offset)]
         (illustration_1, illustration_2, illustration_3) = ('', '', '')
         if len(fragments[0]) >= len(labels[0]):

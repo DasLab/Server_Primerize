@@ -92,8 +92,8 @@ else:
         url(r'^site_data/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT + '/data'}),
         url(r'^LICENSE.md$', serve, kwargs={'path': 'LICENSE.md', 'document_root': MEDIA_ROOT}),
         url(r'^robots.txt$', serve, kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),
-    ] 
-    
+    ]
+
     if DEBUG: urlpatterns.append(url(r'^test/?$', views.test))
 
 handler400 = views.error400

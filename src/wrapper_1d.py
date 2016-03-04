@@ -113,7 +113,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
             job_entry.status = '3'
             job_entry.save()
         return create_res_html(html, job_id, 1)
-    
+
     try:
         script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse" id="disp_job_id">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-warning" title="Mispriming alerts"><p>' % (job_id, '/site_data/1d/result_%s.txt' % job_id)
 
@@ -182,7 +182,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         file_name = MEDIA_ROOT + '/data/1d/result_%s.txt' % job_id
         lines = ''.join(open(file_name, 'r').readlines())
         insert_where = '\n\nOUTPUT\n======\n'
-        
+
         if is_t7:
             str_t7 = '<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;T7_CHECK: feature enabled (uncheck the option to disable). T7 promoter sequence '
             if flag:

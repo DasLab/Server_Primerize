@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
         d = time.strftime('%Y%m%d') #datetime.datetime.now().strftime('%Y%m%d')
         gdrive_dir = 'echo' if DEBUG else 'cd %s' % APACHE_ROOT
-        prefix = '_DEBUG' else ''
+        prefix = '_DEBUG' if DEBUG else ''
 
         flag = False
         t = time.time()
