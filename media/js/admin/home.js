@@ -52,6 +52,7 @@ $(document).ready(function() {
             $("#id_scipy").html(data.scipy);
             $("#id_matplotlib").html(data.matplotlib);
             $("#id_numba").html(data.numba);
+            $("#id_llvmlite").html(data.llvmlite);
 
             $("#id_yui").html(data.yuicompressor);
             $("#id_rdatkit").html(data.RDAT_Kit);
