@@ -37,7 +37,7 @@ class Command(BaseCommand):
 
                 result.append({'version': ver, 'title': rel.title, 'description': rel.body})
 
-            open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'w').write(simplejson.dumps(result, indent=' ' * 4, sort_keys=True))
+            simplejson.dump(result, open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'w'), indent=' ' * 4, sort_keys=True)
 
             if os.path.exists('%s/data/Primerize-master.zip' % MEDIA_ROOT):
                 os.remove('%s/data/Primerize-master.zip' % MEDIA_ROOT)

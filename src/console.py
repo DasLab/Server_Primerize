@@ -99,7 +99,7 @@ def get_backup_stat():
     for i in range(0, len(gdrive), 6):
         ver['gdrive'].append([gdrive[i + 1], '%s %s' % (gdrive[i + 2], gdrive[i + 3]), '%s %s' % (gdrive[i + 4], gdrive[i + 5])])
 
-    open(os.path.join(MEDIA_ROOT, 'cache/stat_backup.json'), 'w').write(simplejson.dumps(ver, indent=' ' * 4, sort_keys=True))
+    simplejson.dump(ver, open(os.path.join(MEDIA_ROOT, 'cache/stat_backup.json'), 'w'), indent=' ' * 4, sort_keys=True)
     subprocess.Popen('rm %s' % os.path.join(MEDIA_ROOT, 'data/temp.txt'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
@@ -161,7 +161,7 @@ def set_backup_form(request):
         cron_job[-1] = '>> %s/cache/log_cron.log 2>&1 # %s' % (MEDIA_ROOT, suffix[suffix.rfind(' # ') + 3:])
     env_cron['KEEP_BACKUP'] = form.cleaned_data['keep_backup']
     env_cron['KEEP_JOB'] = form.cleaned_data['keep_job']
-    open('%s/config/cron.conf' % MEDIA_ROOT, 'w').writelines(simplejson.dumps(env_cron, sort_keys=True, indent=' ' * 4))
+    simplejson.dump(env_cron, open('%s/config/cron.conf' % MEDIA_ROOT, 'w'), sort_keys=True, indent=' ' * 4)
     refresh_settings()
     set_sys_crontab()
     return 0
