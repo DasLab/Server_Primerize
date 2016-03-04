@@ -15,13 +15,9 @@ $(document).ready(function () {
 
   $("#top").on("click", function () {
     event.preventDefault();
-    $('#top > img').animate({'left':'-5%', 'opacity':'0'}, 125);
+    $('#top > div').animate({'right':'-5%', 'opacity':'0'}, 125);
     $("html, body").stop().animate({scrollTop: 0}, 250);
   });
-  $("#top").hover(
-    function(){ $("#top > img").attr("src", "/site_media/images/fg_top.png"); },
-    function(){ $("#top > img").attr("src", "/site_media/images/fg_top_hover.png"); }
-  );
 
   var url = window.location.href;
 
@@ -47,9 +43,9 @@ $(window).on("scroll", function () {
   clearTimeout($.data(this, 'scrollTimer'));
   $.data(this, 'scrollTimer', setTimeout(function() {
     if ($(this).scrollTop() > $(window).height() / 2) {
-      $('#top > img').animate({'left':'0%', 'opacity':'1.0'}, 125);
+      $('#top > div').animate({'right':'0%', 'opacity':'1.0'}, 125);
     } else {
-      $('#top > img').animate({'left':'-5%', 'opacity':'0'}, 125);
+      $('#top > div').animate({'right':'-5%', 'opacity':'0'}, 125);
     }
   }, 200));
 });
