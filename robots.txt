@@ -22,12 +22,14 @@ User-agent: *
 Disallow: /
 Crawl-delay: 600
 
+
 # but allow only important bots
 User-agent: Googlebot
 User-agent: Googlebot-Image
 User-agent: Mediapartners-Google
 User-agent: msnbot
 User-agent: msnbot-media
+User-agent: bingbot
 User-agent: Slurp
 User-agent: Yahoo-Blogs
 User-agent: Yahoo-MMCrawler
@@ -37,15 +39,6 @@ User-agent: Yandexbot
 User-agent: FacebookExternalHit
 
 # Directories
-Disallow: /.git/
-Disallow: /backup/
-Disallow: /cache/
-Disallow: /config/
-Disallow: /data/
-Disallow: /media/admin/
-Disallow: /media/fonts/
-Disallow: /media/js/
-Disallow: /src/
 
 # Files
 Disallow: /*.py
@@ -59,7 +52,15 @@ Disallow: /admin/
 Disallow: /login/
 Disallow: /logout/
 Disallow: /password/
-Disallow: /submit_download/
+Disallow: /download/
+
+Disallow: /design_1d_run/
+Disallow: /design_2d_run/
+Disallow: /demo_1d_run/
+Disallow: /demo_2d_run/
+Disallow: /random_1d/
+Disallow: /random_2d/
+Disallow: /design_2d_from_1d/
 
 Disallow: /ping_test/
 Disallow: /test/
