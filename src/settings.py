@@ -19,7 +19,7 @@ MEDIA_URL = ''
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = '' # MEDIA_ROOT + '/media/'
+STATIC_ROOT = ''  # MEDIA_ROOT + '/media/'
 STATICFILES_DIRS = (root('data'), root('media'))
 
 
@@ -71,7 +71,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'maxBytes': 1024*1024*10,
-            'backupCount' : 10,
+            'backupCount': 10,
             'filename': '%s/cache/log_django.log' % MEDIA_ROOT,
         },
         'email': {
@@ -183,11 +183,11 @@ SUIT_CONFIG = {
 
     # forms
     'SHOW_REQUIRED_ASTERISK': True,  # Default True
-    'CONFIRM_UNSAVED_CHANGES': True, # Default True
+    'CONFIRM_UNSAVED_CHANGES': True,  # Default True
 
     # menu
     # 'SEARCH_URL': '/admin/auth/user/',
-    'MENU_OPEN_FIRST_CHILD': True, # Default True
+    'MENU_OPEN_FIRST_CHILD': True,  # Default True
     'MENU': (),
 
     # misc
@@ -196,8 +196,8 @@ SUIT_CONFIG = {
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-if not DEBUG: 
-    SECURE_HSTS_SECONDS = SESSION_COOKIE_AGE = 86400 # a day 
+if not DEBUG:
+    SECURE_HSTS_SECONDS = SESSION_COOKIE_AGE = 86400  # a day
     # 31536000 = one year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

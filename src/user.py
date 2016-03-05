@@ -13,7 +13,7 @@ from src.env import error403
 
 def user_login(request):
     if request.user.is_authenticated():
-        if request.GET.has_key('next') and 'admin' in request.GET['next']:
+        if 'next' in request.GET and 'admin' in request.GET.get('next'):
             return error403(request)
         return HttpResponseRedirect('/')
 
@@ -37,7 +37,7 @@ def user_login(request):
                     messages = 'Inactive/disabled account. Please contact us.'
         return render_to_response(PATH.HTML_PATH['login'], {'form': form, 'messages': messages}, context_instance=RequestContext(request))
     else:
-        if request.GET.has_key('next') and 'admin' in request.GET['next']:
+        if 'next' in request.GET and 'admin' in request.GET.get('next'):
             flag = 'Admin'
         else:
             flag = 'Member'

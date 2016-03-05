@@ -24,7 +24,6 @@ from src.views import error400
 import primerize
 
 
-
 def design_2d(request, form=Design2DForm(), from_1d=False):
     return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
 
@@ -173,7 +172,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                     script += '<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6"><div class="thumbnail"><div id="svg_plt_%d_prm_%d"></div><div class="caption"><p class="text-center center-block" style="margin-bottom:0px;"><i>Primer</i> <b>%d</b> %s</p></div></div></div>' % (i + 1, j + 1, j + 1, primer_suffix_html(j))
 
                     for k in xrange(96):
-                        if primer_sequences._data.has_key(k + 1):
+                        if k + 1 in primer_sequences._data:
                             row = primer_sequences._data[k + 1]
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': row[0], 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
                         else:
@@ -181,7 +180,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
 
             script += '</div>'
 
-        open(os.path.join(MEDIA_ROOT, 'data/2d/result_%s.json' % job_id), 'w').write(simplejson.dumps(json, sort_keys=True, indent=' ' * 4))
+        simplejson.dump(json, open(os.path.join(MEDIA_ROOT, 'data/2d/result_%s.json' % job_id), 'w'), sort_keys=True, indent=' ' * 4)
         script += '</div></div></div></div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
         if flag:
             warning = ''
@@ -199,7 +198,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
 
-        offset = plate.get('offset')        
+        offset = plate.get('offset')
         start = plate.get('which_muts')[0] + offset - 1
         end = plate.get('which_muts')[-1] + offset - 1
         fragments = []
@@ -309,7 +308,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
 
 
 def design_2d_from_1d(request):
-    if request.META.has_key('HTTP_REFERER'):
+    if 'HTTP_REFERER' in request.META:
         referer_job_id = request.META['HTTP_REFERER']
         referer_job_id = referer_job_id[referer_job_id.find('?job_id=') + 8:]
 

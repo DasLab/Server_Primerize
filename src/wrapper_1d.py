@@ -168,7 +168,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
                             script += char
                     script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>')
             elif (line[0] == '$'):
-                if line[1].find('xxxx') != -1: 
+                if 'xxxx' in line[1]: 
                     Tm = '%2.1f' % assembly._data['assembly'].Tm_overlaps[x]
                     x += 1
                     script += line[1].replace('x' * len(Tm), '<kbd>%s</kbd>' % Tm)

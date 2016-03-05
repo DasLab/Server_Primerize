@@ -58,10 +58,10 @@ def download(request):
 
 def result(request):
     if request.method == 'POST': return error400(request)
-    if not request.GET.has_key('job_id'):
+    if 'job_id' not in request.GET:
         return error404(request)
     else:
-        job_id = request.GET['job_id']
+        job_id = request.GET.get('job_id')
         if not job_id: return HttpResponseRedirect('/')
         if len(job_id) != 16 or (not re.match('[0-9a-fA-F]{16}', job_id)): return error400(request)
         try:
