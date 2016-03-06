@@ -505,19 +505,20 @@ a.btn-default {
 
 .logo_footer_das, .logo_footer_stanford, .logo_footer_eterna {
   background: url("/site_media/images/logo_footer.png") no-repeat;
-  height: 42px;
+  height: 36px;
   display: inline-block;
 }
 .logo_footer_das {
   background-position: 0 0;
-  width: 74px;
+  width: 65px;
 }
 .logo_footer_stanford {
-  background-position: -73px 0;
-  width: 158px;
+  background-position: -64px 0;
+  width: 132px;
 }
 .logo_footer_eterna {
-  background-position: -230px 0;
-  width: 135px;
-  margin: 2px 5px;
+  background-position: -197px 0;
+  width: 117px;
+  margin: 5px;
 }
+
