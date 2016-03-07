@@ -29,8 +29,8 @@ class Command(BaseCommand):
             result = []
             for rel in releases:
                 ver = rel.tag_name
-                if not os.path.exists('%s/data/Primerize-%s.zip' % (MEDIA_ROOT, ver)):
-                    subprocess.check_call('cd %s/data && curl -O -J -L -u %s:%s https://github.com/%s/archive/%s.zip' % (MEDIA_ROOT, GIT["USERNAME"], GIT["PASSWORD"], repo, ver), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                if not os.path.exists('%s/dist/Primerize-%s.zip' % (MEDIA_ROOT, ver)):
+                    subprocess.check_call('cd %s/dist && curl -O -J -L -u %s:%s https://github.com/%s/archive/%s.zip' % (MEDIA_ROOT, GIT["USERNAME"], GIT["PASSWORD"], repo, ver), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                     print "Release \033[94m%s\033[0m downloaded." % ver
                 else:
                     print "Release \033[94m%s\033[0m already exists and is ignored." % ver
@@ -39,9 +39,9 @@ class Command(BaseCommand):
 
             simplejson.dump(result, open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'w'), indent=' ' * 4, sort_keys=True)
 
-            if os.path.exists('%s/data/Primerize-master.zip' % MEDIA_ROOT):
-                os.remove('%s/data/Primerize-master.zip' % MEDIA_ROOT)
-            subprocess.check_call('cd %s/data && curl -O -J -L -u %s:%s https://github.com/%s/archive/master.zip' % (MEDIA_ROOT, GIT["USERNAME"], GIT["PASSWORD"], repo), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            if os.path.exists('%s/dist/Primerize-master.zip' % MEDIA_ROOT):
+                os.remove('%s/dist/Primerize-master.zip' % MEDIA_ROOT)
+            subprocess.check_call('cd %s/dist && curl -O -J -L -u %s:%s https://github.com/%s/archive/master.zip' % (MEDIA_ROOT, GIT["USERNAME"], GIT["PASSWORD"], repo), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             print "Release \033[94mlatest master\033[0m downloaded."
 
         except Exception:

@@ -37,6 +37,7 @@ else:
         url(r'^protocol/?$', views.protocol),
         url(r'^license/?$', views.license),
         url(r'^download/?$', views.download),
+        url(r'^link/(?P<tag>.*)/?$', views.link),
         url(r'^docs/?$', views.docs),
         url(r'^about/?$', views.about),
 

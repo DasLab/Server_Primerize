@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-
+from django.utils.encoding import smart_str
 
 from src.console import *
 from src.env import error400, error401, error403, error404, error500, error503
@@ -41,6 +41,7 @@ def download(request):
     else:
         flag = -1
         form = DownloadForm(request.POST)
+        (first_name, last_name, email) = (None, None, None)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
@@ -53,7 +54,27 @@ def download(request):
                 user.save()
                 flag = 1
 
-        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': form, 'flag': flag, 'dist': result}, context_instance=RequestContext(request))
+        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': form, 'flag': flag, 'dist': result, 'first_name': first_name, 'last_name': last_name, 'email': email}, context_instance=RequestContext(request))
+
+def link(request, tag):
+    if not tag: return error400(request)
+
+    if 'first_name' in request.GET and 'last_name' in request.GET and 'email' in request.GET:
+        first_name = request.GET.get('first_name')
+        last_name = request.GET.get('last_name')
+        email = request.GET.get('email')
+        records = SourceDownloader.objects.filter(first_name=first_name, last_name=last_name, email=email)
+        if len(records):
+            tag = tag.replace('/', '')
+            file_name = '%s/dist/Primerize-%s.zip' % (MEDIA_ROOT, tag)
+            if os.path.exists(file_name):
+                response = HttpResponse(content_type='application/zip')
+                response['Content-Disposition'] = 'attachment; filename=Primerize-%s.zip' % tag
+                response['X-Sendfile'] = smart_str(file_name)
+                return response
+            else:
+                return error404(request)
+    return error401(request)
 
 
 def result(request):
