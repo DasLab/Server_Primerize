@@ -1,5 +1,5 @@
-$(document).ready(function () {
-  $('[id^=tab_], #up').on('click', function () {
+$(document).ready(function() {
+  $('[id^=tab_], #top').on('click', function() {
     $('html, body').stop().animate({scrollTop: $($(this).attr("href")).offset().top - 75}, 500);
   });
   
@@ -9,16 +9,16 @@ $(document).ready(function () {
         offset: {
           top: $("#main").position().top
         }
-    }); 
+    });
   }
 
-  $('ul.panel-collapse').on('show.bs.collapse', function () {
+  $('ul.panel-collapse').on('show.bs.collapse', function() {
     $(this).parent().find("a>span.glyphicon.pull-right")
       .removeClass("glyphicon-triangle-bottom")
       .addClass("glyphicon-triangle-top");
       
   });
-  $('ul.panel-collapse').on('hide.bs.collapse', function () {
+  $('ul.panel-collapse').on('hide.bs.collapse', function() {
     $(this).parent().find("a>span.glyphicon.pull-right")
       .removeClass("glyphicon-triangle-top")
       .addClass("glyphicon-triangle-bottom");
@@ -27,11 +27,14 @@ $(document).ready(function () {
 
 });
 
-$(window).on("scroll", function () {
-  if ($(this).scrollTop() > $(window).height()/2) {
-    $('#up').fadeIn();
-  } else {
-    $('#up').fadeOut();
-  }
+$(window).on("scroll", function() {
+  clearTimeout($.data(this, 'scrollTimer'));
+  $.data(this, 'scrollTimer', setTimeout(function() {
+    if ($(this).scrollTop() > $(window).height() / 2) {
+      $('#top > div').animate({'right':'0%', 'opacity':'1.0'}, 125);
+    } else {
+      $('#top > div').animate({'right':'-5%', 'opacity':'0'}, 125);
+    }
+  }, 200));
 });
 
