@@ -165,6 +165,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                 num_primers_on_plate = primer_sequences.get('count')
 
                 if num_primers_on_plate:
+                    if num_primers_on_plate == 1 and primer_sequences.has('A01') and 'WT' in primer_sequences.get('A01')[0]: continue
                     if num_primers_on_plate < 24:
                         flag[i + 1].append((j + 1, num_primers_on_plate))
 
