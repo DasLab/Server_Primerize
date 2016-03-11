@@ -1037,6 +1037,14 @@ P4P6_2HP-6R GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT     25nm
                         </div>
                       </div>
                     </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                      <div class="thumbnail">
+                        <div id="svg_plt_1_hidden" style="background-color: #eee;"></div>
+                        <div class="caption">
+                          <p class="text-center center-block" style="margin-bottom:0px;"><i>Hidden Plate</i></p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="row tutorial">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1078,10 +1086,11 @@ P4P6_2HP-6R GTTGTTGTTGTTGTTTCTTTTTGTCAGCTACTCGCTGACGGTTTGGTTTTGAACTGCAT     25nm
                     </div>
                   </div>
 
-                  <img class="question" style="left:18%;top:7%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Plate Number" data-content="Numbering of library plates, e.g. first 96 mutants will be plate 1."/>
-                  <img class="question" style="left:18%;top:32%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Primer Number" data-content="Numbering of all primers. Foward (F) and reverse (R) primers (in assembly) are labelled."/>
-                  <img class="question" style="right:15%;top:42%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Wild-Type Primers" data-content="Wild-Type primers are colored green on the plates."/>
-                  <img class="question" style="right:15%;top:22%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Mutant Primers" data-content="Primers harboring mutations are colored violet on the plates."/>
+                  <img class="question" style="left:18%;top:7%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Plate Number" data-content="Numbering of library plates, e.g. first 96 mutants will be plate 1."/>
+                  <img class="question" style="left:18%;top:32%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Primer Number" data-content="Numbering of all primers. Foward (F) and reverse (R) primers (in assembly) are labelled."/>
+                  <img class="question" style="left:7%;top:42%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="bottom" title="Wild-Type Primers" data-content="Wild-Type primers are colored green on the plates."/>
+                  <img class="question" style="right:35%;top:22%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Mutant Primers" data-content="Primers harboring mutations are colored violet on the plates."/>
+                  <img class="question" style="left:35%;top:45%" src="/site_media/images/fg_question.png" height="42" data-toggle="popover" data-placement="right" title="Hidden Plates" data-content="Plates with only Wild-Type primer at well A01 are not shown."/>
                 </div>
               </div>
             </div>
@@ -1567,6 +1576,8 @@ Lib1-A261T
             draw_single_plate(d3.select("#svg_plt_" + plt_key + "_prm_" + prm_key), data.plates[plt_key].primers[prm_key], false);
           }
         }
+
+        $("#svg_plt_1_hidden").css("height", $("#svg_plt_1_prm_6").css("height"));
       }
     });
   </script>
