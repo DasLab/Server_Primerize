@@ -82,13 +82,13 @@
               <pre class="indent_2">    <span class="bash_cmd">import</span> <code>primerize</code>
 
     prm_1d = <code>primerize.Primerize_1D</code>()
-    job_1d = prm_1d.<span class="bash_cmd">design</span>(<span class="bash_str">'TTCTAATACGACTCACTATA...AAAAAGAAACAACAACAACAAC'</span>, MIN_TM=<span class="bash_num">60.0</span>, NUM_PRIMERS=<span class="bash_num">0</span>, MIN_LENGTH=<span class="bash_num">15</span>, MAX_LENGTH=<span class="bash_num">60</span>, prefix=<span class="bash_str">'P4P6_2HP'</span>)
+    job_1d = prm_1d.<span class="bash_cmd">design</span>(<span class="bash_str">'TTCTAATACGACTCACTATAGGCCAAAGGCGUCGAGUAGACGCCAACAACGGAAUUGCGGGAAAGGGGUCAACAGCCGUUCAGUACCAAGUCUCAGGGGAAACUUUGAGAUGGCCUUGCAAAGGGUAUGGUAAUAAGCUGACGGACAUGGUCCUAACCACGCAGCCAAGUCCUAAGUCAACAGAUCUUCUGUUGAUAUGGAUGCAGUUCAAAACCAAACCGUCAGCGAGUAGCUGACAAAAAGAAACAACAACAACAAC'</span>, MIN_TM=<span class="bash_num">60.0</span>, NUM_PRIMERS=<span class="bash_num">0</span>, MIN_LENGTH=<span class="bash_num">15</span>, MAX_LENGTH=<span class="bash_num">60</span>, prefix=<span class="bash_str">'P4P6_2HP'</span>)
     <span class="bash_cmd">if</span> job_1d.<span class="bash_key">is_success</span>:
         <span class="bash_cmd">print</span> job_1d
         job_1d.<span class="bash_cmd">save</span>()
 
     prm_2d = <code>primerize.Primerize_2D</code>()
-    job_2d = prm_2d.<span class="bash_cmd">design</span>(<span class="bash_str">'TTCTAATACGACTCACTATA...AAAAAGAAACAACAACAACAAC'</span>, offset=<span class="bash_num">-51</span>, which_muts=<span class="bash_cmd">range</span>(<span class="bash_num">102, 261 + 1</span>), which_libs=<span class="bash_num">[1]</span>, prefix=<span class="bash_str">'P4P6_2HP'</span>)
+    job_2d = prm_2d.<span class="bash_cmd">design</span>(job_1d, offset=<span class="bash_num">-51</span>, which_muts=<span class="bash_cmd">range</span>(<span class="bash_num">102, 261 + 1</span>), which_libs=<span class="bash_num">[1]</span>, prefix=<span class="bash_str">'P4P6_2HP'</span>)
     <span class="bash_cmd">if</span> job_2d.<span class="bash_key">is_success</span>:
         <span class="bash_cmd">print</span> job_2d
         job_2d.<span class="bash_cmd">save</span>()
@@ -392,11 +392,47 @@
                 <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_2D</code> <span class="code code_class">object</span>.</p>
                 <p class="indent_1"><b>Methods</b>:</p>
                 <p class="indent_2">
-                  <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<span class="code code_const">[]</span>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>)
+                  <span class="code code_method">design</span>(<mark>job_1d</mark>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>)
+                </p>
+                <p class="indent_2">
+                  <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<span class="code code_const">[]</span>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>, <mark>is_force</mark>=<i class="code code_none">False</i>)
                 </p>
                 <p class="indent_3">Run design code to get library plates for input sequence according to specified library options. Current worker parameters are used for nonspecified optional arguments.</p>
 
                 <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>job_1d</mark></td>
+                      <td><span class="code code_class">primerize.Design_1D</span></td>
+                      <td><i>(Required)</i> Result of <code>primerize.Design_1D.design</code>. Its <mark>sequence</mark>, <mark>primer_set</mark>, and <mark>prefix</mark> are used.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>offset</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Sequence numbering offset.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_muts</mark></td>
+                      <td><span class="code code_type">list(int)</span></td>
+                      <td><i>(Optional)</i> Array of mutation positions.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_libs</mark></td>
+                      <td><span class="code code_type">list(int)</span></td>
+                      <td><i>(Optional)</i> Array of mutation library choice.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_4">Instead of running with results from <code>primerize.Primerize_1D.design</code>, you can manually specify <mark>sequence</mark>, <mark>primer_set</mark>, and <mark>prefix</mark> with the use of <mark>is_force</mark>.</p>
                 <table class="table indent_4">
                   <thead>
                     <tr class="active">
@@ -414,27 +450,17 @@
                     <tr>
                       <td><mark>primer_set</mark></td>
                       <td><span class="code code_type">list(str)</span></td>
-                      <td><i>(Optional)</i> List of primers to use for assembly. When nonspecified, solution from <code>primerize_Primerize_1D.design</code> under default condition is used.</td>
-                    </tr>
-                    <tr>
-                      <td><mark>offset</mark></td>
-                      <td><span class="code code_type">int</span></td>
-                      <td><i>(Optional)</i> Sequence numbering offset.</td>
-                    </tr>
-                    <tr>
-                      <td><mark>which_muts</mark></td>
-                      <td><span class="code code_type">list(int)</span></td>
-                      <td><i>(Optional)</i> Array of mutation positions.</td>
-                    </tr>
-                    <tr>
-                      <td><mark>which_libs</mark></td>
-                      <td><span class="code code_type">list(int)</span></td>
-                      <td><i>(Optional)</i> Array of mutation library choice.</td>
+                      <td><i>(Optional)</i> List of primers to use for assembly. When nonspecified, it will abort unless <mark>is_force</mark> is set to <span class="code code_none">True</span>.</td>
                     </tr>
                     <tr>
                       <td><mark>prefix</mark></td>
                       <td><span class="code code_type">str</span></td>
                       <td><i>(Optional)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>is_force</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Optional)</i> Flag for whether to use solution from <code>primerize.Primerize_1D.design</code> under default condition.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -774,7 +800,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
+                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>, <span class="code code_const">'region'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -847,7 +873,7 @@
                     </tr>
                     <tr>
                       <td><mark>_data</mark></td>
-                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'construct_names'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'plates'</span>: <span class="code code_type">list(list(<code>primerize.util.Plate_96Well</code>))</span>, <span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code> }</td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'construct_names'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'plates'</span>: <span class="code code_type">list(list(<code>primerize.util.Plate_96Well</code>))</span>, <span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code>, <span class="code code_json">'illustration'</span>: { <span class="code code_json">'labels'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'fragments'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'lines'</span>: <span class="code code_type">tuple(str)</span> } }</td>
                     </tr>
                     <tr><td colspan="2"></td></tr>
                   </tbody>
@@ -1037,6 +1063,32 @@
                 <br/>
 
                 <p class="indent_2">
+                  <span class="code code_method">has</span>(<mark>coord</mark>)
+                </p>
+                <p class="indent_3">Test if data of a given <i class="code code_class">WellPosition</i> is present.</p>
+
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>coord</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> <i class="code code_class">WellPosition</i> for data. <u>Use same range as <code>primerize.util.Plate_96Well.get</code>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">bool</span>.</p>
+                <br/>
+
+                <p class="indent_2">
                   <span class="code code_method">get</span>(<mark>key</mark>)
                 </p>
                 <p class="indent_3">Get data of a particular well or number of wells filled.</p>
@@ -1054,7 +1106,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Required)</i> Keyword of parameter. <u>Either use <span class="code code_const">'count'</span> for number of wells filled, or <i class="code code_class">WellPosition</i> (e.g.) <span class="code code_const">'A1'</span>) for well data.</u> Illegal <mark>keyword</mark> or <i class="code code_class">WellPosition</i> (out of <span class="code code_desp">range(0, 96) + 1</span>) raises <span class="code code_error">AttributeError</span>. Nonexisted <mark>coord</mark> raises <span class="code code_error">KeyError</span>.</td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Either use <span class="code code_const">'count'</span> for number of wells filled, or <i class="code code_class">WellPosition</i> (e.g.) <span class="code code_const">'A01'</span>) for well data.</u> Illegal <mark>keyword</mark> or <i class="code code_class">WellPosition</i> (out of <span class="code code_desp">range(0, 96) + 1</span>) raises <span class="code code_error">AttributeError</span>. Nonexisted <mark>coord</mark> raises <span class="code code_error">KeyError</span>.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
