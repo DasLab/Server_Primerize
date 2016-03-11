@@ -88,7 +88,7 @@
         job_1d.<span class="bash_cmd">save</span>()
 
     prm_2d = <code>primerize.Primerize_2D</code>()
-    job_2d = prm_2d.<span class="bash_cmd">design</span>(job_1d, offset=<span class="bash_num">-51</span>, which_muts=<span class="bash_cmd">range</span>(<span class="bash_num">102, 261 + 1</span>), which_libs=<span class="bash_num">[1]</span>, prefix=<span class="bash_str">'P4P6_2HP'</span>)
+    job_2d = prm_2d.<span class="bash_cmd">design</span>(job_1d, offset=<span class="bash_num">-51</span>, which_muts=<span class="bash_cmd">range</span>(<span class="bash_num">102, 261 + 1</span>), which_libs=<span class="bash_num">[1]</span>)
     <span class="bash_cmd">if</span> job_2d.<span class="bash_key">is_success</span>:
         <span class="bash_cmd">print</span> job_2d
         job_2d.<span class="bash_cmd">save</span>()
@@ -150,7 +150,7 @@
     <code>xlwt</code>        >=  <span class="bash_cmd">1.0.0</span></pre>
 
               <br/>
-              <p class="indent_1">Note that the <code>numba</code>&nbsp;&nbsp;<a href="http://numba.pydata.org/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> is used for its <span class="code code_json">@jit</span>&nbsp;&nbsp;<a href="http://numba.pydata.org/numba-doc/0.22.1/user/jit.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> decorator on loop optimization. <code>numba</code> requires <span class="code code_desp">llvm</span>&nbsp;&nbsp;<a href="http://llvm.org/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>, which can be installed through <span class="code code_desp">apt-get</span>&nbsp;&nbsp;<a href="https://help.ubuntu.com/lts/serverguide/apt-get.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> on <b>Linux</b> or <span class="code code_desp">brew</span>&nbsp;&nbsp;<a href="http://brew.sh/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> on Mac <b>OSX</b>.</p>
+              <p class="indent_1">Note that the <code>numba</code>&nbsp;&nbsp;<a href="http://numba.pydata.org/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> is used for its <span class="code code_json">@jit</span>&nbsp;&nbsp;<a href="http://numba.pydata.org/numba-doc/0.22.1/user/jit.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> decorator on loop optimization. <code>numba</code> requires <span class="code code_desp">llvm</span>&nbsp;&nbsp;<a href="http://llvm.org/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>, which can be installed through <span class="code code_desp">apt-get</span>&nbsp;&nbsp;<a href="https://help.ubuntu.com/lts/serverguide/apt-get.html" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> on <b>Linux</b> or <span class="code code_desp">brew</span>&nbsp;&nbsp;<a href="http://brew.sh/" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a> on Mac <b>OSX</b>. It also requires <code>llvmlite</code>, which can be installed through <span class="code code_desp">pip</span>. The compatibilities between <code>numba</code>, <code>llvm</code>, and <span class="code code_desp">llvm</span> needs to pay special attention to.</p>
             </div>
           </div>
         </div>
