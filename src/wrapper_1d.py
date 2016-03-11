@@ -136,46 +136,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
             script += '<tr><td><b>%d</b> %s</td><td><em>%d</em></td><td style="word-break:break-all" class="monospace">%s</td></tr>' % (i + 1, primer_suffix_html(i), len(assembly.primer_set[i]), assembly.primer_set[i])
 
         script += '<tr><td colspan="3" style="padding: 0px;"></td></tr></tbody></table></div></div></div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
-
-        x = 0
-        for line in assembly._data['assembly'].print_lines:
-            if line[0] == '~':
-                script += '<br/><span class="label-white label-primary">' + line[1] + '</span>'
-            elif line[0] == '=':
-                script += '<span class="label-warning">' + line[1] + '</span>'
-            elif line[0] == '^':
-                for char in line[1]:
-                    if char in SEQ['valid']:
-                        script += '<span class="label-info">' + char + '</span>'
-                    else:
-                        if char.isdigit():
-                            script += '<b>' + char + '</b>'
-                        elif char in ('-', '<', '>'):
-                            script += '<span class="label-white label-orange">' + char + '</span>'
-                        else:
-                            script += char
-                    script = script.replace('<span class="label-white label-orange">-</span><span class="label-white label-orange">></span>', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>')
-            elif line[0] == "!":
-                for char in line[1]:
-                    if char in SEQ['valid']:
-                        script += '<span class="label-white label-danger">' + char + '</span>'
-                    else:
-                        if char.isdigit():
-                            script += '<b>' + char + '</b>'
-                        elif char in ('-', '<', '>'):
-                            script += '<span class="label-white label-green">' + char + '</span>'
-                        else:
-                            script += char
-                    script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>')
-            elif (line[0] == '$'):
-                if 'xxxx' in line[1]: 
-                    Tm = '%2.1f' % assembly._data['assembly'].Tm_overlaps[x]
-                    x += 1
-                    script += line[1].replace('x' * len(Tm), '<kbd>%s</kbd>' % Tm)
-                elif '|' in line[1]:
-                    script += line[1]
-            script += '<br/>'
-
+        script += assembly.echo('assembly').replace('->', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>').replace('<-', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>').replace('\033[92m', '<span class="label-white label-primary">').replace('\033[96m', '<span class="label-warning">').replace('\033[94m', '<span class="label-info">').replace('\033[95m', '<span class="label-white label-danger">').replace('\033[41m', '<span class="label-white label-inverse">').replace('\033[100m', '<span style="font-weight:bold;">').replace('\033[0m', '</span>').replace('\n', '<br/>')
         script += '</pre></div></div></div></div><div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#PCR" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly. Or go ahead for <code>Mutate-and-Map Plates</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-1d-to-2d" class="btn btn-primary btn-lg btn-block" href="/design_2d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design&nbsp;</a></div></div><script type="text/javascript">resize();</script>'
 
         assembly.save(MEDIA_ROOT + '/data/1d/', 'result_%s' % job_id)

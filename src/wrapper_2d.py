@@ -120,7 +120,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
     try:
         t0 = time.time()
         # time.sleep(15)
-        plate = prm_2d.design(sequence, primer_set, offset, which_muts, which_lib, tag)
+        plate = prm_2d.design(sequence, primer_set, offset, which_muts, which_lib, tag, True)
         if plate.is_success:
             dir_name = os.path.join(MEDIA_ROOT, 'data/2d/result_%s' % job_id)
             if not os.path.exists(dir_name): os.mkdir(dir_name)
@@ -182,6 +182,11 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
 
         simplejson.dump(json, open(os.path.join(MEDIA_ROOT, 'data/2d/result_%s.json' % job_id), 'w'), sort_keys=True, indent=' ' * 4)
         script += '</div></div></div></div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
+
+        script += plate.echo('assembly').replace('->', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>').replace('<-', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>').replace('\033[92m', '<span class="label-white label-primary">').replace('\033[96m', '<span class="label-warning">').replace('\033[94m', '<span class="label-info">').replace('\033[95m', '<span class="label-white label-danger">').replace('\033[41m', '<span class="label-white label-inverse">').replace('\033[100m', '<span style="font-weight:bold;">').replace('\033[0m', '</span>').replace('\n', '<br/>')
+        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#par_prep" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly.</p><script type="text/javascript">resize();</script>'
+
+
         if flag:
             warning = ''
             for key in flag.keys():
@@ -197,102 +202,12 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         else:
             script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
-
-        offset = plate.get('offset')
-        start = plate.get('which_muts')[0] + offset - 1
-        end = plate.get('which_muts')[-1] + offset - 1
-        fragments = []
-        if start <= 20:
-            fragments.append(plate.sequence[:start])
-        else:
-            fragments.append(plate.sequence[:10] + '......' + plate.sequence[start - 10:start])
-        if end - start <= 40:
-            fragments.append(plate.sequence[start:end + 1])
-        else:
-            fragments.append(plate.sequence[start:start + 20] + '......' + plate.sequence[end - 19:end + 1])
-        if len(plate.sequence) - end <= 20:
-            fragments.append(plate.sequence[end + 1:])
-        else:
-            fragments.append(plate.sequence[end + 1:end + 11] + '......' + plate.sequence[-10:])
-
-        labels = ['%d' % (1 - offset), '%d' % plate.get('which_muts')[0], '%d' % plate.get('which_muts')[-1], '%d' % (len(plate.sequence) - offset)]
-        (illustration_1, illustration_2, illustration_3) = ('', '', '')
-        if len(fragments[0]) >= len(labels[0]):
-            illustration_1 += '<span class="label-white label-default" style="color:#c28fdd;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
-            illustration_2 += '<span style="color:#c28fdd;">|</span><span>%s</span>' % ('&nbsp;' * (len(fragments[0]) - 1))
-            illustration_3 += '<span style="color:#c28fdd;">%s</span><span>%s</span>' % (labels[0], '&nbsp;' * (len(fragments[0]) - len(labels[0])))
-        elif fragments[0]:
-            illustration_1 += '<span class="label-white label-default" style="color:#c28fdd;">' + fragments[0][0] + '</span><span class="label-white label-default">' + fragments[0][1:] + '</span>'
-            illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[0]))
-            illustration_3 += '<span>%s</span>' % ('&nbsp;' * len(fragments[0]))
-
-        if len(fragments[1]) >= len(labels[1]) + len(labels[2]):
-            illustration_1 += '<span class="label-green" style="color:#ff7c55;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:-1] + '</span><span class="label-green" style="color:#ff7c55;">' + fragments[1][-1] + '</span>'
-            illustration_2 += '<span style="color:#ff7c55;">|</span><span>%s</span><span style="color:#ff7c55;">|</span>' % ('&nbsp;' * (len(fragments[1]) - 2))
-            illustration_3 += '<span style="color:#ff7c55;">%s</span><span>%s</span><span style="color:#ff7c55;">%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1]) - len(labels[2])), labels[2])
-        elif fragments[1]:
-            if len(fragments[1]) >= len(labels[1]):
-                illustration_1 += '<span class="label-green" style="color:#ff7c55;">' + fragments[1][0] + '</span><span class="label-green">' + fragments[1][1:] + '</span>'
-                illustration_2 += '<span style="color:#ff7c55;">|</span><span>%s</span>' % ('&nbsp;' * (len(fragments[1]) - 1))
-                illustration_3 += '<span style="color:#ff7c55;">%s</span><span>%s</span>' % (labels[1], '&nbsp;' * (len(fragments[1]) - len(labels[1])))
-            else:
-                illustration_1 += '<span class="label-green">' + fragments[1] + '</span>'
-                illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[1]))
-                illustration_3 += '<span>%s</span>' % ('&nbsp;' * len(fragments[1]))
-
-        if len(fragments[2]) >= len(labels[3]):
-            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#c28fdd;">' + fragments[2][-1] + '</span>'
-            illustration_2 += '<span>%s</span><span style="color:#c28fdd;">|</span>' % ('&nbsp;' * (len(fragments[2]) - 1))
-            illustration_3 += '<span>%s</span><span style="color:#c28fdd;">%s</span>' % ('&nbsp;' * (len(fragments[2]) - len(labels[3])), labels[3])
-        elif fragments[2]:
-            illustration_1 += '<span class="label-white label-default">' + fragments[2][:-1] + '</span><span class="label-white label-default" style="color:#c28fdd;">' + fragments[2][-1] + '</span>'
-            illustration_2 += '<span>%s</span>' % ('&nbsp;' * len(fragments[2]))
-            illustration_3 += '<span>%s</span>' % ('&nbsp;' * len(fragments[2]))
-
+        (illustration_1, illustration_2, illustration_3) = plate._data['illustration']['lines']
+        illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
+        illustration_2 = illustration_2.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
+        illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
         script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
 
-
-        x = 0
-        for line in plate._data['assembly'].print_lines:
-            if line[0] == '~':
-                script += '<br/><span class="label-white label-primary">' + line[1] + '</span>'
-            elif line[0] == '=':
-                script += '<span class="label-warning">' + line[1] + '</span>'
-            elif line[0] == '^':
-                for char in line[1]:
-                    if char in SEQ['valid']:
-                        script += '<span class="label-info">' + char + '</span>'
-                    else:
-                        if char.isdigit():
-                            script += '<b>' + char + '</b>'
-                        elif char in ('-', '<', '>'):
-                            script += '<span class="label-white label-orange">' + char + '</span>'
-                        else:
-                            script += char
-                    script = script.replace('<span class="label-white label-orange">-</span><span class="label-white label-orange">></span>', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>')
-            elif line[0] == "!":
-                for char in line[1]:
-                    if char in SEQ['valid']:
-                        script += '<span class="label-white label-danger">' + char + '</span>'
-                    else:
-                        if char.isdigit():
-                            script += '<b>' + char + '</b>'
-                        elif char in ('-', '<', '>'):
-                            script += '<span class="label-white label-green">' + char + '</span>'
-                        else:
-                            script += char
-                    script = script.replace('<span class="label-white label-green"><</span><span class="label-white label-green">-</span>', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>')
-            elif (line[0] == '$'):
-                if line[1].find('xxxx') != -1: 
-                    Tm = '%2.1f' % plate._data['assembly'].Tm_overlaps[x]
-                    x += 1
-                    script += line[1].replace('x' * len(Tm), '<kbd>%s</kbd>' % Tm)
-                elif '|' in line[1]:
-                    script += line[1]
-            script += '<br/>'
-        script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#par_prep" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly.</p><script type="text/javascript">resize();</script>'
-
-        # script += plate.print_constructs().replace('\033[96m', '<span class="label label-info">').replace('\033[93m', '<span class="label label-success">').replace('\033[91m', '<span class="label label-danger">').replace('\033[94m', '<span class="label label-primary">').replace('\033[41m', '<span class="label label-magenta">').replace('\033[100m', '<span class="label label-default">').replace('\033[95m', '<span class="label label-violet">').replace('\033[92m', '<span class="label label-orange">').replace('\033[0m', '</span>').replace('\n', '<br/>')
 
         if job_id != ARG['DEMO_2D_ID']:
             job_entry = Design2D.objects.get(job_id=job_id)
