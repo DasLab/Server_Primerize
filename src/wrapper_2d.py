@@ -40,7 +40,7 @@ def design_2d_run(request):
         max_muts = form.cleaned_data['max_muts']
         lib = form.cleaned_data['lib']
 
-        sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
+        sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T')).encode('utf-8', 'ignore')
         tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
         primers = re.sub('[^ACGTUacgtu\ \,]', '', primers)
         primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
