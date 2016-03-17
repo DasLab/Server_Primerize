@@ -54,11 +54,14 @@
                   <ul id="collapse_tab_class" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_class">
                     <li><a id="tab_31" href="#primerize_1d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Primerize_1D()</code></a></li>
                     <li><a id="tab_32" href="#primerize_2d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Primerize_2D()</code></a></li>
-                    <li><a id="tab_33" href="#design_1d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Design_1D()</code></a></li>
-                    <li><a id="tab_34" href="#design_2d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Design_2D()</code></a></li>
-                    <li><a id="tab_35" href="#assembly">&nbsp;&nbsp;&nbsp;&nbsp;<code>Assembly()</code></a></li>
-                    <li><a id="tab_36" href="#plate_96well">&nbsp;&nbsp;&nbsp;&nbsp;<code>Plate_96Well()</code></a></li>
-                    <li><a id="tab_37" href="#nearest_neighbor">&nbsp;&nbsp;&nbsp;&nbsp;<code>Nearest_Neighbor()</code></a></li>
+                    <li><a id="tab_33" href="#primerize_3d">&nbsp;&nbsp;&nbsp;&nbsp;<code>Primerize_3D()</code></a></li>
+                    <li><a id="tab_34" href="#design_single">&nbsp;&nbsp;&nbsp;&nbsp;<code>Design_Single()</code></a></li>
+                    <li><a id="tab_35" href="#design_plate">&nbsp;&nbsp;&nbsp;&nbsp;<code>Design_Plate()</code></a></li>
+                    <li><a id="tab_36" href="#assembly">&nbsp;&nbsp;&nbsp;&nbsp;<code>Assembly()</code></a></li>
+                    <li><a id="tab_37" href="#mutation">&nbsp;&nbsp;&nbsp;&nbsp;<code>Mutation()</code></a></li>
+                    <li><a id="tab_38" href="#construct_list">&nbsp;&nbsp;&nbsp;&nbsp;<code>Construct_List()</code></a></li>
+                    <li><a id="tab_39" href="#plate_96well">&nbsp;&nbsp;&nbsp;&nbsp;<code>Plate_96Well()</code></a></li>
+                    <li><a id="tab_30" href="#nearest_neighbor">&nbsp;&nbsp;&nbsp;&nbsp;<code>Nearest_Neighbor()</code></a></li>
                   </ul>
               </li>
             </ul>
@@ -88,14 +91,19 @@
         job_1d.<span class="bash_cmd">save</span>()
 
     prm_2d = <code>primerize.Primerize_2D</code>()
-    job_2d = prm_2d.<span class="bash_cmd">design</span>(job_1d, offset=<span class="bash_num">-51</span>, which_muts=<span class="bash_cmd">range</span>(<span class="bash_num">102, 261 + 1</span>), which_libs=<span class="bash_num">[1]</span>)
+    job_2d = prm_2d.<span class="bash_cmd">design</span>(job_1d, offset=<span class="bash_num">-51</span>, which_muts=<span class="bash_cmd">range</span>(<span class="bash_num">102, 261 + 1</span>), which_lib=<span class="bash_num">1</span>)
     <span class="bash_cmd">if</span> job_2d.<span class="bash_key">is_success</span>:
         <span class="bash_cmd">print</span> job_2d
         job_2d.<span class="bash_cmd">save</span>()
-</pre>
+
+    prm_3d = <code>primerize.Primerize_3D</code>()
+    job_3d = prm_3d.<span class="bash_cmd">design</span>(job_1d, offset=<span class="bash_num">-51</span>, structures=[<span class="bash_str">'...........................((((((.....))))))...........((((((...((((((.....(((.((((.(((..(((((((((....)))))))))..((.......))....)))......)))))))....))))))..)).))))((...((((...(((((((((...)))))))))..))))...)).............((((((.....))))))......................'</span>], N_mutations=<span class="bash_num">1</span>, which_lib=<span class="bash_num">1</span>, is_single=<span class="bash_const">True</span>, is_single=<span class="bash_const">True</span>)
+    <span class="bash_cmd">if</span> job_3d.<span class="bash_key">is_success</span>:
+        <span class="bash_cmd">print</span> job_3d
+        job_3d.<span class="bash_cmd">save</span>()</pre>
 
               <br/>
-              <p class="indent_1">For advanced users, the returned <code>Design_1D</code> and <code>Design_2D</code> result <span class="code code_class">class</span> offer methods for <span class="code code_method">get()</span>, <span class="code code_method">save()</span> and <span class="code code_method">echo()</span>:</p>
+              <p class="indent_1">For advanced users, the returned <code>Design_Single</code> and <code>Design_Plate</code> result <span class="code code_class">class</span> offer methods for <span class="code code_method">get()</span>, <span class="code code_method">save()</span> and <span class="code code_method">echo()</span>:</p>
 
               <pre class="indent_2">    MIN_TM = job_1d.<span class="bash_cmd">get</span>(<span class="bash_str">'MIN_TM'</span>)
     <span class="bash_cmd">print</span> job_1d.<span class="bash_cmd">get</span>(<span class="bash_str">'MISPRIME'</span>)
@@ -103,22 +111,27 @@
     <span class="bash_cmd">if</span> job_1d.<span class="bash_key">is_success</span>:
         job_1d.<span class="bash_cmd">save</span>(path=<span class="bash_str">'result/'</span>, name=<span class="bash_str">'Primer'</span>)
 
-    LIB = job_2d.<span class="bash_cmd">get</span>(<span class="bash_str">'which_libs'</span>)
+    LIB = job_2d.<span class="bash_cmd">get</span>(<span class="bash_str">'which_lib'</span>)
     N_PRIMER = job_2d.<span class="bash_cmd">get</span>(<span class="bash_str">'N_PRIMER'</span>)
     <span class="bash_cmd">print job_2d</span>.<span class="bash_cmd">get</span>(<span class="bash_str">'CONSTRUCT'</span>)
     <span class="bash_cmd">if</span> job_2d.<span class="bash_key">is_success</span>:
-        <span class="bash_cmd">print</span> job_2d.<span class="bash_cmd">echo</span>()
-        job_2d.<span class="bash_cmd">save</span>(<span class="bash_str">'assembly'</span>, path=<span class="bash_str">'result/'</span>, name=<span class="bash_str">'Lib'</span>)</pre>
+        <span class="bash_cmd">print</span> job_2d.<span class="bash_cmd">echo</span>(<span class="bash_str">'region'</span>)
+        job_2d.<span class="bash_cmd">save</span>(<span class="bash_str">'assembly'</span>, path=<span class="bash_str">'result/'</span>, name=<span class="bash_str">'Lib'</span>)
+
+    N_PLATE = job_3d.<span class="bash_cmd">get</span>(<span class="bash_str">'N_PLATE'</span>)
+    <span class="bash_cmd">if</span> job_3d.<span class="bash_key">is_success</span>:
+        <span class="bash_cmd">print</span> job_3d.<span class="bash_cmd">echo</span>(<span class="bash_str">'plate'</span>)
+        <span class="bash_cmd">print</span> <span class="bash_cmd">repr</span>(job_3d)</pre>
 
                 <br/>
-                <p class="indent_1">Besides <span class="code code_method">design()</span>, the <code>Primerize_1D</code> and <code>Primerize_2D</code> worker <span class="code code_class">class</span> offer methods for <span class="code code_method">get()</span>, <span class="code code_method">set()</span>, and <span class="code code_method">reset()</span>:</p>
+                <p class="indent_1">Besides <span class="code code_method">design()</span>, the <code>Primerize_1D</code>, <code>Primerize_2D</code> and <code>Primerize_3D</code> worker <span class="code code_class">class</span> offer methods for <span class="code code_method">get()</span>, <span class="code code_method">set()</span>, and <span class="code code_method">reset()</span>:</p>
 
                 <pre class="indent_2">    COL_SIZE = prm_1d.<span class="bash_cmd">get</span>(<span class="bash_str">'COL_SIZE'</span>)
     prm_1d.<span class="bash_cmd">set</span>(<span class="bash_str">'MIN_LENGTH'</span>, <span class="bash_num">30</span>)
     prm_1d.<span class="bash_cmd">reset</span>()</pre>
 
                 <br/>
-                <p class="indent_1">There are also <code>Assembly</code> and <code>Plate_96Well</code> helper <span class="code code_class">class</span>. For more details, please refer to the <a href="#class_reference"><b>Class Reference</b></a>.</p>
+                <p class="indent_1">There are also <code>Assembly</code>, <code>Mutation</code>, <code>Construct_List</code> and <code>Plate_96Well</code> helper <span class="code code_class">class</span>. For more details, please refer to the <a href="#class_reference"><b>Class Reference</b></a>.</p>
 
             </div>
           </div>
@@ -271,7 +284,7 @@
                     <tr><td colspan="3"></td></tr>
                   </tbody>
                 </table>
-                <p class="indent_3"><b>Returns</b>: <code>primerize.Design_1D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_3"><b>Returns</b>: <code>primerize.Design_Single</code> <span class="code code_class">object</span>.</p>
                 <br/>
 
                 <p class="indent_2">
@@ -338,7 +351,7 @@
               <hr/>
 
               <div id="primerize_2d">
-                <p><span class="code code_class">class</span> <code>primerize.Primerize_2D</code>(<mark>offset</mark>=<i class="code code_const">0</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>which_libs</mark>=<i class="code code_const">[1]</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>prefix</mark>=<i class="code code_const">'lib'</i>)</p>
+                <p><span class="code code_class">class</span> <code>primerize.Primerize_2D</code>(<mark>offset</mark>=<i class="code code_const">0</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>which_lib</mark>=<i class="code code_const">1</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>prefix</mark>=<i class="code code_const">'lib'</i>)</p>
                 <p class="indent_1">Construct a worker for 2D Primer Design (Mutate-and-Map Plates).</p>
                 <br/>
 
@@ -363,15 +376,15 @@
                       <td><i>(Optional)</i> Array of mutation positions. <u>Use numbering based on offset.</u> When nonspecified, the entire sequence is included for mutagenesis.</td>
                     </tr>
                     <tr>
-                      <td><mark>which_libs</mark></td>
-                      <td><span class="code code_type">list(int)</span></td>
+                      <td><mark>which_lib</mark></td>
+                      <td><span class="code code_type">int</span></td>
                       <td>
-                        <i>(Optional)</i> Array of mutation library choice. <u>Valid choices are <span class="code code_const">(0, 1, 2)</span></u>. Repeated elements are ignored.
+                        <i>(Optional)</i> Mutation library choice. <u>Valid choices are <span class="code code_const">(1, 2, 3)</span></u>.
                         <br/>
                         <ul>
-                          <li><span class="code code_const">0</span> represents <kbd>A -> T, T -> A, C -> G, G -> C</kbd> library;</li>
-                          <li><span class="code code_const">1</span> represents <kbd>A -> C, T -> C, C -> A, G -> A</kbd> library;</li>
-                          <li><span class="code code_const">2</span> represents <kbd>A -> G, T -> G, C -> T, G -> T</kbd> library.</li>
+                          <li><span class="code code_const">1</span> represents <kbd>A -> T, T -> A, C -> G, G -> C</kbd> library;</li>
+                          <li><span class="code code_const">2</span> represents <kbd>A -> C, T -> C, C -> A, G -> A</kbd> library;</li>
+                          <li><span class="code code_const">3</span> represents <kbd>A -> G, T -> G, C -> T, G -> T</kbd> library.</li>
                         </ul>
                       </td>
                     </tr>
@@ -392,10 +405,10 @@
                 <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_2D</code> <span class="code code_class">object</span>.</p>
                 <p class="indent_1"><b>Methods</b>:</p>
                 <p class="indent_2">
-                  <span class="code code_method">design</span>(<mark>job_1d</mark>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>)
+                  <span class="code code_method">design</span>(<mark>job_1d</mark>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_lib</mark>=<i class="code code_none">None</i>)
                 </p>
                 <p class="indent_2">
-                  <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<span class="code code_const">[]</span>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_libs</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>, <mark>is_force</mark>=<i class="code code_none">False</i>)
+                  <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<i class="code code_const">[]</i>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_none">None</i>, <mark>which_lib</mark>=<i class="code code_none">None</i>, <mark>prefix</mark>=<i class="code code_none">None</i>, <mark>is_force</mark>=<i class="code code_none">False</i>)
                 </p>
                 <p class="indent_3">Run design code to get library plates for input sequence according to specified library options. Current worker parameters are used for nonspecified optional arguments.</p>
 
@@ -411,8 +424,8 @@
                   <tbody>
                     <tr>
                       <td><mark>job_1d</mark></td>
-                      <td><span class="code code_class">primerize.Design_1D</span></td>
-                      <td><i>(Required)</i> Result of <code>primerize.Design_1D.design</code>. Its <mark>sequence</mark>, <mark>primer_set</mark>, and <mark>prefix</mark> are used.</td>
+                      <td><span class="code code_class">primerize.Design_Single</span></td>
+                      <td><i>(Required)</i> Result of <code>primerize.Primerize_1D.design</code>. Its <mark>sequence</mark>, <mark>primer_set</mark>, and <mark>prefix</mark> are used.</td>
                     </tr>
                     <tr>
                       <td><mark>offset</mark></td>
@@ -425,9 +438,9 @@
                       <td><i>(Optional)</i> Array of mutation positions.</td>
                     </tr>
                     <tr>
-                      <td><mark>which_libs</mark></td>
-                      <td><span class="code code_type">list(int)</span></td>
-                      <td><i>(Optional)</i> Array of mutation library choice.</td>
+                      <td><mark>which_lib</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Mutation library choice.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -465,7 +478,7 @@
                     <tr><td colspan="3"></td></tr>
                   </tbody>
                 </table>
-                <p class="indent_3"><b>Returns</b>: <code>primerize.Design_2D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_3"><b>Returns</b>: <code>primerize.Design_Plate</code> <span class="code code_class">object</span>.</p>
                 <br/>
 
                 <p class="indent_2">
@@ -486,7 +499,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_libs'</span>, <span class="code code_const">'COL_SIZE  '</span>, <span class="code code_const">'prefix'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_lib'</span>, <span class="code code_const">'COL_SIZE  '</span>, <span class="code code_const">'prefix'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -532,12 +545,237 @@
               </div>
               <hr/>
 
-              <div id="design_1d">
-                <p><span class="code code_class">class</span> <code>primerize.Design_1D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
-                <p class="indent_1">Result of a <code>primerize.Primerize_1D.design</code> run.</p>
+              <div id="primerize_3d">
+                <p><span class="code code_class">class</span> <code>primerize.Primerize_3D</code>(<mark>offset</mark>=<i class="code code_const">0</i>, <mark>N_mutations</mark>=<i class="code code_const">1</i>, <mark>which_lib</mark>=<i class="code code_const">1</i>, <mark>is_single</mark>=<i class="code code_none">True</i>, <mark>is_fillWT</mark>=<i class="code code_none">False</i>, <mark>COL_SIZE</mark>=<i class="code code_const">142</i>, <mark>prefix</mark>=<i class="code code_const">'lib'</i>)</p>
+                <p class="indent_1">Construct a worker for 3D Primer Design (Mutation/Rescue Plates).</p>
                 <br/>
 
                 <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>offset</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Sequence numbering offset, which is <abbr title="offset">one minus the final number of the first nucleotide</abbr>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>N_mutations</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Number of mutations for "single mutants". <u>Valid choices are <span class="code code_const">(1, 2, 3)</span>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_lib</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td>
+                        <i>(Optional)</i> Mutation library choice. <u>Valid choices are <span class="code code_const">(1, 4)</span></u>.
+                        <br/>
+                        <ul>
+                          <li><span class="code code_const">1</span> represents <kbd>A:T -> T:A, G:C -> C:G</kbd> library ("<span class="code code_json">swap</span>");</li>
+                          <li><span class="code code_const">4</span> represents <kbd>A:T -> C:G, G:C -> T:A</kbd> library ("<span class="code code_json">cross</span>");</li>
+                        </ul>
+                        <b>Note</b>: <kbd>G:U</kbd> pairs are always replaced by <kbd>C:G</kbd> pairs.
+                      </td>
+                    </tr>
+                    <tr/>
+                      <td><mark>is_single</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Optional)</i> Flag for whether include single mutants on the plate.</td>
+                    </tr>
+                    <tr/>
+                      <td><mark>is_fillWT</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Optional)</i> Flag for whether include Wild-type primers at all <span class="code code_class">WellPositions</span>.</td>
+                    </tr>
+                    <tr/>
+                      <td><mark>COL_SIZE</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Column width for assembly output. <u>Positive number only.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>prefix</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+
+                <p class="indent_1"><b>Returns</b>: <code>primerize.Primerize_3D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
+                <p class="indent_2">
+                  <span class="code code_method">design</span>(<mark>job_1d</mark>, <mark>structures</mark>=<i class="code code_const">[]</i>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>N_mutations</mark>=<i class="code code_none">None</i>, <mark>which_lib</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>is_single</mark>=<i class="code code_none">None</i>, <mark>is_fillWT</mark>=<i class="code code_none">None</i>)
+                </p>
+                <p class="indent_2">
+                  <span class="code code_method">design</span>(<mark>sequence</mark>, <mark>primer_set</mark>=<i class="code code_const">[]</i>, <mark>structures</mark>=<i class="code code_const">[]</i>, <mark>offset</mark>=<i class="code code_none">None</i>, <mark>N_mutations</mark>=<i class="code code_none">None</i>, <mark>which_lib</mark>=<i class="code code_none">None</i>, <mark>which_muts</mark>=<i class="code code_const">[]</i>, <mark>is_single</mark>=<i class="code code_none">None</i>, <mark>is_fillWT</mark>=<i class="code code_none">None</i>, <mark>is_force</mark>=<i class="code code_none">False</i>)
+                </p>
+                <p class="indent_3">Run design code to get library plates for input sequence and structures according to specified library options. Current worker parameters are used for nonspecified optional arguments.</p>
+
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>job_1d</mark></td>
+                      <td><span class="code code_class">primerize.Design_Single</span></td>
+                      <td><i>(Required)</i> Result of <code>primerize.Primerize_1D.design</code>. Its <mark>sequence</mark>, <mark>primer_set</mark>, and <mark>prefix</mark> are used.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>structures</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Required)</i> Array of secondary structures. <u>Use dot-bracket notation.</u> Each structure should be the same length as sequence.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>offset</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Sequence numbering offset.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>N_mutations</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Number of mutations for "single mutants".</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_lib</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Mutation library choice.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>which_muts</mark></td>
+                      <td><span class="code code_type">list(int)</span></td>
+                      <td><i>(Optional)</i> Array of mutation positions. <u>Use numbering based on offset.</u> When nonspecified, the entire sequence is included for mutagenesis.</td>
+                    </tr>
+                    <tr/>
+                      <td><mark>is_single</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Optional)</i> Flag for whether include single mutants on the plate.</td>
+                    </tr>
+                    <tr/>
+                      <td><mark>is_fillWT</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Optional)</i> Flag for whether include Wild-type primers at all <span class="code code_class">WellPositions</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_4">Instead of running with results from <code>primerize.Primerize_1D.design</code>, you can manually specify <mark>sequence</mark>, <mark>primer_set</mark>, and <mark>prefix</mark> with the use of <mark>is_force</mark>.</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>sequence</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Sequence for assembly design. <u>Valid RNA/DNA sequence only, case insensitive.</u></td>
+                    </tr>
+                    <tr>
+                      <td><mark>primer_set</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Optional)</i> List of primers to use for assembly. When nonspecified, it will abort unless <mark>is_force</mark> is set to <span class="code code_none">True</span>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>prefix</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Optional)</i> Construct prefix/name.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>is_force</mark></td>
+                      <td><span class="code code_type">bool</span></td>
+                      <td><i>(Optional)</i> Flag for whether to use solution from <code>primerize.Primerize_1D.design</code> under default condition.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <code>primerize.Design_Plate</code> <span class="code code_class">object</span>.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">get</span>(<mark>key</mark>)
+                </p>
+                <p class="indent_3">Get current worker parameters.</p>
+
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'N_mutations'</span>, <span class="code code_const">'which_lib'</span>, <span class="code code_const">'is_single'</span>, <span class="code code_const">'is_fillWT'</span>, <span class="code code_const">'COL_SIZE  '</span>, <span class="code code_const">'prefix'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: the <mark>value</mark> of specified <mark>keyword</mark>.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">set</span>(<mark>key</mark>, <mark>value</mark>)
+                </p>
+                <p class="indent_3">Set current worker parameters.</p>
+
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>key</mark></td>
+                      <td><span class="code code_type">str</span></td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_3D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                    </tr>
+                    <tr>
+                      <td><mark>value</mark></td>
+                      <td><span class="code code_type">(auto)</span></td>
+                      <td><i>(Required)</i> New value for specified <mark>keyword</mark>. <u>Type of value must match <mark>keyword</mark>.</u> Illegal <mark>value</mark> raises <span class="code code_error">ValueError</span>.</td>
+                    </tr>
+
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+
+                <p class="indent_2">
+                  <span class="code code_method">reset</span>()
+                </p>
+                <p class="indent_3">Reset current worker parameters to default.</p>
+                <br/>
+              </div>
+              <hr/>
+
+              <div id="design_single">
+                <p><span class="code code_class">class</span> <code>primerize.Design_Single</code>(<mark>init_dict</mark>)</p>
+                <p class="indent_1">Result of a <code>primerize.Primerize_1D.design</code> run.</p>
+                <br/>
+
+                <p class="indent_1"><b>Parameters</b>: <mark>init_dict</mark> is a <span class="code code_type">dict</span> with the following <span class="code code_json">keys</span>:</p>
                 <table class="table indent_2">
                   <thead>
                     <tr class="active">
@@ -581,7 +819,7 @@
                   </tbody>
                 </table>
 
-                <p class="indent_1"><b>Returns</b>: <code>primerize.Design_1D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.Design_Single</code> <span class="code code_class">object</span>.</p>
                 <p class="indent_1"><b>Methods</b>:</p>
 
                 <p class="indent_2">
@@ -704,12 +942,12 @@
               </div>
               <hr/>
 
-              <div id="design_2d">
-                <p><span class="code code_class">class</span> <code>primerize.Design_2D</code>(<mark>sequence</mark>, <mark>name</mark>, <mark>is_success</mark>, <mark>primer_set</mark>, <mark>params</mark>, <mark>data</mark>)</p>
-                <p class="indent_1">Result of a <code>primerize.Primerize_2D.design</code> run.</p>
+              <div id="design_plate">
+                <p><span class="code code_class">class</span> <code>primerize.Design_Plate</code>(<mark>init_dict</mark>)</p>
+                <p class="indent_1">Result of a <code>primerize.Primerize_2D.design</code> or <code>primerize.Primerize_3D.design</code> run.</p>
                 <br/>
 
-                <p class="indent_1"><b>Parameters</b>:</p>
+                <p class="indent_1"><b>Parameters</b>: <mark>init_dict</mark> is a <span class="code code_type">dict</span> with the following <span class="code code_json">keys</span>:</p>
                 <table class="table indent_2">
                   <thead>
                     <tr class="active">
@@ -740,6 +978,11 @@
                       <td><i>(Required)</i> List of primers for assembly.</td>
                     </tr>
                     <tr>
+                      <td><mark>structures</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Optional)</i> List of secondary structures, only <i>Required</i> for <code>primerize.Primerize_3D.design</code> results.</td>
+                    </tr>
+                    <tr>
                       <td><mark>params</mark></td>
                       <td><span class="code code_type">dict</span></td>
                       <td><i>(Required)</i> Dictionary of parameters used for this result.</td>
@@ -753,7 +996,7 @@
                   </tbody>
                 </table>
 
-                <p class="indent_1"><b>Returns</b>: <code>primerize.Design_2D</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.Design_Plate</code> <span class="code code_class">object</span>.</p>
                 <p class="indent_1"><b>Methods</b>:</p>
 
                 <p class="indent_2">
@@ -774,7 +1017,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_libs'</span>, <span class="code code_const">'N_PRIMER'</span>, <span class="code code_const">'N_PLATE'</span>, <span class="code code_const">'N_CONSTRUCT'</span>, <span class="code code_const">'N_BP'</span>, <span class="code code_const">'PRIMER'</span>, <span class="code code_const">'CONSTRUCT'</span>; case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are <span class="code code_const">'offset'</span>, <span class="code code_const">'which_muts'</span>, <span class="code code_const">'which_lib'</span>, <span class="code code_const">'N_PRIMER'</span>, <span class="code code_const">'N_PLATE'</span>, <span class="code code_const">'N_CONSTRUCT'</span>, <span class="code code_const">'N_BP'</span>, <span class="code code_const">'PRIMER'</span>, <span class="code code_const">'CONSTRUCT'</span>, (<span class="code code_const">'structures'</span> only for <code>primerize.Primerize_3D.design</code> results); case insensitive.</u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -800,7 +1043,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>, <span class="code code_const">'region'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
+                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>, (<span class="code code_const">'region'</span>only for <code>primerize.Primerize_2D.design</code> results); case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -868,12 +1111,31 @@
                       <td><span class="code code_type">list(str)</span></td>
                     </tr>
                     <tr>
+                      <td><mark>structures</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                    </tr>
+                    <tr>
                       <td><mark>_params</mark></td>
-                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'offset'</span>: <span class="code code_type">int</span>, <span class="code code_json">'which_muts'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'which_libs'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'N_PRIMER'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_PLATE'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_CONSTRUCT'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_BP'</span>: <span class="code code_type">int</span> }</td>
+                      <td>
+                        <span class="code code_type">dict</span>: { <span class="code code_json">'offset'</span>: <span class="code code_type">int</span>, <span class="code code_json">'which_muts'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'which_lib'</span>: <span class="code code_type">list(int)</span>, <span class="code code_json">'N_PRIMER'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_PLATE'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_CONSTRUCT'</span>: <span class="code code_type">int</span>, <span class="code code_json">'N_BP'</span>: <span class="code code_type">int</span>, <span class="code code_json">'type'</span>: <span class="code code_type">str</span> }
+                        <br/>
+                        For <code>primerize.Primerize_3D.design</code> results, it also has <span class="code code_json">'N_MUTATION'</span>: <span class="code code_type">int</span>, <span class="code code_json">'is_single'</span>: <span class="code code_type">bool</span>, <span class="code code_json">'is_fillWT'</span>: <span class="code code_type">bool</span>.
+                      </td>
                     </tr>
                     <tr>
                       <td><mark>_data</mark></td>
-                      <td><span class="code code_type">dict</span>: { <span class="code code_json">'construct_names'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'plates'</span>: <span class="code code_type">list(list(<code>primerize.util.Plate_96Well</code>))</span>, <span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code>, <span class="code code_json">'illustration'</span>: { <span class="code code_json">'labels'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'fragments'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'lines'</span>: <span class="code code_type">tuple(str)</span> } }</td>
+                      <td>
+                        <span class="code code_type">dict</span>: { 
+                        <br/>
+                        <span class="code">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="code code_json">'constructs'</span>: <code>primerize.util.Construct_List</code>, 
+                        <br/>
+                        <span class="code">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="code code_json">'plates'</span>: <span class="code code_type">list(list(<code>primerize.util.Plate_96Well</code>))</span>, 
+                        <br/>
+                        <span class="code">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code>
+                        <br/>
+                        }
+                        <br/>
+                        For <code>primerize.Primerize_2D.design</code> results, it also has <span class="code code_json">'illustration'</span>: { <span class="code code_json">'labels'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'fragments'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'lines'</span>: <span class="code code_type">tuple(str)</span> }.</td>
                     </tr>
                     <tr><td colspan="2"></td></tr>
                   </tbody>
