@@ -86,6 +86,9 @@ p.cap:first-letter {
 }
 .panel-body {
 	border: 1px solid #b7bac5;
+	border-top: none;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 
 .panel-default > .panel-heading {
