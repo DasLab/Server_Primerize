@@ -165,7 +165,10 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                 num_primers_on_plate = primer_sequences.get('count')
 
                 if num_primers_on_plate:
-                    if num_primers_on_plate == 1 and primer_sequences.has('A01') and 'WT' in primer_sequences.get('A01')[0]: continue
+                    if num_primers_on_plate == 1 and primer_sequences.has('A01'):
+                        tag = primer_sequences.get('A01')[0]
+                        if (isinstance(tag, primerize.Mutation) and not tag) or (isinstance(tag, str) and 'WT' in tag): continue
+
                     if num_primers_on_plate < 24:
                         flag[i + 1].append((j + 1, num_primers_on_plate))
 
@@ -175,7 +178,12 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                     for k in xrange(96):
                         if k + 1 in primer_sequences._data:
                             row = primer_sequences._data[k + 1]
-                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': row[0], 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
+                            if isinstance(row[0], primerize.Mutation):
+                                lbl = ';'.join(row[0].list()) if row[0] else 'WT'
+                                lbl = primer_sequences.tag + lbl
+                            else:
+                                lbl = row[0]
+                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
                         else:
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
 
