@@ -331,7 +331,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_1D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize.Primerize_1D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
                     </tr>
                     <tr>
                       <td><mark>value</mark></td>
@@ -525,7 +525,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_2D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize.Primerize_2D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
                     </tr>
                     <tr>
                       <td><mark>value</mark></td>
@@ -568,7 +568,7 @@
                     <tr>
                       <td><mark>N_mutations</mark></td>
                       <td><span class="code code_type">int</span></td>
-                      <td><i>(Optional)</i> Number of mutations for "single mutants". <u>Valid choices are <span class="code code_const">(1, 2, 3)</span>.</td>
+                      <td><i>(Optional)</i> Number of consecutive mutations for "single mutants". <u>Valid choices are <span class="code code_const">(1, 2, 3)</span></u> (e.g. <span class="code code_const">2</span> makes "single mutants" like <span class="code code_const">['G13C', 'T14A']</span> and "double mutants" like <span class="code code_const">['G13C', 'T14A', 'A71T', 'C72G']</span>).</td>
                     </tr>
                     <tr>
                       <td><mark>which_lib</mark></td>
@@ -591,7 +591,7 @@
                     <tr/>
                       <td><mark>is_fillWT</mark></td>
                       <td><span class="code code_type">bool</span></td>
-                      <td><i>(Optional)</i> Flag for whether include Wild-type primers at all <span class="code code_class">WellPositions</span>.</td>
+                      <td><i>(Optional)</i> Flag for whether include Wild-type primers at all <i class="code code_class">WellPositions</i>.</td>
                     </tr>
                     <tr/>
                       <td><mark>COL_SIZE</mark></td>
@@ -645,7 +645,7 @@
                     <tr>
                       <td><mark>N_mutations</mark></td>
                       <td><span class="code code_type">int</span></td>
-                      <td><i>(Optional)</i> Number of mutations for "single mutants".</td>
+                      <td><i>(Optional)</i> Number of consecutive mutations for "single mutants".</td>
                     </tr>
                     <tr>
                       <td><mark>which_lib</mark></td>
@@ -665,7 +665,7 @@
                     <tr/>
                       <td><mark>is_fillWT</mark></td>
                       <td><span class="code code_type">bool</span></td>
-                      <td><i>(Optional)</i> Flag for whether include Wild-type primers at all <span class="code code_class">WellPositions</span>.</td>
+                      <td><i>(Optional)</i> Flag for whether include Wild-type primers at all <i class="code code_class">WellPositions</i>.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -750,7 +750,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize_Primerize_3D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
+                      <td><i>(Required)</i> Keyword of parameter. <u>Valid keywords are the same as <code>primerize.Primerize_3D.get</code></u> Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>.</td>
                     </tr>
                     <tr>
                       <td><mark>value</mark></td>
@@ -970,7 +970,7 @@
                     <tr>
                       <td><mark>is_success</mark></td>
                       <td><span class="code code_type">bool</span></td>
-                      <td><i>(Required)</i> Flag for whether <code>primerize.Primerize_2D.design</code> run successfully found a solution.</td>
+                      <td><i>(Required)</i> Flag for whether <code>primerize.Primerize_2D.design</code> or <code>primerize.Primerize_3D.design</code> run successfully found a solution.</td>
                     </tr>
                     <tr>
                       <td><mark>primer_set</mark></td>
@@ -1257,6 +1257,257 @@
                     <tr>
                       <td><mark>Tm_overlaps</mark></td>
                       <td><span class="code code_type">list(float)</span></td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr/>
+
+              <div id="mutation">
+                <p><span class="code code_class">class</span> <code>primerize.util.Mutation</code>(<mark>mut_list</mark>=<i class="code code_const">[]</i>)</p>
+                <p class="indent_1">Collection of mutations for a construct.</p>
+                <br/>
+
+                <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>mut_list</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Optional)</i> List of mutations. When nonspecified, an empty instance is created; when specified, it calls <span class="code code_method">push</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+
+                <p class="indent_1"><b>Returns</b>: <code>primerize.util.Mutation</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
+
+                <p class="indent_2">
+                  <span class="code code_method">echo</span>()
+                </p>
+                <p class="indent_3">Print all mutations, delimited by <span class="code code_const">;</span>.</p>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">list</span>()
+                </p>
+                <p class="indent_3">Return a list of all mutations.</p>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">list(str)</span> of result.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">has</span>(<mark>mut_list</mark>)
+                </p>
+                <p class="indent_3">Test if a list of given mutation is present.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>mut_list</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Required)</i> Mutations in format of <mark>'wt_char'</mark>, <mark>'seq_pos'</mark>, and <mark>'mut_char'</mark>, (e.g. <span class="code code_const">['G13C', 'A15T']</span>).</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">bool</span>.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">push</span>(<mark>mut_list</mark>)
+                </p>
+                <p class="indent_3">Add a list of mutations.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>mut_list</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Required)</i> Mutations. <u>Valid keywords are the same as <code>primerize.util.Mutation.has</code>.</u> Each <mark>'seq_pos'</mark> can only be mutated once. Conflicting mutations are overwritten and the most recent one is saved.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">pop</span>(<mark>mut_list</mark>)
+                </p>
+                <p class="indent_3">Remove a list of mutations.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>mut_list</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Required)</i> Mutations. <u>Valid keywords are the same as <code>primerize.util.Mutation.has</code>.</u> Mutations that are not present will result in a premature return with <span class="code code_none">False</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">bool</span> for whether all mutations in <mark>mut_list</mark> are successfully removed.</p>
+                <br/>
+
+                <p class="indent_2">
+                    <i>Built-in methods</i>: <span class="code code_method">__eq__</span>, <span class="code code_method">__len__</span>, and <span class="code code_method">__iter__</span>.
+                </p>
+                <br/>
+
+                <p class="indent_1"><b>Attributes</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
+                      <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>_data</mark></td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_type">int</span>: <span class="code code_type">tuple(str, str)</span> }, i.e. <i class="code code_desp">dict: {<mark>'seqpos'</mark>: (<mark>'wt_char'</mark>, <mark>'mut_char'</mark>) }</i></td>
+                    </tr>
+                    <tr><td colspan="2"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr/>
+
+              <div id="construct_list">
+                <p><span class="code code_class">class</span> <code>primerize.util.Construct_List</code>()</p>
+                <p class="indent_1">Collection of mutant constructs.</p>
+                <p class="indent_1"><b>Returns</b>: <code>primerize.util.Construct_List</code> <span class="code code_class">object</span>.</p>
+                <p class="indent_1"><b>Methods</b>:</p>
+
+                <p class="indent_2">
+                  <span class="code code_method">echo</span>()
+                </p>
+                <p class="indent_3">Print all mutant constructs.</p>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">has</span>(<mark>mut_list</mark>)
+                </p>
+                <p class="indent_3">Test if a list of given mutant construct is present.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>mut_list</mark></td>
+                      <td><span class="code code_class">primerize.util.Mutation</span></td>
+                      <td><i>(Required)</i> A mutant represented by <code>primerize.util.Mutation</code>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">bool</span>.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">push</span>(<mark>mut_list</mark>)
+                </p>
+                <p class="indent_3">Add a list of mutations.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>mut_list</mark></td>
+                      <td><span class="code code_class">primerize.util.Mutation</span></td>
+                      <td><i>(Required)</i> A mutant represented by <code>primerize.util.Mutation</code>. If the mutant is already present, it will return <span class="code code_none">False</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">bool</span> for whether <mark>mut_list</mark> is successfully added.</p>
+                <br/>
+
+                <p class="indent_2">
+                  <span class="code code_method">pop</span>(<mark>mut_list</mark>)
+                </p>
+                <p class="indent_3">Remove a list of mutations.</p>
+                <p class="indent_3"><b>Parameters</b>:</p>
+                <table class="table indent_4">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>mut_list</mark></td>
+                      <td><span class="code code_class">primerize.util.Mutation</span></td>
+                      <td><i>(Required)</i> A mutant represented by <code>primerize.util.Mutation</code>. Mutant that is not present will result in a premature return with <span class="code code_none">False</span>.</td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
+                <p class="indent_3"><b>Returns</b>: <span class="code code_type">bool</span> for whether <mark>mut_list</mark> is successfully removed.</p>
+                <br/>
+
+                <p class="indent_2">
+                    <i>Built-in methods</i>: <span class="code code_method">__len__</span> and <span class="code code_method">__iter__</span>.
+                </p>
+                <br/>
+
+                <p class="indent_1"><b>Attributes</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Attribute</th>
+                      <th class="col-lg-10 col-md-10 col-sm-9 col-xs-9">Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>_data</mark></td>
+                      <td><span class="code code_type">list(<code>primerize.util.Mutation</code>)</td>
                     </tr>
                     <tr><td colspan="2"></td></tr>
                   </tbody>
