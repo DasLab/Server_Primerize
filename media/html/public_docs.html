@@ -1294,7 +1294,7 @@
                 <p class="indent_2">
                   <span class="code code_method">echo</span>()
                 </p>
-                <p class="indent_3">Print all mutations, delimited by <span class="code code_const">;</span>.</p>
+                <p class="indent_3">Print result in rich-text, delimited by <span class="code code_const">;</span>.</p>
                 <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
                 <br/>
 
@@ -1412,7 +1412,7 @@
                 <p class="indent_2">
                   <span class="code code_method">echo</span>()
                 </p>
-                <p class="indent_3">Print all mutant constructs.</p>
+                <p class="indent_3">Print result in rich-text.</p>
                 <p class="indent_3"><b>Returns</b>: <span class="code code_type">str</span> of result.</p>
                 <br/>
 
@@ -1516,8 +1516,28 @@
               <hr/>
 
               <div id="plate_96well">
-                <p><span class="code code_class">class</span> <code>primerize.util.Plate_96Well</code>()</p>
+                <p><span class="code code_class">class</span> <code>primerize.util.Plate_96Well</code>(<mark>tag</mark>=<span class="code code_const">1</span>)</p>
                 <p class="indent_1">Abstraction of 96-well plates.</p>
+                <br/>
+
+                <p class="indent_1"><b>Parameters</b>:</p>
+                <table class="table indent_2">
+                  <thead>
+                    <tr class="active">
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Argument</th>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3">Type</th>
+                      <th class="col-lg-8 col-md-8 col-sm-6 col-xs-6">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mark>tag</mark></td>
+                      <td><span class="code code_type">int</span></td>
+                      <td><i>(Optional)</i> Mutation library tag. <u>Use <mark>which_lib</mark> number.</u></td>
+                    </tr>
+                    <tr><td colspan="3"></td></tr>
+                  </tbody>
+                </table>
                 <p class="indent_1"><b>Returns</b>: <code>primerize.util.Plate_96Well</code> <span class="code code_class">object</span>.</p>
                 <p class="indent_1"><b>Methods</b>:</p>
 
@@ -1546,7 +1566,7 @@
                 <br/>
 
                 <p class="indent_2">
-                  <span class="code code_method">save</span>(<mark>file_name</mark>=<i class="code code_const">'./'</i>, <mark>title</mark>=<i class="code code_const">''</i>)
+                  <span class="code code_method">save</span>(<mark>ref_primer</mark>=<i class="code code_const">''</i>, <mark>file_name</mark>=<i class="code code_const">'./'</i>, <mark>title</mark>=<i class="code code_const">''</i>)
                 </p>
                 <p class="indent_3">Save plate layout to image file (<kbd>SVG</kbd>).</p>
 
@@ -1560,6 +1580,11 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <tr>
+                      <td><mark>ref_primer</mark></td>
+                      <td><span class="code code_type">list(str)</span></td>
+                      <td><i>(Optional)</i> List of Wild-type <mark>primer_set</mark> for highlighting. If nonspecified, highlighting is disabled.</td>
+                    </tr>
                     <tr>
                       <td><mark>file_name</mark></td>
                       <td><span class="code code_type">str</span></td>
@@ -1649,8 +1674,8 @@
                     </tr>
                     <tr>
                       <td><mark>tag</mark></td>
-                      <td><span class="code code_type">str</span></td>
-                      <td><i>(Required)</i> Name tag of well.</td>
+                      <td><span class="code code_class">primerize.util.Mutation</span></td>
+                      <td><i>(Required)</i> Mutant representd by <code>primerize.util.Mutation</code>. <span class="code code_type">str</span> is only supported for backward compatibility.</td>
                     </tr>
                     <tr>
                       <td><mark>primer</mark></td>
@@ -1665,6 +1690,11 @@
                   <span class="code code_method">reset</span>()
                 </p>
                 <p class="indent_3">Clear current plate data.</p>
+                <br/>
+                <p class="indent_2">
+                    <i>Built-in methods</i>: <span class="code code_method">__len__</span>.
+                </p>
+                <br/>
 
                 <p class="indent_1"><b>Attributes</b>:</p>
                 <table class="table indent_2">
@@ -1681,7 +1711,7 @@
                     </tr>
                     <tr>
                       <td><mark>_data</mark></td>
-                      <td><span class="code code_type">dict</span>: { <span class="code code_type">str</span>: <span class="code code_type">tuple(str, str)</span> }, i.e. <i class="code code_desp">dict: {<mark>'coord'</mark>: (<mark>'tag'</mark>, <mark>'primer'</mark>) }</i></td>
+                      <td><span class="code code_type">dict</span>: { <span class="code code_type">str</span>: <span class="code code_type">tuple(<code>primerize.util.Mutation</code>, str)</span> }, i.e. <i class="code code_desp">dict: {<mark>'coord'</mark>: (<mark>'tag'</mark>, <mark>'primer'</mark>) }</i></td>
                     </tr>
                     <tr><td colspan="2"></td></tr>
                   </tbody>
