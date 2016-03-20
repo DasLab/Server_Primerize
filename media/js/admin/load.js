@@ -7,7 +7,7 @@ xmlhttp.onreadystatechange = function() {
             ver_jquery = xmlDoc.jquery;
             ver_bootstrap = xmlDoc.bootstrap;
             ver_d3 = xmlDoc.d3;
-            ver_zclip = xmlDoc.zclip;
+            ver_clip = xmlDoc.clip;
 
             document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/' + ver_jquery + '/jquery.min.js"><\/script>');
             document.write('\

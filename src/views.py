@@ -123,7 +123,7 @@ def get_user(request):
 
 def get_js(request):
     stats = simplejson.load(open('%s/cache/stat_ver.json' % MEDIA_ROOT, 'r'))
-    json = {'jquery': stats['jquery'], 'bootstrap': stats['bootstrap'], 'd3': stats['d3'], 'zclip': stats['zclip']}
+    json = {'jquery': stats['jquery'], 'bootstrap': stats['bootstrap'], 'd3': stats['d3'], 'clip': stats['clip']}
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def get_ver(request):

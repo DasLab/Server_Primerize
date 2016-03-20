@@ -29,7 +29,7 @@ $(document).ready(function() {
             $("#id_django_adminplus").html(data.django_adminplus);
             $("#id_django_filemanager").html(data.django_filemanager);
             $("#id_d3").html(data.d3);
-            $("#id_zclip").html(data.zclip);
+            $("#id_clip").html(data.clip);
             $("#id_gvizapi").html(data.gviz_api);
 
             $("#id_ssh").html(data.ssh);

@@ -49,7 +49,7 @@ class Command(BaseCommand):
             open('%s/dist/Primerize-LICENSE.md' % MEDIA_ROOT, 'w').write(data)
 
         except Exception:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to download release \033[94m%s\033." % ver)
+            self.stdout.write("    \033[41mERROR\033[0m: Failed to download release \033[94m%s\033[0m." % ver)
             err = traceback.format_exc()
             ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
             open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
