@@ -1,5 +1,5 @@
 var xmlhttp = new XMLHttpRequest(), isCDN = false;
-var ver_jquery, ver_bootstrap, ver_d3, ver_zclip;
+var ver_jquery, ver_bootstrap, ver_d3, ver_clip;
 xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == XMLHttpRequest.DONE) {
         if (xmlhttp.status == 200) {
