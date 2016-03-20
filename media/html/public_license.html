@@ -7,7 +7,7 @@
       To continue downloading source code, you must accept the agreement.
      </h3>
      <br/>
-     <div class="alert alert-info" id="license_content"></div>
+     <div class="alert alert-info" id="license_content">{% autoescape off %}{{license_md}}{% endautoescape %}</div>
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -19,8 +19,4 @@
       </div>
     </div>
   </div>
-{% endblock %}
-
-{% block script %}
-  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}license{{DEBUG_STR}}.js"></script>  
 {% endblock %}
