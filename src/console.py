@@ -218,7 +218,7 @@ def aws_result(results, args, req_id=None):
         ts = d[u'Timestamp'].replace(tzinfo=pytz.utc).astimezone(pytz.timezone(TIME_ZONE))
         d.update({u'Timestamp': ts})
         if args['calc_rate'] and 'Sum' in args['cols']:
-            d.update({args['metric'][0] + u'Rate': d[u'Sum'] / args['period']})
+            d.update({args['metric'][0] + u'Rate': round(d[u'Sum'] / args['period'], 3)})
         for j, r in enumerate(results):
             if j == 0 and len(results) > 1 and args['calc_rate']:
                 continue
@@ -231,7 +231,7 @@ def aws_result(results, args, req_id=None):
                 if args['calc_rate'] and k == u'Sum':
                     val = val / args['period']
                     name = args['metric'][j] + u'Rate'
-                d[name] = val
+                d[name] = round(val, 3)
                 if k in d: del d[k]
 
     desp = {'Timestamp': ('datetime', 'Timestamp'), 'Unit': ('string', args['unit'])}
@@ -276,10 +276,10 @@ def aws_call(conn, args, qs, req_id=None):
 
         if qs in ['lat', 'latency']:
             for d in data:
-                d[u'Maximum'] = d[u'Maximum'] * 1000
+                d[u'Maximum'] = round(d[u'Maximum'] * 1000, 3)
         if qs in ['disk', 'net', 'volbytes', 'network']:
             for d in data:
-                d[u'Sum'] = d[u'Sum'] / 1024
+                d[u'Sum'] = round(d[u'Sum'] / 1024, 3)
         results.append(data)
     return aws_result(results, args, req_id)
 
