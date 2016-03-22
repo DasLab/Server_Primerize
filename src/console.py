@@ -234,7 +234,7 @@ def aws_result(results, args, req_id=None):
                 d[name] = val
                 if k in d: del d[k]
 
-    desp = {'Timestamp': ('datetime', 'Timestamp'), 'Samples': ('number', 'Samples'), 'Unit': ('string', args['unit'])}
+    desp = {'Timestamp': ('datetime', 'Timestamp'), 'Unit': ('string', args['unit'])}
     stats = ['Timestamp']
     for i, me in enumerate(args['metric']):
         if len(args['cols']) == len(args['metric']) and len(args['cols']) > 1:
@@ -310,7 +310,7 @@ def aws_stats(request):
         else:
             conn = boto.ec2.cloudwatch.connect_to_region(AWS['REGION'], aws_access_key_id=AWS['ACCESS_KEY_ID'], aws_secret_access_key=AWS['SECRET_ACCESS_KEY'], is_secure=True)
             if sp == '7d':
-                args = {'period': 7200, 'start_time': datetime.utcnow() - timedelta(days=7), 'end_time': datetime.utcnow()}
+                args = {'period': 10800, 'start_time': datetime.utcnow() - timedelta(days=7), 'end_time': datetime.utcnow()}
             elif sp == '48h':
                 args = {'period': 720, 'start_time': datetime.utcnow() - timedelta(hours=48), 'end_time': datetime.utcnow()}
             else:
@@ -388,13 +388,13 @@ def ga_stats(request):
             if qs == 'chart':
                 (dm, strpt) = ('date', '%Y%m%d')
                 if sp == '24h':
-                    (d1, d2, dm, strpt) = ('yesterday', 'today', 'dateHour', '%Y%m%d%H')
+                    (d1, d2, dm, strpt, ts) = ('yesterday', 'today', 'dateHour', '%Y%m%d%H', 'datetime')
                 elif sp == '7d':
-                    (d1, d2) = ('7daysAgo', 'today')
+                    (d1, d2, ts) = ('7daysAgo', 'today', 'date')
                 elif sp == '1m':
-                    (d1, d2) = ('30daysAgo', 'yesterday')
+                    (d1, d2, ts) = ('30daysAgo', 'yesterday', 'date')
                 elif sp == '3m':
-                    (d1, d2) = ('90daysAgo', 'yesterday')
+                    (d1, d2, ts) = ('90daysAgo', 'yesterday', 'date')
                 else:
                     return error400(request)
 
@@ -410,10 +410,12 @@ def ga_stats(request):
 
                 data = []
                 stats = ['Timestamp', 'Sessions']
-                desp = {'Timestamp': ('datetime', 'Timestamp'), 'Samples': ('number', 'Samples'), 'Unit': ('string', 'Count'), 'Sessions': ('number', 'Sessions')}
+                desp = {'Timestamp': (ts, 'Timestamp'), 'Sessions': ('number', 'Sessions')}
 
                 for row in temp:
-                    data.append({u'Timestamp': datetime.strptime(row[0], strpt), 'Sessions': float(row[1])})
+                    ts = datetime.strptime(row[0], strpt)
+                    ts = ts if sp == '24h' else ts.date()
+                    data.append({u'Timestamp': ts, 'Sessions': float(row[1])})
                 data = sorted(data, key=operator.itemgetter(stats[0]))
                 data_table = gviz_api.DataTable(desp)
                 data_table.LoadData(data)
@@ -443,7 +445,7 @@ def ga_stats(request):
 
                 data = []
                 stats = ['Category', field]
-                desp = {'Samples': ('number', 'Samples'), 'Unit': ('string', 'Count'), 'Category': ('string', 'Category'), field: ('number', field)}
+                desp = {'Category': ('string', 'Category'), field: ('number', field)}
 
                 for row in temp:
                     data.append({'Category': row[0], field: float(row[1])})
@@ -469,7 +471,7 @@ def ga_stats(request):
 
             data = []
             stats = ['Country', 'Sessions']
-            desp = {'Samples': ('number', 'Samples'), 'Unit': ('string', 'Count'), 'Country': ('string', 'Country'), 'Sessions': ('number', 'Sessions')}
+            desp = {'Country': ('string', 'Country'), 'Sessions': ('number', 'Sessions')}
 
             for row in temp:
                 data.append({'Country': row[0], 'Sessions': float(row[1])})
@@ -527,7 +529,7 @@ def git_stats(request):
 
         else:
             data = []
-            desp = {'Timestamp': ('datetime', 'Timestamp'), 'Samples': ('number', 'Samples'), 'Unit': ('string', 'Count')}
+            desp = {'Timestamp': ('date', 'Timestamp')}
             stats = ['Timestamp']
 
             if qs == 'c':
@@ -541,7 +543,7 @@ def git_stats(request):
                 fields = ['Commits']
                 for contrib in contribs:
                     for i, day in enumerate(contrib.days):
-                        data.append({u'Timestamp': contrib.week + timedelta(days=i), u'Commits': day})
+                        data.append({u'Timestamp': (contrib.week + timedelta(days=i)).date(), u'Commits': day})
             elif qs == 'ad':
                 i = 0
                 contribs = repo.get_stats_code_frequency()
@@ -552,7 +554,7 @@ def git_stats(request):
                 if contribs is None: return error500(request)
                 fields = ['Additions', 'Deletions']
                 for contrib in contribs:
-                    data.append({u'Timestamp': contrib.week, u'Additions': contrib.additions, u'Deletions': contrib.deletions})
+                    data.append({u'Timestamp': contrib.week.date(), u'Additions': contrib.additions, u'Deletions': contrib.deletions})
             elif qs == 'au':
                 i = 0
                 contribs = repo.get_stats_contributors()
