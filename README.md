@@ -49,7 +49,9 @@ python manage.py runserver
 
 ## Documentation
 
-Documentation is available at https://primerize.stanford.edu/admin/doc_django/.
+ - Documentation is available at admin [manual](https://primerize.stanford.edu/admin/man/) and [reference](https://primerize.stanford.edu/admin/ref/).
+
+- Alternatively, read the repository [**Wiki**](https://github.com/DasLab/Server_Primerize/wiki/).
 
 ## License
 
