@@ -21,11 +21,21 @@ JOB_STATUS_CHOICES = (
 )
 
 M2_LIBRARY_CHOICES = (
-    ('1', 'A->T, T->A, C->G, G->C'),
-    ('2', 'A->C, T->C, C->A, G->A'),
-    ('3', 'A->G, T->G, C->T, G->T'),
+    ('1', 'A->U, U->A, C->G, G->C'),
+    ('2', 'A->C, U->C, C->A, G->A'),
+    ('3', 'A->G, U->G, C->U, G->U'),
 )
 
+M2R_LIBRARY_CHOICES = (
+    ('1', 'Swap (A:U->U:A, G:C->C:G)'),
+    ('4', 'Cross (A:U->C:G, G:C->U:A)'),
+)
+
+M2R_MUTATION_CHOICES = (
+    ('1', 'Single Mutation'),
+    ('2', 'Double Mutation'),
+    ('3', 'Triple Mutation'),
+)
 
 class Design1D(models.Model):
     date = models.DateField(verbose_name='Submission Date')
@@ -68,7 +78,7 @@ class Design3D(models.Model):
     date = models.DateField(verbose_name='Submission Date')
     job_id = models.CharField(primary_key=True, blank=False, unique=True, max_length=16, verbose_name='Job ID')
     sequence = models.TextField(blank=False)
-    structure = models.TextField(blank=True, verbose_name='Secondary Structures', help_text='<span class="glyphicon glyphicon-tent"></span>&nbsp;Serialized array of target secondary structures.')
+    structures = models.TextField(blank=True, verbose_name='Secondary Structures', help_text='<span class="glyphicon glyphicon-tent"></span>&nbsp;Serialized array of target secondary structures.')
     primers = models.TextField(blank=True, verbose_name='Primer Set', help_text='<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Serialized array of 1d design.')
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
@@ -77,8 +87,8 @@ class Design3D(models.Model):
     status = models.CharField(blank=False, max_length=15, verbose_name='Status')
 
     class Meta():
-        verbose_name = 'Mutation/Rescue Design'
-        verbose_name_plural = 'Mutation/Rescue Designs'
+        verbose_name = 'Mutation/Rescue Set'
+        verbose_name_plural = 'Mutation/Rescue Sets'
 
     def __unicode__(self):
         return u'%s' % self.job_id
@@ -179,10 +189,10 @@ class Design3DForm(forms.Form):
     offset = forms.IntegerField(required=False, initial=0)
     min_muts = forms.IntegerField(required=False)
     max_muts = forms.IntegerField(required=False)
-    lib = forms.ChoiceField(choices=M2_LIBRARY_CHOICES, initial='1', required=True)
-    is_single = forms.BooleanField(required=False)
-    is_fillWT = forms.BooleanField(required=False)
-    num_mutations = forms.IntegerField(required=True, min_value=1, max_value=3, initial=1)
+    lib = forms.ChoiceField(choices=M2R_LIBRARY_CHOICES, initial='1', required=True)
+    is_single = forms.BooleanField(required=False, initial=False)
+    is_fill_WT = forms.BooleanField(required=False, initial=False)
+    num_mutations = forms.ChoiceField(choices=M2R_MUTATION_CHOICES, initial='1', required=True)
 
 
 class DownloadForm(forms.Form):

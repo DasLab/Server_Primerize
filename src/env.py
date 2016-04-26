@@ -50,7 +50,6 @@ def reload_conf(DEBUG, MEDIA_ROOT):
     STR = {
         'P4P6_0': env_arg['STR_P4P6_0'],
         'P4P6_1': env_arg['STR_P4P6_1'],
-        'P4P6_2': env_arg['STR_P4P6_2'],
         'valid': env_arg['STR_VALID'],
     }
 
@@ -60,7 +59,7 @@ def reload_conf(DEBUG, MEDIA_ROOT):
     KEEP_BACKUP = env_cron['KEEP_BACKUP']
     KEEP_JOB = env_cron['KEEP_JOB']
 
-    return (env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB)
+    return (env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, STR, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB)
 
 
 class SYS_PATH(object):
@@ -76,6 +75,7 @@ class SYS_PATH(object):
 
             'design_1d': MEDIA_ROOT + '/media/html/public_design_1d.html',
             'design_2d': MEDIA_ROOT + '/media/html/public_design_2d.html',
+            'design_3d': MEDIA_ROOT + '/media/html/public_design_3d.html',
 
             'login': MEDIA_ROOT + '/media/html/user_login.html',
             'password': MEDIA_ROOT + '/media/html/user_password.html',
@@ -115,7 +115,7 @@ PATH = SYS_PATH(MEDIA_ROOT)
 # MEDIA_ROOT = os.path.join(os.path.abspath("."))
 FILEMANAGER_STATIC_ROOT = root('media/admin') + '/'
 
-(env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
+(env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, STR, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
 
 
 

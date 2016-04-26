@@ -103,7 +103,12 @@ def result(request):
             form = Design2DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset'], 'lib': str(params['which_lib'][0])})
             return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
         elif job_list_entry.type == '3':
-            pass
+            job_entry = Design3D.objects.get(job_id=job_id)
+            params = simplejson.loads(job_entry.params)
+            structures = job_entry.structures[1::-1].replace("'", '').replace(' ', '')
+            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
+            form = Design2DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'structures': structures, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset'], 'lib': str(params['which_lib'][0]), 'num_mutations': params['num_mutations'], 'is_single': params['is_single'], 'is_fill_WT': params['is_fill_WT']})
+            return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
         else:
             raise ValueError
 

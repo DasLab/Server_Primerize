@@ -1,0 +1,300 @@
+{% extends "media/html/_public.html" %}
+{% load widget_tweaks %}
+
+{% block head%}
+  <meta http-equiv="cache-control" content="no-cache"/>
+  <meta http-equiv="pragma" content="no-cache"/>
+{% endblock %}
+
+{% block content %}
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h2>
+      Input Data:
+      <code class="pull-right">Mutation/Rescue Sets</code>
+    </h2>
+    <form method='post' action='/design_3d_run/' id='form_3d'>
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+          <div class="bgimg-lg">
+            <div style="padding-bottom:15px;" data-toggle="tooltip" data-placement="bottom" title="Construct name prefix for all primers; maximum length 32 characters.">
+              <label for="tag" class="col-lg-3 col-md-3 col-sm-4 col-xs-5">
+                <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b>Name Tag</b>:&nbsp;&nbsp;
+              </label>
+              <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                {% render_field 3d_form.tag class+="form-control" placeholder="Enter a name for your sequence" %}
+                <span class="input-group-addon"><i>optional</i></span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <label for="sequence" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <span class="glyphicon glyphicon-cd"></span>&nbsp;&nbsp;<b>Sequence</b>:
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul>
+                  <li>Please enter your sequence below: valid nucleotides only (A, C, G, T, and U); and <u>at least <b>60</b> nt</u> long.</li>
+                  <li>Flanking sequences (e.g. T7 promoter, buffering region, tail) should be included. Please make sure the sequence matches exactly as in <code>Single Assembly</code>.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="list-group">
+                  {% render_field 3d_form.sequence class+="form-control monospace translucent textarea-group" placeholder="Enter your RNA/DNA sequence" rows="6" cols="50" %}
+                  <div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px;">
+                    <p class="text-right" style="margin:0px;">
+                      Length: <i><b><span id="count"></span></b></i> nt
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bgimg-lg">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label for="structures" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <span class="glyphicon glyphicon-tent"></span>&nbsp;&nbsp;<b>Structures</b>:
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul>
+                  <li>Please enter your secondary structure targets. Use <a href="http://ultrastudio.org/en/Dot-Bracket_Notation" target="_blank"><u>dot-bracket</u> notation&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>. Please make sure the length match the sequence.</li>
+                  <li>Click "Add Structure" to add more secondary structures.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {% render_field 3d_form.structures class+="form-control monospace hidden" placeholder="Enter secondary structures" rows="10" cols="50" %}
+                <div id="structures">
+                  <div style="padding-bottom:10px;" id="structure_1" class="input-group">
+                    <span class="input-group-addon"><b>1</b></span>
+                    <input class="structure_input form-control monospace translucent" type="text" id="id_structure_1" name="id_structure_1" placeholder="Enter secondary structure #1"/>
+                    <span class="input-group-addon">
+                      <i><b><span id="count_structure_1">0</span></b></i> nt
+                    </span>
+                  </div>
+                  <div style="padding-bottom:10px;" id="structure_2" class="input-group">
+                    <span class="input-group-addon"><b>2</b></span>
+                    <input class="structure_input form-control monospace translucent" type="text" id="id_structure_2" name="id_structure_2" placeholder="Enter secondary structure #2"/>
+                    <span class="input-group-addon">
+                      <i><b><span id="count_structure_2">0</span></b></i> nt
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/>
+
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label for="primers" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;<b>Primers</b>:
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul>
+                  <li>Please enter your primer set from <code>Single Assembly</code> below. Please make sure the primer numberings match the previous result.</li>
+                  <li>Click "Add Primers" to add more primer pairs.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {% render_field 3d_form.primers class+="form-control monospace hidden" placeholder="Enter the primer set" rows="10" cols="50" %}
+                <div id="primer_sets">
+                  <div style="padding-bottom:10px;" id="primer_1" class="input-group">
+                    <span class="input-group-addon">
+                      <b>1</b>
+                      <span class="label label-info">F</span>
+                    </span>
+                    <input class="primer_input form-control monospace translucent" type="text" id="id_primer_1" name="id_primer_1" placeholder="Enter primer 1 sequence"/>
+                    <span class="input-group-addon">
+                      <i><b><span id="count_primer_1">0</span></b></i> nt
+                    </span>
+                  </div>
+                  <div style="padding-bottom:10px;" id="primer_2" class="input-group">
+                    <span class="input-group-addon">
+                      <b>2</b>
+                      <span class="label label-danger">R</span>
+                    </span>
+                    <input class="primer_input form-control monospace translucent" type="text" id="id_primer_2" name="id_primer_2" placeholder="Enter primer 2 sequence"/>
+                    <span class="input-group-addon">
+                      <i><b><span id="count_primer_2">0</span></b></i> nt
+                    </span>
+                  </div>
+                  <div style="padding-bottom:10px;" id="primer_3" class="input-group">
+                    <span class="input-group-addon">
+                      <b>3</b>
+                      <span class="label label-info">F</span>
+                    </span>
+                    <input class="primer_input form-control monospace translucent" type="text" id="id_primer_3" name="id_primer_3" placeholder="Enter primer 3 sequence"/>
+                    <span class="input-group-addon">
+                      <i><b><span id="count_primer_3">0</span></b></i> nt
+                    </span>
+                  </div>
+                  <div style="padding-bottom:10px;" id="primer_4" class="input-group">
+                    <span class="input-group-addon">
+                      <b>4</b>
+                      <span class="label label-danger">R</span>
+                    </span>
+                    <input class="primer_input form-control monospace translucent" type="text" id="id_primer_4" name="id_primer_4" placeholder="Enter primer 4 sequence"/>
+                    <span class="input-group-addon">
+                      <i><b><span id="count_primer_4">0</span></b></i> nt
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <input name="job_id" id="job_id" type="text" style="display:none" value="" />
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="tooltip" data-placement="bottom" title="More options for guided design. Parameters for offset, mutation ranges and library can be specified.">
+              <h3 class="panel-title"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Advanced Options</h3>
+            </div>
+            <div class="panel-body">
+              <div data-toggle="tooltip" data-placement="bottom" title="Sequence numbering offset, equals to 1 minus the final number of the first nucleotide. Default = 0, i.e. the 1st nucleotide in the sequence will be numbered as 1.">
+                <label for="offset">sequence <b>offset</b>:</label>
+                <div class="input-group" style="margin-left:10px;">
+                  {% render_field 3d_form.offset class+="form-control" %}
+                  <span class="input-group-addon">nt</span>
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Starting position of mutation region. Use numbering based on offset. Default is NaN, which will be automatically filled with the corresponding number of first nucleotide in the sequence.">
+                <label for="min_mut">mutation <b>starting</b> position:</label>
+                <div class="input-group" style="margin-left:10px;">
+                  <span class="input-group-addon hidden-sm hidden-xs">@</span>
+                  {% render_field 3d_form.min_muts class+="form-control" %}
+                  <span class="input-group-addon">nt</span>
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Ending position of mutation region. Use numbering based on offset. Default is NaN, which will be automatically filled with the corresponding number of last nucleotide in the sequence.">
+                <label for="max_mut">mutation <b>ending</b> position:</label>
+                <div class="input-group" style="margin-left:10px;">
+                  <span class="input-group-addon hidden-sm hidden-xs">@</span>
+                  {% render_field 3d_form.max_muts class+="form-control" %}
+                  <span class="input-group-addon">nt</span>
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Mutation scheme. Two libraries are available. Note: G:U pairs are always replaced by C:G pairs! Default = 1." >
+                <label for="max_mut">mutation <b>library</b> choice:</label>
+                <div style="margin-left:10px;">
+                  {% render_field 3d_form.lib class+="form-control" %}
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Numer of mutations for 'single mutants'. Default = 1." >
+                <label for="max_mut"># number of <b>mutations</b> for each:</label>
+                <div style="margin-left:10px;">
+                  {% render_field 3d_form.num_mutations class+="form-control" %}
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Include 'single mutants' in the plate results. If not, only 'double mutants' are included." >
+                <div class="checkbox" style="display:inline-block;">
+                  <label>
+                    {{3d_form.is_single}}
+                    <span class="cr"><span class="cr-icon glyphicon glyphicon-ok"></span></span>
+                    &nbsp;Include <b>'single mutants'</b>
+                  </label>
+                </div>
+              </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Fill Wild-Type primers to plates. If not, the plate results would look similar to Mutate-and-Map." >
+                <div class="checkbox" style="display:inline-block;">
+                  <label>
+                    {{3d_form.is_fill_WT}}
+                    <span class="cr"><span class="cr-icon glyphicon glyphicon-ok"></span></span>
+                    &nbsp;Fill <b>WT</b> primers
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <p>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn_submit">
+                  <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;Primerize!
+                </button>
+              </p>
+              <p>
+                <button type="button" class="btn btn-info btn-block" id="btn-add-str" data-toggle="tooltip" data-placement="bottom" title="Add a secondary structure input.">
+                  <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Structure
+                </button>
+              </p>
+              <p>
+                <button type="button" class="btn btn-warning btn-block" id="btn-add-prm" data-toggle="tooltip" data-placement="bottom" title="Add a pair of primers input.">
+                  <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Primers
+                </button>
+              </p>
+              <p>
+                <a id="btn_demo" class="btn btn-success btn-block" href="/demo_3d_run/" data-toggle="tooltip" data-placement="bottom" title="Example primer design using P4P6-2HP RNA.">
+                  <span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;Show Demo
+                </a>
+              </p>
+              <p>
+                <a class="btn btn-default btn-block" href="/design_3d/">
+                  <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Clear Form
+                </a>
+              </p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="result"></div>
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+    if (isCDN) {
+      document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/' + ver_clip + '/clipboard.min.js"><\/script>');
+      document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/' + ver_d3 + '/d3.min.js"><\/script>');
+    } else {
+      document.write('<script type="text/javascript" src="/site_media/js/clipboard.min.js"><\/script>');
+      document.write('<script type="text/javascript" src="/site_media/js/d3.min.js"><\/script>');
+    }
+  </script>
+  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}plate_96{{DEBUG_STR}}.js"></script>  
+  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}design_3d{{DEBUG_STR}}.js"></script>  
+
+  {% if result_job_id %}
+    <script type="text/javascript">
+      var job_id = "{{result_job_id}}", primer_list = $("#id_primers").val().split(',');
+      ajax_load_html(job_id);
+      sync_primer_input(primer_list);
+
+      ajax_timeout = setInterval(function() {
+        if ($("#result").html().indexOf("Primerize is running") == -1) {
+          clearInterval(ajax_timeout);
+        } else {
+          ajax_load_html(job_id);
+        }
+      }, 1500);
+    </script>
+  {% endif %}
+  {% if from_1d %}
+    <script type="text/javascript">
+      var primer_list = $("#id_primers").val().split(',');
+      sync_primer_input(primer_list);
+
+      $("input.primer_input").prop("readonly", true);
+      $("#id_sequence").prop("readonly", true);
+      $("#btn-add-prm").prop("disabled", true);
+    </script>
+  {% endif %}
+
+{% endblock %}
+

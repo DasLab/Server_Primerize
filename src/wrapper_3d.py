@@ -24,7 +24,7 @@ from src.views import error400
 import primerize
 
 
-def design_3d(request, form=Design2DForm(), from_1d=False):
+def design_3d(request, form=Design3DForm(), from_1d=False):
     return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
 
 def design_3d_run(request):
@@ -41,11 +41,14 @@ def design_3d_run(request):
         max_muts = form.cleaned_data['max_muts']
         lib = form.cleaned_data['lib']
         is_single = form.cleaned_data['is_single']
-        is_fillWT = form.cleaned_data['is_fillWT']
+        is_fill_WT = form.cleaned_data['is_fill_WT']
         num_mutations = form.cleaned_data['num_mutations']
 
         sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T')).encode('utf-8', 'ignore')
-        structures = re.sub('[^' + '\\'.join(STR['valid']) + '\ \,]', '', structures.upper()).encode('utf-8', 'ignore')
+        tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
+        if not tag: tag = 'primer'
+
+        structures = re.sub('[^' + '\\'.join(STR['valid']) + '\ \,]', '', structures)
         structures = [str(s.strip()) for s in structures.split(',') if s.strip()]
         if not structures:
             msg = '<b>No secondary structure</b> given for rescue design. Please supply at least one secondary structure in dot-bracket notation.'
@@ -54,7 +57,6 @@ def design_3d_run(request):
         if not len_str:
             msg = 'Invalid structure input (<b>ALL</b> should be the same length as sequence).'
 
-        tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
         primers = re.sub('[^' + ''.join(SEQ['valid']) + ''.join(SEQ['valid']).lower() + '\ \,]', '', primers)
         primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
         if not primers:
@@ -63,7 +65,7 @@ def design_3d_run(request):
                 primers = assembly.primer_set
             else:
                 msg = '<b>No assembly solution</b> found for sequence input under default constraints. Please supply a working assembly scheme (primers).'
-        if not tag: tag = 'primer'
+
         if not offset: offset = 0
         (which_muts, min_muts, max_muts) = primerize.util.get_mut_range(min_muts, max_muts, offset, sequence)
         if not lib: lib = '1'
@@ -83,14 +85,14 @@ def design_3d_run(request):
 
         job_id = random_job_id()
         create_wait_html(job_id, 3)
-        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=structures, primers=primers, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fillWT}, sort_keys=True, indent=' ' * 4))
+        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=structures, primers=primers, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=3, date=datetime.now())
         job_list_entry.save()
-        job = threading.Thread(target=design_3d_wrapper, args=(sequence, structures, primers, tag, offset, which_muts, which_lib, num_mutations, is_single, is_fillWT, job_id))
+        job = threading.Thread(target=design_3d_wrapper, args=(sequence, structures, primers, tag, offset, which_muts, which_lib, num_mutations, is_single, is_fill_WT, job_id))
         job.start()
 
-        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'structures': structures, 'primers': primers, 'min_muts': min_muts, 'max_muts': max_muts, 'offset': offset, 'lib': lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fillWT}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'structures': structures, 'primers': primers, 'min_muts': min_muts, 'max_muts': max_muts, 'offset': offset, 'lib': lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form}, context_instance=RequestContext(request))
@@ -103,9 +105,9 @@ def demo_3d_run(request):
     job_id = ARG['DEMO_3D_ID']
     create_wait_html(job_id, 3)
     which_muts = range(ARG['MIN_MUTS'], ARG['MAX_MUTS'] + 1)
-    job = threading.Thread(target=design_2d_wrapper, args=(SEQ['P4P6'], [STR['P4P6_0'], STR['P4P6_1'], STR['P4P6_2']], SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], ARG['IS_SINGLE'], ARG['IS_FILLWT'], job_id))
+    job = threading.Thread(target=design_3d_wrapper, args=(SEQ['P4P6'], [STR['P4P6_0'], STR['P4P6_1']], SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], ARG['IS_SINGLE'], ARG['IS_FILLWT'], job_id))
     job.start()
-    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'structures': [STR['P4P6_0'], STR['P4P6_1'], STR['P4P6_2']], 'primers': SEQ['PRIMER_SET'], 'min_muts': ARG['MIN_MUTS'], 'max_muts': ARG['MAX_MUTS'], 'offset': ARG['OFFSET'], 'lib': ARG['LIB'], 'num_mutations': ARG['NUM_MUT'], 'is_single': ARG['IS_SINGLE'], 'is_fill_WT': ARG['IS_FILLWT']}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'structures': [STR['P4P6_0'], STR['P4P6_1']], 'primers': SEQ['PRIMER_SET'], 'min_muts': ARG['MIN_MUTS'], 'max_muts': ARG['MAX_MUTS'], 'offset': ARG['OFFSET'], 'lib': ARG['LIB'], 'num_mutations': ARG['NUM_MUT'], 'is_single': ARG['IS_SINGLE'], 'is_fill_WT': ARG['IS_FILLWT']}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
 # def random_2d(request):
@@ -136,7 +138,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
     try:
         t0 = time.time()
         # time.sleep(15)
-        plate = prm_3d.design(sequence, primer_set, offset, which_muts, which_lib, tag, True)
+        plate = prm_3d.design(sequence, primer_set, structures, offset, num_mutations, which_lib, which_muts, tag, is_single, is_fillWT, True)
         if plate.is_success:
             dir_name = os.path.join(MEDIA_ROOT, 'data/3d/result_%s' % job_id)
             if not os.path.exists(dir_name): os.mkdir(dir_name)
@@ -147,7 +149,6 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
                 zf.write(f, os.path.basename(f))
             zf.close()
             shutil.rmtree('%s/data/3d/result_%s' % (MEDIA_ROOT, job_id))
-            # subprocess.check_call('cd %s && zip -rm result_%s.zip result_%s' % (os.path.join(MEDIA_ROOT, 'data/2d/'), job_id, job_id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         t_total = time.time() - t0
     except Exception:
         t_total = time.time() - t0
@@ -165,7 +166,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         return create_res_html(html, job_id, 3)
 
     try:
-        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <span class="monospace pull-right">__SEQ_ANNOT__</span></p></div>' % (job_id, '/site_data/2d/result_%s.zip' % job_id)
+        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <span class="monospace pull-right">__SEQ_ANNOT__</span></p></div>' % (job_id, '/site_data/3d/result_%s.zip' % job_id)
         script += '<div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
@@ -227,12 +228,12 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         else:
             script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
-        (illustration_1, illustration_2, illustration_3) = plate._data['illustration']['lines']
-        illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
-        illustration_2 = illustration_2.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
-        illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
-        script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
-
+        # (illustration_1, illustration_2, illustration_3) = plate._data['illustration']['lines']
+        # illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
+        # illustration_2 = illustration_2.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
+        # illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
+        # script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
+        (illustration_1, illustration_2, illustration_3) = ('', '', '')
 
         if job_id != ARG['DEMO_3D_ID']:
             job_entry = Design3D.objects.get(job_id=job_id)
@@ -257,7 +258,7 @@ def design_3d_from_1d(request):
         if Design1D.objects.filter(job_id=referer_job_id).exists():
             job_entry = Design1D.objects.get(job_id=referer_job_id)
             primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
-            form = Design2DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers})
+            form = Design3DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers})
             from_1d = True
     else:
         return error400(request)
