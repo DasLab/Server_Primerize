@@ -14,7 +14,7 @@ function track_primer_list() {
     var l = $(this).val().length;
     $(this).next().children().children().children().text(l);
 
-    var val = $(this).val().match(/[ACGTUacgtu\ ]+/g);
+    var val = $(this).val().match(/[ACGTUacgtu]+/g);
     if (val) { $(this).val(val.join('')); }
     value += $(this).val() + ',';
   });
@@ -29,7 +29,7 @@ function track_structure_list() {
     var l = $(this).val().length;
     $(this).next().children().children().children().text(l);
 
-    var val = $(this).val().match(/[ACGTUacgtu\ ]+/g);
+    var val = $(this).val().match(/[\.\(\)\[\]]+/g);
     if (val) { $(this).val(val.join('')); }
     value += $(this).val() + ',';
   });
@@ -66,7 +66,7 @@ function ajax_load_html(job_id) {
     success: function(data) {
       $("#result").html(data);
       if ($("#result").html().indexOf("alert-danger") == -1) {
-        draw_96_plate(job_id);
+        draw_96_plate(job_id, 3);
       }
     }
   });

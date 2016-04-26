@@ -140,9 +140,10 @@ function draw_single_plate(element, data, flag) {
         });    
 }
 
-function draw_96_plate(job_id) {
+function draw_96_plate(job_id, type) {
+    if (type !== 3) { type = 2; }
     $.ajax({
-        url: '/site_data/2d/result_' + job_id + '.json',
+        url: '/site_data/' + type.toString() + 'd/result_' + job_id + '.json',
         cache: false,
         dataType: "json",
         success: function(data) {
