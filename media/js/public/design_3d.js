@@ -161,7 +161,7 @@ function sync_structure_input(data) {
     idx = parseInt(idx.substring(idx.indexOf('_') + 1, idx.length));
   }
   if (data.length > idx) {
-    for (var i = 0; i < Math.ceil((data.length - idx) / 2); i++) {
+    for (var i = 0; i < data.length - idx; i++) {
       expand_structure_input();
     }
   }

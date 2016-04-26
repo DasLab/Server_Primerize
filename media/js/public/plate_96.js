@@ -30,6 +30,8 @@ function get_stroke_color(d) {
             return '#a19193';
         } else if (d.color == 'danger') {
             return '#ff5c2b';
+        } else if (d.color == 'green') {
+            return '#29be92';
         }
     } else if (d.label) {
         if (d.label.indexOf("WT") != -1) {
@@ -56,6 +58,8 @@ function get_fill_color(d) {
             return '#f5f5f5';
         } else if (d.color == 'danger') {
             return '#ffcebf';
+        } else if (d.color == 'green') {
+            return '#beebde';
         }
     } else if (d.label) {
         if (d.label.indexOf("WT") != -1) {

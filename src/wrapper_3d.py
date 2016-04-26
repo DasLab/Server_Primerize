@@ -184,6 +184,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
         json = {'plates': {}}
+        primer_set = plate.primer_set
         flag = {}
         for i in xrange(plate.get('N_PLATE')):
             flag[i + 1] = []
@@ -213,7 +214,10 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
                                 lbl = primer_sequences.tag + lbl
                             else:
                                 lbl = row[0]
-                            json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
+                            if row[1] == primer_set[j] and lbl != 'WT': 
+                                json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1], 'color': 'green'})
+                            else:
+                                json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
                         else:
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
 
@@ -226,7 +230,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         script += plate.echo('assembly').replace('->', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>').replace('<-', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>').replace('\033[92m', '<span class="label-white label-primary">').replace('\033[96m', '<span class="label-warning">').replace('\033[94m', '<span class="label-info">').replace('\033[95m', '<span class="label-white label-danger">').replace('\033[41m', '<span class="label-white label-inverse">').replace('\033[100m', '<span style="font-weight:bold;">').replace('\033[0m', '</span>').replace('\n', '<br/>')
         script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#par_prep" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly.</p><script type="text/javascript">resize();</script>'
 
-        print flag
+
         if flag:
             warning = ''
             for key in flag.keys():
