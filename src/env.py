@@ -39,7 +39,8 @@ def reload_conf(DEBUG, MEDIA_ROOT):
 
         'DEMO_1D_ID': env_arg['DEMO_1D_ID'],
         'DEMO_2D_ID': env_arg['DEMO_2D_ID'],
-        'DEMO_3D_ID': env_arg['DEMO_3D_ID'],
+        'DEMO_3D_ID_1': env_arg['DEMO_3D_ID_1'],
+        'DEMO_3D_ID_2': env_arg['DEMO_3D_ID_2'],
     }
     SEQ = {
         'P4P6': env_arg['SEQ_P4P6'],
@@ -48,8 +49,10 @@ def reload_conf(DEBUG, MEDIA_ROOT):
         'valid': env_arg['SEQ_VALID'],
     }
     STR = {
-        'P4P6_0': env_arg['STR_P4P6_0'],
+        'P4P6': env_arg['STR_P4P6'],
         'P4P6_1': env_arg['STR_P4P6_1'],
+        'P4P6_2': env_arg['STR_P4P6_2'],
+        'P4P6_3': env_arg['STR_P4P6_3'],
         'valid': env_arg['STR_VALID'],
     }
 

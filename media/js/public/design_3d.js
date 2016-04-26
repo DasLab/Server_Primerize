@@ -217,10 +217,10 @@ $(document).ready(function () {
     event.preventDefault();
   });
   
-  $("#btn_demo").on("click", function(event) {
+  $("#btn_demo_1, #btn_demo_2").on("click", function(event) {
     $.ajax({
       type: "GET",
-      url: $(this).attr("href"),
+      url: $(this).attr("href") + '?mode=' + $(this).attr('id').slice(-1),
       success: function(data) { ajax_update_result(data); },
     });
     event.preventDefault();

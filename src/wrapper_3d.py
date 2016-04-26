@@ -99,15 +99,28 @@ def design_3d_run(request):
 
 
 def demo_3d(request):
-    return HttpResponseRedirect('/result/?job_id=' + ARG['DEMO_3D_ID'])
+    return HttpResponseRedirect('/result/?job_id=' + ARG['DEMO_3D_ID_1'])
 
 def demo_3d_run(request):
-    job_id = ARG['DEMO_3D_ID']
+    if 'mode' in request.GET and len(request.GET.get('mode')):
+        mode = str(request.GET.get('mode')[0])
+    else:
+        mode = '1'
+    job_id = ARG['DEMO_3D_ID_' + mode]
     create_wait_html(job_id, 3)
     which_muts = range(ARG['MIN_MUTS'], ARG['MAX_MUTS'] + 1)
-    job = threading.Thread(target=design_3d_wrapper, args=(SEQ['P4P6'], [STR['P4P6_0'], STR['P4P6_1']], SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], ARG['IS_SINGLE'], ARG['IS_FILLWT'], job_id))
+    is_single = ARG['IS_SINGLE']
+    is_fill_WT = ARG['IS_FILLWT']
+    if mode == '2':
+        structures = [STR['P4P6_1'], STR['P4P6_2'], STR['P4P6_3']]
+    else:
+        structures = [STR['P4P6']]
+        is_single = (not is_single)
+        is_fill_WT = (not is_fill_WT)
+
+    job = threading.Thread(target=design_3d_wrapper, args=(SEQ['P4P6'], structures, SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], is_single, is_fill_WT, job_id))
     job.start()
-    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'structures': [STR['P4P6_0'], STR['P4P6_1']], 'primers': SEQ['PRIMER_SET'], 'min_muts': ARG['MIN_MUTS'], 'max_muts': ARG['MAX_MUTS'], 'offset': ARG['OFFSET'], 'lib': ARG['LIB'], 'num_mutations': ARG['NUM_MUT'], 'is_single': ARG['IS_SINGLE'], 'is_fill_WT': ARG['IS_FILLWT']}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'structures': structures, 'primers': SEQ['PRIMER_SET'], 'min_muts': ARG['MIN_MUTS'], 'max_muts': ARG['MAX_MUTS'], 'offset': ARG['OFFSET'], 'lib': ARG['LIB'], 'num_mutations': ARG['NUM_MUT'], 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
 # def random_2d(request):
@@ -159,7 +172,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
     # when no solution found
     if (not plate.is_success):
         html = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><button class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" disabled><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</button></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;<b>FAILURE</b>: No solution found (Primerize run finished without errors).<br/><ul><li>Please examine the primers input. Make sure the primer sequences and their order are correct, and their assembly match the full sequence. Try again with the correct input.</li><li>For further information, please feel free to <a class="btn btn-warning btn-sm" href="/about/#contact" style="color: #ffffff;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Contact&nbsp;</a> us to track down the problem.</li></ul></p>' % (job_id)
-        if job_id != ARG['DEMO_3D_ID']:
+        if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']):
             job_entry = Design3D.objects.get(job_id=job_id)
             job_entry.status = '3'
             job_entry.save()
@@ -235,7 +248,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         # script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
         (illustration_1, illustration_2, illustration_3) = ('', '', '')
 
-        if job_id != ARG['DEMO_3D_ID']:
+        if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']):
             job_entry = Design3D.objects.get(job_id=job_id)
             job_entry.status = '2'
             # job_entry.plates = assembly.primer_set
