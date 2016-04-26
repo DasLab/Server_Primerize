@@ -68,9 +68,11 @@ class Design3D(models.Model):
     date = models.DateField(verbose_name='Submission Date')
     job_id = models.CharField(primary_key=True, blank=False, unique=True, max_length=16, verbose_name='Job ID')
     sequence = models.TextField(blank=False)
+    structure = models.TextField(blank=True, verbose_name='Secondary Structures', help_text='<span class="glyphicon glyphicon-tent"></span>&nbsp;Serialized array of target secondary structures.')
+    primers = models.TextField(blank=True, verbose_name='Primer Set', help_text='<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Serialized array of 1d design.')
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
-
+    plates = models.TextField(blank=True, verbose_name='Primer Plates', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized array of 2d design.')
     time = models.FloatField(blank=True, verbose_name='Time Elapsed')
     status = models.CharField(blank=False, max_length=15, verbose_name='Status')
 
@@ -168,6 +170,19 @@ class Design2DForm(forms.Form):
     min_muts = forms.IntegerField(required=False)
     max_muts = forms.IntegerField(required=False)
     lib = forms.ChoiceField(choices=M2_LIBRARY_CHOICES, initial='1', required=True)
+
+class Design3DForm(forms.Form):
+    sequence = forms.CharField(widget=forms.Textarea, required=True)
+    structures = forms.CharField(widget=forms.Textarea, required=True)
+    primers = forms.CharField(widget=forms.Textarea, required=False)
+    tag = forms.CharField(required=False)
+    offset = forms.IntegerField(required=False, initial=0)
+    min_muts = forms.IntegerField(required=False)
+    max_muts = forms.IntegerField(required=False)
+    lib = forms.ChoiceField(choices=M2_LIBRARY_CHOICES, initial='1', required=True)
+    is_single = forms.BooleanField(required=False)
+    is_fillWT = forms.BooleanField(required=False)
+    num_mutations = forms.IntegerField(required=True, min_value=1, max_value=3, initial=1)
 
 
 class DownloadForm(forms.Form):

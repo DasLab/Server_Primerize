@@ -8,6 +8,7 @@ from src.models import *
 import primerize
 prm_1d = primerize.Primerize_1D()
 prm_2d = primerize.Primerize_2D()
+prm_3d = primerize.Primerize_3D()
 
 
 def is_valid_name(input, char_allow, length):

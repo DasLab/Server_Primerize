@@ -33,6 +33,10 @@ def reload_conf(DEBUG, MEDIA_ROOT):
         'MIN_MUTS': env_arg['MIN_MUTS_P4P6'],
         'MAX_MUTS': env_arg['MAX_MUTS_P4P6'],
 
+        'NUM_MUT': env_arg['NUM_MUT'],
+        'IS_SINGLE': env_arg['IS_SINGLE'],
+        'IS_FILLWT': env_arg['IS_FILLWT'],
+
         'DEMO_1D_ID': env_arg['DEMO_1D_ID'],
         'DEMO_2D_ID': env_arg['DEMO_2D_ID'],
         'DEMO_3D_ID': env_arg['DEMO_3D_ID'],
@@ -42,6 +46,12 @@ def reload_conf(DEBUG, MEDIA_ROOT):
         'T7': env_arg['SEQ_T7'],
         'PRIMER_SET': env_arg['PRIMER_SET_P4P6'],
         'valid': env_arg['SEQ_VALID'],
+    }
+    STR = {
+        'P4P6_0': env_arg['STR_P4P6_0'],
+        'P4P6_1': env_arg['STR_P4P6_1'],
+        'P4P6_2': env_arg['STR_P4P6_2'],
+        'valid': env_arg['STR_VALID'],
     }
 
     env_cron = simplejson.load(open('%s/config/cron.conf' % MEDIA_ROOT))
