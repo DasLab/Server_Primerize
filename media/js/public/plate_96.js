@@ -110,19 +110,28 @@ function draw_single_plate(element, data, flag) {
                 if (d.label) {
                     var pageX = d3.event.pageX, pageY = d3.event.pageY;
                     tooltip_timer = setTimeout(function() {
-                        var label = d.label;
-                        if (label.indexOf("WT") == -1) {
-                            label = 'Lib <span class="label label-warning">' + label.substring(3, 4) + '</span> - <span class="label label-dark-blue">' + label.substring(5, 6) + '</span><span class="label label-teal">' + label.substring(6, label.length - 1) + '</span><span class="label label-dark-red">' + label.substring(label.length - 1) + '</span>';
+                        var lib = 'Lib <span class="label label-warning">' + d.label.substring(3, 4) + '</span> - ';
+                        if (d.label.indexOf("WT") == -1) {
+                            var temp = d.label.substring(5).split(';'), label = [];
+                            for (var i = 0; i < temp.length; i++) {
+                                label.push('<span class="label label-dark-blue">' + temp[i].substring(0, 1) + '</span><span class="label label-teal">' + temp[i].substring(1, temp[i].length - 1) + '</span><span class="label label-dark-red">' + temp[i].substring(temp[i].length - 1) + '</span>');
+                            }
+                            var label_more = '';
+                            if (label.length > 1) {
+                                for (var i = 1; i < label.length; i++) {
+                                    label_more += '<tr><td></td><td></td><td><p>' + label[i] + '</p></td></tr>';
+                                }
+                            }
                         } else {
-                            label = 'Lib <span class="label label-warning">' + label.substring(3, 4) + '</span> - <span class="label label-success">WT</span>';
+                            var label = ['<span class="label label-success">WT</span>'];
                         }
 
                         tooltip.transition().duration(200)
                             .style("opacity", 0.9);
-                        tooltip.html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td><p><span class="label label-primary">' + d.pos + '</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>' + label + '</p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td style="word-break:break-all"><code style="padding:0px; border-radius:0px;">' + d.sequence + '</code></td></tr></tbody></table>')
+                        tooltip.html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td colspan="2"><p><span class="label label-primary">' + d.pos + '</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>' + lib + '</p></td><td><p>' + label[0] + '</p></td></tr>' + label_more + '<tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td colspan="2" style="word-break:break-all"><code style="padding:0px; border-radius:0px;">' + d.sequence + '</code></td></tr></tbody></table>')
                             .style({"left": (pageX - 180) + "px", "top": (pageY + 20) + "px"});
-                    }, 200); 
-                }                                   
+                    }, 200);
+                }
             }
         })
         .on("mouseout", function(d) {

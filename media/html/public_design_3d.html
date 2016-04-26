@@ -279,8 +279,10 @@
 
   {% if result_job_id %}
     <script type="text/javascript">
-      var job_id = "{{result_job_id}}", primer_list = $("#id_primers").val().split(',');
+      var job_id = "{{result_job_id}}";
+      var structure_list = $("#id_structures").val().split(','), primer_list = $("#id_primers").val().split(',');
       ajax_load_html(job_id);
+      sync_structure_input(structure_list);
       sync_primer_input(primer_list);
 
       ajax_timeout = setInterval(function() {
