@@ -77,19 +77,16 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 {% render_field 3d_form.structures class+="form-control monospace hidden" placeholder="Enter secondary structures" rows="10" cols="50" %}
                 <div id="structures">
-                  <div style="padding-bottom:10px;" id="structure_1" class="input-group">
-                    <span class="input-group-addon"><b>1</b></span>
-                    <input class="structure_input form-control monospace translucent" type="text" id="id_structure_1" name="id_structure_1" placeholder="Enter secondary structure #1"/>
-                    <span class="input-group-addon">
-                      <i><b><span id="count_structure_1">0</span></b></i> nt
-                    </span>
-                  </div>
-                  <div style="padding-bottom:10px;" id="structure_2" class="input-group">
-                    <span class="input-group-addon"><b>2</b></span>
-                    <input class="structure_input form-control monospace translucent" type="text" id="id_structure_2" name="id_structure_2" placeholder="Enter secondary structure #2"/>
-                    <span class="input-group-addon">
-                      <i><b><span id="count_structure_2">0</span></b></i> nt
-                    </span>
+                  <div style="padding-bottom:10px;" id="structure_1">
+                    <textarea class="structure_input form-control monospace translucent textarea-group" type="text" rows="3" cols="50" id="id_structure_1" name="id_structure_1" placeholder="Enter secondary structure #1"></textarea>
+                    <div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px; height:32px;">
+                      <p class="pull-left" style="margin:0px;">
+                        <b><span class="label label-success">SecStr</span> 1</b>
+                      </p>
+                      <p class="pull-right" style="margin:0px;">
+                        Length: <i><b><span id="count_structure_1">0</span></b></i> nt
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

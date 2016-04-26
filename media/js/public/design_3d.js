@@ -25,9 +25,15 @@ function track_primer_list() {
 
 function track_structure_list() {
   var value = '';
-  $("input.structure_input").each(function () {
+  $("textarea.structure_input").each(function () {
     var l = $(this).val().length;
-    $(this).next().children().children().children().text(l);
+    var l_label = $(this).next().children().last().children().children();
+    l_label.text(l);
+    if (l !== $("#id_sequence").val().length) {
+      l_label.css("color", "#ff5c2b");
+    } else {
+      l_label.css("color", "#29be92");
+    }
 
     var val = $(this).val().match(/[\.\(\)\[\]]+/g);
     if (val) { $(this).val(val.join('')); }
@@ -180,7 +186,7 @@ function expand_structure_input() {
   } else {
     idx = 0;
   }
-  $('<div style="padding-bottom:10px;" id="structure_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon"><b>' + (idx + 1).toString() + '</b></span><input class="primer_input form-control monospace translucent" type="text" id="id_structure_' + (idx + 1).toString() + '" name="id_structure_' + (idx + 1).toString() + '" placeholder="Enter secondary structure #' + (idx + 1).toString() + '"/><span class="input-group-addon"><i><b><span id="count_structure_' + (idx + 1).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#structures"));
+  $('<div style="padding-bottom:10px;" id="structure_' + (idx + 1).toString() + '"><textarea class="structure_input form-control monospace translucent textarea-group" type="text" rows="3" cols="50" id="id_structure_' + (idx + 1).toString() + '" name="id_structure_' + (idx + 1).toString() + '" placeholder="Enter secondary structure #' + (idx + 1).toString() + '"></textarea><div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px; height:32px;"><p class="pull-left" style="margin:0px;"><b><span class="label label-success">SecStr</span> ' + (idx + 1).toString() + '</b></p><p class="pull-right" style="margin:0px;">Length: <i><b><span id="count_structure_' + (idx + 1).toString() + '">0</span></b></i> nt</p></div>').appendTo($("#structures"));
   $("#id_structure_" + (idx + 1).toString()).on("keyup", track_structure_list);
 }
 
@@ -193,13 +199,13 @@ $(document).ready(function () {
     if (val) { $(this).val(val.join('')); }
   });
 
-  $("input.structure_input").on("keyup", track_structure_list);
+  $("textarea.structure_input").on("keyup", track_structure_list);
   $("input.primer_input").on("keyup", track_primer_list);
   $("#btn-add-str").on("click", expand_structure_input);
   $("#btn-add-prm").on("click", expand_primer_input);
 
   $("#form_3d").submit(function(event) {
-    $("input.structure_input").prop("disabled", true);
+    $("textarea.structure_input").prop("disabled", true);
     $("input.primer_input").prop("disabled", true);
     $.ajax({
       type: "POST",
@@ -207,8 +213,8 @@ $(document).ready(function () {
       data: $(this).serialize(),
       success: function(data) { ajax_update_result(data); },
     });
-    $("input.structure_input").prop("disabled", false);
-    $("input.structure_input").prop("readonly", false);
+    $("textarea.structure_input").prop("disabled", false);
+    $("textarea.structure_input").prop("readonly", false);
     $("input.primer_input").prop("disabled", false);
     $("input.primer_input").prop("readonly", false);
     $("#id_sequence").prop("readonly", false);

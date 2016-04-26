@@ -217,6 +217,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
                         else:
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
 
+            if not flag[i + 1]: del flag[i + 1]
             script += '</div>'
 
         simplejson.dump(json, open(os.path.join(MEDIA_ROOT, 'data/3d/result_%s.json' % job_id), 'w'), sort_keys=True, indent=' ' * 4)
@@ -225,7 +226,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         script += plate.echo('assembly').replace('->', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>').replace('<-', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>').replace('\033[92m', '<span class="label-white label-primary">').replace('\033[96m', '<span class="label-warning">').replace('\033[94m', '<span class="label-info">').replace('\033[95m', '<span class="label-white label-danger">').replace('\033[41m', '<span class="label-white label-inverse">').replace('\033[100m', '<span style="font-weight:bold;">').replace('\033[0m', '</span>').replace('\n', '<br/>')
         script += '</pre></div></div></div></div><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#par_prep" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly.</p><script type="text/javascript">resize();</script>'
 
-
+        print flag
         if flag:
             warning = ''
             for key in flag.keys():
@@ -239,7 +240,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
             warning += '<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Group multiple plates that have fewer than <u>24</u> wells together before ordering.<br/>'
             script = script.replace('__NOTE_NUM__', warning)
         else:
-            script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
+            script = script.replace('<div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success" id="col-res-l"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
         # (illustration_1, illustration_2, illustration_3) = plate._data['illustration']['lines']
         # illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')

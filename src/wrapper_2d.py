@@ -187,6 +187,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
                         else:
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
 
+            if not flag[i + 1]: del flag[i + 1]
             script += '</div>'
 
         simplejson.dump(json, open(os.path.join(MEDIA_ROOT, 'data/2d/result_%s.json' % job_id), 'w'), sort_keys=True, indent=' ' * 4)
