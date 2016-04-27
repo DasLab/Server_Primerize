@@ -45,7 +45,7 @@ $(document).ready(function () {
     $("input").addClass("form-control");
     $("select").addClass("form-control");
     $("textarea").addClass("form-control");
-    $("#id_sequence, #id_primers, #id_params, #id_plates").addClass("monospace");
+    $("#id_sequence, #id_structures, #id_primers, #id_params, #id_plates").addClass("monospace");
     $("#id_job_id, #id_job_1d, #id_job_2d, #id_job_3d").addClass("monospace job_id");
     $("span.add-on").html('<span class="glyphicon glyphicon-calendar"></span>').addClass("input-group-addon").removeClass("add-on");
 
@@ -177,9 +177,27 @@ $(document).ready(function () {
         $("ul.breadcrumb > li:first").next().remove();
         $("ul.breadcrumb > li:first").next().prepend('<span style="color: #000;" class="glyphicon glyphicon-tint"></span>&nbsp;&nbsp;');
     } else if ($(location).attr("href").indexOf("admin/src/design3d") != -1) {
-        $("div.col-md-6 > h2.legend").html('<span class="glyphicon glyphicon-leaf"></span>&nbsp;' + $("div.col-md-6 > h2.legend").html() + '<span class="pull-right" style="font-weight:normal; font-size: 12px;">(Click values in first column to edit)</span>');
+        $("th.column-date").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-2");
+        $("th.column-job_id").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-2");
+        $("th.column-tag").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-2");
+        $("th.column-status").addClass("col-lg-1 col-md-1 col-sm-1 col-xs-1");
+        $("th.column-sequence").addClass("col-lg-5 col-md-5 col-sm-5 col-xs-5");
+
+        $("td.field-tag").css("font-style", "italic");
+        $("td.field-job_id").each(function() { $(this).html("<kbd>" + $(this).html() + "</kbd>"); });
+        $("td.field-status").each(function() { $(this).html(render_status($(this).html())); });
+        $("td.field-sequence").css("word-break", "break-all");
+        $("td.field-sequence").each(function() { $(this).html('<code style="padding:0px; border-radius:0px;">' + $(this).html() + "</code>"); });
+
+        $("th.column-date > div.text > a").html('<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Submission Date');
+        $("th.column-job_id > div.text > a").html('<span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;Job ID');
+        $("th.column-tag > div.text > a").html('<span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;Tag');
+        $("th.column-status > div.text > a").html('<span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Status');
+        $("th.column-sequence > div.text > a").html('<span class="glyphicon glyphicon-console"></span>&nbsp;&nbsp;Sequence');
+
+        $("div.col-md-6 > h2.legend").html('<span class="glyphicon glyphicon-tint"></span>&nbsp;' + $("div.col-md-6 > h2.legend").html() + '<span class="pull-right" style="font-weight:normal; font-size: 12px;">(Click values in first column to edit)</span>');
         $("ul.breadcrumb > li:first").next().remove();
-        $("ul.breadcrumb > li:first").next().prepend('<span style="color: #000;" class="glyphicon glyphicon-leaf"></span>&nbsp;&nbsp;');
+        $("ul.breadcrumb > li:first").next().prepend('<span style="color: #000;" class="glyphicon glyphicon-tint"></span>&nbsp;&nbsp;');
     } else if ($(location).attr("href").indexOf("admin/src/sourcedownloader") != -1) {
         $("th.column-date").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-2");
         $("th.column-full_name").addClass("col-lg-2 col-md-2 col-sm-2 col-xs-2");

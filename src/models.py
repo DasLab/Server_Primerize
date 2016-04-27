@@ -62,7 +62,7 @@ class Design2D(models.Model):
     primers = models.TextField(blank=True, verbose_name='Primer Set', help_text='<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Serialized array of 1d design.')
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
-    plates = models.TextField(blank=True, verbose_name='Primer Plates', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized array of 2d design.')
+    plates = models.TextField(blank=True, verbose_name='Primer Plates', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized array of 2D design.')
     time = models.FloatField(blank=True, verbose_name='Time Elapsed', help_text='<span class="glyphicon glyphicon-time"></span>&nbsp;Unit of <span class="label label-inverse">seconds</span>.')
     status = models.CharField(blank=False, max_length=1, choices=JOB_STATUS_CHOICES, verbose_name='Status')
 
@@ -82,9 +82,9 @@ class Design3D(models.Model):
     primers = models.TextField(blank=True, verbose_name='Primer Set', help_text='<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Serialized array of 1d design.')
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
-    plates = models.TextField(blank=True, verbose_name='Primer Plates', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized array of 2d design.')
+    plates = models.TextField(blank=True, verbose_name='Primer Plates', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized array of 3D design.')
     time = models.FloatField(blank=True, verbose_name='Time Elapsed')
-    status = models.CharField(blank=False, max_length=15, verbose_name='Status')
+    status = models.CharField(blank=False, max_length=1, choices=JOB_STATUS_CHOICES, verbose_name='Status')
 
     class Meta():
         verbose_name = 'Mutation/Rescue Set'

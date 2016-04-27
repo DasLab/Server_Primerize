@@ -53,7 +53,12 @@ class Design2DAdmin(admin.ModelAdmin):
 admin.site.register(Design2D, Design2DAdmin)
 
 class Design3DAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('date', 'job_id', 'tag', 'status', 'sequence',)
+    ordering = ('-date',)
+    fieldsets = [
+        (format_html('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;Entry'), {'fields': ['date', ('job_id', 'tag'), 'sequence', 'structures', 'primers', 'params']}),
+        (format_html('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Results'), {'fields': [('status', 'time'), 'plates']}),
+    ]
 admin.site.register(Design3D, Design3DAdmin)
 
 
