@@ -78,7 +78,7 @@
                 {% render_field 3d_form.structures class+="form-control monospace hidden" placeholder="Enter secondary structures" rows="10" cols="50" %}
                 <div id="structures">
                   <div style="padding-bottom:10px;" id="structure_1">
-                    <textarea class="structure_input form-control monospace translucent textarea-group" type="text" rows="3" cols="50" id="id_structure_1" name="id_structure_1" placeholder="Enter secondary structure #1"></textarea>
+                    <textarea class="structure_input form-control monospace translucent textarea-group" type="text" rows="4" cols="50" id="id_structure_1" name="id_structure_1" placeholder="Enter secondary structure #1"></textarea>
                     <div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px; height:32px;">
                       <p class="pull-left" style="margin:0px;">
                         <b><span class="label label-success">SecStr</span> 1</b>
@@ -291,7 +291,7 @@
       }, 1500);
     </script>
   {% endif %}
-  {% if from_1d %}
+  {% if from_1d or from_2d %}
     <script type="text/javascript">
       var primer_list = $("#id_primers").val().split(',');
       sync_primer_input(primer_list);
@@ -299,6 +299,15 @@
       $("input.primer_input").prop("readonly", true);
       $("#id_sequence").prop("readonly", true);
       $("#btn-add-prm").prop("disabled", true);
+
+      {% if from_2d %}
+      $("#id_offset").prop("readonly", true);
+      $("#id_offset").prop("disabled", true);
+      $("#id_min_muts").prop("readonly", true);
+      $("#id_min_muts").prop("disabled", true);
+      $("#id_max_muts").prop("readonly", true);
+      $("#id_max_muts").prop("disabled", true);
+      {% endif %}
     </script>
   {% endif %}
 

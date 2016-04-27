@@ -24,8 +24,8 @@ from src.views import error400
 import primerize
 
 
-def design_3d(request, form=Design3DForm(), from_1d=False):
-    return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
+def design_3d(request, form=Design3DForm(), from_1d=False, from_2d=False):
+    return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form, 'from_1d': from_1d, 'from_2d': from_2d}, context_instance=RequestContext(request))
 
 def design_3d_run(request):
     if request.method != 'POST': return error400(request)
@@ -121,30 +121,6 @@ def demo_3d_run(request):
     job = threading.Thread(target=design_3d_wrapper, args=(SEQ['P4P6'], structures, SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], is_single, is_fill_WT, job_id))
     job.start()
     return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'structures': structures, 'primers': SEQ['PRIMER_SET'], 'min_muts': ARG['MIN_MUTS'], 'max_muts': ARG['MAX_MUTS'], 'offset': ARG['OFFSET'], 'lib': ARG['LIB'], 'num_mutations': ARG['NUM_MUT'], 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), content_type='application/json')
-
-
-# def random_2d(request):
-#     sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
-#     assembly = prm_1d.design(sequence)
-#     if assembly.is_success:
-#         primers = assembly.primer_set
-#     else:
-#         primers = ''
-#     tag = 'scRNA'
-#     offset = 0
-#     (which_muts, min_muts, max_muts) = primerize.util.get_mut_range(None, None, offset, sequence)
-#     lib = '1'
-#     which_lib = [int(lib)]
-
-#     job_id = random_job_id()
-#     create_wait_html(job_id, 2)
-#     job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, primers=primers, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib}, sort_keys=True, indent=' ' * 4))
-#     job_entry.save()
-#     job_list_entry = JobIDs(job_id=job_id, type=2, date=datetime.now())
-#     job_list_entry.save()
-#     job = threading.Thread(target=design_2d_wrapper, args=(sequence, primers, tag, offset, which_muts, which_lib, job_id))
-#     job.start()
-#     return HttpResponseRedirect('/result/?job_id=' + job_id)
 
 
 def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts, which_lib, num_mutations, is_single, is_fillWT, job_id):
@@ -281,5 +257,23 @@ def design_3d_from_1d(request):
     else:
         return error400(request)
 
-    return design_3d(request, form, from_1d)
+    return design_3d(request, form, from_1d=from_1d)
+
+def design_3d_from_2d(request):
+    if 'HTTP_REFERER' in request.META:
+        referer_job_id = request.META['HTTP_REFERER']
+        referer_job_id = referer_job_id[referer_job_id.find('?job_id=') + 8:]
+
+        form = Design3DForm()
+        from_2d = False
+        if Design2D.objects.filter(job_id=referer_job_id).exists():
+            job_entry = Design2D.objects.get(job_id=referer_job_id)
+            params = simplejson.loads(job_entry.params)
+            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
+            form = Design3DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset']})
+            from_2d = True
+    else:
+        return error400(request)
+
+    return design_3d(request, form, from_2d=from_2d)
 

@@ -58,10 +58,10 @@ else:
         url(r'^design_3d_run/?$', wrapper_3d.design_3d_run),
         url(r'^demo_3d/?$', wrapper_3d.demo_3d),
         url(r'^demo_3d_run/?$', wrapper_3d.demo_3d_run),
-        # url(r'^random_2d/?$', wrapper_2d.random_2d),
 
         url(r'^design_2d_from_1d/?$', wrapper_2d.design_2d_from_1d),
         url(r'^design_3d_from_1d/?$', wrapper_3d.design_3d_from_1d),
+        url(r'^design_3d_from_2d/?$', wrapper_3d.design_3d_from_2d),
 
         url(r'^(home|index)/?$', RedirectView.as_view(url='/', permanent=True)),
         url(r'^(help|intro)/?$', RedirectView.as_view(url='/tutorial/', permanent=True)),
