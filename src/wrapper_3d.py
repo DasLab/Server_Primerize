@@ -232,8 +232,8 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']):
             job_entry = Design3D.objects.get(job_id=job_id)
             job_entry.status = '2'
-            # job_entry.plates = assembly.primer_set
             job_entry.time = t_total
+            job_entry.plates = repr(plate._data['plates']).replace('\033[90m', '').replace('\033[91m', '').replace('\033[92m', '').replace('\033[93m', '').replace('\033[94m', '').replace('\033[95m', '').replace('\033[0m', '')
             job_entry.save()
         create_res_html(script, job_id, 3)
     except Exception:
