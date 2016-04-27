@@ -1045,7 +1045,7 @@
                     <tr>
                       <td><mark>key</mark></td>
                       <td><span class="code code_type">str</span></td>
-                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>, (<span class="code code_const">'region'</span>only for <code>primerize.Primerize_2D.design</code> results); case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
+                      <td><i>(Optional)</i> Keyword of printing. <u>Valid keywords are <span class="code code_const">'plate'</span>, <span class="code code_const">'assembly'</span>, <span class="code code_const">'region'</span>; case insensitive.</u> When nonspecified, result of all keywords is returned. Illegal <mark>keyword</mark> raises <span class="code code_error">AttributeError</span>. If <mark>is_success</mark> = <i class="code code_none">False</i>, it raises <span class="code code_error">UnboundLocalError</span>.</td>
                     </tr>
                     <tr><td colspan="3"></td></tr>
                   </tbody>
@@ -1133,11 +1133,13 @@
                         <br/>
                         <span class="code">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="code code_json">'plates'</span>: <span class="code code_type">list(list(<code>primerize.util.Plate_96Well</code>))</span>, 
                         <br/>
-                        <span class="code">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code>
+                        <span class="code">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="code code_json">'assembly'</span>: <code>primerize.util.Assembly</code>,
+                        <br/>
+                        <span class="code">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="code code_json">'illustration'</span>: { <span class="code code_json">'labels'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'fragments'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'lines'</span>: <span class="code code_type">tuple(str)</span> }
                         <br/>
                         }
                         <br/>
-                        For <code>primerize.Primerize_2D.design</code> results, it also has <span class="code code_json">'illustration'</span>: { <span class="code code_json">'labels'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'fragments'</span>: <span class="code code_type">list(str)</span>, <span class="code code_json">'lines'</span>: <span class="code code_type">tuple(str)</span> }.</td>
+                        For <code>primerize.Primerize_2D.design</code> results, it also has <span class="code code_json">'bps'</span>: <span class="code code_type">list(tuple(int, int))</span>.</td>
                     </tr>
                     <tr><td colspan="2"></td></tr>
                   </tbody>

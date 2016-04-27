@@ -37,13 +37,15 @@ textarea.monospace,
 input.monospace,
 select.monospace,
 td.monospace,
-span.monospace {
+span.monospace,
+p.monospace {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
   font-weight: bold;
   font-size: 16px;
 }
 
-span.monospace > span {
+span.monospace > span,
+p.monospace span {
   font-family: inherit;
   font-size: 14px;
 }

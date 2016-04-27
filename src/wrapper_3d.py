@@ -155,7 +155,8 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         return create_res_html(html, job_id, 3)
 
     try:
-        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <span class="monospace pull-right">__SEQ_ANNOT__</span></p></div>' % (job_id, '/site_data/3d/result_%s.zip' % job_id)
+        mode = 'NORMAL' if len(structures) == 1 else 'DIFF'
+        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <u>%s</u> <i>Mode</i>.</p><p class="monospace" style="overflow-x:scroll;">__SEQ_ANNOT__</p></div>' % (job_id, '/site_data/3d/result_%s.zip' % job_id, mode)
         script += '<div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
@@ -222,12 +223,12 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         else:
             script = script.replace('<div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success" id="col-res-l"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
-        # (illustration_1, illustration_2, illustration_3) = plate._data['illustration']['lines']
-        # illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
-        # illustration_2 = illustration_2.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
-        # illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
-        # script = script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_2 + '</p><p style="margin-top:0px;">&nbsp;<span class="monospace pull-right">' + illustration_3)
-        (illustration_1, illustration_2, illustration_3) = ('', '', '')
+        (illustration_3, illustration_2, illustration_1, illustration_str) = plate._data['illustration']['lines']
+        illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
+        illustration_2 = illustration_2.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
+        illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
+        illustration_str = illustration_str.replace('\n', '<br/>').replace(' ', '&nbsp;').replace('\033[41m', '<span class="label-white label-primary">').replace('\033[0m', '</span>')
+        script = script.replace('__SEQ_ANNOT__', illustration_3 + '<br/>' + illustration_2 + '<br/>' + illustration_1 + '<br/><span style="white-space:pre;">' + illustration_str + '</span>')
 
         if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']):
             job_entry = Design3D.objects.get(job_id=job_id)
