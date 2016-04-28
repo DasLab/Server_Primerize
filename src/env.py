@@ -52,7 +52,6 @@ def reload_conf(DEBUG, MEDIA_ROOT):
         'P4P6': env_arg['STR_P4P6'],
         'P4P6_1': env_arg['STR_P4P6_1'],
         'P4P6_2': env_arg['STR_P4P6_2'],
-        'P4P6_3': env_arg['STR_P4P6_3'],
         'valid': env_arg['STR_VALID'],
     }
 

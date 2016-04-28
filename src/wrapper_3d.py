@@ -112,7 +112,7 @@ def demo_3d_run(request):
     is_single = ARG['IS_SINGLE']
     is_fill_WT = ARG['IS_FILLWT']
     if mode == '2':
-        structures = [STR['P4P6_1'], STR['P4P6_2'], STR['P4P6_3']]
+        structures = [STR['P4P6_1'], STR['P4P6_2']]
     else:
         structures = [STR['P4P6']]
         is_single = (not is_single)
