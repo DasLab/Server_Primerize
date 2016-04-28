@@ -18,7 +18,7 @@ def index(request):
     return render_to_response(PATH.HTML_PATH['index'], {}, context_instance=RequestContext(request))
 
 def tutorial(request):
-    return render_to_response(PATH.HTML_PATH['tutorial'], {'job_id': ARG['DEMO_2D_ID']}, context_instance=RequestContext(request))
+    return render_to_response(PATH.HTML_PATH['tutorial'], {'job_id_2d': ARG['DEMO_2D_ID'], 'job_id_3d': ARG['DEMO_3D_ID_2']}, context_instance=RequestContext(request))
 
 def protocol(request):
     return render_to_response(PATH.HTML_PATH['protocol'], {}, context_instance=RequestContext(request))
