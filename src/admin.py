@@ -167,6 +167,8 @@ def get_backup(request):
     stats = simplejson.load(open('%s/cache/stat_backup.json' % MEDIA_ROOT, 'r'))
     return HttpResponse(simplejson.dumps(stats, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
+def get_arch(request):
+    return HttpResponse(''.join(open('%s/config/flow_chart.svg' % MEDIA_ROOT).readlines()), content_type='image/svg+xml')
 
 admin.site.register_view('backup/', view=backup, visible=False)
 admin.site.register_view('backup_stat/', view=backup_stat, visible=False)
@@ -195,3 +197,4 @@ admin.site.register_view('sys_stat/', view=sys_stat, visible=False)
 admin.site.register_view('get_ver/', view=get_ver, visible=False)
 admin.site.register_view('get_sys/', view=get_sys, visible=False)
 admin.site.register_view('get_backup/', view=get_backup, visible=False)
+admin.site.register_view('get_arch/', view=get_arch, visible=False)
