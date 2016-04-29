@@ -651,3 +651,54 @@ ul.breadcrumb > li.active {
 .i_git_o::after { background-position: 0 75%; }
 .i_linkedin_o::after { background-position: 0 87.5%; }
 .i_slack_o::after { background-position: 0 100%; }
+
+
+.code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace; 
+  font-weight: bold;
+  border-radius: 0.25em;
+  padding: 2px 5px;
+}
+.code_url {
+  font-variant: italic;
+  color: #d86f5c;
+  background-color: #fbf0ee;
+}
+.code_path {
+  color: #29be92;
+  background-color: #e9f8f4;
+}
+.code_spe {
+  font-variant: italic;
+  color: #ff5c2b;
+  background-color: #ffeee9;
+}
+.code_method {
+  color: #3ed4e7;
+  background-color: #ebfafc;
+}
+.code_class {
+  color: #ff912e;
+  background-color: #fff4ea;
+}
+.code_key {
+  color: #5496d7;
+  background-color: #edf4fb;
+}
+.code_val {
+  font-variant: italic;
+  color: #c28fdd;
+  background-color: #f8f3fb;
+}
+.code_cmd {
+  color: #333;
+  background-color: #eee;
+}
+.code_brand {
+  color: #eeb211;
+  background-color: #fdf7e7;
+}
+.code_misc {
+  color: #ff69bc;
+  background-color: #fff0f8;
+}
