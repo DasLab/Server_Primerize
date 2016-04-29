@@ -129,15 +129,31 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
               <h4><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Maintaining Public Site</h4>
               <br/>
+              <p><span class="code code_class">Design1D</span>, <span class="code code_class">Design2D</span> and <span class="code code_class">Design3D</span> <b>class</b></p>
+              <ul>
+                <li>The demo <span class="code code_key">JOB_ID</span> should be present in all these classes, with time set to <span class="code code_val">1970-01-01</span> and <span class="code code_key">Status</span> set to <span class="code code_val">1</span> (Demo).</li>
+              </ul>
+              <p><span class="code code_class">JobID</span> <b>class</b></p>
+              <ul>
+                <li>This table is used to look up a <span class="code code_key">JOB_ID</span> for <span class="code code_url">/result/</span> queries. All <span class="code code_key">JOB_ID</span> of <span class="code code_class">Design1D</span>, <span class="code code_class">Design2D</span> and <span class="code code_class">Design3D</span> classes should be registered to this table.</li>
+              </ul>
+              <p><span class="code code_class">JobGroup</span> <b>class</b></p>
+              <ul>
+                <li>Future use for connecting/grouping <span class="code code_key">JOB_ID</span> of <span class="code code_class">Design1D</span>, <span class="code code_class">Design2D</span> and <span class="code code_class">Design3D</span> jobs. <b>Currently not used!</b></li>
+              </ul>
+              <br/>
               <p><span class="code code_class">HistoryItem</span> <b>class</b></p>
               <ul>
                 <li>Announce news for the Primerize server and <code>priemrize</code> package when needed.</li>
                 <li>News content is HTML-enabled.</li>
               </ul>
-              <br/>
               <p><span class="code code_class">SourceDownloader</span> <b>class</b></p>
               <ul>
                 <li>Keep track of who requested to download <code>primerize</code> source code.</li>
+              </ul>
+              <p><span class="code code_class">User</span> <b>class</b></p>
+              <ul>
+                <li>User accounts. Currently only <span class="code code_val">daslab</span> is used as Admin. Do not add new logins unless future user system is open for public.</li>
               </ul>
             </div>
           </div>  

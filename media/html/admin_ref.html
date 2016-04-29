@@ -148,7 +148,7 @@
               <br/>
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <img src="/admin/get_arch/" alt="" width="100%" class="thumbnail" />
+                  <img src="/admin/get_arch/" alt="Server Architecture" width="100%" class="thumbnail" />
                 </div>
               </div>
 
@@ -173,8 +173,11 @@
               </div>
               <br/>
               <div class="row" style="padding-bottom:5px;">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                   App initiation
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                  <span class="code code_path">user.py</span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <span class="glyphicon glyphicon-arrow-down"></span>
@@ -183,10 +186,7 @@
               </div>
 
               <div class="row" style="padding-bottom:5px;">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                  <span class="code code_path">auth.py</span>
-                  <span class="glyphicon glyphicon-option-horizontal pull-right"></span>
-                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center"></div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <span class="code code_path">admin.py</span>
                   <span class="glyphicon glyphicon-arrow-left pull-right"></span>
@@ -194,19 +194,21 @@
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <span class="code code_path">urls.py</span>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                  <span class="code code_path">helper.py</span>
+                </div>
               </div>
               <div class="row" style="padding-bottom:5px;">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                  <span class="glyphicon glyphicon-arrow-up"></span>
-                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center"></div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <span class="glyphicon glyphicon-arrow-down"></span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <span class="glyphicon glyphicon-sort"></span>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                  <span class="glyphicon glyphicon-arrow-up"></span>
+                </div>
               </div>
               <div class="row" style="padding-bottom:5px;">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
@@ -222,7 +224,7 @@
                   <span class="glyphicon glyphicon-arrow-right pull-right"></span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                  <span class="code code_path">dash.py</span>
+                  <span class="code code_path">wrapper_1d.py</span>
                 </div>
               </div>
               <div class="row" style="padding-bottom:5px;">
@@ -234,7 +236,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center"></div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                  <span class="glyphicon glyphicon-arrow-up"></span>
+                  <span class="code code_path">wrapper_2d.py</span>
                 </div>
               </div>
               <div class="row" style="padding-bottom:5px;">
@@ -245,19 +247,97 @@
                   <span class="glyphicon glyphicon-arrow-left pull-right"></span>
                   <span class="code code_cmd">gdrive</span>
                   <br/>
-                  <span class="code code_misc">pandoc</span>
-                  <br/>
                   <span class="code code_misc">cron</span> job
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <span class="code code_path">gdrive.py</span> job
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                  <span class="code code_path">cache.py</span> job
+                  <span class="code code_path">wrapper_3d.py</span>
                 </div>
               </div>
 
-
+              <br/>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp; Path</th>
+                      <th class="col-lg-3 col-md-3 col-sm-4 col-xs-4"></th>
+                      <th class="col-lg-7 col-md-7 col-sm-5 col-xs-5"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp; Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">backup/</span></td>
+                      <td>Backup <span class="code code_spe">*.tgz</span> files.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">cache/</span></td>
+                      <td>System log files and cached system status <span class="code code_key">JSON</span> files.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">config/</span></td>
+                      <td>Configuration <span class="code code_spe">*.conf</span> server secrets, and flow chart.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">data/</span></td>
+                      <td>Job results <span class="code code_spe">*.html</span> for display, <span class="code code_spe">*.zip</span> for download, and <span class="code code_spe">*.json</span> for plate rendering. Subcategorized into <span class="code code_path">1d/</span>, <span class="code code_path">2d/</span>, and <span class="code code_path">3d/</span>. This folder is accessible through url <span class="code code_url">/site_data/</span>.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">dist/</span></td>
+                      <td>Distribution of <code>primerize</code> package releases and master branch, and a <span class="code code_path">LICENSE.md</span> for license display.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">media/</span></td>
+                      <td>Static assets for front-end. This folder is accessible through url <span class="code code_url">/site_media/</span>.</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><span class="code code_path">admin/</span></td>
+                      <td>Admin related <span class="code code_key">HTML</span> and others.</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><span class="code code_path">css/</span></td>
+                      <td><span class="code code_key">CSS</span> styling files.</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><span class="code code_path">fonts/</span></td>
+                      <td><span class="code code_misc">Glyphicon</span> and <span class="code code_spe">Helvetica</span> font resource.</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><span class="code code_path">html/</span></td>
+                      <td>Public <span class="code code_key">HTML</span> templates</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><span class="code code_path">images/</span></td>
+                      <td>Public image files, contains sprites.</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><span class="code code_path">js/</span></td>
+                      <td>Public <span class="code code_misc">Javascript</span> files. Subcategorized into <span class="code code_path">admin/</span>, <span class="code code_path">public/</span> and <span class="code code_path">suit/</span>.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">src/</span></td>
+                      <td><span class="code code_cmd">python</span> back-end scripts.</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><span class="code code_path">management/commands/</span></td>
+                      <td><span class="code code_misc">Django</span> management command scripts.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span class="code code_path">*.sh</span></td>
+                      <td><span class="code code_cmd">bash</span> commands for multiple server tasks (supplementing <span class="code code_misc">Django</span> management commands).</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
