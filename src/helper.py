@@ -54,7 +54,12 @@ def primer_suffix_html(num):
 
 
 def random_job_id():
-    return binascii.b2a_hex(os.urandom(8))
+    while True:
+        job_id = binascii.b2a_hex(os.urandom(8))
+        try:
+            is_exist = JobIDs.objects.get(job_id=job_id)
+        except:
+            return job_id
 
 
 def create_res_html(html_content, job_id, type):

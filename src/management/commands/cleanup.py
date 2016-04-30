@@ -29,17 +29,16 @@ class Command(BaseCommand):
             for job in all_job:
                 if job.type == '1':
                     obj = Design1D.objects.get(job_id=job.job_id)
-                    obj.delete()
-                    for f in glob.glob('%s/data/1d/result_%s.*') % (MEDIA_ROOT, job.job_id):
-                        os.remove(f)
                 elif job.type == '2':
                     obj = Design2D.objects.get(job_id=job.job_id)
-                    obj.delete()
-                    for f in glob.glob('%s/data/2d/result_%s.*') % (MEDIA_ROOT, job.job_id):
-                        os.remove(f)
                 elif job.type == '3':
-                    pass
+                    obj = Design3D.objects.get(job_id=job.job_id)
+
+                obj.delete()
+                for f in glob.glob('%s/data/%sd/result_%s.*') % (MEDIA_ROOT, job.type, job.job_id):
+                    os.remove(f)
                 job.delete()
+                
         except Exception:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to remove JOB_ID \033[94m%s\033." % job.job_id)
             err = traceback.format_exc()
