@@ -86,11 +86,9 @@
                     <a id="tab_58" href="#python_src">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">src/</span></a>
                     <ul style="padding-left:60px;">
                       <li><a id="tab_581" href="#src_admin"><span class="code code_path">src/admin.py</span></a></li>
-                      <li><a id="tab_582" href="#src_auth"><span class="code code_path">src/auth.py</span></a></li>
-                      <li><a id="tab_583" href="#src_console"><span class="code code_path">src/console.py</span></a></li>
-                      <li><a id="tab_584" href="#src_dash"><span class="code code_path">src/dash.py</span></a></li>
-                      <li><a id="tab_585" href="#src_env"><span class="code code_path">src/env.py</span></a></li>
-                      <li><a id="tab_586" href="#src_views"><span class="code code_path">src/views.py</span></a></li>
+                      <li><a id="tab_582" href="#src_console"><span class="code code_path">src/console.py</span></a></li>
+                      <li><a id="tab_583" href="#src_env"><span class="code code_path">src/env.py</span></a></li>
+                      <li><a id="tab_584" href="#src_views"><span class="code code_path">src/views.py</span></a></li>
                     </ul>
                   </li>
                   <li><a id="tab_59" href="#python_wrap">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">src/wrapper_?d.py</span></a></li>
@@ -774,32 +772,13 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td><span class="code code_method">apache()</span>, <span class="code code_method">aws()</span>, <span class="code code_method">ga()</span>, <span class="code code_method">git()</span></td><td>Handles page requests of <span class="code code_url">/admin/apache/</span>, <span class="code code_url">/admin/aws/</span>, <span class="code code_url">/admin/ga/</span>, <span class="code code_url">/admin/git/</span>.</td></tr>
                       <tr><td><span class="code code_method">apache_stat()</span>, <span class="code code_method">aws_stat()</span>, <span class="code code_method">ga_stat()</span>, <span class="code code_method">git_stat()</span></td><td>Retrieves analytics data through <span class="code code_method">*_stats()</span> in <span class="code code_path">src/console.py</span>.</td></tr>
                       <tr><td><span class="code code_method">get_sys()</span>, <span class="code code_method">get_ver()</span>, <span class="code code_method">get_backup()</span></td><td>Accesses <span class="code code_path">cache/stat_sys.json</span>, <span class="code code_path">cache/stat_ver.json</span> and <span class="code code_path">cache/stat_backup.json</span> for <span class="code code_cmd">versions</span> and <span class="code code_cmd">backup</span> status (capacity, sizes, <i>etc.</i>) text. Neither <span class="code code_key">TXT</span> files are accessible through url.</td></tr>
+                      <tr><td><span class="code code_method">get_arch()</span></td><td>Accesses <span class="code code_path">config/flow_chart.svg</span> for admin only.</td></tr>
                       <tr><td><span class="code code_method">backup_form()</span></td><td>Get backup related status from <span class="code code_misc">cron</span> jobs.</td></tr>
                       <tr><td><span class="code code_method">backup_now()</span>, <span class="code code_method">upload_now()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management commands of either <span class="code code_cmd">backup</span> or <span class="code code_cmd">gdrive</span>.</td></tr>
                       <tr><td><span class="code code_method">sys_stat()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management command of <span class="code code_cmd">versions</span> with flag <span class="code code_val">1</span> to override <span class="code code_key">IS_VERSION</span> in <span class="code code_path">config/bot.conf</span>.</td></tr>
-                      <tr><td><span class="code code_method">dash_stat()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management command of <span class="code code_cmd">cache</span> with flag <span class="code code_val">3</span> or <span class="code code_val">15</span> or <span class="code code_val">30</span> specified.</td></tr>
-                      <tr><td><span class="code code_method">ssl_dash()</span>, <span class="code code_method">group_dash()</span>, <span class="code code_method">dash_dash()</span></td><td>Returns status of <span class="code code_misc">SSL Certificate</span>, access group of <span class="code code_path">config/group.conf</span>, or <span class="code code_cmd">cache</span> files refreshness (last time modified).</td></tr>
-                      <tr><td><span class="code code_method">backup()</span>, <span class="code code_method">bot()</span></td><td>Handles page requests of <span class="code code_url">/admin/backup/</span> and <span class="code code_url">/admin/bot/</span> pages. Also takes <span class="code code_spe">POST</span> request to set configurations.</td></tr>
-                      <tr><td><span class="code code_method">export()</span></td><td>Handles page request of <span class="code code_url">/admin/export/</span>. Also takes <span class="code code_spe">POST</span> request to execute publication export to file.</td></tr>
-                      <tr><td><span class="code code_method">dir()</span>, <span class="code code_method">man()</span>, <span class="code code_method">ref()</span></td><td>Handles page requests of <span class="code code_url">/admin/dir/</span>, <span class="code code_url">/admin/man/</span>, and <span class="code code_url">/admin/ref/</span> for <span class="code code_misc">django-filemanager</span> and documentation pages.</td></tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_auth"><span class="code code_path">src/auth.py</span></h4>
-              <p>Handles admin auto-login when using <span class="code code_misc">WebAuth</span>, and <span class="code code_key">EMAIL</span> settings.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_class">USER_GROUP</span></td><td>Parses <span class="code code_path">config/group.conf</span> and is used by <span class="code code_method">group_dash()</span> in <span class="code code_path">src/admin.py</span>.</td></tr>
-                      <tr><td><span class="code code_class">AutomaticAdminLoginMiddleware</span></td><td>Automatically login <span class="code code_val">daslab</span> user for people listed in <span class="code code_class">GROUP.ADMIN()</span> when using <span class="code code_misc">WebAuth</span> in production.</td></tr>
-                      <tr><td><span class="code code_class">ExceptionUserInfoMiddleware</span></td><td>Mirrors user <span class="code code_key">sunet_id</span> and email into <span class="code code_class">request.META</span>, which is useful for tracking down who encountered a problem from <span class="code code_brand">Apache</span> log.</td></tr>
+                      <tr><td><span class="code code_method">ssl_dash()</span></td><td>Returns status of <span class="code code_misc">SSL Certificate</span>.</td></tr>
+                      <tr><td><span class="code code_method">backup()</span></td><td>Handles page requests of <span class="code code_url">/admin/backup/</span> page. Also takes <span class="code code_spe">POST</span> request to set configurations.</td></tr>
+                      <tr><td><span class="code code_method">dir()</span>, <span class="code code_method">man()</span>, <span class="code code_method">ref()</span>, <span class="code code_method">doc()</span></td><td>Handles page requests of <span class="code code_url">/admin/dir/</span>, <span class="code code_url">/admin/man/</span>, <span class="code code_url">/admin/ref/</span>, and <span class="code code_url">/admin/doc/</span> for <span class="code code_misc">django-filemanager</span> and documentation pages.</td></tr>
                       <tr><td colspan="2" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
@@ -809,19 +788,17 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
 
               <br/>
               <h4 id="src_console"><span class="code code_path">src/console.py</span></h4>
-              <p>Handles admin analytics console/dashboard data requests, including <span class="code code_brand">Slack</span> messages.</p>
+              <p>Handles admin analytics console/dashboard data requests and error emails.</p>
               <div class="row">
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_method">send_notify_slack()</span>, <span class="code code_method">send_error_slack()</span>, <span class="code code_method">send_notify_emails()</span></td><td colspan="2">Uses <span class="code code_misc">Slacker</span> API or <span class="code code_cmd">smtp</span> email to send messages to admin about error reports.</td></tr>
-                      <tr><td><span class="code code_method">find_slack_id()</span></td><td colspan="2">Finds match of group <span class="code code_class">Member</span> <span class="code code_brand">Slack</span> ID and <span class="code code_key">sunet_id</span>. It matches the <b>first name</b> of the target user to records in <span class="code code_brand">Slack</span>, and infers <span class="code code_key">sunet_id</span> by stripping the email address of matching <span class="code code_brand">Slack</span> ID.</td></tr>
+                      <tr><td><span class="code code_method">send_notify_emails()</span></td><td colspan="2">Uses <span class="code code_cmd">smtp</span> email to send messages to admin about error reports.</td></tr>
                       <tr><td><span class="code code_method">get_backup_stat()</span></td><td colspan="2">Reads sizes of folders in <span class="code code_path">data/</span> and sizes of files in <span class="code code_path">backup/</span>, and a list of <span class="code code_key">TGZ</span> files stored in <span class="code code_brand">Google Drive</span>. Text information is saved to <span class="code code_path">cache/stat_backup.json</span>.</td></tr>
                       <tr><td><span class="code code_method">refresh_settings()</span></td><td colspan="2">Reloads <span class="code code_path">config/*.conf</span> files into current running environment. It writes to <span class="code code_class">settings._wrapped</span> to overwrite current <span class="code code_misc">Django</span> app setting.</td></tr>
                       <tr><td><span class="code code_method">get_sys_crontab()</span>, <span class="code code_method">set_sys_crontab()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_misc">cron</span> jobs. <b>GET</b> reads from system <span class="code code_cmd">crontab -l</span> instead of <span class="code code_path">config/cron.conf</span> to reflect the current setting.</td></tr>
                       <tr><td><span class="code code_method">get_backup_form()</span>, <span class="code code_method">set_backup_form()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_cmd">backup</span> settings. <b>GET</b> reads from system <span class="code code_method">get_sys_crontab()</span>; <b>SET</b> writes to <span class="code code_path">config/cron.conf</span>.</tr>
-                      <tr><td><span class="code code_method">get_bot_form()</span>, <span class="code code_method">set_bot_form()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_misc">Bot</span> settings. Reads from and writes to <span class="code code_path">config/bot.conf</span>.</tr>
                       <tr><td><span class="code code_method">restyle_apache()</span></td><td colspan="2">Parses <span class="code code_brand">Apache</span> status page (<span class="code code_url">/server-status/</span>) into a <span class="code code_key">JSON</span> object. Uses <span class="code code_misc">urllib2</span> for credential supply to <span class="code code_url">/server-status/</span>.</td></tr>
 
                       <tr><td><span class="code code_method">aws_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/aws/</span> data query. Uses <span class="code code_misc">gviz-api.py</span> and <span class="code code_misc">boto</span>. Calls <span class="code code_method">aws_result()</span> through <span class="code code_method">aws_call()</span> for data formatting. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Query format:</td></tr>
@@ -835,38 +812,6 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td><span class="code code_method">git_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/git/</span> data query. Uses <span class="code code_misc">gviz-api.py</span> and <span class="code code_misc">PyGithub</span>. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Makes <u>3</u> attempts if connection fails. Query format:</td></tr>
                       <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (table of contributors data), <span class="code code_val">num</span> (repository statistics, e.g. number of branches), <span class="code code_val">c</span> (commits calendar), <span class="code code_val">ad</span> (addition/deletion timeline), and <span class="code code_val">au</span> (author contribution pie plot).</td></tr>
                       <tr><td></td><td><span class="code code_key">tqx</span></td><td>Same as in <span class="code code_method">aws_stats()</span>.</tr></td>
-                      <tr><td><span class="code code_method">export_citation()</span></td><td colspan="2">Handles publication export. Uses <span class="code code_misc">pandoc</span> for creating <span class="code code_key">DOCX</span> files from <span class="code code_key">HTML</span>.</td></tr>
-                      <tr><td colspan="3" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_dash"><span class="code code_path">src/dash.py</span></h4>
-              <p>Handles group analytics of servers/services data requests.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_method">cache_aws()</span>, <span class="code code_method">dash_aws()</span></td><td colspan="2">Saves to or loads from <span class="code code_path">cache/</span> for <span class="code code_brand">AWS</span> CloudWatch data. Mechanism is similar to <span class="code code_method">aws_stats()</span> in <span class="code code_path">src/console.py</span>. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (<b>GET</b> list of all <span class="code code_misc">EC2</span>, <span class="code code_misc">ELB</span>, and <span class="code code_misc">EBS</span> and their basic information), <span class="code code_val">lat</span> (latency, <span class="code code_misc">ELB</span> only), <span class="code code_val">req</span> (request, <span class="code code_misc">ELB</span> only), <span class="code code_val">net</span> (network I/O, <span class="code code_misc">EC2</span> only), <span class="code code_val">cpu</span> (cpu credit, <span class="code code_misc">EC2</span> only), and <span class="code code_val">disk</span> (disk I/O, <span class="code code_misc">EBS</span> only).</td></tr>
-                      <tr><td></td><td><span class="code code_key">id</span></td><td>Instance ID. Used for <span class="code code_key">qs</span>!=<span class="code code_val">init</span>.</tr></td>
-                      <tr><td></td><td><span class="code code_key">tp</span></td><td>Instance type. Used for <span class="code code_key">qs</span>!=<span class="code code_val">init</span>. Accepts <span class="code code_val">ec2</span>, <span class="code code_val">elb</span>, or <span class="code code_val">ebs</span>.</td></tr>
-                      <tr><td><span class="code code_method">cache_ga()</span>, <span class="code code_method">dash_ga()</span></td><td colspan="2">Saves to or loads from <span class="code code_path">cache/</span> for <span class="code code_brand">Google Analytics</span> data. Mechanism is similar to <span class="code code_method">ga_stats()</span> in <span class="code code_path">src/console.py</span>. Makes <u>3</u> attempts if connection fails. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (<b>GET</b> list of all <span class="code code_brand">Google Analytics</span> tracker IDs and their basic information), <span class="code code_val">sessions</span>, and <span class="code code_val">percentNewSessions</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_key">id</span></td><td>Instance ID. Used for <span class="code code_key">qs</span>!=<span class="code code_val">init</span>.</tr></td>
-                      <tr><td><span class="code code_method">cache_git()</span>, <span class="code code_method">dash_git()</span></td><td colspan="2">Saves to or loads from <span class="code code_path">cache/</span> for <span class="code code_brand">GitHub</span> data. Mechanism is similar to <span class="code code_method">git_stats()</span> in <span class="code code_path">src/console.py</span>. Makes <u>3</u> attempts if connection fails. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (<b>GET</b> list of all <span class="code code_brand">GitHub</span> repositories and their table of contributors), <span class="code code_val">num</span> (repository statistics, e.g. number of branches), <span class="code code_val">c</span> (commits calendar), and <span class="code code_val">ad</span> (addition/deletion timeline).</td></tr>
-                      <tr><td></td><td><span class="code code_key">repo</span></td><td>Repository name. Used for <span class="code code_key">qs</span>!=<span class="code code_val">init</span>. Contains name only, excluding organization.</tr></td>
-                      <tr><td><span class="code code_method">cache_slack()</span>, <span class="code code_method">dash_slack()</span></td><td colspan="2">Saves to or loads from <span class="code code_path">cache/</span> for <span class="code code_brand">Slack</span> data. Uses <span class="code code_misc">Slacker</span>. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">users</span> (list of members and basic information), <span class="code code_val">home</span> (list of members presence status), <span class="code code_val">channels</span>, and <span class="code code_val">files</span>.</td></tr>
-                      <tr><td><span class="code code_method">cache_dropbox()</span>, <span class="code code_method">dash_dropbox()</span></td><td colspan="2">Saves to or loads from <span class="code code_path">cache/</span> for <span class="code code_brand">Dropbox</span> data. Uses <span class="code code_misc">dropbox</span> client. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">sizes</span> (account quota and usage), <span class="code code_val">folders</span> (list of folders sizes and shares), and <span class="code code_val">history</span> (recent activity plot).</td></tr>
-                      <tr><td><span class="code code_method">cache_schedule()</span>, <span class="code code_method">dash_schedule()</span>, <span class="code code_method">cache_duty()</span>, <span class="code code_method">dash_duty()</span></td><td colspan="2">Saves to or loads from <span class="code code_path">cache/</span> for <span class="code code_spe">Schedule Spreadsheet</span> and <span class="code code_spe">Duty Spreadsheet</span> from <span class="code code_brand">Google Drive</span>. Parses the data into <span class="code code_key">JSON</span> format. Makes <u>3</u> attempts if connection fails. Checks <span class="code code_val">[THIS WEEK]</span> in the <span class="code code_key">CSV</span> file to locate the row of current week.</td></tr>
-                      <tr><td><span class="code code_method">cache_cal()</span>, <span class="code code_method">dash_cal()</span></td><td colspan="2">Saves to or loads from <span class="code code_path">cache/</span> for <span class="code code_spe">Group Calendar</span>. Uses <span class="code code_misc">iCalendar</span> to parse the <span class="code code_key">ICS</span> file into <span class="code code_key">JSON</span> format and colors events by type. Makes <u>3</u> attempts if connection fails.</td></tr>
                       <tr><td><span class="code code_method">dash_ssl()</span></td><td colspan="2">Uses <span class="code code_cmd">openssl</span> to retrieve server <span class="code code_misc">SSL Certificate</span> expiration date.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>
                     </tbody>
@@ -894,6 +839,25 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
               </div>
 
               <br/>
+              <h4 id="src_helper"><span class="code code_path">src/helper.py</span></h4>
+              <p>Collection of helper functions for <span class="code code_path">src/wrapper_?d.py</span>.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_val">prm_1d</span>, <span class="code code_val">prm_2d</span>, <span class="code code_val">prm_3d</span></td><td><code>primerize</code> constructor instances. They are constructed once and shared by <span class="code ocde_path">src/wrapper_?d.py</span>.</td></tr>
+                      <tr><td><span class="code code_method">is_valid_name()</span>, <span class="code code_method">is_valid_email()</span>, <span class="code code_method">is_t7_present()</span></td><td>Test functions for inputs.</td></tr>
+                      <tr><td><span class="code code_method">random_job_id()</span></td><td>Generates random <span class="code code_key">JOB_ID</span> as <mark>16-digit</mark> <u>hexadecimal</u> string. It prevents collision by querying all previous <span class="code code_key">JOB_ID</span> on record.</td></tr>
+                      <tr><td><span class="code code_method">create_res_html()</span>, <span class="code code_method">create_wait_html()</span>, <span class="code code_method">create_err_html()</span></td><td>Writes to <span class="code code_key">HTML</span> result files in <span class="code code_path">data/</span>. <span class="code code_method">create_res_html()</span> is called by the other 2 for file handling.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
               <h4 id="src_models"><span class="code code_path">src/models.py</span></h4>
               <p>Handles <span class="code code_brand">MySQL</span> database table schema and in-page form models.</p>
               <div class="row">
@@ -901,14 +865,12 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_class">models.Model</span></td><td colspan="2">Database table schema. See <a href="https://docs.djangoproject.com/es/1.9/ref/models/fields/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
-                      <tr><td></td><td>Public site</td><td><span class="code code_class">News</span>, <span class="code code_class">Member</span>, and <span class="code code_class">Publication</span>.</td></tr>
-                      <tr><td></td><td>Group site</td><td><span class="code code_class">FlashSlide</span>, <span class="code code_class">JournalClub</span>, <span class="code code_class">EternaYoutube</span>, <span class="code code_class">RotationStudent</span>, <span class="code code_class">Presentation</span>, and <span class="code code_class">SlackMessage</span>.</td></tr>
+                      <tr><td><span class="code code_class">models.Model</span></td><td colspan="2">Database table schema. See <a href="https://docs.djangoproject.com/es/1.9/ref/models/fields/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>; contains <span class="code code_class">Design1D</span>, <span class="code code_class">Design2D</span>, <span class="code code_class">Design3D</span>, <span class="code code_class">JobIDs</span>, <span class="code code_class">JobGroups</span>, <span class="code code_class">HistoryItem</span>, and <span class="code code_class">SourceDownloader</span>.</td></tr>
                       <tr><td><span class="code code_class">forms.Form</span></td><td colspan="2">Front-end in-page forms. See <a href="https://docs.djangoproject.com/en/1.9/ref/forms/fields/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
-                      <tr><td></td><td>Admin site</td><td><span class="code code_class">BackupForm</span>, <span class="code code_class">ExportForm</span>, and <span class="code code_class">BotSettingForm</span>.</td></tr>
-                      <tr><td></td><td>Group site</td><td><span class="code code_class">UploadForm</span>, <span class="code code_class">ContactForm</span>, and <span class="code code_class">EmailForm</span>.</td></tr>
+                      <tr><td></td><td>Admin site</td><td><span class="code code_class">BackupForm</span>.</td></tr>
+                      <tr><td></td><td>Public site</td><td><span class="code code_class">Design1DForm</span>, <span class="code code_class">Design2DForm</span>, <span class="code code_class">Design3DForm</span>, and <span class="code code_class">DownloadForm</span>.</td></tr>
                       <tr><td></td><td>Login</td><td><span class="code code_class">LoginForm</span>, <span class="code code_class">PasswordForm</span>.</td></tr>
-                      <tr><td><span class="code code_method">email_form()</span>, <span class="code code_method">debug_flag()</span>, <span class="code code_method">ga_tracker()</span></td><td colspan="2">Global context processors to convey <span class="code code_key">DEBUG</span> flag, <span class="code code_brand">Google Analytics</span> tracker ID, and email admin form to front-end pages.</td></tr>
+                      <tr><td><span class="code code_method">debug_flag()</span>, <span class="code code_method">ga_tracker()</span></td><td colspan="2">Global context processors to convey <span class="code code_key">DEBUG</span> flag and <span class="code code_brand">Google Analytics</span> tracker ID.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
@@ -933,6 +895,23 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
               </ul>
 
               <br/>
+              <h4 id="src_views"><span class="code code_path">src/user.py</span></h4>
+              <p>Handles responses for user-related activity. Each handler is routed from <span class="code code_path">src/urls.py</span>, and takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_method">user_login()</span>, <span class="code code_method">user_password()</span>, <span class="code code_method">user_logout()</span></td><td>Pages related to account. Only used in <b>test server</b> due to <span class="code code_misc">WebAuth</span>. In production, the only user in system is <span class="code code_val">daslab</span>.</td></tr>
+                      <tr><td><span class="code code_method">browse()</span></td><td><span class="code code_misc">django-filemanger</span> view handler, channeled as <code>&lt;iframe&gt;</code> on <span class="code code_url">/admin/dir/</span>.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
               <h4 id="src_views"><span class="code code_path">src/views.py</span></h4>
               <p>Handles responses for non-admin pages. Each handler is routed from <span class="code code_path">src/urls.py</span>, and mostly takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
               <div class="row">
@@ -940,18 +919,16 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_method">news()</span>, <span class="code code_method">people()</span>, <span class="code code_method">publications()</span></td><td>Prepares list of all objects from appropriate table in <span class="code code_brand">MySQL</span>, with trimming of images or pdf links. For <span class="code code_method">publications()</span>, the start of each year is marked; and the watershed of "<b>previous work</b>".</td></tr>
-                      <tr><td><span class="code code_method">lab_*()</span></td><td>Handles <span class="code code_url">/group/*</span> requests. No longer uses <span class="code code_cmd">@login_required</span> due to <span class="code code_misc">WebAuth</span> gating. Database objects list is same as above.</td></tr>
-                      <tr><td><span class="code code_method">user_login()</span>, <span class="code code_method">user_password()</span>, <span class="code code_method">user_logout()</span></td><td>Pages related to account. Only used in <b>test server</b> due to <span class="code code_misc">WebAuth</span>. In production, the only user in system is <span class="code code_val">daslab</span>.</td></tr>
-                      <tr><td><span class="code code_method">user_contact()</span>, <span class="code code_method">user_email()</span>, <span class="code code_method">user_upload()</span></td><td>Handles user <span class="code code_spe">POST</span> requests.</td></tr>
-                      <tr><td><span class="code code_method">*_dash()</span></td><td>Group server/service page data query relaying.</td></tr>
-                      <tr><td><span class="code code_method">user_dash()</span></td><td>Returns user group and information for group site (navbar, <i>etc.</i>).</td></tr>
-                      <tr><td><span class="code code_method">schedule_dash()</span></td><td>Returns recent items on page <span class="code code_url">/group/</span>.</td></tr>
-                      <tr><td><span class="code code_method">browse()</span></td><td><span class="code code_misc">django-filemanger</span> view handler, channeled as <code>&lt;iframe&gt;</code> on <span class="code code_url">/admin/dir/</span>.</td></tr>
+                      <tr><td><span class="code code_method">index()</span>, <span class="code code_method">tutorial()</span>, <span class="code code_method">protocol()</span>, <span class="code code_method">docs()</span>, <span class="code code_method">about()</span></td><td>Page handlers for corresponding URLs. Some pass additional information for page rendering or dynamic contents.</td></tr>
+                      <tr><td><span class="code code_method">license()</span></td><td>Handler for <span class="code code_url">/license/</span> page. Reads in <span class="code cde_path">dist/Primerize-LICENSE.md</span> for display.</td></tr>
+                      <tr><td><span class="code code_method">download()</span></td><td>Handler for <span class="code code_url">/download/</span> page and form. It displays all available releases of <code>primerize</code> based on information from <span class="code code_path">cache/stat_dist.json</span>. For valid registration, it writes to a <span class="code code_class">SourceDownloader</span> entry and passes the demographic information back, which is useful for <span class="code code_method">link()</span>.</td></tr>
+                      <tr><td><span class="code code_method">link()</span></td><td>Handler for direct <code>primerize</code> code download responses. This is a mechanism for preventing direct access/exposure of <span class="code code_path">dist/Primerize-?.?.?.zip</span> files. Requests are validated against <span class="code code_class">SourceDownloader</span> records, and the <span class="code code_key">ZIP</span> file is returned only when a match is found.</td></tr>
+                      <tr><td><span class="code code_method">result()</span></td><td>Handler for result retrieval. It looks up the <span class="code code_key">JOB_ID</span> in <span class="code code_class">JobIDs</span> for a match, and responses with a page for the corresponding <span class="code code_class">Design?D</span> type. Input values of the found <span class="code code_key">JOB_ID</span> record is populated to the <span class="code code_class">form</span> as <i>initial</i> values.</td></tr>
                       <tr><td><span class="code code_method">ping_test()</span></td><td>Returns an empty <u>200</u> response. Used by <span class="code code_brand">AWS</span> <span class="code code_misc">ELB</span> <b>Health Check</b>.</td></tr>
                       <tr><td><span class="code code_method">test()</span></td><td>Test handler for <b>test server</b>. Not accessible in production.</td></tr>
                       <tr><td><span class="code code_method">get_admin()</span>, <span class="code code_method">get_user()</span></td><td>Used by <u>403</u> error page only (<span class="code code_url">/error/403/</span>).</td></tr>
                       <tr><td><span class="code code_method">get_js()</span></td><td>Used by <span class="code code_path">media/js/admin/load.js</span>. Reads <span class="code code_path">cache/stat_ver.json</span> and returns core <span class="code code_key">JS</span> vendor library versions. The versions information is used to load libraries from <span class="code code_spe">CDN</span>.</td></tr>
+                      <tr><td><span class="code code_method">get_ver()</span></td><td>Used by <span class="code code_url">/</span> and <span class="code code_url">/docs/</span> to retrieve current running version <code>primerize</code>.</td></tr>
                       <tr><td colspan="2" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
@@ -962,6 +939,15 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
               <br/>
               <h4 id="src_wsgi"><span class="code code_path">src/wsgi.py</span></h4>
               <p>Handles <span class="code code_misc">uwsgi</span> connections. <b>Do not change</b>, unless syntax changes in newer <span class="code code_misc">Django</span> releases. Called by <span class="code code_brand">Apache</span> <span class="code code_misc">mod_wsgi</span> dispatcher.</p>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row" id="python_wrap">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+              <h4><span class="code code_path">src/wrapper_?d.py</span></h4>
+              <p>Handles design run submissions.</p>
+
             </div>
           </div>
 
@@ -987,33 +973,21 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                         </td>
                       </tr>
                       <tr>
-                        <td><span class="code code_path">bday.py</span></td>
+                        <td><span class="code code_path">cleanup.py</span></td>
                         <td>
                           <ul>
-                            <li>Checks if anyone's birthday is today and sends out wishes in <span class="code code_brand">Slack</span>. <b>Alumni</b> members are excluded.</li>
-                            <li>The <span class="code code_misc">cron</span> job is triggered <u>daily</u>.</li>
+                            <li>Finds all <span class="code code_key">JOB_ID</span> records in <span class="code code_class">JobIDs</span> table that are older than <span class="code code_key">KEEP_JOB</span> months specified in <span class="code code_path">config/cron.conf</span>.</li>
+                            <li>Removes related result files in <span class="code code_path">data/</span> and deletes the <span class="code code_brand">MySQL</span> entry.</li>
                           </ul>
                         </td>
                       </tr>
                       <tr>
-                        <td><span class="code code_path">cache.py</span></td>
+                        <td><span class="code code_path">dist.py</span></td>
                         <td>
                           <ul>
-                            <li>Caches analytics data into <span class="code code_path">cache/</span>. Accepts an interval argument for category, choose from: <span class="code code_val">3</span>, <span class="code code_val">15</span>, or <span class="code code_val">30</span>. </li>
-                            <li>Results are saved as <span class="code code_spe">*.json</span> and <span class="code code_spe">*.pickle</span> files as a memory dump of variable. HTTP errors (<u>500</u>, <u>502</u>, <u>503</u>, connection time-out) are reported to <span class="code code_brand">Slack</span> but with exemption.</li>
-                            <li>The <span class="code code_misc">cron</span> job is triggered every <u>3</u>, <u>15</u>, <u>30</u> minutes.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">duty.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Checks if any duty reminders should be sent out today. Accepts an interval argument for category, choose from: <span class="code code_val">week</span>, <span class="code code_val">month</span>, or <span class="code code_val">quarter</span>.</li>
-                            <li><span class="code code_brand">Dropbox</span> payment notice is sent on <u>October</u> <u>annually</u>.</li>
-                            <li><b>Birthday</b> reminder includes people's birthdays for the upcoming <u>60</u> days.</li>
-                            <li>In <span class="code code_key">DEBUG</span> mode, all <span class="code code_brand">Slack</span> messages will be sent to admin instead of original receiver.</li>
-                            <li>The <u>weekly</u> <span class="code code_misc">cron</span> job is triggered <u>daily</u> to capture the 2 <b>reminder</b> dates. The <u>monthly</u> and <u>quarterly</u> <span class="code code_misc">cron</span> jobs are also triggered <u>daily</u>, but only executed fully on <u>first week of each month</u> and the set date. Because checking time inside <span class="code code_cmd">python</span> is easier than coding in <span class="code code_cmd">bash</span>.</li>
+                            <li>Retrieves all releases of <code>primerize</code> package, and writes versions and texts into <span class="code code_path">cache/stat_dist.json</span>.</li>
+                            <li>Downloads all release <span class="code code_key">ZIP</span> files using <span class="code code_cmd">curl</span> with <span class="code code_val">daslab-admin</span> <span class="code code_brand">GitHub</span> account credentials in <span class="code code_path">config/oauth.conf</span>. Files are saved to <span class="code code_path">dist/</span>. Releases already downloaded are skipped.</li>
+                            <li>The latest master branch is downloaded as <span class="code code_path">dist/Primerize-master.zip</span>. The <span class="code code_path">LICENSE.md</span> inside it is extracted and placed as <span class="code code_path">dist/Primerize-LICENSE.md</span>, which is used by <span class="code code_method">license()</span> in <span class="code code_path">src/views.py</span> for <span class="code code_url">/license/</span>.</li>
                           </ul>
                         </td>
                       </tr>
@@ -1025,29 +999,6 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                             <li>Uses <span class="code code_method">subprocess.check_call()</span> for <span class="code code_cmd">drive</span>. Files are renamed with <u>date</u> as prefix.</li>
                             <li>Old files are determined by their <b>last modified date</b> and removed (default <u>45</u> days).</li>
                             <li>The <span class="code code_misc">cron</span> job is triggered <u>weekly</u>. <b>Summary</b> is sent to admin after job finish either via <b>email</b> or <span class="code code_brand">Slack</span>. </li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">meeting.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Sets up <span class="code code_class">Flash Slides</span> and sends out <span class="code code_spe">Group Meeting Reminder</span>.</li>
-                            <li>Only on weeks that are not <span class="code code_val">N/A</span> will <span class="code code_class">Flash Slides</span> be created. Instead of creating a <span class="code code_brand">Google Presentation</span>, it actually copies over an existing blank one specified by <span class="code code_key">TEMPLATE_PRESENTATION_ID</span> in <span class="code code_path">config/oauth.conf</span>, because it's easier this way to have the <b>aspect ratio</b> correct. </li>
-                            <li>The <span class="code code_spe">Group Meeting Reminder</span> describes the meeting <u>this week</u>, <u>next week</u>, as well as headers and footers. Presenters' names will be matched by <span class="code code_method">find_slack_id()</span> in <span class="code code_path">src/console.py</span>, and addressed in the message.</li>
-                            <li>Admin will be notified for adding <span class="code code_brand">MySQL</span> entries for <span class="code code_class">Eterna Special</span>, <span class="code code_class">Journal Club</span>, and <span class="code code_class">Rotation Student</span>. Presenter of <u>next week</u> will be notified for preparation.</li>
-                            <li>In <span class="code code_key">DEBUG</span> mode, all <span class="code code_brand">Slack</span> messages will be sent to admin instead of original receiver.</li>
-                            <li>The <span class="code code_misc">cron</span> job is triggered <u>daily</u>, but only executed fully on <u>day before meeting</u>. Because checking time inside <span class="code code_cmd">python</span> is easier than coding in <span class="code code_cmd">bash</span>.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">report.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Sends <span class="code code_misc">cron</span> error report to admin if not <span class="code code_key">IS_SLACK</span>. Also compresses <span class="code code_misc">cron</span> log and cleans up old <span class="code code_class">Slack Messages</span>.</li>
-                            <li>It zips <span class="code code_path">cache/log_cron.log</span>, and removes <span class="code code_class">Slack Messages</span> that are older than <u>15</u> days in <span class="code code_brand">MySQL</span> database.</li>
-                            <li>The <span class="code code_misc">cron</span> job is triggered <u>weekly</u>. <b>Summary</b> of <span class="code code_path">cache/log_alert_admin.log</span> is sent to admin after job finish either via <b>email</b> or <span class="code code_brand">Slack</span>. </li>
                           </ul>
                         </td>
                       </tr>
@@ -1064,8 +1015,8 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                         <td><span class="code code_path">versions.py</span></td>
                         <td>
                           <ul>
-                            <li>Collects system installed package versions into <span class="code code_path">cache/stat_sys.json</span> and <span class="code code_path">cache/stat_ver.json</span>. Accepts a flag argument for overriding <span class="code code_key">IS_VERSIONS</span> in <span class="code code_path">config/bot.conf</span>, chooses from: <span class="code code_val">0</span> or <span class="code code_val">1</span>.</li>
-                            <li>Uses <span class="code code_method">subprocess.Popen()</span> for <span class="code code_cmd">bash</span> commands. Some commands need to write to <span class="code code_path">cache/temp.txt</span> temporarily for output handling. Some values, e.g. <span class="code code_misc">WebAuth</span>, <span class="code code_misc">mod_wsgi</span>, and <span class="code code_misc">wallet</span> are implemented for <u>production</u> only. Commands for <b>memory</b> readings are dependent on <span class="code code_key">DEBUG</span> as well.</li>
+                            <li>Collects system installed package versions into <span class="code code_path">cache/stat_sys.json</span> and <span class="code code_path">cache/stat_ver.json</span>.</li>
+                            <li>Uses <span class="code code_method">subprocess.Popen()</span> for <span class="code code_cmd">bash</span> commands. Some commands need to write to <span class="code code_path">cache/temp.txt</span> temporarily for output handling. Some values, e.g. <span class="code code_misc">mod_wsgi</span>, are implemented for <u>production</u> only. Commands for <b>memory</b> readings are dependent on <span class="code code_key">DEBUG</span> as well.</li>
                             <li>Renders <span class="code code_path">cache/sys_ver.txt</span> (only in <b>production</b>) based on information in <span class="code code_path">cache/stat_ver.json</span>. It is displayed in <span class="code code_cmd">bash</span> upon login.</li>
                             <li>Calls <span class="code code_method">get_backup_stat()</span> from <span class="code code_path">src/console.py</span> too.</li>
                           </ul>

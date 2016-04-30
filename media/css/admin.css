@@ -551,6 +551,18 @@ ul.breadcrumb > li.active {
 #content {
   padding-right: 20px;
 }
+
+.scroll_nav > ul { font-size: 12px; }
+.scroll_nav > ul > li > ul > li > a {
+  padding: 5px;
+  padding-left: 15px;
+}
+.scroll_nav > ul > li.active > a,
+.scroll_nav > ul > li.active > ul > li.active > a {
+  background-color: #eee;
+  font-weight: bold;
+}
+
 /*
 @media (max-width:767px) {
 

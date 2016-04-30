@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 for f in glob.glob('%s/data/%sd/result_%s.*') % (MEDIA_ROOT, job.type, job.job_id):
                     os.remove(f)
                 job.delete()
-                
+
         except Exception:
             self.stdout.write("    \033[41mERROR\033[0m: Failed to remove JOB_ID \033[94m%s\033." % job.job_id)
             err = traceback.format_exc()
