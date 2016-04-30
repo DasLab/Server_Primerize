@@ -633,6 +633,27 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
           </div>
 
           <hr/>
+          <div class="row" id="python_dist">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+              <h4><span class="code code_path">dist/</span></h4>
+              <p>Contains <code>primerize</code> package releases for download. The meta data for all releases are stored in <span class="code code_path">cache/stat_dist.json</span>. The <span class="code code_cmd">dj_man dist</span> command automates distribution and meta data.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_path">Primerize-?.?.?.zip</span></td><td><code>primerize</code> package releases named after their versions</td></tr>
+                      <tr><td><span class="code code_path">Primerize-master.zip</span></td><td>The latest master branch of the <code>primerize</code> package at <span class="code code_url">https://github.com/DasLab/Primerize/</span>.</td></tr>
+                      <tr><td><span class="code code_path">Primerize-LICENSE.md</span></td><td>The LICENSE statement from the <code>primerize</code> repository to be displayed at <span class="code code_url">/license/</span>.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
           <div class="row" id="python_media">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
               <h4><span class="code code_path">media/</span></h4>
@@ -689,10 +710,42 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td></td><td><span class="code code_path">menu.js</span>, <span class="code code_path">table.js</span></td><td>Injection of <span class="code code_misc">Javascript</span> to format menu (sidebar, navbar, breadcrumb, highlighting, collapsing) and table (column width and icon for <code>&lt;th&gt;</code>, and Date/Time <code>&lt;input&gt;</code>) for admin pages. Note that the <span class="code code_method">window.resize()</span> methods use <span class="code code_method">setTimeout()</span> to prevent overlapping trigger of the event that results in delay in updating the view.</td></tr>
 
                       <tr><td><span class="code code_path">public/</span></td><td colspan="2">Public <span class="code code_misc">Javascript</span> files.</td></tr>
-                      <tr><td></td><td><span class="code code_path">design_1d.js</span></td><td></td></tr>
-                      <tr><td></td><td><span class="code code_path">design_2d.js</span>, <span class="code code_path">design_3d.js</span></td><td></td></tr>
+                      <tr>
+                        <td></td><td><span class="code code_path">design_1d.js</span></td>
+                        <td>Interactive script for <span class="code code_class">Design1D</span> job page.
+                          <ul>
+                            <li>Input disabling / <span class="code code_spe">re</span> filtering, sequence length tracking and warning toggle.</li>
+                            <li>Form submission is replaced by <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> requests to prevent page refresh. The input values are updated from the <span class="code code_key">JSON</span> returned from the form submission, only once. The <span class="code code_key">JOB_ID</span> is assigned by <span class="code code_cmd">python</span> and returned inside the <span class="code code_key">JSON</span> response.</li>
+                            <li>After submission (or demo), the <span class="code code_method">ajax_update_result()</span> function is called at most every second (depending on sequence length). This function loads the <span class="code code_key">HTML</span> file of the current <span class="code code_key">JOB_ID</span>, and keep refreshing until it's no longer the <i>"waiting"</i> page (<i>i.e.</i>, run finished with either <span class="code_path">success</span> or <span class="code_spe">error</span>). This refreshing behavior makes sure the result is updated while the run is underway, if the user stays waiting on the page.</li>
+                            <li>The <span class="code code_method">ajax_load_html()</span> function handles job result retrieval when user returns with a <span class="code code_key">JOB_ID</span> after leaving the status-refreshing page.</li>
+                            <li>The current window URL is updated to <span class="code code_url">/result/?job_id=</span> with the actural <span class="code code_key">JOB_ID</span> once the run finishes.</li>
+                            <li>When retrieving a result after leaving the running page, the input parameters are retrieved from <span class="code code_brand">MySQL</span> and loaded in the <span class="code code_class">form</span> Model by <span class="code code_method">result()</span> in <span class="code code_path">src/views.py</span>.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td></td><td><span class="code code_path">design_2d.js</span>, <span class="code code_path">design_3d.js</span></td>
+                        <td>Interactive scripts for <span class="code code_class">Design2D</span> and <span class="code code_class">Design3D</span> job pages.
+                          <ul>
+                            <li>The <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> form submission mechanism, page refreshing and/or loading by <span class="code code_method">ajax_update_result()</span> and <span class="code code_method">ajax_load_html()</span>, window URL rewrite are the same as <span class="code code_path">design_1d.js</span>.</li>
+                            <li>Input length tracking, and appending input boxes for additional primer pairs (<span class="code code_method">expand_primer_input()</span>) and structures (<span class="code code_method">expand_structure_input()</span>).</li>
+                            <li>The inherited input boxes for primer sets and structures from <span class="code code_misc">Django</span> are hidden in order to use the rich multi-input interface. The <span class="code code_method">track_primer_list()</span> and <span class="code code_method">track_structure_list()</span> functions updates the original hidden inputs on <span class="code code_misc">keyup</span> events of any of those visible input boxes. <b>The original hidden inputs are actually used for form submission.</b> And the <span class="code code_method">sync_primer_input()</span> and <span class="code code_method">sync_structure_input()</span> functions are in charge of updating those fields from the returned <span class="code code_key">JSON</span>.</li>
+                            <li>Primer sets and structures are disabled upon form submission to make sure the original hidden inputs are up-to-date with the visible ones, and re-enabled right after <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span>.</li>
+                            <br/>
+                            <li>When the page is referred by <span class="code code_method">design_2d_from_1d()</span>, <span class="code code_method">design_3d_from_1d()</span>, or <span class="code code_method">design_3d_from_2d()</span>, the pre-filled results are passed simiarly as the case of retrieving a result. This part of <span class="code code_misc">Javascript</span> code resides in <span class="code code_path">media/html/public_design_?d.html</span> since it's dependent on templating variables from <span class="code code_misc">Django</span>.</li>
+                          </ul>
+                        </td>
+                      </tr>
                       <tr><td></td><td><span class="code code_path">index.js</span></td><td>Makes <span class="code code_key">AJAX</span> call to <span class="code code_url">/get_ver/</span> for displaying server <code>primerize</code> running version. Also handles the result retrieval button gate control; and column height consistency.</td></tr>
-                      <tr><td></td><td><span class="code code_path">plate_96.js</span></td><td></td></tr>
+                      <tr>
+                        <td></td><td><span class="code code_path">plate_96.js</span></td>
+                        <td>Core script that handles 96-well plate drawing using <span class="code code_misc">d3.js</span>.
+                          <ul>
+                            <li>The <span class="code code_method">draw_96_plate()</span> function loads the corresponding <span class="code code_key">JSON</span> file for the specified <span class="code code_key">JOB_ID</span> (by default <span class="code code_key">type</span> is <span class="code code_val">2</span>, meaning <mark>2d</mark> for the path) and draw all the plates on the page with a naming scheme for <span class="code code_key">SVG</span> containers of <span class="code code_val">#svg_plt_?_prm_?</span>.</li>
+                            <li>Special colors are avaiable as parsed in <span class="code code_method">get_fill_color()</span>. This is mainly used by the <span class="code code_url">/protocol/</span> page, as well as <u>Wild-Type</u> primer color override for <span class="code code_class">Design3D</span> jobs.</li>
+                          </ul>
+                        </td>
+                      </tr>
                       <tr><td></td><td><span class="code code_path">protocol.js</span>, <span class="code code_path">tutorial.js</span></td><td><span class="code code_path">tutorial.js</span> takes care of the <span class="code code_method">window.width()</span> and <span class="code code_misc">scrollSpy</span> similarly as <span class="code code_path">media/js/admin/doc.js</span>; used by <span class="code code_url">/tutorial/</span> and <span class="code code_url">/protocol/</span>. <span class="code code_path">protocol.js</span> is responsible for the <u>DNA/RNA</u> concentration calculator and example 96-well plates rendering.</td></tr>
                       <tr><td></td><td><span class="code code_path">util.js</span></td><td>Shared by all public pages. It takes care of responsive resizing, loading animation, footer year display, and navbar menu highlighting.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>

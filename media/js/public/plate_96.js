@@ -150,7 +150,7 @@ function draw_single_plate(element, data, flag) {
                     clearTimeout(tooltip_timer);
                 }
             }
-        });    
+        });
 }
 
 function draw_96_plate(job_id, type) {
