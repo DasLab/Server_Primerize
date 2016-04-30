@@ -485,6 +485,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                   <li><span class="code code_val">django_admin_log</span>, <span class="code code_val">django_content_type</span>, <span class="code code_val">django_flatpage</span>, <span class="code code_val">django_flatpage_sites</span>, <span class="code code_val">django_migrations</span>, <span class="code code_val">django_session</span>, <span class="code code_val">django_site</span></li>
                   <li><span class="code code_val">src_design1d</span>, <span class="code code_val">src_design2d</span>, <span class="code code_val">src_design3d</span>, <span class="code code_val">src_historyitem</span>, <span class="code code_val">src_jobgroups</span>, <span class="code code_val">src_jobids</span>, <span class="code code_val">src_sourcedownloader</span></li>
                 </ul>
+                <li>The <b>demo</b> entries are stored with <span class="code code_key">date</span> as <span class="code code_val">1970-01-01</span> on purpose. They will not be <span class="code code_cmd">cleanup</span>. So are their <span class="code code_key">JOB_ID</span> in the <span class="code code_val">src_jobids</span> table.</li>
               </ul>
             </div>
           </div>
@@ -609,7 +610,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
               <h4><span class="code code_path">data/</span></h4>
               <p>Contains job results for display and download.</p>
               <ul>
-                <li>Files are named by <span class="code code_key">JOB_ID</span> with prefix of <mark>result_</mark>.</li>
+                <li>Files are named by <span class="code code_key">JOB_ID</span> with prefix of <span class="code code_val">result_</span>.</li>
                 <li>Results are saved to their corresponding category, from <span class="code code_path">data/1d/</span>, <span class="code code_path">data/2d/</span>, and <span class="code code_path">data/3d/</span>.</li>
                 <li>Old files are removed by the <span class="code code_cmd">cleanup</span> <span class="code code_misc">Django</span> command triggered by <span class="code code_misc">cron</span>.</li>
               </ul>
@@ -694,7 +695,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_path">*.min.js</span></td><td colspan="2">Vendor libraries (Bootstrap, jQuery, fullcalendar, Moment, SWFObject).</td></tr>
+                      <tr><td><span class="code code_path">*.min.js</span></td><td colspan="2">Vendor libraries (Bootstrap, jQuery, D3).</td></tr>
                       <tr><td><span class="code code_path">admin/</span></td><td colspan="2">Admin <span class="code code_misc">Javascript</span> files.</td></tr>
                       <tr><td></td><td><span class="code code_path">_*.js</span></td><td>Vendor libraries for <span class="code code_misc">django-suit</span> and <span class="code code_misc">django-filemanager</span>.</td></tr>
                       <tr><td></td><td><span class="code code_path">apache.js</span></td><td>Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/apache_stat/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">restyle_apache()</span> in <span class="code code_path">src/console.py</span>. The page refreshes every <u>3</u> seconds by <span class="code code_method">setTimeout()</span>.</td></tr>
@@ -717,7 +718,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                             <li>After submission (or demo), the <span class="code code_method">ajax_update_result()</span> function is called at most every second (depending on sequence length). This function loads the <span class="code code_key">HTML</span> file of the current <span class="code code_key">JOB_ID</span>, and keep refreshing until it's no longer the <i>"waiting"</i> page (<i>i.e.</i>, run finished with either <span class="code_path">success</span> or <span class="code_spe">error</span>). This refreshing behavior makes sure the result is updated while the run is underway, if the user stays waiting on the page.</li>
                             <li>The <span class="code code_method">ajax_load_html()</span> function handles job result retrieval when user returns with a <span class="code code_key">JOB_ID</span> after leaving the status-refreshing page.</li>
                             <li>The current window URL is updated to <span class="code code_url">/result/?job_id=</span> with the actural <span class="code code_key">JOB_ID</span> once the run finishes.</li>
-                            <li>When retrieving a result after leaving the running page, the input parameters are retrieved from <span class="code code_brand">MySQL</span> and loaded in the <span class="code code_class">form</span> Model by <span class="code code_method">result()</span> in <span class="code code_path">src/views.py</span>.</li>
+                            <li>When retrieving a result after leaving the running page, the input parameters are retrieved from <span class="code code_brand">MySQL</span> and loaded in the <span class="code code_class">forms.Form</span> model by <span class="code code_method">result()</span> in <span class="code code_path">src/views.py</span>.</li>
                           </ul>
                         </td>
                       </tr>
@@ -775,7 +776,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td><span class="code code_method">get_arch()</span></td><td>Accesses <span class="code code_path">config/flow_chart.svg</span> for admin only.</td></tr>
                       <tr><td><span class="code code_method">backup_form()</span></td><td>Get backup related status from <span class="code code_misc">cron</span> jobs.</td></tr>
                       <tr><td><span class="code code_method">backup_now()</span>, <span class="code code_method">upload_now()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management commands of either <span class="code code_cmd">backup</span> or <span class="code code_cmd">gdrive</span>.</td></tr>
-                      <tr><td><span class="code code_method">sys_stat()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management command of <span class="code code_cmd">versions</span> with flag <span class="code code_val">1</span> to override <span class="code code_key">IS_VERSION</span> in <span class="code code_path">config/bot.conf</span>.</td></tr>
+                      <tr><td><span class="code code_method">sys_stat()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management command of <span class="code code_cmd">versions</span>.</td></tr>
                       <tr><td><span class="code code_method">ssl_dash()</span></td><td>Returns status of <span class="code code_misc">SSL Certificate</span>.</td></tr>
                       <tr><td><span class="code code_method">backup()</span></td><td>Handles page requests of <span class="code code_url">/admin/backup/</span> page. Also takes <span class="code code_spe">POST</span> request to set configurations.</td></tr>
                       <tr><td><span class="code code_method">dir()</span>, <span class="code code_method">man()</span>, <span class="code code_method">ref()</span>, <span class="code code_method">doc()</span></td><td>Handles page requests of <span class="code code_url">/admin/dir/</span>, <span class="code code_url">/admin/man/</span>, <span class="code code_url">/admin/ref/</span>, and <span class="code code_url">/admin/doc/</span> for <span class="code code_misc">django-filemanager</span> and documentation pages.</td></tr>
@@ -846,7 +847,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_val">prm_1d</span>, <span class="code code_val">prm_2d</span>, <span class="code code_val">prm_3d</span></td><td><code>primerize</code> constructor instances. They are constructed once and shared by <span class="code ocde_path">src/wrapper_?d.py</span>.</td></tr>
+                      <tr><td><span class="code code_val">prm_1d</span>, <span class="code code_val">prm_2d</span>, <span class="code code_val">prm_3d</span></td><td><code>primerize</code> constructor instances. They are constructed once and shared by <span class="code code_path">src/wrapper_?d.py</span>.</td></tr>
                       <tr><td><span class="code code_method">is_valid_name()</span>, <span class="code code_method">is_valid_email()</span>, <span class="code code_method">is_t7_present()</span></td><td>Test functions for inputs.</td></tr>
                       <tr><td><span class="code code_method">random_job_id()</span></td><td>Generates random <span class="code code_key">JOB_ID</span> as <mark>16-digit</mark> <u>hexadecimal</u> string. It prevents collision by querying all previous <span class="code code_key">JOB_ID</span> on record.</td></tr>
                       <tr><td><span class="code code_method">create_res_html()</span>, <span class="code code_method">create_wait_html()</span>, <span class="code code_method">create_err_html()</span></td><td>Writes to <span class="code code_key">HTML</span> result files in <span class="code code_path">data/</span>. <span class="code code_method">create_res_html()</span> is called by the other 2 for file handling.</td></tr>
@@ -920,7 +921,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                   <table class="table table-hover">
                     <tbody>
                       <tr><td><span class="code code_method">index()</span>, <span class="code code_method">tutorial()</span>, <span class="code code_method">protocol()</span>, <span class="code code_method">docs()</span>, <span class="code code_method">about()</span></td><td>Page handlers for corresponding URLs. Some pass additional information for page rendering or dynamic contents.</td></tr>
-                      <tr><td><span class="code code_method">license()</span></td><td>Handler for <span class="code code_url">/license/</span> page. Reads in <span class="code cde_path">dist/Primerize-LICENSE.md</span> for display.</td></tr>
+                      <tr><td><span class="code code_method">license()</span></td><td>Handler for <span class="code code_url">/license/</span> page. Reads in <span class="code code_path">dist/Primerize-LICENSE.md</span> for display.</td></tr>
                       <tr><td><span class="code code_method">download()</span></td><td>Handler for <span class="code code_url">/download/</span> page and form. It displays all available releases of <code>primerize</code> based on information from <span class="code code_path">cache/stat_dist.json</span>. For valid registration, it writes to a <span class="code code_class">SourceDownloader</span> entry and passes the demographic information back, which is useful for <span class="code code_method">link()</span>.</td></tr>
                       <tr><td><span class="code code_method">link()</span></td><td>Handler for direct <code>primerize</code> code download responses. This is a mechanism for preventing direct access/exposure of <span class="code code_path">dist/Primerize-?.?.?.zip</span> files. Requests are validated against <span class="code code_class">SourceDownloader</span> records, and the <span class="code code_key">ZIP</span> file is returned only when a match is found.</td></tr>
                       <tr><td><span class="code code_method">result()</span></td><td>Handler for result retrieval. It looks up the <span class="code code_key">JOB_ID</span> in <span class="code code_class">JobIDs</span> for a match, and responses with a page for the corresponding <span class="code code_class">Design?D</span> type. Input values of the found <span class="code code_key">JOB_ID</span> record is populated to the <span class="code code_class">form</span> as <i>initial</i> values.</td></tr>
@@ -947,6 +948,47 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
               <h4><span class="code code_path">src/wrapper_?d.py</span></h4>
               <p>Handles design run submissions.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_method">design_?d()</span></td><td>Presents the empty design page.</td></tr>
+                      <tr>
+                        <td><span class="code code_method">design_?d_run()</span></td>
+                        <td>Handles the <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> request.
+                          <ul>
+                            <li>It parses and tests the inputs, spawns a job in background using <span class="code code_class">threading.Thread</span>, and adds <span class="code code_key">JOB_ID</span> to database.</li>
+                            <li>It creates a <i>waiting</i> page <span class="code code_key">HTML</span> for display.</li>
+                            <li> A <span class="code code_key">JSON</span> response is returned for page refreshing, while the threaded job runs in parallel.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr><td><span class="code code_method">demo_?d()</span></td><td>Presents the demo result page.</td></tr>
+                      <tr><td><span class="code code_method">demo_?d_run()</span></td><td>Handles the <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> request for running demo. It takes default parameter and spawns the <span class="code code_class">threading.Thread</span> job.</td></tr>
+                      <tr><td><span class="code code_method">random_?d()</span></td><td>is to test for random input and remains unknown to public. It generates a random sequence first, and follow the same steps as other jobs.</td></tr>
+                      <tr>
+                        <td><span class="code code_method">design_?d_wrapper()</span></td>
+                        <td>Calls <code>primerize</code> design code and processes the result.
+                          <ul>
+                            <li>It creates a <i>error</i>, or <i>fail</i>, or <i>success</i> page <span class="code code_key">HTML</span> for display, overwriting the previous <i>waiting</i> page.</li>
+                            <li>It renders a graphical <span class="code code_key">HTML</span> result page by parsing the result instance from <code>primerize</code>.</li>
+                            <li>It updates the <span class="code code_key">JOB_ID</span> entry in <span class="code code_brand">MySQL</span> of its <span class="code code_key">status</span>, <span class="code code_key">time</span> and results.</li>
+                          </ul>
+                          For <mark>2D</mark> and <mark>3D</mark>:
+                          <ul>
+                            <li>The result folder is zipped using <span class="code code_misc">zipfile</span> in <span class="code code_cmd">python</span>.</li>
+                            <li>A <span class="code code_key">JSON</span> file is saved for <span class="code code_misc">d3.js</span> 96-well plate drawing. <u>Wild-Type</u> primers are overridden by color <i>green</i>.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr><td><span class="code code_method">design_?d_from_?d()</span></td><td>Like <span class="code code_url">/result/</span>, it pre-fills the form with previous inputs, and redirects to <span class="code code_method">design_?d()</span> with flag <span class="code code_key">from_?d</span> set. The <span class="code code_key">HTTP_REFERER</span> in the <span class="code code_class">request.META</span> is required to parse <span class="code code_key">JOB_ID</span>.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
 
             </div>
           </div>
