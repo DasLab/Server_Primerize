@@ -7,7 +7,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="jumbotron">
         <div class="container">
-          <h1>DasLab Admin Reference</h1>
+          <h1>Primerize Admin Reference</h1>
           <img src="/site_media/images/logo_primerize.png" style="clear:both; float:right; padding-left: 20px;"/>
           <p>
             This page explains server setup and code structure in detail.
@@ -641,7 +641,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_path">Primerize-?.?.?.zip</span></td><td><code>primerize</code> package releases named after their versions</td></tr>
+                      <tr><td><span class="code code_path">Primerize-?.?.?.zip</span></td><td><code>primerize</code> package releases named after their versions.</td></tr>
                       <tr><td><span class="code code_path">Primerize-master.zip</span></td><td>The latest master branch of the <code>primerize</code> package at <span class="code code_url">https://github.com/DasLab/Primerize/</span>.</td></tr>
                       <tr><td><span class="code code_path">Primerize-LICENSE.md</span></td><td>The LICENSE statement from the <code>primerize</code> repository to be displayed at <span class="code code_url">/license/</span>.</td></tr>
                     </tbody>
@@ -748,6 +748,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td></td><td><span class="code code_path">protocol.js</span>, <span class="code code_path">tutorial.js</span></td><td><span class="code code_path">tutorial.js</span> takes care of the <span class="code code_method">window.width()</span> and <span class="code code_misc">scrollSpy</span> similarly as <span class="code code_path">media/js/admin/doc.js</span>; used by <span class="code code_url">/tutorial/</span> and <span class="code code_url">/protocol/</span>. <span class="code code_path">protocol.js</span> is responsible for the <u>DNA/RNA</u> concentration calculator and example 96-well plates rendering.</td></tr>
                       <tr><td></td><td><span class="code code_path">util.js</span></td><td>Shared by all public pages. It takes care of responsive resizing, loading animation, footer year display, and navbar menu highlighting.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>
+                      <tr><td><span class="code code_path">suit/</span></td><td colspan="2">Vendor of <span class="code code_misc">django-suit</span> scripts. Only <span class="code code_path">*.min.js</span> are used.</td></tr>
                     </tbody>
                   </table>
                 </div>
