@@ -21,8 +21,6 @@ from src.helper import *
 from src.models import *
 from src.views import error400
 
-import primerize
-
 
 def design_2d(request, form=Design2DForm(), from_1d=False):
     return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
@@ -162,10 +160,10 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
 
             for j in xrange(plate.get('N_PRIMER')):
                 primer_sequences = plate._data['plates'][j][i]
-                num_primers_on_plate = primer_sequences.get('count')
+                num_primers_on_plate = len(primer_sequences)
 
                 if num_primers_on_plate:
-                    if num_primers_on_plate == 1 and primer_sequences.has('A01'):
+                    if num_primers_on_plate == 1 and 'A01' in primer_sequences:
                         tag = primer_sequences.get('A01')[0]
                         if (isinstance(tag, primerize.Mutation) and not tag) or (isinstance(tag, str) and 'WT' in tag): continue
 
@@ -202,8 +200,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
             for key in flag.keys():
                 if len(flag[key]):
                     warning += '<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: <i>Plate</i> #<span class="label label-orange">%d</span> ' % key
-                    for p in xrange(len(flag[key])):
-                        f = flag[key][p]
+                    for f in flag[key]:
                         warning += '<i>Primer</i> <b>%d</b> %s, ' % (f[0], primer_suffix_html(f[0] - 1))
                     warning = warning[:-2]
                     warning += ' have fewer than <u>24</u> wells filled.<br/>'

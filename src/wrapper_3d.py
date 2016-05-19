@@ -21,8 +21,6 @@ from src.helper import *
 from src.models import *
 from src.views import error400
 
-import primerize
-
 
 def design_3d(request, form=Design3DForm(), from_1d=False, from_2d=False):
     return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form, 'from_1d': from_1d, 'from_2d': from_2d}, context_instance=RequestContext(request))
@@ -52,7 +50,7 @@ def design_3d_run(request):
         structures = [str(s.strip()) for s in structures.split(',') if s.strip()]
         if not structures:
             msg = '<b>No secondary structure</b> given for rescue design. Please supply at least one secondary structure in dot-bracket notation.'
-        len_str = [len(s) for s in structures]
+        len_str = map(len, structures)
         len_str = all([s == len(sequence) for s in len_str])
         if not len_str:
             msg = 'Invalid structure input (<b>ALL</b> should be the same length as sequence).'
@@ -170,10 +168,10 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
 
             for j in xrange(plate.get('N_PRIMER')):
                 primer_sequences = plate._data['plates'][j][i]
-                num_primers_on_plate = primer_sequences.get('count')
+                num_primers_on_plate = len(primer_sequences)
 
                 if num_primers_on_plate:
-                    if num_primers_on_plate == 1 and primer_sequences.has('A01'):
+                    if num_primers_on_plate == 1 and 'A01' in primer_sequences:
                         tag = primer_sequences.get('A01')[0]
                         if (isinstance(tag, primerize.Mutation) and not tag) or (isinstance(tag, str) and 'WT' in tag): continue
 
@@ -191,7 +189,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
                                 lbl = primer_sequences.tag + lbl
                             else:
                                 lbl = row[0]
-                            if row[1] == primer_set[j] and lbl != 'WT': 
+                            if row[1] == primer_set[j] and lbl != 'WT':
                                 json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1], 'color': 'green'})
                             else:
                                 json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
@@ -213,8 +211,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
             for key in flag.keys():
                 if len(flag[key]):
                     warning += '<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: <i>Plate</i> #<span class="label label-orange">%d</span> ' % key
-                    for p in xrange(len(flag[key])):
-                        f = flag[key][p]
+                    for f in flag[key]:
                         warning += '<i>Primer</i> <b>%d</b> %s, ' % (f[0], primer_suffix_html(f[0] - 1))
                     warning = warning[:-2]
                     warning += ' have fewer than <u>24</u> wells filled.<br/>'

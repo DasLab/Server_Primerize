@@ -16,8 +16,6 @@ from src.helper import *
 from src.models import *
 from src.views import error400
 
-import primerize
-
 
 def design_1d(request):
     return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
@@ -119,8 +117,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
         warnings = assembly.get('WARNING')
         if len(warnings):
-            for i in xrange(len(warnings)):
-                w = warnings[i]
+            for w in warnings:
                 p_1 = '<b>%d</b> %s' % (w[0], primer_suffix_html(w[0] - 1))
                 p_2 = ', '.join('<b>%d</b> %s' % (x, primer_suffix_html(x - 1)) for x in w[3])
                 script += '<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Primer %s can misprime with <span class="label label-default">%d</span>-residue overlap to position <span class="label label-success">%s</span>, which is covered by primers: %s.<br/>' % (p_1, w[1], str(int(w[2])), p_2)
@@ -132,8 +129,8 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         script += '</p></div><div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-default" id="col-res-l"><p>__NOTE_T7__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;Designed Primers</h2></div><div class="panel-body"><table class="table table-striped table-hover" ><thead><tr class="active"><th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">#</th><th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Length</th><th class="col-lg-10 col-md-10 col-sm-10 col-xs-10">Sequence</th></tr></thead><tbody>'
-        for i in xrange(len(assembly.primer_set)):
-            script += '<tr><td><b>%d</b> %s</td><td><em>%d</em></td><td style="word-break:break-all" class="monospace">%s</td></tr>' % (i + 1, primer_suffix_html(i), len(assembly.primer_set[i]), assembly.primer_set[i])
+        for i, primer in enumerate(assembly.primer_set):
+            script += '<tr><td><b>%d</b> %s</td><td><em>%d</em></td><td style="word-break:break-all" class="monospace">%s</td></tr>' % (i + 1, primer_suffix_html(i), len(primer), primer)
 
         script += '<tr><td colspan="3" style="padding: 0px;"></td></tr></tbody></table></div></div></div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
         script += assembly.echo('assembly').replace('->', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>').replace('<-', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>').replace('\033[92m', '<span class="label-white label-primary">').replace('\033[96m', '<span class="label-warning">').replace('\033[94m', '<span class="label-info">').replace('\033[95m', '<span class="label-white label-danger">').replace('\033[41m', '<span class="label-white label-inverse">').replace('\033[100m', '<span style="font-weight:bold;">').replace('\033[0m', '</span>').replace('\n', '<br/>')
