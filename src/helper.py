@@ -6,9 +6,9 @@ from src.settings import *
 from src.models import *
 
 import primerize
-prm_1d = primerize.Primerize_1D()
-prm_2d = primerize.Primerize_2D()
-prm_3d = primerize.Primerize_3D()
+prm_1d = primerize.Primerize_1D
+prm_2d = primerize.Primerize_2D
+prm_3d = primerize.Primerize_3D
 
 
 def is_valid_name(input, char_allow, length):
@@ -85,7 +85,6 @@ def create_err_html(job_id, t_total, type):
 
     script_500 = ''.join(open(PATH.HTML_PATH['500'], 'r').readlines())
     script_500 = script_500[script_500.find('<div class="row bgimg2-lg'):script_500.find('endblock') - 3]
-    create_res_html(html+script_500, job_id, type)
-
+    create_res_html(html + script_500, job_id, type)
 
 
