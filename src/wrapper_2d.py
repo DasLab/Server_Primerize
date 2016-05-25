@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 #, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 
 from datetime import datetime
 import glob
@@ -23,7 +23,7 @@ from src.views import error400
 
 
 def design_2d(request, form=Design2DForm(), from_1d=False):
-    return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'from_1d': from_1d}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['design_2d'], {'2d_form': form, 'from_1d': from_1d})
 
 def design_2d_run(request):
     if request.method != 'POST': return error400(request)
@@ -75,7 +75,7 @@ def design_2d_run(request):
         return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'primers': primers, 'min_muts': min_muts, 'max_muts': max_muts, 'offset': offset, 'lib': lib}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
-    return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['design_2d'], {'2d_form': form})
 
 
 def demo_2d(request):

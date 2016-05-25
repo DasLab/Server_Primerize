@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 #, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 
 from datetime import datetime
 import glob
@@ -23,7 +23,7 @@ from src.views import error400
 
 
 def design_3d(request, form=Design3DForm(), from_1d=False, from_2d=False):
-    return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form, 'from_1d': from_1d, 'from_2d': from_2d}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['design_3d'], {'3d_form': form, 'from_1d': from_1d, 'from_2d': from_2d})
 
 def design_3d_run(request):
     if request.method != 'POST': return error400(request)
@@ -93,7 +93,7 @@ def design_3d_run(request):
         return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'structures': structures, 'primers': primers, 'min_muts': min_muts, 'max_muts': max_muts, 'offset': offset, 'lib': lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
-    return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['design_3d'], {'3d_form': form})
 
 
 def demo_3d(request):

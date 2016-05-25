@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 #, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 
 from datetime import datetime
 import random
@@ -18,7 +18,7 @@ from src.views import error400
 
 
 def design_1d(request):
-    return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()})
 
 def design_1d_run(request):
     if request.method != 'POST': return error400(request)
@@ -62,7 +62,7 @@ def design_1d_run(request):
         return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
-    return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['design_1d'], {'1d_form': form})
 
 
 def demo_1d(request):

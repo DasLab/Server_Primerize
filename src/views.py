@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.utils.encoding import smart_str
 
 from src.console import *
@@ -15,31 +15,31 @@ import simplejson
 
 
 def index(request):
-    return render_to_response(PATH.HTML_PATH['index'], {}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['index'])
 
 def tutorial(request):
-    return render_to_response(PATH.HTML_PATH['tutorial'], {'job_id_2d': ARG['DEMO_2D_ID'], 'job_id_3d': ARG['DEMO_3D_ID_2']}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['tutorial'], {'job_id_2d': ARG['DEMO_2D_ID'], 'job_id_3d': ARG['DEMO_3D_ID_2']})
 
 def protocol(request):
-    return render_to_response(PATH.HTML_PATH['protocol'], {}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['protocol'])
 
 def license(request):
     license_md = ''.join(open('%s/dist/Primerize-LICENSE.md' % MEDIA_ROOT, 'r').readlines())
     license_md = license_md.replace('\n', '<br/>') + '</strong>'
-    return render_to_response(PATH.HTML_PATH['license'], {'license_md': license_md}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['license'], {'license_md': license_md})
 
 def docs(request):
-    return render_to_response(PATH.HTML_PATH['docs'], {}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['docs'])
 
 def about(request):
     history_list = HistoryItem.objects.order_by('-date')
-    return render_to_response(PATH.HTML_PATH['about'], {'history': history_list}, context_instance=RequestContext(request))
+    return render(request, PATH.HTML_PATH['about'], {'history': history_list})
 
 def download(request):
     result = simplejson.load(open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'r'))
 
     if request.method != 'POST':
-        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'flag': 0, 'dist': result}, context_instance=RequestContext(request))
+        return render(request, PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'flag': 0, 'dist': result})
     else:
         flag = -1
         form = DownloadForm(request.POST)
@@ -56,7 +56,7 @@ def download(request):
                 user.save()
                 flag = 1
 
-        return render_to_response(PATH.HTML_PATH['download'], {'dl_form': form, 'flag': flag, 'dist': result, 'first_name': first_name, 'last_name': last_name, 'email': email}, context_instance=RequestContext(request))
+        return render(request, PATH.HTML_PATH['download'], {'dl_form': form, 'flag': flag, 'dist': result, 'first_name': first_name, 'last_name': last_name, 'email': email})
 
 def link(request, tag):
     if not tag: return error400(request)
@@ -95,20 +95,20 @@ def result(request):
             job_entry = Design1D.objects.get(job_id=job_id)
             params = simplejson.loads(job_entry.params)
             form = Design1DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'min_Tm': params['min_Tm'], 'max_len': params['max_len'], 'min_len': params['min_len'], 'num_primers': params['num_primers'], 'is_num_primers': params['is_num_primers'], 'is_check_t7': params['is_check_t7']})
-            return render_to_response(PATH.HTML_PATH['design_1d'], {'1d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
+            return render(request, PATH.HTML_PATH['design_1d'], {'1d_form': form, 'result_job_id': job_id})
         elif job_list_entry.type == '2':
             job_entry = Design2D.objects.get(job_id=job_id)
             params = simplejson.loads(job_entry.params)
             primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
             form = Design2DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset'], 'lib': str(params['which_lib'][0])})
-            return render_to_response(PATH.HTML_PATH['design_2d'], {'2d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
+            return render(request, PATH.HTML_PATH['design_2d'], {'2d_form': form, 'result_job_id': job_id})
         elif job_list_entry.type == '3':
             job_entry = Design3D.objects.get(job_id=job_id)
             params = simplejson.loads(job_entry.params)
             structures = job_entry.structures[1:-1].replace("'", '').replace(' ', '')
             primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
             form = Design3DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'structures': structures, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset'], 'lib': str(params['which_lib'][0]), 'num_mutations': params['num_mutations'], 'is_single': params['is_single'], 'is_fill_WT': params['is_fill_WT']})
-            return render_to_response(PATH.HTML_PATH['design_3d'], {'3d_form': form, 'result_job_id': job_id}, context_instance=RequestContext(request))
+            return render(request, PATH.HTML_PATH['design_3d'], {'3d_form': form, 'result_job_id': job_id})
         else:
             raise ValueError
 
