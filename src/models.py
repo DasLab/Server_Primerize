@@ -29,6 +29,7 @@ M2_LIBRARY_CHOICES = (
 M2R_LIBRARY_CHOICES = (
     ('1', 'Swap (A:U->U:A, G:C->C:G)'),
     ('4', 'Cross (A:U->C:G, G:C->U:A)'),
+    ('5', 'Stable (A:U->C:G, G:C->C:G)'),
 )
 
 M2R_MUTATION_CHOICES = (
