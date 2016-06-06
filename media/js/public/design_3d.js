@@ -1,4 +1,4 @@
-var ajax_timeout;
+var ajax_timeout, hover_timeout;
 
 function primer_label(num) {
   if (num % 2) {
@@ -74,6 +74,15 @@ function ajax_load_html(job_id) {
       if ($("#result").html().indexOf("alert-danger") == -1) {
         draw_96_plate(job_id, 3);
       }
+
+      $("span[class^='seqpos_']").hover(function() {
+        var cls = $(this).attr("class");
+        clearTimeout(hover_timeout);
+        hover_timeout = setTimeout(function() { $("span." + cls + ", circle." + cls).addClass("active"); }, 50);
+      }, function() {
+        clearTimeout(hover_timeout);
+        $("span[class^='seqpos_'].active, circle[class^='seqpos_'].active").removeClass("active");
+      });
     }
   });
 }

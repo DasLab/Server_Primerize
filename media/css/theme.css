@@ -69,6 +69,10 @@ select.job_id {
 pre > span {
   font-family: inherit;
 }
+span[class^='seqpos_'].active {
+  background-color: #000;
+  color: #ff69bc;
+}
 
 
 div.input-group > select.form-control {
@@ -163,6 +167,11 @@ div.svg_tooltip {
   border-radius: 5px;
   color: #ffffff;
   width: 360px;
+}
+svg g circle.active {
+  fill: #ffd2ea !important;
+  stroke: #ff69bc !important;
+  transition: all 0.2s ease 0s;
 }
 
 

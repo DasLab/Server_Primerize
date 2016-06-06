@@ -103,13 +103,25 @@ function draw_single_plate(element, data, flag) {
         .attr("cy", function(d) { return get_coord_y(d.coord) + tick_width; })
         .attr("cx", function(d) { return get_coord_x(d.coord) + tick_width; })
         .attr("r", cell_radius)
+        .attr("class", function(d) {
+            if (d.label && d.label.indexOf("WT") == -1) {
+                var temp = d.label.substring(5).split(';'), label = '';
+                for (var i = 0; i < temp.length; i++) {
+                    label += 'seqpos_' + temp[i].substring(1, temp[i].length - 1) + ' ';
+                }
+                return label;
+            }
+            return '';
+        })
         .style("fill", function(d) { return get_fill_color(d); })
         .style("stroke", function(d) { return get_stroke_color(d); })
         .style("stroke-width", cell_stroke)
         .on("mouseover", function(d) {
             if (flag) {
-                d3.select(this).transition().duration(200)
-                    .style({"fill": "#ffd2ea", "stroke": "#ff69bc"});
+                var cls = d3.select(this).attr("class").trim().split(' ')
+                            .map(function(val) { return 'span.' + val; })
+                            .reduce(function(prev_val, curr_val) { return prev_val + ', ' + curr_val; });
+                d3.select(this).classed('active', true);
 
                 if (d.label) {
                     var pageX = d3.event.pageX, pageY = d3.event.pageY;
@@ -135,19 +147,22 @@ function draw_single_plate(element, data, flag) {
                         tooltip.html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td colspan="2"><p><span class="label label-primary">' + d.pos + '</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>' + lib + '</p></td><td><p>' + label[0] + '</p></td></tr>' + label_more + '<tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td colspan="2" style="word-break:break-all"><code style="padding:0px; border-radius:0px;">' + d.sequence + '</code></td></tr></tbody></table>')
                             .style({"left": (pageX - 180) + "px", "top": (pageY + 20) + "px"});
                     }, 200);
+
+                    clearTimeout(hover_timeout);
+                    hover_timeout = setTimeout(function() { $(cls).addClass("active"); }, 50);
                 }
             }
         })
         .on("mouseout", function(d) {
             if (flag) {
-                d3.select(this).transition().duration(200)
-                    .style("fill", function(d) { return get_fill_color(d); })
-                    .style("stroke", function(d) { return get_stroke_color(d); });
+                d3.select(this).classed('active', false);
 
                 if (d.label) {
                     tooltip.transition().duration(200)
                         .style("opacity", 0);
                     clearTimeout(tooltip_timer);
+                    clearTimeout(hover_timeout);
+                    $("span[class^='seqpos_'].active").removeClass("active");
                 }
             }
         });
