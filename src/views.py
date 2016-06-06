@@ -1,5 +1,4 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.template import RequestContext
 from django.shortcuts import render
 from django.utils.encoding import smart_str
 
