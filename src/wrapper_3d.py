@@ -228,7 +228,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
         illustration_str = illustration_str.replace('\n', '<br/>').replace(' ', '&nbsp;').replace('\033[41m', '<span class="label-white label-primary">').replace('\033[0m', '</span>')
         illustration_final = illustration_3 + '<br/>' + illustration_2 + '<br/>' + illustration_1 + '<br/><span style="white-space:pre;">' + illustration_str + '</span>'
-        illustration_final = illustration_final + '<br/>' + illustration_1 + '<br/>' + illustration_2 + '<br/>' + illustration_3 if len(plate.structures) >= 5 else illustration_final
+        illustration_final = illustration_final + illustration_1 + '<br/>' + illustration_2 + '<br/>' + illustration_3 if len(plate.structures) >= 5 else illustration_final
         script = script.replace('__SEQ_ANNOT__', illustration_final)
 
         if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']):
