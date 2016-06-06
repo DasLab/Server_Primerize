@@ -154,7 +154,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
 
     try:
         mode = 'NORMAL' if len(structures) == 1 else 'DIFF'
-        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <u>%s</u> <i>Mode</i>.</p><p class="monospace" style="overflow-x:scroll;">__SEQ_ANNOT__</p></div>' % (job_id, '/site_data/3d/result_%s.zip' % job_id, mode)
+        script = '<br/><hr/><div class="row"><div class="col-lg-8 col-md-8 col-sm-6 col-xs-6"><h2>Output Result:</h2></div><div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><h4 class="text-right"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;<span class="label label-violet">JOB_ID</span>: <span class="label label-inverse">%s</span></h4><a href="%s" class="btn btn-blue pull-right" style="color: #ffffff;" title="Output in plain text" download><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Save Result&nbsp;</a></div></div><br/><div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <b style="color:#ff69bc;">%s</b> <i>Mode</i>; <span>(<span class="glyphicon glyphicon-stats" style="color:#b7bac5;"></span> <u>%d</u>)</span>.</p><p class="monospace" style="overflow-x:scroll;">__SEQ_ANNOT__</p></div>' % (job_id, '/site_data/3d/result_%s.zip' % job_id, mode, plate.get('N_CONSTRUCT'))
         script += '<div class="row"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center" id="col-res-r"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % t_total
 
         script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-primary"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;Plate Layout</h2></div><div class="panel-body">'
@@ -164,7 +164,8 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         for i in xrange(plate.get('N_PLATE')):
             flag[i + 1] = []
             json['plates'][i + 1] = {'primers': {}}
-            script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><p class="lead">Plate # <span class="label label-orange">%d</span></p></div></div><div class="row">' % (i + 1)
+            construct_list = primerize.Plate_96Well()
+            script += '<div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><p class="lead">Plate # <span class="label label-orange">%d</span> <span style="font-size:small;">(<span class="glyphicon glyphicon-stats" style="color:#b7bac5;"></span> <u>__N_CONSTRUCT_PLATE__</u>)</span></p></div></div><div class="row">' % (i + 1)
 
             for j in xrange(plate.get('N_PRIMER')):
                 primer_sequences = plate._data['plates'][j][i]
@@ -179,7 +180,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
                         flag[i + 1].append((j + 1, num_primers_on_plate))
 
                     json['plates'][i + 1]['primers'][j + 1] = []
-                    script += '<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6"><div class="thumbnail"><div id="svg_plt_%d_prm_%d"></div><div class="caption"><p class="text-center center-block" style="margin-bottom:0px;"><i>Primer</i> <b>%d</b> %s</p></div></div></div>' % (i + 1, j + 1, j + 1, primer_suffix_html(j))
+                    script += '<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6"><div class="thumbnail"><div id="svg_plt_%d_prm_%d"></div><div class="caption"><p class="text-center center-block" style="margin-bottom:0px;"><i>Primer</i> <b>%d</b> %s <span style="font-size:small;">(<span class="glyphicon glyphicon-stats" style="color:#b7bac5;"></span> <u>%s</u>)</span></p></div></div></div>' % (i + 1, j + 1, j + 1, primer_suffix_html(j), num_primers_on_plate)
 
                     for k in xrange(96):
                         if k + 1 in primer_sequences._data:
@@ -193,11 +194,13 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
                                 json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1], 'color': 'green'})
                             else:
                                 json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1, 'label': lbl, 'pos': primerize.util.num_to_coord(k + 1), 'sequence': row[1]})
+                            construct_list.set(primerize.util.num_to_coord(k + 1), '', '')
                         else:
                             json['plates'][i + 1]['primers'][j + 1].append({'coord': k + 1})
 
             if not flag[i + 1]: del flag[i + 1]
             script += '</div>'
+            script = script.replace('__N_CONSTRUCT_PLATE__', str(len(construct_list)))
 
         simplejson.dump(json, open(os.path.join(MEDIA_ROOT, 'data/3d/result_%s.json' % job_id), 'w'), sort_keys=True, indent=' ' * 4)
         script += '</div></div></div></div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
