@@ -249,7 +249,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         illustration_1 = illustration_1_annotated
         illustration_str = illustration_str_annotated[:-5] if len(plate.structures) >= 5 else illustration_str_annotated
         illustration_final = illustration_3 + '<br/>' + illustration_2 + '<br/>' + illustration_1 + '<br/><span style="white-space:pre;">' + illustration_str + '</span>'
-        illustration_final = illustration_final + illustration_1 if len(plate.structures) >= 5 else illustration_final
+        illustration_final = illustration_final + illustration_1 + '<br/>' if len(plate.structures) >= 5 else illustration_final
         script = script.replace('__SEQ_ANNOT__', illustration_final)
 
         if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']):
