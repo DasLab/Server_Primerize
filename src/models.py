@@ -236,3 +236,9 @@ def debug_flag(request):
 
 def ga_tracker(request):
     return {'TRACKING_ID': GA['TRACKING_ID']}
+
+def js_ver(request):
+    stats = simplejson.load(open('%s/cache/stat_ver.json' % MEDIA_ROOT, 'r'))
+    json = {'jquery': stats['jquery'], 'bootstrap': stats['bootstrap'], 'd3': stats['d3'], 'clip': stats['clip'], 'primerize': stats['NA_Thermo']}
+    return {'js_ver': json}
+    

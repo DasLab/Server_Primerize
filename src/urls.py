@@ -79,11 +79,7 @@ else:
         url(r'^logout/?$', user.user_logout),
         url(r'^password/?$', user.user_password),
         url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=True)),
-
-        url(r'^get_js/?$', views.get_js),
-        url(r'^get_ver/?$', views.get_ver),
-        url(r'^get_user/?$', views.get_user),
-        url(r'^get_admin/?$', views.get_admin),
+        url(r'^get_staff/?$', views.get_staff),
 
         url(r'^error/400/?$', views.error400),
         url(r'^error/401/?$', views.error401),

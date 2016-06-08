@@ -170,6 +170,7 @@ TEMPLATES = [{
 
             "src.models.debug_flag",
             "src.models.ga_tracker",
+            "src.models.js_ver",
         ]
     }
 }]

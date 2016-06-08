@@ -115,25 +115,10 @@ def result(request):
 def ping_test(request):
     return HttpResponse(content="", status=200)
 
-def get_admin(request):
-    return HttpResponse(simplejson.dumps({'email': EMAIL_NOTIFY}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
-def get_user(request):
-    if request.user.username:
-        user = request.user.username
-    else:
-        user = 'unknown'
-    return HttpResponse(simplejson.dumps({'user': user}, sort_keys=True, indent=' ' * 4), content_type='application/json')
-
-def get_js(request):
-    stats = simplejson.load(open('%s/cache/stat_ver.json' % MEDIA_ROOT, 'r'))
-    json = {'jquery': stats['jquery'], 'bootstrap': stats['bootstrap'], 'd3': stats['d3'], 'clip': stats['clip']}
-    return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
-
-def get_ver(request):
-    stats = simplejson.load(open('%s/cache/stat_ver.json' % MEDIA_ROOT, 'r'))
-    json = {'primerize': stats['NA_Thermo']}
-    return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
+def get_staff(request):
+    user = request.user.username if request.user.username else 'unknown'
+    return HttpResponse(simplejson.dumps({'user': user, 'admin': EMAIL_NOTIFY}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
 def test(request):
