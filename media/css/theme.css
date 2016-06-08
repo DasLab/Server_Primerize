@@ -34,7 +34,10 @@
 * { font-family: "Helvetica", Arial, sans-serif; }
 
 body { padding: 50px 15px 30px 15px; }
-
+blockquote.h5 {
+  line-height: 140%;
+  font-weight: normal;
+}
 textarea.monospace,
 input.monospace,
 select.monospace,
@@ -264,6 +267,7 @@ label { font-weight: normal;}
 .nav-list{
   padding-left: 20px;
 }
+.nav_home.active > span { text-decoration: underline; }
 .tutorial{ opacity:0.5; }
 
 
@@ -324,21 +328,6 @@ h1.section > span.num { color: #ff0; }
     color: #b3c8e1;
     opacity:0.8;
 }
-#wait.modal {
-  display:    none;
-  position:   fixed;
-  z-index:    1000;
-  top:        0;
-  left:       0;
-  height:     100%;
-  width:      100%;
-  opacity: 0.5;
-  background-color: #ffffff;
-  background-repeat: no-repeat;
-  background-image: url("/site_media/images/fg_load.gif"); 
-  background-position: center center;
-  background-size: 48px;
-}
 
 .modal-dialog { 
     margin: 0;
@@ -349,6 +338,7 @@ h1.section > span.num { color: #ff0; }
     -ms-transform: translate(-50%, -25%) !important;
     -webkit-transform: translate(-50%, -25%) !important;
 }
+.modal-backdrop.in { opacity: 0.5 !important;}
 
 .btn-inverse {
   background-color: #000;
