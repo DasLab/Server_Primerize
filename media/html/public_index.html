@@ -71,7 +71,7 @@
              Advanced academic users may opt to download the source code package. Please read the Terms and Conditions before <a class="btn btn-warning btn-sm" href="/license/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;Download&nbsp;&nbsp;</a>.
           </p>
           <p>
-            Current <code>primerize</code> version: <kbd id="primerize_ver"></kbd>.
+            Current <code>primerize</code> version: <kbd id="primerize_ver">{{js_ver.primerize}}</kbd>.
           </p>
         </div>
       </div>
@@ -91,8 +91,3 @@
     </div>
   </div>
 {% endblock %}
-
-{% block script %}
-  <script type="text/javascript" src="/site_media/js/public/{{DEBUG_DIR}}index{{DEBUG_STR}}.js"></script>  
-{% endblock %}
-
