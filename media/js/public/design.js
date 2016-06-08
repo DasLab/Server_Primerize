@@ -98,7 +98,7 @@ app.modPrimerize.fnAjaxUpdateResult = function(data) {
 
 app.modPrimerize.fnTrackPrimerList = function() {
   var value = '';
-  $("input.primer_input").each(function () {
+  $("input.primer_input").each(function() {
     var l = $(this).val().length;
     $(this).next().children().children().children().text(l);
 
@@ -186,7 +186,7 @@ app.modPrimerize.fnExpandPrimerInput = function() {
 
 app.modPrimerize.fnTrackStructureList = function() {
   var value = '';
-  $("textarea.structure_input").each(function () {
+  $("textarea.structure_input").each(function() {
     var l = $(this).val().length;
     var l_label = $(this).next().children().last().children().children();
     l_label.text(l);
@@ -243,7 +243,7 @@ app.modPrimerize.fnExpandStructureInput = function() {
 app.modPrimerize.fnOnLoad = function() {
   app.modPrimerize.fnTrackInputLength();
   $("#id_sequence").on("keyup", app.modPrimerize.fnTrackInputLength);
-  $("#id_tag").on("keyup", function () {
+  $("#id_tag").on("keyup", function() {
     var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
     if (val) { $(this).val(val.join('')); }
   });
@@ -338,7 +338,7 @@ app.modPrimerize.fnOnLoad = function() {
     } else {
       $("#id_num_primers").attr("disabled", "disabled");
     }
-    $("#id_is_num_primers").on("click", function () {
+    $("#id_is_num_primers").on("click", function() {
       if ($(this).is(":checked")) {
         $("#id_num_primers").removeAttr("disabled");
       } else {

@@ -142,9 +142,6 @@
   </div>
 
   <div id="result"></div>
-{% endblock %}
-
-{% block script %}
   {% if result_job_id %}
     <script type="text/javascript">
       var result_timeout = setTimeout(function() {
@@ -158,5 +155,5 @@
       }, 1000);
     </script>
   {% endif %}
-{% endblock %}
 
+{% endblock %}

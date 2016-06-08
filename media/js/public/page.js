@@ -1,4 +1,4 @@
-function resize() {
+app.fnIndexResize = function() {
     $("#col-1").css("height", "auto");
     $("#col-2").css("height", "auto");
     $("#col-3").css("height", "auto");
@@ -9,30 +9,64 @@ function resize() {
     $("#col-2").css("height", col_h);
     $("#col-3").css("height", col_h);
     $("#col-4").css("height", col_h);
-}
-
-
-if (app.key == "home") {
-    setTimeout(resize, 200);
-
-    $("#btn_retrieve").on("click", function () { $("#wait").fadeIn(1000); });
-    $("#btn_retrieve").prop("disabled", true);
-    $("#input_job_id").on("keyup", function () {
-        var val = $(this).val().match(/^([a-fA-F0-9]){0,16}/g);
-        if (val) { $(this).val(val.join('')); }
-        if ($(this).val().length == 16) {
-            $("#btn_retrieve").prop("disabled", false);
-        } else {
-            $("#btn_retrieve").prop("disabled", true);
-        }
-    });
 
     $(window).on("resize", function() {
         clearTimeout($.data(this, 'resizeTimer'));
-        $.data(this, 'resizeTimer', setTimeout(resize, 200));
+        $.data(this, 'resizeTimer', setTimeout(app.fnIndexResize, 200));
     });
+};
 
-} else if (app.key == "design") {
+app.fnTutorialResize = function() {
+    $("#main").addClass("pull-right");
+    $("#sidebar").css("width", $("#navbar").width() - $("#main").width() - 30);
+
+    if ($("#sidebar").width() < 200) {
+        app.resize_degree = 1;
+        $("#side").removeClass("col-lg-2 col-md-2").addClass("row");
+        $("#main").addClass("row").removeClass("pull-right");
+        $("#sidebar").css("width", "auto").removeAttr("data-spy").removeClass("affix").removeClass("affix-top");
+        $("#side_con").addClass("container");
+    } else {
+        $("#side").addClass("col-lg-2 col-md-2").removeClass("row");
+        $("#main").removeClass("row").addClass("pull-right");
+        $("#sidebar").attr("data-spy", "affix").affix({"offset": {"top": $("#main").position().top}});
+        $("#side_con").removeClass("container");
+
+        if ($("#navbar").width() >= 1680) {
+            $("#sidebar").css("width", ($("#navbar").width() - $("#main").width())/2 - 25);
+            // $("#side").css("padding-right","0px");
+            // $("#side_con").css("padding-right","0px");
+            $("#main").removeClass("pull-right").addClass("row");
+            app.resize_degree = 3;
+        } else {
+            $("#main").addClass("pull-right");
+            $("#sidebar").css("width", ($("#navbar").width() - $("#main").width()) - 25);
+            app.resize_degree = 2;
+        }
+    }
+
+    $(window).on("resize", function() {
+        clearTimeout($.data(this, 'resizeTimer'));
+        $.data(this, 'resizeTimer', setTimeout(app.fnTutorialResize, 200));
+    });
+};
+
+app.fnDesignResize = function() {
+    $("#col-res-l").css("height", "auto");
+    $("#col-res-r").css("height", "auto");
+
+    var col_h = Math.max(parseInt($("#col-res-l").css("height")), parseInt($("#col-res-r").css("height")));
+    $("#col-res-l").css("height", col_h);
+    $("#col-res-r").css("height", col_h);
+
+    $(window).on("resize", function() {
+        clearTimeout($.data(this, 'resizeTimer'));
+        $.data(this, 'resizeTimer', setTimeout(app.fnDesignResize, 200));
+    });
+};
+
+
+app.callbackLoadD3 = function(func) {
     if (!app.isLoaded) {
         if (app.isCDN) {
             var d3_js = [
@@ -44,12 +78,178 @@ if (app.key == "home") {
             var d3_js = ['/site_media/js/public/min/plt.min.js'];
         }
         head.test(d3, [], d3_js, function(flag) {
-            $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'design' + app.DEBUG_STR + '.js', function(data, code, xhr) { app.modPrimerize.fnOnLoad(); });
+            $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'design' + app.DEBUG_STR + '.js', function(data, code, xhr) { 
+                if (func === "init") { func = app.modPrimerize.fnOnLoad; }
+                if (typeof func === "function") { func(); }
+            });
         });
     } else {
-        app.modPrimerize.fnOnLoad();
+        if (func === "init") { func = app.modPrimerize.fnOnLoad; }
+        if (typeof func === "function") { func(); }
+    }
+};
+
+
+app.modPrimerize.job_id = undefined;
+app.modPrimerize.job_type = undefined;
+app.resize_degree = 0;
+
+
+if (app.key == "home") {
+    setTimeout(app.fnIndexResize, 200);
+
+    $("#form_retrieve").submit(function(event) {
+        event.preventDefault();
+        app.href = $(this).attr("action") + "?" + $(this).serialize();
+        // app.modPrimerize.job_id = $("#input_job_id").val();
+        $("#content").fadeTo(100, 0, app.fnChangeLocation);
+    });
+    $("#btn_retrieve").prop("disabled", true);
+    $("#input_job_id").on("keyup", function() {
+        var val = $(this).val().match(/^([a-fA-F0-9]){0,16}/g);
+        if (val) { $(this).val(val.join('')); }
+        if ($(this).val().length == 16) {
+            $("#btn_retrieve").prop("disabled", false);
+        } else {
+            $("#btn_retrieve").prop("disabled", true);
+        }
+    });
+
+} else if (app.key == "design") {
+    app.callbackLoadD3("init");
+
+} else if (app.key == "tutorial" || app.key == "protocol") {
+    $('body').scrollspy({
+        'target': '.scroll_nav',
+        'offset': 150
+    });
+    $('.scroll_nav').on('activate.bs.scrollspy', function() {
+        $('.scroll_nav > ul > li:not(.active) > ul.panel-collapse').collapse('hide');
+        $('.scroll_nav > ul > li.active > ul.panel-collapse').collapse('show');
+    });
+    app.fnTutorialResize();
+
+    $('[id^=tab_], #up').on('click', function() {
+        $('html, body').stop().animate({"scrollTop": $($(this).attr("href")).offset().top - 75}, 500);
+    });
+
+    $('ul.panel-collapse').on('show.bs.collapse', function() {
+        $(this).parent().find("a>span.glyphicon.pull-right")
+        .removeClass("glyphicon-triangle-bottom")
+        .addClass("glyphicon-triangle-top");
+    });
+    $('ul.panel-collapse').on('hide.bs.collapse', function() {
+        $(this).parent().find("a>span.glyphicon.pull-right")
+        .removeClass("glyphicon-triangle-top")
+        .addClass("glyphicon-triangle-bottom");
+    });
+
+    $(window).on("scroll", function() {
+        if ($(this).scrollTop() > $(window).height()/2) {
+            $('#up').fadeIn();
+        } else {
+            $('#up').fadeOut();
+        }
+        if (app.resize_degree == 1) {
+            $("#sidebar").css("width", "auto").removeAttr("data-spy").removeClass("affix").removeClass("affix-top");
+        }
+    });
+
+    if (app.key == "protocol") {
+        $("#calc_DNA").on('click', function() {
+            var A260 = $("#A260_DNA").val(),
+                l = $("#l_DNA").val();
+            $("#conc_DNA").val(parseFloat(A260) * 50000 / 660 / parseInt(l) );
+        });
+        $("#clc_DNA").on('click', function() {
+            $("#A260_DNA").val('');
+            $("#l_DNA").val('');
+            $("#conc_DNA").val('');
+        });
+
+        $("#calc_RNA").on('click', function() {
+            var A260 = $("#A260_RNA").val(),
+                l = $("#l_RNA").val();
+            $("#conc_RNA").val(parseFloat(A260) * 40000 / 330 / parseInt(l) );
+        });
+        $("#clc_RNA").on('click', function() {
+            $("#A260_RNA").val('');
+            $("#l_RNA").val('');
+            $("#conc_RNA").val('');
+        });
+
+        app.callbackLoadD3(function() {
+            var unit = parseInt($("#par_plate_final1").width() / 33);
+            app.mod96Plate.cell_radius = unit;
+            app.mod96Plate.cell_stroke = unit / 5;
+            app.mod96Plate.tick_width = unit * 3;
+
+            $.ajax({
+                url: '/site_media/images/docs/par_plate_final.json',
+                dataType: "json",
+                success: function(data) {
+                    app.mod96Plate.fnDrawSinglePlate(d3.select("#par_plate_final1"), data.data, false);
+                    app.mod96Plate.fnDrawSinglePlate(d3.select("#par_plate_final2"), data.data, false);
+                }
+            });
+            for (var i = 1; i <= 4; i++) {
+                (function(i) {
+                    $.ajax({
+                        url: '/site_media/images/docs/par_plate_primer' + i + '.json',
+                        dataType: "json",
+                        success: function(data) { app.mod96Plate.fnDrawSinglePlate(d3.select("#par_plate_primer" + i), data.data, false); }
+                    });
+                    $.ajax({
+                        url: '/site_media/images/docs/par_plate_primer' + i + '_filled.json',
+                        dataType: "json",
+                        success: function(data) { app.mod96Plate.fnDrawSinglePlate(d3.select("#par_plate_primer" + i + "_filled"), data.data, false); }
+                    });
+                })(i);
+            }
+            $.ajax({
+                url: '/site_media/images/docs/par_plate_helper.json',
+                dataType: "json",
+                success: function(data) { app.mod96Plate.fnDrawSinglePlate(d3.select("#par_plate_helper"), data.data, false); }
+            });
+        });
+
+    } else {
+        app.callbackLoadD3(function() {
+            var unit = parseInt($("[id^='svg_2d_plt_']").first().width() / 33);
+            app.mod96Plate.cell_radius = unit;
+            app.mod96Plate.cell_stroke = unit / 5;
+            app.mod96Plate.tick_width = unit * 3;
+
+            $.ajax({
+                url: '/site_data/2d/result_' + result_job_2d + '.json',
+                dataType: "json",
+                success: function(data) {
+                    for (var plt_key in data.plates) {
+                        for (var prm_key in data.plates[plt_key].primers) {
+                            app.mod96Plate.fnDrawSinglePlate(d3.select("#svg_2d_plt_" + plt_key + "_prm_" + prm_key), data.plates[plt_key].primers[prm_key], false);
+                        }
+                    }
+                    $("#svg_2d_plt_1_hidden").css("height", $("#svg_2d_plt_1_prm_6").css("height"));
+                }
+            });
+            $.ajax({
+                url: '/site_data/3d/result_' + result_job_3d + '.json',
+                dataType: "json",
+                success: function(data) {
+                    for (var plt_key in data.plates) {
+                        for (var prm_key in data.plates[plt_key].primers) {
+                            app.mod96Plate.fnDrawSinglePlate(d3.select("#svg_3d_plt_" + plt_key + "_prm_" + prm_key), data.plates[plt_key].primers[prm_key], false, function() {
+                               if (plt_key == 1 && prm_key == 3) {
+                                    $("#svg_3d_plt_1_prm_3 circle.seqpos_168.seqpos_173").addClass("active");
+                                    $(".svg_tooltip").html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td colspan="2"><p><span class="label label-primary">D03</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>Lib <span class="label label-warning">1</span></p></td><td><p><span class="label label-dark-blue">T</span><span class="label label-teal">168</span><span class="label label-dark-red">A</span></p></td></tr><tr><td></td><td></td><td><p><span class="label label-dark-blue">A</span><span class="label label-teal">173</span><span class="label label-dark-red">T</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td colspan="2" style="word-break:break-all"><code style="padding:0px; border-radius:0px;">TTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGG</code></td></tr></tbody></table>').css({"top": $("#svg_3d_plt_1_prm_3").offset().top + 100, "left": $("#svg_3d_plt_1_prm_3").offset().left, "opacity": 0.6});
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        });
     }
 
-
-
 }
+

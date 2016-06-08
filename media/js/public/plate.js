@@ -77,7 +77,7 @@ app.mod96Plate.fnGetFillColor = function(d) {
 };
 
 
-app.mod96Plate.fnDrawSinglePlate = function(element, data, flag) {
+app.mod96Plate.fnDrawSinglePlate = function(element, data, flag, func) {
     var svg = element.append("svg")
         .attr("width", (app.mod96Plate.cell_stroke + app.mod96Plate.cell_radius * 2) * 12.5 + app.mod96Plate.tick_width + 1)
         .attr("height", (app.mod96Plate.cell_stroke + app.mod96Plate.cell_radius * 2) * 8.5 + app.mod96Plate.tick_width + 1);
@@ -171,6 +171,8 @@ app.mod96Plate.fnDrawSinglePlate = function(element, data, flag) {
                 }
             }
         });
+
+    if (typeof func === "function") { func(); }
 };
 
 app.mod96Plate.fnDrawResultPlates = function() {
@@ -191,4 +193,5 @@ app.mod96Plate.fnDrawResultPlates = function() {
             }
         }
     });
-}
+};
+
