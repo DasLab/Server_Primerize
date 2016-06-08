@@ -213,7 +213,7 @@ label { font-weight: normal;}
 .navbar .navbar-nav > li > a:hover,
 .navbar .navbar-nav > li > a:focus {
   color: #f3f3f3;
-  background-color: #011e46;
+  background-color: #345e91;
   text-shadow: 2px 2px 5px #b3c8e1;
 }
 .navbar .navbar-nav > .active > a,
