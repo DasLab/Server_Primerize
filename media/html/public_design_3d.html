@@ -228,12 +228,12 @@
                 </button>
               </p>
               <p>
-                <button type="button" class="btn btn-info btn-block" id="btn-add-str" data-toggle="tooltip" data-placement="bottom" title="Add a secondary structure input.">
+                <button type="button" class="btn btn-info btn-block" id="btn_add_str" data-toggle="tooltip" data-placement="bottom" title="Add a secondary structure input.">
                   <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Structure
                 </button>
               </p>
               <p>
-                <button type="button" class="btn btn-warning btn-block" id="btn-add-prm" data-toggle="tooltip" data-placement="bottom" title="Add a pair of primers input.">
+                <button type="button" class="btn btn-warning btn-block" id="btn_add_prm" data-toggle="tooltip" data-placement="bottom" title="Add a pair of primers input.">
                   <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add Primers
                 </button>
               </p>
@@ -248,10 +248,11 @@
                 </a>
               </p>
               <p>
-                <a class="btn btn-default btn-block" href="/design_3d/">
+                <a id="btn_clear" class="btn btn-default btn-block" href="/design_3d/">
                   <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Clear Form
                 </a>
               </p>
+            </div>
           </div>
         </div>
       </div>
@@ -264,14 +265,17 @@
 {% block script %}
   {% if result_job_id %}
     <script type="text/javascript">
-      head.ready("d3.min.js", function() {
-        app.fnPrimerize.job_type = 3;
-        app.fnPrimerize.job_id = "{{result_job_id}}";
-        app.fnPrimerize.ajaxLoadHTML();
-        app.fnPrimerize.ajaxRefresh();
-        app.fnPrimerize.syncPrimerInput($("#id_primers").val().split(','));
-        app.fnPrimerize.syncStructureInput($("#id_structures").val().split(','));
-      });
+      var result_timeout = setTimeout(function() {
+        if (app.isLoaded) {
+          app.modPrimerize.job_type = 3;
+          app.modPrimerize.job_id = "{{result_job_id}}";
+          app.modPrimerize.fnAjaxLoadHTML();
+          app.modPrimerize.fnAjaxRefresh();
+          app.modPrimerize.fnSyncPrimerInput($("#id_primers").val().split(','));
+          app.modPrimerize.fnSyncStructureInput($("#id_structures").val().split(','));
+          clearTimeout(result_timeout);
+        }
+      }, 1000);
     </script>
   {% endif %}
   {% if from_1d or from_2d %}

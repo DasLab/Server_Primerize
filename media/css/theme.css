@@ -394,6 +394,10 @@ a.btn-default { color: #000 !important; }
 }
 .nav_top:hover::after { background-position: 0 0; }
 
+#content {
+  background-color: #fff;
+  opacity: 0;
+}
 
 .sprite { display: inline-block; }
 

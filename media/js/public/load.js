@@ -1,5 +1,9 @@
 var more_success, more_fail;
 var d3 = undefined;
+app.isCDN = false;
+app.isLoaded = false;
+app.modPrimerize = {'job_type': undefined, 'job_id': undefined};
+app.mod96Plate = {};
 
 if (app.DEBUG_DIR) {
     more_success = ['/site_media/css/min/theme.min.css'];
@@ -20,8 +24,6 @@ if (app.DEBUG_DIR) {
 }
 
 head.load('https://cdnjs.cloudflare.com/ajax/libs/jquery/' + app.js_ver.jquery + '/jquery.min.js', function() {
-    app.fnPrimerize = {};
-
     head.test(window.$, [
         'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + app.js_ver.bootstrap + '/css/bootstrap.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + app.js_ver.bootstrap + '/js/bootstrap.min.js'
@@ -29,7 +31,6 @@ head.load('https://cdnjs.cloudflare.com/ajax/libs/jquery/' + app.js_ver.jquery +
         app.isCDN = flag;
         $.ajaxSetup({'cache': true});
         $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'menu' + app.DEBUG_STR + '.js');
-        $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'design' + app.DEBUG_STR + '.js');
         $("head").append('<link rel="shortcut icon" type="image/gif" href="/site_media/images/icon_primerize.png" />');
         $("head").append('<link rel="icon" type="image/gif" href="/site_media/images/icon_primerize.png" />');
     });

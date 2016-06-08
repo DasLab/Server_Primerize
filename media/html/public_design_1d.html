@@ -130,10 +130,11 @@
                 </a>
               </p>
               <p>
-                <a class="btn btn-default btn-block" href="/design_1d/">
+                <a id="btn_clear" class="btn btn-default btn-block" href="/design_1d/">
                   <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;Clear Form
                 </a>
               </p>
+            </div>
           </div>
         </div>
       </div>
@@ -146,12 +147,15 @@
 {% block script %}
   {% if result_job_id %}
     <script type="text/javascript">
-      head.ready("d3.min.js", function() {
-        app.fnPrimerize.job_type = 1;
-        app.fnPrimerize.job_id = "{{result_job_id}}";
-        app.fnPrimerize.ajaxLoadHTML();
-        app.fnPrimerize.ajaxRefresh();
-      });
+      var result_timeout = setTimeout(function() {
+        if (app.isLoaded) {
+          app.modPrimerize.job_type = 1;
+          app.modPrimerize.job_id = "{{result_job_id}}";
+          app.modPrimerize.fnAjaxLoadHTML();
+          app.modPrimerize.fnAjaxRefresh();
+          clearTimeout(result_timeout);
+        }
+      }, 1000);
     </script>
   {% endif %}
 {% endblock %}

@@ -33,18 +33,22 @@ if (app.key == "home") {
     });
 
 } else if (app.key == "design") {
-    if (app.isCDN) {
-        var d3_js = [
-            'https://cdnjs.cloudflare.com/ajax/libs/d3/' + app.js_ver.d3 + '/d3.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/' + app.js_ver.clip + '/clipboard.min.js',
-            '/site_media/js/public/plate_96.js'
-        ];
+    if (!app.isLoaded) {
+        if (app.isCDN) {
+            var d3_js = [
+                'https://cdnjs.cloudflare.com/ajax/libs/d3/' + app.js_ver.d3 + '/d3.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/' + app.js_ver.clip + '/clipboard.min.js',
+                '/site_media/js/public/plate.js'
+            ];
+        } else {
+            var d3_js = ['/site_media/js/public/min/plt.min.js'];
+        }
+        head.test(d3, [], d3_js, function(flag) {
+            $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'design' + app.DEBUG_STR + '.js', function(data, code, xhr) { app.modPrimerize.fnOnLoad(); });
+        });
     } else {
-        var d3_js = ['/site_media/js/public/min/plt.min.js'];
+        app.modPrimerize.fnOnLoad();
     }
-    head.test(d3, [], d3_js, function(flag) {
-        app.fnPrimerize.onLoad();
-    });
 
 
 

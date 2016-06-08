@@ -25,7 +25,7 @@ app.fnChangeView = function() {
 
     $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js');
 
-    $("#content").fadeTo(100, 1);
+    $("#content").fadeTo(150, 1);
     if (typeof this.callbackChangeView === "function") {
         this.callbackChangeView();
     }
@@ -65,7 +65,10 @@ $(document).ready(function () {
       $("#content").fadeTo(100, 0, app.fnChangeLocation);
   });
 
+  $("#navbar").css({"opacity": 1, "top": "-50px"}).animate({"top": "0px"}, {"duration": 200, "queue": false});
   app.fnChangeView();
+  // $("body > div").css("opacity", 1);
+  // $("#page-content-wrapper").delay(500).fadeTo(150, 1);
 });
 
 
