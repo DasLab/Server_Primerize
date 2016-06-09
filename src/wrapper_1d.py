@@ -49,7 +49,7 @@ def design_1d_run(request):
         elif num_primers % 2:
             msg = 'Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.'
         if msg:
-            return HttpResponse(simplejson.dumps({'error': msg}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+            return HttpResponse(simplejson.dumps({'error': msg, 'type': 1}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
         job_id = random_job_id()
         create_wait_html(job_id, 1)
@@ -61,7 +61,7 @@ def design_1d_run(request):
         job.start()
         return result_json(job_id)
     else:
-        return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.', 'type': 1}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     return render(request, PATH.HTML_PATH['design_1d'], {'1d_form': form})
 
 
@@ -134,7 +134,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
         script += '<tr><td colspan="3" style="padding: 0px;"></td></tr></tbody></table></div></div></div></div><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="panel panel-green"><div class="panel-heading"><h2 class="panel-title"><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;Assembly Scheme</h2></div><div class="panel-body"><pre style="font-size:12px;">'
         script += assembly.echo('assembly').replace('->', '<span class="label-white label-orange glyphicon glyphicon-arrow-right" style="margin-left:2px; padding-left:1px;"></span>').replace('<-', '<span class="label-white label-green glyphicon glyphicon-arrow-left" style="margin-right:2px; padding-right:1px;"></span>').replace('\033[92m', '<span class="label-white label-primary">').replace('\033[96m', '<span class="label-warning">').replace('\033[94m', '<span class="label-info">').replace('\033[95m', '<span class="label-white label-danger">').replace('\033[41m', '<span class="label-white label-inverse">').replace('\033[100m', '<span style="font-weight:bold;">').replace('\033[0m', '</span>').replace('\n', '<br/>')
-        script += '</pre></div></div></div></div><div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a class="btn btn-info btn-sm" href="/protocol/#PCR" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly. Or go ahead for <code>Mutate-and-Map Plates</code> and/or <code>Mutation/Rescue Sets</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-1d-to-2d" class="btn btn-primary btn-block" href="/design_2d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 2D&nbsp;</a><a id="btn-1d-to-3d" class="btn btn-primary btn-block" href="/design_3d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 3D&nbsp;</a></div></div><script type="text/javascript">app.fnDesignResize();</script>'
+        script += '</pre></div></div></div></div><div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a id="btn-result-to-protocol" class="btn btn-info btn-sm btn-spa" href="/protocol/#PCR" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a> for PCR assembly. Or go ahead for <code>Mutate-and-Map Plates</code> and/or <code>Mutation/Rescue Sets</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-1d-to-2d" class="btn btn-primary btn-block btn-spa" href="/design_2d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 2D&nbsp;</a><a id="btn-1d-to-3d" class="btn btn-primary btn-block btn-spa" href="/design_3d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 3D&nbsp;</a></div></div><script type="text/javascript">app.fnDesignResize();</script>'
 
         assembly.save(MEDIA_ROOT + '/data/1d/', 'result_%s' % job_id)
         file_name = MEDIA_ROOT + '/data/1d/result_%s.txt' % job_id

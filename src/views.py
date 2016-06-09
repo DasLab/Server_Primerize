@@ -102,7 +102,7 @@ def result_json(job_id):
         job_list_entry = JobIDs.objects.get(job_id=job_id)
     except:
         return error404(request)
-    json = {'job_id': job_id, 'type': job_list_entry.type}
+    json = {'job_id': job_id, 'type': int(job_list_entry.type)}
     if job_list_entry.type == '1':
         job_entry = Design1D.objects.get(job_id=job_id)
         params = simplejson.loads(job_entry.params)

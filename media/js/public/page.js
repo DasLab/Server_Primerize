@@ -125,6 +125,45 @@ if (app.key == "home") {
 } else if (app.key == "design") {
     app.callbackLoadD3("init");
 
+    if ($("#result_job_id").html().length > 0) {
+        var result_timeout = setTimeout(function() {
+            if (app.isLoaded) {
+                app.modPrimerize.fnAjaxRetrieveResult($("#result_job_id").html());
+                $("#result_job_id").html("");
+                clearTimeout(result_timeout);
+            }
+        }, 500);
+    } else if ($("#result_from_1d").html() === "True") {
+        console.log("true")
+        var result_timeout = setTimeout(function() {
+            if (app.isLoaded) {
+                app.modPrimerize.fnSyncPrimerInput($("#id_primers").val().split(','));
+                $("input.primer_input").prop("readonly", true);
+                $("#id_sequence").prop("readonly", true);
+                $("#btn_add_prm").prop("disabled", true);
+                $("#result_from_1d").html("");
+                clearTimeout(result_timeout);
+            }
+        }, 500);
+    } else if ($("#result_from_2d").html() === "True") {
+        var result_timeout = setTimeout(function() {
+            if (app.isLoaded) {
+                app.modPrimerize.fnSyncPrimerInput($("#id_primers").val().split(','));
+                $("input.primer_input").prop("readonly", true);
+                $("#id_sequence").prop("readonly", true);
+                $("#btn_add_prm").prop("disabled", true);
+                $("#id_offset").prop("readonly", true);
+                $("#id_offset").prop("disabled", true);
+                $("#id_min_muts").prop("readonly", true);
+                $("#id_min_muts").prop("disabled", true);
+                $("#id_max_muts").prop("readonly", true);
+                $("#id_max_muts").prop("disabled", true);
+                $("#result_from_2d").html("");
+                clearTimeout(result_timeout);
+            }
+        }, 500);
+    }
+
 } else if (app.key == "tutorial" || app.key == "protocol") {
     $('body').scrollspy({
         'target': '.scroll_nav',

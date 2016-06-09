@@ -142,17 +142,5 @@
   </div>
 
   <div id="result"></div>
-  {% if result_job_id %}
-    <script type="text/javascript">
-      console.log("detect script")
-      var result_timeout = setTimeout(function() {
-        if (app.isLoaded) {
-          console.log("result load")
-          app.modPrimerize.fnAjaxLoadResult("{{result_job_id}}");
-          clearTimeout(result_timeout);
-        }
-      }, 1000);
-    </script>
-  {% endif %}
-
+  <div id="result_job_id" style="display: none;">{{result_job_id}}</div>
 {% endblock %}

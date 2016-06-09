@@ -190,29 +190,6 @@
   </div>
 
   <div id="result"></div>
+  <div id="result_job_id" style="display: none;">{{result_job_id}}</div>
+  <div style="display: none;"><span id="result_from_1d">{{from_1d}}</span></div>
 {% endblock %}
-
-{% block script %}
-  {% if result_job_id %}
-    <script type="text/javascript">
-      var result_timeout = setTimeout(function() {
-        if (app.isLoaded) {
-          app.modPrimerize.fnAjaxLoadResult("{{result_job_id}}");
-          clearTimeout(result_timeout);
-        }
-      }, 1000);
-    </script>
-  {% endif %}
-  {% if from_1d %}
-    <script type="text/javascript">
-      var primer_list = $("#id_primers").val().split(',');
-      sync_primer_input(primer_list);
-
-      $("input.primer_input").prop("readonly", true);
-      $("#id_sequence").prop("readonly", true);
-      $("#btn-add").prop("disabled", true);
-    </script>
-  {% endif %}
-
-{% endblock %}
-

@@ -2,7 +2,7 @@ var scrollTimer, resizeTimer;
 
 app.fnParseLocation = function() {
   var urls = {
-    "design": ["design_1d", "design_2d", "design_3d", "demo_1d", "demo_2d", "demo_3d", "result"],
+    "design": ["design_1d", "design_2d", "design_3d", "demo_1d", "demo_2d", "demo_3d", "design_2d_from_1d", "design_3d_from_1d", "design_3d_from_2d", "result"],
     "tutorial": ["tutorial"],
     "protocol": ["protocol"],
     "about": ["about"],

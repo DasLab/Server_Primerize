@@ -8,13 +8,49 @@ app.modPrimerize.fnPrimerLabel = function(num) {
   }
 };
 
+
+app.modPrimerize.fnUpdateFields = function(data) {
+  $("#id_sequence").val(data.data.sequence);
+  $("#id_tag").val(data.data.tag);
+  if (app.modPrimerize.job_type === 1) {
+    $("#id_min_Tm").val(data.data.params.min_Tm);
+    $("#id_max_len").val(data.data.params.max_len);
+    $("#id_min_len").val(data.data.params.min_len);
+    $("#id_num_primers").val(data.data.params.num_primers);
+    $("#id_is_num_primers").prop("checked", data.data.params.is_num_primers);
+    $("#id_is_check_t7").prop("checked", data.data.params.is_check_t7);
+  } else {
+    $("#id_offset").val(data.data.params.offset);
+    $("#id_min_muts").val(data.data.params.min_muts);
+    $("#id_max_muts").val(data.data.params.max_muts);
+    $("#id_lib").val(data.data.params.which_lib[0]);
+    if (app.modPrimerize.job_type === 3) {
+      $("#id_num_mutations").val(data.data.params.num_mutations);
+      $("#id_is_single").prop("checked", data.data.params.is_single);
+      $("#id_is_fill_WT").prop("checked", data.data.params.is_fill_WT);
+      app.modPrimerize.fnSyncStructureInput(data.data.structures);
+      app.modPrimerize.fnTrackStructureList();
+    }
+
+    app.modPrimerize.fnSyncPrimerInput(data.data.primers);
+    app.modPrimerize.fnTrackInputLength();
+    app.modPrimerize.fnTrackPrimerList();
+  }
+};
+
 app.modPrimerize.fnAjaxLoadHTML = function() {
+  if (typeof app.modPrimerize.job_id === "undefined") { return; }
   $.ajax({
     url: '/site_data/' + app.modPrimerize.job_type + 'd/result_' + app.modPrimerize.job_id + '.html',
     cache: false,
     dataType: "html",
     success: function(data) {
       $("#result").html(data);
+      $("#btn-result-to-protocol").on("click", function(event) {
+        event.preventDefault();
+        app.href = $(this).attr("href");
+        $("#content").fadeTo(100, 0, app.fnChangeLocation);
+      });
 
       if (app.modPrimerize.job_type !== 1) {
         if ($("#result").html().indexOf("alert-danger") == -1) {
@@ -29,20 +65,31 @@ app.modPrimerize.fnAjaxLoadHTML = function() {
             clearTimeout(hover_timeout);
             $("span[class^='seqpos_'].active, circle[class^='seqpos_'].active").removeClass("active");
           });
+        } else {
+          $("#btn-2d-to-3d").on("click", function(event) {
+            event.preventDefault();
+            app.href = $(this).attr("href") + "?from=" + app.modPrimerize.job_id;
+            $("#content").fadeTo(100, 0, app.fnChangeLocation);
+          });
         }
       } else {
-
+        $("#btn-1d-to-3d, #btn-1d-to-2d").on("click", function(event) {
+          event.preventDefault();
+          app.href = $(this).attr("href") + "?from=" + app.modPrimerize.job_id;
+          $("#content").fadeTo(100, 0, app.fnChangeLocation);
+        });
       }
     }
   });
 };
 
-app.modPrimerize.fnAjaxRefresh = function() {
+app.modPrimerize.fnAjaxRefreshResult = function() {
   var interval = Math.max($("#id_sequence").val().length * 4, 1500);
 
   ajax_timeout = setInterval(function() {
     var result = $("#result") ? $("#result").html(): "";
-    if (result.length && result.indexOf("Primerize is running") == -1) {
+    if (typeof result !== "undefined" && result.length && result.indexOf("Primerize is running") == -1) {
+      if (app.modPrimerize.job_type !== 1 && !$("#result svg").length) { app.modPrimerize.fnAjaxLoadHTML(); }
       clearInterval(ajax_timeout);
       if (window.history.replaceState) {
         window.history.replaceState({} , '', '/result/?job_id=' + app.modPrimerize.job_id);
@@ -55,47 +102,20 @@ app.modPrimerize.fnAjaxRefresh = function() {
   }, interval);
 };
 
-app.modPrimerize.fnAjaxUpdateResult = function(data) {
+app.modPrimerize.fnAjaxSubmitJob = function(data) {
   clearInterval(ajax_timeout);
   if (data.error) {
     html = '<br/><hr/><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h2>Output Result:</h2></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: ' + data.error + '</p></div>';
     $("#result").html(html);
   } else {
     app.modPrimerize.job_id = data.job_id;
-    $("#result").load('/site_data/' + app.modPrimerize.job_type + 'd/result_' + data.job_id + '.html');
-
-    $("#id_sequence").val(data.data.sequence);
-    $("#id_tag").val(data.data.tag);
-    if (app.modPrimerize.job_type === 1) {
-      $("#id_min_Tm").val(data.data.params.min_Tm);
-      $("#id_max_len").val(data.data.params.max_len);
-      $("#id_min_len").val(data.data.params.min_len);
-      $("#id_num_primers").val(data.data.params.num_primers);
-      $("#id_is_num_primers").prop("checked", data.data.params.is_num_primers);
-      $("#id_is_check_t7").prop("checked", data.data.params.is_check_t7);
-    } else {
-      $("#id_offset").val(data.data.params.offset);
-      $("#id_min_muts").val(data.data.params.min_muts);
-      $("#id_max_muts").val(data.data.params.max_muts);
-      $("#id_lib").val(data.data.params.which_lib[0]);
-      if (app.modPrimerize.job_type === 3) {
-        $("#id_num_mutations").val(data.data.params.num_mutations);
-        $("#id_is_single").prop("checked", data.data.params.is_single);
-        $("#id_is_fill_WT").prop("checked", data.data.params.is_fill_WT);
-        app.modPrimerize.fnSyncStructureInput(data.data.structures);
-        app.modPrimerize.fnTrackStructureList();
-      }
-
-      app.modPrimerize.fnSyncPrimerInput(data.data.primers);
-      app.modPrimerize.fnTrackInputLength();
-      app.modPrimerize.fnTrackPrimerList();
-    }
-
-    app.modPrimerize.fnAjaxRefresh();
+    app.modPrimerize.fnUpdateFields(data);
+    app.modPrimerize.fnAjaxLoadHTML();
+    app.modPrimerize.fnAjaxRefreshResult();
   }
 };
 
-app.modPrimerize.fnAjaxLoadResult = function(job_id) {
+app.modPrimerize.fnAjaxRetrieveResult = function(job_id) {
   $.ajax({
     type: "GET",
     url: "/result/",
@@ -107,18 +127,19 @@ app.modPrimerize.fnAjaxLoadResult = function(job_id) {
 
 app.modPrimerize.fnOnSubmit = function(data) {
   app.modPrimerize.job_id = undefined;
-  app.modPrimerize.job_type = $("#form_1d").length ? 1 : ($("#form_2d").length ? 2 : 3);
-  app.modPrimerize.fnAjaxUpdateResult(data);
+  app.modPrimerize.job_type = data.type;
+  app.modPrimerize.fnAjaxSubmitJob(data);
 
-  if (app.modPrimerize.job_type != 1) {
-    $("input.primer_input").prop("disabled", false);
-    $("input.primer_input").prop("readonly", false);
+  if (app.modPrimerize.job_type !== 1) {
+    $("input.primer_input").prop("disabled", false).prop("readonly", false);
     $("#id_sequence").prop("readonly", false);
     $("#btn_add_prm").prop("disabled", false);
 
-    if (app.modPrimerize.job_type == 3) {
-      $("textarea.structure_input").prop("disabled", false);
-      $("textarea.structure_input").prop("readonly", false);
+    if (app.modPrimerize.job_type === 3) {
+      $("textarea.structure_input").prop("disabled", false).prop("readonly", false);
+      $("#id_offset").prop("disabled", false).prop("readonly", false);
+      $("#id_min_muts").prop("disabled", false).prop("readonly", false);
+      $("#id_max_muts").prop("disabled", false).prop("readonly", false);
       $("#btn_add_str").prop("disabled", false);
     }
   }
@@ -130,7 +151,7 @@ app.modPrimerize.fnOnDisable = function() {
   setTimeout(function() {
     $("#btn_submit").prop("disabled", false).removeClass("btn-danger").addClass("btn-primary");
     $("#btn_submit > span.glyphicon").removeClass("glyphicon-remove-sign").addClass("glyphicon-ok-sign");
-  }, 3500);
+  }, 2500);
 };
 
 
@@ -293,11 +314,11 @@ app.modPrimerize.fnOnLoad = function() {
     $("#content").fadeTo(100, 0, app.fnChangeLocation);
   });
 
-  if (app.page == "design_2d" || app.page == "design_3d") {
+  if (app.page.indexOf("design_2d") !== -1 || app.page.indexOf("design_3d") !== -1) {
     $("input.primer_input").on("keyup", app.modPrimerize.fnTrackPrimerList);
     $("#btn_add_prm").on("click", app.modPrimerize.fnExpandPrimerInput);
 
-    if (app.page == "design_2d") {
+    if (app.page.indexOf("design_2d") !== -1) {
       $("#form_2d").submit(function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();
@@ -385,12 +406,3 @@ app.modPrimerize.fnOnLoad = function() {
 };
 
 app.isLoaded = true;
-if (app.result_flag) {
-  $.ajax({
-    type: "GET",
-    url: "/result/",
-    data: {"job_id": app.modPrimerize.job_id, "json": true},
-    success: app.modPrimerize.fnOnSubmit
-  });
-}
-app.result_flag = false;
