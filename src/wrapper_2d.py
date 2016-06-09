@@ -18,7 +18,7 @@ import zipfile
 
 from src.helper import *
 from src.models import *
-from src.views import error400
+from src.views import result_json, error400
 
 
 def design_2d(request, form=Design2DForm(), from_1d=False):
@@ -75,8 +75,7 @@ def design_2d_run(request):
         job_list_entry.save()
         job = threading.Thread(target=design_2d_wrapper, args=(sequence, primers, tag, offset, which_muts, which_lib, job_id))
         job.start()
-
-        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'primers': primers, 'min_muts': min_muts, 'max_muts': max_muts, 'offset': offset, 'lib': lib}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        return result_json(job_id)
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     return render(request, PATH.HTML_PATH['design_2d'], {'2d_form': form})
@@ -91,7 +90,7 @@ def demo_2d_run(request):
     which_muts = range(ARG['MIN_MUTS'], ARG['MAX_MUTS'] + 1)
     job = threading.Thread(target=design_2d_wrapper, args=(SEQ['P4P6'], SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], job_id))
     job.start()
-    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'primers': SEQ['PRIMER_SET'], 'min_muts': ARG['MIN_MUTS'], 'max_muts': ARG['MAX_MUTS'], 'offset': ARG['OFFSET'], 'lib': ARG['LIB']}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+    return result_json(job_id)
 
 
 def random_2d(request):

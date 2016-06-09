@@ -144,12 +144,11 @@
   <div id="result"></div>
   {% if result_job_id %}
     <script type="text/javascript">
+      console.log("detect script")
       var result_timeout = setTimeout(function() {
         if (app.isLoaded) {
-          app.modPrimerize.job_type = 1;
-          app.modPrimerize.job_id = "{{result_job_id}}";
-          app.modPrimerize.fnAjaxLoadHTML();
-          app.modPrimerize.fnAjaxRefresh();
+          console.log("result load")
+          app.modPrimerize.fnAjaxLoadResult("{{result_job_id}}");
           clearTimeout(result_timeout);
         }
       }, 1000);

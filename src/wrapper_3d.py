@@ -18,7 +18,7 @@ import zipfile
 
 from src.helper import *
 from src.models import *
-from src.views import error400
+from src.views import result_json, error400
 
 
 def design_3d(request, form=Design3DForm(), from_1d=False, from_2d=False):
@@ -91,8 +91,7 @@ def design_3d_run(request):
         job_list_entry.save()
         job = threading.Thread(target=design_3d_wrapper, args=(sequence, structures, primers, tag, offset, which_muts, which_lib, num_mutations, is_single, is_fill_WT, job_id))
         job.start()
-
-        return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': sequence, 'tag': tag, 'structures': structures, 'primers': primers, 'min_muts': min_muts, 'max_muts': max_muts, 'offset': offset, 'lib': lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        return result_json(job_id)
     else:
         return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     return render(request, PATH.HTML_PATH['design_3d'], {'3d_form': form})
@@ -120,7 +119,7 @@ def demo_3d_run(request):
 
     job = threading.Thread(target=design_3d_wrapper, args=(SEQ['P4P6'], structures, SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], is_single, is_fill_WT, job_id))
     job.start()
-    return HttpResponse(simplejson.dumps({'status': 'underway', 'job_id': job_id, 'sequence': SEQ['P4P6'], 'tag': 'P4P6_2HP', 'structures': structures, 'primers': SEQ['PRIMER_SET'], 'min_muts': ARG['MIN_MUTS'], 'max_muts': ARG['MAX_MUTS'], 'offset': ARG['OFFSET'], 'lib': ARG['LIB'], 'num_mutations': ARG['NUM_MUT'], 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+    return result_json(job_id)
 
 
 def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts, which_lib, num_mutations, is_single, is_fillWT, job_id):

@@ -79,37 +79,48 @@ def link(request, tag):
 
 
 def result(request):
-    if request.method == 'POST': return error400(request)
+    if request.method == 'POST': return error403(request)
+
     if 'job_id' not in request.GET:
         return error404(request)
     else:
         job_id = request.GET.get('job_id')
         if not job_id: return HttpResponseRedirect('/')
         if len(job_id) != 16 or (not re.match('[0-9a-fA-F]{16}', job_id)): return error400(request)
+
+        if 'json' in request.GET and request.GET.get('json').lower() != 'false': return result_json(job_id)
         try:
             job_list_entry = JobIDs.objects.get(job_id=job_id)
         except:
             return error404(request)
-        if job_list_entry.type == '1':
-            job_entry = Design1D.objects.get(job_id=job_id)
-            params = simplejson.loads(job_entry.params)
-            form = Design1DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'min_Tm': params['min_Tm'], 'max_len': params['max_len'], 'min_len': params['min_len'], 'num_primers': params['num_primers'], 'is_num_primers': params['is_num_primers'], 'is_check_t7': params['is_check_t7']})
-            return render(request, PATH.HTML_PATH['design_1d'], {'1d_form': form, 'result_job_id': job_id})
-        elif job_list_entry.type == '2':
-            job_entry = Design2D.objects.get(job_id=job_id)
-            params = simplejson.loads(job_entry.params)
-            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
-            form = Design2DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset'], 'lib': str(params['which_lib'][0])})
-            return render(request, PATH.HTML_PATH['design_2d'], {'2d_form': form, 'result_job_id': job_id})
-        elif job_list_entry.type == '3':
-            job_entry = Design3D.objects.get(job_id=job_id)
-            params = simplejson.loads(job_entry.params)
-            structures = job_entry.structures[1:-1].replace("'", '').replace(' ', '')
-            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
-            form = Design3DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'structures': structures, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset'], 'lib': str(params['which_lib'][0]), 'num_mutations': params['num_mutations'], 'is_single': params['is_single'], 'is_fill_WT': params['is_fill_WT']})
-            return render(request, PATH.HTML_PATH['design_3d'], {'3d_form': form, 'result_job_id': job_id})
-        else:
-            raise ValueError
+        form = Design1DForm() if job_list_entry.type == "1" else (Design2DForm() if job_list_entry.type == "2" else Design3DForm())
+        json = {'result_job_id': job_id, '%sd_form' % job_list_entry.type: form}
+        return render(request, PATH.HTML_PATH['design_%sd' % job_list_entry.type], json)
+
+def result_json(job_id):
+    try:
+        job_list_entry = JobIDs.objects.get(job_id=job_id)
+    except:
+        return error404(request)
+    json = {'job_id': job_id, 'type': job_list_entry.type}
+    if job_list_entry.type == '1':
+        job_entry = Design1D.objects.get(job_id=job_id)
+        params = simplejson.loads(job_entry.params)
+        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': params}})
+    elif job_list_entry.type == '2':
+        job_entry = Design2D.objects.get(job_id=job_id)
+        params = simplejson.loads(job_entry.params)
+        primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '').split(',')
+        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'params': params}})
+    elif job_list_entry.type == '3':
+        job_entry = Design3D.objects.get(job_id=job_id)
+        params = simplejson.loads(job_entry.params)
+        structures = job_entry.structures[1:-1].replace("'", '').replace(' ', '').split(',')
+        primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '').split(',')
+        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'structures': structures, 'params': params}})
+    else:
+        raise ValueError
+    return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
 def ping_test(request):

@@ -267,12 +267,7 @@
     <script type="text/javascript">
       var result_timeout = setTimeout(function() {
         if (app.isLoaded) {
-          app.modPrimerize.job_type = 3;
-          app.modPrimerize.job_id = "{{result_job_id}}";
-          app.modPrimerize.fnAjaxLoadHTML();
-          app.modPrimerize.fnAjaxRefresh();
-          app.modPrimerize.fnSyncPrimerInput($("#id_primers").val().split(','));
-          app.modPrimerize.fnSyncStructureInput($("#id_structures").val().split(','));
+          app.modPrimerize.fnAjaxLoadResult("{{result_job_id}}");
           clearTimeout(result_timeout);
         }
       }, 1000);

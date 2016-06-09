@@ -112,7 +112,7 @@ if (app.key == "home") {
         $("#content").fadeTo(100, 0, app.fnChangeLocation);
     });
     $("#btn_retrieve").prop("disabled", true);
-    $("#input_job_id").on("keyup", function() {
+    $("#input_job_id").on("change", function() {
         var val = $(this).val().match(/^([a-fA-F0-9]){0,16}/g);
         if (val) { $(this).val(val.join('')); }
         if ($(this).val().length == 16) {

@@ -64,29 +64,29 @@ app.modPrimerize.fnAjaxUpdateResult = function(data) {
     app.modPrimerize.job_id = data.job_id;
     $("#result").load('/site_data/' + app.modPrimerize.job_type + 'd/result_' + data.job_id + '.html');
 
-    $("#id_sequence").val(data.sequence);
-    $("#id_tag").val(data.tag);
+    $("#id_sequence").val(data.data.sequence);
+    $("#id_tag").val(data.data.tag);
     if (app.modPrimerize.job_type === 1) {
-      $("#id_min_Tm").val(data.min_Tm);
-      $("#id_max_len").val(data.max_len);
-      $("#id_min_len").val(data.min_len);
-      $("#id_num_primers").val(data.num_primers);
-      $("#id_is_num_primers").prop("checked", data.is_num_primers);
-      $("#id_is_check_t7").prop("checked", data.is_check_t7);
+      $("#id_min_Tm").val(data.data.params.min_Tm);
+      $("#id_max_len").val(data.data.params.max_len);
+      $("#id_min_len").val(data.data.params.min_len);
+      $("#id_num_primers").val(data.data.params.num_primers);
+      $("#id_is_num_primers").prop("checked", data.data.params.is_num_primers);
+      $("#id_is_check_t7").prop("checked", data.data.params.is_check_t7);
     } else {
-      $("#id_offset").val(data.offset);
-      $("#id_min_muts").val(data.min_muts);
-      $("#id_max_muts").val(data.max_muts);
-      $("#id_lib").val(data.lib);
+      $("#id_offset").val(data.data.params.offset);
+      $("#id_min_muts").val(data.data.params.min_muts);
+      $("#id_max_muts").val(data.data.params.max_muts);
+      $("#id_lib").val(data.data.params.which_lib[0]);
       if (app.modPrimerize.job_type === 3) {
-        $("#id_num_mutations").val(data.num_mutations);
-        $("#id_is_single").prop("checked", data.is_single);
-        $("#id_is_fill_WT").prop("checked", data.is_fill_WT);
-        app.modPrimerize.fnSyncStructureInput(data.structures);
+        $("#id_num_mutations").val(data.data.params.num_mutations);
+        $("#id_is_single").prop("checked", data.data.params.is_single);
+        $("#id_is_fill_WT").prop("checked", data.data.params.is_fill_WT);
+        app.modPrimerize.fnSyncStructureInput(data.data.structures);
         app.modPrimerize.fnTrackStructureList();
       }
 
-      app.modPrimerize.fnSyncPrimerInput(data.primers);
+      app.modPrimerize.fnSyncPrimerInput(data.data.primers);
       app.modPrimerize.fnTrackInputLength();
       app.modPrimerize.fnTrackPrimerList();
     }
@@ -94,6 +94,16 @@ app.modPrimerize.fnAjaxUpdateResult = function(data) {
     app.modPrimerize.fnAjaxRefresh();
   }
 };
+
+app.modPrimerize.fnAjaxLoadResult = function(job_id) {
+  $.ajax({
+    type: "GET",
+    url: "/result/",
+    data: {"job_id": job_id, "json": true},
+    success: app.modPrimerize.fnOnSubmit
+  });
+};
+
 
 app.modPrimerize.fnOnSubmit = function(data) {
   app.modPrimerize.job_id = undefined;
@@ -375,3 +385,12 @@ app.modPrimerize.fnOnLoad = function() {
 };
 
 app.isLoaded = true;
+if (app.result_flag) {
+  $.ajax({
+    type: "GET",
+    url: "/result/",
+    data: {"job_id": app.modPrimerize.job_id, "json": true},
+    success: app.modPrimerize.fnOnSubmit
+  });
+}
+app.result_flag = false;
