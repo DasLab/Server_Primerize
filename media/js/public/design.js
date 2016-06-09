@@ -95,6 +95,34 @@ app.modPrimerize.fnAjaxUpdateResult = function(data) {
   }
 };
 
+app.modPrimerize.fnOnSubmit = function(data) {
+  app.modPrimerize.job_id = undefined;
+  app.modPrimerize.job_type = $("#form_1d").length ? 1 : ($("#form_2d").length ? 2 : 3);
+  app.modPrimerize.fnAjaxUpdateResult(data);
+
+  if (app.modPrimerize.job_type != 1) {
+    $("input.primer_input").prop("disabled", false);
+    $("input.primer_input").prop("readonly", false);
+    $("#id_sequence").prop("readonly", false);
+    $("#btn_add_prm").prop("disabled", false);
+
+    if (app.modPrimerize.job_type == 3) {
+      $("textarea.structure_input").prop("disabled", false);
+      $("textarea.structure_input").prop("readonly", false);
+      $("#btn_add_str").prop("disabled", false);
+    }
+  }
+};
+
+app.modPrimerize.fnOnDisable = function() {
+  $("#btn_submit").prop("disabled", true).removeClass("btn-primary").addClass("btn-danger");
+  $("#btn_submit > span.glyphicon").removeClass("glyphicon-ok-sign").addClass("glyphicon-remove-sign");
+  setTimeout(function() {
+    $("#btn_submit").prop("disabled", false).removeClass("btn-danger").addClass("btn-primary");
+    $("#btn_submit > span.glyphicon").removeClass("glyphicon-remove-sign").addClass("glyphicon-ok-sign");
+  }, 3500);
+};
+
 
 app.modPrimerize.fnTrackPrimerList = function() {
   var value = '';
@@ -261,85 +289,51 @@ app.modPrimerize.fnOnLoad = function() {
 
     if (app.page == "design_2d") {
       $("#form_2d").submit(function(event) {
+        event.preventDefault();
+        app.modPrimerize.fnOnDisable();
         $("input.primer_input").prop("disabled", true);
         $.ajax({
           type: "POST",
           url: $(this).attr("action"),
           data: $(this).serialize(),
-          success: function(data) {
-            app.modPrimerize.job_id = undefined;
-            app.modPrimerize.job_type = 2;
-            app.modPrimerize.fnAjaxUpdateResult(data);
-          },
+          success: app.modPrimerize.fnOnSubmit
         });
-        $("input.primer_input").prop("disabled", false);
-        $("input.primer_input").prop("readonly", false);
-        $("#id_sequence").prop("readonly", false);
-        $("#btn_add_prm").prop("disabled", false);
-        event.preventDefault();
       });
 
       $("#btn_demo").on("click", function(event) {
+        event.preventDefault();
+        app.modPrimerize.fnOnDisable();
         $.ajax({
           type: "GET",
           url: $(this).attr("href"),
-          success: function(data) {
-            app.modPrimerize.job_id = undefined;
-            app.modPrimerize.job_type = 2;
-            app.modPrimerize.fnAjaxUpdateResult(data);
-          },
+          success: app.modPrimerize.fnOnSubmit
         });
-        $("input.primer_input").prop("disabled", false);
-        $("input.primer_input").prop("readonly", false);
-        $("#id_sequence").prop("readonly", false);
-        $("#btn_add_prm").prop("disabled", false);
-        event.preventDefault();
       });
     } else {
       $("textarea.structure_input").on("keyup", app.modPrimerize.fnTrackStructureList);
       $("#btn_add_str").on("click", app.modPrimerize.fnExpandStructureInput);
 
       $("#form_3d").submit(function(event) {
+        event.preventDefault();
+        app.modPrimerize.fnOnDisable();
         $("textarea.structure_input").prop("disabled", true);
         $("input.primer_input").prop("disabled", true);
         $.ajax({
           type: "POST",
           url: $(this).attr("action"),
           data: $(this).serialize(),
-          success: function(data) {
-            app.modPrimerize.job_id = undefined;
-            app.modPrimerize.job_type = 3;
-            app.modPrimerize.fnAjaxUpdateResult(data);
-          }
+          success: app.modPrimerize.fnOnSubmit
         });
-        $("textarea.structure_input").prop("disabled", false);
-        $("textarea.structure_input").prop("readonly", false);
-        $("input.primer_input").prop("disabled", false);
-        $("input.primer_input").prop("readonly", false);
-        $("#id_sequence").prop("readonly", false);
-        $("#btn_add_str").prop("disabled", false);
-        $("#btn_add_prm").prop("disabled", false);
-        event.preventDefault();
       });
 
       $("#btn_demo_1, #btn_demo_2").on("click", function(event) {
+        event.preventDefault();
+        app.modPrimerize.fnOnDisable();
         $.ajax({
           type: "GET",
           url: $(this).attr("href") + '?mode=' + $(this).attr('id').slice(-1),
-          success: function(data) {
-            app.modPrimerize.job_id = undefined;
-            app.modPrimerize.job_type = 3;
-            app.modPrimerize.fnAjaxUpdateResult(data);
-          },
+          success: app.modPrimerize.fnOnSubmit
         });
-        $("textarea.structure_input").prop("disabled", false);
-        $("textarea.structure_input").prop("readonly", false);
-        $("input.primer_input").prop("disabled", false);
-        $("input.primer_input").prop("readonly", false);
-        $("#id_sequence").prop("readonly", false);
-        $("#btn_add_str").prop("disabled", false);
-        $("#btn_add_prm").prop("disabled", false);
-        event.preventDefault();
       });
     }
 
@@ -358,29 +352,23 @@ app.modPrimerize.fnOnLoad = function() {
     });
 
     $("#form_1d").submit(function(event) {
+      event.preventDefault();
+      app.modPrimerize.fnOnDisable();
       $.ajax({
         type: "POST",
         url: $(this).attr("action"),
         data: $(this).serialize(),
-        success: function(data) {
-          app.modPrimerize.job_id = undefined;
-          app.modPrimerize.job_type = 1;
-          app.modPrimerize.fnAjaxUpdateResult(data);
-        },
+        success: app.modPrimerize.fnOnSubmit
       });
-      event.preventDefault();
     });
     $("#btn_demo").on("click", function(event) {
+      event.preventDefault();
+      app.modPrimerize.fnOnDisable();
       $.ajax({
         type: "GET",
         url: $(this).attr("href"),
-        success: function(data) {
-          app.modPrimerize.job_id = undefined;
-          app.modPrimerize.job_type = 1;
-          app.modPrimerize.fnAjaxUpdateResult(data);
-        },
+        success: app.modPrimerize.fnOnSubmit
       });
-      event.preventDefault();
     });
 
   }
