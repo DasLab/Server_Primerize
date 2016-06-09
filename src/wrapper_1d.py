@@ -44,6 +44,8 @@ def design_1d_run(request):
         msg = ''
         if len(sequence) < 60:
             msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
+        elif len(sequence) > 1000:
+            msg = 'Sequence input exceeds length limit (should be <u>less than <b>1000</b> nt</u>). For long inputs, please download source code and run locally.'
         elif num_primers % 2:
             msg = 'Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.'
         if msg:
