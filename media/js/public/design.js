@@ -289,6 +289,10 @@ app.modPrimerize.fnOnLoad = function() {
             app.modPrimerize.fnAjaxUpdateResult(data);
           },
         });
+        $("input.primer_input").prop("disabled", false);
+        $("input.primer_input").prop("readonly", false);
+        $("#id_sequence").prop("readonly", false);
+        $("#btn_add_prm").prop("disabled", false);
         event.preventDefault();
       });
     } else {
@@ -328,6 +332,13 @@ app.modPrimerize.fnOnLoad = function() {
             app.modPrimerize.fnAjaxUpdateResult(data);
           },
         });
+        $("textarea.structure_input").prop("disabled", false);
+        $("textarea.structure_input").prop("readonly", false);
+        $("input.primer_input").prop("disabled", false);
+        $("input.primer_input").prop("readonly", false);
+        $("#id_sequence").prop("readonly", false);
+        $("#btn_add_str").prop("disabled", false);
+        $("#btn_add_prm").prop("disabled", false);
         event.preventDefault();
       });
     }
