@@ -78,7 +78,7 @@ app.callbackLoadD3 = function(func) {
             var d3_js = ['/site_media/js/public/min/plt.min.js'];
         }
         head.test(d3, [], d3_js, function(flag) {
-            $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'design' + app.DEBUG_STR + '.js', function(data, code, xhr) { 
+            $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'design' + app.DEBUG_STR + '.js', function(data, code, xhr) {
                 if (func === "init") { func = app.modPrimerize.fnOnLoad; }
                 if (typeof func === "function") { func(); }
             });
@@ -93,6 +93,13 @@ app.callbackLoadD3 = function(func) {
 app.modPrimerize.job_id = undefined;
 app.modPrimerize.job_type = undefined;
 app.resize_degree = 0;
+
+$(".btn-spa").on("click", function(event) {
+    event.preventDefault();
+    app.href = $(this).attr("href");
+    $("#content").fadeTo(100, 0, app.fnChangeLocation);
+});
+$("div.svg_tooltip").css({"opacity": 0, "top": 0, "left": 0});
 
 
 if (app.key == "home") {
@@ -221,7 +228,7 @@ if (app.key == "home") {
             app.mod96Plate.tick_width = unit * 3;
 
             $.ajax({
-                url: '/site_data/2d/result_' + result_job_2d + '.json',
+                url: '/site_data/2d/result_' + $("#job_id_2d").text() + '.json',
                 dataType: "json",
                 success: function(data) {
                     for (var plt_key in data.plates) {
@@ -233,7 +240,7 @@ if (app.key == "home") {
                 }
             });
             $.ajax({
-                url: '/site_data/3d/result_' + result_job_3d + '.json',
+                url: '/site_data/3d/result_' + $("#job_id_3d").text() + '.json',
                 dataType: "json",
                 success: function(data) {
                     for (var plt_key in data.plates) {
@@ -249,6 +256,16 @@ if (app.key == "home") {
                 }
             });
         });
+    }
+
+} else if (app.key == "code") {
+    if (app.page == "license") {
+        $("#btn_decline, #btn_accept").on("click", function(event) {
+            event.preventDefault();
+            app.href = $(this).attr("href");
+            $("#content").fadeTo(100, 0, app.fnChangeLocation);
+        });
+
     }
 
 }

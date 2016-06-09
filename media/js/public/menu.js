@@ -25,6 +25,7 @@ app.fnChangeView = function() {
 
     $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js', function(data, code, xhr) {
       $("#content").fadeTo(150, 1);
+      if (window.location.hash) { $('html, body').stop().animate({"scrollTop": $(window.location.hash).offset().top - 75}, 500); }
       if (typeof app.callbackChangeView === "function") { app.callbackChangeView(); }
     });
 };
@@ -35,6 +36,7 @@ app.fnChangeLocation = function() {
     } else {
         window.location.href = app.href;
     }
+    $("html, body").scrollTop(0);
     $("#content").load(app.href + " #content > *", app.fnChangeView);
 };
 
@@ -54,10 +56,10 @@ $(document).ready(function() {
   $("#top").on("click", function() {
     event.preventDefault();
     $('#top > div').animate({'right':'-5%', 'opacity':'0'}, 125);
-    $("html, body").stop().animate({scrollTop: 0}, 250);
+    $("html, body").stop().animate({"scrollTop": 0}, 250);
   });
 
-  $("#nav a, #nav_home").on("click", function(event) {
+  $("#nav a:not(#nav_docs), #nav_home").on("click", function(event) {
       event.preventDefault();
       app.href = $(this).attr("href");
       $("#content").fadeTo(100, 0, app.fnChangeLocation);

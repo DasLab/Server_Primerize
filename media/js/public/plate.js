@@ -4,9 +4,7 @@ app.mod96Plate.cell_stroke = 1.4;
 app.mod96Plate.tick_width = 20;
 app.mod96Plate.x_data = d3.range(1, 13);
 app.mod96Plate.y_data = 'ABCDEFGH'.split('');
-app.mod96Plate.tooltip = d3.select("body").append("div")
-    .attr("class", "svg_tooltip")
-    .style("opacity", 0);
+app.mod96Plate.tooltip = d3.select(".svg_tooltip");
 
 
 app.mod96Plate.fnGetCoordY = function(num) {
