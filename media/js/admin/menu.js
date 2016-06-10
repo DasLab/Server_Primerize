@@ -100,12 +100,11 @@ app.fnChangeView = function() {
     $("#nav_" + app.key + "_lg").addClass("active");
 
     app.fnChangeBreadcrumb();
-    $.getScript('/site_media/js/admin/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js');
-
-    $("#content").fadeTo(100, 1);
-    if (typeof this.callbackChangeView === "function") {
-        this.callbackChangeView();
-    }
+    $.getScript('/site_media/js/admin/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js', function(data, code, xhr) {
+      $("#content").fadeTo(150, 1);
+      if (window.location.hash) { $('html, body').stop().animate({"scrollTop": $(window.location.hash).offset().top - 75}, 500); }
+      if (typeof app.callbackChangeView === "function") { app.callbackChangeView(); }
+    });
 };
 
 app.fnChangeLocation = function() {
@@ -114,6 +113,7 @@ app.fnChangeLocation = function() {
     } else {
         window.location.href = app.href;
     }
+    $("html, body").scrollTop(0);
     $("#content_wrapper").load(app.href + " #content_wrapper > *", app.fnChangeView);
 };
 
