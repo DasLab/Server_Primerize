@@ -20,7 +20,7 @@ app.fnParseLocation = function() {
 
 app.fnChangeView = function() {
     app.fnParseLocation();
-    $("#nav > li.dropdown.active").removeClass("active");
+    $("#nav > li.dropdown.active, #nav_home").removeClass("active");
     $("#nav_"+ app.key).addClass("active");
 
     $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js', function(data, code, xhr) {

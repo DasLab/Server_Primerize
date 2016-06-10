@@ -208,7 +208,7 @@ label { font-weight: normal;}
 }
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
-  color: #FFE788;
+  color: #fff400;
   text-decoration: blink;
 }
 .navbar .navbar-text { color: #d8d8d8; }
@@ -267,7 +267,11 @@ label { font-weight: normal;}
 .nav-list{
   padding-left: 20px;
 }
-.nav_home.active > span { text-decoration: underline; }
+#nav_logo.active > span {
+  color: #fff400;
+  text-decoration: underline;
+}
+#nav_logo.active > span:hover { color: #fff; }
 .tutorial{ opacity:0.5; }
 
 

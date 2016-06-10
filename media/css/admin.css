@@ -63,7 +63,7 @@ label { font-weight: normal;}
 }
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
-  color: #fec78a;
+  color: #fff400;
   text-decoration: blink;
 }
 .navbar .navbar-nav > li > a {
