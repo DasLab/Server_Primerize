@@ -267,11 +267,11 @@ label { font-weight: normal;}
 .nav-list{
   padding-left: 20px;
 }
-#nav_logo.active > span {
+#nav_home.active > span {
   color: #fff400;
   text-decoration: underline;
 }
-#nav_logo.active > span:hover { color: #fff; }
+#nav_home.active > span:hover { color: #fff; }
 .tutorial{ opacity:0.5; }
 
 
