@@ -164,7 +164,7 @@ if (app.key == "home") {
         }, 500);
     }
 
-} else if (app.key == "tutorial" || app.key == "protocol") {
+} else if (app.key == "tutorial" || app.key == "protocol" || app.key == "code") {
     $('body').scrollspy({
         'target': '.scroll_nav',
         'offset': 150
@@ -259,7 +259,7 @@ if (app.key == "home") {
             });
         });
 
-    } else {
+    } else if (app.key == "tutorial") {
         app.callbackLoadD3(function() {
             var unit = parseInt($("[id^='svg_2d_plt_']").first().width() / 33);
             app.mod96Plate.cell_radius = unit;
@@ -331,8 +331,6 @@ if (app.key == "home") {
                 }
             });
         });
-
     }
-
 }
 
