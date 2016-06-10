@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 {% block content %}
-  <form method="post" action="/download/" class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+  <form id="form_dl" method="post" action="/download/" class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
     {% csrf_token %}
     <h3>Please provide your contact information</h3>
     <br/>
@@ -72,7 +72,7 @@
               <span class="pull-right">
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Submit&nbsp;</button>
                 &nbsp;
-                <a href="/download/" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>
+                <a href="/download/" class="btn btn-default btn-spa"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;Clear&nbsp;&nbsp;</a>
               </span>
               <br/>
             </div>
@@ -81,19 +81,11 @@
         </div>
       </div>
 
-      {% if flag == -1 %}
-      <div class="alert alert-danger">
-        <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: Invalid contact information. Please try again.
+      <div style="display:none;" class="alert alert-danger" id="form_dl_notice">
+        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>&nbsp;&nbsp;
+        <span id="form_dl_msg"><b>SUBMITTING</b>: The following messages were produced:</span>
       </div>
-      {% elif flag == 1 %}
-      <div class="alert alert-success">
-        <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b class="lead">Your registration was successful.</b>
-        <br/>
-        You will be notified about future Primerize updates depending on your subscription preference.
-        <br/><br/>
-        Your download should start automatically. If not, please <a id="a_dl" href="/link/master/?first_name={{first_name}}&last_name={{last_name}}&email={{email}}" target="_blank"><i>click here</i>&nbsp;&nbsp;<span class="glyphicon glyphicon-floppy-save"></span></a>.
-      </div>
-      {% endif %}
+
 
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -108,23 +100,19 @@
               </tr>
             </thead>
             <tbody>
-              {% if flag == 1 %}
               <tr>
                 <td>
                   <span class="glyphicon glyphicon-heart-empty"></span>&nbsp;&nbsp;<b class="lead" style="color:#ff912e;">latest</b>
-                  &nbsp;&nbsp;<a href="/link/master/?first_name={{first_name}}&last_name={{last_name}}&email={{email}}" target="_blank" download><span class="glyphicon glyphicon-floppy-save"></span></a>
+                  &nbsp;&nbsp;<a href="/link/master/" target="_blank" id="a_dl_master" download onclick="return false;" style="color: #808080;"><span class="glyphicon glyphicon-floppy-save"></span></a>
                 </td>
                 <td><b>Development</b> from <i>master</i> with latest features as preview for next release.</td>
               </tr>
-              {% endif %}
 
               {% for d in dist %}
               <tr>
                 <td>
                   <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b class="lead" style="color:#5496d7;">{{d.version}}</b>
-                  {% if flag == 1 %}
-                    &nbsp;&nbsp;<a href="/link/{{d.version}}/?first_name={{first_name}}&last_name={{last_name}}&email={{email}}" target="_blank" download><span class="glyphicon glyphicon-download-alt"></span></a>
-                  {% endif %}
+                  &nbsp;&nbsp;<a href="/link/{{d.version}}/" id="a_dl_{{d.version|slugify}}" target="_blank" download onclick="return false;" style="color: #808080;"><span class="glyphicon glyphicon-download-alt"></span></a>
                 </td>
                 <td>
                   <b>{{d.title}}</b>
@@ -142,22 +130,4 @@
 
     </div>
   </form>
-{% endblock %}
-
-{% block script %}
-  <script type="text/javascript">
-    var flag = {{flag}};
-
-    $(document).ready(function () {
-      if (flag == 1) {
-        $("#id_first_name").attr("value", "");
-        $("#id_last_name").attr("value", "");
-        $("#id_institution").attr("value", "");
-        $("#id_department").attr("value", "");
-        $("#id_email").attr("value", "");
-        $("#id_is_subscribe").attr("checked", "checked");
-        $("#a_dl")[0].click();
-      }
-    });
-  </script>
 {% endblock %}

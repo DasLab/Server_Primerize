@@ -72,7 +72,7 @@ app.callbackLoadD3 = function(func) {
             var d3_js = [
                 'https://cdnjs.cloudflare.com/ajax/libs/d3/' + app.js_ver.d3 + '/d3.min.js',
                 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/' + app.js_ver.clip + '/clipboard.min.js',
-                '/site_media/js/public/plate.js'
+                '/site_media/js/public/' + app.DEBUG_DIR + 'plate' + app.DEBUG_STR + '.js'
             ];
         } else {
             var d3_js = ['/site_media/js/public/min/plt.min.js'];
@@ -303,6 +303,33 @@ if (app.key == "home") {
             event.preventDefault();
             app.href = $(this).attr("href");
             $("#content").fadeTo(100, 0, app.fnChangeLocation);
+        });
+
+    } else if (app.page == "download") {
+        $("#form_dl").submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: $(this).serialize(),
+                success: function(data) {
+                    if (data.status === 0) {
+                        $("#form_dl_notice > span.glyphicon").addClass("glyphicon-remove-sign").removeClass("glyphicon-hourglass");
+                        $("#form_dl_msg").html('<b>ERROR</b>: Invalid contact information. Please try again.');
+                        $("#form_dl_notice").fadeIn(200);
+                    } else if (data.status === 1) {
+                        $("#form_dl_notice > span.glyphicon").addClass("glyphicon-ok-sign").removeClass("glyphicon-hourglass");
+                        $("#form_dl_msg").html('<b class="lead">Your registration was successful.</b><br/>You will be notified about future Primerize updates depending on your subscription preference.<br/><br/>Your download should start automatically. If not, please click on <span class="glyphicon glyphicon-floppy-save" style="color:#345e91;"></span> icons below.');
+                        $("#form_dl_notice").addClass("alert-success").removeClass("alert-danger").fadeIn(200);
+
+                        $("a[id^='a_dl_']").css("color", "").removeAttr("onclick").on("click", function(event) {
+                            event.preventDefault();
+                            window.open($(this).attr("href") + "?" + $("#form_dl").serialize());
+                        });
+                        window.open($("#d_al_master").attr("href") + "?" + $("#form_dl").serialize());
+                    }
+                }
+            });
         });
 
     }

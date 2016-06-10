@@ -35,14 +35,12 @@ def about(request):
     return render(request, PATH.HTML_PATH['about'], {'history': history_list})
 
 def download(request):
-    result = simplejson.load(open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'r'))
-
     if request.method != 'POST':
-        return render(request, PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'flag': 0, 'dist': result})
+        result = simplejson.load(open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'r'))
+        return render(request, PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'dist': result})
     else:
-        flag = -1
+        flag = 0
         form = DownloadForm(request.POST)
-        (first_name, last_name, email) = (None, None, None)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
@@ -55,7 +53,7 @@ def download(request):
                 user.save()
                 flag = 1
 
-        return render(request, PATH.HTML_PATH['download'], {'dl_form': form, 'flag': flag, 'dist': result, 'first_name': first_name, 'last_name': last_name, 'email': email})
+        return HttpResponse(simplejson.dumps({'status': flag}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def link(request, tag):
     if not tag: return error400(request)
