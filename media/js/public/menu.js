@@ -19,25 +19,25 @@ app.fnParseLocation = function() {
 };
 
 app.fnChangeView = function() {
-    app.fnParseLocation();
-    $("#nav > li.dropdown.active, #nav_home").removeClass("active");
-    $("#nav_"+ app.key).addClass("active");
+  app.fnParseLocation();
+  $("#nav > li.dropdown.active, #nav_home").removeClass("active");
+  $("#nav_"+ app.key).addClass("active");
 
-    $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js', function(data, code, xhr) {
-      $("#content").fadeTo(150, 1);
-      if (window.location.hash) { $('html, body').stop().animate({"scrollTop": $(window.location.hash).offset().top - 75}, 500); }
-      if (typeof app.callbackChangeView === "function") { app.callbackChangeView(); }
-    });
+  $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js', function(data, code, xhr) {
+    $("#content").fadeTo(150, 1);
+    if (window.location.hash) { $('html, body').stop().animate({"scrollTop": $(window.location.hash).offset().top - 75}, 500); }
+    if (typeof app.callbackChangeView === "function") { app.callbackChangeView(); }
+  });
 };
 
 app.fnChangeLocation = function() {
-    if (window.history.replaceState) {
-        window.history.replaceState({} , '', app.href);
-    } else {
-        window.location.href = app.href;
-    }
-    $("html, body").scrollTop(0);
-    $("#content").load(app.href + " #content > *", app.fnChangeView);
+  if (window.history.replaceState) {
+      window.history.replaceState({} , '', app.href);
+  } else {
+      window.location.href = app.href;
+  }
+  $("html, body").scrollTop(0);
+  $("#content").load(app.href + " #content > *", app.fnChangeView);
 };
 
 

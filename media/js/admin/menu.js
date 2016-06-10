@@ -101,9 +101,9 @@ app.fnChangeView = function() {
 
     app.fnChangeBreadcrumb();
     $.getScript('/site_media/js/admin/' + app.DEBUG_DIR + 'page' + app.DEBUG_STR + '.js', function(data, code, xhr) {
-      $("#content").fadeTo(150, 1);
-      if (window.location.hash) { $('html, body').stop().animate({"scrollTop": $(window.location.hash).offset().top - 75}, 500); }
-      if (typeof app.callbackChangeView === "function") { app.callbackChangeView(); }
+        $("#content").fadeTo(150, 1);
+        if (window.location.hash) { $('html, body').stop().animate({"scrollTop": $(window.location.hash).offset().top - 75}, 500); }
+        if (typeof app.callbackChangeView === "function") { app.callbackChangeView(); }
     });
 };
 
