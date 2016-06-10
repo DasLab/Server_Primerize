@@ -120,7 +120,8 @@ app.modPrimerize.fnAjaxRetrieveResult = function(job_id) {
     type: "GET",
     url: "/result/",
     data: {"job_id": job_id, "json": true},
-    success: app.modPrimerize.fnOnSubmit
+    success: app.modPrimerize.fnOnSubmit,
+    complete: app.modPrimerize.fnOnLoad
   });
 };
 
@@ -314,11 +315,14 @@ app.modPrimerize.fnOnLoad = function() {
     $("#content").fadeTo(100, 0, app.fnChangeLocation);
   });
 
-  if (app.page.indexOf("design_2d") !== -1 || app.page.indexOf("design_3d") !== -1) {
+  var is_2d = (app.page.indexOf("design_2d") !== -1 || app.modPrimerize.job_type === 2),
+      is_3d = (app.page.indexOf("design_3d") !== -1 || app.modPrimerize.job_type === 3);
+
+  if (is_2d || is_3d) {
     $("input.primer_input").on("keyup", app.modPrimerize.fnTrackPrimerList);
     $("#btn_add_prm").on("click", app.modPrimerize.fnExpandPrimerInput);
 
-    if (app.page.indexOf("design_2d") !== -1) {
+    if (is_2d) {
       $("#form_2d").submit(function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();

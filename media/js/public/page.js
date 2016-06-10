@@ -134,7 +134,6 @@ if (app.key == "home") {
             }
         }, 500);
     } else if ($("#result_from_1d").html() === "True") {
-        console.log("true")
         var result_timeout = setTimeout(function() {
             if (app.isLoaded) {
                 app.modPrimerize.fnSyncPrimerInput($("#id_primers").val().split(','));
