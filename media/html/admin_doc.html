@@ -4,84 +4,7 @@
 {% block content %}
 <div id="content-main" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-      <div class="panel panel-violet" id="sidebar" >
-        <div class="panel-heading">
-          <h3 class="panel-title"><span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;Sections</h3>
-        </div>
-        <div class="panel-body scroll_nav">
-          <ul class="nav" role="tablist" id="scroll_nav">
-            <li class="li-success">
-                <a id="tab_1" href="#sys_stat">
-                  <span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Section #1: 
-                  <br/>
-                  <b>System Status</b>
-                </a>
-            </li>
-            <li class="li-warning">
-                <a id="tab_2" href="#sys_ovw">
-                  <span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;Section #2: 
-                  <br/>
-                  <b>Overview</b>
-                </a>
-            </li>
-            <li class="li-primary">
-                <a id="tab_3" href="#sys_bked">
-                  <span class="glyphicon glyphicon-hdd"></span>&nbsp;&nbsp;Section #3: 
-                  <br/>
-                  <b>Back End</b>
-                  <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
-                </a>
-                <ul id="collapse_tab_3" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_3">
-                  <li><a id="tab_31" href="#sys_bked_const"><span class="label label-danger">const.py</span></a></li>
-                  <li><a id="tab_32" href="#sys_bked_config"><span class="label label-danger">config.py</span></a></li>
-                  <li><a id="tab_33" href="#sys_bked_helper"><span class="label label-danger">helper.py</span></a></li>
-                  <li>
-                    <a id="tab_34" href="#sys_bked_prm"><b><span class="label label-danger">primerize.py</span></b></a>
-                    <ul>
-                      <li><a id="tab_342" href="#sys_bked_prm_1d"><span class="label label-warning">design_primers()</span></a></li>
-                      <li><a id="tab_341" href="#sys_bked_prm">...</a></li>
-                    </ul>
-                  </li>
-                  <li><a id="tab_35" href="#sys_bked_runserver"><b><span class="label label-danger">run_server.py</span></b></a></li>
-                </ul>
-            </li>
-            <li class="li-danger">
-                <a id="tab_4" href="#sys_fted">
-                  <span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Section #4: 
-                  <br/>
-                  <b>Front End</b>
-                  <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
-                </a>
-                <ul id="collapse_tab_4" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_4">
-                  <li><a id="tab_41" href="#sys_fted_html"><span class="label label-success">res/html</span></a></li>
-                  <li><a id="tab_42" href="#sys_fted_js"><span class="label label-success">res/js</span></a></li>
-                  <li><a id="tab_43" href="#sys_fted_misc"><span class="label label-success">res/css</span> & <span class="label label-success">res/images</span> &amp; <span class="label label-success">res/fonts</span></a></li>
-                  <li><a id="tab_44" href="#sys_fted_src"><span class="label label-primary">src</span></a></li>
-                </ul>
-            </li>
-            <li class="li-default">
-                <a id="tab_5" href="#sys_misc">
-                  <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Section #5: 
-                  <br/>
-                  <b>Misc</b>
-                  <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_5" aria-expanded="true" aria-controls="collapse_tab_5"></span>
-                </a>
-                <ul id="collapse_tab_5" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_5">
-                  <li><a id="tab_51" href="#sys_misc_aws"><span class="glyphicon glyphicon-text-background"></span>&nbsp;&nbsp;AWS Setup</a></li>
-                  <li><a id="tab_52" href="#sys_misc_ga"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;Google Analytics</a></li>
-                  <li><a id="tab_53" href="#sys_misc_repo"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Git Repositories</a></li>
-                  <li><a id="tab_54" href="#sys_misc_run"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Run Server</a></li>
-                  <li><a id="tab_55" href="#sys_misc_misc"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Misc Setup</a></li>
-                </ul>
-
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" id="main">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="jumbotron">
         <div class="container">
           <h1>Primerize Admin Page</h1>
@@ -93,6 +16,92 @@
           <h5>by <i>t47</i>, May 2015</h5>
         </div>
       </div>
+    </div>
+  </div>
+
+  <hr/>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs" id="side">
+      <div id="side_con">
+        <div class="panel panel-success" id="sidebar" >
+          <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;Sections</h3>
+          </div>
+          <div class="panel-body scroll_nav">
+            <ul class="nav" role="tablist" id="scroll_nav">
+              <li class="li-success">
+                  <a id="tab_1" href="#sys_stat">
+                    <span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;Section #1: 
+                    <br/>
+                    <b>System Status</b>
+                  </a>
+              </li>
+              <li class="li-warning">
+                  <a id="tab_2" href="#sys_ovw">
+                    <span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;Section #2: 
+                    <br/>
+                    <b>Overview</b>
+                  </a>
+              </li>
+              <li class="li-primary">
+                  <a id="tab_3" href="#sys_bked">
+                    <span class="glyphicon glyphicon-hdd"></span>&nbsp;&nbsp;Section #3: 
+                    <br/>
+                    <b>Back End</b>
+                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_3" aria-expanded="true" aria-controls="collapse_tab_3"></span>
+                  </a>
+                  <ul id="collapse_tab_3" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_3">
+                    <li><a id="tab_31" href="#sys_bked_const"><span class="label label-danger">const.py</span></a></li>
+                    <li><a id="tab_32" href="#sys_bked_config"><span class="label label-danger">config.py</span></a></li>
+                    <li><a id="tab_33" href="#sys_bked_helper"><span class="label label-danger">helper.py</span></a></li>
+                    <li>
+                      <a id="tab_34" href="#sys_bked_prm"><b><span class="label label-danger">primerize.py</span></b></a>
+                      <ul>
+                        <li><a id="tab_342" href="#sys_bked_prm_1d"><span class="label label-warning">design_primers()</span></a></li>
+                        <li><a id="tab_341" href="#sys_bked_prm">...</a></li>
+                      </ul>
+                    </li>
+                    <li><a id="tab_35" href="#sys_bked_runserver"><b><span class="label label-danger">run_server.py</span></b></a></li>
+                  </ul>
+              </li>
+              <li class="li-danger">
+                  <a id="tab_4" href="#sys_fted">
+                    <span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Section #4: 
+                    <br/>
+                    <b>Front End</b>
+                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_4" aria-expanded="true" aria-controls="collapse_tab_4"></span>
+                  </a>
+                  <ul id="collapse_tab_4" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_4">
+                    <li><a id="tab_41" href="#sys_fted_html"><span class="label label-success">res/html</span></a></li>
+                    <li><a id="tab_42" href="#sys_fted_js"><span class="label label-success">res/js</span></a></li>
+                    <li><a id="tab_43" href="#sys_fted_misc"><span class="label label-success">res/css</span> & <span class="label label-success">res/images</span> &amp; <span class="label label-success">res/fonts</span></a></li>
+                    <li><a id="tab_44" href="#sys_fted_src"><span class="label label-primary">src</span></a></li>
+                  </ul>
+              </li>
+              <li class="li-default">
+                  <a id="tab_5" href="#sys_misc">
+                    <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Section #5: 
+                    <br/>
+                    <b>Misc</b>
+                    <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_5" aria-expanded="true" aria-controls="collapse_tab_5"></span>
+                  </a>
+                  <ul id="collapse_tab_5" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_5">
+                    <li><a id="tab_51" href="#sys_misc_aws"><span class="glyphicon glyphicon-text-background"></span>&nbsp;&nbsp;AWS Setup</a></li>
+                    <li><a id="tab_52" href="#sys_misc_ga"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;Google Analytics</a></li>
+                    <li><a id="tab_53" href="#sys_misc_repo"><span class="glyphicon glyphicon-download-alt"></span>&nbsp;&nbsp;Git Repositories</a></li>
+                    <li><a id="tab_54" href="#sys_misc_run"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;&nbsp;Run Server</a></li>
+                    <li><a id="tab_55" href="#sys_misc_misc"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Misc Setup</a></li>
+                  </ul>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="pull-right col-lg-9 col-md-9 col-sm-12 col-xs-12" id="main">
       <div class="container-fluid li-success" role="main">
         <div class="panel-success" id="sys_stat">
           <div class="panel-heading">
@@ -786,14 +795,4 @@ alias upd_c='sudo apt-get autoclean && sudo apt-get clean && sudo apt-get autore
   </a>
 
 </div>
-{% endblock %}
-
-{% block extrajs %}
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("ul.breadcrumb").append('<li class="active"><span style="color: #000;" class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;CherryPy (Obsolete)</li>');
-      $("#nav_toggle").trigger("click");
-    });
-  </script>
-  <script type="text/javascript" src="/site_media/js/admin/{{DEBUG_DIR}}doc_cherrypy{{DEBUG_STR}}.js"></script>
 {% endblock %}

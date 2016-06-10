@@ -12,7 +12,7 @@
             <h4 class="italic-title"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;{% trans 'Directory Status' %}</h4>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <a href="/admin/backup_stat/" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Refresh</a>
+            <a href="/admin/stat/backup/refresh/" class="btn btn-warning pull-right" id="btn_backup_stat"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Refresh</a>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
         <h4 class="italic-title">
           <div class="sprite i_21"><i class="i_gdrive"></i></div>&nbsp;&nbsp;{% trans 'Google Drive' %}
           <span class="pull-right">
-            <a href="http://drive.google.com" target="_blank" class="btn btn-warning">
+            <a href="http://drive.google.com/" target="_blank" class="btn btn-warning">
               <div class="sprite i_14"><i class="i_gdrive_o"></i></div>&nbsp;&nbsp;Google Drive
             </a>
           </span>
@@ -206,7 +206,7 @@
             </div>
             <div class="row" style="padding:10px">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <button type="submit" class="btn btn-info btn-block"/><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;Save</button>
+                <button type="submit" class="btn btn-info btn-block"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;Save</button>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <button type="button" class="btn btn-default btn-block" onclick="location.href='/admin/backup/'"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;&nbsp;Reset</button>
@@ -221,10 +221,10 @@
           <p><b>Note</b>: This may take 1-2 minutes to complete.</p>
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <a href="/admin/backup_now/" class="btn btn-danger btn-block"/><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Backup Now</a>
+              <a href="/admin/cmd/backup/" class="btn btn-danger btn-block" id="btn_backup_now"><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Backup Now</a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <a href="/admin/upload_now/" class="btn btn-blue btn-block"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Upload Now</a>
+              <a href="/admin/cmd/upload/" class="btn btn-blue btn-block" id="btn_upload_now"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Upload Now</a>
             </div>
           </div>
         </div>
@@ -280,25 +280,24 @@
 
 
 {% block extrajs %}
-  <script type="text/javascript" src="/site_media/js/admin/{{DEBUG_DIR}}backup{{DEBUG_STR}}.js"></script>
   <script type="text/javascript">
-    $(document).ready(function() {
-      $("ul.breadcrumb").append('<li class="active"><span style="color: #000;" class="glyphicon glyphicon-floppy-open"></span>&nbsp;&nbsp;Backup Schedule</li>');
+    head.ready("bootstrap.min.js", function() {
+      $(document).ready(function() {
+        $("#modal_keep_backup").html('Keep <span class="label label-orange">' + $("#id_keep_backup").val() + '</span> Days');
+        $("#modal_keep_job").html('Keep <span class="label label-orange">' + $("#id_keep_job").val() + '</span> Months');
 
-      $("#modal_keep_backup").html('Keep <span class="label label-orange">' + $("#id_keep_backup").val() + '</span> Days');
-      $("#modal_keep_job").html('Keep <span class="label label-orange">' + $("#id_keep_job").val() + '</span> Months');
+        {% if flag != -1 %}
+          {% if flag == 1 %}
+            $("div.modal-body > h2 > span.label").removeClass("label-default").addClass("label-danger");
+            $("div.modal-body > h2 > span.label").html("SETTINGS NOT APPLIED");
+          {% else %}
+            $("div.modal-body > h2 > span.label").removeClass("label-default").addClass("label-success");
+            $("div.modal-body > h2 > span.label").html("NEW SETTINGS APPLIED");
+          {% endif %}
 
-      {% if flag != -1 %}
-        {% if flag == 1 %}
-          $("div.modal-body > h2 > span.label").removeClass("label-default").addClass("label-danger");
-          $("div.modal-body > h2 > span.label").html("SETTINGS NOT APPLIED");
-        {% else %}
-          $("div.modal-body > h2 > span.label").removeClass("label-default").addClass("label-success");
-          $("div.modal-body > h2 > span.label").html("NEW SETTINGS APPLIED");
+          $("#modal").modal("show");
         {% endif %}
-
-        $("#modal").modal("show");
-      {% endif %}
+      });
     });
   </script>
 {% endblock %}

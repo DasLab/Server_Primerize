@@ -23,4 +23,4 @@
             return false;
         });
     });
-})(django.jQuery);
+})($);

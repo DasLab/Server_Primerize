@@ -21,7 +21,7 @@ function size(){
   $('#main').height($(window).height()-47);
   $('#left').height($(window).height()-69);
   $('#right').height($(window).height()-69);
-  $('#content').height($(window).height()-122);
+  $('#content-dir').height($(window).height()-122);
 }
 
 function onload(){
@@ -123,17 +123,17 @@ function show_files(id)
             if (a.toLowerCase() > b.toLowerCase()) return 1;
             return 0;
           });
-  $('#content').html('');
+  $('#content-dir').html('');
   for(d in dirs)
   {
-    $('#content').append("<div class='col-md-3' title='"+dirs[d]['name']+"'"+
+    $('#content-dir').append("<div class='col-md-3' title='"+dirs[d]['name']+"'"+
        "onmousedown='rightclick_handle(event,\""+dirs[d]['id']+"\",\"dir\");' ondblclick=\"show_files("+dirs[d]['id']+")\"><div class='thumbnail'>"+
        "<img src='/site_media/admin/img/filemanager/folder.png'/>"+
        "<div class='caption'><p class='text-center' style='word-wrap: break-word; font-weight: bold;'>"+dirs[d]['name']+"</p></div></div></div>\n");
   }
   for(f in files)
   { var ext = files[f].split('.')[(files[f].split('.').length-1)];
-    $('#content').append("<div class='col-md-3' title='"+files[f]+"'"+
+    $('#content-dir').append("<div class='col-md-3' title='"+files[f]+"'"+
        "onmousedown='rightclick_handle(event,\""+files[f]+"\",\"file\");'><div class='thumbnail'>"+
        "<img src='"+get_path(id).substr(1)+files[f]+"'/>"+
        "<div class='caption'><p class='text-center' style='word-wrap: break-word;'>"+files[f]+"</p></div></div></div>\n");

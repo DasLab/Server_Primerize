@@ -141,4 +141,4 @@
 		allToggle: "#action-toggle",
 		selectedClass: "selected"
 	};
-})(django.jQuery);
+})($);

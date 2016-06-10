@@ -327,12 +327,3 @@
   </a>
 </div>
 {% endblock %}
-
-{% block extrajs %}
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("ul.breadcrumb").append('<li class="active"><span style="color: #000;" class="glyphicon glyphicon-scale"></span>&nbsp;&nbsp;Manual</li>');
-    });
-  </script>
-  <script type="text/javascript" src="/site_media/js/admin/{{DEBUG_DIR}}doc{{DEBUG_STR}}.js"></script>
-{% endblock %}

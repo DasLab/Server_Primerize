@@ -5,4 +5,5 @@
  * window.jQuery).
  */
 var django = django || {};
-django.jQuery = jQuery.noConflict(true);
+django.jQuery = $.noConflict(true);
+$ = django.jQuery;

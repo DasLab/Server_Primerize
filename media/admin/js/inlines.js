@@ -272,4 +272,4 @@
 
         return $rows;
     };
-})(django.jQuery);
+})($);

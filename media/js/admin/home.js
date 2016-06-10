@@ -1,6 +1,3 @@
-var $ = django.jQuery;
-var weekdayNames = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-
 $(document).ready(function() {
   $("ul.breadcrumb > li.active").text("System Dashboard");
 
@@ -10,7 +7,7 @@ $(document).ready(function() {
   $("lspan").remove();
 
   $.ajax({
-        url : "/admin/get_ver/",
+        url : "/admin/stat/ver/",
         dataType: "json",
         success : function (data) {
             $("#id_linux").html(data.linux);
@@ -59,8 +56,8 @@ $(document).ready(function() {
             $("#id_primerize").html(data.NA_Thermo);
         }
     });
-      $.ajax({
-        url : "/admin/get_sys/",
+    $.ajax({
+        url : "/admin/stat/sys/",
         dataType: "json",
         success : function (data) {
             var drive_used = parseFloat(data.drive[0]), drive_free = parseFloat(data.drive[1]), drive_total = parseFloat(data.drive[2]);
@@ -82,7 +79,7 @@ $(document).ready(function() {
         }
     });
     $.ajax({
-        url : "/admin/get_backup/",
+        url : "/admin/stat/backup/",
         dataType: "json",
         success : function (data) {
             $("#id_backup").html('<span style="color:#00f;">' + data.backup.all + '</span>');
@@ -90,12 +87,11 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url : "/admin/backup_form/",
+        url : "/admin/backup/form/",
         dataType: "json",
         success : function (data) {
-
-            $("#id_week_backup").html($("#id_week_backup").html() + '<br/>On <span class="label label-primary">' + data.time_backup + '</span> every <span class="label label-inverse">' + weekdayNames[data.day_backup] + '</span> (UTC)');
-            $("#id_week_upload").html($("#id_week_upload").html() + '<br/>On <span class="label label-primary">' + data.time_upload + '</span> every <span class="label label-inverse">' + weekdayNames[data.day_upload] + '</span> (UTC)');
+            $("#id_week_backup").html($("#id_week_backup").html() + '<br/>On <span class="label label-primary">' + data.time_backup + '</span> every <span class="label label-inverse">' + weekNames[data.day_backup] + '</span> (UTC)');
+            $("#id_week_upload").html($("#id_week_upload").html() + '<br/>On <span class="label label-primary">' + data.time_upload + '</span> every <span class="label label-inverse">' + weekNames[data.day_upload] + '</span> (UTC)');
 
             if (data.time_backup) {
                 $("#id_week_backup_stat").html('<p class="lead"><span class="label label-green"><span class="glyphicon glyphicon-ok-sign"></span></span></p>');
@@ -110,5 +106,11 @@ $(document).ready(function() {
         }
     });
 
+
+    $("#btn_sys_stat").on("click", function() {
+        $("#page-content-wrapper").html('');
+        $("#sidebar-wrapper").fadeOut(150);
+        $("#nav_load").fadeOut(150);
+    });
 });
 

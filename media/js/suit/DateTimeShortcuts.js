@@ -54,7 +54,6 @@
         },
         // Add a warning when the time zone in the browser and backend do not match.
         addTimezoneWarning: function(inp) {
-            var $ = django.jQuery;
             var warningClass = DateTimeShortcuts.timezoneWarningClass;
             var timezoneOffset = DateTimeShortcuts.timezoneOffset / 3600;
 
@@ -155,7 +154,7 @@
             var cancel_p = quickElement('p', clock_box);
             cancel_p.className = 'calendar-cancel';
             quickElement('a', cancel_p, gettext('Cancel'), 'href', 'javascript:DateTimeShortcuts.dismissClock(' + num + ');');
-            django.jQuery(document).bind('keyup', function(event) {
+            $(document).bind('keyup', function(event) {
                 if (event.which === 27) {
                     // ESC key closes popup
                     DateTimeShortcuts.dismissClock(num);
@@ -279,7 +278,7 @@
             var cancel_p = quickElement('p', cal_box);
             cancel_p.className = 'calendar-cancel';
             quickElement('a', cancel_p, gettext('Cancel'), 'href', 'javascript:DateTimeShortcuts.dismissCalendar(' + num + ');');
-            django.jQuery(document).bind('keyup', function(event) {
+            $(document).bind('keyup', function(event) {
                 if (event.which === 27) {
                     // ESC key closes popup
                     DateTimeShortcuts.dismissCalendar(num);

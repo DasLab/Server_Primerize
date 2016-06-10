@@ -1,16 +1,10 @@
-var $ = django.jQuery;
-var weekdayNames = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-
-$(document).ready(function() {
-    $("ul.breadcrumb > li.active").text("System Dashboard");
-
-    // $("#content").addClass("row").removeClass("row-fluid").removeClass("colM");
+if (app.page == "backup") {
     $("#content > h2.content-title").remove();
     $("span.divider").remove();
     $("lspan").remove();
 
     $.ajax({
-        url : "/admin/get_backup/",
+        url : "/admin/stat/backup/",
         dataType: "json",
         success : function (data) {
             $("#id_design_1d").html('<i>' + data['1d'][0] + '</i>');
@@ -40,7 +34,7 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url : "/admin/get_sys/",
+        url : "/admin/stat/sys/",
         dataType: "json",
         success : function (data) {
             var drive_used = parseFloat(data.drive[0]), drive_free = parseFloat(data.drive[1]), drive_total = parseFloat(data.drive[2]);
@@ -56,13 +50,13 @@ $(document).ready(function() {
         var time = $("#id_time_backup").val();
         var backup = new Date(Date.UTC(2000, 0, parseInt($("#id_day_backup").val()) + 2, time.split(':')[0], time.split(':')[1], 0));
         $("#time_backup_pdt").html(backup.toLocaleTimeString());
-        $("#day_backup_pdt").html(weekdayNames[backup.getDay()]);
+        $("#day_backup_pdt").html(weekNames[backup.getDay()]);
     });
     $("#id_time_upload, #id_day_upload").on("change", function() {
         var time = $("#id_time_upload").val();
         var backup = new Date(Date.UTC(2000, 0, parseInt($("#id_day_upload").val()) + 2, time.split(':')[0], time.split(':')[1], 0));
         $("#time_upload_pdt").html(backup.toLocaleTimeString());
-        $("#day_upload_pdt").html(weekdayNames[backup.getDay()]);
+        $("#day_upload_pdt").html(weekNames[backup.getDay()]);
     });
 
     if (!$("#id_time_backup").val() || !$("#id_day_backup").val()) {
@@ -74,10 +68,15 @@ $(document).ready(function() {
         $("#sign_sync").removeClass("glyphicon-ok-sign").addClass("glyphicon-remove-sign");
     }
 
+    $("#modal_backup").html('On <span class="label label-primary">' + $("#id_time_backup").val() + '</span> every <span class="label label-inverse">' + weekNames[$("#id_day_backup").val()] + '</span> (UTC).');
+    $("#modal_upload").html('On <span class="label label-primary">' + $("#id_time_upload").val() + '</span> every <span class="label label-inverse">' + weekNames[$("#id_day_upload").val()] + '</span> (UTC).');
+
+    $("#btn_backup_now, #btn_upload_now, #btn_backup_stat").on("click", function() {
+        $("#page-content-wrapper").html('');
+        $("#sidebar-wrapper").fadeOut(150);
+        $("#nav_load").fadeOut(150);
+    });
     $("#id_time_backup").trigger("change");
     $("#id_time_upload").trigger("change");
-    $("#modal_backup").html('On <span class="label label-primary">' + $("#id_time_backup").val() + '</span> every <span class="label label-inverse">' + weekdayNames[$("#id_day_backup").val()] + '</span> (UTC).');
-    $("#modal_upload").html('On <span class="label label-primary">' + $("#id_time_upload").val() + '</span> every <span class="label label-inverse">' + weekdayNames[$("#id_day_upload").val()] + '</span> (UTC).');
 
-});
-
+}

@@ -1087,12 +1087,3 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
   </a>
 </div>
 {% endblock %}
-
-{% block extrajs %}
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("ul.breadcrumb").append('<li class="active"><span style="color: #000;" class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;Reference</li>');
-    });
-  </script>
-  <script type="text/javascript" src="/site_media/js/admin/{{DEBUG_DIR}}doc{{DEBUG_STR}}.js"></script>
-{% endblock %}

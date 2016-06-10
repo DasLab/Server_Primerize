@@ -17,9 +17,11 @@ function resize() {
 var degree = 0;
 
 $(document).ready(function () {
-  if (side_toggle) { $("#nav_toggle").trigger("click"); }
-  resize();
-
+  setTimeout(function() {
+    if (side_toggle) { $("#nav_toggle").trigger("click"); }
+    resize();
+  }, 1000);
+  
   $('body').scrollspy({
     'target': '.scroll_nav',
     'offset': 150

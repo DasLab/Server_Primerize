@@ -81,56 +81,25 @@ admin.site.register(SourceDownloader, SourceDownloaderAdmin)
 
 ############################################################################################################################################
 
-def sys_stat(request):
-    call_command('versions')
-    return HttpResponseRedirect('/admin/')
-
-def backup_stat(request):
-    get_backup_stat()
-    return HttpResponseRedirect('/admin/backup/')
-
 def backup_form(request):
-    return HttpResponse(simplejson.dumps(get_backup_form()), content_type='application/json')
+    return HttpResponse(simplejson.dumps(get_backup_form(), sort_keys=True, indent=' ' * 4), content_type='application/json')
 
-def backup_now(request):
-    call_command('backup')
-    return backup_stat(request)
+def admin_cmd(request, keyword):
+    call_command(keyword.strip('/'))
+    return refresh_stat(request, 'backup')
 
-def upload_now(request):
-    call_command('gdrive')
-    return backup_stat(request)
-
-
-def apache_stat(request):
-    return HttpResponse(restyle_apache(), content_type='application/json')
 
 def apache(request):
     return render(request, PATH.HTML_PATH['admin_apache'], {'host_name': env('SSL_HOST')})
 
-
 def aws(request):
     return render(request, PATH.HTML_PATH['admin_aws'], {'timezone': TIME_ZONE})
-
-def aws_stat(request):
-    json = aws_stats(request)
-    if isinstance(json, HttpResponse): return json
-    return HttpResponse(json, content_type='application/json')
 
 def ga(request):
     return render(request, PATH.HTML_PATH['admin_ga'], {'ga_url': GA['LINK_URL']})
 
-def ga_stat(request):
-    json = ga_stats(request)
-    if isinstance(json, HttpResponse): return json
-    return HttpResponse(json, content_type='application/json')
-
 def git(request):
     return render(request, PATH.HTML_PATH['admin_git'], {'timezone': TIME_ZONE, 'git_repo': GIT['REPOSITORY']})
-
-def git_stat(request):
-    json = git_stats(request)
-    if isinstance(json, HttpResponse): return json
-    return HttpResponse(json, content_type='application/json')
 
 
 def backup(request):
@@ -154,46 +123,50 @@ def ref(request):
     return render(request, PATH.HTML_PATH['admin_ref'])
 
 
-def get_ver(request):
-    stats = simplejson.load(open('%s/cache/stat_ver.json' % MEDIA_ROOT, 'r'))
-    return HttpResponse(simplejson.dumps(stats, sort_keys=True, indent=' ' * 4), content_type='application/json')
+def get_stat(request, keyword):
+    if keyword == "arch":
+        return HttpResponse(''.join(open('%s/config/flow_chart.svg' % MEDIA_ROOT).readlines()), content_type='image/svg+xml')
+    json = simplejson.load(open('%s/cache/stat_%s.json' % (MEDIA_ROOT, keyword.strip('/')), 'r'))
+    return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
-def get_sys(request):
-    stats = simplejson.load(open('%s/cache/stat_sys.json' % MEDIA_ROOT, 'r'))
-    return HttpResponse(simplejson.dumps(stats, sort_keys=True, indent=' ' * 4), content_type='application/json')
+def refresh_stat(request, keyword):
+    keyword = keyword.strip('/')
+    if keyword == 'sys':
+        call_command('versions')
+        return HttpResponseRedirect('/admin/')
+    elif keyword == 'backup':
+        get_backup_stat()
+        return HttpResponseRedirect('/admin/backup/')
 
-def get_backup(request):
-    stats = simplejson.load(open('%s/cache/stat_backup.json' % MEDIA_ROOT, 'r'))
-    return HttpResponse(simplejson.dumps(stats, sort_keys=True, indent=' ' * 4), content_type='application/json')
+def get_dash(request, keyword):
+    if keyword == 'apache':
+        json = restyle_apache()
+    elif keyword == 'aws':
+        json = aws_stats(request)
+    elif keyword == 'ga':
+        json = ga_stats(request)
+    elif keyword == 'git':
+        json = git_stats(request)
 
-def get_arch(request):
-    return HttpResponse(''.join(open('%s/config/flow_chart.svg' % MEDIA_ROOT).readlines()), content_type='image/svg+xml')
+    if isinstance(json, HttpResponse): return json
+    return HttpResponse(json, content_type='application/json')
+
 
 admin.site.register_view('backup/', view=backup, visible=False)
-admin.site.register_view('backup_stat/', view=backup_stat, visible=False)
-admin.site.register_view('backup_form/', view=backup_form, visible=False)
-admin.site.register_view('backup_now/', view=backup_now, visible=False)
-admin.site.register_view('upload_now/', view=upload_now, visible=False)
+admin.site.register_view('backup/form/', view=backup_form, visible=False)
+admin.site.register_view(r'cmd/(upload|backup)/?$', view=admin_cmd, visible=False)
 
-admin.site.register_view('apache_stat/', view=apache_stat, visible=False)
 admin.site.register_view('apache/', view=apache, visible=False)
-
 admin.site.register_view('aws/', view=aws, visible=False)
-admin.site.register_view('aws_stat/', view=aws_stat, visible=False)
-
 admin.site.register_view('ga/', view=ga, visible=False)
-admin.site.register_view('ga_stat/', view=ga_stat, visible=False)
-
 admin.site.register_view('git/', view=git, visible=False)
-admin.site.register_view('git_stat/', view=git_stat, visible=False)
 
 admin.site.register_view('dir/', view=dir, visible=False)
-admin.site.register_view('doc/', view=doc, visible=False)
+admin.site.register_view('cherrypy/', view=doc, visible=False)
 admin.site.register_view('man/', view=man, visible=False)
 admin.site.register_view('ref/', view=ref, visible=False)
 
-admin.site.register_view('sys_stat/', view=sys_stat, visible=False)
-admin.site.register_view('get_ver/', view=get_ver, visible=False)
-admin.site.register_view('get_sys/', view=get_sys, visible=False)
-admin.site.register_view('get_backup/', view=get_backup, visible=False)
-admin.site.register_view('get_arch/', view=get_arch, visible=False)
+
+admin.site.register_view(r'dash/(apache|aws|ga|git)/?$', view=get_dash, visible=False)
+admin.site.register_view(r'stat/(ver|sys|backup|arch)/?$', view=get_stat, visible=False)
+admin.site.register_view(r'stat/(sys|backup)/refresh/?$', view=refresh_stat, visible=False)

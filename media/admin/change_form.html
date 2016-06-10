@@ -1,23 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static admin_modify suit_tags admin_urls %}
 
-{% block extrahead %}{{ block.super }}
-  {% url 'admin:jsi18n' as jsi18nurl %}
-  <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
-
-  {# {{ media }} #}
-
-{% endblock %}
-
-{% block extratail %}
-  <script type="text/javascript" src="/site_media/js/suit/{{DEBUG_DIR}}calendar{{DEBUG_STR}}.js"></script>
-  <script type="text/javascript" src="/site_media/js/suit/{{DEBUG_DIR}}RelatedWidgetWrapper{{DEBUG_STR}}.js"></script>
-  <script type="text/javascript" src="/site_media/js/suit/{{DEBUG_DIR}}SelectBox{{DEBUG_STR}}.js"></script>
-  <script type="text/javascript" src="/site_media/js/suit/{{DEBUG_DIR}}SelectFilter2{{DEBUG_STR}}.js"></script>
-
-{% endblock %}
-
-
 {% block extrajs %}
   {{ block.super }}
 
@@ -30,21 +13,25 @@
   {% endif %}
 
   {% if adminform.model_admin.suit_form_tabs %}
-    <script type="text/javascript">
-    (function ($) {
-      $(function () {
-        $('#suit_form_tabs').suit_form_tabs();
-      });
-    }(Suit.$))
-    </script>
+  <script type="text/javascript">
+    head.ready("jquery.min.js", function() {
+      (function ($) {
+        $(function () {
+          $('#suit_form_tabs').suit_form_tabs();
+        });
+      }($));
+    });
+  </script>
   {% endif %}
         
   <script>
-    (function ($) {
-      $(function () {
-        $("#{{ opts.module_name }}_form").suit_form_debounce();
-      });
-    }(Suit.$))    
+    head.ready("suit.min.js", function() {
+      (function ($) {
+        $(function () {
+          $("#{{ opts.module_name }}_form").suit_form_debounce();
+        });
+      }($));
+    });
   </script>
 
 {% endblock %}
@@ -180,7 +167,7 @@
           <script type="text/javascript">
             (function ($) {
               $('form#{{ opts.module_name }}_form :input[type!=button][type!=submit]:visible:enabled:first').focus();
-            })(django.jQuery);
+            })($);
           </script>
         {% endif %}
 

@@ -173,26 +173,14 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<h4><span class="label label-inverse" style="color: #ff0;">HTTP 2xx & 3xx</span></h4>
+				<h4><span class="label label-inverse" style="color: #ff0;">HTTP 2xx &amp; 3xx</span></h4>
 				<div id="plot_23xx" class="thumbnail place_holder" style="padding:0px 20px; height: 220px;"></div>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<h4><span class="label label-inverse" style="color: #ff0;">HTTP 4xx & 5xx</span></h4>
+				<h4><span class="label label-inverse" style="color: #ff0;">HTTP 4xx &amp; 5xx</span></h4>
 				<div id="plot_45xx" class="thumbnail place_holder" style="padding:0px 20px; height: 220px;"></div>
 			</div>
 		</div>
 		
 	</div>
 {% endblock %}
-
-{% block extrajs %}
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("ul.breadcrumb").append('<li class="active"><div class="sprite i_21"><i class="i_aws"></i></div>&nbsp;&nbsp;Amazon Web Services</li>');
-		});
-	</script>
-	<script type="text/javascript" src="https://www.google.com/jsapi" ></script>
-	<script type="text/javascript" src="/site_media/js/admin/{{DEBUG_DIR}}aws{{DEBUG_STR}}.js"></script>
-
-{% endblock %}
-

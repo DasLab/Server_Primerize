@@ -1,13 +1,14 @@
-var $ = django.jQuery;
-
 function get_apache_stat() {
     $.ajax({
-        url : "/admin/apache_stat/",
+        url : "/admin/dash/apache/",
         dataType: "json",
         success : function (data) {
+            // console.log(data);
+
             $("#apache_title").html(data.title);
             $("#apache_ver").html(data.ver_apache);
             $("#apache_wsgi").html(data.ver_wsgi);
+            $("#apache_webauth").html(data.ver_webauth);
             $("#apache_ssl").html(data.ver_ssl);
             $("#apache_mpm").html(data.mpm);
             $("#apache_port").html(data.port);
@@ -39,16 +40,15 @@ function get_apache_stat() {
             $("#apache_worker").html(data.worker);
 
             $("#apache_client").html(data.table);
-        },  
+        }
     });
 }
 
 $(document).ready(function() {
     $("[data-toggle='popover']").popover({trigger: "hover"});
     $("[data-toggle='tooltip']").tooltip();
-    $("ul.breadcrumb").append('<li class="active"><span style="color: #000;" class="glyphicon glyphicon-grain"></span>&nbsp;&nbsp;Apache Status</li>');
 
     get_apache_stat();
-    setInterval(get_apache_stat, 3000);
+    apache_interval = setInterval(get_apache_stat, 3000);
 });
 

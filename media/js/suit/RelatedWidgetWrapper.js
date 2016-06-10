@@ -1,4 +1,4 @@
-django.jQuery(function($){
+$(function($){
     function updateLinks() {
         var $this = $(this);
         var siblings = $this.nextAll('.change-related, .delete-related');

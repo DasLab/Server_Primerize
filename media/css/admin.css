@@ -244,7 +244,7 @@ a:hover {
 
 .place_holder {
   height: 200px;
-  background-size: 96px;
+  background-size: 72px;
   opacity: 0.5;
   background-color: #fff;
   background-repeat: no-repeat;
@@ -327,10 +327,11 @@ ul.breadcrumb > li.active {
 #wrapper {
   padding-left: 235px;
   transition: all 0.4s ease 0s;
+  z-index: 1;
   /*margin: 0px 0px;*/
 }
 #sidebar-wrapper {
-  margin-left: -250px; left: 250px;
+  left: -250px;
   width: 250px; height: 100%;
   background-color: #112539;
   position: fixed; overflow-y: auto;
@@ -343,6 +344,9 @@ ul.breadcrumb > li.active {
 }
 #content {
   padding-right: 20px;
+  opacity: 0;
+  background-color: #fff;
+  min-height: 100%;
 }
 
 .scroll_nav > ul { font-size: 12px; }
