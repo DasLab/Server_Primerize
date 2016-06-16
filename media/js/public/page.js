@@ -174,6 +174,8 @@ if (app.key == "home") {
     });
     app.fnTutorialResize();
 
+    $("[data-toggle='popover']").popover({trigger: "hover"});
+    $("[data-toggle='tooltip']").tooltip();
     $('[id^=tab_], #up').on('click', function() {
         $('html, body').stop().animate({"scrollTop": $($(this).attr("href")).offset().top - 75}, 500);
     });
@@ -286,7 +288,9 @@ if (app.key == "home") {
                             app.mod96Plate.fnDrawSinglePlate(d3.select("#svg_3d_plt_" + plt_key + "_prm_" + prm_key), data.plates[plt_key].primers[prm_key], false, function() {
                                if (plt_key == 1 && prm_key == 3) {
                                     $("#svg_3d_plt_1_prm_3 circle.seqpos_168.seqpos_173").addClass("active");
-                                    $(".svg_tooltip").html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td colspan="2"><p><span class="label label-primary">D03</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>Lib <span class="label label-warning">1</span></p></td><td><p><span class="label label-dark-blue">T</span><span class="label label-teal">168</span><span class="label label-dark-red">A</span></p></td></tr><tr><td></td><td></td><td><p><span class="label label-dark-blue">A</span><span class="label label-teal">173</span><span class="label label-dark-red">T</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td colspan="2" style="word-break:break-all"><code style="padding:0px; border-radius:0px;">TTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGG</code></td></tr></tbody></table>').css({"top": $("#svg_3d_plt_1_prm_3").offset().top + 100, "left": $("#svg_3d_plt_1_prm_3").offset().left, "opacity": 0.6});
+                                    setTimeout(function() {
+                                        $(".svg_tooltip").html('<table style="margin-top:5px;"><tbody><tr><td style="padding-right:20px;"><p><span class="label label-default">Well Position</span></p></td><td colspan="2"><p><span class="label label-primary">D03</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Name</span></p></td><td><p>Lib <span class="label label-warning">1</span></p></td><td><p><span class="label label-dark-blue">T</span><span class="label label-teal">168</span><span class="label label-dark-red">A</span></p></td></tr><tr><td></td><td></td><td><p><span class="label label-dark-blue">A</span><span class="label label-teal">173</span><span class="label label-dark-red">T</span></p></td></tr><tr><td style="padding-right:20px;"><p><span class="label label-default">Sequence</span></p></td><td colspan="2" style="word-break:break-all"><code style="padding:0px; border-radius:0px;">TTGCGGGAAAGGGGTCAACAGCCGTTCAGTACCAAGTCTCAGG</code></td></tr></tbody></table>').css({"top": $("#svg_3d_plt_1_prm_3").offset().top + 100, "left": $("#svg_3d_plt_1_prm_3").offset().left, "opacity": 0.6});
+                                    }, 200);
                                 }
                             });
                         }
