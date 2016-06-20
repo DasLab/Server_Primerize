@@ -53,7 +53,8 @@ app.modPrimerize.fnAjaxLoadHTML = function() {
       });
 
       if (app.modPrimerize.job_type !== 1) {
-        if ($("#result").html().indexOf("alert-danger") == -1) {
+        var result = $("#result").html();
+        if (result.indexOf("alert-danger") == -1 && result.indexOf("Primerize is running") == -1) {
           app.mod96Plate.fnDrawResultPlates();
         }
         if (app.modPrimerize.job_type === 3) {
@@ -91,11 +92,12 @@ app.modPrimerize.fnAjaxRefreshResult = function() {
     if (typeof result !== "undefined" && result.length && result.indexOf("Primerize is running") == -1) {
       if (app.modPrimerize.job_type !== 1 && !$("#result svg").length) { app.modPrimerize.fnAjaxLoadHTML(); }
       clearInterval(ajax_timeout);
-      if (window.history.replaceState) {
-        window.history.replaceState({} , '', '/result/?job_id=' + app.modPrimerize.job_id);
+      if (window.history.pushState) {
+        window.history.pushState(null , null, '/result/?job_id=' + app.modPrimerize.job_id);
       } else {
         window.location.href = '/result/?job_id=' + app.modPrimerize.job_id;
       }
+      window.onpopstate = function() { location.reload(); };
     } else {
       app.modPrimerize.fnAjaxLoadHTML();
     }
