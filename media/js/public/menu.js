@@ -31,8 +31,8 @@ app.fnChangeView = function() {
 };
 
 app.fnChangeLocation = function() {
-  if (window.history.replaceState) {
-      window.history.replaceState({} , '', app.href);
+  if (window.history.pushState) {
+    window.history.pushState(null , null, app.href);
   } else {
       window.location.href = app.href;
   }
@@ -80,4 +80,5 @@ $(window).on("scroll", function() {
   }, 200));
 });
 
+window.onpopstate = function() { location.reload(); };
 
