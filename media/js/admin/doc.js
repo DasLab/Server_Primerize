@@ -16,7 +16,7 @@ function resize() {
 
 var degree = 0;
 
-$(document).ready(function () {
+$(document).ready(function() {
   setTimeout(function() {
     if (side_toggle) { $("#nav_toggle").trigger("click"); }
     resize();
@@ -26,22 +26,23 @@ $(document).ready(function () {
     'target': '.scroll_nav',
     'offset': 150
   });
-  $('.scroll_nav').on('activate.bs.scrollspy', function () {
+  $('.scroll_nav').on('activate.bs.scrollspy', function() {
     $('.scroll_nav > ul > li:not(.active) > ul.panel-collapse').collapse('hide');
     $('.scroll_nav > ul > li.active > ul.panel-collapse').collapse('show');
   });
 
-  $('[id^=tab_], #top').on('click', function () {
+  $('[id^=tab_], #top').on('click', function(event) {
+    event.preventDefault();
     $('html, body').stop().animate({scrollTop: $($(this).attr("href")).offset().top - 75}, 500);
   });
   
-  $('ul.panel-collapse').on('show.bs.collapse', function () {
+  $('ul.panel-collapse').on('show.bs.collapse', function() {
     $(this).parent().find("a>span.glyphicon.pull-right")
       .removeClass("glyphicon-triangle-bottom")
       .addClass("glyphicon-triangle-top");
       
   });
-  $('ul.panel-collapse').on('hide.bs.collapse', function () {
+  $('ul.panel-collapse').on('hide.bs.collapse', function() {
     $(this).parent().find("a>span.glyphicon.pull-right")
       .removeClass("glyphicon-triangle-top")
       .addClass("glyphicon-triangle-bottom");
@@ -49,7 +50,7 @@ $(document).ready(function () {
 
 });
 
-$(window).on("scroll", function () {
+$(window).on("scroll", function() {
   clearTimeout($.data(this, 'scrollTimer'));
   $.data(this, 'scrollTimer', setTimeout(function() {
     if ($(this).scrollTop() > $(window).height() / 2) {

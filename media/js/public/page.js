@@ -176,7 +176,8 @@ if (app.key == "home") {
 
     $("[data-toggle='popover']").popover({trigger: "hover"});
     $("[data-toggle='tooltip']").tooltip();
-    $('[id^=tab_], #up').on('click', function() {
+    $('[id^=tab_], #up').on('click', function(event) {
+        event.preventDefault();
         $('html, body').stop().animate({"scrollTop": $($(this).attr("href")).offset().top - 75}, 500);
     });
 
