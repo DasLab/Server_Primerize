@@ -43,7 +43,8 @@ def design_3d_run(request):
 
         sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T')).encode('utf-8', 'ignore')
         tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
-        if not tag: tag = 'primer'
+        primers = re.sub('[^' + ''.join(SEQ['valid']) + ''.join(SEQ['valid']).lower() + '\ \,]', '', primers)
+        primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
 
         structures = re.sub('[^' + '\\'.join(STR['valid']) + '\ \,]', '', structures)
         structures = [str(s.strip()) for s in structures.split(',') if s.strip()]
@@ -54,7 +55,6 @@ def design_3d_run(request):
         if not len_str:
             msg = 'Invalid structure input (<b>ALL</b> should be the same length as sequence).'
 
-        primers = re.sub('[^' + ''.join(SEQ['valid']) + ''.join(SEQ['valid']).lower() + '\ \,]', '', primers)
         if len(sequence) < 60:
             msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
         elif len(sequence) > 1000:
@@ -66,14 +66,13 @@ def design_3d_run(request):
         if msg:
             return HttpResponse(simplejson.dumps({'error': msg, 'type': 3}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
-        primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
         if not primers:
             assembly = prm_1d.design(sequence)
             if assembly.is_success:
                 primers = assembly.primer_set
             else:
                 msg = '<b>No assembly solution</b> found for sequence input under default constraints. Please supply a working assembly scheme (primers).'
-
+        if not tag: tag = 'primer'
         if not offset: offset = 0
         (which_muts, min_muts, max_muts) = primerize.util.get_mut_range(min_muts, max_muts, offset, sequence)
         if not lib: lib = '1'

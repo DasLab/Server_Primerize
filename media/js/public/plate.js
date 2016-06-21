@@ -114,7 +114,7 @@ app.mod96Plate.fnDrawSinglePlate = function(element, data, flag, func) {
                 }
                 return label;
             }
-            return '';
+            return 'WT';
         })
         .style("fill", function(d) { return app.mod96Plate.fnGetFillColor(d); })
         .style("stroke", function(d) { return app.mod96Plate.fnGetStrokeColor(d); })
@@ -142,7 +142,7 @@ app.mod96Plate.fnDrawSinglePlate = function(element, data, flag, func) {
                                 }
                             }
                         } else {
-                            var label = ['<span class="label label-success">WT</span>'];
+                            var label_more = '', label = ['<span class="label label-success">WT</span>'];
                         }
 
                         app.mod96Plate.tooltip.transition().duration(200)
