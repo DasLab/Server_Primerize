@@ -76,12 +76,7 @@
                   <li><a id="tab_54" href="#python_config">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">config/</span></a></li>
                   <li><a id="tab_55" href="#python_data">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">data/</span></a></li>
                   <li><a id="tab_56" href="#python_dist">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">dist/</span></a></li>
-                  <li>
-                    <a id="tab_57" href="#python_media">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">media/</span></a>
-                    <ul style="padding-left:60px;">
-                      <li><a id="tab_571" href="#python_js"><span class="code code_path">media/js/</span></a></li>
-                    </ul>
-                  </li>
+                  <li><a id="tab_57" href="#python_media">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">media/</span></a></li>
                   <li>
                     <a id="tab_58" href="#python_src">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">src/</span></a>
                     <ul style="padding-left:60px;">
@@ -93,6 +88,16 @@
                   </li>
                   <li><a id="tab_59" href="#python_wrap">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">src/wrapper_?d.py</span></a></li>
                   <li><a id="tab_50" href="#man_cmd">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">src/management/commands/</span></a></li>
+                </ul>
+              </li>
+              <li class="li-orange">
+                <a id="tab_6" href="#js">
+                  <span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;Section #6: 
+                  <b>Javascript</b>
+                  <span class="glyphicon pull-right glyphicon-triangle-bottom" data-toggle="collapse" data-parent="#accordion" href="#collapse_tab_6" aria-expanded="true" aria-controls="collapse_tab_6"></span>
+                </a>
+                <ul id="collapse_tab_6" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_6">
+                  <li><a id="tab_61" href="#js_public">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Public Site</a></li>
                 </ul>
               </li>
 
@@ -120,6 +125,7 @@
                   <p>HTTP <span class="code code_method">Request</span> from internet</p>
                   <span class="glyphicon glyphicon-arrow-down"></span>
                   <p>Stanford <b>NetDB</b> alias (<span class="code code_url">primerize.stanford.edu</span>)</p>
+                  <p>(<span class="code code_url">primerize2d.stanford.edu</span>)</p>
                   <span class="glyphicon glyphicon-arrow-down"></span>
                   <p><span class="code code_brand">AWS</span> <span class="code code_misc">ELB</span> (<span class="code code_url">primerize-balancer-1516867550.us-west-2.elb.amazonaws.com</span>)</p>
                   <span class="glyphicon glyphicon-arrow-down"></span>
@@ -430,7 +436,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
               <ul>
                 <li>Install <span class="code code_misc">mod_wsgi</span> and <span class="code code_misc">mod_xsendfile</span> by <span class="code code_cmd">sudo apt-get install libapache2-mod-wsgi libapache2-mod-xsendfile</span>.</li>
-                <li>Have the following modules enabled (exactly): <span class="code code_val">access_compat</span>, <span class="code code_val">alias</span>, <span class="code code_val">auth_basic</span>, <span class="code code_val">authn_core</span>, <span class="code code_val">authn_file</span>, <span class="code code_val">authz_core</span>, <span class="code code_val">authz_groupfile</span>, <span class="code code_val">authz_host</span>, <span class="code code_val">authz_user</span>, <span class="code code_val">deflate</span>, <span class="code code_val">filter</span>, <span class="code code_val">mime</span>, <span class="code code_val">mpm_worker</span>, <span class="code code_val">negotiation</span>, <span class="code code_val">reqtimeout</span>, <span class="code code_val">setenvif</span>, <span class="code code_val">socache_shmcb</span>, <span class="code code_val">ssl</span>, <span class="code code_val">status</span>, <span class="code code_val">wsgi</span>, <span class="code code_val">xsendfile</span>.</li>
+                <li>Have the following modules enabled (exactly): <span class="code code_val">access_compat</span>, <span class="code code_val">alias</span>, <span class="code code_val">auth_basic</span>, <span class="code code_val">authn_core</span>, <span class="code code_val">authn_file</span>, <span class="code code_val">authz_core</span>, <span class="code code_val">authz_groupfile</span>, <span class="code code_val">authz_host</span>, <span class="code code_val">authz_user</span>, <span class="code code_val">deflate</span>, <span class="code code_val">expires</span>, <span class="code code_val">filter</span>, <span class="code code_val">headers</span>, <span class="code code_val">http2</span>, <span class="code code_val">mime</span>, <span class="code code_val">mpm_worker</span>, <span class="code code_val">negotiation</span>, <span class="code code_val">reqtimeout</span>, <span class="code code_val">setenvif</span>, <span class="code code_val">socache_shmcb</span>, <span class="code code_val">ssl</span>, <span class="code code_val">status</span>, <span class="code code_val">wsgi</span>, <span class="code code_val">xsendfile</span>.</li>
                 <li>Edit configuration files. It's recommend to recover and overwrite from the <span class="code code_path">backup/backup_apache.tgz</span>. These files are important: <span class="code code_path">apache.conf</span>, <span class="code code_path">deflate.conf</span>, <span class="code code_path">httpd.conf</span>, <span class="code code_path">ports.conf</span>, <span class="code code_path">sites-enabled/000-default.conf</span>.</li>
               </ul>
               <div class="row">
@@ -439,7 +445,14 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                   <table class="table table-hover">
                     <tbody>
                       <tr><td><span class="code code_path">httpd.conf</span></td><td>Defines <span class="code code_misc">worker</span> numbers, server status page access, error handling pages. Do not use <span class="code code_misc">prefork</span> with <span class="code code_misc">mod_wsgi</span>!</td></tr>
-                      <tr><td><span class="code code_path">sites-enabled/000-default.conf</span></td><td>Sets <span class="code code_misc">SSL</span>, non-HTTPS redirects, <span class="code code_misc">xsendfile</span> path for <span class="code code_url">/tools/download/package/release/</span>, <span class="code code_misc">wsgi</span> app path, directory permissions, and <span class="code code_url">/favicon.ico</span> redirect.</td></tr>
+                      <tr>
+                        <td><span class="code code_path">sites-enabled/000-default.conf</span></td>
+                        <td>
+                          Sets <span class="code code_misc">SSL</span>, non-HTTPS redirects, <span class="code code_misc">xsendfile</span> path for <span class="code code_url">/tools/download/package/release/</span>, <span class="code code_misc">wsgi</span> app path, directory permissions, and <span class="code code_url">/favicon.ico</span> redirect.
+                          <br/>
+                          Additionally, it handles requests from <span class="code code_url">primerize2d.stanford.edu</span> and redirct <b>*all</b> to <span class="code code_url">primerize.stanford.edu/primerize2d/</span>, which is a landing page for paper reviewers.
+                        </td>
+                      </tr>
                       <tr><td><span class="code code_path">password</span></td><td>Stores <span class="code code_brand">Apache</span> user logins. Currently only <span class="code code_val">daslab</span>.</td></tr>
                       <tr><td colspan="2" style="padding:0px;"></td></tr>
                     </tbody>
@@ -593,8 +606,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td><span class="code code_path">t47_dev.py</span></td><td colspan="2"><span class="code code_misc">Django</span> setting flags, isolated from all others. </td></tr>
                       <tr><td></td><td><span class="code code_key">IS_DEVEL</span></td><td><span class="code code_key">DEBUG</span> flag. Use <span class="code code_val">1</span> for test server, <span class="code code_val">0</span> for production.</td></tr>
                       <tr><td></td><td><span class="code code_key">IS_MAINTENANCE</span></td><td>Flag for temporary server downtime. Set to <span class="code code_val">1</span> for downtime, which returns <u>503</u> response to all urls.</td></tr>
-                      <tr><td></td><td><span class="code code_key">IS_SLACK</span></td><td>Flag for using <span class="code code_brand">Slack</span> for messaging. <b>No longer used</b>, moved to <span class="code code_path">config/bot.conf</span>.</td></tr>
-                      <tr><td><span class="code code_path">flow_chart.svg</span></td><td colspan="2">The architecture <span class="code code_key">SVG</span> image shown in the <a href="#django">Overview</a>. It is placed here to control access to admin only.</td></tr>
+                      <tr><td><span class="code code_path">flow_chart.svg</span></td><td colspan="2">The architecture <span class="code code_key">SVG</span> image shown in the <a href="#django">Overview</a>. It is placed here to restrict access to admin only.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
@@ -643,7 +655,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                     <tbody>
                       <tr><td><span class="code code_path">Primerize-?.?.?.zip</span></td><td><code>primerize</code> package releases named after their versions.</td></tr>
                       <tr><td><span class="code code_path">Primerize-master.zip</span></td><td>The latest master branch of the <code>primerize</code> package at <span class="code code_url">https://github.com/DasLab/Primerize/</span>.</td></tr>
-                      <tr><td><span class="code code_path">Primerize-LICENSE.md</span></td><td>The LICENSE statement from the <code>primerize</code> repository to be displayed at <span class="code code_url">/license/</span>.</td></tr>
+                      <tr><td><span class="code code_path">Primerize-LICENSE.md</span></td><td>The LICENSE statement from the <code>primerize</code> repository (master) to be displayed at <span class="code code_url">/license/</span>.</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -681,6 +693,79 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td><span class="code code_path">images/</span></td><td colspan="2">Image files. Public site images and group icons are consolidated into sprite images for fewer requests.</td></tr>
                       <tr><td></td><td><span class="code code_path">docs/</span></td><td>Images used for tutorial and protocol pages. 96-well plate images are now rendered dynamically by <span class="code code_misc">d3.js</span> using the <span class="code code_key">JSON</span> files.</td></tr>
                       <tr><td></td><td><span class="code code_path">old/</span></td><td>Previously used logos.</td></tr>
+                      <tr><td><span class="code code_path">js/</span></td><td colspan="2"><span class="code code_misc">Javascript</span> files, see <a href="#js" class="btn-spa">here</a>.</td></tr>
+                      <tr><td colspan="3" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row" id="python_src">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+              <h4><span class="code code_path">src/</span></h4>
+              <p>Contains <span class="code code_cmd">python</span> scripts for the app.</p>
+              <br/>
+              <h4 id="src_admin"><span class="code code_path">src/admin.py</span></h4>
+              <p>Handles admin related page requests and tasks.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_class">class</span></td><td>Defines admin page view (list and detail), layout and field grouping. See <a href="https://docs.djangoproject.com/en/1.9/ref/contrib/admin/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
+                      <tr><td><span class="code code_method">get_dash()</span></td><td>Retrieves analytics data for requests <span class="code code_url">/admin/dash/(apache|aws|ga|git)/</span> through <span class="code code_method">*_stats()</span> in <span class="code code_path">src/console.py</span>.</td></tr>
+                      <tr><td><span class="code code_method">get_stat()</span></td><td>Retrieves statistics for requests <span class="code code_url">/admin/stat/(ver|sys|backup|arch)/</span> through access of <span class="code code_path">cache/stat_sys.json</span>, <span class="code code_path">cache/stat_ver.json</span> and <span class="code code_path">cache/stat_backup.json</span> for <span class="code code_cmd">versions</span> and <span class="code code_cmd">backup</span> status (capacity, sizes, <i>etc.</i>) text. Neither <span class="code code_key">TXT</span> files are accessible through url. Also accesses <span class="code code_path">config/flow_chart.svg</span> for admin only.</td></tr>
+                      <tr><td><span class="code code_method">backup_form()</span></td><td>Get backup related status from <span class="code code_misc">cron</span> jobs.</td></tr>
+                      <tr><td><span class="code code_method">admin_cmd()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management commands from requests <span class="code code_url">/admin/cmd/(upload|backup)/</span> of either <span class="code code_cmd">backup</span> or <span class="code code_cmd">gdrive</span>.</td></tr>
+                      <tr>
+                        <td><span class="code code_method">refresh_stat()</span></td>
+                        <td>Kicks off <span class="code code_method">call_command()</span> for management command from requests <span class="code code_url">/admin/stat/(sys|backup|dash)/refresh/</span> of:
+                          <ul>
+                            <li><span class="code code_cmd">versions</span>;</li>
+                            <li>refresh <span class="code code_cmd">backup</span> statistics by calling <span class="code code_method">get_backup_stat()</span> from <span class="code code_path">src/console.py</span>.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr><td><span class="code code_method">backup()</span></td><td>Handles page requests of <span class="code code_url">/admin/backup/</span> page. Also takes <span class="code code_spe">POST</span> request to set configurations.</td></tr>
+                      <tr><td><span class="code code_method">dir()</span>, <span class="code code_method">man()</span>, <span class="code code_method">ref()</span>, <span class="code code_method">doc()</span></td><td>Handles page requests of <span class="code code_url">/admin/dir/</span>, <span class="code code_url">/admin/man/</span>, <span class="code code_url">/admin/ref/</span>, and <span class="code code_url">/admin/doc/</span> for <span class="code code_misc">django-filemanager</span> and documentation pages.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
+              <h4 id="src_console"><span class="code code_path">src/console.py</span></h4>
+              <p>Handles admin analytics console/dashboard data requests and error emails.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_method">send_notify_emails()</span></td><td colspan="2">Uses <span class="code code_cmd">smtp</span> email to send messages to admin about error reports.</td></tr>
+                      <tr><td><span class="code code_method">get_backup_stat()</span></td><td colspan="2">Reads sizes of folders in <span class="code code_path">data/</span> and sizes of files in <span class="code code_path">backup/</span>, and a list of <span class="code code_key">TGZ</span> files stored in <span class="code code_brand">Google Drive</span>. Text information is saved to <span class="code code_path">cache/stat_backup.json</span>.</td></tr>
+                      <tr><td><span class="code code_method">refresh_settings()</span></td><td colspan="2">Reloads <span class="code code_path">config/*.conf</span> files into current running environment. It writes to <span class="code code_class">settings._wrapped</span> to overwrite current <span class="code code_misc">Django</span> app setting.</td></tr>
+                      <tr><td><span class="code code_method">get_sys_crontab()</span>, <span class="code code_method">set_sys_crontab()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_misc">cron</span> jobs. <b>GET</b> reads from system <span class="code code_cmd">crontab -l</span> instead of <span class="code code_path">config/cron.conf</span> to reflect the current setting.</td></tr>
+                      <tr><td><span class="code code_method">get_backup_form()</span>, <span class="code code_method">set_backup_form()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_cmd">backup</span> settings. <b>GET</b> reads from system <span class="code code_method">get_sys_crontab()</span>; <b>SET</b> writes to <span class="code code_path">config/cron.conf</span>.</tr>
+                      <tr><td><span class="code code_method">restyle_apache()</span></td><td colspan="2">Parses <span class="code code_brand">Apache</span> status page (<span class="code code_url">/server-status/</span>) into a <span class="code code_key">JSON</span> object. Uses <span class="code code_misc">urllib2</span> for credential supply to <span class="code code_url">/server-status/</span>.</td></tr>
+
+                      <tr><td><span class="code code_method">aws_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/aws/</span> data query. Uses <span class="code code_misc">gviz-api.py</span> and <span class="code code_misc">boto</span>. Calls <span class="code code_method">aws_result()</span> through <span class="code code_method">aws_call()</span> for data formatting. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Query format:</td></tr>
+                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (table of basic specs on top of page), <span class="code code_val">latency</span>, <span class="code code_val">request</span>, <span class="code code_val">23xx</span> (HTTP response <u>2xx</u> and <u>3xx</u> combined), <span class="code code_val">45xx</span> (HTTP response <u>4xx</u> and <u>5xx</u> combined), <span class="code code_val">host</span>, <span class="code code_val">status</span>, <span class="code code_val">cpu</span>, <span class="code code_val">credit</span>, and <span class="code code_val">volbytes</span>.</td></tr>
+                      <tr><td></td><td><span class="code code_key">sp</span></td><td>Period; accepts <span class="code code_val">7d</span> (7 days) or <span class="code code_val">48h</span> (48 hours).</td></tr>
+                      <tr><td></td><td><span class="code code_key">tqx</span></td><td>Required by <span class="code code_brand">Google Visualization</span> API. It should has the value like <span class="code code_val">reqId:%d</span>.</tr></td>
+                      <tr><td><span class="code code_method">ga_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/ga/</span> data query. Uses <span class="code code_misc">gviz-api.py</span>. Uses <span class="code code_misc">requests</span> instead of <span class="code code_brand">Google Analytics</span> <b>OAuth</b> API for simplicity. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Makes <u>3</u> attempts if connection fails. Query format:</td></tr>
+                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (table of number ratings), <span class="code code_val">chart</span> (session plots), <span class="code code_val">pie</span> (categorical pie plots), and <span class="code code_val">geo</span> (world map of visitors).</td></tr>
+                      <tr><td></td><td><span class="code code_key">sp</span></td><td>Period or type; <span class="code code_key">qs</span>=<span class="code code_val">chart</span> accepts <span class="code code_val">24h</span>, <span class="code code_val">7d</span>, <span class="code code_val">1m</span> (1 month), or <span class="code code_val">3m</span> (3 months), while <span class="code code_key">qs</span>=<span class="code code_val">pie</span> accepts <span class="code code_val">session</span>, <span class="code code_val">user</span>, <span class="code code_val">browser</span>, or <span class="code code_val">pageview</span>.</td></tr>
+                      <tr><td></td><td><span class="code code_key">tqx</span></td><td>Same as in <span class="code code_method">aws_stats()</span>.</tr></td>
+                      <tr><td><span class="code code_method">git_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/git/</span> data query. Uses <span class="code code_misc">gviz-api.py</span> and <span class="code code_misc">PyGithub</span>. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Makes <u>3</u> attempts if connection fails. Query format:</td></tr>
+                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (table of contributors data), <span class="code code_val">num</span> (repository statistics, e.g. number of branches), <span class="code code_val">c</span> (commits calendar), <span class="code code_val">ad</span> (addition/deletion timeline), and <span class="code code_val">au</span> (author contribution pie plot).</td></tr>
+                      <tr><td></td><td><span class="code code_key">tqx</span></td><td>Same as in <span class="code code_method">aws_stats()</span>.</tr></td>
+                      <tr><td><span class="code code_method">dash_ssl()</span></td><td colspan="2">Uses <span class="code code_cmd">openssl</span> to retrieve server <span class="code code_misc">SSL Certificate</span> expiration date.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
@@ -688,6 +773,273 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
               </div>
 
+              <br/>
+              <h4 id="src_env"><span class="code code_path">src/env.py</span></h4>
+              <p>Handles <span class="code code_spe">*.conf</span> files and <span class="code code_key">HTML</span> template path.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_class">SYS_PATH</span></td><td>Collection of <span class="code code_key">HTML</span> template path and data folder path. It inherits from <span class="code code_class">Singleton</span>.</td></tr>
+                      <tr><td><span class="code code_method">reload_conf()</span></td><td>Loads <span class="code code_path">config/*.conf</span> files and save as runtime environment variables for the <span class="code code_misc">Django</span> app.</td></tr>
+                      <tr><td><span class="code code_method">error400()</span>, <span class="code code_method">error401()</span>, <span class="code code_method">error403()</span>, <span class="code code_method">error404()</span>, <span class="code code_method">error500()</span>, <span class="code code_method">error503()</span></td><td>Handlers for custom HTTP error response pages. Use <span class="code code_url">?status=false</span> to suppress the HTTP error code (returns <u>200</u> instead).</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
+              <h4 id="src_helper"><span class="code code_path">src/helper.py</span></h4>
+              <p>Collection of helper functions for <span class="code code_path">src/wrapper_?d.py</span>.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_val">prm_1d</span>, <span class="code code_val">prm_2d</span>, <span class="code code_val">prm_3d</span></td><td><code>primerize</code> constructor instances. They are constructed once and shared by <span class="code code_path">src/wrapper_?d.py</span>.</td></tr>
+                      <tr><td><span class="code code_method">is_valid_name()</span>, <span class="code code_method">is_valid_email()</span>, <span class="code code_method">is_t7_present()</span></td><td>Test functions for inputs.</td></tr>
+                      <tr><td><span class="code code_method">random_job_id()</span></td><td>Generates random <span class="code code_key">JOB_ID</span> as <mark>16-digit</mark> <u>hexadecimal</u> string. It prevents collision by querying all previous <span class="code code_key">JOB_ID</span> on record.</td></tr>
+                      <tr><td><span class="code code_method">create_res_html()</span>, <span class="code code_method">create_wait_html()</span>, <span class="code code_method">create_err_html()</span></td><td>Writes to <span class="code code_key">HTML</span> result files in <span class="code code_path">data/</span>. <span class="code code_method">create_res_html()</span> is called by the other 2 for file handling.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
+              <h4 id="src_models"><span class="code code_path">src/models.py</span></h4>
+              <p>Handles <span class="code code_brand">MySQL</span> database table schema and in-page form models.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_class">models.Model</span></td><td colspan="2">Database table schema. See <a href="https://docs.djangoproject.com/es/1.9/ref/models/fields/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>; contains <span class="code code_class">Design1D</span>, <span class="code code_class">Design2D</span>, <span class="code code_class">Design3D</span>, <span class="code code_class">JobIDs</span>, <span class="code code_class">JobGroups</span>, <span class="code code_class">HistoryItem</span>, and <span class="code code_class">SourceDownloader</span>.</td></tr>
+                      <tr><td><span class="code code_class">forms.Form</span></td><td colspan="2">Front-end in-page forms. See <a href="https://docs.djangoproject.com/en/1.9/ref/forms/fields/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
+                      <tr><td></td><td>Admin site</td><td><span class="code code_class">BackupForm</span>.</td></tr>
+                      <tr><td></td><td>Public site</td><td><span class="code code_class">Design1DForm</span>, <span class="code code_class">Design2DForm</span>, <span class="code code_class">Design3DForm</span>, and <span class="code code_class">DownloadForm</span>.</td></tr>
+                      <tr><td></td><td>Login</td><td><span class="code code_class">LoginForm</span>, <span class="code code_class">PasswordForm</span>.</td></tr>
+                      <tr><td><span class="code code_method">debug_flag()</span>, <span class="code code_method">ga_tracker()</span></td><td colspan="2">Global context processors to convey <span class="code code_key">DEBUG</span> flag and <span class="code code_brand">Google Analytics</span> tracker ID.</td></tr>
+                      <tr><td><span class="code code_method">js_ver()</span></td><td colspan="2">Global context processors for <span class="code code_misc">JavaScript</span> vendor library versions. The versions information is used to load libraries from <span class="code code_spe">CDN</span>.</td></tr>
+                      <tr><td colspan="3" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
+              <h4 id="src_settings"><span class="code code_path">src/settings.py</span></h4>
+              <p>Handles basic app settings (defined by <span class="code code_misc">Django</span>). See <a href="https://docs.djangoproject.com/en/1.9/ref/settings/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>. <b>Loading order is to avoid <span class="code code_method">import</span> loop.</b></p>
+              <ul>
+                <li><span class="code code_key">X_FRAME_OPTIONS</span> is not set to <span class="code code_val">DENY</span> due to <span class="code code_url">/admin/dir/</span> uses <code>&lt;iframe&gt;</code> of <span class="code code_url">/admin/browse/</span>.</li>
+              </ul>
+
+              <br/>
+              <h4 id="src_urls"><span class="code code_path">src/urls.py</span></h4>
+              <p>Handles url routing (defined by <span class="code code_misc">Django</span>). Uses <span class="code code_class">AdminSitePlus()</span> to override <span class="code code_class">Admin</span>. See <span class="code code_misc">django-adminplus</span> <a href=" https://github.com/jsocol/django-adminplus/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</p>
+              <ul>
+                <li>Routes <span class="code code_url">/site_media/</span> to <span class="code code_path">media/</span>, and <span class="code code_url">/site_data/</span> to <span class="code code_path">data/</span>; to prevent direct access to files from path.</li>
+                <li>Redirect old and synonym urls to current ones with <u>301</u>. Exposes custom error handler pages, as well as <span class="code code_path">robots.txt</span> as <span class="code code_url">/robots.txt</span>.</li>
+                <li>Based on <span class="code code_key">IS_MAINTENANCE</span> in <span class="code code_path">config/t47_dev.py</span>, the server can run in either <b>normal</b> mode or <b>downtime</b> mode. In <b>downtime</b> mode, all requests are responded with HTTP code <u>503</u>.</li>
+              </ul>
+
+              <br/>
+              <h4 id="src_user"><span class="code code_path">src/user.py</span></h4>
+              <p>Handles requests for user-related activity. Each handler is routed from <span class="code code_path">src/urls.py</span>, and takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_method">user_login()</span>, <span class="code code_method">user_password()</span>, <span class="code code_method">user_logout()</span></td><td>Pages related to account. Only used in <b>test server</b> due to <span class="code code_misc">WebAuth</span>. In production, the only user in system is <span class="code code_val">daslab</span>.</td></tr>
+                      <tr><td><span class="code code_method">browse()</span></td><td><span class="code code_misc">django-filemanger</span> view handler, channeled as <code>&lt;iframe&gt;</code> on <span class="code code_url">/admin/dir/</span>.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
+              <h4 id="src_views"><span class="code code_path">src/views.py</span></h4>
+              <p>Handles requests for non-admin pages. Each handler is routed from <span class="code code_path">src/urls.py</span>, and mostly takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_method">index()</span>, <span class="code code_method">tutorial()</span>, <span class="code code_method">protocol()</span>, <span class="code code_method">docs()</span>, <span class="code code_method">about()</span></td><td>Page handlers for corresponding URLs. Some pass additional information for page rendering or dynamic contents.</td></tr>
+                      <tr><td><span class="code code_method">license()</span></td><td>Handler for <span class="code code_url">/license/</span> page. Reads in <span class="code code_path">dist/Primerize-LICENSE.md</span> for display.</td></tr>
+                      <tr><td><span class="code code_method">download()</span></td><td>Handler for <span class="code code_url">/download/</span> page and form. It displays all available releases of <code>primerize</code> based on information from <span class="code code_path">cache/stat_dist.json</span>. For valid registration, it writes to a <span class="code code_class">SourceDownloader</span> entry and passes the demographic information back, which is useful for <span class="code code_method">link()</span>.</td></tr>
+                      <tr><td><span class="code code_method">link()</span></td><td>Handler for direct <code>primerize</code> code download responses. This is a mechanism for preventing direct access/exposure of <span class="code code_path">dist/Primerize-?.?.?.zip</span> files. Requests are validated against <span class="code code_class">SourceDownloader</span> records, and the <span class="code code_key">ZIP</span> file is returned only when a match is found.</td></tr>
+                      <tr><td><span class="code code_method">result()</span></td><td>Handler for result retrieval. It looks up the <span class="code code_key">JOB_ID</span> in <span class="code code_class">JobIDs</span> for a match, and responses with a page for the corresponding <span class="code code_class">Design?D</span> type. Input values of the found <span class="code code_key">JOB_ID</span> record is populated to the <span class="code code_class">form</span> as <i>initial</i> values. When <span class="code code_url">?json=true</span>, it passes to <span class="code code_method">result_json()</span> and returns <span class="code code_key">JSON</span> response.</td></tr>
+                      <tr><td><span class="code code_method">result_json()</span></td><td>Return a <span class="code code_key">JSON</span> response of a given <span class="code code_key">JOB_ID</span>. This is used by the <span class="code code_key">AJAX</span> calls for retrieving job information.</td></tr>
+                      <tr><td><span class="code code_method">ping_test()</span></td><td>Returns an empty <u>200</u> response. Used by <span class="code code_brand">AWS</span> <span class="code code_misc">ELB</span> <b>Health Check</b>.</td></tr>
+                      <tr><td><span class="code code_method">test()</span></td><td>Test handler for <b>test server</b>. Not accessible in production.</td></tr>
+                      <tr><td><span class="code code_method">get_staff()</span></td><td>Returns admin email and current user; Used by <u>403</u> error page (<span class="code code_url">/error/403/</span>).</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
+              <h4 id="src_wsgi"><span class="code code_path">src/wsgi.py</span></h4>
+              <p>Handles <span class="code code_misc">uwsgi</span> connections. <b>Do not change</b>, unless syntax changes in newer <span class="code code_misc">Django</span> releases. Called by <span class="code code_brand">Apache</span> <span class="code code_misc">mod_wsgi</span> dispatcher.</p>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row" id="python_wrap">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+              <h4><span class="code code_path">src/wrapper_?d.py</span></h4>
+              <p>Handles design run submissions.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_method">design_?d()</span></td><td>Presents the empty design page.</td></tr>
+                      <tr>
+                        <td><span class="code code_method">design_?d_run()</span></td>
+                        <td>Handles the <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> request.
+                          <ul>
+                            <li>It parses and tests the inputs, spawns a job in background using <span class="code code_class">threading.Thread</span>, and adds <span class="code code_key">JOB_ID</span> to database.</li>
+                            <li>It creates a <i>waiting</i> page <span class="code code_key">HTML</span> (<span class="code code_method">create_wait_html()</span> in <span class="code code_path">src/helper.py</span>) for display.</li>
+                            <li> A <span class="code code_key">JSON</span> response from <span class="code code_method">result_json()</span> in <span class="code code_path">src/views.py</span> is returned for page refreshing, while the threaded job runs in parallel.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr><td><span class="code code_method">demo_?d()</span></td><td>Presents the demo result page.</td></tr>
+                      <tr><td><span class="code code_method">demo_?d_run()</span></td><td>Handles the <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> request for running demo. It takes default parameter and spawns the <span class="code code_class">threading.Thread</span> job.</td></tr>
+                      <tr><td><span class="code code_method">random_?d()</span></td><td>To test for random input and remains unknown to public; not available for <span class="code code_class">Design3D</span>. It generates a random sequence first, and follow the same steps as other jobs.</td></tr>
+                      <tr>
+                        <td><span class="code code_method">design_?d_wrapper()</span></td>
+                        <td>Calls <code>primerize</code> design code and processes the result.
+                          <ul>
+                            <li>It creates a <i>error</i>, or <i>fail</i>, or <i>success</i> page <span class="code code_key">HTML</span> (<span class="code code_method">create_res_html()</span> in <span class="code code_path">src/helper.py</span>) for display, overwriting the previous <i>waiting</i> page.</li>
+                            <li>It renders a graphical <span class="code code_key">HTML</span> result page by parsing the result instance from <code>primerize</code>.</li>
+                            <li>It updates the <span class="code code_key">JOB_ID</span> entry in <span class="code code_brand">MySQL</span> of its <span class="code code_key">status</span>, <span class="code code_key">time</span> and results.</li>
+                          </ul>
+                          For <span class="code code_class">Design2D</span> and <span class="code code_class">Design3D</span>:
+                          <ul>
+                            <li>The result folder is zipped using <span class="code code_misc">zipfile</span> in <span class="code code_cmd">python</span>.</li>
+                            <li>A <span class="code code_key">JSON</span> file is saved for <span class="code code_misc">d3.js</span> 96-well plate drawing. <u>Wild-Type</u> primers are overridden by color <i>green</i>.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr><td><span class="code code_method">design_?d_from_?d()</span></td><td>Like <span class="code code_url">/result/</span>, it pre-fills the form with previous inputs, and redirects to <span class="code code_method">design_?d()</span> with flag <span class="code code_key">from_?d</span> set. The <span class="code code_key">HTTP_REFERER</span> in the <span class="code code_class">request.META</span> is required to parse <span class="code code_key">JOB_ID</span>.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row" id="man_cmd">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+              <h4><span class="code code_path">src/management/commands</span></h4>
+              <p>Contains <span class="code code_misc">Django</span> management command scripts.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td><span class="code code_path">backup.py</span></td>
+                        <td>
+                          <ul>
+                            <li>Backs up <span class="code code_misc">static</span> files, <span class="code code_brand">MySQL</span>, <span class="code code_brand">Apache</span>, and local <span class="code code_path">config/</span> files into <span class="code code_path">backup/</span> folder.</li>
+                            <li>Uses <span class="code code_method">subprocess.check_call()</span> for <span class="code code_cmd">mysqldump</span>, <span class="code code_misc">tarfile</span> for creating <span class="code code_key">TGZ</span> files.</li>
+                            <li>Due to lack of permissions of <span class="code code_val">www-data</span> user to <span class="code code_path">/etc/apache2/</span>, <span class="code code_brand">Apache</span> settings are archived by a <span class="code code_misc">cron</span> job under <span class="code code_val">ubuntu</span>. </li>
+                            <li>The <span class="code code_misc">cron</span> job is triggered <u>weekly</u>. <b>Summary</b> is sent to admin after job finish either via <b>email</b>.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="code code_path">cleanup.py</span></td>
+                        <td>
+                          <ul>
+                            <li>Finds all <span class="code code_key">JOB_ID</span> records in <span class="code code_class">JobIDs</span> table that are older than <span class="code code_key">KEEP_JOB</span> months specified in <span class="code code_path">config/cron.conf</span>.</li>
+                            <li>Removes related result files in <span class="code code_path">data/</span> and deletes the <span class="code code_brand">MySQL</span> entry.</li>
+                            <li>Iterates over each file in <span class="code code_path">data/</span> and finds results that are not recorded in <span class="code code_brand">MySQL</span> (orphans), and remove the files.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="code code_path">dist.py</span></td>
+                        <td>
+                          <ul>
+                            <li>Retrieves all releases of <code>primerize</code> package, and writes versions and texts into <span class="code code_path">cache/stat_dist.json</span>.</li>
+                            <li>Downloads all release <span class="code code_key">ZIP</span> files using <span class="code code_cmd">curl</span> with <span class="code code_val">daslab-admin</span> <span class="code code_brand">GitHub</span> account credentials in <span class="code code_path">config/oauth.conf</span>. Files are saved to <span class="code code_path">dist/</span>. Releases already downloaded are skipped.</li>
+                            <li>The latest master branch is downloaded as <span class="code code_path">dist/Primerize-master.zip</span>. The <span class="code code_path">LICENSE.md</span> inside it is extracted and placed as <span class="code code_path">dist/Primerize-LICENSE.md</span>, which is used by <span class="code code_method">license()</span> in <span class="code code_path">src/views.py</span> for <span class="code code_url">/license/</span>.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="code code_path">gdrive.py</span></td>
+                        <td>
+                          <ul>
+                            <li>Uploads most recent backup onto <span class="code code_val">daslab</span> <span class="code code_brand">Google Drive</span> and cleans up obsolete backup files.</li>
+                            <li>Uses <span class="code code_method">subprocess.check_call()</span> for <span class="code code_cmd">drive</span>. Files are renamed with <u>date</u> as prefix.</li>
+                            <li>Old files are determined by their <b>last modified date</b> and removed (default <u>45</u> days).</li>
+                            <li>The <span class="code code_misc">cron</span> job is triggered <u>weekly</u>. <b>Summary</b> is sent to admin after job finish either via <b>email</b>. </li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="code code_path">restore.py</span></td>
+                        <td>
+                          <ul>
+                            <li>Restores <span class="code code_misc">static</span> files, <span class="code code_brand">MySQL</span>, <span class="code code_brand">Apache</span>, and local <span class="code code_path">config/</span> files from local <span class="code code_path">backup/</span> files.</li>
+                            <li>Uses <span class="code code_method">subprocess.check_call()</span> for <span class="code code_cmd">mysql</span>, <span class="code code_misc">tarfile</span> and <span class="code code_misc">shutil</span> for unpacking <span class="code code_key">TGZ</span> files.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="code code_path">versions.py</span></td>
+                        <td>
+                          <ul>
+                            <li>Collects system installed package versions into <span class="code code_path">cache/stat_sys.json</span> and <span class="code code_path">cache/stat_ver.json</span>.</li>
+                            <li>Uses <span class="code code_method">subprocess.Popen()</span> for <span class="code code_cmd">bash</span> commands. Some commands need to write to <span class="code code_path">cache/temp.txt</span> temporarily for output handling. Some values, e.g. <span class="code code_misc">mod_wsgi</span>, are implemented for <u>production</u> only. Commands for <b>memory</b> readings are dependent on <span class="code code_key">DEBUG</span> as well.</li>
+                            <li>Renders <span class="code code_path">cache/sys_ver.txt</span> (only in <b>production</b>) based on information in <span class="code code_path">cache/stat_ver.json</span>. It is displayed in <span class="code code_cmd">bash</span> upon login.</li>
+                            <li>Calls <span class="code code_method">get_backup_stat()</span> from <span class="code code_path">src/console.py</span> too.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <hr/>
+      <div class="container-fluid li-orange" role="main">
+        <div class="panel-orange" id="js">
+          <div class="panel-heading">
+            <span class="lead">
+              <span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#6</span>: Javascript</b>
+            </span>
+          </div>
+          <br/>
+          <div class="row" id="js_public">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
               <h4 id="python_js"><span class="code code_path">media/js/</span></h4>
               <p>Contains <span class="code code_misc">Javascript</span> files.</p>
               <div class="row">
@@ -754,331 +1106,13 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 </div>
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
               </div>
-            </div>
-          </div>
-
-          <hr/>
-          <div class="row" id="python_src">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
-              <h4><span class="code code_path">src/</span></h4>
-              <p>Contains <span class="code code_cmd">python</span> scripts for the app.</p>
-              <br/>
-              <h4 id="src_admin"><span class="code code_path">src/admin.py</span></h4>
-              <p>Handles admin related page requests and tasks.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_class">class</span></td><td>Defines admin page view (list and detail), layout and field grouping. See <a href="https://docs.djangoproject.com/en/1.9/ref/contrib/admin/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
-                      <tr><td><span class="code code_method">apache()</span>, <span class="code code_method">aws()</span>, <span class="code code_method">ga()</span>, <span class="code code_method">git()</span></td><td>Handles page requests of <span class="code code_url">/admin/apache/</span>, <span class="code code_url">/admin/aws/</span>, <span class="code code_url">/admin/ga/</span>, <span class="code code_url">/admin/git/</span>.</td></tr>
-                      <tr><td><span class="code code_method">apache_stat()</span>, <span class="code code_method">aws_stat()</span>, <span class="code code_method">ga_stat()</span>, <span class="code code_method">git_stat()</span></td><td>Retrieves analytics data through <span class="code code_method">*_stats()</span> in <span class="code code_path">src/console.py</span>.</td></tr>
-                      <tr><td><span class="code code_method">get_sys()</span>, <span class="code code_method">get_ver()</span>, <span class="code code_method">get_backup()</span></td><td>Accesses <span class="code code_path">cache/stat_sys.json</span>, <span class="code code_path">cache/stat_ver.json</span> and <span class="code code_path">cache/stat_backup.json</span> for <span class="code code_cmd">versions</span> and <span class="code code_cmd">backup</span> status (capacity, sizes, <i>etc.</i>) text. Neither <span class="code code_key">TXT</span> files are accessible through url.</td></tr>
-                      <tr><td><span class="code code_method">get_arch()</span></td><td>Accesses <span class="code code_path">config/flow_chart.svg</span> for admin only.</td></tr>
-                      <tr><td><span class="code code_method">backup_form()</span></td><td>Get backup related status from <span class="code code_misc">cron</span> jobs.</td></tr>
-                      <tr><td><span class="code code_method">backup_now()</span>, <span class="code code_method">upload_now()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management commands of either <span class="code code_cmd">backup</span> or <span class="code code_cmd">gdrive</span>.</td></tr>
-                      <tr><td><span class="code code_method">sys_stat()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management command of <span class="code code_cmd">versions</span>.</td></tr>
-                      <tr><td><span class="code code_method">ssl_dash()</span></td><td>Returns status of <span class="code code_misc">SSL Certificate</span>.</td></tr>
-                      <tr><td><span class="code code_method">backup()</span></td><td>Handles page requests of <span class="code code_url">/admin/backup/</span> page. Also takes <span class="code code_spe">POST</span> request to set configurations.</td></tr>
-                      <tr><td><span class="code code_method">dir()</span>, <span class="code code_method">man()</span>, <span class="code code_method">ref()</span>, <span class="code code_method">doc()</span></td><td>Handles page requests of <span class="code code_url">/admin/dir/</span>, <span class="code code_url">/admin/man/</span>, <span class="code code_url">/admin/ref/</span>, and <span class="code code_url">/admin/doc/</span> for <span class="code code_misc">django-filemanager</span> and documentation pages.</td></tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_console"><span class="code code_path">src/console.py</span></h4>
-              <p>Handles admin analytics console/dashboard data requests and error emails.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_method">send_notify_emails()</span></td><td colspan="2">Uses <span class="code code_cmd">smtp</span> email to send messages to admin about error reports.</td></tr>
-                      <tr><td><span class="code code_method">get_backup_stat()</span></td><td colspan="2">Reads sizes of folders in <span class="code code_path">data/</span> and sizes of files in <span class="code code_path">backup/</span>, and a list of <span class="code code_key">TGZ</span> files stored in <span class="code code_brand">Google Drive</span>. Text information is saved to <span class="code code_path">cache/stat_backup.json</span>.</td></tr>
-                      <tr><td><span class="code code_method">refresh_settings()</span></td><td colspan="2">Reloads <span class="code code_path">config/*.conf</span> files into current running environment. It writes to <span class="code code_class">settings._wrapped</span> to overwrite current <span class="code code_misc">Django</span> app setting.</td></tr>
-                      <tr><td><span class="code code_method">get_sys_crontab()</span>, <span class="code code_method">set_sys_crontab()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_misc">cron</span> jobs. <b>GET</b> reads from system <span class="code code_cmd">crontab -l</span> instead of <span class="code code_path">config/cron.conf</span> to reflect the current setting.</td></tr>
-                      <tr><td><span class="code code_method">get_backup_form()</span>, <span class="code code_method">set_backup_form()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_cmd">backup</span> settings. <b>GET</b> reads from system <span class="code code_method">get_sys_crontab()</span>; <b>SET</b> writes to <span class="code code_path">config/cron.conf</span>.</tr>
-                      <tr><td><span class="code code_method">restyle_apache()</span></td><td colspan="2">Parses <span class="code code_brand">Apache</span> status page (<span class="code code_url">/server-status/</span>) into a <span class="code code_key">JSON</span> object. Uses <span class="code code_misc">urllib2</span> for credential supply to <span class="code code_url">/server-status/</span>.</td></tr>
-
-                      <tr><td><span class="code code_method">aws_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/aws/</span> data query. Uses <span class="code code_misc">gviz-api.py</span> and <span class="code code_misc">boto</span>. Calls <span class="code code_method">aws_result()</span> through <span class="code code_method">aws_call()</span> for data formatting. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (table of basic specs on top of page), <span class="code code_val">latency</span>, <span class="code code_val">request</span>, <span class="code code_val">23xx</span> (HTTP response <u>2xx</u> and <u>3xx</u> combined), <span class="code code_val">45xx</span> (HTTP response <u>4xx</u> and <u>5xx</u> combined), <span class="code code_val">host</span>, <span class="code code_val">status</span>, <span class="code code_val">cpu</span>, <span class="code code_val">credit</span>, and <span class="code code_val">volbytes</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_key">sp</span></td><td>Period; accepts <span class="code code_val">7d</span> (7 days) or <span class="code code_val">48h</span> (48 hours).</td></tr>
-                      <tr><td></td><td><span class="code code_key">tqx</span></td><td>Required by <span class="code code_brand">Google Visualization</span> API. It should has the value like <span class="code code_val">reqId:%d</span>.</tr></td>
-                      <tr><td><span class="code code_method">ga_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/ga/</span> data query. Uses <span class="code code_misc">gviz-api.py</span>. Uses <span class="code code_misc">requests</span> instead of <span class="code code_brand">Google Analytics</span> <b>OAuth</b> API for simplicity. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Makes <u>3</u> attempts if connection fails. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (table of number ratings), <span class="code code_val">chart</span> (session plots), <span class="code code_val">pie</span> (categorical pie plots), and <span class="code code_val">geo</span> (world map of visitors).</td></tr>
-                      <tr><td></td><td><span class="code code_key">sp</span></td><td>Period or type; <span class="code code_key">qs</span>=<span class="code code_val">chart</span> accepts <span class="code code_val">24h</span>, <span class="code code_val">7d</span>, <span class="code code_val">1m</span> (1 month), or <span class="code code_val">3m</span> (3 months), while <span class="code code_key">qs</span>=<span class="code code_val">pie</span> accepts <span class="code code_val">session</span>, <span class="code code_val">user</span>, <span class="code code_val">browser</span>, or <span class="code code_val">pageview</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_key">tqx</span></td><td>Same as in <span class="code code_method">aws_stats()</span>.</tr></td>
-                      <tr><td><span class="code code_method">git_stats()</span></td><td colspan="2">Handles <span class="code code_url">/admin/git/</span> data query. Uses <span class="code code_misc">gviz-api.py</span> and <span class="code code_misc">PyGithub</span>. <span class="code code_key">qs</span>=<span class="code code_val">init</span> returns <span class="code code_key">JSON</span>, while others return <span class="code code_brand">Google Visualization</span> <span class="code code_method">ToJSONResponse()</span> object. Makes <u>3</u> attempts if connection fails. Query format:</td></tr>
-                      <tr><td></td><td><span class="code code_key">qs</span></td><td>Query string; accepts <span class="code code_val">init</span> (table of contributors data), <span class="code code_val">num</span> (repository statistics, e.g. number of branches), <span class="code code_val">c</span> (commits calendar), <span class="code code_val">ad</span> (addition/deletion timeline), and <span class="code code_val">au</span> (author contribution pie plot).</td></tr>
-                      <tr><td></td><td><span class="code code_key">tqx</span></td><td>Same as in <span class="code code_method">aws_stats()</span>.</tr></td>
-                      <tr><td><span class="code code_method">dash_ssl()</span></td><td colspan="2">Uses <span class="code code_cmd">openssl</span> to retrieve server <span class="code code_misc">SSL Certificate</span> expiration date.</td></tr>
-                      <tr><td colspan="3" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_env"><span class="code code_path">src/env.py</span></h4>
-              <p>Handles <span class="code code_spe">*.conf</span> files and <span class="code code_key">HTML</span> template path.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_class">SYS_PATH</span></td><td>Collection of <span class="code code_key">HTML</span> template path and data folder path.</td></tr>
-                      <tr><td><span class="code code_method">reload_conf()</span></td><td>Loads <span class="code code_path">config/*.conf</span> files and save as runtime environment variables for the <span class="code code_misc">Django</span> app.</td></tr>
-                      <tr><td><span class="code code_method">error400()</span>, <span class="code code_method">error401()</span>, <span class="code code_method">error403()</span>, <span class="code code_method">error404()</span>, <span class="code code_method">error500()</span>, <span class="code code_method">error503()</span></td><td>Handlers for custom HTTP error response pages. Use <span class="code code_url">?status=false</span> to suppress the HTTP error code (returns <u>200</u> instead).</td></tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_helper"><span class="code code_path">src/helper.py</span></h4>
-              <p>Collection of helper functions for <span class="code code_path">src/wrapper_?d.py</span>.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_val">prm_1d</span>, <span class="code code_val">prm_2d</span>, <span class="code code_val">prm_3d</span></td><td><code>primerize</code> constructor instances. They are constructed once and shared by <span class="code code_path">src/wrapper_?d.py</span>.</td></tr>
-                      <tr><td><span class="code code_method">is_valid_name()</span>, <span class="code code_method">is_valid_email()</span>, <span class="code code_method">is_t7_present()</span></td><td>Test functions for inputs.</td></tr>
-                      <tr><td><span class="code code_method">random_job_id()</span></td><td>Generates random <span class="code code_key">JOB_ID</span> as <mark>16-digit</mark> <u>hexadecimal</u> string. It prevents collision by querying all previous <span class="code code_key">JOB_ID</span> on record.</td></tr>
-                      <tr><td><span class="code code_method">create_res_html()</span>, <span class="code code_method">create_wait_html()</span>, <span class="code code_method">create_err_html()</span></td><td>Writes to <span class="code code_key">HTML</span> result files in <span class="code code_path">data/</span>. <span class="code code_method">create_res_html()</span> is called by the other 2 for file handling.</td></tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_models"><span class="code code_path">src/models.py</span></h4>
-              <p>Handles <span class="code code_brand">MySQL</span> database table schema and in-page form models.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_class">models.Model</span></td><td colspan="2">Database table schema. See <a href="https://docs.djangoproject.com/es/1.9/ref/models/fields/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>; contains <span class="code code_class">Design1D</span>, <span class="code code_class">Design2D</span>, <span class="code code_class">Design3D</span>, <span class="code code_class">JobIDs</span>, <span class="code code_class">JobGroups</span>, <span class="code code_class">HistoryItem</span>, and <span class="code code_class">SourceDownloader</span>.</td></tr>
-                      <tr><td><span class="code code_class">forms.Form</span></td><td colspan="2">Front-end in-page forms. See <a href="https://docs.djangoproject.com/en/1.9/ref/forms/fields/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
-                      <tr><td></td><td>Admin site</td><td><span class="code code_class">BackupForm</span>.</td></tr>
-                      <tr><td></td><td>Public site</td><td><span class="code code_class">Design1DForm</span>, <span class="code code_class">Design2DForm</span>, <span class="code code_class">Design3DForm</span>, and <span class="code code_class">DownloadForm</span>.</td></tr>
-                      <tr><td></td><td>Login</td><td><span class="code code_class">LoginForm</span>, <span class="code code_class">PasswordForm</span>.</td></tr>
-                      <tr><td><span class="code code_method">debug_flag()</span>, <span class="code code_method">ga_tracker()</span></td><td colspan="2">Global context processors to convey <span class="code code_key">DEBUG</span> flag and <span class="code code_brand">Google Analytics</span> tracker ID.</td></tr>
-                      <tr><td colspan="3" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_settings"><span class="code code_path">src/settings.py</span></h4>
-              <p>Handles basic app settings (defined by <span class="code code_misc">Django</span>). See <a href="https://docs.djangoproject.com/en/1.9/ref/settings/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>. <b>Loading order is to avoid <span class="code code_method">import</span> loop.</b></p>
-              <ul>
-                <li><span class="code code_key">X_FRAME_OPTIONS</span> is not set to <span class="code code_val">DENY</span> due to <span class="code code_url">/admin/dir/</span> uses <code>&lt;iframe&gt;</code> of <span class="code code_url">/admin/browse/</span>.</li>
-              </ul>
-
-              <br/>
-              <h4 id="src_urls"><span class="code code_path">src/urls.py</span></h4>
-              <p>Handles url routing (defined by <span class="code code_misc">Django</span>). Uses <span class="code code_class">AdminSitePlus()</span> to override <span class="code code_class">Admin</span>. See <span class="code code_misc">django-adminplus</span> <a href=" https://github.com/jsocol/django-adminplus/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</p>
-              <ul>
-                <li>Routes <span class="code code_url">/site_media/</span> to <span class="code code_path">media/</span>, and <span class="code code_url">/site_data/</span> to <span class="code code_path">data/</span>; to prevent direct access to files from path.</li>
-                <li>Redirect old and synonym urls to current ones with <u>301</u>. Exposes custom error handler pages, as well as <span class="code code_path">robots.txt</span> as <span class="code code_url">/robots.txt</span>.</li>
-                <li>Based on <span class="code code_key">IS_MAINTENANCE</span> in <span class="code code_path">config/t47_dev.py</span>, the server can run in either <b>normal</b> mode or <b>downtime</b> mode. In <b>downtime</b> mode, all requests are responded with HTTP code <u>503</u>.</li>
-              </ul>
-
-              <br/>
-              <h4 id="src_views"><span class="code code_path">src/user.py</span></h4>
-              <p>Handles responses for user-related activity. Each handler is routed from <span class="code code_path">src/urls.py</span>, and takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_method">user_login()</span>, <span class="code code_method">user_password()</span>, <span class="code code_method">user_logout()</span></td><td>Pages related to account. Only used in <b>test server</b> due to <span class="code code_misc">WebAuth</span>. In production, the only user in system is <span class="code code_val">daslab</span>.</td></tr>
-                      <tr><td><span class="code code_method">browse()</span></td><td><span class="code code_misc">django-filemanger</span> view handler, channeled as <code>&lt;iframe&gt;</code> on <span class="code code_url">/admin/dir/</span>.</td></tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_views"><span class="code code_path">src/views.py</span></h4>
-              <p>Handles responses for non-admin pages. Each handler is routed from <span class="code code_path">src/urls.py</span>, and mostly takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_method">index()</span>, <span class="code code_method">tutorial()</span>, <span class="code code_method">protocol()</span>, <span class="code code_method">docs()</span>, <span class="code code_method">about()</span></td><td>Page handlers for corresponding URLs. Some pass additional information for page rendering or dynamic contents.</td></tr>
-                      <tr><td><span class="code code_method">license()</span></td><td>Handler for <span class="code code_url">/license/</span> page. Reads in <span class="code code_path">dist/Primerize-LICENSE.md</span> for display.</td></tr>
-                      <tr><td><span class="code code_method">download()</span></td><td>Handler for <span class="code code_url">/download/</span> page and form. It displays all available releases of <code>primerize</code> based on information from <span class="code code_path">cache/stat_dist.json</span>. For valid registration, it writes to a <span class="code code_class">SourceDownloader</span> entry and passes the demographic information back, which is useful for <span class="code code_method">link()</span>.</td></tr>
-                      <tr><td><span class="code code_method">link()</span></td><td>Handler for direct <code>primerize</code> code download responses. This is a mechanism for preventing direct access/exposure of <span class="code code_path">dist/Primerize-?.?.?.zip</span> files. Requests are validated against <span class="code code_class">SourceDownloader</span> records, and the <span class="code code_key">ZIP</span> file is returned only when a match is found.</td></tr>
-                      <tr><td><span class="code code_method">result()</span></td><td>Handler for result retrieval. It looks up the <span class="code code_key">JOB_ID</span> in <span class="code code_class">JobIDs</span> for a match, and responses with a page for the corresponding <span class="code code_class">Design?D</span> type. Input values of the found <span class="code code_key">JOB_ID</span> record is populated to the <span class="code code_class">form</span> as <i>initial</i> values.</td></tr>
-                      <tr><td><span class="code code_method">ping_test()</span></td><td>Returns an empty <u>200</u> response. Used by <span class="code code_brand">AWS</span> <span class="code code_misc">ELB</span> <b>Health Check</b>.</td></tr>
-                      <tr><td><span class="code code_method">test()</span></td><td>Test handler for <b>test server</b>. Not accessible in production.</td></tr>
-                      <tr><td><span class="code code_method">get_admin()</span>, <span class="code code_method">get_user()</span></td><td>Used by <u>403</u> error page only (<span class="code code_url">/error/403/</span>).</td></tr>
-                      <tr><td><span class="code code_method">get_js()</span></td><td>Used by <span class="code code_path">media/js/admin/load.js</span>. Reads <span class="code code_path">cache/stat_ver.json</span> and returns core <span class="code code_key">JS</span> vendor library versions. The versions information is used to load libraries from <span class="code code_spe">CDN</span>.</td></tr>
-                      <tr><td><span class="code code_method">get_ver()</span></td><td>Used by <span class="code code_url">/</span> and <span class="code code_url">/docs/</span> to retrieve current running version <code>primerize</code>.</td></tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-
-              <br/>
-              <h4 id="src_wsgi"><span class="code code_path">src/wsgi.py</span></h4>
-              <p>Handles <span class="code code_misc">uwsgi</span> connections. <b>Do not change</b>, unless syntax changes in newer <span class="code code_misc">Django</span> releases. Called by <span class="code code_brand">Apache</span> <span class="code code_misc">mod_wsgi</span> dispatcher.</p>
-            </div>
-          </div>
-
-          <hr/>
-          <div class="row" id="python_wrap">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
-              <h4><span class="code code_path">src/wrapper_?d.py</span></h4>
-              <p>Handles design run submissions.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr><td><span class="code code_method">design_?d()</span></td><td>Presents the empty design page.</td></tr>
-                      <tr>
-                        <td><span class="code code_method">design_?d_run()</span></td>
-                        <td>Handles the <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> request.
-                          <ul>
-                            <li>It parses and tests the inputs, spawns a job in background using <span class="code code_class">threading.Thread</span>, and adds <span class="code code_key">JOB_ID</span> to database.</li>
-                            <li>It creates a <i>waiting</i> page <span class="code code_key">HTML</span> for display.</li>
-                            <li> A <span class="code code_key">JSON</span> response is returned for page refreshing, while the threaded job runs in parallel.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr><td><span class="code code_method">demo_?d()</span></td><td>Presents the demo result page.</td></tr>
-                      <tr><td><span class="code code_method">demo_?d_run()</span></td><td>Handles the <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> request for running demo. It takes default parameter and spawns the <span class="code code_class">threading.Thread</span> job.</td></tr>
-                      <tr><td><span class="code code_method">random_?d()</span></td><td>is to test for random input and remains unknown to public. It generates a random sequence first, and follow the same steps as other jobs.</td></tr>
-                      <tr>
-                        <td><span class="code code_method">design_?d_wrapper()</span></td>
-                        <td>Calls <code>primerize</code> design code and processes the result.
-                          <ul>
-                            <li>It creates a <i>error</i>, or <i>fail</i>, or <i>success</i> page <span class="code code_key">HTML</span> for display, overwriting the previous <i>waiting</i> page.</li>
-                            <li>It renders a graphical <span class="code code_key">HTML</span> result page by parsing the result instance from <code>primerize</code>.</li>
-                            <li>It updates the <span class="code code_key">JOB_ID</span> entry in <span class="code code_brand">MySQL</span> of its <span class="code code_key">status</span>, <span class="code code_key">time</span> and results.</li>
-                          </ul>
-                          For <mark>2D</mark> and <mark>3D</mark>:
-                          <ul>
-                            <li>The result folder is zipped using <span class="code code_misc">zipfile</span> in <span class="code code_cmd">python</span>.</li>
-                            <li>A <span class="code code_key">JSON</span> file is saved for <span class="code code_misc">d3.js</span> 96-well plate drawing. <u>Wild-Type</u> primers are overridden by color <i>green</i>.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr><td><span class="code code_method">design_?d_from_?d()</span></td><td>Like <span class="code code_url">/result/</span>, it pre-fills the form with previous inputs, and redirects to <span class="code code_method">design_?d()</span> with flag <span class="code code_key">from_?d</span> set. The <span class="code code_key">HTTP_REFERER</span> in the <span class="code code_class">request.META</span> is required to parse <span class="code code_key">JOB_ID</span>.</td></tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
 
             </div>
           </div>
-
-          <hr/>
-          <div class="row" id="man_cmd">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
-              <h4><span class="code code_path">src/management/commands</span></h4>
-              <p>Contains <span class="code code_misc">Django</span> management command scripts.</p>
-              <div class="row">
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-                  <table class="table table-hover">
-                    <tbody>
-                      <tr>
-                        <td><span class="code code_path">backup.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Backs up <span class="code code_misc">static</span> files, <span class="code code_brand">MySQL</span>, <span class="code code_brand">Apache</span>, and local <span class="code code_path">config/</span> files into <span class="code code_path">backup/</span> folder.</li>
-                            <li>Uses <span class="code code_method">subprocess.check_call()</span> for <span class="code code_cmd">mysqldump</span>, <span class="code code_misc">tarfile</span> for creating <span class="code code_key">TGZ</span> files.</li>
-                            <li>Due to lack of permissions of <span class="code code_val">www-data</span> user to <span class="code code_path">/etc/apache2/</span>, <span class="code code_brand">Apache</span> settings are archived by a <span class="code code_misc">cron</span> job under <span class="code code_val">ubuntu</span>. </li>
-                            <li>The <span class="code code_misc">cron</span> job is triggered <u>weekly</u>. <b>Summary</b> is sent to admin after job finish either via <b>email</b> or <span class="code code_brand">Slack</span>. </li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">cleanup.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Finds all <span class="code code_key">JOB_ID</span> records in <span class="code code_class">JobIDs</span> table that are older than <span class="code code_key">KEEP_JOB</span> months specified in <span class="code code_path">config/cron.conf</span>.</li>
-                            <li>Removes related result files in <span class="code code_path">data/</span> and deletes the <span class="code code_brand">MySQL</span> entry.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">dist.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Retrieves all releases of <code>primerize</code> package, and writes versions and texts into <span class="code code_path">cache/stat_dist.json</span>.</li>
-                            <li>Downloads all release <span class="code code_key">ZIP</span> files using <span class="code code_cmd">curl</span> with <span class="code code_val">daslab-admin</span> <span class="code code_brand">GitHub</span> account credentials in <span class="code code_path">config/oauth.conf</span>. Files are saved to <span class="code code_path">dist/</span>. Releases already downloaded are skipped.</li>
-                            <li>The latest master branch is downloaded as <span class="code code_path">dist/Primerize-master.zip</span>. The <span class="code code_path">LICENSE.md</span> inside it is extracted and placed as <span class="code code_path">dist/Primerize-LICENSE.md</span>, which is used by <span class="code code_method">license()</span> in <span class="code code_path">src/views.py</span> for <span class="code code_url">/license/</span>.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">gdrive.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Uploads most recent backup onto <span class="code code_val">daslab</span> <span class="code code_brand">Google Drive</span> and cleans up obsolete backup files.</li>
-                            <li>Uses <span class="code code_method">subprocess.check_call()</span> for <span class="code code_cmd">drive</span>. Files are renamed with <u>date</u> as prefix.</li>
-                            <li>Old files are determined by their <b>last modified date</b> and removed (default <u>45</u> days).</li>
-                            <li>The <span class="code code_misc">cron</span> job is triggered <u>weekly</u>. <b>Summary</b> is sent to admin after job finish either via <b>email</b> or <span class="code code_brand">Slack</span>. </li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">restore.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Restores <span class="code code_misc">static</span> files, <span class="code code_brand">MySQL</span>, <span class="code code_brand">Apache</span>, and local <span class="code code_path">config/</span> files from local <span class="code code_path">backup/</span> files.</li>
-                            <li>Uses <span class="code code_method">subprocess.check_call()</span> for <span class="code code_cmd">mysql</span>, <span class="code code_misc">tarfile</span> and <span class="code code_misc">shutil</span> for unpacking <span class="code code_key">TGZ</span> files.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="code code_path">versions.py</span></td>
-                        <td>
-                          <ul>
-                            <li>Collects system installed package versions into <span class="code code_path">cache/stat_sys.json</span> and <span class="code code_path">cache/stat_ver.json</span>.</li>
-                            <li>Uses <span class="code code_method">subprocess.Popen()</span> for <span class="code code_cmd">bash</span> commands. Some commands need to write to <span class="code code_path">cache/temp.txt</span> temporarily for output handling. Some values, e.g. <span class="code code_misc">mod_wsgi</span>, are implemented for <u>production</u> only. Commands for <b>memory</b> readings are dependent on <span class="code code_key">DEBUG</span> as well.</li>
-                            <li>Renders <span class="code code_path">cache/sys_ver.txt</span> (only in <b>production</b>) based on information in <span class="code code_path">cache/stat_ver.json</span>. It is displayed in <span class="code code_cmd">bash</span> upon login.</li>
-                            <li>Calls <span class="code code_method">get_backup_stat()</span> from <span class="code code_path">src/console.py</span> too.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr><td colspan="2" style="padding:0px;"></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-              </div>
-            </div>
-          </div>
-
-
         </div>
       </div>
-    </div>
 
+    </div>
 
   </div>
 

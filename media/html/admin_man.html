@@ -185,8 +185,8 @@
               <h4><span class="glyphicon glyphicon-hdd"></span>&nbsp;&nbsp;Server Monitoring</h4>
               <ul>
                 <li>Most of analytics, inclduing <span class="code code_brand">Apache</span>, <span class="code code_brand">AWS</span>, <span class="code code_brand">Google Analytics</span> and <span class="code code_brand">GitHub</span>, are available in admin console. No need to login at vendors to see statistics. Alternatively, you can login at vendor's using <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span> account.</li>
-                <li>For server package upgrade, run <span class="code code_cmd">upd</span>, which is a shortcut that updates both <span class="code code_cmd">apt-get</span> and <span class="code code_cmd">pip</span>. Afterwards, make sure <span class="code code_bran">Apache</span> is running with <span class="code code_misc">worker</span>, NOT <span class="code code_misc">prefork</span>!</li>
-                <li>To restart the server, use <span class="code code_cmd">sudo reboot</span>.</li>
+                <li>For server package upgrade, run <span class="code code_cmd">upd</span>, which is a shortcut that updates both <span class="code code_cmd">apt-get</span> and <span class="code code_cmd">pip</span>. Afterwards, make sure <span class="code code_brand">Apache</span> is running with <span class="code code_misc">worker</span>, NOT <span class="code code_misc">prefork</span>!</li>
+                <li>To restart the server, <span class="code code_cmd">swap_off</span> first and use <span class="code code_cmd">sudo reboot</span>.</li>
                 <li>Turn on <span class="code code_cmd">swap</span> to expand the instance's memory, use command <span class="code code_cmd">swap_on</span>. This is <b>important</b> since <code>primerize</code> 1D design takes more than 1G of memory for slightly larger jobs. The 1G memory from <span class="code code_brand">AWS</span> <span class="code code_misc">EC2</span> instance is not enough! Use <span class="code code_cmd">htop</span> to monitor memory usage.</li>
               </ul>
             </div>
@@ -214,6 +214,7 @@
               <br/>
               <p>When making changes to <span class="code code_misc">static</span> assets, including <span class="code code_spe">*.html</span>, <span class="code code_spe">*.css</span>, <span class="code code_spe">*.js</span>, <span class="code code_misc">images/pdf</span> files, as well as <span class="code code_brand">MySQL</span> database, you don't need to restart <span class="code code_brand">Apache</span>. Changes will be reflected upon browser refresh (sometimes browser cache may delay it).</p>
               <p>In contrary, when making changes to <span class="code code_misc">script</span> files, including <span class="code code_spe">*.py</span>, <span class="code code_spe">*.conf</span>, <span class="code code_spe">*.sh</span>, as well as <span class="code code_brand">Apache</span> settings, you have to restart <span class="code code_brand">Apache</span> to reflect changes. A quick way to do so is running <span class="code code_cmd">a2rs</span>, which is an alias for <span class="code code_cmd">sudo apache2ctl restart</span>.</p>
+              <p>In addition, changes to the <code>primerize</code> package requires <b>reinstalling</b> of <code>primerize</code> and <span class="code code_brand">Apache</span> restart. To do so, run <span class="code code_cmd">cd ~/NA_Thermo && sudo -H python setup.py install</span>.</p>
               <br/>
               <p><b>Server Downtime</b></p>
               <p>To mark the server as temporarily unavailable, change <span class="code code_key">IS_MAINTENANCE</span> to <span class="code code_val">true</span> in <span class="code code_path">config/t47_dev.py</span>. The server will still be running, but only returns status <u>503</u> for any requests.</p>
@@ -258,6 +259,7 @@
                       <tr><td><span class="code code_misc">Django</span> and <span class="code code_misc">cron</span> log</td><td><span class="code code_path">cache/</span></td></tr>
                       <tr><td><span class="code code_misc">static</span> files</td><td><span class="code code_path">data/</span></td></tr>
                       <tr><td><code>primerize</code> package distribution</td><td><span class="code code_path">dist/</span></td></tr>
+                      <tr><td><code>primerize</code> installation</td><td><span class="code code_path">/home/ubuntu/NA_Thermo/</span></td></tr>
                       <tr><td>Secret / configurations</td><td><span class="code code_path">config/</span></td></1tr>
                       <tr><td colspan="2" style="padding:0px;"></td></tr>
                     </tbody>
