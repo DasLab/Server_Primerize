@@ -33,7 +33,7 @@ app.fnTutorialResize = function() {
         $("#side_con").removeClass("container");
 
         if ($("#navbar").width() >= 1680) {
-            $("#sidebar").css("width", ($("#navbar").width() - $("#main").width())/2 - 25);
+            $("#sidebar").css("width", ($("#navbar").width() - $("#main").width()) / 2 - 25);
             // $("#side").css("padding-right","0px");
             // $("#side_con").css("padding-right","0px");
             $("#main").removeClass("pull-right").addClass("row");

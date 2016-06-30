@@ -19,7 +19,7 @@
         $(function () {
           $('#suit_form_tabs').suit_form_tabs();
         });
-      }($));
+      }(window.$));
     });
   </script>
   {% endif %}
@@ -30,7 +30,7 @@
         $(function () {
           $("#{{ opts.module_name }}_form").suit_form_debounce();
         });
-      }($));
+      }(window.$));
     });
   </script>
 
@@ -168,7 +168,7 @@
             head.ready("suit.min.js", function() {
               (function ($) {
                 $('form#{{ opts.module_name }}_form :input[type!=button][type!=submit]:visible:enabled:first').focus();
-              })($);
+              })(window.$);
             });
           </script>
         {% endif %}

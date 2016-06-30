@@ -158,20 +158,6 @@ app.modPrimerize.fnOnDisable = function() {
 };
 
 
-app.modPrimerize.fnTrackPrimerList = function() {
-  var value = '';
-  $("input.primer_input").each(function() {
-    var l = $(this).val().length;
-    $(this).next().children().children().children().text(l);
-
-    var val = $(this).val().match(/[ACGTUacgtu]+/g);
-    if (val) { $(this).val(val.join('')); }
-    value += $(this).val() + ',';
-  });
-  value = value.substring(0, value.length - 1);
-  $("#id_primers").val(value);
-};
-
 app.modPrimerize.fnTrackInputLength = function() {
   var val = $("#id_sequence").val().match(/[ACGTUacgtu\ \n]+/g);
   if (val) { $("#id_sequence").val(val.join('')); }
@@ -206,6 +192,20 @@ app.modPrimerize.fnTrackInputLength = function() {
       if (app.page == "design_1d") { $("#warn_500, #warn_1000").css("display", "none"); }
     }
   }
+};
+
+app.modPrimerize.fnTrackPrimerList = function() {
+  var value = '';
+  $("input.primer_input").each(function() {
+    var l = $(this).val().length;
+    $(this).next().children().children().children().text(l);
+
+    var val = $(this).val().match(/[ACGTUacgtu]+/g);
+    if (val) { $(this).val(val.join('')); }
+    value += $(this).val() + ',';
+  });
+  value = value.substring(0, value.length - 1);
+  $("#id_primers").val(value);
 };
 
 app.modPrimerize.fnSyncPrimerInput = function(data) {
