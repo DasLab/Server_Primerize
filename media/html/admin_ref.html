@@ -90,7 +90,7 @@
                   <li><a id="tab_50" href="#man_cmd">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code code_path">src/management/commands/</span></a></li>
                 </ul>
               </li>
-              <li class="li-orange">
+              <li class="li-default">
                 <a id="tab_6" href="#js">
                   <span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;Section #6: 
                   <b>Javascript</b>
@@ -98,6 +98,7 @@
                 </a>
                 <ul id="collapse_tab_6" class="panel-collapse collapse nav" role="tabpanel" aria-labelledby="collapse_tab_6">
                   <li><a id="tab_61" href="#js_public">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Public Site</a></li>
+                  <li><a id="tab_62" href="#js_admin">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tower"></span>&nbsp;&nbsp;Admin Site</a></li>
                 </ul>
               </li>
 
@@ -1030,75 +1031,24 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
       </div>
 
       <hr/>
-      <div class="container-fluid li-orange" role="main">
-        <div class="panel-orange" id="js">
+      <div class="container-fluid li-default" role="main">
+        <div class="panel-default" id="js">
           <div class="panel-heading">
             <span class="lead">
               <span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;<b><span class="sec">Section</span> <span class="num">#6</span>: Javascript</b>
             </span>
           </div>
           <br/>
-          <div class="row" id="js_public">
+          <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
-              <h4 id="python_js"><span class="code code_path">media/js/</span></h4>
+              <h4><span class="code code_path">media/js/</span></h4>
               <p>Contains <span class="code code_misc">Javascript</span> files.</p>
               <div class="row">
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_path">*.min.js</span></td><td colspan="2">Vendor libraries (Bootstrap, jQuery, D3).</td></tr>
-                      <tr><td><span class="code code_path">admin/</span></td><td colspan="2">Admin <span class="code code_misc">Javascript</span> files.</td></tr>
-                      <tr><td></td><td><span class="code code_path">_*.js</span></td><td>Vendor libraries for <span class="code code_misc">django-suit</span> and <span class="code code_misc">django-filemanager</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_path">apache.js</span></td><td>Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/apache_stat/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">restyle_apache()</span> in <span class="code code_path">src/console.py</span>. The page refreshes every <u>3</u> seconds by <span class="code code_method">setTimeout()</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_path">aws.js</span></td><td>Uses <span class="code code_misc">gviz-api.py</span>. Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/aws_stat/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">aws_stats()</span> in <span class="code code_path">src/console.py</span>. Data is retrieved on the fly (not cached).</td></tr>
-                      <tr><td></td><td><span class="code code_path">backup.js</span></td><td>Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/get_backup/</span>, which passes to <span class="code code_method">get_backup()</span> in <span class="code code_path">src/admin.py</span>. Also makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/get_ver/</span>, which passes to <span class="code code_method">get_ver()</span> in <span class="code code_path">src/admin.py</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_path">doc.js</span>, <span class="code code_path">doc_cherrypy.js</span></td><td>Used by <span class="code code_url">/admin/man/</span> and <span class="code code_url">/admin/ref/</span> pages for <span class="code code_misc">scrollSpy</span> side-bar resizing according to <span class="code code_method">window.width()</span>. The obsolete <span class="code code_misc">CherryPy</span> documentation page (<span class="code code_url">/admin/doc/</span>) uses <span class="code code_path">doc_cherrypy.js</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_path">ga.js</span></td><td>Uses <span class="code code_misc">gviz-api.py</span>, not <span class="code code_brand">Google Analytics</span> API. Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/ga_stat/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">ga_stats()</span> in <span class="code code_path">src/console.py</span>. Data is retrieved on the fly (not cached).</td></tr>
-                      <tr><td></td><td><span class="code code_path">git.js</span></td><td>Uses <span class="code code_misc">gviz-api.py</span>. Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/git_stat/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">git_stats()</span> in <span class="code code_path">src/console.py</span>. Data is retrieved on the fly (not cached).</td></tr>
-                      <tr><td></td><td><span class="code code_path">home.js</span></td><td>Similar to <span class="code code_path">backup.js</span>, makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/get_backup/</span> and <span class="code code_url">/admin/get_ver/</span>. Additionally, makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/backup_form/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">get_backup_form()</span> in <span class="code code_path">src/console.py</span>; <span class="code code_url">/admin/ssl_dash/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">dash_ssl()</span> in <span class="code code_path">src/console.py</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_path">load.js</span></td><td>Loads vendor libraries using <span class="code code_spe">CDN</span>, or <b>fallback</b> to local files. Used by entire site (both public and group)! Makes <span class="code code_key">AJAX</span> call to <span class="code code_url">/get_js/</span>, which passes to <span class="code code_method">get_js()</span> in <span class="code code_path">src/views.py</span>. It checks <b>jQuery</b> availability from <span class="code code_url">https://cdnjs.com/</span> first, and decides whether to use it. Uses <span class="code code_method">document.write()</span> to dynamically add <code>&lt;script&gt;</code> and  <code>&lt;link&gt;</code> in <span class="code code_key">HTML</span>.</td></tr>
-                      <tr><td></td><td><span class="code code_path">menu.js</span>, <span class="code code_path">table.js</span></td><td>Injection of <span class="code code_misc">Javascript</span> to format menu (sidebar, navbar, breadcrumb, highlighting, collapsing) and table (column width and icon for <code>&lt;th&gt;</code>, and Date/Time <code>&lt;input&gt;</code>) for admin pages. Note that the <span class="code code_method">window.resize()</span> methods use <span class="code code_method">setTimeout()</span> to prevent overlapping trigger of the event that results in delay in updating the view.</td></tr>
-
-                      <tr><td><span class="code code_path">public/</span></td><td colspan="2">Public <span class="code code_misc">Javascript</span> files.</td></tr>
-                      <tr>
-                        <td></td><td><span class="code code_path">design_1d.js</span></td>
-                        <td>Interactive script for <span class="code code_class">Design1D</span> job page.
-                          <ul>
-                            <li>Input disabling / <span class="code code_spe">re</span> filtering, sequence length tracking and warning toggle.</li>
-                            <li>Form submission is replaced by <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> requests to prevent page refresh. The input values are updated from the <span class="code code_key">JSON</span> returned from the form submission, only once. The <span class="code code_key">JOB_ID</span> is assigned by <span class="code code_cmd">python</span> and returned inside the <span class="code code_key">JSON</span> response.</li>
-                            <li>After submission (or demo), the <span class="code code_method">ajax_update_result()</span> function is called at most every second (depending on sequence length). This function loads the <span class="code code_key">HTML</span> file of the current <span class="code code_key">JOB_ID</span>, and keep refreshing until it's no longer the <i>"waiting"</i> page (<i>i.e.</i>, run finished with either <span class="code_path">success</span> or <span class="code_spe">error</span>). This refreshing behavior makes sure the result is updated while the run is underway, if the user stays waiting on the page.</li>
-                            <li>The <span class="code code_method">ajax_load_html()</span> function handles job result retrieval when user returns with a <span class="code code_key">JOB_ID</span> after leaving the status-refreshing page.</li>
-                            <li>The current window URL is updated to <span class="code code_url">/result/?job_id=</span> with the actural <span class="code code_key">JOB_ID</span> once the run finishes.</li>
-                            <li>When retrieving a result after leaving the running page, the input parameters are retrieved from <span class="code code_brand">MySQL</span> and loaded in the <span class="code code_class">forms.Form</span> model by <span class="code code_method">result()</span> in <span class="code code_path">src/views.py</span>.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td></td><td><span class="code code_path">design_2d.js</span>, <span class="code code_path">design_3d.js</span></td>
-                        <td>Interactive scripts for <span class="code code_class">Design2D</span> and <span class="code code_class">Design3D</span> job pages.
-                          <ul>
-                            <li>The <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> form submission mechanism, page refreshing and/or loading by <span class="code code_method">ajax_update_result()</span> and <span class="code code_method">ajax_load_html()</span>, window URL rewrite are the same as <span class="code code_path">design_1d.js</span>.</li>
-                            <li>Input length tracking, and appending input boxes for additional primer pairs (<span class="code code_method">expand_primer_input()</span>) and structures (<span class="code code_method">expand_structure_input()</span>).</li>
-                            <li>The inherited input boxes for primer sets and structures from <span class="code code_misc">Django</span> are hidden in order to use the rich multi-input interface. The <span class="code code_method">track_primer_list()</span> and <span class="code code_method">track_structure_list()</span> functions updates the original hidden inputs on <span class="code code_misc">keyup</span> events of any of those visible input boxes. <b>The original hidden inputs are actually used for form submission.</b> And the <span class="code code_method">sync_primer_input()</span> and <span class="code code_method">sync_structure_input()</span> functions are in charge of updating those fields from the returned <span class="code code_key">JSON</span>.</li>
-                            <li>Primer sets and structures are disabled upon form submission to make sure the original hidden inputs are up-to-date with the visible ones, and re-enabled right after <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span>.</li>
-                            <br/>
-                            <li>When the page is referred by <span class="code code_method">design_2d_from_1d()</span>, <span class="code code_method">design_3d_from_1d()</span>, or <span class="code code_method">design_3d_from_2d()</span>, the pre-filled results are passed simiarly as the case of retrieving a result. This part of <span class="code code_misc">Javascript</span> code resides in <span class="code code_path">media/html/public_design_?d.html</span> since it's dependent on templating variables from <span class="code code_misc">Django</span>.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr><td></td><td><span class="code code_path">index.js</span></td><td>Makes <span class="code code_key">AJAX</span> call to <span class="code code_url">/get_ver/</span> for displaying server <code>primerize</code> running version. Also handles the result retrieval button gate control; and column height consistency.</td></tr>
-                      <tr>
-                        <td></td><td><span class="code code_path">plate_96.js</span></td>
-                        <td>Core script that handles 96-well plate drawing using <span class="code code_misc">d3.js</span>.
-                          <ul>
-                            <li>The <span class="code code_method">draw_96_plate()</span> function loads the corresponding <span class="code code_key">JSON</span> file for the specified <span class="code code_key">JOB_ID</span> (by default <span class="code code_key">type</span> is <span class="code code_val">2</span>, meaning <mark>2d</mark> for the path) and draw all the plates on the page with a naming scheme for <span class="code code_key">SVG</span> containers of <span class="code code_val">#svg_plt_?_prm_?</span>.</li>
-                            <li>Special colors are avaiable as parsed in <span class="code code_method">get_fill_color()</span>. This is mainly used by the <span class="code code_url">/protocol/</span> page, as well as <u>Wild-Type</u> primer color override for <span class="code code_class">Design3D</span> jobs.</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr><td></td><td><span class="code code_path">protocol.js</span>, <span class="code code_path">tutorial.js</span></td><td><span class="code code_path">tutorial.js</span> takes care of the <span class="code code_method">window.width()</span> and <span class="code code_misc">scrollSpy</span> similarly as <span class="code code_path">media/js/admin/doc.js</span>; used by <span class="code code_url">/tutorial/</span> and <span class="code code_url">/protocol/</span>. <span class="code code_path">protocol.js</span> is responsible for the <u>DNA/RNA</u> concentration calculator and example 96-well plates rendering.</td></tr>
-                      <tr><td></td><td><span class="code code_path">util.js</span></td><td>Shared by all public pages. It takes care of responsive resizing, loading animation, footer year display, and navbar menu highlighting.</td></tr>
+                      <tr><td><span class="code code_path">*.min.js</span></td><td colspan="2">Vendor libraries (Bootstrap, jQuery, D3, Head.load).</td></tr>
                       <tr><td><span class="code code_path">suit/</span></td><td colspan="2">Vendor of <span class="code code_misc">django-suit</span> scripts. Only <span class="code code_path">*.min.js</span> are used.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>
                     </tbody>
@@ -1106,7 +1056,126 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 </div>
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
               </div>
+            </div>
+          </div>
 
+          <hr/>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+              <h4 id="js_public"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Public Site</h4>
+              <p><span class="code code_path">media/js/public/</span>: Contains <span class="code code_misc">Javascript</span> files for the public site.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_path">ga.js</span></td><td>Local copy of <span class="code code_brand">Google Analytics</span> script.</td></tr>
+                      <tr><td><span class="code code_path">load.js</span></td><td>Loads vendor libraries using <span class="code code_spe">CDN</span>, or <b>fallback</b> to local files. Similar to <span class="code code_path">media/js/admin/load.js</span>.</td></tr>
+                      <tr><td><span class="code code_path">menu.js</span></td><td>Main script for the <b>public app</b>, switching page without reloading. Works in similar way as <span class="code code_path">media/js/admin/menu.js</span>.</td></tr>
+                      <tr>
+                        <td><span class="code code_path">page.js</span></td>
+                        <td>
+                          Formats menu for the <b>public app</b>, applying page-specific scripts. Works in similar way as <span class="code code_path">media/js/admin/page.js</span>. Specifically, it binds panel resizing; tutorial sidebar responsiveness; tutorial question hovering; download page logic, etc. See break-down below.
+                          <br/>
+                          <ul>
+                            <li><span class="code code_method">app.callbackLoadD3()</span>: Loads libraries for design-related functionality, D3, clipboard, <span class="code code_path">plate.js</span> and <span class="code code_path">design.js</span>. Once finished, it executes a callback function. When passed with <span class="code code_val">'init'</span>, it runs <span class="code code_method">app.modPrimerize.fnOnLoad()</span> as callback.</li>
+                            <li><u>Retrieval and Design Pre-fill</u>: Reads flags from <span class="code code_key">HTML</span> that are passed from <span class="code code_misc">Django</span> in hidden elements; waits for <span class="code code_key">app.isLoaded</span> and act.</li>
+                            <li><u>Tutorial Sidebar</u>: Hide when small screen (<span class="code code_val">resize_degree = 1</span>); show on left side and share the screen with main body (<span class="code code_val">resize_degree = 2</span>); show on side as floating while main body is centered (<span class="code code_val">resize_degree = 3</span>).</li>
+                            <li><u>Home Page</u>: Submit retrieval form with redirect; filter <span class="code code_key">JOB_ID</span> input.</li>
+                            <li><u>Tutorial and Protocol</u>: takes care of the <span class="code code_method">window.width()</span> and <span class="code code_misc">scrollSpy</span> similarly as <span class="code code_path">media/js/admin/doc.js</span>; <u>DNA/RNA</u> concentration calculator; example 96-well plates rendering using <span class="code code_method">app.callbackLoadD3()</span>.</li>
+                            <li><u>Code Download</u>: <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> form submit and enable download if success; download link submits a form with the user information for validation.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="code code_path">design.js</span></td>
+                        <td>
+                          Interactive script for <span class="code code_class">Design1D</span>, <span class="code code_class">Design2D</span>, and <span class="code code_class">Design3D</span> job page. Creates the <span class="code code_key">app.modPrimerize</span> module and sets <span class="code code_key">app.isLoaded</span> flag.
+                          <br/>
+                          The <span class="code code_key">app.modPrimerize</span> module keeps track of the current <span class="code code_key">job_id</span> and <span class="code code_key">job_type</span>.
+                          <br/>
+                          <ul>
+                            <li><span class="code code_method">app.modPrimerize.fnUpdateFields()</span>: update input form values from the <span class="code code_key">JSON</span> response.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnAjaxLoadHTML()</span>: Loads the result <span class="code code_key">HTML</span> page into output section. It also binds result pre-fill buttons, and interactive hovering for <span class="code code_class">Design3D</span> results.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnAjaxRefreshResult()</span>: Controls page refreshing upon job submission; it calls <span class="code code_method">app.modPrimerize.fnAjaxLoadHTML()</span> with <span class="code code_method">setInterval()</span>; and keeps refreshing until it's no longer the <i>"waiting"</i> page (<i>i.e.</i>, run finished with either <span class="code_path">success</span> or <span class="code_spe">error</span>). This refreshing behavior makes sure the result is updated while the run is underway, if the user stays waiting on the page. The current window URL is updated to <span class="code code_url">/result/?job_id=</span> with the actural <span class="code code_key">JOB_ID</span> once the run finishes.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnAjaxSubmitJob()</span>: Handles <span class="code code_key">AJAX</span> response from job submission; renders error cases and/or update fields and refresh results. The <span class="code code_key">JOB_ID</span> is assigned by <span class="code code_cmd">python</span> and returned inside the <span class="code code_key">JSON</span> response.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnAjaxRetrieveResult()</span>: Used for user retrieval a result for a given <span class="code code_key">JOB_ID</span> from home page.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnOnSubmit()</span>: Calls <span class="code code_method">app.modPrimerize.fnAjaxSubmitJob()</span>, freezes inputs.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnOnDisable</span>: Disables form temporarily to prevent repeated form submission. Primer sets and structures are disabled upon form submission to make sure the original hidden inputs are up-to-date with the visible ones, and re-enabled right after <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span>.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnTrackInputLength()</span>: Input disabling / <span class="code code_spe">REGEX</span> filtering, sequence length tracking and warning toggle for primary sequence input.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnTrackPrimerList()</span>, <span class="code code_method">app.modPrimerize.fnTrackStructureList()</span>: Updates length display and color flags, and updates the hidden <code>&lt;input&gt;</code> for actual form. The inherited input boxes for primer sets and structures from <span class="code code_misc">Django</span> are hidden in order to use the rich multi-input interface. <b>The original hidden inputs are actually used for form submission.</b></li>
+                            <li><span class="code code_method">app.modPrimerize.fnSyncPrimerInput()</span>, <span class="code code_method">app.modPrimerize.fnSyncStructureInput()</span>: Updates displayed input values from <span class="code code_key">JSON</span> response (either cleaned up by server after submission, or retrieval job).</li>
+                            <li><span class="code code_method">app.modPrimerize.fnExpandPrimerInput()</span>, <span class="code code_method">app.modPrimerize.fnExpandStructureInput()</span>: Adds more (pair of) inputs for the fields.</li>
+                            <li><span class="code code_method">app.modPrimerize.fnOnLoad()</span>: Main script for events binding, and <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> forms to prevent page refresh. When the page is referred by <span class="code code_method">design_2d_from_1d()</span>, <span class="code code_method">design_3d_from_1d()</span>, or <span class="code code_method">design_3d_from_2d()</span>, the pre-filled results are passed simiarly as the case of retrieving a result.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="code code_path">plate.js</span></td>
+                        <td>
+                          Core script that handles 96-well plate drawing using <span class="code code_misc">d3.js</span>. Creates the <span class="code code_key">app.mod96Plate</span> module.
+                          <br/>
+                          <ul>
+                            <li><span class="code code_key">app.mod96Plate.cell_radius</span>, <span class="code code_key">app.mod96Plate.cell_radius</span>, <span class="code code_key">app.mod96Plate.cell_radius</span>: Default parameters for <span class="code code_key">SVG</span> dimentions.</li>
+                            <li><span class="code code_key">app.mod96Plate.x_data</span>, <span class="code code_key">app.mod96Plate.y_data</span>: Constants for axis labels.</li>
+                            <li><span class="code code_key">app.mod96Plate.tooltip</span>: Handler for the tooltip element.</li>
+                            <li><span class="code code_method">app.mod96Plate.fnGetCoordY()</span>, <span class="code code_method">app.mod96Plate.fnGetCoordY()</span>: Locates a coordinate to the 96-well plate graph.</li>
+                            <li><span class="code code_method">app.mod96Plate.fnGetStrokeColor()</span>, <span class="code code_method">app.mod96Plate.fnGetFillColor()</span>: Get current color for the well. Special colors are avaiable and parsed; this is mainly used by the <span class="code code_url">/protocol/</span> page, as well as <u>Wild-Type</u> primer color override for <span class="code code_class">Design3D</span> jobs.</li>
+                            <li><span class="code code_method">app.mod96Plate.fnDrawSinglePlate()</span>: Draw a 96-well plate based on input data on given <span class="code code_key">HTML</span> element. The <span class="code code_key">flag</span> specifies whether to enable tooltip on hover.</li>
+                            <li><span class="code code_method">app.mod96Plate.fnDrawResultPlates()</span>: Draw all plate results in <span class="code code_key">SVG</span> containers of <span class="code code_val">#svg_plt_?_prm_?</span> for a page. It makes a <span class="code code_key">AJAX</span> call for a <span class="code code_key">JSON</span> file, resets cell dimensions, and calls <span class="code code_method">app.mod96Plate.fnDrawSinglePlate()</span> for each plate.</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 30px;">
+              <h4 id="js_admin"><span class="glyphicon glyphicon-tower"></span>&nbsp;&nbsp;Admin Site</h4>
+              <p><span class="code code_path">media/js/admin/</span>: Contains <span class="code code_misc">Javascript</span> files for the Admin site.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_path">_*.js</span></td><td>Vendor libraries for <span class="code code_misc">django-suit</span> and <span class="code code_misc">django-filemanager</span>.</td></tr>
+                      <tr><td><span class="code code_path">apache.js</span></td><td>Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/stat/apache/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">restyle_apache()</span> in <span class="code code_path">src/console.py</span>. The page refreshes every <u>3</u> seconds by <span class="code code_method">setTimeout()</span>.</td></tr>
+                      <tr><td><span class="code code_path">clock.js</span></td><td>Displays real-time clock on navigation bar.</td></tr>
+                      <tr><td><span class="code code_path">doc.js</span></td><td>Used by <span class="code code_url">/admin/man/</span>, <span class="code code_url">/admin/ref/</span> and <span class="code code_url">/admin/doc/</span> pages for <span class="code code_misc">scrollSpy</span> side-bar resizing according to <span class="code code_method">window.width()</span>.</td></tr>
+                      <tr><td><span class="code code_path">gapi.js</span></td><td>Uses <span class="code code_misc">gviz-api.py</span> (not <span class="code code_brand">Google Analytics</span> API) for <span class="code code_url">/admin/aws/</span>, <span class="code code_url">/admin/ga/</span>, and <span class="code code_url">/admin/git/</span> page dashboard. Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/stat/(aws|ga|git)/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">aws_stats()</span>, <span class="code code_method">ga_stats()</span>, and <span class="code code_method">git_stats()</span> in <span class="code code_path">src/console.py</span>. Data is retrieved on the fly (not cached).</td></tr>
+                      <tr><td><span class="code code_path">home.js</span></td><td>Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/stat/sys/</span>, <span class="code code_url">/admin/stat/backup/</span> and <span class="code code_url">/admin/stat/ver/</span>. Additionally, makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/backup/form/</span>, which passes through <span class="code code_path">src/admin.py</span> to <span class="code code_method">get_backup_form()</span> in <span class="code code_path">src/console.py</span>.</td></tr>
+                      <tr><td><span class="code code_path">load.js</span></td><td>Loads vendor libraries using <span class="code code_spe">CDN</span>, or <b>fallback</b> to local files. Uses <span class="code code_spe">head.load</span> library. It checks <b>jQuery</b> availability from <span class="code code_url">https://cdnjs.com/</span> first, and decides <span class="code code_spe">CDN</span> availability and saves to <span class="code code_key">app.isCDN</span>. Uses <span class="code code_method">head.test()</span> to dynamically load all <span class="code code_misc">Javascript</span> dependencies. <b>All <span class="code code_misc">Javascript</span> files should be loaded from here, <i>i.e.</i> no more <code>&lt;script&gt;</code> tag in <span class="code code_key">HTML</span>!</b></td></tr>
+                      <tr>
+                        <td><span class="code code_path">menu.js</span></td>
+                        <td>
+                          Main script for the <b>admin app</b>, switching page without reloading.
+                          <ul>
+                            <li><span class="code code_key">app.fnOnLoad</span> initiates the view with animation;</li>
+                            <li><span class="code code_key">app.fnNavCollapse</span> controls navigation bar behavior on resize;</li>
+                            <li><span class="code code_key">app.fnChangeLocation</span> updates the <span class="code code_key">app.href</span> and reloads the page content (excluding navigation). Calls <span class="code code_key">app.fnChangeView</span>;</li>
+                            <li><span class="code code_key">app.fnChangeView</span> updates side navigation highlighting, calls <span class="code code_key">app.fnParseLocation</span> and <span class="code code_key">app.fnChangeBreadcrumb</span>, runs <span class="code code_path">page.js</span> for new content, and calls <span class="code code_key">app.callbackChangeView</span> if defined;</li>
+                            <li><span class="code code_key">app.fnChangeBreadcrumb</span> updates breadcrumb banner for each page;</li>
+                            <li><span class="code code_key">app.fnParseLocation</span> figures out the current page path and stores to <span class="code code_key">app.key</span> and <span class="code code_key">app.page</span>.</li>
+                          </ul>
+                          Note that the <span class="code code_method">window.resize()</span> methods use <span class="code code_method">setTimeout()</span> to prevent overlapping trigger of the event that results in delay in updating the view.
+                        </td>
+                      </tr>
+                      <tr><td><span class="code code_path">page.js</span></td><td>Formats menu (sidebar, navbar, breadcrumb, highlighting, collapsing), and Date/Time <code>&lt;input&gt;</code>) for admin pages. Loads required additional <code>&lt;script&gt;</code> for pages. Called by <span class="code code_path">menu.js</span>.</td></tr>
+                      <tr><td><span class="code code_path">table.js</span></td><td>Injection of <span class="code code_misc">Javascript</span> to format table (column width and icon for <code>&lt;th&gt;</code>).</td></tr>
+                      <tr><td><span class="code code_path">util.js</span></td><td>Used by <span class="code code_url">/admin/backup/</span> page. Makes <span class="code code_key">AJAX</span> calls to <span class="code code_url">/admin/stat/backup/</span> and <span class="code code_url">/admin/stat/ver/</span>, which passes to <span class="code code_method">get_ver()</span> in <span class="code code_path">src/admin.py</span>. Controls page behavior and responses.</td></tr>
+                      <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
             </div>
           </div>
         </div>
