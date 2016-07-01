@@ -370,8 +370,10 @@
                 <li>Submit <span class="code code_misc">SSL Certificate</span> through <span class="code code_cmd">aws iam</span>. See <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>. Use the <span class="code code_misc">SSL Certificate</span> for <span class="code code_val">443</span> forwarding protocol.</li>
                 <li>Add instance to <span class="code code_misc">ELB</span>, configure with port forwarding <span class="code code_val">80</span> to <u>80</u>, <span class="code code_val">443</span> to <u>443</u>. Use same <b>Security Groups</b> as <span class="code code_misc">EC2</span>.</li>
                 <li>Set <span class="code code_misc">ELB</span> <b>Health Check</b> to address <span class="code code_url">HTTPS:443/ping_test/</span>, with interval <u>180 s</u> and timeout <u>15 s</u>.</li>
+                <li>Set <span class="code code_misc">ELB</span> <b>Monitoring Alarm</b> for <u>Healthy Host &lt; 1</u> sending email to <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span>.</li>
               </ul>
               <p>Once done, you can access the server via <span class="code code_cmd">ssh</span>. Use the server's <b>Public IP</b> address, instead of <b>Private IP</b>. <span class="code code_brand">AWS</span> <span class="code code_misc">EC2</span> are configured to use a certificate for authentication, not password (In fact, user <span class="code code_val">ubuntu</span> has no password). Use <span class="code code_cmd">-i</span> to supply the certificate.</p>
+              <p>When the server's <span class="code code_misc">Django</span> or <span class="code code_brand">Apache</span> mulfunctions, you should receive an alert email forwaraded from <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span>. After fixing the issue, you may need to reset the <span class="code code_misc">ELB</span> <b>Health Check</b> to force instant recheck (e.g. set interval to <u>300s</u> and then back to <u>180s</u>).</p>
             </div>
           </div>
 
@@ -394,6 +396,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
 <span class="code code_spe">numba</span> == <span class="code code_val">0.23.1</span>
 </pre>
               <p>These packages are excluded from <span class="code code_cmd">upd</span> command so you won't accidentally update them. In the far future, if this combination has components that are out of support, updating all into newer (still compatible with each other) versions should be carried out.</p>
+              <p>Other package archives we use to keep <span class="code code_cmd">git</span>, <span class="code code_brand">Apache</span> and <span class="code code_brand">MySQL</span> up to date are <span class="code code_val">git-core/ppa</span>, <span class="code code_val">ondrej/apache2</span> and <span class="code code_val">ondrej/mysql-5_7</span>. Use <span class="code code_cmd">sudo add-apt-repository ppa:<i><u>ppa_name</u></i></span> to add to system.</p>
               <br/>
 
               <p>Second, you need to install <span class="code code_cmd">gdrive</span> for <span class="code code_brand">Google Drive</span> connections. You can retrieve from the <span class="code code_path">backup/backup_config.tgz</span>, or download <a href="https://github.com/prasmussen/gdrive" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</p>
