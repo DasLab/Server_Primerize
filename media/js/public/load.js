@@ -6,7 +6,11 @@ app.modPrimerize = {'job_type': undefined, 'job_id': undefined};
 app.mod96Plate = {};
 
 if (app.DEBUG_DIR) {
-    more_success = ['/site_media/css/min/theme.min.css'];
+    more_success = [
+        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + app.js_ver.bootstrap + '/css/bootstrap.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' + app.js_ver.bootstrap + '/js/bootstrap.min.js',
+        '/site_media/css/min/theme.min.css'
+    ];
     more_fail = [
         '/site_media/js/public/min/core.min.js',
         '/site_media/css/min/core.min.css'
