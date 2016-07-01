@@ -776,11 +776,8 @@ var gapi_callback = setTimeout(function() {
 }, 1000);
 
 
-$(window).on("resize", function() {
-    clearTimeout($(window).data(this, 'resizeTimer'));
-    $(window).data(this, 'resizeTimer', setTimeout(function() {
-        for (var i = 0; i < gapi.gapi.gviz_handles.length; i++) {
-            gapi.gviz_handles[i].draw();
-        }
-    }, 200));
-});
+$(window).on("resize", throttle(function() {
+    for (var i = 0; i < gapi.gviz_handles.length; i++) {
+        gapi.gviz_handles[i].draw();
+    }
+}, 200, 1000));

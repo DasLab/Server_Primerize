@@ -1,4 +1,18 @@
-var scrollTimer, resizeTimer, side_toggle = true, apache_interval;
+var side_toggle = true, apache_interval;
+var throttle = function(func, delay, at_least) {
+  var timer = null, previous = null;
+  return function() {
+    var now = +new Date();
+    if (!previous) { previous = now; }
+    if (now - previous > at_least) {
+      func();
+      previous = now;
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(func, delay);
+    }
+  };
+};
 
 app.fnParseLocation = function() {
     var urls = {
@@ -141,6 +155,10 @@ app.fnNavCollapse = function() {
         );
         $("#nav_logo").css("width", parseInt($("#nav_logo").css("width")) + 250 - parseInt($("#nav_public").position().left));
     }
+    setTimeout(function() {
+        $("#page-content-wrapper").css("width", $(window).width() - $("#sidebar-wrapper").width());
+        $("#wrapper").css("width", $("#sidebar-wrapper").width() + $("#page-content-wrapper").width() - 15);
+    }, 500);
 };
 
 app.fnOnLoad = function() {
@@ -163,14 +181,17 @@ app.fnOnLoad = function() {
             }, 400);
         }
         side_toggle = !side_toggle;
+        setTimeout(function() {
+            $("#page-content-wrapper").css("width", $(window).width() - $("#sidebar-wrapper").width());
+        }, 500);
     });
-    $("#wrapper").css("width", (parseInt($("#wrapper").css("width")) + 15).toString() + "px");
+    $("#wrapper").css("width", $("#wrapper").width() + 15);
     app.fnNavCollapse();
 
     $("#page-content-wrapper").css("opacity", 0);
     $("#nav_load").css({"opacity": 1, "top": "-50px"}).animate({"top": "0px"}, {"duration": 200, "queue": false});
     $("body > div").css("opacity", 1);
-    $("#sidebar-wrapper").animate({"left": "0px"}, {"duration": 200, "queue": false});
+    if (side_toggle) { $("#sidebar-wrapper").animate({"left": "0px"}, {"duration": 200, "queue": false}); }
     $("#page-content-wrapper").delay(500).fadeTo(150, 1);
 };
 
@@ -199,13 +220,7 @@ $(document).ready(function() {
 });
 
 
-$(window).on("resize", function() {
-    clearTimeout($.data(this, 'resizeTimer'));
-    $.data(this, 'resizeTimer', setTimeout(function() {
-        app.fnNavCollapse();
-        $("#wrapper").css("width", $(window).width() - $("#sidebar-wrapper").width() - 20);
-    }, 200));
-});
+$(window).on("resize", throttle(app.fnNavCollapse, 200, 1000));
 
 window.onpopstate = function() { location.reload(); };
 

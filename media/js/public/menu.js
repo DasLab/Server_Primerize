@@ -1,4 +1,17 @@
-var scrollTimer, resizeTimer;
+var throttle = function(func, delay, at_least) {
+  var timer = null, previous = null;
+  return function() {
+    var now = +new Date();
+    if (!previous) { previous = now; }
+    if (now - previous > at_least) {
+      func();
+      previous = now;
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(func, delay);
+    }
+  };
+};
 
 app.fnParseLocation = function() {
   var urls = {
@@ -69,16 +82,13 @@ $(document).ready(function() {
 });
 
 
-$(window).on("scroll", function() {
-  clearTimeout($.data(this, 'scrollTimer'));
-  $.data(this, 'scrollTimer', setTimeout(function() {
-    if ($(this).scrollTop() > $(window).height() / 2) {
-      $('#top > div').animate({'right':'0%', 'opacity':'1.0'}, 125);
-    } else {
-      $('#top > div').animate({'right':'-5%', 'opacity':'0'}, 125);
-    }
-  }, 200));
-});
+$(window).on("scroll", throttle(function() {
+  if ($(this).scrollTop() > $(window).height() / 2) {
+    $('#top > div').animate({'right': '5%', 'opacity': 0.85}, 125);
+  } else {
+    $('#top > div').animate({'right': '-5%', 'opacity': 0}, 125);
+  }
+}, 200, 500));
 
 window.onpopstate = function() { location.reload(); };
 

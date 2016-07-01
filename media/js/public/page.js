@@ -10,10 +10,7 @@ app.fnIndexResize = function() {
     $("#col-3").css("height", col_h);
     $("#col-4").css("height", col_h);
 
-    $(window).on("resize", function() {
-        clearTimeout($.data(this, 'resizeTimer'));
-        $.data(this, 'resizeTimer', setTimeout(app.fnIndexResize, 200));
-    });
+    $(window).on("resize", throttle(app.fnIndexResize, 200, 1000));
 };
 
 app.fnTutorialResize = function() {
@@ -45,10 +42,7 @@ app.fnTutorialResize = function() {
         }
     }
 
-    $(window).on("resize", function() {
-        clearTimeout($.data(this, 'resizeTimer'));
-        $.data(this, 'resizeTimer', setTimeout(app.fnTutorialResize, 200));
-    });
+    $(window).on("resize", throttle(app.fnTutorialResize, 200, 1000));
 };
 
 app.fnDesignResize = function() {
@@ -59,10 +53,7 @@ app.fnDesignResize = function() {
     $("#col-res-l").css("height", col_h);
     $("#col-res-r").css("height", col_h);
 
-    $(window).on("resize", function() {
-        clearTimeout($.data(this, 'resizeTimer'));
-        $.data(this, 'resizeTimer', setTimeout(app.fnDesignResize, 200));
-    });
+    $(window).on("resize", throttle(app.fnDesignResize, 200, 1000));
 };
 
 

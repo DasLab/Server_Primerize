@@ -373,7 +373,7 @@
                 <li>Set <span class="code code_misc">ELB</span> <b>Monitoring Alarm</b> for <u>Healthy Host &lt; 1</u> sending email to <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span>.</li>
               </ul>
               <p>Once done, you can access the server via <span class="code code_cmd">ssh</span>. Use the server's <b>Public IP</b> address, instead of <b>Private IP</b>. <span class="code code_brand">AWS</span> <span class="code code_misc">EC2</span> are configured to use a certificate for authentication, not password (In fact, user <span class="code code_val">ubuntu</span> has no password). Use <span class="code code_cmd">-i</span> to supply the certificate.</p>
-              <p>When the server's <span class="code code_misc">Django</span> or <span class="code code_brand">Apache</span> mulfunctions, you should receive an alert email forwaraded from <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span>. After fixing the issue, you may need to reset the <span class="code code_misc">ELB</span> <b>Health Check</b> to force instant recheck (e.g. set interval to <u>300s</u> and then back to <u>180s</u>).</p>
+              <p>When the server's <span class="code code_misc">Django</span> or <span class="code code_brand">Apache</span> malfunctions, you should receive an alert email forwarded from <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span>. After fixing the issue, you may need to reset the <span class="code code_misc">ELB</span> <b>Health Check</b> to force instant recheck (e.g. set interval to <u>300s</u> and then back to <u>180s</u>).</p>
             </div>
           </div>
 
