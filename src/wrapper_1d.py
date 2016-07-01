@@ -157,12 +157,12 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         script = script.replace('__NOTE_T7__', str_t7.replace('\n', '<br/>').replace('T7_CHECK', '<b>T7_CHECK</b>').replace('SUCCESS', '<b>SUCCESS</b>').replace('WARNING', '<b>WARNING</b>').replace('NOT', '<u><b>NOT</b></u>').replace('nucleotides GG', 'nucleotides <u>GG</u>'))
         open(file_name, 'w').write(lines)
 
-        if job_id != ARG['DEMO_1D_ID']:
-            job_entry = Design1D.objects.get(job_id=job_id)
-            job_entry.status = '2'
-            job_entry.primers = assembly.primer_set
-            job_entry.time = t_total
-            job_entry.save()
+        job_entry = Design1D.objects.get(job_id=job_id)
+        job_entry.status = '2' if job_id != ARG['DEMO_1D_ID'] else '0'
+        job_entry.primers = assembly.primer_set
+        job_entry.time = t_total
+        job_entry.save()
+
         create_res_html(script, job_id, 1)
     except Exception:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"

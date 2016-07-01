@@ -253,12 +253,11 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         illustration_final = illustration_final + illustration_1 + '<br/><br/>' if len(plate.structures) >= 5 else illustration_final
         script = script.replace('__SEQ_ANNOT__', illustration_final)
 
-        if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']):
-            job_entry = Design3D.objects.get(job_id=job_id)
-            job_entry.status = '2'
-            job_entry.time = t_total
-            job_entry.plates = repr(plate._data['plates']).replace('\033[90m', '').replace('\033[91m', '').replace('\033[92m', '').replace('\033[93m', '').replace('\033[94m', '').replace('\033[95m', '').replace('\033[0m', '')
-            job_entry.save()
+        job_entry = Design3D.objects.get(job_id=job_id)
+        job_entry.status = '2' if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']) else '0'
+        job_entry.time = t_total
+        job_entry.plates = repr(plate._data['plates']).replace('\033[90m', '').replace('\033[91m', '').replace('\033[92m', '').replace('\033[93m', '').replace('\033[94m', '').replace('\033[95m', '').replace('\033[0m', '')
+        job_entry.save()
         create_res_html(script, job_id, 3)
     except Exception:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
