@@ -126,6 +126,8 @@ def ref(request):
 def get_stat(request, keyword):
     if keyword == "arch":
         return HttpResponse(''.join(open('%s/config/flow_chart.svg' % MEDIA_ROOT).readlines()), content_type='image/svg+xml')
+    elif keyword == "app":
+        return HttpResponse(''.join(open('%s/config/js_app.svg' % MEDIA_ROOT).readlines()), content_type='image/svg+xml')
     json = simplejson.load(open('%s/cache/stat_%s.json' % (MEDIA_ROOT, keyword.strip('/')), 'r'))
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
@@ -168,5 +170,5 @@ admin.site.register_view('ref/', view=ref, visible=False)
 
 
 admin.site.register_view(r'dash/(apache|aws|ga|git)/?$', view=get_dash, visible=False)
-admin.site.register_view(r'stat/(ver|sys|backup|arch)/?$', view=get_stat, visible=False)
+admin.site.register_view(r'stat/(ver|sys|backup|arch|app)/?$', view=get_stat, visible=False)
 admin.site.register_view(r'stat/(sys|backup)/refresh/?$', view=refresh_stat, visible=False)

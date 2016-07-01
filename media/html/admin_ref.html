@@ -611,6 +611,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td></td><td><span class="code code_key">IS_DEVEL</span></td><td><span class="code code_key">DEBUG</span> flag. Use <span class="code code_val">1</span> for test server, <span class="code code_val">0</span> for production.</td></tr>
                       <tr><td></td><td><span class="code code_key">IS_MAINTENANCE</span></td><td>Flag for temporary server downtime. Set to <span class="code code_val">1</span> for downtime, which returns <u>503</u> response to all urls.</td></tr>
                       <tr><td><span class="code code_path">flow_chart.svg</span></td><td colspan="2">The architecture <span class="code code_key">SVG</span> image shown in the <a href="#django">Overview</a>. It is placed here to restrict access to admin only.</td></tr>
+                      <tr><td><span class="code code_path">js_app.svg</span></td><td colspan="2">The <span class="code code_misc">Javscript</span> public app logics <span class="code code_key">SVG</span> image shown in the <a href="#django">Overview</a>. It is placed here to restrict access to admin only.</td></tr>
                       <tr><td colspan="3" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
@@ -722,7 +723,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                     <tbody>
                       <tr><td><span class="code code_class">class</span></td><td>Defines admin page view (list and detail), layout and field grouping. See <a href="https://docs.djangoproject.com/en/1.9/ref/contrib/admin/" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
                       <tr><td><span class="code code_method">get_dash()</span></td><td>Retrieves analytics data for requests <span class="code code_url">/admin/dash/(apache|aws|ga|git)/</span> through <span class="code code_method">*_stats()</span> in <span class="code code_path">src/console.py</span>.</td></tr>
-                      <tr><td><span class="code code_method">get_stat()</span></td><td>Retrieves statistics for requests <span class="code code_url">/admin/stat/(ver|sys|backup|arch)/</span> through access of <span class="code code_path">cache/stat_sys.json</span>, <span class="code code_path">cache/stat_ver.json</span> and <span class="code code_path">cache/stat_backup.json</span> for <span class="code code_cmd">versions</span> and <span class="code code_cmd">backup</span> status (capacity, sizes, <i>etc.</i>) text. Neither <span class="code code_key">TXT</span> files are accessible through url. Also accesses <span class="code code_path">config/flow_chart.svg</span> for admin only.</td></tr>
+                      <tr><td><span class="code code_method">get_stat()</span></td><td>Retrieves statistics for requests <span class="code code_url">/admin/stat/(ver|sys|backup|arch|app)/</span> through access of <span class="code code_path">cache/stat_sys.json</span>, <span class="code code_path">cache/stat_ver.json</span> and <span class="code code_path">cache/stat_backup.json</span> for <span class="code code_cmd">versions</span> and <span class="code code_cmd">backup</span> status (capacity, sizes, <i>etc.</i>) text. Neither <span class="code code_key">TXT</span> files are accessible through url. Also accesses <span class="code code_path">config/flow_chart.svg</span> and <span class="code code_path">config/js_app.svg</span> for admin only.</td></tr>
                       <tr><td><span class="code code_method">backup_form()</span></td><td>Get backup related status from <span class="code code_misc">cron</span> jobs.</td></tr>
                       <tr><td><span class="code code_method">admin_cmd()</span></td><td>Kicks off <span class="code code_method">call_command()</span> for management commands from requests <span class="code code_url">/admin/cmd/(upload|backup)/</span> of either <span class="code code_cmd">backup</span> or <span class="code code_cmd">gdrive</span>.</td></tr>
                       <tr>
@@ -1059,6 +1060,9 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 </div>
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
               </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <img src="/admin/stat/app/" alt="App Architecture" width="100%" class="thumbnail" />
             </div>
           </div>
 
