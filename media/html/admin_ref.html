@@ -396,7 +396,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
 <span class="code code_spe">numba</span> == <span class="code code_val">0.23.1</span>
 </pre>
               <p>These packages are excluded from <span class="code code_cmd">upd</span> command so you won't accidentally update them. In the far future, if this combination has components that are out of support, updating all into newer (still compatible with each other) versions should be carried out.</p>
-              <p>Other package archives we use to keep <span class="code code_cmd">git</span>, <span class="code code_brand">Apache</span> and <span class="code code_brand">MySQL</span> up to date are <span class="code code_val">git-core/ppa</span>, <span class="code code_val">ondrej/apache2</span> and <span class="code code_val">ondrej/mysql-5_7</span>. Use <span class="code code_cmd">sudo add-apt-repository ppa:<i><u>ppa_name</u></i></span> to add to system.</p>
+              <p>Other package archives we use to keep <span class="code code_cmd">git</span>, <span class="code code_brand">Apache</span> and <span class="code code_brand">MySQL</span> up to date are <span class="code code_val">git-core/ppa</span>, <span class="code code_val">ondrej/apache2</span> and <strike><span class="code code_val">ondrej/mysql-5_7</span></strike>. Use <span class="code code_cmd">sudo add-apt-repository ppa:<i><u>ppa_name</u></i></span> to add to system.</p>
               <br/>
 
               <p>Second, you need to install <span class="code code_cmd">gdrive</span> for <span class="code code_brand">Google Drive</span> connections. You can retrieve from the <span class="code code_path">backup/backup_config.tgz</span>, or download <a href="https://github.com/prasmussen/gdrive" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</p>
@@ -503,6 +503,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                   <li><span class="code code_val">src_design1d</span>, <span class="code code_val">src_design2d</span>, <span class="code code_val">src_design3d</span>, <span class="code code_val">src_historyitem</span>, <span class="code code_val">src_jobgroups</span>, <span class="code code_val">src_jobids</span>, <span class="code code_val">src_sourcedownloader</span></li>
                 </ul>
                 <li>The <b>demo</b> entries are stored with <span class="code code_key">date</span> as <span class="code code_val">1970-01-01</span> on purpose. They will not be <span class="code code_cmd">cleanup</span>. So are their <span class="code code_key">JOB_ID</span> in the <span class="code code_val">src_jobids</span> table.</li>
+                <li>Configuration file is located at <span class="code code_path">/etc/mysql/my.cnf</span>. <span class="code code_brand">MySQL</span> version <u>5.7</u> is known to be memory-hungry, with all limits enforced, still gradually increase its memory usage to above <u>700 MB</u>. Thus, we have downgraded to version <u>5.6</u>.</li>
               </ul>
             </div>
           </div>
