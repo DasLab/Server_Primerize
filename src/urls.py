@@ -21,8 +21,7 @@ admin.site.logout = user.user_logout
 if IS_MAINTENANCE:
     urlpatterns = [
         url(r'^ping_test/?$', views.ping_test),
-        url(r'^get_admin/?$', views.get_admin),
-        url(r'^get_js/?$', views.get_js),
+        url(r'^get_staff/?$', views.get_staff),
 
         url(r'^site_media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT + '/media'}),
         url(r'^robots.txt$', serve, kwargs={'path': 'robots.txt', 'document_root': MEDIA_ROOT}),
