@@ -22,17 +22,21 @@ def tutorial(request):
 def protocol(request):
     return render(request, PATH.HTML_PATH['protocol'])
 
-def license(request):
-    license_md = ''.join(open('%s/dist/Primerize-LICENSE.md' % MEDIA_ROOT, 'r').readlines())
-    license_md = license_md.replace('\n', '<br/>') + '</strong>'
-    return render(request, PATH.HTML_PATH['license'], {'license_md': license_md})
-
 def docs(request):
     return render(request, PATH.HTML_PATH['docs'])
 
 def about(request):
     history_list = HistoryItem.objects.order_by('-date')
     return render(request, PATH.HTML_PATH['about'], {'history': history_list})
+
+def landing(request):
+    return render(request, PATH.HTML_PATH['landing'])
+
+
+def license(request):
+    license_md = ''.join(open('%s/dist/Primerize-LICENSE.md' % MEDIA_ROOT, 'r').readlines())
+    license_md = license_md.replace('\n', '<br/>') + '</strong>'
+    return render(request, PATH.HTML_PATH['license'], {'license_md': license_md})
 
 def download(request):
     if request.method != 'POST':

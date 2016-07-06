@@ -39,6 +39,7 @@ else:
         url(r'^link/(?P<tag>.*)/?$', views.link),
         url(r'^docs/?$', views.docs),
         url(r'^about/?$', views.about),
+        url(r'^primerize2d/?$', views.landing),
 
         url(r'^result/?$', views.result),
         url(r'^design_1d/?$', wrapper_1d.design_1d),
@@ -69,6 +70,7 @@ else:
         url(r'^(package|code|source|repository)/?$', RedirectView.as_view(url='/download/', permanent=True)),
         url(r'^(doc|documentation|reference|manual)/?$', RedirectView.as_view(url='/docs/', permanent=True)),
         url(r'^(citation|contact|primerize)/?$', RedirectView.as_view(url='/about/', permanent=True)),
+        url(r'^(landing|review)/?$', RedirectView.as_view(url='/primerize2d/', permanent=True)),
 
         url(r'^(find|retrieve)/?$', RedirectView.as_view(url='/result/', permanent=True)),
         url(r'^design/?$', RedirectView.as_view(url='/design_1d/', permanent=True)),

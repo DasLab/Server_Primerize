@@ -85,6 +85,7 @@ class SYS_PATH(Singleton):
             'download': MEDIA_ROOT + '/media/html/public_download.html',
             'docs': MEDIA_ROOT + '/media/html/public_docs.html',
             'about': MEDIA_ROOT + '/media/html/public_about.html',
+            'landing': MEDIA_ROOT + '/media/html/public_landing.html',
 
             'design_1d': MEDIA_ROOT + '/media/html/public_design_1d.html',
             'design_2d': MEDIA_ROOT + '/media/html/public_design_2d.html',
