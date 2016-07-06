@@ -9,8 +9,6 @@ app.fnIndexResize = function() {
     $("#col-2").css("height", col_h);
     $("#col-3").css("height", col_h);
     $("#col-4").css("height", col_h);
-
-    $(window).on("resize", throttle(app.fnIndexResize, 200, 1000));
 };
 
 app.fnTutorialResize = function() {
@@ -41,8 +39,6 @@ app.fnTutorialResize = function() {
             app.resize_degree = 2;
         }
     }
-
-    $(window).on("resize", throttle(app.fnTutorialResize, 200, 1000));
 };
 
 app.fnDesignResize = function() {
@@ -52,8 +48,19 @@ app.fnDesignResize = function() {
     var col_h = Math.max(parseInt($("#col-res-l").css("height")), parseInt($("#col-res-r").css("height")));
     $("#col-res-l").css("height", col_h);
     $("#col-res-r").css("height", col_h);
+};
 
-    $(window).on("resize", throttle(app.fnDesignResize, 200, 1000));
+app.fnLandingResize = function() {
+    $("#res-1").css("padding-top", "").css("padding-bottom", "");
+    $("#h-2").css("padding-top", "").css("padding-bottom", "");
+    $("#p-2").css("padding-top", "").css("padding-bottom", "");
+
+    var diff_h = parseInt($("#res-2").css("height")) - parseInt($("#res-1").css("height"));
+    $("#res-1").css("padding-top", diff_h / 2 + "px").css("padding-bottom", diff_h / 2 + "px");
+    diff_h = parseInt($("#h-1").css("height")) - parseInt($("#h-2").css("height"));
+    $("#h-2").css("padding-top", diff_h / 2 + "px").css("padding-bottom", diff_h / 2 + "px");
+    diff_h = parseInt($("#p-1").css("height")) - parseInt($("#p-2").css("height"));
+    $("#p-2").css("padding-top", diff_h / 2 + "px").css("padding-bottom", diff_h / 2 + "px");
 };
 
 
@@ -94,7 +101,13 @@ $("div.svg_tooltip").css({"opacity": 0, "top": 0, "left": 0});
 
 
 if (app.key == "home") {
-    setTimeout(app.fnIndexResize, 200);
+    if (app.page == "primerize2d") {
+        setTimeout(app.fnLandingResize, 200);
+        $(window).on("resize", throttle(app.fnLandingResize, 200, 1000));
+    } else {
+        setTimeout(app.fnIndexResize, 200);
+        $(window).on("resize", throttle(app.fnIndexResize, 200, 1000));
+    }
 
     $("#form_retrieve").submit(function(event) {
         event.preventDefault();
@@ -115,6 +128,7 @@ if (app.key == "home") {
 
 } else if (app.key == "design") {
     app.callbackLoadD3("init");
+    $(window).on("resize", throttle(app.fnDesignResize, 200, 1000));
 
     if ($("#result_job_id").html().length > 0) {
         var result_timeout = setTimeout(function() {
@@ -164,6 +178,7 @@ if (app.key == "home") {
         $('.scroll_nav > ul > li.active > ul.panel-collapse').collapse('show');
     });
     app.fnTutorialResize();
+    $(window).on("resize", throttle(app.fnTutorialResize, 200, 1000));
 
     $("[data-toggle='popover']").popover({trigger: "hover"});
     $("[data-toggle='tooltip']").tooltip();
