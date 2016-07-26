@@ -132,6 +132,7 @@ app.modPrimerize.fnOnSubmit = function(data) {
   app.modPrimerize.job_id = undefined;
   app.modPrimerize.job_type = data.type;
   app.modPrimerize.fnAjaxSubmitJob(data);
+  console.log('on submit')
 
   if (app.modPrimerize.job_type !== 1) {
     $("input.primer_input").prop("disabled", false).prop("readonly", false);
@@ -149,11 +150,13 @@ app.modPrimerize.fnOnSubmit = function(data) {
 };
 
 app.modPrimerize.fnOnDisable = function() {
-  $("#btn_submit").prop("disabled", true).removeClass("btn-primary").addClass("btn-danger");
+  $("#btn_submit").removeClass("btn-primary").addClass("btn-danger");
   $("#btn_submit > span.glyphicon").removeClass("glyphicon-ok-sign").addClass("glyphicon-remove-sign");
+  $("#div_btns > p > button").prop("disabled", true);
   setTimeout(function() {
     $("#btn_submit").prop("disabled", false).removeClass("btn-danger").addClass("btn-primary");
     $("#btn_submit > span.glyphicon").removeClass("glyphicon-remove-sign").addClass("glyphicon-ok-sign");
+    $("#div_btns > p > button").prop("disabled", false);
   }, 2500);
 };
 
@@ -304,12 +307,12 @@ app.modPrimerize.fnExpandStructureInput = function() {
 
 app.modPrimerize.fnOnLoad = function() {
   app.modPrimerize.fnTrackInputLength();
-  $("#id_sequence").on("keyup", app.modPrimerize.fnTrackInputLength);
-  $("#id_tag").on("keyup", function() {
+  $("#id_sequence").unbind("keyup").on("keyup", app.modPrimerize.fnTrackInputLength);
+  $("#id_tag").unbind("keyup").on("keyup", function() {
     var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
     if (val) { $(this).val(val.join('')); }
   });
-  $("#btn_clear").on("click", function(event) {
+  $("#btn_clear").unbind("click").on("click", function(event) {
     event.preventDefault();
     app.modPrimerize.job_id = undefined;
     clearTimeout(ajax_timeout);
@@ -321,8 +324,8 @@ app.modPrimerize.fnOnLoad = function() {
       is_3d = (app.page.indexOf("design_3d") !== -1 || app.modPrimerize.job_type === 3);
 
   if (is_2d || is_3d) {
-    $("input.primer_input").on("keyup", app.modPrimerize.fnTrackPrimerList);
-    $("#btn_add_prm").on("click", app.modPrimerize.fnExpandPrimerInput);
+    $("input.primer_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackPrimerList);
+    $("#btn_add_prm").unbind("keyup").on("click", app.modPrimerize.fnExpandPrimerInput);
 
     if (is_2d) {
       $("#form_2d").submit(function(event) {
@@ -337,7 +340,7 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
 
-      $("#btn_demo").on("click", function(event) {
+      $("#btn_demo").unbind("click").on("click", function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();
         $.ajax({
@@ -347,8 +350,8 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
     } else {
-      $("textarea.structure_input").on("keyup", app.modPrimerize.fnTrackStructureList);
-      $("#btn_add_str").on("click", app.modPrimerize.fnExpandStructureInput);
+      $("textarea.structure_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackStructureList);
+      $("#btn_add_str").unbind("click").on("click", app.modPrimerize.fnExpandStructureInput);
 
       $("#form_3d").submit(function(event) {
         event.preventDefault();
@@ -363,7 +366,7 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
 
-      $("#btn_demo_1, #btn_demo_2").on("click", function(event) {
+      $("#btn_demo_1, #btn_demo_2").unbind("click").on("click", function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();
         $.ajax({
@@ -380,7 +383,7 @@ app.modPrimerize.fnOnLoad = function() {
     } else {
       $("#id_num_primers").attr("disabled", "disabled");
     }
-    $("#id_is_num_primers").on("click", function() {
+    $("#id_is_num_primers").unbind("click").on("click", function() {
       if ($(this).is(":checked")) {
         $("#id_num_primers").removeAttr("disabled");
       } else {
@@ -398,7 +401,7 @@ app.modPrimerize.fnOnLoad = function() {
         success: app.modPrimerize.fnOnSubmit
       });
     });
-    $("#btn_demo").on("click", function(event) {
+    $("#btn_demo").unbind("click").on("click", function(event) {
       event.preventDefault();
       app.modPrimerize.fnOnDisable();
       $.ajax({
