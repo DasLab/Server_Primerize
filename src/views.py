@@ -11,6 +11,7 @@ from src.settings import *
 from datetime import datetime
 import re
 import simplejson
+import traceback
 
 
 def index(request):
@@ -84,7 +85,7 @@ def result(request):
     if request.method == 'POST': return error403(request)
 
     if 'job_id' not in request.GET:
-        return error404(request)
+        return error400(request)
     else:
         job_id = request.GET.get('job_id')
         if not job_id: return HttpResponseRedirect('/')
@@ -102,8 +103,10 @@ def result(request):
 def result_json(job_id):
     try:
         job_list_entry = JobIDs.objects.get(job_id=job_id)
-    except:
-        return error404(request)
+    except Exception:
+        print traceback.format_exc()
+        return HttpResponse(simplejson.dumps({'status': 404, 'error': 'JOB_ID not found'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+
     json = {'job_id': job_id, 'type': int(job_list_entry.type)}
     if job_list_entry.type == '1':
         job_entry = Design1D.objects.get(job_id=job_id)
