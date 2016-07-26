@@ -132,7 +132,6 @@ app.modPrimerize.fnOnSubmit = function(data) {
   app.modPrimerize.job_id = undefined;
   app.modPrimerize.job_type = data.type;
   app.modPrimerize.fnAjaxSubmitJob(data);
-  console.log('on submit')
 
   if (app.modPrimerize.job_type !== 1) {
     $("input.primer_input").prop("disabled", false).prop("readonly", false);
