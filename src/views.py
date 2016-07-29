@@ -44,7 +44,7 @@ def download(request):
         result = simplejson.load(open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'r'))
         return render(request, PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'dist': result})
     else:
-        flag = 0
+        (flag, msg) = (0, '')
         form = DownloadForm(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
@@ -57,8 +57,15 @@ def download(request):
                 user = SourceDownloader(date=datetime.now(), first_name=first_name, last_name=last_name, institution=inst, department=dept, email=email, is_subscribe=form.cleaned_data['is_subscribe'])
                 user.save()
                 flag = 1
-
-        return HttpResponse(simplejson.dumps({'status': flag}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+            else:
+                msg += '' if is_valid_name(first_name, "- ", 2) else '<li>Invalid <u>First Name</u>: only letters, numbers, and "-" allowed, and with minimum length 3 charaters required.</li>'
+                msg += '' if is_valid_name(last_name, "- ", 1) else '<li>Invalid <u>Last Name</u>: only letters, numbers, and "-" allowed, with minimum length 2 charaters required.</li>'
+                msg += '' if is_valid_name(inst, "()-, ", 4) else '<li>Invalid <u>Institution</u>: only letters, numbers, and "()-, " allowed, with minimum length 5 charaters required.</li>'
+                msg += '' if is_valid_name(dept, "()-, ", 4) else '<li>Invalid <u>Department</u>: only letters, numbers, and "()-, " allowed, with minimum length 5 charaters required.</li>'
+                msg += '' if is_valid_email(email) else '<li>Invalid <u>E-mail Address</u>.</li>'
+        else:
+            msg = 'Required form field(s) are missing.</li>'
+        return HttpResponse(simplejson.dumps({'status': flag, 'message': msg}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def link(request, tag):
     if not tag: return error400(request)

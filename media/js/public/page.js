@@ -324,7 +324,7 @@ if (app.key == "home") {
                     success: function(data) {
                         if (data.status === 0) {
                             $("#form_dl_notice > span.glyphicon").addClass("glyphicon-remove-sign").removeClass("glyphicon-hourglass");
-                            $("#form_dl_msg").html('<b>ERROR</b>: Invalid contact information. Please try again.');
+                            $("#form_dl_msg").html('<b>ERROR</b>: Invalid contact information. Please try again.<ul>' + data.message + '</ul>');
                             $("#form_dl_notice").fadeIn(200);
                         } else if (data.status === 1) {
                             $("#form_dl_notice > span.glyphicon").addClass("glyphicon-ok-sign").removeClass("glyphicon-hourglass");
