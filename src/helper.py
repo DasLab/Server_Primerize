@@ -26,7 +26,7 @@ def is_valid_email(input):
     input_split = input_split[1].split(".")
     if len(input_split) == 1: return 0
     for char in input_split:
-        if not is_valid_name(char, "", 1): return 0
+        if not is_valid_name(char, "-", 1): return 0
     return 1
 
 
