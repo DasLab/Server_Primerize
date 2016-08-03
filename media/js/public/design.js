@@ -243,8 +243,8 @@ app.modPrimerize.fnExpandPrimerInput = function() {
   }
   $('<div style="padding-bottom:10px;" id="primer_' + (idx + 1).toString() + '" class="input-group"><span class="input-group-addon">' + app.modPrimerize.fnPrimerLabel(idx + 1) + '</span><input class="primer_input form-control monospace translucent" type="text" id="id_primer_' + (idx + 1).toString() + '" name="id_primer_' + (idx + 1).toString() + '" placeholder="Enter primer ' + (idx + 1).toString() + ' sequence"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 1).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
   $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + app.modPrimerize.fnPrimerLabel(idx + 2) + '</span><input class="primer_input form-control monospace translucent" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '" placeholder="Enter primer ' + (idx + 2).toString() + ' sequence"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 2).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
-  $("#id_primer_" + (idx + 1).toString()).on("keyup", app.modPrimerize.fnTrackPrimerList);
-  $("#id_primer_" + (idx + 2).toString()).on("keyup", app.modPrimerize.fnTrackPrimerList);
+  $("#id_primer_" + (idx + 1).toString()).on("blur", app.modPrimerize.fnTrackPrimerList);
+  $("#id_primer_" + (idx + 2).toString()).on("blur", app.modPrimerize.fnTrackPrimerList);
 };
 
 
@@ -300,14 +300,14 @@ app.modPrimerize.fnExpandStructureInput = function() {
     idx = 0;
   }
   $('<div style="padding-bottom:10px;" id="structure_' + (idx + 1).toString() + '"><textarea class="structure_input form-control monospace translucent textarea-group" type="text" rows="4" cols="50" id="id_structure_' + (idx + 1).toString() + '" name="id_structure_' + (idx + 1).toString() + '" placeholder="Enter secondary structure #' + (idx + 1).toString() + '"></textarea><div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px; height:32px;"><p class="pull-left" style="margin:0px;"><b><span class="label label-success">SecStr</span> ' + (idx + 1).toString() + '</b></p><p class="pull-right" style="margin:0px;">Length: <i><b><span id="count_structure_' + (idx + 1).toString() + '">0</span></b></i> nt</p></div>').appendTo($("#structures"));
-  $("#id_structure_" + (idx + 1).toString()).on("keyup", app.modPrimerize.fnTrackStructureList);
+  $("#id_structure_" + (idx + 1).toString()).on("blur", app.modPrimerize.fnTrackStructureList);
 };
 
 
 app.modPrimerize.fnOnLoad = function() {
   app.modPrimerize.fnTrackInputLength();
-  $("#id_sequence").unbind("keyup").on("keyup", app.modPrimerize.fnTrackInputLength);
-  $("#id_tag").unbind("keyup").on("keyup", function() {
+  $("#id_sequence").unbind("blur").on("blur", app.modPrimerize.fnTrackInputLength);
+  $("#id_tag").unbind("blur").on("blur", function() {
     var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
     if (val) { $(this).val(val.join('')); }
   });
@@ -323,8 +323,8 @@ app.modPrimerize.fnOnLoad = function() {
       is_3d = (app.page.indexOf("design_3d") !== -1 || app.modPrimerize.job_type === 3);
 
   if (is_2d || is_3d) {
-    $("input.primer_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackPrimerList);
-    $("#btn_add_prm").unbind("keyup").on("click", app.modPrimerize.fnExpandPrimerInput);
+    $("input.primer_input").unbind("blur").on("blur", app.modPrimerize.fnTrackPrimerList);
+    $("#btn_add_prm").unbind("blur").on("click", app.modPrimerize.fnExpandPrimerInput);
 
     if (is_2d) {
       $("#form_2d").submit(function(event) {
@@ -349,7 +349,7 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
     } else {
-      $("textarea.structure_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackStructureList);
+      $("textarea.structure_input").unbind("blur").on("blur", app.modPrimerize.fnTrackStructureList);
       $("#btn_add_str").unbind("click").on("click", app.modPrimerize.fnExpandStructureInput);
 
       $("#form_3d").submit(function(event) {
