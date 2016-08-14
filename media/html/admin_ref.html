@@ -365,7 +365,7 @@
               <h4><span class="glyphicon glyphicon-text-background"></span>&nbsp;&nbsp;<span class="code code_brand">AWS</span> Setup</h4>
               <p>The server is an <span class="code code_misc">EC2</span> instance with <span class="code code_misc">ELB</span> at <span class="code code_brand">AWS</span>. Essential setup is listed as below:</p>
               <ul>
-                <li><span class="code code_misc">EC2</span> instance with <span class="code code_brand">Ubuntu</span> <u>14.04 LTS</u>. <span class="code code_misc">EBS</span> drive is mount to <span class="code code_path">/dev/sda1</span>.</li>
+                <li><span class="code code_misc">EC2</span> instance with <span class="code code_brand">Ubuntu</span> <u>16.04.x LTS</u>. <span class="code code_misc">EBS</span> drive is mount to <span class="code code_path">/dev/sda1</span>.</li>
                 <li>Use the following <b>Security Groups</b>: <span class="code code_key">HTTP &amp; SSH</span> (opens port <u>80</u> and port <u>22</u>), <span class="code code_key">HTTPS</span> (opens port <u>443</u>).</li>
                 <li>Submit <span class="code code_misc">SSL Certificate</span> through <span class="code code_cmd">aws iam</span>. See <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/ssl-server-cert.html" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>. Use the <span class="code code_misc">SSL Certificate</span> for <span class="code code_val">443</span> forwarding protocol.</li>
                 <li>Add instance to <span class="code code_misc">ELB</span>, configure with port forwarding <span class="code code_val">80</span> to <u>80</u>, <span class="code code_val">443</span> to <u>443</u>. Use same <b>Security Groups</b> as <span class="code code_misc">EC2</span>.</li>
@@ -389,14 +389,20 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty main
 deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
 deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main  
 </pre>
-              <p>Now you can use <span class="code code_cmd">apt-get</span> to install <span class="code code_cmd">llvm</span>. Due to the complicated compatibility issues between <span class="code code_cmd">llvm</span>, which is used by <code>llvmlite</code> and <code>numba</code>, we stick with:</p>
+              <p>Now you can use <span class="code code_cmd">apt-get</span> to install <span class="code code_cmd">llvm</span>. Due to the complicated compatibility issues between <span class="code code_cmd">llvm</span>, which is used by <code>llvmlite</code> and <code>numba</code>, use either:</p>
 <pre style="width:50%;">
 <span class="code code_cmd">llvm</span> == <span class="code code_val">3.6.2</span>
 <span class="code code_spe">llvmlite</span> == <span class="code code_val">0.8.0</span>
 <span class="code code_spe">numba</span> == <span class="code code_val">0.23.1</span>
 </pre>
+              <p>or (current):</p>
+<pre style="width:50%;">
+<span class="code code_cmd">llvm</span> == <span class="code code_val">3.7.1</span>
+<span class="code code_spe">llvmlite</span> == <span class="code code_val">0.12.1</span>
+<span class="code code_spe">numba</span> == <span class="code code_val">0.27.0</span>
+</pre>
               <p>These packages are excluded from <span class="code code_cmd">upd</span> command so you won't accidentally update them. In the far future, if this combination has components that are out of support, updating all into newer (still compatible with each other) versions should be carried out.</p>
-              <p>Other package archives we use to keep <span class="code code_cmd">git</span>, <span class="code code_brand">Apache</span> and <span class="code code_brand">MySQL</span> up to date are <span class="code code_val">git-core/ppa</span>, <span class="code code_val">ondrej/apache2</span> and <strike><span class="code code_val">ondrej/mysql-5_7</span></strike>. Use <span class="code code_cmd">sudo add-apt-repository ppa:<i><u>ppa_name</u></i></span> to add to system.</p>
+              <p>Other package archives we use to keep <span class="code code_cmd">git</span>, <span class="code code_brand">Apache</span> and <span class="code code_brand">MySQL</span> up to date are <span class="code code_val">git-core/ppa</span> and <span class="code code_val">ondrej/apache2</span>. Use <span class="code code_cmd">sudo add-apt-repository ppa:<i><u>ppa_name</u></i></span> to add to system.</p>
               <br/>
 
               <p>Second, you need to install <span class="code code_cmd">gdrive</span> for <span class="code code_brand">Google Drive</span> connections. You can retrieve from the <span class="code code_path">backup/backup_config.tgz</span>, or download <a href="https://github.com/prasmussen/gdrive" target="_blank">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</p>
@@ -503,7 +509,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                   <li><span class="code code_val">src_design1d</span>, <span class="code code_val">src_design2d</span>, <span class="code code_val">src_design3d</span>, <span class="code code_val">src_historyitem</span>, <span class="code code_val">src_jobgroups</span>, <span class="code code_val">src_jobids</span>, <span class="code code_val">src_sourcedownloader</span></li>
                 </ul>
                 <li>The <b>demo</b> entries are stored with <span class="code code_key">date</span> as <span class="code code_val">1970-01-01</span> on purpose. They will not be <span class="code code_cmd">cleanup</span>. So are their <span class="code code_key">JOB_ID</span> in the <span class="code code_val">src_jobids</span> table.</li>
-                <li>Configuration file is located at <span class="code code_path">/etc/mysql/my.cnf</span>. <span class="code code_brand">MySQL</span> version <u>5.7</u> is known to be memory-hungry, with all limits enforced, still gradually increase its memory usage to above <u>700 MB</u>. Thus, we have downgraded to version <u>5.6</u>.</li>
+                <li>Configuration file is located at <span class="code code_path">/etc/mysql/my.cnf</span>. <strike><span class="code code_brand">MySQL</span> version <u>5.7</u> is known to be memory-hungry, with all limits enforced, still gradually increase its memory usage to above <u>700 MB</u>. Thus, we have downgraded to version <u>5.6</u>.</strike> (Solved now by <span class="code code_brand">MySQL</span> <u>5.7.13+</u>.)</li>
               </ul>
             </div>
           </div>
