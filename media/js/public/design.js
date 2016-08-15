@@ -29,13 +29,15 @@ app.modPrimerize.fnUpdateFields = function(data) {
       $("#id_is_single").prop("checked", data.data.params.is_single);
       $("#id_is_fill_WT").prop("checked", data.data.params.is_fill_WT);
       app.modPrimerize.fnSyncStructureInput(data.data.structures);
+      app.modPrimerize.fnTrackStructureLength();
       app.modPrimerize.fnTrackStructureList();
     }
 
     app.modPrimerize.fnSyncPrimerInput(data.data.primers);
-    app.modPrimerize.fnTrackInputLength();
-    app.modPrimerize.fnTrackPrimerList();
+    app.modPrimerize.fnTrackSequenceWarning();
   }
+  app.modPrimerize.fnTrackPrimerLength();
+  app.modPrimerize.fnTrackPrimerList();
 };
 
 app.modPrimerize.fnAjaxLoadHTML = function() {
@@ -160,7 +162,12 @@ app.modPrimerize.fnOnDisable = function() {
 };
 
 
-app.modPrimerize.fnTrackInputLength = function() {
+app.modPrimerize.fnTrackSequenceLength = function() {
+  var l = $("#id_sequence").val().length;
+  $("#count").text(l);
+};
+
+app.modPrimerize.fnTrackSequenceWarning = function() {
   var val = $("#id_sequence").val().match(/[ACGTUacgtu\ \n]+/g);
   if (val) { $("#id_sequence").val(val.join('')); }
   var l = $("#id_sequence").val().length;
@@ -196,12 +203,17 @@ app.modPrimerize.fnTrackInputLength = function() {
   }
 };
 
-app.modPrimerize.fnTrackPrimerList = function() {
-  var value = '';
+
+app.modPrimerize.fnTrackPrimerLength = function() {
   $("input.primer_input").each(function() {
     var l = $(this).val().length;
     $(this).next().children().children().children().text(l);
+  });
+};
 
+app.modPrimerize.fnTrackPrimerList = function() {
+  var value = '';
+  $("input.primer_input").each(function() {
     var val = $(this).val().match(/[ACGTUacgtu]+/g);
     if (val) { $(this).val(val.join('')); }
     value += $(this).val() + ',';
@@ -231,6 +243,7 @@ app.modPrimerize.fnSyncPrimerInput = function(data) {
       $("#id_primer_" + (i + 1).toString()).val('');
     }
   }
+  app.modPrimerize.fnTrackPrimerLength();
   app.modPrimerize.fnTrackPrimerList();
 };
 
@@ -245,10 +258,12 @@ app.modPrimerize.fnExpandPrimerInput = function() {
   $('<div style="padding-bottom:10px;" id="primer_' + (idx + 2).toString() + '" class="input-group"><span class="input-group-addon">' + app.modPrimerize.fnPrimerLabel(idx + 2) + '</span><input class="primer_input form-control monospace translucent" type="text" id="id_primer_' + (idx + 2).toString() + '" name="id_primer_' + (idx + 2).toString() + '" placeholder="Enter primer ' + (idx + 2).toString() + ' sequence"/><span class="input-group-addon"><i><b><span id="count_primer_' + (idx + 2).toString() + '">0</span></b></i> nt</span></div>').appendTo($("#primer_sets"));
   $("#id_primer_" + (idx + 1).toString()).on("blur", app.modPrimerize.fnTrackPrimerList);
   $("#id_primer_" + (idx + 2).toString()).on("blur", app.modPrimerize.fnTrackPrimerList);
+  $("#id_primer_" + (idx + 1).toString()).on("keyup", app.modPrimerize.fnTrackPrimerLength);
+  $("#id_primer_" + (idx + 2).toString()).on("keyup", app.modPrimerize.fnTrackPrimerLength);
 };
 
 
-app.modPrimerize.fnTrackStructureList = function() {
+app.modPrimerize.fnTrackStructureLength = function() {
   var value = '';
   $("textarea.structure_input").each(function() {
     var l = $(this).val().length;
@@ -259,7 +274,12 @@ app.modPrimerize.fnTrackStructureList = function() {
     } else {
       l_label.css("color", "#29be92");
     }
+  });
+};
 
+app.modPrimerize.fnTrackStructureList = function() {
+  var value = '';
+  $("textarea.structure_input").each(function() {
     var val = $(this).val().match(/[\.\(\)\[\]]+/g);
     if (val) { $(this).val(val.join('')); }
     value += $(this).val() + ',';
@@ -289,6 +309,7 @@ app.modPrimerize.fnSyncStructureInput = function(data) {
       $("#id_structure_" + (i + 1).toString()).val('');
     }
   }
+  app.modPrimerize.fnTrackStructureLength();
   app.modPrimerize.fnTrackStructureList();
 };
 
@@ -301,12 +322,14 @@ app.modPrimerize.fnExpandStructureInput = function() {
   }
   $('<div style="padding-bottom:10px;" id="structure_' + (idx + 1).toString() + '"><textarea class="structure_input form-control monospace translucent textarea-group" type="text" rows="4" cols="50" id="id_structure_' + (idx + 1).toString() + '" name="id_structure_' + (idx + 1).toString() + '" placeholder="Enter secondary structure #' + (idx + 1).toString() + '"></textarea><div class="list-group-item disabled" style="padding:6px 12px; color:#555; border-color:#ccc; background-color:#eee; border-top:0px; height:32px;"><p class="pull-left" style="margin:0px;"><b><span class="label label-success">SecStr</span> ' + (idx + 1).toString() + '</b></p><p class="pull-right" style="margin:0px;">Length: <i><b><span id="count_structure_' + (idx + 1).toString() + '">0</span></b></i> nt</p></div>').appendTo($("#structures"));
   $("#id_structure_" + (idx + 1).toString()).on("blur", app.modPrimerize.fnTrackStructureList);
+  $("#id_structure_" + (idx + 1).toString()).on("keyup", app.modPrimerize.fnTrackStructureLength);
 };
 
 
 app.modPrimerize.fnOnLoad = function() {
-  app.modPrimerize.fnTrackInputLength();
-  $("#id_sequence").unbind("blur").on("blur", app.modPrimerize.fnTrackInputLength);
+  app.modPrimerize.fnTrackSequenceWarning();
+  $("#id_sequence").unbind("blur").on("blur", app.modPrimerize.fnTrackSequenceWarning);
+  $("#id_sequence").unbind("keyup").on("keyup", app.modPrimerize.fnTrackSequenceLength);
   $("#id_tag").unbind("blur").on("blur", function() {
     var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
     if (val) { $(this).val(val.join('')); }
@@ -324,6 +347,7 @@ app.modPrimerize.fnOnLoad = function() {
 
   if (is_2d || is_3d) {
     $("input.primer_input").unbind("blur").on("blur", app.modPrimerize.fnTrackPrimerList);
+    $("input.primer_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackPrimerLength);
     $("#btn_add_prm").unbind("blur").on("click", app.modPrimerize.fnExpandPrimerInput);
 
     if (is_2d) {
@@ -350,6 +374,7 @@ app.modPrimerize.fnOnLoad = function() {
       });
     } else {
       $("textarea.structure_input").unbind("blur").on("blur", app.modPrimerize.fnTrackStructureList);
+      $("textarea.structure_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackStructureLength);
       $("#btn_add_str").unbind("click").on("click", app.modPrimerize.fnExpandStructureInput);
 
       $("#form_3d").submit(function(event) {
