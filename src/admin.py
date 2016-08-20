@@ -85,7 +85,8 @@ def backup_form(request):
     return HttpResponse(simplejson.dumps(get_backup_form(), sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def admin_cmd(request, keyword):
-    call_command(keyword.strip('/'))
+    keyword = 'gdrive' if keyword.strip('/') == 'upload' else 'backup'
+    call_command(keyword)
     return refresh_stat(request, 'backup')
 
 
