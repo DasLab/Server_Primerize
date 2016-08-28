@@ -24,7 +24,7 @@ class Command(BaseCommand):
         flag = False
         try:
             gh = Github(login_or_token=GIT["ACCESS_TOKEN"])
-            repo = GIT["REPOSITORY"].replace('Server_', '')
+            repo = GIT["DIST_REPO"]
             releases = gh.get_repo(repo).get_releases()
 
             result = []
