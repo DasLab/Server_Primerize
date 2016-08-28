@@ -49,9 +49,9 @@ python manage.py runserver
 
 ## Documentation
 
- - Documentation is available at admin [manual](https://primerize.stanford.edu/admin/man/) and [reference](https://primerize.stanford.edu/admin/ref/).
+- Documentation is available at admin [manual](https://primerize.stanford.edu/admin/man/) and [reference](https://primerize.stanford.edu/admin/ref/).
 
-- Alternatively, read the repository [**Wiki**](https://github.com/DasLab/Server_Primerize/wiki/).
+- Alternatively, read the repository [**Wiki**](https://github.com/t47io/Django-Server-Primerize/wiki/).
 
 ## License
 
@@ -67,5 +67,10 @@ Copyright &copy; of **Primerize** _Source Code_ is described in [LICENSE.md](htt
 >[Primerize: Automated Primer Assembly for Transcribing Interesting RNAs.](http://nar.oxfordjournals.org/content/43/W1/W522.full)<br/>
 >*Nucleic Acid Research* **43 (W1)**: W522-W526.
 
-by [**t47**](http://t47.io/), *January 2016*.
+>Tian, S., and Das, R. (**2016**)<br/> 
+>Primerize-2D: automated primer design for RNA multidimensional chemical mapping.<br/>
+>*manuscript in preparation.*
+
+
+by [**t47**](http://t47.io/), *August 2016*.
 
