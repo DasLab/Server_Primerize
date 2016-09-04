@@ -1,7 +1,3 @@
-function replace_path(string) {
-    return string.replace('/home/ubuntu/Server_Primerize/data/', '/site_data/').replace('/Website_Server/Primerize/data/', '/site_data/');
-}
-
 function render_status(string) {
     var span_class = 'default';
     if (string == 'Success') {
