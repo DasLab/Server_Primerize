@@ -103,7 +103,7 @@
               <tr>
                 <td>
                   <span class="glyphicon glyphicon-heart-empty"></span>&nbsp;&nbsp;<b class="lead" style="color:#ff912e;">latest</b>
-                  &nbsp;&nbsp;<a href="/link/master/" target="_blank" id="a_dl_master" download onclick="return false;" style="color: #808080;"><span class="glyphicon glyphicon-floppy-save"></span></a>
+                  &nbsp;&nbsp;<a href="/link/master/" target="_blank" rel="noopener" id="a_dl_master" download onclick="return false;" style="color: #808080;"><span class="glyphicon glyphicon-floppy-save"></span></a>
                 </td>
                 <td><b>Development</b> from <i>master</i> with latest features as preview for next release.</td>
               </tr>
@@ -112,7 +112,7 @@
               <tr>
                 <td>
                   <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<b class="lead" style="color:#5496d7;">{{d.version}}</b>
-                  &nbsp;&nbsp;<a href="/link/{{d.version}}/" id="a_dl_{{d.version|slugify}}" target="_blank" download onclick="return false;" style="color: #808080;"><span class="glyphicon glyphicon-download-alt"></span></a>
+                  &nbsp;&nbsp;<a href="/link/{{d.version}}/" id="a_dl_{{d.version|slugify}}" target="_blank" rel="noopener" download onclick="return false;" style="color: #808080;"><span class="glyphicon glyphicon-download-alt"></span></a>
                 </td>
                 <td>
                   <b>{{d.title}}</b>
