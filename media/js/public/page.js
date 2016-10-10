@@ -1,16 +1,3 @@
-app.fnIndexResize = function() {
-    $("#col-1").css("height", "auto");
-    $("#col-2").css("height", "auto");
-    $("#col-3").css("height", "auto");
-    $("#col-4").css("height", "auto");
-
-    var col_h = Math.max(parseInt($("#col-1").css("height")), parseInt($("#col-2").css("height")), parseInt($("#col-3").css("height")), parseInt($("#col-4").css("height")));
-    $("#col-1").css("height", col_h);
-    $("#col-2").css("height", col_h);
-    $("#col-3").css("height", col_h);
-    $("#col-4").css("height", col_h);
-};
-
 app.fnTutorialResize = function() {
     $("#main").addClass("pull-right");
     $("#sidebar").css("width", $("#navbar").width() - $("#main").width() - 30);
@@ -39,28 +26,6 @@ app.fnTutorialResize = function() {
             app.resize_degree = 2;
         }
     }
-};
-
-app.fnDesignResize = function() {
-    $("#col-res-l").css("height", "auto");
-    $("#col-res-r").css("height", "auto");
-
-    var col_h = Math.max(parseInt($("#col-res-l").css("height")), parseInt($("#col-res-r").css("height")));
-    $("#col-res-l").css("height", col_h);
-    $("#col-res-r").css("height", col_h);
-};
-
-app.fnLandingResize = function() {
-    $("#res-1").css("padding-top", "").css("padding-bottom", "");
-    $("#h-2").css("padding-top", "").css("padding-bottom", "");
-    $("#p-2").css("padding-top", "").css("padding-bottom", "");
-
-    var diff_h = parseInt($("#res-2").css("height")) - parseInt($("#res-1").css("height"));
-    $("#res-1").css("padding-top", diff_h / 2 + "px").css("padding-bottom", diff_h / 2 + "px");
-    diff_h = parseInt($("#h-1").css("height")) - parseInt($("#h-2").css("height"));
-    $("#h-2").css("padding-top", diff_h / 2 + "px").css("padding-bottom", diff_h / 2 + "px");
-    diff_h = parseInt($("#p-1").css("height")) - parseInt($("#p-2").css("height"));
-    $("#p-2").css("padding-top", diff_h / 2 + "px").css("padding-bottom", diff_h / 2 + "px");
 };
 
 
@@ -101,14 +66,6 @@ $("div.svg_tooltip").css({"opacity": 0, "top": 0, "left": 0});
 
 
 if (app.key == "home") {
-    if (app.page == "primerize2d") {
-        setTimeout(app.fnLandingResize, 200);
-        $(window).on("resize", throttle(app.fnLandingResize, 200, 1000));
-    } else {
-        setTimeout(app.fnIndexResize, 200);
-        $(window).on("resize", throttle(app.fnIndexResize, 200, 1000));
-    }
-
     $("#form_retrieve").submit(function(event) {
         event.preventDefault();
         app.href = $(this).attr("action") + "?" + $(this).serialize();
@@ -128,7 +85,6 @@ if (app.key == "home") {
 
 } else if (app.key == "design") {
     app.callbackLoadD3("init");
-    $(window).on("resize", throttle(app.fnDesignResize, 200, 1000));
 
     if ($("#result_job_id").html().length > 0) {
         var result_timeout = setTimeout(function() {

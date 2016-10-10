@@ -413,6 +413,31 @@ a.btn-default { color: #000 !important; }
 }
 .nav_top:hover::after { background-position: 0 0; }
 
+.equal {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -mos-flex-flow: row wrap;
+  flex-flow: row wrap;
+
+}
+.equal > div[class*='col-'] {
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: flex;
+}
+.equal > div > div.panel {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch; 
+}
+.equal > div > div.panel > .panel-body,
+.equal > div > div.alert { flex-grow: 1; }
+
 #content {
   background-color: #fff;
   opacity: 0;
