@@ -435,7 +435,7 @@ a.btn-default { color: #000 !important; }
   flex-direction: column;
   align-content: stretch; 
 }
-.equal > div > div.panel > .panel-body,
+.equal > div > div.panel > div.panel-body,
 .equal > div > div.alert { flex-grow: 1; }
 
 #content {
