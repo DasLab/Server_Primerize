@@ -33,7 +33,7 @@ app.modPrimerize.fnUpdateFields = function(data) {
       app.modPrimerize.fnTrackStructureList();
     }
 
-    app.modPrimerize.fnSyncPrimerInput(data.data.primers);
+    app.modPrimerize.fnSyncPrimerInput(data.result.primer_set);
     app.modPrimerize.fnTrackSequenceWarning();
   }
   app.modPrimerize.fnTrackPrimerLength();
@@ -327,7 +327,11 @@ app.modPrimerize.fnExpandStructureInput = function() {
 
 
 app.modPrimerize.fnOnLoad = function() {
-  app.modPrimerize.fnTrackSequenceWarning();
+  if ($("#id_sequence").length) {
+    app.modPrimerize.fnTrackSequenceWarning();
+  } else {
+    $("#content").fadeTo(150, 1);
+  }
   $("#id_sequence").unbind("blur").on("blur", app.modPrimerize.fnTrackSequenceWarning);
   $("#id_sequence").unbind("keyup").on("keyup", app.modPrimerize.fnTrackSequenceLength);
   $("#id_tag").unbind("blur").on("blur", function() {
