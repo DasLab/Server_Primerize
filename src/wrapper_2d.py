@@ -224,7 +224,8 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
 
         job_entry = Design2D.objects.get(job_id=job_id)
         job_entry.status = '2' if job_id != ARG['DEMO_2D_ID'] else '0'
-        job_entry.plates = repr(plate._data['plates']).replace('\033[90m', '').replace('\033[91m', '').replace('\033[92m', '').replace('\033[93m', '').replace('\033[94m', '').replace('\033[95m', '').replace('\033[0m', '')
+        job_entry.result = simplejson.dumps({'primer_set': plate.primer_set, 'primers': plate._data['assembly'].primers.tolist()[0:-1], 'tm_overlaps': map(lambda x: round(x, 2), plate._data['assembly'].Tm_overlaps), 'plates': [plate.get('N_PLATE'), plate.get('N_PRIMER')], 'constructs': len(plate._data['constructs']), 'warnings': flag})
+        # repr(plate._data['plates']).replace('\033[90m', '').replace('\033[91m', '').replace('\033[92m', '').replace('\033[93m', '').replace('\033[94m', '').replace('\033[95m', '').replace('\033[0m', '')
         job_entry.time = t_total
         job_entry.save()
         create_res_html(script, job_id, 2)
