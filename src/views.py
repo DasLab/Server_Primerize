@@ -115,18 +115,19 @@ def result_json(job_id):
         return HttpResponse(simplejson.dumps({'status': 404, 'error': 'JOB_ID not found'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
     json = {'job_id': job_id, 'type': int(job_list_entry.type)}
+    json_data = {}
     if job_list_entry.type == '1':
         job_entry = Design1D.objects.get(job_id=job_id)
-        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': simplejson.loads(job_entry.params)}})
     elif job_list_entry.type == '2':
         job_entry = Design2D.objects.get(job_id=job_id)
-        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': simplejson.loads(job_entry.params)}})
     elif job_list_entry.type == '3':
         job_entry = Design3D.objects.get(job_id=job_id)
-        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'structures': simplejson.loads(job_entry.structures), 'params': simplejson.loads(job_entry.params)}})
+        json_data.update({'structures': simplejson.loads(job_entry.structures)})
     else:
         raise ValueError
         
+    json_data.update({'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': simplejson.loads(job_entry.params)})
+    json.update({'status': int(job_entry.status), 'data': json_data})
     if job_entry.status == '0' or job_entry.status == '2':
         json.update({'result': simplejson.loads(job_entry.result), 'time': round(job_entry.time, 2)})
         

@@ -12,7 +12,7 @@ if (typeof app.fnFormatInput !== "function") {
         $("input").addClass("form-control");
         $("select").addClass("form-control");
         $("textarea").addClass("form-control");
-        $("#id_sequence, #id_structures, #id_primers, #id_params, #id_plates").addClass("monospace");
+        $("#id_sequence, #id_structures, #id_primers, #id_params, #id_result").addClass("monospace");
         $("#id_job_id, #id_job_1d, #id_job_2d, #id_job_3d").addClass("monospace job_id");
         $("span.add-on").html('<span class="glyphicon glyphicon-calendar"></span>').addClass("input-group-addon").removeClass("add-on");
 

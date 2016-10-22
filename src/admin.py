@@ -38,7 +38,7 @@ class Design1DAdmin(admin.ModelAdmin):
     ordering = ('-date',)
     fieldsets = [
         (format_html('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;Entry'), {'fields': ['date', ('job_id', 'tag'), 'sequence', 'params']}),
-        (format_html('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Results'), {'fields': [('status', 'time'), 'primers']}),
+        (format_html('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Results'), {'fields': [('status', 'time'), 'result']}),
     ]
 admin.site.register(Design1D, Design1DAdmin)
 
@@ -46,8 +46,8 @@ class Design2DAdmin(admin.ModelAdmin):
     list_display = ('date', 'job_id', 'tag', 'status', 'sequence',)
     ordering = ('-date',)
     fieldsets = [
-        (format_html('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;Entry'), {'fields': ['date', ('job_id', 'tag'), 'sequence', 'primers', 'params']}),
-        (format_html('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Results'), {'fields': [('status', 'time'), 'plates']}),
+        (format_html('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;Entry'), {'fields': ['date', ('job_id', 'tag'), 'sequence', 'params']}),
+        (format_html('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Results'), {'fields': [('status', 'time'), 'result']}),
     ]
 admin.site.register(Design2D, Design2DAdmin)
 
@@ -55,8 +55,8 @@ class Design3DAdmin(admin.ModelAdmin):
     list_display = ('date', 'job_id', 'tag', 'status', 'sequence',)
     ordering = ('-date',)
     fieldsets = [
-        (format_html('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;Entry'), {'fields': ['date', ('job_id', 'tag'), 'sequence', 'structures', 'primers', 'params']}),
-        (format_html('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Results'), {'fields': [('status', 'time'), 'plates']}),
+        (format_html('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;Entry'), {'fields': ['date', ('job_id', 'tag'), 'sequence', 'structures', 'params']}),
+        (format_html('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Results'), {'fields': [('status', 'time'), 'result']}),
     ]
 admin.site.register(Design3D, Design3DAdmin)
 
