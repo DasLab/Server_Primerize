@@ -111,27 +111,25 @@ def result_json(job_id):
     try:
         job_list_entry = JobIDs.objects.get(job_id=job_id)
     except Exception:
-        print traceback.format_exc()
+        print '\033[41mERROR\033[0m: unmatched JobID: \033[92m%s\033[0m.' % job_id
         return HttpResponse(simplejson.dumps({'status': 404, 'error': 'JOB_ID not found'}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
     json = {'job_id': job_id, 'type': int(job_list_entry.type)}
     if job_list_entry.type == '1':
         job_entry = Design1D.objects.get(job_id=job_id)
-        params = simplejson.loads(job_entry.params)
-        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': params}})
+        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': simplejson.loads(job_entry.params)}})
     elif job_list_entry.type == '2':
         job_entry = Design2D.objects.get(job_id=job_id)
-        params = simplejson.loads(job_entry.params)
-        primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '').split(',')
-        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'params': params}})
+        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': simplejson.loads(job_entry.params)}})
     elif job_list_entry.type == '3':
         job_entry = Design3D.objects.get(job_id=job_id)
-        params = simplejson.loads(job_entry.params)
-        structures = job_entry.structures[1:-1].replace("'", '').replace(' ', '').split(',')
-        primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '').split(',')
-        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'structures': structures, 'params': params}})
+        json.update({'status': int(job_entry.status), 'data': {'sequence': job_entry.sequence, 'tag': job_entry.tag, 'structures': simplejson.loads(job_entry.structures), 'params': simplejson.loads(job_entry.params)}})
     else:
         raise ValueError
+        
+    if job_entry.status == '0' or job_entry.status == '2':
+        json.update({'result': simplejson.loads(job_entry.result), 'time': round(job_entry.time, 2)})
+        
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 
