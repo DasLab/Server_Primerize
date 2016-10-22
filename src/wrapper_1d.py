@@ -159,7 +159,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
 
         job_entry = Design1D.objects.get(job_id=job_id)
         job_entry.status = '2' if job_id != ARG['DEMO_1D_ID'] else '0'
-        job_entry.result = simplejson.dumps({'primer_set': assembly.primer_set, 'primers': assembly._data['assembly'].primers.tolist()[0:-1], 'tm_overlaps': map(lambda x: round(x, 2), assembly._data['assembly'].Tm_overlaps), 'warnings': assembly._data['warnings']})
+        job_entry.result = simplejson.dumps({'primer_set': assembly.primer_set, 'primers': assembly._data['assembly'].primers.tolist()[0:-1], 'tm_overlaps': map(lambda x: round(x, 2), assembly._data['assembly'].Tm_overlaps), 'warnings': assembly._data['warnings']}, sort_keys=True, indent=' ' * 4)
         job_entry.time = t_total
         job_entry.save()
 

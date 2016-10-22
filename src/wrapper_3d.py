@@ -84,7 +84,7 @@ def design_3d_run(request):
 
         job_id = random_job_id()
         create_wait_html(job_id, 3)
-        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=simplejson.dumps(structures), tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4))
+        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=simplejson.dumps(structures, sort_keys=True, indent=' ' * 4), tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=3, date=datetime.now())
         job_list_entry.save()
@@ -255,7 +255,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
 
         job_entry = Design3D.objects.get(job_id=job_id)
         job_entry.status = '2' if job_id not in (ARG['DEMO_3D_ID_1'], ARG['DEMO_3D_ID_2']) else '0'
-        job_entry.result = simplejson.dumps({'primer_set': plate.primer_set, 'primers': plate._data['assembly'].primers.tolist()[0:-1], 'tm_overlaps': map(lambda x: round(x, 2), plate._data['assembly'].Tm_overlaps), 'plates': [plate.get('N_PLATE'), plate.get('N_PRIMER')], 'constructs': len(plate._data['constructs']), 'warnings': flag})
+        job_entry.result = simplejson.dumps({'primer_set': plate.primer_set, 'primers': plate._data['assembly'].primers.tolist()[0:-1], 'tm_overlaps': map(lambda x: round(x, 2), plate._data['assembly'].Tm_overlaps), 'plates': [plate.get('N_PLATE'), plate.get('N_PRIMER')], 'constructs': len(plate._data['constructs']), 'warnings': flag}, sort_keys=True, indent=' ' * 4)
         job_entry.time = t_total
         job_entry.save()
         create_res_html(script, job_id, 3)
@@ -273,7 +273,7 @@ def design_3d_from_1d(request):
         from_1d = False
         if Design1D.objects.filter(job_id=referer_job_id).exists():
             job_entry = Design1D.objects.get(job_id=referer_job_id)
-            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
+            primers = ','.join(simplejson.loads(job_entry.result)['primer_set'])
             form = Design3DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers})
             from_1d = True
     else:
@@ -290,7 +290,7 @@ def design_3d_from_2d(request):
         if Design2D.objects.filter(job_id=referer_job_id).exists():
             job_entry = Design2D.objects.get(job_id=referer_job_id)
             params = simplejson.loads(job_entry.params)
-            primers = job_entry.primers.replace('[', '').replace(']', '').replace("'", '').replace(' ', '')
+            primers = ','.join(simplejson.loads(job_entry.result)['primer_set'])
             form = Design3DForm(initial={'sequence': job_entry.sequence, 'tag': job_entry.tag, 'primers': primers, 'max_muts': params['max_muts'], 'min_muts': params['min_muts'], 'offset': params['offset']})
             from_2d = True
     else:
