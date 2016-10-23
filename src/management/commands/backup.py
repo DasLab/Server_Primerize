@@ -14,76 +14,91 @@ from src.console import get_date_time, get_backup_stat, send_notify_emails
 class Command(BaseCommand):
     help = 'Backups MySQL database, static files, Apache2 settings and config settings to local backup/ folder. Existing backup files will be overwritten.'
 
+    def add_arguments(self, parser):
+        parser.add_argument('--item', nargs='+', type=str, help='List of backup itmes, choose from (\'apache\', \'config\', \'mysql\', \'static\')')
+
     def handle(self, *args, **options):
         t0 = time.time()
         self.stdout.write('%s:\t%s' % (time.ctime(), ' '.join(sys.argv)))
 
+        if options['item']:
+            is_apache = 'apache' in options['item']
+            is_config = 'config' in options['item']
+            is_mysql = 'mysql' in options['item']
+            is_static = 'static' in options['item']
+        else:
+            is_apache, is_config, is_mysql, is_static = True, True, True, True
+
         flag = False
-        t = time.time()
-        self.stdout.write("#1: Backing up MySQL database...")
-        try:
-            subprocess.check_call('mysqldump --quick %s -u %s -p%s > %s/backup/backup_mysql' % (env.db()['NAME'], env.db()['USER'], env.db()['PASSWORD'], MEDIA_ROOT), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            tarfile.open('%s/backup/backup_mysql.tgz' % MEDIA_ROOT, 'w:gz').add('%s/backup/backup_mysql' % MEDIA_ROOT, arcname='backup_mysql')
-            os.remove('%s/backup/backup_mysql' % MEDIA_ROOT)
-        except Exception:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to dump \033[94mMySQL\033[0m database.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mMySQL\033[0m database dumped.")
-        self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+        if is_mysql:
+            t = time.time()
+            self.stdout.write("#1: Backing up MySQL database...")
+            try:
+                subprocess.check_call('mysqldump --quick %s -u %s -p%s > %s/backup/backup_mysql' % (env.db()['NAME'], env.db()['USER'], env.db()['PASSWORD'], MEDIA_ROOT), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                tarfile.open('%s/backup/backup_mysql.tgz' % MEDIA_ROOT, 'w:gz').add('%s/backup/backup_mysql' % MEDIA_ROOT, arcname='backup_mysql')
+                os.remove('%s/backup/backup_mysql' % MEDIA_ROOT)
+            except Exception:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to dump \033[94mMySQL\033[0m database.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mMySQL\033[0m database dumped.")
+            self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
 
-        t = time.time()
-        self.stdout.write("#2: Backing up static files...")
-        try:
-            tarfile.open('%s/backup/backup_static.tgz' % MEDIA_ROOT, 'w:gz').add('%s/data' % MEDIA_ROOT, arcname='data')
-        except Exception:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mstatic\033[0m files.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mstatic\033[0m files synced.")
-        self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+        if is_static:
+            t = time.time()
+            self.stdout.write("#2: Backing up static files...")
+            try:
+                tarfile.open('%s/backup/backup_static.tgz' % MEDIA_ROOT, 'w:gz').add('%s/data' % MEDIA_ROOT, arcname='data')
+            except Exception:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mstatic\033[0m files.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mstatic\033[0m files synced.")
+            self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
 
-        t = time.time()
-        self.stdout.write("#3: Backing up apache2 settings...")
-        try:
-            pass
-            # tarfile.open('%s/backup/backup_apache2.tgz' % MEDIA_ROOT, 'w:gz').add('/etc/apache2', arcname='apache2')
-        except Exception:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mapache2\033[0m settings.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mapache2\033[0m settings saved.")
-        self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+        if is_apache:
+            t = time.time()
+            self.stdout.write("#3: Backing up apache2 settings...")
+            try:
+                pass
+                # tarfile.open('%s/backup/backup_apache2.tgz' % MEDIA_ROOT, 'w:gz').add('/etc/apache2', arcname='apache2')
+            except Exception:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mapache2\033[0m settings.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mapache2\033[0m settings saved.")
+            self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
 
-        t = time.time()
-        self.stdout.write("#4: Backing up config settings...")
-        try:
-            tarfile.open('%s/backup/backup_config.tgz' % MEDIA_ROOT, 'w:gz').add('%s/config' % MEDIA_ROOT, arcname='config')
-        except Exception:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mconfig\033[0m settings.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mconfig\033[0m settings saved.")
-        self.stdout.write("Time elapsed: %.1f s.\n" % (time.time() - t))
+        if is_config:
+            t = time.time()
+            self.stdout.write("#4: Backing up config settings...")
+            try:
+                tarfile.open('%s/backup/backup_config.tgz' % MEDIA_ROOT, 'w:gz').add('%s/config' % MEDIA_ROOT, arcname='config')
+            except Exception:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to archive \033[94mconfig\033[0m settings.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_backup.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mconfig\033[0m settings saved.")
+            self.stdout.write("Time elapsed: %.1f s.\n" % (time.time() - t))
 
         if flag:
             self.stdout.write("Finished with errors!")

@@ -13,74 +13,89 @@ from src.console import get_date_time, get_backup_stat, send_notify_emails
 class Command(BaseCommand):
     help = 'Uploads MySQL database, static files, Apache2 settings and config settings from local backup/ folder to Google Drive, and deletes expired backup files in Google Drive. Uploaded files will be named with date.'
 
+    def add_arguments(self, parser):
+        parser.add_argument('--item', nargs='+', type=str, help='List of backup itmes, choose from (\'apache\', \'config\', \'mysql\', \'static\')')
+
     def handle(self, *args, **options):
         t0 = time.time()
         self.stdout.write('%s:\t%s' % (time.ctime(), ' '.join(sys.argv)))
+
+        if options['item']:
+            is_apache = 'apache' in options['item']
+            is_config = 'config' in options['item']
+            is_mysql = 'mysql' in options['item']
+            is_static = 'static' in options['item']
+        else:
+            is_apache, is_config, is_mysql, is_static = True, True, True, True
 
         d = time.strftime('%Y%m%d')  # datetime.datetime.now().strftime('%Y%m%d')
         gdrive_dir = 'echo' if DEBUG else 'cd %s' % APACHE_ROOT
         prefix = '_DEBUG' if DEBUG else ''
 
         flag = False
-        t = time.time()
-        self.stdout.write("#1: Uploading MySQL database...")
-        try:
-            subprocess.check_call('%s && drive upload -f %s/backup/backup_mysql.tgz -t %s_%s_mysql%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mMySQL\033[0m database.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mMySQL\033[0m database uploaded.")
-        self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+        if is_mysql:
+            t = time.time()
+            self.stdout.write("#1: Uploading MySQL database...")
+            try:
+                subprocess.check_call('%s && drive upload -f %s/backup/backup_mysql.tgz -t %s_%s_mysql%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            except subprocess.CalledProcessError:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mMySQL\033[0m database.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mMySQL\033[0m database uploaded.")
+            self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
-        t = time.time()
-        self.stdout.write("#2: Uploading static files...")
-        try:
-            subprocess.check_call('%s && drive upload -f %s/backup/backup_static.tgz -t %s_%s_static%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mstatic\033[0m files.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mstatic\033[0m files uploaded.")
-        self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+        if is_static:
+            t = time.time()
+            self.stdout.write("#2: Uploading static files...")
+            try:
+                subprocess.check_call('%s && drive upload -f %s/backup/backup_static.tgz -t %s_%s_static%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            except subprocess.CalledProcessError:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mstatic\033[0m files.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mstatic\033[0m files uploaded.")
+            self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
-        t = time.time()
-        self.stdout.write("#3: Uploading apache2 settings...")
-        try:
-            subprocess.check_call('%s && drive upload -f %s/backup/backup_apache.tgz -t %s_%s_apache%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mapache2\033[0m settings.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mapache2\033[0m settings uploaded.")
-        self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+        if is_apache:
+            t = time.time()
+            self.stdout.write("#3: Uploading apache2 settings...")
+            try:
+                subprocess.check_call('%s && drive upload -f %s/backup/backup_apache.tgz -t %s_%s_apache%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            except subprocess.CalledProcessError:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mapache2\033[0m settings.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mapache2\033[0m settings uploaded.")
+            self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
-        t = time.time()
-        self.stdout.write("#4: Uploading config settings...")
-        try:
-            subprocess.check_call('%s && drive upload -f %s/backup/backup_config.tgz -t %s_%s_config%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError:
-            self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mconfig\033[0m settings.")
-            err = traceback.format_exc()
-            ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
-            open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
-            open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
-            flag = True
-        else:
-            self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mconfig\033[0m settings uploaded.")
-        self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
+        if is_config:
+            t = time.time()
+            self.stdout.write("#4: Uploading config settings...")
+            try:
+                subprocess.check_call('%s && drive upload -f %s/backup/backup_config.tgz -t %s_%s_config%s.tgz' % (gdrive_dir, MEDIA_ROOT, env('SERVER_NAME'), d, prefix), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            except subprocess.CalledProcessError:
+                self.stdout.write("    \033[41mERROR\033[0m: Failed to upload \033[94mconfig\033[0m settings.")
+                err = traceback.format_exc()
+                ts = '%s\t\t%s\n' % (time.ctime(), ' '.join(sys.argv))
+                open('%s/cache/log_alert_admin.log' % MEDIA_ROOT, 'a').write(ts)
+                open('%s/cache/log_cron_gdrive.log' % MEDIA_ROOT, 'a').write('%s\n%s\n' % (ts, err))
+                flag = True
+            else:
+                self.stdout.write("    \033[92mSUCCESS\033[0m: \033[94mconfig\033[0m settings uploaded.")
+            self.stdout.write("Time elapsed: %.1f s." % (time.time() - t))
 
 
         t = time.time()
