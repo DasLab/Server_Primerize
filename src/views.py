@@ -125,12 +125,10 @@ def result_json(job_id):
         json_data.update({'structures': simplejson.loads(job_entry.structures)})
     else:
         raise ValueError
-        
+
     json_data.update({'sequence': job_entry.sequence, 'tag': job_entry.tag, 'params': simplejson.loads(job_entry.params)})
-    json.update({'status': int(job_entry.status), 'data': json_data})
-    if job_entry.status == '0' or job_entry.status == '2':
-        json.update({'result': simplejson.loads(job_entry.result), 'time': round(job_entry.time, 2)})
-        
+    json.update({'status': int(job_entry.status), 'data': json_data, 'result': simplejson.loads(job_entry.result), 'time': round(job_entry.time, 2)})
+
     return HttpResponse(simplejson.dumps(json, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 

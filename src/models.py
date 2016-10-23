@@ -45,7 +45,7 @@ class Design1D(models.Model):
     tag = models.CharField(blank=True, max_length=31, help_text='<span class="glyphicon glyphicon-tag"></span>&nbsp;Prefix/name for sequence.')
     params = models.TextField(blank=True, verbose_name='Optional Parameters', help_text='<span class="glyphicon glyphicon-file"></span>&nbsp;Serialized JSON of optional parameters.')
     result = models.TextField(blank=True, verbose_name='Result Data', help_text='<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Serialized JSON of 1D design essential result.')
-    time = models.FloatField(blank=True, verbose_name='Time Elapsed', help_text='<span class="glyphicon glyphicon-time"></span>&nbsp;Unit of <span class="label label-inverse">seconds</span>.')
+    time = models.FloatField(blank=False, default=0, verbose_name='Time Elapsed', help_text='<span class="glyphicon glyphicon-time"></span>&nbsp;Unit of <span class="label label-inverse">seconds</span>.')
     status = models.CharField(blank=False, max_length=1, choices=JOB_STATUS_CHOICES, verbose_name='Status')
 
     class Meta():
@@ -63,7 +63,7 @@ class Design2D(models.Model):
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
     result = models.TextField(blank=True, verbose_name='Result Data', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized JSON of 2D design essential result.')
-    time = models.FloatField(blank=True, verbose_name='Time Elapsed', help_text='<span class="glyphicon glyphicon-time"></span>&nbsp;Unit of <span class="label label-inverse">seconds</span>.')
+    time = models.FloatField(blank=False, default=0, verbose_name='Time Elapsed', help_text='<span class="glyphicon glyphicon-time"></span>&nbsp;Unit of <span class="label label-inverse">seconds</span>.')
     status = models.CharField(blank=False, max_length=1, choices=JOB_STATUS_CHOICES, verbose_name='Status')
 
     class Meta():
@@ -82,7 +82,7 @@ class Design3D(models.Model):
     tag = models.CharField(blank=True, max_length=31)
     params = models.TextField(blank=True, verbose_name='Optional Parameters')
     result = models.TextField(blank=True, verbose_name='Result Data', help_text='<span class="glyphicon glyphicon-th"></span>&nbsp;Serialized JSON of 3D design essential result.')
-    time = models.FloatField(blank=True, verbose_name='Time Elapsed')
+    time = models.FloatField(blank=False, default=0, verbose_name='Time Elapsed')
     status = models.CharField(blank=False, max_length=1, choices=JOB_STATUS_CHOICES, verbose_name='Status')
 
     class Meta():
@@ -182,7 +182,7 @@ class Design2DForm(forms.Form):
 
 class Design3DForm(forms.Form):
     sequence = forms.CharField(widget=forms.Textarea, required=True)
-    structures = forms.CharField(widget=forms.Textarea, required=True)
+    structures = forms.CharField(widget=forms.Textarea, required=False)
     primers = forms.CharField(widget=forms.Textarea, required=False)
     tag = forms.CharField(required=False)
     offset = forms.IntegerField(required=False, initial=0)

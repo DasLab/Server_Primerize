@@ -84,7 +84,7 @@ def design_3d_run(request):
 
         job_id = random_job_id()
         create_wait_html(job_id, 3)
-        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=simplejson.dumps(structures, sort_keys=True, indent=' ' * 4), tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4))
+        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=simplejson.dumps(structures, sort_keys=True, indent=' ' * 4), tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({'primer_set': primers}, sort_keys=True, indent=' ' * 4))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=3, date=datetime.now())
         job_list_entry.save()
