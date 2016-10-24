@@ -53,7 +53,7 @@ def design_1d_run(request):
 
         job_id = random_job_id()
         create_wait_html(job_id, 1)
-        job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}, sort_keys=True, indent=' ' * 4))
+        job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({}))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
         job_list_entry.save()
@@ -81,7 +81,7 @@ def random_1d(request):
     tag = 'scRNA'
     job_id = random_job_id()
     create_wait_html(job_id, 1)
-    job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}, sort_keys=True, indent=' ' * 4))
+    job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({}))
     job_entry.save()
     job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
     job_list_entry.save()

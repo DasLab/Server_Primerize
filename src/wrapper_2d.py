@@ -108,7 +108,7 @@ def random_2d(request):
 
     job_id = random_job_id()
     create_wait_html(job_id, 2)
-    job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, primers=primers, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib}, sort_keys=True, indent=' ' * 4))
+    job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({'primer_set': primers}, sort_keys=True, indent=' ' * 4))
     job_entry.save()
     job_list_entry = JobIDs(job_id=job_id, type=2, date=datetime.now())
     job_list_entry.save()
