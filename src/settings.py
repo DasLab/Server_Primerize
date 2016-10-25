@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'adminplus',
     'suit',
     'widget_tweaks',
+    'corsheaders',
 
     'django.contrib.admin.apps.SimpleAdminConfig',
     # 'django.contrib.admin',
@@ -130,6 +131,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -208,3 +210,13 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_SECURE = CSRF_COOKIE_SECURE = (not DEBUG)
 CSRF_COOKIE_HTTPONLY = True
 # X_FRAME_OPTIONS = 'DENY'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = (
+    r'^design_1d_run/?$',
+    r'^design_2d_run/?$',
+    r'^design_3d_run/?$',
+    r'^result/?$'
+)
+CORS_ALLOW_METHODS = ('GET', 'POST')
+

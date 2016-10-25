@@ -12,6 +12,7 @@ This is the _Source Code_ repository for **Primerize** PCR Primer Assembly Desig
 boto >= 2.38.0
 Django >= 1.9.1
 django-adminplus >= 0.5
+django-cors-headers >= 1.2.2
 django-crontab >= 0.7.0
 django-environ >= 0.4.0
 django-filemanager == 0.0.2
