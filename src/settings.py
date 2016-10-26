@@ -131,18 +131,17 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware'
 ]
-if not DEBUG: MIDDLEWARE_CLASSES.append('django.middleware.security.SecurityMiddleware')
+if not DEBUG: MIDDLEWARE_CLASSES.insert(0, 'django.middleware.security.SecurityMiddleware')
 
 
 TEMPLATES = [{
@@ -212,11 +211,8 @@ CSRF_COOKIE_HTTPONLY = True
 # X_FRAME_OPTIONS = 'DENY'
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_URLS_REGEX = (
-    r'^design_1d_run/?$',
-    r'^design_2d_run/?$',
-    r'^design_3d_run/?$',
-    r'^result/?$'
-)
-CORS_ALLOW_METHODS = ('GET', 'POST')
+CORS_URLS_REGEX = (r'^(design_[1-3]d_run|result)/?$')
+CORS_ALLOW_METHODS = ('GET', 'POST', 'OPTIONS')
+CORS_REPLACE_HTTPS_REFERER = True
+CORS_ALLOW_CREDENTIALS = False
 
