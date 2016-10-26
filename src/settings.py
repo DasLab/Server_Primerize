@@ -115,7 +115,7 @@ INSTALLED_APPS = (
     'adminplus',
     'suit',
     'widget_tweaks',
-    'corsheaders',
+    # 'corsheaders',
 
     'django.contrib.admin.apps.SimpleAdminConfig',
     # 'django.contrib.admin',
@@ -133,9 +133,9 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = [
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'corsheaders.middleware.CorsPostCsrfMiddleware',
+    # 'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -209,10 +209,11 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_SECURE = CSRF_COOKIE_SECURE = (not DEBUG)
 CSRF_COOKIE_HTTPONLY = True
 # X_FRAME_OPTIONS = 'DENY'
+CSRF_FAILURE_VIEW = error403
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_URLS_REGEX = (r'^(design_[1-3]d_run|result)/?$')
-CORS_ALLOW_METHODS = ('GET', 'POST', 'OPTIONS')
-CORS_REPLACE_HTTPS_REFERER = True
-CORS_ALLOW_CREDENTIALS = False
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_URLS_REGEX = (r'^(design_[1-3]d_run|result|test2)/?$')
+# CORS_ALLOW_METHODS = ('GET', 'POST', 'OPTIONS')
+# CORS_REPLACE_HTTPS_REFERER = True
+# CORS_ALLOW_CREDENTIALS = False
 

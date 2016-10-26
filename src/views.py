@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.utils.encoding import smart_str
+from django.views.decorators.csrf import csrf_exempt
 
 from src.console import *
 from src.env import error400, error401, error403, error404, error500, error503
