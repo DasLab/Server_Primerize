@@ -20,7 +20,7 @@ def design_1d(request):
     return render(request, PATH.HTML_PATH['design_1d'], {'1d_form': Design1DForm()})
 
 def design_1d_run(request):
-    if request.method not in ['POST', 'OPTIONS']: return error400(request)
+    if request.method != 'POST': return error400(request)
     form = Design1DForm(request.POST)
     if form.is_valid():
         sequence = form.cleaned_data['sequence']

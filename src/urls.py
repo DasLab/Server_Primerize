@@ -7,6 +7,7 @@ from adminplus.sites import AdminSitePlus
 from filemanager import path_end
 
 from src.settings import MEDIA_ROOT, DEBUG, IS_MAINTENANCE, env
+from src import api
 from src import user
 from src import views
 from src import wrapper_1d, wrapper_2d, wrapper_3d
@@ -62,6 +63,9 @@ else:
         url(r'^design_2d_from_1d/?$', wrapper_2d.design_2d_from_1d),
         url(r'^design_3d_from_1d/?$', wrapper_3d.design_3d_from_1d),
         url(r'^design_3d_from_2d/?$', wrapper_3d.design_3d_from_2d),
+
+        url(r'^api/submit/$', api.submit),
+        url(r'^api/result/$', views.result),
 
         url(r'^(home|index)/?$', RedirectView.as_view(url='/', permanent=True)),
         url(r'^(help|intro)/?$', RedirectView.as_view(url='/tutorial/', permanent=True)),
