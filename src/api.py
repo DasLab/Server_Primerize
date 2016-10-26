@@ -24,4 +24,5 @@ def submit(request):
         response = design_3d_run(request)
 
     response['Access-Control-Allow-Origin'] = request.META.get('HTTP_ORIGIN')
+    response['Access-Control-Allow-Methods'] =  'POST, OPTIONS'
     return response
