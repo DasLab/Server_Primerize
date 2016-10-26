@@ -9,8 +9,9 @@ from src.wrapper_3d import design_3d_run
 @csrf_exempt
 def submit(request):
     if 'type' not in request.POST: return error400(request)
+    if request.POST.get('type') not in ('1', '2', '3'): return error400(request)
 
-    job_type = request.POST.get('type')
+    job_type = int(request.POST.get('type'))
     if job_type == 1:
         return design_1d_run(request)
     elif job_type == 2:
