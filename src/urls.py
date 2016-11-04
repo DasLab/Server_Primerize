@@ -65,7 +65,7 @@ else:
         url(r'^design_3d_from_2d/?$', wrapper_3d.design_3d_from_2d),
 
         url(r'^api/submit/$', api.submit),
-        url(r'^api/result/$', views.result),
+        url(r'^api/result/$', api.result),
 
         url(r'^(home|index)/?$', RedirectView.as_view(url='/', permanent=True)),
         url(r'^(help|intro)/?$', RedirectView.as_view(url='/tutorial/', permanent=True)),
