@@ -221,7 +221,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
             warning += '<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Group multiple plates that have fewer than <u>24</u> wells together before ordering.<br/>'
             script = script.replace('__NOTE_NUM__', warning)
         else:
-            script = script.replace('<div class="alert alert-warning" id="col-res-l"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success" id="col-res-l"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
+            script = script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
 
         (illustration_3, illustration_2, illustration_1, illustration_str) = plate._data['illustration']['lines']
         illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
