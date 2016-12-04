@@ -29,14 +29,12 @@ app.modPrimerize.fnUpdateFields = function(data) {
       $("#id_is_single").prop("checked", data.data.params.is_single);
       $("#id_is_fill_WT").prop("checked", data.data.params.is_fill_WT);
       app.modPrimerize.fnSyncStructureInput(data.data.structures);
-      app.modPrimerize.fnTrackStructureLength();
       app.modPrimerize.fnTrackStructureList();
     }
 
     app.modPrimerize.fnSyncPrimerInput(data.result.primer_set);
     app.modPrimerize.fnTrackSequenceWarning();
   }
-  app.modPrimerize.fnTrackPrimerLength();
   app.modPrimerize.fnTrackPrimerList();
 };
 
@@ -163,13 +161,14 @@ app.modPrimerize.fnOnDisable = function() {
 
 
 app.modPrimerize.fnTrackSequenceLength = function() {
-  var l = $("#id_sequence").val().length;
-  $("#count").text(l);
+  var val = $("#id_sequence").val().match(/[ACGTUacgtu]+/g);
+  if (val) { $("#count").text(val.join('').length); }
 };
 
 app.modPrimerize.fnTrackSequenceWarning = function() {
   var val = $("#id_sequence").val().match(/[ACGTUacgtu\ \n]+/g);
-  if (val) { $("#id_sequence").val(val.join('')); }
+  $("#id_sequence").val(val ? val.join('') : '');
+  app.modPrimerize.fnTrackSequenceLength();
   var l = $("#id_sequence").val().length;
 
   $("#count").text(l);
@@ -206,7 +205,8 @@ app.modPrimerize.fnTrackSequenceWarning = function() {
 
 app.modPrimerize.fnTrackPrimerLength = function() {
   $("input.primer_input").each(function() {
-    var l = $(this).val().length;
+    var val = $(this).val().match(/[ACGTUacgtu]+/g);
+    var l = val ? val.join('').length : 0;
     $(this).next().children().children().children().text(l);
   });
 };
@@ -215,11 +215,12 @@ app.modPrimerize.fnTrackPrimerList = function() {
   var value = '';
   $("input.primer_input").each(function() {
     var val = $(this).val().match(/[ACGTUacgtu]+/g);
-    if (val) { $(this).val(val.join('')); }
+    $(this).val(val ? val.join('') : '');
     value += $(this).val() + ',';
   });
   value = value.substring(0, value.length - 1);
   $("#id_primers").val(value);
+  app.modPrimerize.fnTrackPrimerLength();
 };
 
 app.modPrimerize.fnSyncPrimerInput = function(data) {
@@ -243,7 +244,6 @@ app.modPrimerize.fnSyncPrimerInput = function(data) {
       $("#id_primer_" + (i + 1).toString()).val('');
     }
   }
-  app.modPrimerize.fnTrackPrimerLength();
   app.modPrimerize.fnTrackPrimerList();
 };
 
@@ -266,7 +266,8 @@ app.modPrimerize.fnExpandPrimerInput = function() {
 app.modPrimerize.fnTrackStructureLength = function() {
   var value = '';
   $("textarea.structure_input").each(function() {
-    var l = $(this).val().length;
+    var val = $(this).val().match(/[\.\(\)\[\]]+/g);
+    var l = val ? val.join('').length : 0;
     var l_label = $(this).next().children().last().children().children();
     l_label.text(l);
     if (l !== $("#id_sequence").val().length) {
@@ -281,11 +282,12 @@ app.modPrimerize.fnTrackStructureList = function() {
   var value = '';
   $("textarea.structure_input").each(function() {
     var val = $(this).val().match(/[\.\(\)\[\]]+/g);
-    if (val) { $(this).val(val.join('')); }
+    $(this).val(val ? val.join('') : '');
     value += $(this).val() + ',';
   });
   value = value.substring(0, value.length - 1);
   $("#id_structures").val(value);
+  app.modPrimerize.fnTrackStructureLength();
 };
 
 app.modPrimerize.fnSyncStructureInput = function(data) {
@@ -309,7 +311,6 @@ app.modPrimerize.fnSyncStructureInput = function(data) {
       $("#id_structure_" + (i + 1).toString()).val('');
     }
   }
-  app.modPrimerize.fnTrackStructureLength();
   app.modPrimerize.fnTrackStructureList();
 };
 
