@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.management import call_command
 
-from src.env import error400, error403, error404
+from src.env import error400, error403, error404, error500
 from src.settings import env, DEBUG
 from src.views import result_json
 from src.wrapper_1d import design_1d_run
@@ -46,14 +46,18 @@ def result(request):
     return response
 
 
+@csrf_exempt
 def git_hook(request):
     if request.method != 'POST': return error404(request)
-    if ('X-Hub-Signature' not in request.META) or ('X-GitHub-Delivery' not in request.META) or ('X-GitHub-Event' not in request.META): return error400(request)
+    if ('HTTP_X_HUB_SIGNATURE' not in request.META) or ('HTTP_X_GITHUB_DELIVERY' not in request.META) or ('HTTP_X_GITHUB_EVENT' not in request.META): return error400(request)
 
-    signature = request.META['X-Hub-Signature']
+    signature = request.META['HTTP_X_HUB_SIGNATURE']
     mac = hmac.new(env('GITHOOK_SECRET'), msg=request.body, digestmod=sha1)
-    if not hmac.compare_digest(str(mac.hexdigest()), str(signature)): return error403(request)
+    if not hmac.compare_digest('sha1=' + str(mac.hexdigest()), str(signature)): return error403(request)
 
-    call_command('dist')
+    try:
+        call_command('dist')
+    except Exception:
+        return error500(request)
     return HttpResponse(content="", status=201)
 
