@@ -66,6 +66,7 @@ else:
 
         url(r'^api/submit/$', api.submit),
         url(r'^api/result/$', api.result),
+        url(r'^api/git_hook/$', api.git_hook),
 
         url(r'^(home|index)/?$', RedirectView.as_view(url='/', permanent=True)),
         url(r'^(help|intro)/?$', RedirectView.as_view(url='/tutorial/', permanent=True)),

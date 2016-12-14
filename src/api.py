@@ -1,12 +1,16 @@
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.management import call_command
 
-from src.env import error400, error403
+from src.env import error400, error403, error404
 from src.settings import env, DEBUG
 from src.views import result_json
 from src.wrapper_1d import design_1d_run
 from src.wrapper_2d import design_2d_run
 from src.wrapper_3d import design_3d_run
 
+import hmac
+from hashlib import sha1
 import re
 
 
@@ -40,3 +44,16 @@ def result(request):
     response['Access-Control-Allow-Origin'] = request.META.get('HTTP_ORIGIN')
     response['Access-Control-Allow-Methods'] =  'GET'
     return response
+
+
+def git_hook(request):
+    if request.method != 'POST': return error404(request)
+    if ('X-Hub-Signature' not in request.META) or ('X-GitHub-Delivery' not in request.META) or ('X-GitHub-Event' not in request.META): return error400(request)
+
+    signature = request.META['X-Hub-Signature']
+    mac = hmac.new(env('GITHOOK_SECRET'), msg=request.body, digestmod=sha1)
+    if not hmac.compare_digest(str(mac.hexdigest()), str(signature)): return error403(request)
+
+    call_command('dist')
+    return HttpResponse(content="", status=201)
+
