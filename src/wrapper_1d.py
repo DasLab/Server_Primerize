@@ -24,16 +24,8 @@ def design_1d_run(request):
     if form.is_valid():
         (sequence, tag) = form_data_clean_common(form.cleaned_data)
         (min_Tm, max_len, min_len, num_primers, is_num_primers, is_check_t7) = form_data_clean_1d(form.cleaned_data)
-
-        msg = ''
-        if len(sequence) < 60:
-            msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
-        elif len(sequence) > 1000:
-            msg = 'Sequence input exceeds length limit (should be <u>less than <b>1000</b> nt</u>). For long inputs, please download source code and run locally.'
-        elif num_primers % 2:
-            msg = 'Invalid advanced options input: <b>#</b> number of primers must be <b><u>EVEN</u></b>.'
-        if msg:
-            return HttpResponse(simplejson.dumps({'error': msg, 'type': 1}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        is_valid = form_check_valid(1, sequence, num_primers=num_primers)
+        if isinstance(is_valid, tuple): return is_valid
 
         job_id = random_job_id()
         create_wait_html(job_id, 1)
@@ -45,7 +37,7 @@ def design_1d_run(request):
         job.start()
         return result_json(job_id)
     else:
-        return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.', 'type': 1}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'error': '00', 'type': 1}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     return render(request, PATH.HTML_PATH['design_1d'], {'1d_form': form})
 
 

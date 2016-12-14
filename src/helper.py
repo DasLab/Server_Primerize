@@ -1,6 +1,9 @@
+from django.http import HttpResponse
+
 import binascii
 import os
 import re
+import simplejson
 import string
 
 from src.settings import *
@@ -114,6 +117,37 @@ def form_clean_data_3d(form_data, sequence):
     if not num_mutations: num_mutations = '1'
     num_mutations = int(num_mutations)
     return (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_single, is_fill_WT, num_mutations)
+
+
+def form_check_valid(type, sequence, num_primers=0, primers=[], min_muts=None, max_muts=None, structures=[]):
+    if len(sequence) < 60:
+        return HttpResponse(simplejson.dumps({'error': '10', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+    elif len(sequence) > 1000:
+        return HttpResponse(simplejson.dumps({'error': '11', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+    elif num_primers % 2:
+        return HttpResponse(simplejson.dumps({'error': '20', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+
+    if type >= 2:
+        if type == 3:
+            if not structures:
+                return HttpResponse(simplejson.dumps({'error': '40', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+            len_str = map(len, structures)
+            len_str = all([s == len(sequence) for s in len_str])
+            if not len_str:
+                return HttpResponse(simplejson.dumps({'error': '41', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+
+        if len(primers) % 2:
+            return HttpResponse(simplejson.dumps({'error': '21', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        elif min_muts > max_muts:
+            return HttpResponse(simplejson.dumps({'error': '30', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+
+        if not primers:
+            assembly = prm_1d.design(sequence)
+            if assembly.is_success:
+                primers = assembly.primer_set
+            else:
+                return HttpResponse(simplejson.dumps({'error': '01', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+    return (None, primers)
 
 
 def primer_suffix_html(num):

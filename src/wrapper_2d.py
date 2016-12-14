@@ -26,33 +26,14 @@ def design_2d(request, form=Design2DForm(), from_1d=False):
 def design_2d_run(request):
     if request.method != 'POST': return error400(request)
     form = Design2DForm(request.POST)
-    msg = ''
     if form.is_valid():
-        try:
-            (sequence, tag) = form_data_clean_common(form.cleaned_data)
-            (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_clean_data_2d(form.cleaned_data, sequence)
-        except:
-            print traceback.format_exc()
-
-        if len(sequence) < 60:
-            msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
-        elif len(sequence) > 1000:
-            msg = 'Sequence input exceeds length limit (should be <u>less than <b>1000</b> nt</u>). For long inputs, please download source code and run locally.'
-        elif len(primers) % 2:
-            msg = 'Invalid primers input (should be in <b>pairs</b>).'
-        elif min_muts > max_muts:
-            msg = 'Invalid mutation starting and ending positions: <b>starting</b> should be <u>lower than</u> or <u>equal to</u> <b>ending</b>.'
-        if msg:
-            return HttpResponse(simplejson.dumps({'error': msg, 'type': 2}, sort_keys=True, indent=' ' * 4), content_type='application/json')
-
-        if not primers:
-            assembly = prm_1d.design(sequence)
-            if assembly.is_success:
-                primers = assembly.primer_set
-            else:
-                msg = '<b>No assembly solution</b> found for sequence input under default constraints. Please supply a working assembly scheme (primers).'
-        if msg:
-            return HttpResponse(simplejson.dumps({'error': msg, 'type': 2}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        (sequence, tag) = form_data_clean_common(form.cleaned_data)
+        (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_clean_data_2d(form.cleaned_data, sequence)
+        is_valid = form_check_valid(2, sequence, primers=primers, min_muts=min_muts, max_muts=max_muts)
+        if isinstance(is_valid, tuple):
+            return is_valid
+        else:
+            primers = is_valid[1]
 
         job_id = random_job_id()
         create_wait_html(job_id, 2)
@@ -64,7 +45,7 @@ def design_2d_run(request):
         job.start()
         return result_json(job_id)
     else:
-        return HttpResponse(simplejson.dumps({'error': 'Invalid primary and/or advanced options input.', 'type': 2}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+        return HttpResponse(simplejson.dumps({'error': '00', 'type': 2}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     return render(request, PATH.HTML_PATH['design_2d'], {'2d_form': form})
 
 
