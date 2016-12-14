@@ -11,6 +11,8 @@ import time
 import traceback
 
 from src.helper import *
+from src.helper_form import *
+from src.helper_html import *
 from src.models import *
 from src.views import result_json, error400
 
@@ -28,7 +30,7 @@ def design_1d_run(request):
         if isinstance(is_valid, HttpResponse): return is_valid
 
         job_id = random_job_id()
-        create_wait_html(job_id, 1)
+        create_HTML_page_wait(job_id, 1)
         job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': min_Tm, 'max_len': max_len, 'min_len': min_len, 'num_primers': num_primers, 'is_num_primers': is_num_primers, 'is_check_t7': is_check_t7}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({}))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
@@ -46,7 +48,7 @@ def demo_1d(request):
 
 def demo_1d_run(request):
     job_id = ARG['DEMO_1D_ID']
-    create_wait_html(job_id, 1)
+    create_HTML_page_wait(job_id, 1)
     job = threading.Thread(target=design_1d_wrapper, args=(SEQ['P4P6'], 'P4P6_2HP', ARG['MIN_TM'], ARG['NUM_PRM'], ARG['MAX_LEN'], ARG['MIN_LEN'], 1, job_id))
     job.start()
     return result_json(job_id)
@@ -56,7 +58,7 @@ def random_1d(request):
     sequence = SEQ['T7'] + ''.join(random.choice('CGTA') for _ in xrange(random.randint(100, 500)))
     tag = 'scRNA'
     job_id = random_job_id()
-    create_wait_html(job_id, 1)
+    create_HTML_page_wait(job_id, 1)
     job_entry = Design1D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'min_Tm': ARG['MIN_TM'], 'max_len': ARG['MAX_LEN'], 'min_len': ARG['MIN_LEN'], 'num_primers': ARG['NUM_PRM'], 'is_num_primers': 0, 'is_check_t7': 1}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({}))
     job_entry.save()
     job_list_entry = JobIDs(job_id=job_id, type=1, date=datetime.now())
@@ -78,20 +80,20 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         t_total = time.time() - t0
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        return create_err_html(job_id, t_total, 1)
+        return create_HTML_page_error(job_id, t_total, 1)
 
     # when no solution found
-    if (not assembly.is_success): return create_HTML_no_solution(job_id, 1)
+    if (not assembly.is_success): return create_HTML_page_fail(job_id, 1)
 
     try:
-        script = output_header_html(job_id, 1)
+        script = HTML_elem_header(job_id, 1)
         script += '<div class="alert alert-warning" title="Mispriming alerts"><p>'
-        script = create_HTML_warnings(assembly, script, 1)
-        script += '</p></div>' + time_elapsed_html(t_total, 1)
-        script = create_HTML_t7_check(job_id, script, flag, is_t7, is_G)
-        script += create_HTML_primers(assembly)
-        script += create_HTML_assembly(assembly.echo('assembly'))
-        script += '<div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">%s. Or go ahead for <code>Mutate-and-Map Plates</code> and/or <code>Mutation/Rescue Sets</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-1d-to-2d" class="btn btn-primary btn-block btn-spa" href="/design_2d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 2D&nbsp;</a><a id="btn-1d-to-3d" class="btn btn-primary btn-block btn-spa" href="/design_3d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 3D&nbsp;</a></div></div>' % whats_next_html()
+        script = HTML_comp_warnings(assembly, script, 1)
+        script += '</p></div>' + HTML_elem_time_elapsed(t_total, 1)
+        script = HTML_comp_t7_check(job_id, script, flag, is_t7, is_G)
+        script += HTML_comp_primers(assembly)
+        script += HTML_comp_assembly(assembly.echo('assembly'))
+        script += '<div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">%s. Or go ahead for <code>Mutate-and-Map Plates</code> and/or <code>Mutation/Rescue Sets</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-1d-to-2d" class="btn btn-primary btn-block btn-spa" href="/design_2d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 2D&nbsp;</a><a id="btn-1d-to-3d" class="btn btn-primary btn-block btn-spa" href="/design_3d_from_1d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 3D&nbsp;</a></div></div>' % HTML_elem_whats_next()
 
         job_entry = Design1D.objects.get(job_id=job_id)
         job_entry.status = '2' if job_id != ARG['DEMO_1D_ID'] else '0'
@@ -99,10 +101,10 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
         job_entry.time = t_total
         job_entry.save()
 
-        create_res_html(script, job_id, 1)
+        create_HTML_page_result(script, job_id, 1)
     except Exception:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        create_err_html(job_id, t_total, 1)
+        create_HTML_page_error(job_id, t_total, 1)
 
 

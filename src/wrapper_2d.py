@@ -5,13 +5,14 @@ from django.shortcuts import render
 from datetime import datetime
 import random
 import simplejson
-# import subprocess
 import sys
 import threading
 import time
 import traceback
 
 from src.helper import *
+from src.helper_form import *
+from src.helper_html import *
 from src.models import *
 from src.views import result_json, error400
 
@@ -32,7 +33,7 @@ def design_2d_run(request):
             primers = is_valid[1]
 
         job_id = random_job_id()
-        create_wait_html(job_id, 2)
+        create_HTML_page_wait(job_id, 2)
         job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({'primer_set': primers}, sort_keys=True, indent=' ' * 4))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=2, date=datetime.now())
@@ -50,7 +51,7 @@ def demo_2d(request):
 
 def demo_2d_run(request):
     job_id = ARG['DEMO_2D_ID']
-    create_wait_html(job_id, 2)
+    create_HTML_page_wait(job_id, 2)
     which_muts = range(ARG['MIN_MUTS'], ARG['MAX_MUTS'] + 1)
     job = threading.Thread(target=design_2d_wrapper, args=(SEQ['P4P6'], SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], job_id))
     job.start()
@@ -71,7 +72,7 @@ def random_2d(request):
     which_lib = [int(lib)]
 
     job_id = random_job_id()
-    create_wait_html(job_id, 2)
+    create_HTML_page_wait(job_id, 2)
     job_entry = Design2D(date=datetime.now(), job_id=job_id, sequence=sequence, tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({'primer_set': primers}, sort_keys=True, indent=' ' * 4))
     job_entry.save()
     job_list_entry = JobIDs(job_id=job_id, type=2, date=datetime.now())
@@ -92,31 +93,31 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         t_total = time.time() - t0
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        return create_err_html(job_id, t_total, 2)
+        return create_HTML_page_error(job_id, t_total, 2)
 
     # when no solution found
-    if (not plate.is_success): return create_HTML_no_solution(job_id, 2)
+    if (not plate.is_success): return create_HTML_page_fail(job_id, 2)
 
     try:
-        script = output_header_html(job_id, 2)
+        script = HTML_elem_header(job_id, 2)
         script += '<div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <span>(<span class="glyphicon glyphicon-stats" style="color:#b7bac5;"></span> <u>%d</u>)</span><span class="monospace pull-right">__SEQ_ANNOT__</span></p></div>' % plate.get('N_CONSTRUCT')
-        script += time_elapsed_html(t_total, 2)
-        (script, flag) = create_HTML_plates(plate, script, job_id, 2)
-        script += create_HTML_assembly(plate.echo('assembly'))
-        script += '<div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">%s. Or go ahead for <code>Mutation/Rescue Sets</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-2d-to-3d" class="btn btn-primary btn-block btn-spa" href="/design_3d_from_2d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 3D&nbsp;</a></div></div>' % whats_next_html()
-        script = create_HTML_warnings(flag, script, 2)
-        script = create_HTML_illustration(plate, script, 2)
+        script += HTML_elem_time_elapsed(t_total, 2)
+        (script, flag) = HTML_comp_plates(plate, script, job_id, 2)
+        script += HTML_comp_assembly(plate.echo('assembly'))
+        script += '<div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">%s. Or go ahead for <code>Mutation/Rescue Sets</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-2d-to-3d" class="btn btn-primary btn-block btn-spa" href="/design_3d_from_2d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 3D&nbsp;</a></div></div>' % HTML_elem_whats_next()
+        script = HTML_comp_warnings(flag, script, 2)
+        script = HTML_comp_illustration(plate, script, 2)
 
         job_entry = Design2D.objects.get(job_id=job_id)
         job_entry.status = '2' if job_id != ARG['DEMO_2D_ID'] else '0'
         job_entry.result = simplejson.dumps({'primer_set': plate.primer_set, 'primers': plate._data['assembly'].primers.tolist()[0:-1], 'tm_overlaps': map(lambda x: round(x, 2), plate._data['assembly'].Tm_overlaps), 'plates': [plate.get('N_PLATE'), plate.get('N_PRIMER')], 'constructs': len(plate._data['constructs']), 'warnings': flag}, sort_keys=True, indent=' ' * 4)
         job_entry.time = t_total
         job_entry.save()
-        create_res_html(script, job_id, 2)
+        create_HTML_page_result(script, job_id, 2)
     except Exception:
         print "\033[41mError(s)\033[0m encountered: \033[94m", sys.exc_info()[0], "\033[0m"
         print traceback.format_exc()
-        create_err_html(job_id, t_total, 2)
+        create_HTML_page_error(job_id, t_total, 2)
 
 
 def design_2d_from_1d(request):
@@ -132,6 +133,5 @@ def design_2d_from_1d(request):
             from_1d = True
     else:
         return error400(request)
-
     return design_2d(request, form, from_1d)
 
