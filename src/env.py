@@ -53,6 +53,7 @@ def reload_conf(DEBUG, MEDIA_ROOT):
         'P4P6_2': env_arg['STR_P4P6_2'],
         'valid': env_arg['STR_VALID'],
     }
+    ERR_CODE = simplejson.load(open('%s/config/err.conf' % MEDIA_ROOT))
 
     env_cron = simplejson.load(open('%s/config/cron.conf' % MEDIA_ROOT))
     CRONJOBS = env_cron['CRONJOBS']
@@ -60,7 +61,7 @@ def reload_conf(DEBUG, MEDIA_ROOT):
     KEEP_BACKUP = env_cron['KEEP_BACKUP']
     KEEP_JOB = env_cron['KEEP_JOB']
 
-    return (env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, STR, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB)
+    return (env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ERR_CODE, ARG, SEQ, STR, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB)
 
 
 class Singleton(object):
@@ -129,7 +130,7 @@ PATH = SYS_PATH(MEDIA_ROOT)
 # MEDIA_ROOT = os.path.join(os.path.abspath("."))
 FILEMANAGER_STATIC_ROOT = root('media/admin') + '/'
 
-(env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ARG, SEQ, STR, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
+(env, AWS, GA, DRIVE, GIT, APACHE_ROOT, ERR_CODE, ARG, SEQ, STR, CRONJOBS, CRONTAB_LOCK_JOBS, KEEP_BACKUP, KEEP_JOB) = reload_conf(DEBUG, MEDIA_ROOT)
 
 
 
