@@ -180,10 +180,11 @@
               </div>
               <br/>
               <div class="row" style="padding-bottom:5px;">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                   App initiation
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                  <span class="code code_path">api.py</span>, 
                   <span class="code code_path">user.py</span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
@@ -613,7 +614,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                     <tbody>
                       <tr><td><span class="code code_path">arg.conf</span></td><td colspan="2">Default parameters for all demo runs; contains sequences, structures, demo <span class="code code_key">JOB_ID</span>, and other default parameters. Should be adapted from <span class="code code_path">arg.conf.example</span> with no change.</td></tr>
                       <tr><td><span class="code code_path">cron.conf</span></td><td colspan="2">List of <span class="code code_misc">cron</span> jobs in <span class="code code_key">JSON</span> format. See <span class="code code_misc">django-crontab</span> <a href="https://github.com/kraiz/django-crontab" target="_blank" rel="noopener noreferrer external">specs&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>. The suffix of each job is for logging into corresponding log files in <span class="code code_path">cache/</span>.</td></tr>
-                      <tr><td><span class="code code_path">env.conf</span></td><td colspan="2">Server secrets! Contains database and <span class="code code_brand">Apache</span> login. See <span class="code code_misc">django-environ</span> <a href="https://github.com/joke2k/django-environ" target="_blank" rel="noopener noreferrer external">specs&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
+                      <tr><td><span class="code code_path">env.conf</span></td><td colspan="2"><b>Server secrets</b>! Contains <span class="code code_brand">GitHub</span> <b>webhooks</b> secret, <span class="code code_brand">MySQL</span> database and <span class="code code_brand">Apache</span> login. See <span class="code code_misc">django-environ</span> <a href="https://github.com/joke2k/django-environ" target="_blank" rel="noopener noreferrer external">specs&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
                       <tr><td><span class="code code_path">oauth.conf</span></td><td colspan="2">Access token and account information for third-party APIs in <span class="code code_key">JSON</span> format. All vendors are under <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span> account. It also records <span class="code code_brand">AWS</span> IDs and <span class="code code_brand">Google Analytics</span> ID.</td></tr>
                       <tr><td><span class="code code_path">t47_dev.py</span></td><td colspan="2"><span class="code code_misc">Django</span> setting flags, isolated from all others. </td></tr>
                       <tr><td></td><td><span class="code code_key">IS_DEVEL</span></td><td><span class="code code_key">DEBUG</span> flag. Use <span class="code code_val">1</span> for test server, <span class="code code_val">0</span> for production.</td></tr>
@@ -746,6 +747,23 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td><span class="code code_method">backup()</span></td><td>Handles page requests of <span class="code code_url">/admin/backup/</span> page. Also takes <span class="code code_spe">POST</span> request to set configurations.</td></tr>
                       <tr><td><span class="code code_method">dir()</span>, <span class="code code_method">man()</span>, <span class="code code_method">ref()</span>, <span class="code code_method">doc()</span></td><td>Handles page requests of <span class="code code_url">/admin/dir/</span>, <span class="code code_url">/admin/man/</span>, <span class="code code_url">/admin/ref/</span>, and <span class="code code_url">/admin/doc/</span> for <span class="code code_misc">django-filemanager</span> and documentation pages.</td></tr>
                       <tr><td colspan="2" style="padding:0px;"></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+              </div>
+
+              <br/>
+              <h4 id="src_console"><span class="code code_path">src/api.py</span></h4>
+              <p>Handles <span class="code code_misc">API</span> job calls and <span class="code code_brand">GitHub</span> <b>webhooks</b>.</p>
+              <div class="row">
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr><td><span class="code code_method">git_hook()</span></td><td>Handles <span class="code code_brand">GitHub</span> <b>webhooks</b> <span class="code code_spe">POST</span> requests at <span class="code code_url">/api/git_hook/</span>. The <span class="code code_misc">SHA-1</span> digest of <span class="code code_misc">HMAC</span> hash of <span class="code code_class">request.body</span> is compared to <span class="code code_key">HTTP_X_HUB_SIGNATURE</span> field from <span class="code code_class">request.META</span> for a match. Then kicks off the <span class="code code_method">call_command()</span> for the management command <span class="code code_cmd">dist</span>. <span class="code code_spe">CSRF</span> token is disabled.</td></tr>
+                      <tr><td><span class="code code_method">submit()</span>, <span class="code code_method">result()</span></td><td>Allows <span class="code code_misc">CORS</span> (cross-origin) requests for job submission and result retrieval. Sets <span class="code code_key">Access-Control-Allow-Origin</span> header for response. <span class="code code_spe">CSRF</span> token is disabled.</td></tr>
+                      <tr><td colspan="3" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -996,6 +1014,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                             <li>Retrieves all releases of <code>primerize</code> package, and writes versions and texts into <span class="code code_path">cache/stat_dist.json</span>.</li>
                             <li>Downloads all release <span class="code code_key">ZIP</span> files using <span class="code code_cmd">curl</span> with <span class="code code_val">daslab-admin</span> <span class="code code_brand">GitHub</span> account credentials in <span class="code code_path">config/oauth.conf</span>. Files are saved to <span class="code code_path">dist/</span>. Releases already downloaded are skipped.</li>
                             <li>The latest master branch is downloaded as <span class="code code_path">dist/Primerize-master.zip</span>. The <span class="code code_path">LICENSE.md</span> inside it is extracted and placed as <span class="code code_path">dist/Primerize-LICENSE.md</span>, which is used by <span class="code code_method">license()</span> in <span class="code code_path">src/views.py</span> for <span class="code code_url">/license/</span>.</li>
+                            <li>This command is triggered by <span class="code code_brand">GitHub</span> <b>webhooks</b>, which is configured at <span class="code code_url">https://github.com/DasLab/Primerize/settings/hooks</span>, to keep the local <span class="code code_key">ZIP</span> files up-to-date. Webhooks are handled by <span class="code code_method">git_hook()</span> in <span class="code code_path">src/api.py</span>.</li>
                           </ul>
                         </td>
                       </tr>
