@@ -6,7 +6,6 @@ from datetime import datetime
 import glob
 import os
 import random
-import re
 import simplejson
 import shutil
 # import subprocess
@@ -29,18 +28,11 @@ def design_2d_run(request):
     form = Design2DForm(request.POST)
     msg = ''
     if form.is_valid():
-        sequence = form.cleaned_data['sequence']
-        tag = form.cleaned_data['tag']
-        primers = form.cleaned_data['primers']
-        offset = form.cleaned_data['offset']
-        min_muts = form.cleaned_data['min_muts']
-        max_muts = form.cleaned_data['max_muts']
-        lib = form.cleaned_data['lib']
-
-        sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T')).encode('utf-8', 'ignore')
-        tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
-        primers = re.sub('[^' + ''.join(SEQ['valid']) + ''.join(SEQ['valid']).lower() + '\ \,]', '', primers)
-        primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
+        try:
+            (sequence, tag) = form_data_clean_common(form.cleaned_data)
+            (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_clean_data_2d(form.cleaned_data, sequence)
+        except:
+            print traceback.format_exc()
 
         if len(sequence) < 60:
             msg = 'Invalid sequence input (should be <u>at least <b>60</b> nt</u> long and without illegal characters).'
@@ -59,11 +51,6 @@ def design_2d_run(request):
                 primers = assembly.primer_set
             else:
                 msg = '<b>No assembly solution</b> found for sequence input under default constraints. Please supply a working assembly scheme (primers).'
-        if not tag: tag = 'primer'
-        if not offset: offset = 0
-        (which_muts, min_muts, max_muts) = primerize.util.get_mut_range(min_muts, max_muts, offset, sequence)
-        if not lib: lib = '1'
-        which_lib = [int(lib)]
         if msg:
             return HttpResponse(simplejson.dumps({'error': msg, 'type': 2}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 

@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 from datetime import datetime
 import random
-import re
 import simplejson
 import sys
 import threading
@@ -23,23 +22,8 @@ def design_1d_run(request):
     if request.method != 'POST': return error400(request)
     form = Design1DForm(request.POST)
     if form.is_valid():
-        sequence = form.cleaned_data['sequence']
-        tag = form.cleaned_data['tag']
-        min_Tm = form.cleaned_data['min_Tm']
-        max_len = form.cleaned_data['max_len']
-        min_len = form.cleaned_data['min_len']
-        num_primers = form.cleaned_data['num_primers']
-        is_num_primers = form.cleaned_data['is_num_primers']
-        is_check_t7 = form.cleaned_data['is_check_t7']
-
-        sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T'))
-        tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
-        if not tag: tag = 'primer'
-        if not min_Tm: min_Tm = ARG['MIN_TM']
-        if not max_len: max_len = ARG['MAX_LEN']
-        if not min_len: min_len = ARG['MIN_LEN']
-        if len(sequence) > 500: min_len = max(30, min_len)
-        if (not num_primers) or (not is_num_primers): num_primers = ARG['NUM_PRM']
+        (sequence, tag) = form_data_clean_common(form.cleaned_data)
+        (min_Tm, max_len, min_len, num_primers, is_num_primers, is_check_t7) = form_data_clean_1d(form.cleaned_data)
 
         msg = ''
         if len(sequence) < 60:

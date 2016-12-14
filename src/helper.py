@@ -1,5 +1,6 @@
 import binascii
 import os
+import re
 import string
 
 from src.settings import *
@@ -9,6 +10,15 @@ import primerize
 prm_1d = primerize.Primerize_1D
 prm_2d = primerize.Primerize_2D
 prm_3d = primerize.Primerize_3D
+
+
+def random_job_id():
+    while True:
+        job_id = binascii.b2a_hex(os.urandom(8))
+        try:
+            is_exist = JobIDs.objects.get(job_id=job_id)
+        except:
+            return job_id
 
 
 def is_valid_name(input, char_allow, length):
@@ -46,20 +56,68 @@ def is_t7_present(sequence):
         return (SEQ['T7'] + sequence, 0, is_G)
 
 
+def form_data_clean_common(form_data):
+    sequence = form_data['sequence']
+    sequence = re.sub('[^' + ''.join(SEQ['valid']) + ']', '', sequence.upper().replace('U', 'T')).encode('utf-8', 'ignore')
+    tag = form_data['tag']
+    tag = re.sub('[^a-zA-Z0-9\ \.\-\_]', '', tag)
+    if not tag: tag = 'primer'
+    return (sequence, tag)
+
+
+def form_data_clean_primers(primers):
+    primers = re.sub('[^' + ''.join(SEQ['valid']) + ''.join(SEQ['valid']).lower() + '\ \,]', '', primers)
+    primers = [str(p.strip()) for p in primers.split(',') if p.strip()]
+    return primers
+
+
+def form_data_clean_structures(structures):
+    structures = re.sub('[^' + '\\'.join(STR['valid']) + '\ \,]', '', structures)
+    structures = [str(s.strip()) for s in structures.split(',') if s.strip()]
+    return structures
+
+
+def form_data_clean_1d(form_data):
+    min_Tm = form_data['min_Tm']
+    max_len = form_data['max_len']
+    min_len = form_data['min_len']
+    num_primers = form_data['num_primers']
+    is_num_primers = form_data['is_num_primers']
+    is_check_t7 = form_data['is_check_t7']
+    if not min_Tm: min_Tm = ARG['MIN_TM']
+    if not max_len: max_len = ARG['MAX_LEN']
+    if not min_len: min_len = ARG['MIN_LEN']
+    if len(sequence) > 500: min_len = max(30, min_len)
+    if (not num_primers) or (not is_num_primers): num_primers = ARG['NUM_PRM']
+    return (min_Tm, max_len, min_len, num_primers, is_num_primers, is_check_t7)
+
+
+def form_clean_data_2d(form_data, sequence):
+    primers = form_data_clean_primers(form_data['primers'])
+    offset = form_data['offset']
+    min_muts = form_data['min_muts']
+    max_muts = form_data['max_muts']
+    lib = form_data['lib']
+    if not offset: offset = 0
+    (which_muts, min_muts, max_muts) = primerize.util.get_mut_range(min_muts, max_muts, offset, sequence)
+    if not lib: lib = '1'
+    which_lib = [int(lib)]
+    return (primers, offset, min_muts, max_muts, which_muts, which_lib)
+
+
+def form_clean_data_3d(form_data, sequence):
+    (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_clean_data_2d(form_data, sequence)
+    structures = form_data_clean_structures(form_data['structures'])
+    is_single = form_data['is_single']
+    is_fill_WT = form_data['is_fill_WT']
+    num_mutations = form_data['num_mutations']
+    if not num_mutations: num_mutations = '1'
+    num_mutations = int(num_mutations)
+    return (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_single, is_fill_WT, num_mutations)
+
+
 def primer_suffix_html(num):
-    if num % 2:
-        return '<span class="label label-danger">R</span>'
-    else:
-        return '<span class="label label-info">F</span>'
-
-
-def random_job_id():
-    while True:
-        job_id = binascii.b2a_hex(os.urandom(8))
-        try:
-            is_exist = JobIDs.objects.get(job_id=job_id)
-        except:
-            return job_id
+    return '<span class="label label-danger">R</span>' if num % 2 else '<span class="label label-info">F</span>'
 
 
 def create_res_html(html_content, job_id, type):
