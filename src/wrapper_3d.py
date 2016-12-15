@@ -89,7 +89,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
 
     try:
         mode = 'NORMAL' if len(structures) == 1 else 'DIFF'
-        script = HTML_elem_header(job_id, 3)
+        script = HTML_elem_header(job_id, False, 3)
         script += '<div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <b style="color:#ff69bc;">%s</b> <i>Mode</i>; <span>(<span class="glyphicon glyphicon-stats" style="color:#b7bac5;"></span> <u>%d</u>)</span>.<small class="pull-right">(hover on sequence to locate plate coordinates)</small></p><p class="monospace" style="overflow-x:scroll;">__SEQ_ANNOT__</p></div>' % (mode, plate.get('N_CONSTRUCT'))
         script += HTML_elem_time_elapsed(t_total, 3)
         (script, flag) = HTML_comp_plates(plate, script, job_id, 3)

@@ -86,7 +86,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
     if (not assembly.is_success): return create_HTML_page_fail(job_id, 1)
 
     try:
-        script = HTML_elem_header(job_id, 1)
+        script = HTML_elem_header(job_id, False, 1)
         script += '<div class="alert alert-warning" title="Mispriming alerts"><p>'
         script = HTML_comp_warnings(assembly, script, 1)
         script += '</p></div>' + HTML_elem_time_elapsed(t_total, 1)

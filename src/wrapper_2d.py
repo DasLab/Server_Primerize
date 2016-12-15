@@ -99,7 +99,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
     if (not plate.is_success): return create_HTML_page_fail(job_id, 2)
 
     try:
-        script = HTML_elem_header(job_id, 2)
+        script = HTML_elem_header(job_id, False, 2)
         script += '<div class="alert alert-default" title="Sequence Illustration"><p><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b>INFO</b>: <span>(<span class="glyphicon glyphicon-stats" style="color:#b7bac5;"></span> <u>%d</u>)</span><span class="monospace pull-right">__SEQ_ANNOT__</span></p></div>' % plate.get('N_CONSTRUCT')
         script += HTML_elem_time_elapsed(t_total, 2)
         (script, flag) = HTML_comp_plates(plate, script, job_id, 2)
