@@ -4,7 +4,7 @@ from django.utils.encoding import smart_str
 
 from src.console import *
 from src.env import error400, error401, error403, error404, error500, error503
-from src.helper import *
+from src.helper_form import is_valid_name, is_valid_email
 from src.models import *
 from src.settings import *
 

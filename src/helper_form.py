@@ -3,8 +3,8 @@ from django.http import HttpResponse
 import re
 import string
 
-from src.settings import *
 from src.helper import *
+from src.settings import *
 
 
 def is_valid_name(input, char_allow, length):

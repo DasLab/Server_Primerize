@@ -1,5 +1,4 @@
 from django.http import HttpResponseRedirect, HttpResponse
-#, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseServerError
 from django.shortcuts import render
 
 from datetime import datetime

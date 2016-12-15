@@ -1,6 +1,6 @@
-from src.settings import *
-from src.models import *
 from src.helper import *
+from src.models import *
+from src.settings import *
 
 
 def create_HTML_page_result(html_content, job_id, type):

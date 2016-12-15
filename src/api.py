@@ -2,16 +2,16 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.management import call_command
 
+import hmac
+from hashlib import sha1
+import re
+
 from src.env import error400, error403, error404, error500
 from src.settings import env, DEBUG
 from src.views import result_json
 from src.wrapper_1d import design_1d_run
 from src.wrapper_2d import design_2d_run
 from src.wrapper_3d import design_3d_run
-
-import hmac
-from hashlib import sha1
-import re
 
 
 ALLOWED_ORIGIN = [env('ALLOWED_CORS_HOST')] if not DEBUG else [env('ALLOWED_CORS_HOST'), 'http://localhost:9000']
