@@ -42,6 +42,7 @@ app.callbackLoadD3 = function(func) {
         }
         head.test(d3, [], d3_js, function(flag) {
             $.getScript('/site_media/js/public/' + app.DEBUG_DIR + 'design' + app.DEBUG_STR + '.js', function(data, code, xhr) {
+                if (!app.DEBUG_DIR) { $.getScript('/site_media/js/public/api.js'); }
                 if (func === "init") { func = app.modPrimerize.fnOnLoad; }
                 if (typeof func === "function") { func(); }
             });

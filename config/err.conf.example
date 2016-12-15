@@ -1,0 +1,16 @@
+{
+  "00": "invalid form",
+  "01": "no 1d solution found",
+  
+  "10": "sequence too short",
+  "11": "sequence too long",
+
+  "20": "primer num not even",
+  "21": "primer not pairs",
+
+  "30": "mutpos not incremental",
+
+  "40": "structure empty",
+  "41": "structure length mismatch"
+
+}

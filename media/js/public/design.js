@@ -107,7 +107,7 @@ app.modPrimerize.fnAjaxRefreshResult = function() {
 app.modPrimerize.fnAjaxSubmitJob = function(data) {
   clearInterval(ajax_timeout);
   if (data.error) {
-    html = '<br/><hr/><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h2>Output Result:</h2></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: ' + data.error + '</p></div>';
+    html = '<br/><hr/><div class="row"><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h2>Output Result:</h2></div></div><br/><div class="alert alert-danger"><p><span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;<b>ERROR</b>: ' + app.modPrimerize.errCode[data.error] + '</p></div>';
     $("#result").html(html);
   } else {
     app.modPrimerize.job_id = data.job_id;
