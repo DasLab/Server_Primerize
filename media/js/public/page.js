@@ -275,6 +275,13 @@ if (app.key == "home") {
         } else if (app.page == "download") {
             $("#form_dl").submit(function(event) {
                 event.preventDefault();
+                $("#btn_submit").prop("disabled", true).removeClass("btn-primary").addClass("btn-danger");
+                $("#btn_submit > span.glyphicon").removeClass("glyphicon-play-circle").addClass("glyphicon-time");
+                setTimeout(function() {
+                    $("#btn_submit").prop("disabled", false).removeClass("btn-danger").addClass("btn-primary");
+                    $("#btn_submit > span.glyphicon").removeClass("glyphicon-time").addClass("glyphicon-play-circle");
+                }, 1000);
+
                 $.ajax({
                     type: "POST",
                     url: $(this).attr("action"),
@@ -292,6 +299,10 @@ if (app.key == "home") {
                             $("#form_dl_notice > span.glyphicon").addClass("glyphicon-ok-sign").removeClass("glyphicon-hourglass");
                             $("#form_dl_msg").html('<b class="lead">Your registration was successful.</b><br/>You will be notified about future Primerize updates depending on your subscription preference.<br/><br/>Your download should start automatically. If not, please click on <span class="glyphicon glyphicon-floppy-save" style="color:#345e91;"></span> icons below.');
                             $("#form_dl_notice").addClass("alert-success").removeClass("alert-danger").fadeIn(200);
+
+                            setTimeout(function() {
+                                $("#btn_submit").prop("disabled", true).removeClass("btn-primary").addClass("btn-info");
+                            }, 1000);
 
                             $("a[id^='a_dl_']").css("color", "").removeAttr("onclick").on("click", function(event) {
                                 event.preventDefault();
