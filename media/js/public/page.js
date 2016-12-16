@@ -138,9 +138,7 @@ if (app.key == "home") {
     app.fnTutorialResize();
     $(window).on("resize", throttle(app.fnTutorialResize, 200, 1000));
 
-    $("[data-toggle='popover']").popover({trigger: "hover"});
-    $("[data-toggle='tooltip']").tooltip();
-    $('[id^=tab_], #up').on('click', function(event) {
+    $('[id^=tab_]').on('click', function(event) {
         event.preventDefault();
         $('html, body').stop().animate({"scrollTop": $($(this).attr("href")).offset().top - 75}, 500);
     });
@@ -157,11 +155,6 @@ if (app.key == "home") {
     });
 
     $(window).on("scroll", function() {
-        if ($(this).scrollTop() > $(window).height()/2) {
-            $('#up').fadeIn();
-        } else {
-            $('#up').fadeOut();
-        }
         if (app.resize_degree == 1) {
             $("#sidebar").css("width", "auto").removeAttr("data-spy").removeClass("affix").removeClass("affix-top");
         }

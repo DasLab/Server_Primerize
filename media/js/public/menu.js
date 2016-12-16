@@ -41,6 +41,9 @@ app.fnChangeView = function() {
     if (window.location.hash) { $('html, body').stop().animate({"scrollTop": $(window.location.hash).offset().top - 75}, 500); }
     if (typeof app.callbackChangeView === "function") { app.callbackChangeView(); }
   });
+
+  $("[data-toggle='popover']").popover({trigger: "hover"});
+  $("[data-toggle='tooltip']").tooltip();
 };
 
 app.fnChangeLocation = function() {
@@ -63,8 +66,6 @@ $(document).ready(function() {
     function(){ $(this).addClass("open"); },
     function(){ $(this).removeClass("open"); }
   );
-  $("[data-toggle='popover']").popover({trigger: "hover"});
-  $("[data-toggle='tooltip']").tooltip();
 
   $("#top").on("click", function() {
     event.preventDefault();
