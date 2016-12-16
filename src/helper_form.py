@@ -1,28 +1,13 @@
 from django.http import HttpResponse
 
+from datetime import datetime
 import re
 import string
 
 from src.helper import *
+from src.models import SourceDownloader
 from src.settings import *
 
-
-def is_valid_name(input, char_allow, length):
-    if len(input) <= length: return 0
-    src = ''.join([string.digits, string.ascii_letters, char_allow])
-    for char in input:
-        if char not in src: return 0
-    return 1
-
-def is_valid_email(input):
-    input_split = input.split("@")
-    if len(input_split) != 2: return 0
-    if not is_valid_name(input_split[0], ".-_", 2): return 0
-    input_split = input_split[1].split(".")
-    if len(input_split) == 1: return 0
-    for char in input_split:
-        if not is_valid_name(char, "-", 1): return 0
-    return 1
 
 # def is_valid_sequence(sequence):
 #     for e in sequence.upper():
@@ -94,7 +79,7 @@ def form_clean_data_3d(form_data, sequence):
     return (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_single, is_fill_WT, num_mutations)
 
 
-def form_check_valid(type, sequence, num_primers=0, primers=[], min_muts=None, max_muts=None, structures=[]):
+def form_check_valid_job(type, sequence, num_primers=0, primers=[], min_muts=None, max_muts=None, structures=[]):
     if len(sequence) < 60:
         return HttpResponse(simplejson.dumps({'error': '10', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     elif len(sequence) > 1000:
@@ -123,3 +108,45 @@ def form_check_valid(type, sequence, num_primers=0, primers=[], min_muts=None, m
             else:
                 return HttpResponse(simplejson.dumps({'error': '01', 'type': type}, sort_keys=True, indent=' ' * 4), content_type='application/json')
     return (None, primers)
+
+
+def is_valid_name(input, char_allow, length):
+    if len(input) <= length: return 0
+    src = ''.join([string.digits, string.ascii_letters, char_allow])
+    for char in input:
+        if char not in src: return 0
+    return 1
+
+def is_valid_email(input):
+    input_split = input.split("@")
+    if len(input_split) != 2: return 0
+    if not is_valid_name(input_split[0], ".-_", 2): return 0
+    input_split = input_split[1].split(".")
+    if len(input_split) == 1: return 0
+    for char in input_split:
+        if not is_valid_name(char, "-", 1): return 0
+    return 1
+
+
+def form_check_valid_download(form_data):
+    (flag, msg) = (0, [])
+
+    first_name = form_data['first_name']
+    last_name = form_data['last_name']
+    inst = form_data['institution']
+    dept = form_data['department']
+    email = form_data['email']
+
+    is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 2) and is_valid_name(dept, "()-, ", 2) and is_valid_email(email)
+    if is_valid:
+        user = SourceDownloader(date=datetime.now(), first_name=first_name, last_name=last_name, institution=inst, department=dept, email=email, is_subscribe=form_data['is_subscribe'])
+        user.save()
+        flag = 1
+    else:
+        if not is_valid_name(first_name, "- ", 2): msg.append("91")
+        if not is_valid_name(last_name, "- ", 1): msg.append("92")
+        if not is_valid_name(inst, "()-, ", 2): msg.append("93")
+        if not is_valid_name(dept, "()-, ", 2): msg.append("94")
+        if not is_valid_email(email): msg.append("95")
+    return (flag, msg)
+

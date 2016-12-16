@@ -53,6 +53,7 @@ app.callbackLoadD3 = function(func) {
     }
 };
 
+if (!app.DEBUG_DIR) { $.getScript('/site_media/js/public/api.js'); }
 
 app.modPrimerize.job_id = undefined;
 app.modPrimerize.job_type = undefined;
@@ -281,7 +282,11 @@ if (app.key == "home") {
                     success: function(data) {
                         if (data.status === 0) {
                             $("#form_dl_notice > span.glyphicon").addClass("glyphicon-remove-sign").removeClass("glyphicon-hourglass");
-                            $("#form_dl_msg").html('<b>ERROR</b>: Invalid contact information. Please try again.<ul>' + data.message + '</ul>');
+                            var html = '';
+                            for (var i = 0; i < data.error.length; i++) {
+                                html += '<li>' + app.modPrimerize.errCode[data.error[i]] + '</li>'
+                            }
+                            $("#form_dl_msg").html('<b>ERROR</b>: Invalid contact information. Please try again.<ul>' + html + '</ul>');
                             $("#form_dl_notice").fadeIn(200);
                         } else if (data.status === 1) {
                             $("#form_dl_notice > span.glyphicon").addClass("glyphicon-ok-sign").removeClass("glyphicon-hourglass");

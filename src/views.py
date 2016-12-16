@@ -4,14 +4,13 @@ from django.utils.encoding import smart_str
 
 from src.console import *
 from src.env import error400, error401, error403, error404, error500, error503
-from src.helper_form import is_valid_name, is_valid_email
+from src.helper_form import form_check_valid_download
 from src.models import *
 from src.settings import *
 
-from datetime import datetime
 import re
 import simplejson
-import traceback
+# import traceback
 
 
 def index(request):
@@ -44,28 +43,13 @@ def download(request):
         result = simplejson.load(open('%s/cache/stat_dist.json' % MEDIA_ROOT, 'r'))
         return render(request, PATH.HTML_PATH['download'], {'dl_form': DownloadForm(), 'dist': result})
     else:
-        (flag, msg) = (0, '')
+        (flag, msg) = (0, [])
         form = DownloadForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            inst = form.cleaned_data['institution']
-            dept = form.cleaned_data['department']
-            email = form.cleaned_data['email']
-            is_valid = is_valid_name(first_name, "- ", 2) and is_valid_name(last_name, "- ", 1) and is_valid_name(inst, "()-, ", 4) and is_valid_name(dept, "()-, ", 4) and is_valid_email(email)
-            if is_valid:
-                user = SourceDownloader(date=datetime.now(), first_name=first_name, last_name=last_name, institution=inst, department=dept, email=email, is_subscribe=form.cleaned_data['is_subscribe'])
-                user.save()
-                flag = 1
-            else:
-                msg += '' if is_valid_name(first_name, "- ", 2) else '<li>Invalid <u>First Name</u>: only letters, numbers, and "-" allowed, and with minimum length 3 charaters required.</li>'
-                msg += '' if is_valid_name(last_name, "- ", 1) else '<li>Invalid <u>Last Name</u>: only letters, numbers, and "-" allowed, with minimum length 2 charaters required.</li>'
-                msg += '' if is_valid_name(inst, "()-, ", 4) else '<li>Invalid <u>Institution</u>: only letters, numbers, and "()-, " allowed, with minimum length 5 charaters required.</li>'
-                msg += '' if is_valid_name(dept, "()-, ", 4) else '<li>Invalid <u>Department</u>: only letters, numbers, and "()-, " allowed, with minimum length 5 charaters required.</li>'
-                msg += '' if is_valid_email(email) else '<li>Invalid <u>E-mail Address</u>.</li>'
+            (flag, msg) = form_check_valid_download(form.cleaned_data)
         else:
-            msg = 'Required form field(s) are missing.</li>'
-        return HttpResponse(simplejson.dumps({'status': flag, 'message': msg}, sort_keys=True, indent=' ' * 4), content_type='application/json')
+            msg.append("90")
+        return HttpResponse(simplejson.dumps({'status': flag, 'error': msg}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 def link(request, tag):
     if not tag: return error400(request)
@@ -75,6 +59,7 @@ def link(request, tag):
         last_name = request.GET.get('last_name')
         email = request.GET.get('email')
         records = SourceDownloader.objects.filter(first_name=first_name, last_name=last_name, email=email)
+        print len(records)
         if len(records):
             tag = tag.replace('/', '')
             file_name = '%s/dist/Primerize-%s.zip' % (MEDIA_ROOT, tag)
@@ -84,7 +69,7 @@ def link(request, tag):
                 response['X-Sendfile'] = smart_str(file_name)
                 return response
             else:
-                return error404(request)
+                return error401(request)
     return error401(request)
 
 

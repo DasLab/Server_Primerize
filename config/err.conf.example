@@ -11,6 +11,12 @@
   "30": "mutpos not incremental",
 
   "40": "structure empty",
-  "41": "structure length mismatch"
+  "41": "structure length mismatch",
 
+  "90": "missing fields",
+  "91": "first name invalid",
+  "92": "last name invalid",
+  "93": "institution invalid",
+  "94": "department invalid",
+  "95": "email invalid"
 }
