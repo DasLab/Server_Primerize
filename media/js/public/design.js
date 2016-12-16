@@ -333,13 +333,13 @@ app.modPrimerize.fnOnLoad = function() {
   } else {
     $("#content").fadeTo(150, 1);
   }
-  $("#id_sequence").unbind("blur").on("blur", app.modPrimerize.fnTrackSequenceWarning);
-  $("#id_sequence").unbind("keyup").on("keyup", app.modPrimerize.fnTrackSequenceLength);
-  $("#id_tag").unbind("blur").on("blur", function() {
+  $("#id_sequence").off("blur").on("blur", app.modPrimerize.fnTrackSequenceWarning);
+  $("#id_sequence").off("keyup").on("keyup", app.modPrimerize.fnTrackSequenceLength);
+  $("#id_tag").off("blur").on("blur", function() {
     var val = $(this).val().match(/[a-zA-Z0-9\ \.\-\_]+/g);
     if (val) { $(this).val(val.join('')); }
   });
-  $("#btn_clear").unbind("click").on("click", function(event) {
+  $("#btn_clear").off("click").on("click", function(event) {
     event.preventDefault();
     app.modPrimerize.job_id = undefined;
     clearTimeout(ajax_timeout);
@@ -351,12 +351,12 @@ app.modPrimerize.fnOnLoad = function() {
       is_3d = (app.page.indexOf("design_3d") !== -1 || app.modPrimerize.job_type === 3);
 
   if (is_2d || is_3d) {
-    $("input.primer_input").unbind("blur").on("blur", app.modPrimerize.fnTrackPrimerList);
-    $("input.primer_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackPrimerLength);
-    $("#btn_add_prm").unbind("blur").on("click", app.modPrimerize.fnExpandPrimerInput);
+    $("input.primer_input").off("blur").on("blur", app.modPrimerize.fnTrackPrimerList);
+    $("input.primer_input").off("keyup").on("keyup", app.modPrimerize.fnTrackPrimerLength);
+    $("#btn_add_prm").off("blur").on("click", app.modPrimerize.fnExpandPrimerInput);
 
     if (is_2d) {
-      $("#form_2d").submit(function(event) {
+      $("#form_2d").off("submit").on("submit", function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();
         $("input.primer_input").prop("disabled", true);
@@ -368,7 +368,7 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
 
-      $("#btn_demo").unbind("click").on("click", function(event) {
+      $("#btn_demo").off("click").on("click", function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();
         $.ajax({
@@ -378,11 +378,11 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
     } else {
-      $("textarea.structure_input").unbind("blur").on("blur", app.modPrimerize.fnTrackStructureList);
-      $("textarea.structure_input").unbind("keyup").on("keyup", app.modPrimerize.fnTrackStructureLength);
-      $("#btn_add_str").unbind("click").on("click", app.modPrimerize.fnExpandStructureInput);
+      $("textarea.structure_input").off("blur").on("blur", app.modPrimerize.fnTrackStructureList);
+      $("textarea.structure_input").off("keyup").on("keyup", app.modPrimerize.fnTrackStructureLength);
+      $("#btn_add_str").off("click").on("click", app.modPrimerize.fnExpandStructureInput);
 
-      $("#form_3d").submit(function(event) {
+      $("#form_3d").off("submit").on("submit", function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();
         $("textarea.structure_input").prop("disabled", true);
@@ -395,7 +395,7 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
 
-      $("#btn_demo_1, #btn_demo_2").unbind("click").on("click", function(event) {
+      $("#btn_demo_1, #btn_demo_2").off("click").on("click", function(event) {
         event.preventDefault();
         app.modPrimerize.fnOnDisable();
         $.ajax({
@@ -412,7 +412,7 @@ app.modPrimerize.fnOnLoad = function() {
     } else {
       $("#id_num_primers").attr("disabled", "disabled");
     }
-    $("#id_is_num_primers").unbind("click").on("click", function() {
+    $("#id_is_num_primers").off("click").on("click", function() {
       if ($(this).is(":checked")) {
         $("#id_num_primers").removeAttr("disabled");
       } else {
@@ -420,7 +420,7 @@ app.modPrimerize.fnOnLoad = function() {
       }
     });
 
-    $("#form_1d").submit(function(event) {
+    $("#form_1d").off("submit").on("submit", function(event) {
       event.preventDefault();
       app.modPrimerize.fnOnDisable();
       $.ajax({
@@ -430,7 +430,7 @@ app.modPrimerize.fnOnLoad = function() {
         success: app.modPrimerize.fnOnSubmit
       });
     });
-    $("#btn_demo").unbind("click").on("click", function(event) {
+    $("#btn_demo").off("click").on("click", function(event) {
       event.preventDefault();
       app.modPrimerize.fnOnDisable();
       $.ajax({
