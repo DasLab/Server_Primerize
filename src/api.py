@@ -5,6 +5,7 @@ from django.core.management import call_command
 import hmac
 from hashlib import sha1
 import re
+import traceback
 
 from src.env import error400, error403, error404, error500
 from src.settings import env, DEBUG
@@ -58,6 +59,7 @@ def git_hook(request):
     try:
         call_command('dist')
     except Exception:
+        print traceback.format_exc()
         return error500(request)
     return HttpResponse(content="", status=201)
 
