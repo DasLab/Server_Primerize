@@ -62,7 +62,7 @@ def HTML_elem_header(job_id, disabled, type):
 def HTML_elem_time_elapsed(t_total, type):
     alert = 'default' if type == 1 else 'warning'
     placeholder = '__NOTE_T7__' if type == 1 else '__NOTE_NUM__'
-    return '<div class="row equal"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-%s"><p>%s</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center"> <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:<br/><i>%.1f</i> s.</div></div></div>' % (alert, placeholder, t_total)
+    return '<div class="row equal"><div class="col-lg-10 col-md-10 col-sm-9 col-xs-9"><div class="alert alert-%s"><p>%s</p></div></div><div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><div class="alert alert-orange text-center"><span><span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;<b>Time elapsed</b>:</span><span><i>%.1f</i> s.</span></div></div></div>' % (alert, placeholder, t_total)
 
 def HTML_elem_whats_next():
     return '<p class="lead"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;<b><u><i>What\'s next?</i></u></b> Try our suggested experimental <a id="btn-result-to-protocol" class="btn btn-info btn-sm btn-spa" href="/protocol/#par_prep" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;Protocol&nbsp;</a>'
@@ -81,7 +81,7 @@ def HTML_comp_primers(assembly):
     script += '<tr><td colspan="3" style="padding: 0px;"></td></tr></tbody></table></div></div></div></div>'
     return script
 
-def HTML_comp_warnings(flag, script, type):
+def HTML_comp_warnings(flag, script, plate, type):
     if type == 1:
         warnings = flag.get('WARNING')
         if len(warnings):
@@ -95,8 +95,13 @@ def HTML_comp_warnings(flag, script, type):
             script = script.replace('alert-warning', 'alert-success')
         return script
     else:
+        warning = ''
+        if type == 3 and plate.get('WARNING'):
+            warning += '<span style="color:#ff5c2b"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b></span>: Mismatch in specified base-pairs between: '
+            for pair in plate.get('warning'):
+                warning += '<span class="label label-default">%s</span><span class="label label-success">%s</span> and <span class="label label-default">%s</span><span class="label label-success">%s</span>; ' % (plate.sequence[pair[0] - 1], pair[0] - plate.get('offset'), plate.sequence[pair[1] - 1], pair[1] - plate.get('offset'))
+            warning = warning[:-2] + '.<br/>'
         if flag:
-            warning = ''
             for key in flag.keys():
                 if len(flag[key]):
                     warning += '<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: <i>Plate</i> #<span class="label label-orange">%d</span> ' % key
@@ -105,6 +110,7 @@ def HTML_comp_warnings(flag, script, type):
                     warning = warning[:-2]
                     warning += ' have fewer than <u>24</u> wells filled.<br/>'
             warning += '<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;<b>WARNING</b>: Group multiple plates that have fewer than <u>24</u> wells together before ordering.<br/>'
+        if warning:
             return script.replace('__NOTE_NUM__', warning)
         else:
             return script.replace('<div class="alert alert-warning"><p>__NOTE_NUM__</p></div>', '<div class="alert alert-success"><p><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;<b>SUCCESS</b>: All plates are ready to go. No editing is needed before placing the order.</p></div>')
@@ -135,17 +141,17 @@ def HTML_comp_illustration(plate, script, type):
         (illustration_1, illustration_2, illustration_3) = plate._data['illustration']['lines']
     else:
         (illustration_3, illustration_2, illustration_1, illustration_str) = plate._data['illustration']['lines']
-    illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff7c55;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
-    illustration_2 = illustration_2.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
-    illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff7c55;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
+    illustration_1 = illustration_1.replace(' ', '&nbsp;').replace('\033[91m', '<span class="label-white label-default" style="color:#c28fdd;">').replace('\033[44m', '<span class="label-green" style="color:#ff912e;">').replace('\033[46m', '<span class="label-green">').replace('\033[40m', '<span class="label-white label-default">').replace('\033[0m', '</span>')
+    illustration_2 = illustration_2.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff912e;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
+    illustration_3 = illustration_3.replace(' ', '&nbsp;').replace('\033[92m', '<span style="color:#ff912e;">').replace('\033[91m', '<span style="color:#c28fdd;">').replace('\033[0m', '</span>')
 
     if type == 2:
         return script.replace('__SEQ_ANNOT__', illustration_1 + '</p><p class="text-right" style="margin-top:2px;">&nbsp;<span class="monospace">' + illustration_2 + '</p><p class="text-right" style="margin-top:0px;">&nbsp;<span class="monospace">' + illustration_3)
     else:
-        illustration_str = illustration_str.replace(' ', '&nbsp;').replace('\033[43m', '<span class="label-white label-primary">').replace('\033[0m', '</span>')
+        illustration_str = illustration_str.replace(' ', '&nbsp;').replace('\033[43m', '<span class="label-white label-primary">').replace('\033[41m', '<span class="label-white label-danger">').replace('\033[0m', '</span>')
 
         (illustration_str_annotated, illustration_1_annotated) = ('', '')
-        num = 1 - plate._params['offset']
+        num = 1 - plate.get('offset')
         for char in illustration_1:
             if char in ''.join(SEQ['valid']):
                 illustration_1_annotated += '<span class="seqpos_%d">%s</span>' % (num, char)
@@ -154,7 +160,7 @@ def HTML_comp_illustration(plate, script, type):
                 illustration_1_annotated += char
 
         for ill_str in illustration_str.split('\n'):
-            num = 1 - plate._params['offset']
+            num = 1 - plate.get('offset')
             for i, char in enumerate(ill_str):
                 if char in ''.join(STR['valid']):
                     illustration_str_annotated += '<span class="seqpos_%d">%s</span>' % (num, char)

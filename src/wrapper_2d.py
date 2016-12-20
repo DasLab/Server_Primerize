@@ -104,7 +104,7 @@ def design_2d_wrapper(sequence, primer_set, tag, offset, which_muts, which_lib, 
         (script, flag) = HTML_comp_plates(plate, script, job_id, 2)
         script += HTML_comp_assembly(plate.echo('assembly'))
         script += '<div class="row"><div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">%s. Or go ahead for <code>Mutation/Rescue Sets</code>.</p></div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a id="btn-2d-to-3d" class="btn btn-primary btn-block btn-spa" href="/design_3d_from_2d/" role="button" style="color: #ffffff;"><span class="glyphicon glyphicon-play-circle"></span>&nbsp;&nbsp;Design 3D&nbsp;</a></div></div>' % HTML_elem_whats_next()
-        script = HTML_comp_warnings(flag, script, 2)
+        script = HTML_comp_warnings(flag, script, [], 2)
         script = HTML_comp_illustration(plate, script, 2)
 
         job_entry = Design2D.objects.get(job_id=job_id)

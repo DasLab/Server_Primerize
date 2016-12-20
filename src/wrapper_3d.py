@@ -97,7 +97,7 @@ def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts,
         (script, flag) = HTML_comp_plates(plate, script, job_id, 3)
         script += HTML_comp_assembly(plate.echo('assembly'))
         script += HTML_elem_whats_next() + '</p>'
-        script = HTML_comp_warnings(flag, script, 3)
+        script = HTML_comp_warnings(flag, script, plate, 3)
         script = HTML_comp_illustration(plate, script, 3)
 
         job_entry = Design3D.objects.get(job_id=job_id)
