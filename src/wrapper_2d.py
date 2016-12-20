@@ -24,7 +24,7 @@ def design_2d_run(request):
     form = Design2DForm(request.POST)
     if form.is_valid():
         (sequence, tag) = form_data_clean_common(form.cleaned_data)
-        (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_clean_data_2d(form.cleaned_data, sequence)
+        (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_data_clean_2d(form.cleaned_data, sequence)
         is_valid = form_check_valid_job(2, sequence, primers=primers, min_muts=min_muts, max_muts=max_muts)
         if isinstance(is_valid, HttpResponse):
             return is_valid

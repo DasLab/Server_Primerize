@@ -56,7 +56,7 @@ def form_data_clean_1d(form_data, sequence):
     if (not num_primers) or (not is_num_primers): num_primers = ARG['NUM_PRM']
     return (min_Tm, max_len, min_len, num_primers, is_num_primers, is_check_t7)
 
-def form_clean_data_2d(form_data, sequence):
+def form_data_clean_2d(form_data, sequence):
     primers = form_data_clean_primers(form_data['primers'])
     offset = form_data['offset']
     min_muts = form_data['min_muts']
@@ -68,8 +68,8 @@ def form_clean_data_2d(form_data, sequence):
     which_lib = [int(lib)]
     return (primers, offset, min_muts, max_muts, which_muts, which_lib)
 
-def form_clean_data_3d(form_data, sequence):
-    (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_clean_data_2d(form_data, sequence)
+def form_data_clean_3d(form_data, sequence):
+    (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_data_clean_2d(form_data, sequence)
     structures = form_data_clean_structures(form_data['structures'])
     is_exclude = form_data['is_exclude']
     is_exclude = is_exclude if len(structures) > 1 else False

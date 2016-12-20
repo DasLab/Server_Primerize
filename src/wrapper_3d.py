@@ -25,7 +25,7 @@ def design_3d_run(request):
     msg = ''
     if form.is_valid():
         (sequence, tag) = form_data_clean_common(form.cleaned_data)
-        (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_exclude, is_single, is_fill_WT, num_mutations) = form_clean_data_3d(form.cleaned_data, sequence)
+        (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_exclude, is_single, is_fill_WT, num_mutations) = form_data_clean_3d(form.cleaned_data, sequence)
         is_valid = form_check_valid_job(3, sequence, primers=primers, min_muts=min_muts, max_muts=max_muts, structures=structures)
         if isinstance(is_valid, HttpResponse):
             return is_valid
