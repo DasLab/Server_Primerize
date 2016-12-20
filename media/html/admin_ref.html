@@ -180,17 +180,20 @@
               </div>
               <br/>
               <div class="row" style="padding-bottom:5px;">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                   App initiation
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                  <span class="code code_path">api.py</span>, 
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                  <span class="code code_path">api.py</span>,
+                  <br/>
                   <span class="code code_path">user.py</span>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <span class="glyphicon glyphicon-arrow-down"></span>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                  <span class="code code_path">helper_form.py</span>, <span class="code code_path">helper_html.py</span>
+                </div>
               </div>
 
               <div class="row" style="padding-bottom:5px;">
@@ -614,7 +617,8 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                     <tbody>
                       <tr><td><span class="code code_path">arg.conf</span></td><td colspan="2">Default parameters for all demo runs; contains sequences, structures, demo <span class="code code_key">JOB_ID</span>, and other default parameters. Should be adapted from <span class="code code_path">arg.conf.example</span> with no change.</td></tr>
                       <tr><td><span class="code code_path">cron.conf</span></td><td colspan="2">List of <span class="code code_misc">cron</span> jobs in <span class="code code_key">JSON</span> format. See <span class="code code_misc">django-crontab</span> <a href="https://github.com/kraiz/django-crontab" target="_blank" rel="noopener noreferrer external">specs&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>. The suffix of each job is for logging into corresponding log files in <span class="code code_path">cache/</span>.</td></tr>
-                      <tr><td><span class="code code_path">env.conf</span></td><td colspan="2"><b>Server secrets</b>! Contains <span class="code code_brand">GitHub</span> <b>webhooks</b> secret, <span class="code code_brand">MySQL</span> database and <span class="code code_brand">Apache</span> login. See <span class="code code_misc">django-environ</span> <a href="https://github.com/joke2k/django-environ" target="_blank" rel="noopener noreferrer external">specs&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
+                      <tr><td><span class="code code_path">env.conf</span></td><td colspan="2"><b>Server secrets</b>! Contains <span class="code code_brand">GitHub</span> <b>webhooks</b> secret, <span class="code code_brand">MySQL</span> database, <span class="code code_brand">Apache</span> login and email settings for additional admin. See <span class="code code_misc">django-environ</span> <a href="https://github.com/joke2k/django-environ" target="_blank" rel="noopener noreferrer external">specs&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
+                      <tr><td><span class="code code_path">err.conf</span></td><td colspan="2"><span class="code code_misc">API</span> error codes.</td></tr>
                       <tr><td><span class="code code_path">oauth.conf</span></td><td colspan="2">Access token and account information for third-party APIs in <span class="code code_key">JSON</span> format. All vendors are under <span class="code code_val">daslab</span> <span class="code code_brand">Gmail</span> account. It also records <span class="code code_brand">AWS</span> IDs and <span class="code code_brand">Google Analytics</span> ID.</td></tr>
                       <tr><td><span class="code code_path">t47_dev.py</span></td><td colspan="2"><span class="code code_misc">Django</span> setting flags, isolated from all others. </td></tr>
                       <tr><td></td><td><span class="code code_key">IS_DEVEL</span></td><td><span class="code code_key">DEBUG</span> flag. Use <span class="code code_val">1</span> for test server, <span class="code code_val">0</span> for production.</td></tr>
@@ -778,7 +782,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_method">send_notify_emails()</span></td><td colspan="2">Uses <span class="code code_cmd">smtp</span> email to send messages to admin about error reports.</td></tr>
+                      <tr><td><span class="code code_method">send_notify_emails()</span></td><td colspan="2">Uses <span class="code code_cmd">smtp</span> email to send messages to admin about error reports. Used by <span class="code code_cmd">cron</span> jobs since the <span class="code code_misc">Django</span> <span class="code code_method">send_mail()</span> function fails randomly.</td></tr>
                       <tr><td><span class="code code_method">get_backup_stat()</span></td><td colspan="2">Reads sizes of folders in <span class="code code_path">data/</span> and sizes of files in <span class="code code_path">backup/</span>, and a list of <span class="code code_key">TGZ</span> files stored in <span class="code code_brand">Google Drive</span>. Text information is saved to <span class="code code_path">cache/stat_backup.json</span>.</td></tr>
                       <tr><td><span class="code code_method">refresh_settings()</span></td><td colspan="2">Reloads <span class="code code_path">config/*.conf</span> files into current running environment. It writes to <span class="code code_class">settings._wrapped</span> to overwrite current <span class="code code_misc">Django</span> app setting.</td></tr>
                       <tr><td><span class="code code_method">get_sys_crontab()</span>, <span class="code code_method">set_sys_crontab()</span></td><td colspan="2"><b>GET</b>/<b>SET</b> <span class="code code_misc">cron</span> jobs. <b>GET</b> reads from system <span class="code code_cmd">crontab -l</span> instead of <span class="code code_path">config/cron.conf</span> to reflect the current setting.</td></tr>
@@ -823,7 +827,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
               </div>
 
               <br/>
-              <h4 id="src_helper"><span class="code code_path">src/helper.py</span></h4>
+              <h4 id="src_helper"><span class="code code_path">src/helper.py</span>, <span class="code code_path">src/helper_form.py</span>, <span class="code code_path">src/helper_html.py</span></h4>
               <p>Collection of helper functions for <span class="code code_path">src/wrapper_?d.py</span>.</p>
               <div class="row">
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
@@ -831,9 +835,14 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                   <table class="table table-hover">
                     <tbody>
                       <tr><td><span class="code code_val">prm_1d</span>, <span class="code code_val">prm_2d</span>, <span class="code code_val">prm_3d</span></td><td><code>primerize</code> constructor instances. They are constructed once and shared by <span class="code code_path">src/wrapper_?d.py</span>.</td></tr>
-                      <tr><td><span class="code code_method">is_valid_name()</span>, <span class="code code_method">is_valid_email()</span>, <span class="code code_method">is_t7_present()</span></td><td>Test functions for inputs.</td></tr>
                       <tr><td><span class="code code_method">random_job_id()</span></td><td>Generates random <span class="code code_key">JOB_ID</span> as <mark>16-digit</mark> <u>hexadecimal</u> string. It prevents collision by querying all previous <span class="code code_key">JOB_ID</span> on record.</td></tr>
-                      <tr><td><span class="code code_method">create_res_html()</span>, <span class="code code_method">create_wait_html()</span>, <span class="code code_method">create_err_html()</span></td><td>Writes to <span class="code code_key">HTML</span> result files in <span class="code code_path">data/</span>. <span class="code code_method">create_res_html()</span> is called by the other 2 for file handling.</td></tr>
+                      <tr><td><span class="code code_method">save_result_data()</span>, <span class="code code_method">save_plate_json()</span></td><td>Saves <span class="code code_key">TXT</span> and/or <span class="code code_key">ZIP</span> results to files; saves <span class="code code_key">JSON</span> plate layouts.</td></tr>
+                      <tr><td><span class="code code_method">form_data_clean_*()</span></td><td>Cleans up and prepares form data for <span class="code code_method">design_?d_run()</span> jobs.</td></tr>
+                      <tr><td><span class="code code_method">form_check_valid_*()</span></td><td>Checks if form is valid and returns an <span class="code code_misc">API</span> errr code.</td></tr>
+                      <tr><td><span class="code code_method">is_valid_name()</span>, <span class="code code_method">is_valid_email()</span>, <span class="code code_method">is_t7_present()</span></td><td>Test functions for inputs.</td></tr>
+                      <tr><td><span class="code code_method">create_HTML_page_*()</span></td><td>Writes to <span class="code code_key">HTML</span> result files in <span class="code code_path">data/</span>.</td></tr>
+                      <tr><td><span class="code code_method">HTML_elem_*()</span></td><td>Generates <span class="code code_key">HTML</span> code for page elements (Primer suffix, header, time elapsed, and what's next).</td></tr>
+                      <tr><td><span class="code code_method">HTML_comp_*()</span></td><td>Generates <span class="code code_key">HTML</span> code for page components (Assembly, primer list, warnings, T7 check, illustration, and plates).</td></tr>
                       <tr><td colspan="2" style="padding:0px;"></td></tr>
                     </tbody>
                   </table>
@@ -942,7 +951,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                         <td>Handles the <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> request.
                           <ul>
                             <li>It parses and tests the inputs, spawns a job in background using <span class="code code_class">threading.Thread</span>, and adds <span class="code code_key">JOB_ID</span> to database.</li>
-                            <li>It creates a <i>waiting</i> page <span class="code code_key">HTML</span> (<span class="code code_method">create_wait_html()</span> in <span class="code code_path">src/helper.py</span>) for display.</li>
+                            <li>It creates a <i>waiting</i> page <span class="code code_key">HTML</span> (<span class="code code_method">create_HTML_page_wait()</span> in <span class="code code_path">src/helper.py</span>) for display.</li>
                             <li> A <span class="code code_key">JSON</span> response from <span class="code code_method">result_json()</span> in <span class="code code_path">src/views.py</span> is returned for page refreshing, while the threaded job runs in parallel.</li>
                           </ul>
                         </td>
@@ -954,7 +963,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                         <td><span class="code code_method">design_?d_wrapper()</span></td>
                         <td>Calls <code>primerize</code> design code and processes the result.
                           <ul>
-                            <li>It creates a <i>error</i>, or <i>fail</i>, or <i>success</i> page <span class="code code_key">HTML</span> (<span class="code code_method">create_res_html()</span> in <span class="code code_path">src/helper.py</span>) for display, overwriting the previous <i>waiting</i> page.</li>
+                            <li>It creates a <i>error</i>, or <i>fail</i>, or <i>success</i> page <span class="code code_key">HTML</span> (<span class="code code_method">create_HTML_page_result()</span> in <span class="code code_path">src/helper.py</span>) for display, overwriting the previous <i>waiting</i> page.</li>
                             <li>It renders a graphical <span class="code code_key">HTML</span> result page by parsing the result instance from <code>primerize</code>.</li>
                             <li>It updates the <span class="code code_key">JOB_ID</span> entry in <span class="code code_brand">MySQL</span> of its <span class="code code_key">status</span>, <span class="code code_key">time</span> and results.</li>
                           </ul>
@@ -1103,6 +1112,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
+                      <tr><td><span class="code code_path">api.js</span></td><td>Dictionary of <span class="code code_misc">API</span> error code look-up and message display.</td></tr>
                       <tr><td><span class="code code_path">ga.js</span></td><td>Local copy of <span class="code code_brand">Google Analytics</span> script.</td></tr>
                       <tr><td><span class="code code_path">load.js</span></td><td>Loads vendor libraries using <span class="code code_spe">CDN</span>, or <b>fallback</b> to local files. Similar to <span class="code code_path">media/js/admin/load.js</span>.</td></tr>
                       <tr><td><span class="code code_path">menu.js</span></td><td>Main script for the <b>public app</b>, switching page without reloading. Works in similar way as <span class="code code_path">media/js/admin/menu.js</span>.</td></tr>
@@ -1140,7 +1150,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                             <li><span class="code code_method">app.modPrimerize.fnTrackSequenceWarning()</span>: Input disabling / <span class="code code_spe">REGEX</span> filtering, sequence length tracking and warning toggle for primary sequence input (on <span class="code code_val">blur</span> event).</li>
                             <li><span class="code code_method">app.modPrimerize.fnTrackPrimerLength()</span>, <span class="code code_method">app.modPrimerize.fnTrackStructureLength()</span>: Updates length display and color flags on <span class="code code_val">keyup</span> events.</li>
                             <li><span class="code code_method">app.modPrimerize.fnTrackPrimerList()</span>, <span class="code code_method">app.modPrimerize.fnTrackStructureList()</span>: Updates the hidden <code>&lt;input&gt;</code> for actual form (on <span class="code code_val">blur</span> events). The inherited input boxes for primer sets and structures from <span class="code code_misc">Django</span> are hidden in order to use the rich multi-input interface. <b>The original hidden inputs are actually used for form submission.</b></li>
-                            <li><span class="code code_method">app.modPrimerize.fnSyncPrimerInput()</span>, <span class="code code_method">app.modPrimerize.fnSyncStructureInput()</span>: Updates displayed input values from <span class="code code_key">JSON</span> response (either cleaned up by server after submission, or retrieval job).</li>
+                            <li><span class="code code_method">app.modPrimerize.fnSyncPrimerInput()</span>, <span class="code code_method">app.modPrimerize.fnSyncStructureInput()</span>: Updates displayed input values from <span class="code code_key">JSON</span> response (either cleaned up by server after submission, or retrieval job); also toggles the availability of <span class="code code_key">is_exclude</span> checkbox.</li>
                             <li><span class="code code_method">app.modPrimerize.fnExpandPrimerInput()</span>, <span class="code code_method">app.modPrimerize.fnExpandStructureInput()</span>: Adds more (pair of) inputs for the fields.</li>
                             <li><span class="code code_method">app.modPrimerize.fnOnLoad()</span>: Main script for events binding, and <span class="code code_key">AJAX</span> <span class="code code_spe">POST</span> forms to prevent page refresh. When the page is referred by <span class="code code_method">design_2d_from_1d()</span>, <span class="code code_method">design_3d_from_1d()</span>, or <span class="code code_method">design_3d_from_2d()</span>, the pre-filled results are passed simiarly as the case of retrieving a result.</li>
                           </ul>
