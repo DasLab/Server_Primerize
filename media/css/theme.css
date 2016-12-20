@@ -62,6 +62,7 @@ p.monospace {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
   font-weight: bold;
   font-size: 16px;
+  resize: vertical;
 }
 span.monospace > span,
 p.monospace span {

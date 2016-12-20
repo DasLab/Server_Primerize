@@ -23,6 +23,7 @@
 	],	
 
 	"NUM_MUT": 1,
+	"IS_EXCLUDE": true,
 	"IS_SINGLE": true,
 	"IS_FILLWT": true,	
 
