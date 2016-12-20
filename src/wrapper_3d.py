@@ -25,7 +25,7 @@ def design_3d_run(request):
     msg = ''
     if form.is_valid():
         (sequence, tag) = form_data_clean_common(form.cleaned_data)
-        (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_single, is_fill_WT, num_mutations) = form_clean_data_3d(form.cleaned_data, sequence)
+        (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_exclude, is_single, is_fill_WT, num_mutations) = form_clean_data_3d(form.cleaned_data, sequence)
         is_valid = form_check_valid_job(3, sequence, primers=primers, min_muts=min_muts, max_muts=max_muts, structures=structures)
         if isinstance(is_valid, HttpResponse):
             return is_valid
@@ -34,11 +34,11 @@ def design_3d_run(request):
 
         job_id = random_job_id()
         create_HTML_page_wait(job_id, 3)
-        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=simplejson.dumps(structures, sort_keys=True, indent=' ' * 4), tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({'primer_set': primers}, sort_keys=True, indent=' ' * 4))
+        job_entry = Design3D(date=datetime.now(), job_id=job_id, sequence=sequence, structures=simplejson.dumps(structures, sort_keys=True, indent=' ' * 4), tag=tag, status='1', params=simplejson.dumps({'offset': offset, 'min_muts': min_muts, 'max_muts': max_muts, 'which_lib': which_lib, 'num_mutations': num_mutations, 'is_exclude': is_exclude, 'is_single': is_single, 'is_fill_WT': is_fill_WT}, sort_keys=True, indent=' ' * 4), result=simplejson.dumps({'primer_set': primers}, sort_keys=True, indent=' ' * 4))
         job_entry.save()
         job_list_entry = JobIDs(job_id=job_id, type=3, date=datetime.now())
         job_list_entry.save()
-        job = threading.Thread(target=design_3d_wrapper, args=(sequence, structures, primers, tag, offset, which_muts, which_lib, num_mutations, is_single, is_fill_WT, job_id))
+        job = threading.Thread(target=design_3d_wrapper, args=(sequence, structures, primers, tag, offset, which_muts, which_lib, num_mutations, is_exclude, is_single, is_fill_WT, job_id))
         job.start()
         return result_json(job_id)
     else:
@@ -57,25 +57,27 @@ def demo_3d_run(request):
     job_id = ARG['DEMO_3D_ID_' + mode]
     create_HTML_page_wait(job_id, 3)
     which_muts = range(ARG['MIN_MUTS'], ARG['MAX_MUTS'] + 1)
+    is_exclude = ARG['IS_EXCLUDE']
     is_single = ARG['IS_SINGLE']
     is_fill_WT = ARG['IS_FILLWT']
     if mode == '2':
         structures = [STR['P4P6_1'], STR['P4P6_2']]
     else:
         structures = [STR['P4P6']]
+        is_exclude = (not is_exclude)
         is_single = (not is_single)
         is_fill_WT = (not is_fill_WT)
 
-    job = threading.Thread(target=design_3d_wrapper, args=(SEQ['P4P6'], structures, SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], is_single, is_fill_WT, job_id))
+    job = threading.Thread(target=design_3d_wrapper, args=(SEQ['P4P6'], structures, SEQ['PRIMER_SET'], 'P4P6_2HP', ARG['OFFSET'], which_muts, [int(ARG['LIB'])], ARG['NUM_MUT'], is_exclude, is_single, is_fill_WT, job_id))
     job.start()
     return result_json(job_id)
 
 
-def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts, which_lib, num_mutations, is_single, is_fillWT, job_id):
+def design_3d_wrapper(sequence, structures, primer_set, tag, offset, which_muts, which_lib, num_mutations, is_exclude, is_single, is_fillWT, job_id):
     try:
         t0 = time.time()
         # time.sleep(15)
-        plate = prm_3d.design(sequence, primer_set, structures, offset, num_mutations, which_lib, which_muts, tag, is_single, is_fillWT, True)
+        plate = prm_3d.design(sequence, primer_set, structures, offset, num_mutations, which_lib, which_muts, tag, is_exclude, is_single, is_fillWT, True)
         save_result_data(plate, job_id, tag, 3)
         t_total = time.time() - t0
     except Exception:

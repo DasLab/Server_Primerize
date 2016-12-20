@@ -71,12 +71,13 @@ def form_clean_data_2d(form_data, sequence):
 def form_clean_data_3d(form_data, sequence):
     (primers, offset, min_muts, max_muts, which_muts, which_lib) = form_clean_data_2d(form_data, sequence)
     structures = form_data_clean_structures(form_data['structures'])
+    is_exclude = form_data['is_exclude']
     is_single = form_data['is_single']
     is_fill_WT = form_data['is_fill_WT']
     num_mutations = form_data['num_mutations']
     if not num_mutations: num_mutations = '1'
     num_mutations = int(num_mutations)
-    return (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_single, is_fill_WT, num_mutations)
+    return (primers, offset, min_muts, max_muts, which_muts, which_lib, structures, is_exclude, is_single, is_fill_WT, num_mutations)
 
 
 def form_check_valid_job(type, sequence, num_primers=0, primers=[], min_muts=None, max_muts=None, structures=[]):

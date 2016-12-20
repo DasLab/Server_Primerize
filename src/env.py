@@ -33,6 +33,7 @@ def reload_conf(DEBUG, MEDIA_ROOT):
         'MAX_MUTS': env_arg['MAX_MUTS_P4P6'],
 
         'NUM_MUT': env_arg['NUM_MUT'],
+        'IS_EXCLUDE': env_arg['IS_EXCLUDE'],
         'IS_SINGLE': env_arg['IS_SINGLE'],
         'IS_FILLWT': env_arg['IS_FILLWT'],
 

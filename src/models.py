@@ -189,6 +189,7 @@ class Design3DForm(forms.Form):
     min_muts = forms.IntegerField(required=False)
     max_muts = forms.IntegerField(required=False)
     lib = forms.ChoiceField(choices=M2R_LIBRARY_CHOICES, initial='1', required=True)
+    is_exclude = forms.BooleanField(required=False, initial=True)
     is_single = forms.BooleanField(required=False, initial=False)
     is_fill_WT = forms.BooleanField(required=False, initial=False)
     num_mutations = forms.ChoiceField(choices=M2R_MUTATION_CHOICES, initial='1', required=True)
