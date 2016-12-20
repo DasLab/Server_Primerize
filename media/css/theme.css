@@ -437,7 +437,12 @@ a.btn-default { color: #000 !important; }
   align-content: stretch; 
 }
 .equal > div > div.panel > div.panel-body,
-.equal > div > div.alert { flex-grow: 1; }
+.equal > div > div.alert {
+  display: flex;
+  flex-grow: 1;
+  flex-flow: column wrap;
+  justify-content: center;
+}
 
 #content {
   background-color: #fff;
