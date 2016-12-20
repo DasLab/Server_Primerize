@@ -200,6 +200,15 @@
                   {% render_field 3d_form.num_mutations class+="form-control" %}
                 </div>
               </div>
+              <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Exclude helices that are shared across all structures; only activatable in DIFF mode. If not, shared helices are included as negative controls." >
+                <div class="checkbox" style="display:inline-block;">
+                  <label>
+                    {{3d_form.is_exclude}}
+                    <span class="cr"><span class="cr-icon glyphicon glyphicon-ok"></span></span>
+                    &nbsp;Exclude <b>shared helices</b>
+                  </label>
+                </div>
+              </div>
               <div style="padding-top: 10px;" data-toggle="tooltip" data-placement="bottom" title="Include 'single mutants' in the plate results. If not, only 'double mutants' are included." >
                 <div class="checkbox" style="display:inline-block;">
                   <label>

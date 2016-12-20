@@ -26,6 +26,7 @@ app.modPrimerize.fnUpdateFields = function(data) {
     $("#id_lib").val(data.data.params.which_lib[0]);
     if (app.modPrimerize.job_type === 3) {
       $("#id_num_mutations").val(data.data.params.num_mutations);
+      $('#id_is_exclude').prop("checked", data.data.params.is_exclude);
       $("#id_is_single").prop("checked", data.data.params.is_single);
       $("#id_is_fill_WT").prop("checked", data.data.params.is_fill_WT);
       app.modPrimerize.fnSyncStructureInput(data.data.structures);
@@ -287,6 +288,8 @@ app.modPrimerize.fnTrackStructureList = function() {
   });
   value = value.substring(0, value.length - 1);
   $("#id_structures").val(value);
+  value = value.split(',').filter(function(item) { return item.length; });
+  $("#id_is_exclude").prop("disabled", value.length <= 1);
   app.modPrimerize.fnTrackStructureLength();
 };
 
@@ -378,6 +381,8 @@ app.modPrimerize.fnOnLoad = function() {
         });
       });
     } else {
+      var value = $("#id_structures").val().split(',').filter(function(item) { return item.length; });
+      $("#id_is_exclude").prop("disabled", value.length <= 1);
       $("textarea.structure_input").off("blur").on("blur", app.modPrimerize.fnTrackStructureList);
       $("textarea.structure_input").off("keyup").on("keyup", app.modPrimerize.fnTrackStructureLength);
       $("#btn_add_str").off("click").on("click", app.modPrimerize.fnExpandStructureInput);
@@ -407,16 +412,16 @@ app.modPrimerize.fnOnLoad = function() {
     }
 
   } else {
-    if ($("#id_is_num_primers").is(":checked")) {
-      $("#id_num_primers").removeAttr("disabled");
+    if ($("#id_is_num_primers").prop("checked")) {
+      $("#id_num_primers").prop("disabled", false);
     } else {
-      $("#id_num_primers").attr("disabled", "disabled");
+      $("#id_num_primers").prop("disabled", true);
     }
     $("#id_is_num_primers").off("click").on("click", function() {
-      if ($(this).is(":checked")) {
-        $("#id_num_primers").removeAttr("disabled");
+      if ($(this).prop("checked")) {
+        $("#id_num_primers").prop("disabled", false);
       } else {
-        $("#id_num_primers").attr("disabled", "disabled");
+        $("#id_num_primers").prop("disabled", true);
       }
     });
 
