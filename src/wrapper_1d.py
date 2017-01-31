@@ -72,6 +72,7 @@ def design_1d_wrapper(sequence, tag, min_Tm, num_primers, max_length, min_length
     try:
         t0 = time.time()
         # time.sleep(15)
+        (flag, is_G) = (0, False)
         if is_t7: (sequence, flag, is_G) = is_t7_present(sequence)
         assembly = prm_1d.design(sequence, min_Tm, num_primers, min_length, max_length, tag)
         assembly.save(MEDIA_ROOT + '/data/1d/', 'result_%s' % job_id)
