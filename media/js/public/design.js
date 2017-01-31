@@ -34,9 +34,9 @@ app.modPrimerize.fnUpdateFields = function(data) {
     }
 
     app.modPrimerize.fnSyncPrimerInput(data.result.primer_set);
-    app.modPrimerize.fnTrackSequenceWarning();
+    app.modPrimerize.fnTrackPrimerList();
   }
-  app.modPrimerize.fnTrackPrimerList();
+  app.modPrimerize.fnTrackSequenceWarning();
 };
 
 app.modPrimerize.fnAjaxLoadHTML = function() {

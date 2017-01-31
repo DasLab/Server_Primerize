@@ -26,6 +26,7 @@ def design_1d_run(request):
     if form.is_valid():
         (sequence, tag) = form_data_clean_common(form.cleaned_data)
         (min_Tm, max_len, min_len, num_primers, is_num_primers, is_check_t7) = form_data_clean_1d(form.cleaned_data, sequence)
+        if is_check_t7: (sequence, _, _) = is_t7_present(sequence)
         is_valid = form_check_valid_job(1, sequence, num_primers=num_primers)
         if isinstance(is_valid, HttpResponse): return is_valid
 
