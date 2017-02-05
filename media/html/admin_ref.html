@@ -459,7 +459,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_path">httpd.conf</span></td><td>Defines <span class="code code_misc">worker</span> numbers, server status page access, error handling pages. Do not use <span class="code code_misc">prefork</span> with <span class="code code_misc">mod_wsgi</span>!</td></tr>
+                      <tr><td><span class="code code_path">httpd.conf</span></td><td>Defines <span class="code code_misc">worker</span> numbers, <span class="code code_url">/server-status/</span>span> page access, <span class="code code_key">Expires</span> header, and error handling pages. Do not use <span class="code code_misc">prefork</span> with <span class="code code_misc">mod_wsgi</span>!</td></tr>
                       <tr>
                         <td><span class="code code_path">sites-enabled/000-default.conf</span></td>
                         <td>
@@ -554,7 +554,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                       <tr><td><span class="code code_path">robots.txt</span></td><td>Instruction for web crawlers. See <a href="http://www.robotstxt.org/" target="_blank" rel="noopener noreferrer external">here&nbsp;&nbsp;<span class="glyphicon glyphicon-new-window"></span></a>.</td></tr>
                       <tr><td><span class="code code_path">manage.py</span></td><td><span class="code code_misc">Django</span> script entry point. <b>Do not change</b>, unless syntax changes in newer <span class="code code_misc">Django</span> releases.</td></tr>
                       <tr><td><span class="code code_path">util_chmod.sh</span></td><td>Runs <span class="code code_cmd">chmod</span> and <span class="code code_cmd">chown</span> to files and directories to set minimal required permissions. Most files are owned by <span class="code code_val">www-data</span> (the <span class="code code_brand">Apache</span> user). <span class="code code_path">config/cron.conf</span> is writable by <span class="code code_val">www-data</span>, while others are read-only. <span class="code code_spe">*.sh</span> are only accessible by <span class="code code_val">ubuntu</span>.</td></tr>
-                      <tr><td><span class="code code_path">util_minify.sh</span></td><td>Minifies <span class="code code_spe">*.css</span> and <span class="code code_spe">*.js</span> files for production. Also concatenates cetain <span class="code code_spe">*.css</span> and <span class="code code_spe">*.js</span> files for fewer requests in production. Required <span class="code code_path">../yuicompressor.jar</span>.</td></tr>
+                      <tr><td><span class="code code_path">util_minify.sh</span></td><td>Minifies <span class="code code_spe">*.css</span> and <span class="code code_spe">*.js</span> files for production. Also concatenates cetain <span class="code code_spe">*.css</span> and <span class="code code_spe">*.js</span> files for fewer requests in production. Requires <span class="code code_path">../yuicompressor.jar</span>.</td></tr>
                       <tr><td><span class="code code_path">util_prep_dir.sh</span></td><td>Prepares empty directories and log files for first time setup.</td></tr>
                       <tr><td><span class="code code_path">util_src_dist.sh</span></td><td>Updates the local copy of <code>primerize</code> package (at <span class="code code_path">/home/ubuntu/NA_Thermo/</span>) to latest master, and (re-)installs it system-wide.</td></tr>
                       <tr><td><span class="code code_path">util_sys_asset.sh</span></td><td>Copies over essential system settings and packages into <span class="code code_path">config/sys/</span> that will later be zipped by <span class="code code_cmd">dj_man backup</span>.</td></tr>
@@ -744,7 +744,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                         <td>Kicks off <span class="code code_method">call_command()</span> for management command from requests <span class="code code_url">/admin/stat/(sys|backup)/refresh/</span> of:
                           <ul>
                             <li><span class="code code_cmd">versions</span>;</li>
-                            <li>refresh <span class="code code_cmd">backup</span> statistics by calling <span class="code code_method">get_backup_stat()</span> from <span class="code code_path">src/console.py</span>.</li>
+                            <li><span class="code code_cmd">backup</span> statistics by calling <span class="code code_method">get_backup_stat()</span> from <span class="code code_path">src/console.py</span>.</li>
                           </ul>
                         </td>
                       </tr>
@@ -890,13 +890,13 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
 
               <br/>
               <h4 id="src_user"><span class="code code_path">src/user.py</span></h4>
-              <p>Handles requests for user-related activity. Each handler is routed from <span class="code code_path">src/urls.py</span>, and takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
+              <p>Handles requests for user-related activity. Each handler is routed from <span class="code code_path">src/urls.py</span>, and takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates.</p>
               <div class="row">
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                   <table class="table table-hover">
                     <tbody>
-                      <tr><td><span class="code code_method">user_login()</span>, <span class="code code_method">user_password()</span>, <span class="code code_method">user_logout()</span></td><td>Pages related to account. Only used in <b>test server</b> due to <span class="code code_misc">WebAuth</span>. In production, the only user in system is <span class="code code_val">daslab</span>.</td></tr>
+                      <tr><td><span class="code code_method">user_login()</span>, <span class="code code_method">user_password()</span>, <span class="code code_method">user_logout()</span></td><td>Pages related to account. In production, the only user in system is <span class="code code_val">daslab</span>.</td></tr>
                       <tr><td><span class="code code_method">browse()</span></td><td><span class="code code_misc">django-filemanger</span> view handler, channeled as <code>&lt;iframe&gt;</code> on <span class="code code_url">/admin/dir/</span>.</td></tr>
                       <tr><td colspan="2" style="padding:0px;"></td></tr>
                     </tbody>
@@ -907,7 +907,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
 
               <br/>
               <h4 id="src_views"><span class="code code_path">src/views.py</span></h4>
-              <p>Handles requests for non-admin pages. Each handler is routed from <span class="code code_path">src/urls.py</span>, and mostly takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates</p>
+              <p>Handles requests for non-admin pages. Each handler is routed from <span class="code code_path">src/urls.py</span>, and mostly takes <span class="code code_class">PATH.HTML_PATH</span> to locate <span class="code code_key">HTML</span> templates.</p>
               <div class="row">
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
