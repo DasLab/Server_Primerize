@@ -30,8 +30,8 @@
 	},
 
 	"GIT": {
-		"REPOSITORY": "t47io/Django-Server-Primerize",
-		"DIST_REPO": "DasLab/Primerize",
+		"REPOSITORY": "DasLab/Server_Primerize",
+		"DIST_REPO": "ribokit/Primerize",
 
 		"USERNAME": "login",
 		"PASSWORD": "password",

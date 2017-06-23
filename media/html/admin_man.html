@@ -280,7 +280,7 @@
               <p>The following setup does not use <span class="code code_brand">Apache</span>. Your test server will behave exactly the same as production.</p>
               <ul>
                 <li>Follow <span class="code code_path">README.md</span> to install dependencies.</li>
-                <li>Clone the repository from <span class="code code_url">https://github.com/t47io/django-Primerize-server.git</span>.</li>
+                <li>Clone the repository from <span class="code code_url">https://github.com/DasLab/Server_Primerize.git</span>.</li>
                 <li>Run <span class="code code_path">util_prep_dir.sh</span> to create necessary folders (empty).</li>
                 <li>Copy backup files either from <span class="code code_brand">AWS</span> instance or from <span class="code code_val">daslab</span> <span class="code code_brand">Google Drive</span>. Then run <span class="code code_cmd">python manage.py restore</span> to unpack <span class="code code_misc">static</span> files and overwrite <span class="code code_brand">MySQL</span> database tables. You may need to manually create a <span class="code code_val">primerize</span> table in <span class="code code_brand">MySQL</span> first if not exists.</li>
                 <li>Use <span class="code code_path">config/*.conf</span> files from the backup. Remember to edit <span class="code code_path">config/t47_dev.py</span> to set <span class="code code_key">IS_DEVEL</span> to <span class="code code_val">true</span> (turns on <span class="code code_key">DEBUG</span> mode).</li>

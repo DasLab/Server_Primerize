@@ -51,11 +51,11 @@ python manage.py runserver
 
 - Documentation is available at admin [manual](https://primerize.stanford.edu/admin/man/) and [reference](https://primerize.stanford.edu/admin/ref/).
 
-- Alternatively, read the repository [**Wiki**](https://github.com/t47io/Django-Server-Primerize/wiki/).
+- Alternatively, read the repository [**Wiki**](https://github.com/DasLab/Server_Primerize/wiki/).
 
 ## License
 
-**Copyright &copy; 2014-2016: Siqi Tian _[[t47](https://t47.io/)]_, Das Lab, Stanford University. All Rights Reserved.**
+**Copyright &copy; 2014-2017: Siqi Tian _[[t47](https://t47.io/)]_, Das Lab, Stanford University. All Rights Reserved.**
 
 **Primerize Server** _Source Code_ is proprietary and confidential. Unauthorized copying of this repository, via any medium, is strictly prohibited.
 
@@ -67,10 +67,10 @@ Copyright &copy; of **Primerize** _Source Code_ is described in [LICENSE.md](htt
 >[Primerize: Automated Primer Assembly for Transcribing Interesting RNAs.](http://nar.oxfordjournals.org/content/43/W1/W522.full)<br/>
 >*Nucleic Acid Research* **43 (W1)**: W522-W526.
 
->Tian, S., and Das, R. (**2016**)<br/> 
->Primerize-2D: automated primer design for RNA multidimensional chemical mapping.<br/>
->*manuscript in preparation.*
+>Tian, S., and Das, R. (**2017**)<br/>
+>[Primerize-2D: automated primer design for RNA multidimensional chemical mapping.](https://academic.oup.com/bioinformatics/article-abstract/33/9/1405/2801460/Primerize-2D-automated-primer-design-for-RNA)<br/>
+>*Bioinformatics* **33 (9)**: 1405-1406.
 
 
-by [**t47**](http://t47.io/), *August 2016*.
+by [**t47**](https://t47.io/), *August 2016*.
 
