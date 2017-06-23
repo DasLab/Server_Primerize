@@ -672,7 +672,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                   <table class="table table-hover">
                     <tbody>
                       <tr><td><span class="code code_path">Primerize-?.?.?.zip</span></td><td><code>primerize</code> package releases named after their versions.</td></tr>
-                      <tr><td><span class="code code_path">Primerize-master.zip</span></td><td>The latest master branch of the <code>primerize</code> package at <span class="code code_url">https://github.com/DasLab/Primerize/</span>.</td></tr>
+                      <tr><td><span class="code code_path">Primerize-master.zip</span></td><td>The latest master branch of the <code>primerize</code> package at <span class="code code_url">https://github.com/ribokit/Primerize/</span>.</td></tr>
                       <tr><td><span class="code code_path">Primerize-LICENSE.md</span></td><td>The LICENSE statement from the <code>primerize</code> repository (master) to be displayed at <span class="code code_url">/license/</span>.</td></tr>
                     </tbody>
                   </table>
@@ -1023,7 +1023,7 @@ deb-src http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.6 main
                             <li>Retrieves all releases of <code>primerize</code> package, and writes versions and texts into <span class="code code_path">cache/stat_dist.json</span>.</li>
                             <li>Downloads all release <span class="code code_key">ZIP</span> files using <span class="code code_cmd">curl</span> with <span class="code code_val">daslab-admin</span> <span class="code code_brand">GitHub</span> account credentials in <span class="code code_path">config/oauth.conf</span>. Files are saved to <span class="code code_path">dist/</span>. Releases already downloaded are skipped.</li>
                             <li>The latest master branch is downloaded as <span class="code code_path">dist/Primerize-master.zip</span>. The <span class="code code_path">LICENSE.md</span> inside it is extracted and placed as <span class="code code_path">dist/Primerize-LICENSE.md</span>, which is used by <span class="code code_method">license()</span> in <span class="code code_path">src/views.py</span> for <span class="code code_url">/license/</span>.</li>
-                            <li>This command is triggered by <span class="code code_brand">GitHub</span> <b>webhooks</b>, which is configured at <span class="code code_url">https://github.com/DasLab/Primerize/settings/hooks</span>, to keep the local <span class="code code_key">ZIP</span> files up-to-date. Webhooks are handled by <span class="code code_method">git_hook()</span> in <span class="code code_path">src/api.py</span>.</li>
+                            <li>This command is triggered by <span class="code code_brand">GitHub</span> <b>webhooks</b>, which is configured at <span class="code code_url">https://github.com/ribokit/Primerize/settings/hooks</span>, to keep the local <span class="code code_key">ZIP</span> files up-to-date. Webhooks are handled by <span class="code code_method">git_hook()</span> in <span class="code code_path">src/api.py</span>.</li>
                           </ul>
                         </td>
                       </tr>

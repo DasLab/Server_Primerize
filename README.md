@@ -27,7 +27,7 @@ simplejson >= 3.8.1
 primerize >= 1.1.0
 ```
 
-The `primerize` package is available internally at https://github.com/DasLab/Primerize/.
+The `primerize` package is available internally at https://github.com/ribokit/Primerize/.
 
 The `gviz-api.py` is available at https://github.com/google/google-visualization-python/.
 
@@ -59,7 +59,7 @@ python manage.py runserver
 
 **Primerize Server** _Source Code_ is proprietary and confidential. Unauthorized copying of this repository, via any medium, is strictly prohibited.
 
-Copyright &copy; of **Primerize** _Source Code_ is described in [LICENSE.md](https://github.com/DasLab/Primerize/blob/master/LICENSE.md).
+Copyright &copy; of **Primerize** _Source Code_ is described in [LICENSE.md](https://github.com/ribokit/Primerize/blob/master/LICENSE.md).
 
 ## Reference
 
