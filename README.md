@@ -27,11 +27,30 @@ simplejson >= 3.8.1
 primerize >= 1.1.0
 ```
 
-The `primerize` package is available internally at https://github.com/ribokit/Primerize/.
+The `primerize` package is available internally at [`Primerize`](https://github.com/ribokit/Primerize/).
 
-The `gviz-api.py` is available at https://github.com/google/google-visualization-python/.
+The `gviz-api.py` is available at [`google-visualization-python`](https://github.com/google/google-visualization-python/).
 
-The `django-filemanager` is a modified version of https://github.com/IMGIITRoorkee/django-filemanager/. The source code is available internally. Install with `sudo python setup.py install`.
+The `django-filemanager` is a modified version of [`django-filemanager`](https://github.com/IMGIITRoorkee/django-filemanager/). The source code is available internally at this [fork](https://github.com/t47io/django-filemanager/).
+
+Install with:
+
+```sh
+cd ~
+git clone https://github.com/ribokit/Primerize.git
+cd Primerize
+sudo python setup.py install
+
+cd ..
+git clone https://github.com/google/google-visualization-python.git
+cd google-visualization-python
+sudo python setup.py install
+
+cd ..
+git clone https://github.com/t47io/django-filemanager.git
+cd django-filemanager
+sudo python setup.py install
+```
 
 **Primerize Server** also requires proper setup of `llvm`, `mysql.server`, `apache2`, `mod_wsgi`, `openssl`, `gdrive`, `awscli`, and `cron` jobs.
 
@@ -46,6 +65,8 @@ To run the test/dev server, use:
 cd path/to/server_primerize/repo
 python manage.py runserver
 ```
+
+The server should be running at `localhost:8000` with a python session interactive in terminal.
 
 ## Documentation
 
