@@ -33,9 +33,6 @@
 		"REPOSITORY": "DasLab/Server_Primerize",
 		"DIST_REPO": "ribokit/Primerize",
 
-		"USERNAME": "login",
-		"PASSWORD": "password",
-
 		"CLIENT_ID": "client_id",
 		"CLIENT_SECRET": "client_secret",
 
