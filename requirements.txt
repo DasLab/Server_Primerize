@@ -13,4 +13,4 @@ pytz == 2018.3
 requests == 2.18.4
 simplejson == 3.13.2
 
-primerize == 1.1.0
+primerize == 1.6.4
