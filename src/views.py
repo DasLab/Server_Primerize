@@ -122,7 +122,7 @@ def ping_test(request):
 
 
 def get_staff(request):
-    user = request.user.username if request.user.username else 'unknown'
+    user = request.user.username if hasattr(request, 'user') and request.user.username else 'unknown'
     return HttpResponse(simplejson.dumps({'user': user, 'admin': EMAIL_NOTIFY}, sort_keys=True, indent=' ' * 4), content_type='application/json')
 
 

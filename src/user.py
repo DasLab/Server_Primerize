@@ -11,6 +11,9 @@ from src.env import error403
 
 
 def user_login(request):
+    if not hasattr(request, 'user'):
+        return error403(request)
+
     if request.user.is_authenticated():
         if 'next' in request.GET and 'admin' in request.GET.get('next'):
             return error403(request)
