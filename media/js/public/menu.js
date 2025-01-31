@@ -73,7 +73,7 @@ $(document).ready(function() {
     $("html, body").stop().animate({"scrollTop": 0}, 250);
   });
 
-  $("#nav a:not(#nav_docs), #nav_home").on("click", function(event) {
+  $("#nav > li:not(#nav_code) > a, #nav > li:not(#nav_code) li > a, #nav_home").on("click", function(event) {
       event.preventDefault();
       app.href = $(this).attr("href");
       $("#content").fadeTo(100, 0, app.fnChangeLocation);
